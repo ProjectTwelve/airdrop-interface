@@ -1,16 +1,16 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+    background: url("/img/bg_01.png") no-repeat right top 20vh,
+    url("/img/bg_02.png") no-repeat left top 60vh,
+    #0E142C;
+    font-family: 'Poppins', sans-serif;
+    backdrop-filter: blur(8px);
+    min-height: 100vh;
 }
 
 * {
-  box-sizing: border-box;
+    color: #FFF;
 }
