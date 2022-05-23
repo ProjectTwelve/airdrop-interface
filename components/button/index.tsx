@@ -3,17 +3,21 @@ import classNames from 'classnames';
 
 type ButtonProps = {
   className?: string;
-  type?: 'default' | 'gradient' | 'error';
+  type?: 'default' | 'gradient' | 'error' | 'bordered';
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   disabled?: boolean;
 };
 
-function Button({ className, type, size, onClick, disabled, children }: React.PropsWithChildren<ButtonProps>) {
+const Button = React.forwardRef(function ButtonInner(
+  { className, type, size, onClick, disabled, children }: React.PropsWithChildren<ButtonProps>,
+  ref: any,
+) {
   const bg = {
     default: 'bg-[#494E69]/40',
     error: 'bg-red-400',
     gradient: 'bg-gradient',
+    bordered: 'border'
   };
   const sizes = {
     small: 'h-[30px]',
@@ -22,6 +26,7 @@ function Button({ className, type, size, onClick, disabled, children }: React.Pr
   };
   return (
     <button
+      ref={ref}
       onClick={onClick}
       className={classNames(
         'relative overflow-hidden rounded-full px-4 text-center',
@@ -36,12 +41,13 @@ function Button({ className, type, size, onClick, disabled, children }: React.Pr
       {children}
     </button>
   );
-}
+});
 
 Button.defaultProps = {
   type: 'default',
   size: 'medium',
   disabled: false,
+  ref: null,
 };
 
 export default React.memo(Button);

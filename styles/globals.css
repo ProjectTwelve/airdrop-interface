@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --root-main: rgba(46, 50, 75, 0.8);
+    --root-border-1: rgba(221, 207, 233, 0.45);
+    --root-border-2: rgba(221, 207, 233, 0.1);
+}
+
 body {
-    background: url("/img/bg_01.png") no-repeat right top 20vh,
-    url("/img/bg_02.png") no-repeat left top 60vh,
-    #0E142C;
+    background: url("/img/bg_01.png") no-repeat right top 20vh, url("/img/bg_02.png") no-repeat left top 60vh, #0E142C;
     font-family: 'Poppins', sans-serif;
     backdrop-filter: blur(8px);
     min-height: 100vh;
@@ -13,4 +17,38 @@ body {
 
 * {
     color: #FFF;
+    outline: none;
+}
+
+.backdrop-box {
+    background: repeating-linear-gradient(to bottom, var(--root-main), var(--root-main)), repeating-linear-gradient(to bottom, var(--root-border-1), var(--root-border-2));
+    background-clip: content-box, padding-box;
+    padding: 2px;
+    backdrop-filter: blur(16px);
+}
+
+@font-face {
+    font-family: 'D-DIN';
+    font-weight: 700;
+    src: url('/fonts/D-DIN-Bold.ttf');
+}
+
+.toast-container {
+    position: relative;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0);
+    font-size: 14px;
+}
+
+.toast-container::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to bottom, var(--root-main), var(--root-main)), repeating-linear-gradient(to bottom, var(--root-border-1), var(--root-border-2));
+    background-clip: content-box, padding-box;
+    padding: 2px;
+    backdrop-filter: blur(16px);
+    border-radius: 12px;
+    z-index: -1;
 }
