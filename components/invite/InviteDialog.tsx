@@ -29,13 +29,13 @@ function InviteDialog() {
       render={() => (
         <div className="w-[600px]">
           <h2 className="text-center text-xl">My P12 Airdrop Invite Address</h2>
-          <div className="mt-8 rounded-lg border-2 border-p12-link bg-p12-link/20 p-5 text-xs leading-5">
+          <div className="mt-8 rounded-lg border-2 border-p12-tips bg-p12-tips/20 p-5 text-xs leading-5">
             · You can share the link below with your Steam developer friends.
             <br />
             · You will be rewarded with $P12 once they have successfully verified their games.
             <br />
             · You will be able to get ??? $P12 for each verified game from your Invite Address.
-            <br />· You can check your rewarded $P12 on “My P12 tokens” page.
+            <br />· You can check your rewarded $P12 on &quot;My P12 tokens&quot; page.
           </div>
           <div className="relative mt-6 break-words rounded-lg bg-p12-black/60 p-5 pb-16 text-sm">
             {inviteLink}

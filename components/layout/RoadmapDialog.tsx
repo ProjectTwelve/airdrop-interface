@@ -47,11 +47,11 @@ export default function RoadmapDialog({ close }: RoadmapDialogProps) {
                 calculation formula.
               </p>
               <p className="flex items-center justify-start gap-1.5 leading-5">
-                <span className="h-4 w-4 text-center text-sm">·</span>
+                <Image src="/svg/check.svg" width={16} height={16} alt="check" />
                 Invitation-reward function is available, the amount of reward $P12 is shown as &quot;?&quot;.
               </p>
               <p className="flex items-center justify-start gap-1.5 leading-5">
-                <span className="h-4 w-4 text-center text-sm">·</span>
+                <Image src="/svg/check.svg" width={16} height={16} alt="check" />
                 Airdrop community channels in <SocialMedia size="small" />
               </p>
             </div>

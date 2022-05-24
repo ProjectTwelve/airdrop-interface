@@ -8,7 +8,7 @@ import VerifyGames from '../../components/developer/VerifyGames';
 import Tokens from '../../components/developer/Tokens';
 
 export default function Developer() {
-  const tabs = ['Verify my steam games', 'My P12 tokens'];
+  const tabs = ['Verify my Steam games', 'My P12 tokens'];
   const [selectedTab, setSelectedTab] = useState(0);
   const router = useRouter();
 
