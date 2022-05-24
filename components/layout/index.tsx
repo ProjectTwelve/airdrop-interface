@@ -4,7 +4,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import Web3ReactManage from '../web3/Web3ReactManage';
 import LayoutHeader from './LayoutHeader';
 import { RecoilRoot } from 'recoil';
-import InviteDialog from '../invite/InviteDialog';
+import InviteDialog from '../dialog/InviteDialog';
 import { ToastContainer } from 'react-toastify';
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {

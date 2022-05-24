@@ -1,3 +1,5 @@
+@import "./components/react-tabs.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,4 +53,24 @@ body {
     backdrop-filter: blur(16px);
     border-radius: 12px;
     z-index: -1;
+}
+
+div::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0);
+    width: 4px;
+    border-radius: 4px;
+}
+
+div::-webkit-scrollbar-thumb {
+    background: rgba(206, 220, 255, 0.12);
+    border-radius: 4px;
+}
+
+/* Hide input[type=number] controls */
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }

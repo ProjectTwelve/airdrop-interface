@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { LegacyRef } from 'react';
 import classNames from 'classnames';
 
 type ButtonProps = {
@@ -7,38 +7,52 @@ type ButtonProps = {
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
   disabled?: boolean;
+  loading?: boolean;
+  style?: React.CSSProperties;
 };
 
+function Loading() {
+  return (
+    <div className="h-full p-1">
+      <img src="/svg/loading.svg" className="h-full mx-auto animate-spin" alt="loading" />
+    </div>
+  );
+}
+
 const Button = React.forwardRef(function ButtonInner(
-  { className, type, size, onClick, disabled, children }: React.PropsWithChildren<ButtonProps>,
-  ref: any,
+  { className, loading, type, size, onClick, disabled, children, style }: React.PropsWithChildren<ButtonProps>,
+  ref: LegacyRef<HTMLButtonElement>,
 ) {
   const bg = {
     default: 'bg-[#494E69]/40',
     error: 'bg-red-400',
     gradient: 'bg-gradient',
-    bordered: 'border'
+    bordered: 'border',
   };
   const sizes = {
-    small: 'h-[30px]',
-    medium: 'h-[42px]',
-    large: 'h-[54px]',
+    small: 'min-h-[30px]',
+    medium: 'min-h-[42px]',
+    large: 'min-h-[54px]',
   };
+
+  console.log('loading: ', loading);
+
   return (
     <button
       ref={ref}
-      onClick={onClick}
+      onClick={loading ? undefined : onClick}
       className={classNames(
         'relative overflow-hidden rounded-full px-4 text-center',
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
-        'disabled:cursor-not-allowed disabled:opacity-50',
+        'disabled:cursor-not-allowed',
         bg[type || 'default'],
         sizes[size || 'medium'],
         className,
       )}
       disabled={disabled}
+      style={style}
     >
-      {children}
+      {loading ? <Loading /> : children}
     </button>
   );
 });
@@ -48,6 +62,7 @@ Button.defaultProps = {
   size: 'medium',
   disabled: false,
   ref: null,
+  loading: false,
 };
 
 export default React.memo(Button);

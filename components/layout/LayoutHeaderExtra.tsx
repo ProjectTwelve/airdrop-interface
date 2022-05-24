@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from '../button';
 import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
 import Dialog from '../dialog';
-import RoadmapDialog from './RoadmapDialog';
+import RoadmapDialog from '../dialog/RoadmapDialog';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocalStorage } from 'react-use';
+import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
-  const [tipsClick, setTipsClick] = useLocalStorage<boolean>('invite_tips_click', false);
+  const [tipsClick, setTipsClick] = useState(true);
   const [, setOpen] = useRecoilState(inviteModalAtom);
   const whitepaperLink = 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf';
+
+  useEffect(() => {
+    const currentStatus = getLocalStorage('invite_tips_click');
+    setTipsClick(currentStatus ?? false);
+  }, []);
 
   if (router.pathname === '/developer') {
     return (
@@ -50,7 +55,13 @@ function LayoutHeaderExtra() {
               <div className="p-4">
                 Share your invite address and get rewards
                 <div className="mt-2 flex justify-end">
-                  <div className="cursor-pointer text-p12-link" onClick={() => setTipsClick(true)}>
+                  <div
+                    className="cursor-pointer text-p12-link"
+                    onClick={() => {
+                      setTipsClick(true);
+                      setLocalStorage('invite_tips_click', true);
+                    }}
+                  >
                     I got it
                   </div>
                 </div>

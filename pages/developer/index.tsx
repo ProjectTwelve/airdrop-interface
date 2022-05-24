@@ -17,7 +17,7 @@ export default function Developer() {
       <Back onClick={() => router.back()} />
       <div className="mt-4">
         <div className="backdrop-box rounded-2xl">
-          <Tabs onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
+          <Tabs forceRenderTabPanel onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
             <TabList className="relative flex items-center justify-center gap-4 border-b border-p12-line text-xl font-bold">
               {tabs.map((tab, index) => (
                 <Tab
