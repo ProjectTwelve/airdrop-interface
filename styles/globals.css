@@ -55,15 +55,21 @@ body {
     z-index: -1;
 }
 
-div::-webkit-scrollbar {
+.vertical-scroll::-webkit-scrollbar {
     background: rgba(0, 0, 0, 0);
     width: 4px;
     border-radius: 4px;
 }
 
-div::-webkit-scrollbar-thumb {
+.vertical-scroll::-webkit-scrollbar-thumb {
     background: rgba(206, 220, 255, 0.12);
     border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0);
+    width: 0;
+    height: 0;
 }
 
 /* Hide input[type=number] controls */

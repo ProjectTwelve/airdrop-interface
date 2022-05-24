@@ -1,0 +1,14 @@
+.tokens__tab:hover .tokens__tab__scrollButton {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tokens__tab__scrollButton {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.1s linear;
+    z-index: 10;
+}

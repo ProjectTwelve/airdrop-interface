@@ -4,14 +4,18 @@ import Button from '../button';
 import SteamAppItem from './SteamAppItem';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
+import { useWeb3React } from '@web3-react/core';
+import { getSignData } from '../../utils';
 
 function VerifyGames() {
+  const { account, library } = useWeb3React();
   const [steamAppList, setSteamAppList] = useState<any[]>([]);
   // prevent duplication of index
   const [count, setCount] = useState(0);
-  const [signature] = useState('signature');
+  const [signature, setSignature] = useState('Please click the generate button.');
   const [, copyToClipboard] = useCopyToClipboard();
   const submittedSteamApps = useMemo(() => steamAppList.filter((app) => app.steam_appid), [steamAppList]);
+  const isSig = /sig/.test(signature);
 
   const onAddSteamApp = useCallback((index: number) => {
     setSteamAppList((appList) => [...appList, { index }]);
@@ -33,6 +37,12 @@ function VerifyGames() {
       return list;
     });
   }, []);
+
+  const generateSignature = useCallback(async () => {
+    if (!library || !account) return;
+    const signature = await library.send('personal_sign', [account, JSON.stringify(getSignData(account))]);
+    setSignature('sig:' + signature);
+  }, [account, library]);
 
   const onVerifySteamApps = useCallback(() => {
     // TODO: request to verify
@@ -80,20 +90,27 @@ function VerifyGames() {
             <h3 className="font-bold">
               YOUR CODE <span className="text-sm font-normal">(you can check for the code later too)</span>
             </h3>
-            <div className="relative mt-3 rounded-2xl bg-p12-black/60 p-6 pb-14">
-              {/* TODO: add signature */}
-              <span className="text-sm">{signature}</span>
+            <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/60 p-6 pb-14">
+              <span className="text-sm">{account ? signature : 'Please connect your wallet first.'}</span>
               <div className="absolute right-5 bottom-5">
-                <Button
-                  type="gradient"
-                  size="small"
-                  onClick={() => {
-                    copyToClipboard(signature);
-                    toast.success('Copied to clipboard');
-                  }}
-                >
-                  copy
-                </Button>
+                {account ? (
+                  isSig ? (
+                    <Button
+                      type="gradient"
+                      size="small"
+                      onClick={() => {
+                        copyToClipboard(signature);
+                        toast.success('Copied to clipboard');
+                      }}
+                    >
+                      copy
+                    </Button>
+                  ) : (
+                    <Button type="gradient" size="small" onClick={generateSignature}>
+                      generate
+                    </Button>
+                  )
+                ) : null}
               </div>
             </div>
           </div>

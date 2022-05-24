@@ -35,8 +35,6 @@ const Button = React.forwardRef(function ButtonInner(
     large: 'min-h-[54px]',
   };
 
-  console.log('loading: ', loading);
-
   return (
     <button
       ref={ref}
