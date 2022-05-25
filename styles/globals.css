@@ -1,4 +1,5 @@
-@import "./components/react-tabs.css";
+@import "./components/tabs.css";
+@import "./components/table.css";
 
 @tailwind base;
 @tailwind components;
@@ -11,11 +12,19 @@
 }
 
 body {
-    background: url("/img/bg_01.png") no-repeat right top 20vh, url("/img/bg_02.png") no-repeat left top 60vh, #0E142C;
+    background: #0E142C;
     font-family: 'Poppins', sans-serif;
-    backdrop-filter: blur(8px);
     min-height: 100vh;
 }
+
+.container-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url("/img/bg_01.png") no-repeat right top 20vh, url("/img/bg_02.png") no-repeat left top 60vh;
+    filter: blur(8px);
+}
+
 
 * {
     color: #FFF;

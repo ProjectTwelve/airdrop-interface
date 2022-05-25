@@ -16,6 +16,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
             <LayoutHeader />
             <main>{children}</main>
           </div>
+          <div className="container-bg"></div>
           <InviteDialog />
           <ToastContainer theme="dark" toastClassName="toast-container" autoClose={3000} hideProgressBar />
         </RecoilRoot>

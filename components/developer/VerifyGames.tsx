@@ -6,6 +6,7 @@ import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useWeb3React } from '@web3-react/core';
 import { getSignData } from '../../utils';
+import Dialog from "../dialog";
 
 function VerifyGames() {
   const { account, library } = useWeb3React();
@@ -49,7 +50,10 @@ function VerifyGames() {
   }, []);
 
   return (
-    <div className="py-12 px-8">
+    <div className="px-8 pt-12">
+      <Dialog render={() => <div className="w-[300px] bg-white h-[300px]">123</div>}>
+        <button>click</button>
+      </Dialog>
       <div className="flex gap-[60px] border-b border-p12-line pb-12">
         <div className="w-full">
           <h2 className="text-xl font-bold">
@@ -116,7 +120,7 @@ function VerifyGames() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between pt-12">
+      <div className="flex items-center justify-between py-8">
         <div className="text-[18px]">
           Select <span className="text-p12-success">{submittedSteamApps.length}</span> games to Verify
         </div>

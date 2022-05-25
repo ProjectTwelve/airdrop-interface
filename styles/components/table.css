@@ -1,0 +1,35 @@
+.react-table {
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.react-table table {
+    width: 100%;
+}
+
+.react-table-thead {
+    background: #4E5573;
+    position: sticky;
+    top: 0;
+}
+
+.react-table-thead > tr {
+}
+
+.react-table-thead > tr > th {
+    text-align: left;
+}
+
+.react-table-tbody > tr > td {
+}
+
+.react-table-tbody > tr:hover > .react-table-cell {
+}
+
+
+.react-table-cell {
+    padding: 12px;
+    font-size: 12px;
+    border-bottom: 1px solid #6E7786;
+}

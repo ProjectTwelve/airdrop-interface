@@ -12,7 +12,7 @@ module.exports = {
       colors: {
         'p12-success': '#1EDB8C',
         'p12-error': '#F13361',
-        'p12-sub': '#A7A7B6',
+        'p12-sub': '#9A9DAA',
         'p12-black': '#1D2030',
         'p12-link': '#43BBFF',
         'p12-tips': '#4383FF',

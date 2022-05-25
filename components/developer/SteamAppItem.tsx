@@ -45,7 +45,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </div>
           </div>
           <div className="flex h-full flex-1 flex-col items-start justify-around">
-            <p className="font-bold">{app.name}</p>
+            <p className="font-bold truncate max-w-[295px]">{app.name}</p>
             <p className="text-sm">
               {app.release_date?.date} &nbsp;&nbsp;
               {app.recommendations?.total} reviews
