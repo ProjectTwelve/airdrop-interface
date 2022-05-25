@@ -6,7 +6,6 @@ import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useWeb3React } from '@web3-react/core';
 import { getSignData } from '../../utils';
-import Dialog from "../dialog";
 
 function VerifyGames() {
   const { account, library } = useWeb3React();
@@ -51,9 +50,6 @@ function VerifyGames() {
 
   return (
     <div className="px-8 pt-12">
-      <Dialog render={() => <div className="w-[300px] bg-white h-[300px]">123</div>}>
-        <button>click</button>
-      </Dialog>
       <div className="flex gap-[60px] border-b border-p12-line pb-12">
         <div className="w-full">
           <h2 className="text-xl font-bold">

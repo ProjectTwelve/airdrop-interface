@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Back from '../../components/back';
@@ -6,10 +6,12 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SocialMedia from '../../components/socialMedia';
 import VerifyGames from '../../components/developer/VerifyGames';
 import Tokens from '../../components/developer/Tokens';
+import { useRecoilState } from 'recoil';
+import { tabSelectAtom } from '../../store/developer/state';
 
 export default function Developer() {
   const tabs = ['Verify my Steam games', 'My P12 tokens'];
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useRecoilState(tabSelectAtom);
   const router = useRouter();
 
   return (
