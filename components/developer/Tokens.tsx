@@ -9,7 +9,7 @@ import Button from '../button';
 import MyP12 from './MyP12';
 import Dialog from '../dialog';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { tabSelectAtom } from '../../store/developer/state';
 
 function Tokens() {
@@ -21,7 +21,7 @@ function Tokens() {
     },
   ]);
   const [selectedToken, setSelectedToken] = useState(0);
-  const [, setSelectedTab] = useRecoilState(tabSelectAtom);
+  const setSelectedTab = useSetRecoilState(tabSelectAtom);
   const [count, setCount] = React.useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const enableTabScroll = tokens.length > 4;
@@ -142,7 +142,7 @@ function Tokens() {
           <MyP12 />
         </div>
         <div className="flex gap-4 border-b border-p12-line py-6">
-          <div className="hidden rounded-lg bg-p12-black/60 p-3">
+          <div className="rounded-lg bg-p12-black/60 p-3">
             <div className="flex items-center justify-between">
               <p className="font-['D-DIN'] text-xl font-bold">?,???</p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
@@ -151,7 +151,7 @@ function Tokens() {
               From <span className="text-p12-success"> 2 </span> verified Games
             </p>
           </div>
-          <div className="hidden rounded-lg bg-p12-black/60 p-3">
+          <div className="rounded-lg bg-p12-black/60 p-3">
             <div className="flex items-center justify-between">
               <p className="font-['D-DIN'] text-xl font-bold">?,???</p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />

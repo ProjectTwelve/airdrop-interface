@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import classNames from 'classnames';
 import { useTable } from 'react-table';
+import Empty from '../empty';
 
 type TableProps = {
   dataSource: any[];
@@ -30,20 +31,28 @@ export default function Table({ dataSource, columns, className }: TableProps) {
           ))}
         </thead>
         <tbody className="react-table-tbody" {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td className="react-table-cell" {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {rows?.length ? (
+            rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td className="react-table-cell" {...cell.getCellProps()}>
+                        {cell.render('Cell')}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan={4}>
+                <Empty />
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

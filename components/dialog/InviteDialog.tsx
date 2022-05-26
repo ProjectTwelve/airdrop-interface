@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Dialog from '../dialog';
 import Button from '../button';
 import { useRecoilState } from 'recoil';
@@ -6,21 +6,20 @@ import { inviteModalAtom } from '../../store/invite/state';
 import { useWeb3React } from '@web3-react/core';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
+import { fetchReferralCode } from '../../lib/api';
 
 function InviteDialog() {
   const { account } = useWeb3React();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
-  const [inviteLink, setInviteLink] = useState('');
+  const [inviteLink, setInviteLink] = useState('Please connect your wallet first');
   const [, copyToClipboard] = useCopyToClipboard();
 
-  useEffect(() => {
-    if (!account) {
-      setInviteLink('Please connect your wallet first');
-      return;
-    }
-    //Todo: request Invite Link
-    setInviteLink('Todo: request Invite Link');
-  }, [account]);
+  useQuery(['invite', account], () => fetchReferralCode({ wallet_address: account }), {
+    enabled: !!account,
+    refetchOnWindowFocus: false,
+    onSuccess: (data) => setInviteLink(window.location.origin + '?code=' + data.data.referral_code),
+  });
 
   return (
     <Dialog

@@ -2,12 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import Button from '../components/button';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../store/invite/state';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
-  const [, setOpen] = useRecoilState(inviteModalAtom);
+  const setOpen = useSetRecoilState(inviteModalAtom);
   const router = useRouter();
 
   return (
@@ -23,7 +23,12 @@ const Home: NextPage = () => {
         <Button className="w-[470px]" size="large" type="bordered" onClick={() => setOpen(true)}>
           My invite address
         </Button>
-        <Button className="w-[470px]" size="large" type="gradient" onClick={() => router.push('/developer')}>
+        <Button
+          className="w-[470px]"
+          size="large"
+          type="gradient"
+          onClick={() => router.push({ pathname: '/developer', query: router.query })}
+        >
           I am a developer
         </Button>
         <Button disabled className="w-[470px]" size="large">

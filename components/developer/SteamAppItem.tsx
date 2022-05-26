@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import Button from '../button';
 import Image from 'next/image';
 import { CloseCircle } from '../svg/CloseCircle';
+import { useQuery } from 'react-query';
+import { fetchDeveloperGame } from '../../lib/api';
+import { toast } from 'react-toastify';
+import { SteamApp } from './VerifyGames';
 
 type SteamGameItemProps = {
-  app: any;
+  app: SteamApp;
   index: number;
   onConfirm: (app: any) => void;
   onRemove: () => void;
@@ -12,27 +16,16 @@ type SteamGameItemProps = {
 
 function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   const [value, setValue] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const onClick = (appid: string) => {
-    console.log('appid: ', appid);
-    setLoading(true);
-    setTimeout(() => {
-      // TODO: request confirm token
-      setLoading(false);
-      onConfirm({
-        steam_appid: '570',
-        header_image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg?t=1650611880',
-        name: 'Dota 2',
-        release_date: {
-          date: '10 Jul, 2013',
-        },
-        recommendations: {
-          total: 10000,
-        },
-      });
-    }, 1000);
-  };
+  const { isLoading, refetch } = useQuery(['developer_game', app.index], () => fetchDeveloperGame({ appid: value }), {
+    enabled: false,
+    onSuccess: (data) => {
+      if (data.code !== 0) {
+        toast.error(data.msg);
+        return;
+      }
+      onConfirm(data.data.game_info);
+    },
+  });
 
   return (
     <div className="h-[72px] overflow-hidden rounded-2xl bg-p12-black/60">
@@ -45,7 +38,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </div>
           </div>
           <div className="flex h-full flex-1 flex-col items-start justify-around">
-            <p className="font-bold truncate max-w-[295px]">{app.name}</p>
+            <p className="max-w-[295px] truncate font-bold">{app.name}</p>
             <p className="text-sm">
               {app.release_date?.date} &nbsp;&nbsp;
               {app.recommendations?.total} reviews
@@ -71,12 +64,12 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             />
           </div>
           <Button
-            loading={loading}
+            loading={isLoading}
             disabled={!value}
             type={value ? 'gradient' : 'default'}
             size="small"
             className="text-sm font-bold"
-            onClick={() => onClick(value)}
+            onClick={refetch}
           >
             confirm
           </Button>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from '../button';
 import Image from 'next/image';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
 import Dialog from '../dialog';
 import RoadmapDialog from '../dialog/RoadmapDialog';
@@ -12,7 +12,7 @@ import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
-  const [, setOpen] = useRecoilState(inviteModalAtom);
+  const setOpen = useSetRecoilState(inviteModalAtom);
   const whitepaperLink = 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf';
 
   useEffect(() => {

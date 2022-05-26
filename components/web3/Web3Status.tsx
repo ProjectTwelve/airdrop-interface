@@ -15,7 +15,7 @@ function Web3Status() {
   const walletSwitchEthereumChain = useCallback(async () => {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x' + CHAIN_ID.toString(16) }],
+      params: [{ chainId: '0x' + CHAIN_ID }],
     });
   }, []);
 

@@ -6,15 +6,45 @@ import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useWeb3React } from '@web3-react/core';
 import { getSignData } from '../../utils';
+import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from 'react-query';
+import { fetchDeveloperVerify } from '../../lib/api';
+import { DeveloperVerifyData, DeveloperVerifyParams, GameInfo, Response } from '../../lib/types';
+import { getErrorToast } from '../../utils/developer';
+import { useSetRecoilState } from 'recoil';
+import { tabSelectAtom } from '../../store/developer/state';
+
+export type SteamApp = Partial<GameInfo> & { index: number };
 
 function VerifyGames() {
   const { account, library } = useWeb3React();
-  const [steamAppList, setSteamAppList] = useState<any[]>([]);
+  const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
+  const queryClient = useQueryClient();
   // prevent duplication of index
   const [count, setCount] = useState(0);
   const [signature, setSignature] = useState('Please click the generate button.');
+  const setSelectedTab = useSetRecoilState(tabSelectAtom);
   const [, copyToClipboard] = useCopyToClipboard();
+  const router = useRouter();
   const submittedSteamApps = useMemo(() => steamAppList.filter((app) => app.steam_appid), [steamAppList]);
+  const canVerify = useMemo(() => submittedSteamApps.length > 0 && account, [account, submittedSteamApps.length]);
+  const mutation = useMutation<Response<DeveloperVerifyData>, any, DeveloperVerifyParams, any>(
+    (data) => {
+      return fetchDeveloperVerify(data);
+    },
+    {
+      onSuccess: (data) => {
+        if (data.code !== 0) {
+          const { failedGames } = data.data;
+          toast.error(getErrorToast(failedGames));
+          return;
+        }
+        toast.success('Verify successfully!');
+        queryClient.refetchQueries(['developer_info', account]).then();
+        setSelectedTab(1);
+      },
+    },
+  );
   const isSig = /sig/.test(signature);
 
   const onAddSteamApp = useCallback((index: number) => {
@@ -25,7 +55,12 @@ function VerifyGames() {
   const onSteamAppConfirm = useCallback((app: any, index: number) => {
     setSteamAppList((appList) => {
       const list = [...appList];
-      list[index] = app;
+      const isDuplicate = list.some((item) => item.steam_appid === app.steam_appid);
+      if (isDuplicate) {
+        toast.error('Includes the same steam game.');
+      } else {
+        list[index] = app;
+      }
       return list;
     });
   }, []);
@@ -45,8 +80,15 @@ function VerifyGames() {
   }, [account, library]);
 
   const onVerifySteamApps = useCallback(() => {
-    // TODO: request to verify
-  }, []);
+    if (!account) return;
+    const { code } = router.query;
+    const ids = submittedSteamApps.map((app) => app.steam_appid!);
+    mutation.mutate({
+      steam_appids: ids,
+      wallet_address: account,
+      referral_code: code as string,
+    });
+  }, [account, mutation, router.query, submittedSteamApps]);
 
   return (
     <div className="px-8 pt-12">
@@ -122,9 +164,10 @@ function VerifyGames() {
         </div>
         <Button
           className="w-[280px]"
-          disabled={!submittedSteamApps.length}
-          type={submittedSteamApps.length ? 'gradient' : 'default'}
+          disabled={!canVerify}
+          type={canVerify ? 'gradient' : 'default'}
           size="large"
+          loading={mutation.isLoading}
           onClick={onVerifySteamApps}
         >
           Verify

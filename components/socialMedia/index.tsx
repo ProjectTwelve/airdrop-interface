@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { socialMediaClickAtom, SocialMediaType } from '../../store/invite/state';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
@@ -11,7 +11,7 @@ type SocialMediaProps = {
 
 function SocialMedia({ size = 'small' }: SocialMediaProps) {
   const sizes = { small: [20, 'gap-2'], medium: [24, 'gap-3'] };
-  const [, setSocialMediaClickStatus] = useRecoilState(socialMediaClickAtom);
+  const setSocialMediaClickStatus = useSetRecoilState(socialMediaClickAtom);
   const socialMedia = [
     { name: SocialMediaType.Twitter, url: 'https://twitter.com/_p12_' },
     { name: SocialMediaType.Telegram, url: 'https://t.me/project_twelve' },
