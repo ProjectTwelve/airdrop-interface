@@ -22,5 +22,5 @@ export default function Tag({ value, type, size }: TagProps) {
     error: 'text-p12-error border-p12-error bg-p12-error/30',
   };
 
-  return <span className={classNames('rounded-full border text-sm', types[type], sizes[size || 'medium'])}>{value}</span>;
+  return <span className={classNames('rounded-full border text-sm whitespace-nowrap', types[type], sizes[size || 'medium'])}>{value}</span>;
 }

@@ -35,7 +35,7 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
         className="mt-6 flex w-[170px] items-center justify-center gap-2"
         onClick={() => tryActivation(metaMask.connector)}
       >
-        <Image src="/img/metamask.png" width={30} height={30} alt="metamask" />
+        <Image src="/img/metamask@2x.png" width={30} height={30} alt="metamask" />
         <span className="text-sm">METAMASK</span>
       </Button>
       <div className="mt-[50px] text-xs text-p12-sub">

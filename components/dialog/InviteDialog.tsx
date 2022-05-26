@@ -53,7 +53,7 @@ function InviteDialog() {
               </div>
             )}
           </div>
-          <div className="mt-7 h-[1px] bg-p12-sub"></div>
+          <div className="mt-7 h-[1px] bg-p12-line"></div>
           <div className="mt-7 flex justify-end">
             <Button type="bordered" onClick={() => setOpen(false)}>
               Confirm

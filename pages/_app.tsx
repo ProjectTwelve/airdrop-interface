@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import Layout from '../components/layout';
 import type { AppProps } from 'next/app';
 
@@ -20,7 +19,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout>
           <Component {...pageProps} />
         </Layout>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { fetchDeveloperInfo } from '../../lib/api';
 import { useWeb3React } from '@web3-react/core';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { motion } from 'framer-motion';
 import { developerGameAtom, claimGroupSelector, NFTClaim } from '../../store/developer/state';
 
 function DeveloperStatus() {
@@ -25,7 +26,12 @@ function DeveloperStatus() {
   );
 
   return (
-    <div className="flex overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0.65, width: 0 }}
+      animate={{ opacity: 1, width: 'auto' }}
+      exit={{ opacity: 0, width: 0 }}
+      className="flex overflow-hidden"
+    >
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         {games.length ? (
           <Tag type={tagType} value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} NFT Coupon`} />
@@ -38,9 +44,11 @@ function DeveloperStatus() {
       </div>
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         <p className="font-['D-DIN'] font-bold">?,???</p>
-        <Image width={30} height={30} src="/img/p12.png" alt="p12" />
+        <div className="h-[30px] w-[30px]">
+          <Image width={30} height={30} src="/img/p12.png" alt="p12" />
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

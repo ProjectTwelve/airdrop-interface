@@ -7,6 +7,7 @@ import WalletPopover from './WalletPopover';
 import { CHAIN_ID } from '../../constants';
 import DeveloperStatus from './DeveloperStatus';
 import { useRouter } from 'next/router';
+import { AnimatePresence } from 'framer-motion';
 
 function Web3Status() {
   const router = useRouter();
@@ -22,7 +23,7 @@ function Web3Status() {
   if (account) {
     return (
       <div className="flex rounded-full bg-[#313752] py-2 text-sm">
-        {router.pathname === '/developer' && <DeveloperStatus />}
+        <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
         <Web3StatusInner />
       </div>
     );

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-start">
+    <div className="fixed top-1/2 -translate-y-1/2 left-0 right-0 flex flex-col items-center justify-start">
       <div className="mt-16">
         <Image width={394} height={180} src="/svg/logo.svg" alt="logo" />
       </div>

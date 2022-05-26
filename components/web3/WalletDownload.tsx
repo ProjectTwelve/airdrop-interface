@@ -9,17 +9,17 @@ type WalletDownloadProps = {
 };
 
 function WalletDownload({ setWalletType }: WalletDownloadProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const links = [
     {
-      icon: '/img/chrome.png',
+      icon: '/img/chrome@2x.png',
       name: 'Chrome',
       url: 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn',
     },
-    { icon: '/img/firefox.png', name: 'Firefox', url: 'https://addons.mozilla.org/firefox/addon/ether-metamask' },
+    { icon: '/img/firefox@2x.png', name: 'Firefox', url: 'https://addons.mozilla.org/firefox/addon/ether-metamask' },
     {
-      icon: '/img/edge.png',
+      icon: '/img/edge@2x.png',
       name: 'Edge',
       url: 'https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm',
     },
@@ -34,7 +34,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-center gap-2">
-          <Image src="/img/metamask.png" width={30} height={30} alt="metamask" />
+          <Image src="/img/metamask@2x.png" width={30} height={30} quality={100} alt="metamask" />
           <span className="text-sm">METAMASK</span>
         </div>
         <div className="flex items-center justify-center gap-3">
