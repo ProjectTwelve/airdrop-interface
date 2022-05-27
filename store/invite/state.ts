@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const inviteModalAtom = atom({
   key: 'invite_modal',
@@ -17,5 +17,13 @@ export const socialMediaClickAtom = atom({
     [SocialMediaType.Twitter]: false,
     [SocialMediaType.Telegram]: false,
     [SocialMediaType.Discord]: false,
+  },
+});
+
+export const isSocialMediaClickSelector = selector({
+  key: 'is_Social_media_click',
+  get: ({ get }) => {
+    const socialMediaClick = get(socialMediaClickAtom);
+    return Object.values(socialMediaClick).every((v) => v);
   },
 });

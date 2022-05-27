@@ -9,6 +9,8 @@ import {
   DeveloperGameData,
   DeveloperInfoParams,
   DeveloperInfoData,
+  DeveloperInvitationParams,
+  DeveloperInvitationData,
 } from './types';
 
 /**
@@ -32,5 +34,16 @@ export const fetchDeveloperGame = (params: DeveloperGameParams) =>
 export const fetchDeveloperVerify = (data: DeveloperVerifyParams) =>
   request.post<any, Response<DeveloperVerifyData>>('/api/developer/verify', data);
 
+/**
+ * get developer info
+ * @param params
+ */
 export const fetchDeveloperInfo = (params: DeveloperInfoParams) =>
   request.get<any, Response<DeveloperInfoData>>('/api/developer/info', { params });
+
+/**
+ * get developer invitation
+ * @param params
+ */
+export const fetchDeveloperInvitation = (params: DeveloperInvitationParams) =>
+  request.get<any, Response<DeveloperInvitationData>>('/api/developer/invitation', { params });

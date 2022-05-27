@@ -36,13 +36,20 @@ export type FailedGameMessage = {
 export type AccountInfo = {
   name: string;
   total_reviews: number;
-  release_date: ReleaseDate;
+  header_image: string;
+  release_date?: ReleaseDate;
   nft_claim: NFTClaim;
   nft_id: number | null;
   appid: number;
   nft_level: NFTLevel;
   credential: number;
   updatedAt: string;
+};
+export type InvitationInfo = {
+  wallet_address: string;
+  appid: string;
+  name: string;
+  time: string;
 };
 
 export type ReferralCodeParams = { wallet_address?: string | null };
@@ -70,4 +77,11 @@ export type DeveloperInfoParams = {
 };
 export type DeveloperInfoData = {
   account_info: AccountInfo[];
+};
+
+export type DeveloperInvitationParams = {
+  addr?: string | null;
+};
+export type DeveloperInvitationData = {
+  invitation_info: InvitationInfo[];
 };

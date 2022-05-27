@@ -17,6 +17,7 @@ module.exports = {
         'p12-link': '#43BBFF',
         'p12-tips': '#4383FF',
         'p12-line': '#4E556D',
+        'p12-bg': '#74788B',
       },
       backgroundImage: {
         gradient: 'linear-gradient(to right, #A011FF, #FF9E76)',

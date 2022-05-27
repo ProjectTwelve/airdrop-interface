@@ -23,7 +23,7 @@ function LayoutHeaderExtra() {
   return (
     <AnimatePresence>
       {router.pathname === '/developer' && (
-        <motion.div className="relative overflow-hidden">
+        <motion.div className="relative">
           <motion.div
             initial={{ opacity: 0.65 }}
             animate={{ opacity: 1 }}

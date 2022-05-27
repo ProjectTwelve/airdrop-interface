@@ -6,16 +6,24 @@ import { fetchDeveloperInfo } from '../../lib/api';
 import { useWeb3React } from '@web3-react/core';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { motion } from 'framer-motion';
-import { developerGameAtom, claimGroupSelector, NFTClaim } from '../../store/developer/state';
+import { claimGroupSelector, claimingGameAtom, developerGameAtom, NFTClaim } from '../../store/developer/state';
+import { BADGES } from '../../constants';
 
 function DeveloperStatus() {
   const { account } = useWeb3React();
   const [games, setGames] = useRecoilState(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
+  const [claimingGame, setClaimingGame] = useRecoilState(claimingGameAtom);
   useQuery(['developer_info', account], () => fetchDeveloperInfo({ addr: account }), {
     enabled: !!account,
+    // refetchInterval: 30000,
     onSuccess: (data) => {
       if (data.code !== 0) return;
+      if (claimingGame) {
+        const currentGame = games.find((game) => game.appid === claimingGame.appid);
+        currentGame?.nft_claim !== NFTClaim.CLAIMED && window.open(BADGES[claimingGame.nft_level].claim);
+        setClaimingGame(undefined);
+      }
       setGames(data.data.account_info || []);
     },
   });
@@ -34,7 +42,7 @@ function DeveloperStatus() {
     >
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         {games.length ? (
-          <Tag type={tagType} value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} NFT Coupon`} />
+          <Tag type={tagType} value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="error" value="Not Eligible" />
         )}

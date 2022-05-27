@@ -39,3 +39,8 @@ export const claimGroupSelector = selector({
     return filters;
   },
 });
+
+export const claimingGameAtom = atom<AccountInfo | undefined>({
+  key: 'claiming_game',
+  default: undefined,
+});

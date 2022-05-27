@@ -35,7 +35,7 @@ export default function RoadmapDialog({ close }: RoadmapDialogProps) {
               </p>
               <p className="flex items-center justify-start gap-1.5 leading-5">
                 <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                Developers are able to verify their games and get NFT coupon - &quot;P12 Genesis&quot;.
+                Developers are able to verify their games and get Airdrop NFT - &quot;P12 Genesis&quot;.
               </p>
               <p className="flex items-center justify-start gap-1.5 leading-5">
                 <Image src="/svg/check.svg" width={16} height={16} alt="check" />
@@ -69,7 +69,7 @@ export default function RoadmapDialog({ close }: RoadmapDialogProps) {
               </p>
               <p className="flex items-center justify-start gap-1.5 leading-5">
                 <span className="h-4 w-4 text-center text-sm">·</span>
-                Gamers are able to verify steam accounts and get NFT coupons.
+                Gamers are able to verify steam accounts and get airdrop NFT.
               </p>
             </div>
           </div>
