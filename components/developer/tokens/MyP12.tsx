@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import SocialMedia from '../socialMedia';
-import { socialMediaClickAtom, SocialMediaType } from '../../store/invite/state';
+import SocialMedia from '../../socialMedia';
+import { socialMediaClickAtom, SocialMediaType } from '../../../store/invite/state';
 import { useRecoilState } from 'recoil';
 
 export function MyP12() {

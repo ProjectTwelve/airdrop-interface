@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Back from '../../components/back';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SocialMedia from '../../components/socialMedia';
-import VerifyGames from '../../components/developer/VerifyGames';
+import Verify from '../../components/developer/Verify';
 import Tokens from '../../components/developer/Tokens';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { claimGroupSelector, NFTClaim, tabSelectAtom } from '../../store/developer/state';
@@ -46,7 +46,7 @@ export default function Developer() {
               </div>
             </TabList>
             <TabPanel>
-              <VerifyGames />
+              <Verify />
             </TabPanel>
             <TabPanel>
               <Tokens />

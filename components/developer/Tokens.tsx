@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { LeftCircle } from '../svg/LeftCircle';
 import classNames from 'classnames';
-import styles from './tokens.module.css';
+import styles from './tokens/tokens.module.css';
 import { useClickScroll } from '../../hooks/useClickScroll';
 import Tag from '../tag';
 import Image from 'next/image';
 import Button from '../button';
-import MyP12 from './MyP12';
+import MyP12 from './tokens/MyP12';
 import Dialog from '../dialog';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useSetRecoilState } from 'recoil';

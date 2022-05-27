@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { AddGameTips, OwnershipTips } from './VerifyTips';
+import { AddGameTips, OwnershipTips } from './verify/Tips';
 import Button from '../button';
-import SteamAppItem from './SteamAppItem';
+import SteamAppItem from './verify/SteamAppItem';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useWeb3React } from '@web3-react/core';
@@ -16,7 +16,7 @@ import { tabSelectAtom } from '../../store/developer/state';
 
 export type SteamApp = Partial<GameInfo> & { index: number };
 
-function VerifyGames() {
+function Verify() {
   const { account, library } = useWeb3React();
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
@@ -177,4 +177,4 @@ function VerifyGames() {
   );
 }
 
-export default React.memo(VerifyGames);
+export default React.memo(Verify);

@@ -1,7 +1,7 @@
-import Dialog from '../dialog';
-import RoadmapDialog from '../dialog/RoadmapDialog';
+import Dialog from '../../dialog';
+import RoadmapDialog from '../../dialog/RoadmapDialog';
 import React from 'react';
-import MessageCodeDialog from '../dialog/MessageCodeDialog';
+import MessageCodeDialog from '../../dialog/MessageCodeDialog';
 
 export function AddGameTips() {
   return (

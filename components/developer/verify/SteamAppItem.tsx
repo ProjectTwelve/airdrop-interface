@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Button from '../button';
+import Button from '../../button';
 import Image from 'next/image';
-import { CloseCircle } from '../svg/CloseCircle';
+import { CloseCircle } from '../../svg/CloseCircle';
 import { useQuery } from 'react-query';
-import { fetchDeveloperGame } from '../../lib/api';
+import { fetchDeveloperGame } from '../../../lib/api';
 import { toast } from 'react-toastify';
-import { SteamApp } from './VerifyGames';
+import { SteamApp } from '../Verify';
 
 type SteamGameItemProps = {
   app: SteamApp;
