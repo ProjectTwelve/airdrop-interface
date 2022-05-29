@@ -8,7 +8,7 @@ function LayoutHeader() {
   const router = useRouter();
 
   return (
-    <header className="flex justify-between">
+    <header className="relative z-10 flex justify-between">
       <div className="flex items-center justify-start">
         <Image
           width={80}
