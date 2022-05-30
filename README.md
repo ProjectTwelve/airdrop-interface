@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+    <img alt="p12_logo" src="./docs/p12_logo.png" />
+</p>
 
-## Getting Started
+# P12 Airdrop
 
-First, run the development server:
+Project Twelve is a GameFi ecosystem with sustainable economies. We believe that Game, the 9th Art, is an integral part
+of Metaverse, where Gamers and Developers are the two most important components.
+STEAM, as a premiere gaming platform, is the largest digital distribution platform for PC gaming; players spent almost
+38 billion hours on Steam in 2021.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![readme_01](./docs/readme_01.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+We believe it will be a good means to identify game lovers with the help of Steam data, and we want to give tributes to
+all Steam Gamers & Developers!
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## For Developers
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Airdrop Tributes
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Developer specific NFT.
+2. $P12 tokens.
 
-## Learn More
+### Mechanism
 
-To learn more about Next.js, take a look at the following resources:
+Through Steam API, we get a list of all steam games with their app ID, names, reviews, etc., and we use the signature
+method to determine the ownership between developers and games.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Here are the rules and the results:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Steam game developers who:
 
-## Deploy on Vercel
+1. Own at least 1 game on Steam(except DLC).
+2. Complete the authentication steps on P12Airdrop website.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+will be rewarded with tributes following rules:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Each verified game will get 1 Developer specific NFT.
+2. The NFT has 4 categories: orange, purple, blue and green.
+3. The amount of $P12 that developers can claim is based on their games' reviews and publish date.
+
+### Result Files
+
+We export the results to a public google
+folder [here](https://drive.google.com/drive/folders/1jKYEUQvfKuJcV84pWSdH96XO05HC4zPs).
+
+Game data is available and complete, while binding relationship between game and address will be continuously updated.
+
+## For Gamers
+
+(coming soon)
