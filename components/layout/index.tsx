@@ -1,11 +1,13 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import { ToastContainer } from 'react-toastify';
 import Web3ReactManage from '../web3/Web3ReactManage';
 import LayoutHeader from './LayoutHeader';
-import { RecoilRoot } from 'recoil';
 import InviteDialog from '../dialog/InviteDialog';
-import { ToastContainer } from 'react-toastify';
+import RoadmapDialog from '../dialog/RoadmapDialog';
+import ToastIcon from '../svg/ToastIcon';
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -18,7 +20,8 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
           </div>
           <div className="container-bg"></div>
           <InviteDialog />
-          <ToastContainer theme="dark" toastClassName="toast-container" autoClose={3000} hideProgressBar />
+          <RoadmapDialog />
+          <ToastContainer theme="dark" toastClassName="toast-container" icon={<ToastIcon />} autoClose={3000} hideProgressBar />
         </RecoilRoot>
       </Web3ReactManage>
     </Web3ReactProvider>

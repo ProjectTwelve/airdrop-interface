@@ -6,8 +6,7 @@
 .tokens__tab__scrollButton {
     visibility: hidden;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 30px;
     opacity: 0;
     transition: all 0.1s linear;
     z-index: 10;

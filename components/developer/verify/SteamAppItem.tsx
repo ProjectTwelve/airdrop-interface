@@ -6,6 +6,8 @@ import { useQuery } from 'react-query';
 import { fetchDeveloperGame } from '../../../lib/api';
 import { toast } from 'react-toastify';
 import { SteamApp } from '../Verify';
+import { useSetRecoilState } from 'recoil';
+import { roadmapModalAtom } from '../../../store/roadmap/state';
 
 type SteamGameItemProps = {
   app: SteamApp;
@@ -16,6 +18,7 @@ type SteamGameItemProps = {
 
 function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   const [value, setValue] = useState('');
+  const setOpen = useSetRecoilState(roadmapModalAtom);
   const { isLoading, refetch } = useQuery(['developer_game', app.index], () => fetchDeveloperGame({ appid: value }), {
     enabled: false,
     onSuccess: (data) => {
@@ -48,7 +51,9 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </p>
           </div>
           <div className="flex w-[120px] items-center justify-center gap-2">
-            <span className="font-['D-DIN'] text-2xl font-bold">?,???</span>
+            <span className="cursor-pointer font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
+              ?,???
+            </span>
             <Image src="/img/p12.png" width={30} height={30} alt="p12" />
           </div>
           <div className="absolute top-1.5 right-1.5" onClick={onRemove}>
@@ -58,7 +63,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
       ) : (
         <div className="flex h-full items-center justify-between gap-5 px-5">
           <div className="flex flex-1 items-center justify-start gap-5 text-sm">
-            <p>Steam appid:</p>
+            <p>App ID:</p>
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}

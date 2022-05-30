@@ -9,12 +9,13 @@ import { claimingGameAtom, developerGameAtom, NFTClaim, tabSelectAtom } from '..
 import { LeftCircle } from '../../svg/LeftCircle';
 import { useClickScroll } from '../../../hooks/useClickScroll';
 import { useSelectedGame } from '../../../hooks/useSelectedGame';
-import { BADGES, NFT_CONTRACT_ADDRESS } from '../../../constants';
+import { BADGES, GALAXY_LIST, NFT_CONTRACT_ADDRESS } from '../../../constants';
 import { useWeb3React } from '@web3-react/core';
 import { useIsFetching, useQueryClient } from 'react-query';
 import { shortenAddress } from '../../../utils';
 
 import styles from './tokens.module.css';
+import { roadmapModalAtom } from '../../../store/roadmap/state';
 
 const claimComponents: Record<NFTClaim, JSX.Element> = {
   [NFTClaim.UNCLAIMED]: <Tag size="small" type="error" value="Unclaimed" />,
@@ -27,6 +28,7 @@ export default function TokenTabs() {
   const games = useRecoilValue(developerGameAtom);
   const isFetching = useIsFetching(['developer_info', account]);
   const setClaimingGame = useSetRecoilState(claimingGameAtom);
+  const setOpen = useSetRecoilState(roadmapModalAtom);
   const queryClient = useQueryClient();
   const enableTabScroll = games.length > 4;
   const [selectedGame, setSelectedGame] = useSelectedGame();
@@ -107,14 +109,17 @@ export default function TokenTabs() {
               <div className="flex flex-col items-center justify-center">
                 {selectedGame.nft_claim === NFTClaim.CLAIMED ? (
                   <>
-                    <Image src={BADGES[selectedGame.nft_level].asset} width={420} height={420} alt="badge" />
-                    <Button
-                      type="bordered"
-                      className="mt-9 w-[260px]"
-                      onClick={() => window.open(BADGES[selectedGame.nft_level].claim)}
-                    >
-                      My NTF at Galaxy
-                    </Button>
+                    <div className="relative h-[420px] w-[420px]">
+                      <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                        <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
+                      </div>
+                      <Image src={BADGES[selectedGame.nft_level].asset} width={420} height={420} alt="badge" />
+                    </div>
+                    {selectedGame.credential <= 10 && (
+                      <Button type="bordered" className="mt-9 w-[260px]" onClick={() => window.open(GALAXY_LIST)}>
+                        My NTF at Galaxy
+                      </Button>
+                    )}
                   </>
                 ) : (
                   <>
@@ -149,17 +154,28 @@ export default function TokenTabs() {
           {selectedGame.nft_claim !== NFTClaim.CLAIMED && (
             <p className="absolute bottom-8 text-center text-sm text-p12-sub">The Airdrop NFT is powered by Project GALAXY</p>
           )}
+          {selectedGame.credential > 10 && (
+            <p className="absolute bottom-8 text-center text-sm text-p12-sub">
+              You&apos;ve got 10 identical NFTs that reached our limit <br /> $P12 unaffected
+            </p>
+          )}
         </div>
         <div className="basis-1/2 p-9">
-          <h2 className="mt-8 text-[30px] font-bold">{selectedGame.appid ? 'Best Game Developer Badge' : 'P12 Genesis'}</h2>
+          <h2 className="mt-8 text-[30px] font-bold">P12 Genesis</h2>
           <h3 className="mt-9 text-xl font-bold">Project twelve Airdrop</h3>
           <p className="mt-2 text-sm text-p12-sub">
-            Birthday: {selectedGame.updatedAt ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD') : '--'}
+            Birthday:{' '}
+            {selectedGame.updatedAt && selectedGame.credential <= 10
+              ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD')
+              : '--'}
           </p>
           <div className="mt-9 rounded-2xl border border-white/80 py-6 px-[30px]">
             <p>Amount of $P12 from this game</p>
             <div className="mt-5 flex items-center justify-between">
-              <p className="font-['D-DIN'] text-[48px] font-bold">
+              <p
+                className="cursor-pointer font-['D-DIN'] text-[48px] font-bold"
+                onClick={() => selectedGame.nft_claim === NFTClaim.CLAIMED && setOpen(true)}
+              >
                 {selectedGame.nft_claim === NFTClaim.CLAIMED ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={48} height={48} alt="p12" />
@@ -168,19 +184,21 @@ export default function TokenTabs() {
           <div className="mt-9 flex rounded-2xl border border-p12-line py-[30px]">
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">ID</p>
-              <p className="text-lg font-bold">{selectedGame.nft_id || '--'}</p>
+              <p className="font-bold">{selectedGame.nft_id || '--'}</p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">Contract address</p>
-              <p className="text-lg font-bold">{selectedGame.appid ? shortenAddress(NFT_CONTRACT_ADDRESS) : '--'}</p>
+              <p className="font-bold">
+                {selectedGame.appid && selectedGame.credential <= 10 ? shortenAddress(NFT_CONTRACT_ADDRESS) : '--'}
+              </p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">Character</p>
-              <p className="text-lg font-bold">{selectedGame.appid ? 'Developer' : '--'}</p>
+              <p className="font-bold">{selectedGame.appid ? 'Developer' : '--'}</p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center">
               <p className="text-sm text-p12-sub">Status</p>
-              <p className="text-lg font-bold">
+              <p className="font-bold">
                 {selectedGame.appid
                   ? {
                       [NFTClaim.UNCLAIMED]: 'Eligible',
