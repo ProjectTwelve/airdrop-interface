@@ -5,15 +5,17 @@ import MyP12 from './tokens/MyP12';
 import Dialog from '../dialog';
 import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector, NFTClaim } from '../../store/developer/state';
 import { useQuery } from 'react-query';
 import { useWeb3React } from '@web3-react/core';
 import { fetchDeveloperInvitation } from '../../lib/api';
+import { roadmapModalAtom } from '../../store/roadmap/state';
 
 function Tokens() {
   const { account } = useWeb3React();
   const claimGroup = useRecoilValue(claimGroupSelector);
+  const setOpen = useSetRecoilState(roadmapModalAtom);
 
   const { data: invitation } = useQuery(['invitation_info', account], () => fetchDeveloperInvitation({ addr: account }), {
     enabled: !!account,
@@ -41,7 +43,12 @@ function Tokens() {
         <div className="flex gap-4 border-b border-p12-line py-6">
           <div className="rounded-lg bg-p12-black/60 p-3">
             <div className="flex items-center justify-between">
-              <p className="font-['D-DIN'] text-xl font-bold">{claimGroup[NFTClaim.CLAIMED].length ? '?,???' : '-,---'}</p>
+              <p
+                className="cursor-pointer font-['D-DIN'] text-xl font-bold"
+                onClick={() => claimGroup[NFTClaim.CLAIMED].length && setOpen(true)}
+              >
+                {claimGroup[NFTClaim.CLAIMED].length ? '?,???' : '-,---'}
+              </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
             <p className="mt-2 text-xs text-p12-sub">
@@ -50,7 +57,12 @@ function Tokens() {
           </div>
           <div className="rounded-lg bg-p12-black/60 p-3">
             <div className="flex items-center justify-between">
-              <p className="font-['D-DIN'] text-xl font-bold">{invitation?.length ? '?,???' : '-,---'}</p>
+              <p
+                className="cursor-pointer font-['D-DIN'] text-xl font-bold"
+                onClick={() => invitation?.length && setOpen(true)}
+              >
+                {invitation?.length ? '?,???' : '-,---'}
+              </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
             <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
@@ -64,7 +76,12 @@ function Tokens() {
           <div className="flex items-center justify-start">
             <p className="mr-3 text-p12-sub">{pieces} pieces</p>
             <p className="mr-4 text-lg font-bold">Total:</p>
-            <p className="mr-6 font-['D-DIN'] text-[64px] font-bold leading-[64px]">{pieces > 0 ? '?,???' : '-,---'}</p>
+            <p
+              className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
+              onClick={() => pieces && setOpen(true)}
+            >
+              {pieces > 0 ? '?,???' : '-,---'}
+            </p>
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
           <div>

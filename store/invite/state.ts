@@ -24,6 +24,6 @@ export const isSocialMediaClickSelector = selector({
   key: 'is_Social_media_click',
   get: ({ get }) => {
     const socialMediaClick = get(socialMediaClickAtom);
-    return Object.values(socialMediaClick).every((v) => v);
+    return Object.values(socialMediaClick).some((v) => v);
   },
 });

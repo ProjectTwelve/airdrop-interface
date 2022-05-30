@@ -51,6 +51,7 @@ function Dialog({ render, open: passedOpen = false, children, onOpenChange }: Re
                 placeItems: 'center',
                 background: 'rgba(12, 18, 44, 0.65)',
                 backdropFilter: 'blur(20px)',
+                zIndex: 20,
               }}
             >
               <FloatingFocusManager context={context}>

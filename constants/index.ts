@@ -2,6 +2,7 @@ import { NFTLevel } from '../store/developer/state';
 
 export const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID ?? '1');
 export const NFT_CONTRACT_ADDRESS = '0x900b8215FA5231C24f30C694850481e25300845c';
+export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 
 export const BADGES = {
   [NFTLevel.ORANGE]: {

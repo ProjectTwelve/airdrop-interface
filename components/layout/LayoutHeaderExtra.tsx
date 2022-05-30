@@ -4,16 +4,16 @@ import Button from '../button';
 import Image from 'next/image';
 import { useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
-import Dialog from '../dialog';
-import RoadmapDialog from '../dialog/RoadmapDialog';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
+import { roadmapModalAtom } from '../../store/roadmap/state';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
-  const setOpen = useSetRecoilState(inviteModalAtom);
-  const whitepaperLink = 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf';
+  const setInviteOpen = useSetRecoilState(inviteModalAtom);
+  const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
+  const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
 
   useEffect(() => {
     const currentStatus = getLocalStorage('invite_tips_click');
@@ -30,21 +30,19 @@ function LayoutHeaderExtra() {
             exit={{ opacity: 0 }}
             className="relative flex gap-3"
           >
-            <Button type="bordered" onClick={() => window.open(whitepaperLink)}>
+            <Button type="bordered" onClick={() => window.open(readmeLink)}>
               <div className="flex items-center justify-center gap-2 text-sm font-bold">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
-                Whitepaper
+                Readme
               </div>
             </Button>
-            <Dialog render={({ close }) => <RoadmapDialog close={close} />}>
-              <Button type="bordered">
-                <div className="flex items-center justify-center gap-2 text-sm font-bold">
-                  <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
-                  Roadmap
-                </div>
-              </Button>
-            </Dialog>
-            <Button type="bordered" onClick={() => setOpen(true)}>
+            <Button type="bordered" onClick={() => setRoadmapOpen(true)}>
+              <div className="flex items-center justify-center gap-2 text-sm font-bold">
+                <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
+                Roadmap
+              </div>
+            </Button>
+            <Button type="bordered" onClick={() => setInviteOpen(true)}>
               <div className="flex items-center justify-center gap-2 text-sm font-bold">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
                 My invite address
