@@ -33,7 +33,7 @@ function InviteDialog() {
             <br />
             · You will be rewarded with $P12 once they have successfully verified their games.
             <br />
-            · You will be able to get ??? $P12 for each verified game from your Invite Link.
+            · You will be able to get 18% of $P12 for each verified game from your invite link.
             <br />· You can check your rewarded $P12 on &quot;My P12 tokens&quot; page.
           </div>
           <div className="relative mt-6 break-words rounded-lg bg-p12-black/60 p-5 pb-16 text-sm">

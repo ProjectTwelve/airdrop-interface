@@ -40,7 +40,7 @@ const Button = React.forwardRef(function ButtonInner(
       ref={ref}
       onClick={loading ? undefined : onClick}
       className={classNames(
-        'relative overflow-hidden rounded-full px-4 text-center',
+        'relative overflow-hidden backdrop-blur rounded-full px-4 text-center',
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
         'disabled:cursor-not-allowed',
         bg[type || 'default'],

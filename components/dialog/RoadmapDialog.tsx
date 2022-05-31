@@ -51,9 +51,12 @@ export default function RoadmapDialog() {
                     Amount of your verified P12 is shown as &apos;?&apos; in Stage 1, which will unfold in Stage2 as well as
                     calculation formula.
                   </p>
-                  <p className="flex justify-start gap-1.5 leading-5">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    Invitation-reward function is available, the amount of reward $P12 is shown as &quot;?&quot;.
+                  <p className="flex items-start justify-start gap-1.5 leading-5">
+                    <div className="flex h-5 w-4 flex-none items-center justify-center">
+                      <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    </div>
+                    Invitation-reward function is available, when developers successfully verify their games through the invite
+                    link, every inviter will be able to get 18% of $P12 for each game as rewards.
                   </p>
                   <div className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
