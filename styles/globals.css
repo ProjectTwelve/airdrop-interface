@@ -12,19 +12,10 @@
 }
 
 body {
-    background: #0E142C;
+    background: #000;
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
 }
-
-/*.container-bg {*/
-/*    position: fixed;*/
-/*    inset: 0;*/
-/*    z-index: -1;*/
-/*    background: url("/img/bg_01.png") no-repeat right top 20vh, url("/img/bg_02.png") no-repeat left top 60vh;*/
-/*    filter: blur(8px);*/
-/*}*/
-
 
 * {
     color: #FFF;
