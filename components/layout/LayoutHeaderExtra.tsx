@@ -31,21 +31,21 @@ function LayoutHeaderExtra() {
             className="relative flex gap-3"
           >
             <Button type="bordered" onClick={() => window.open(readmeLink)}>
-              <div className="flex items-center justify-center gap-2 text-sm font-bold">
+              <div className="flex items-center justify-center gap-2 text-sm">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
                 Readme
               </div>
             </Button>
             <Button type="bordered" onClick={() => setRoadmapOpen(true)}>
-              <div className="flex items-center justify-center gap-2 text-sm font-bold">
+              <div className="flex items-center justify-center gap-2 text-sm">
                 <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
                 Roadmap
               </div>
             </Button>
             <Button type="bordered" onClick={() => setInviteOpen(true)}>
-              <div className="flex items-center justify-center gap-2 text-sm font-bold">
+              <div className="flex items-center justify-center gap-2 text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
-                My invite address
+                My invite link
               </div>
             </Button>
             <AnimatePresence>
@@ -58,7 +58,7 @@ function LayoutHeaderExtra() {
                   className="backdrop-box absolute -top-1/2 w-[190px] rounded-lg text-xs"
                 >
                   <div className="p-4">
-                    Share your invite address and get rewards
+                    Share your invite link and get rewards
                     <div className="mt-2 flex justify-end">
                       <div
                         className="cursor-pointer text-p12-link"

@@ -13,7 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>P12 | Project Twelve</title>
+        <title>P12 | Genesis Airdrop | Project Twelve</title>
+        <meta name="keywords" content="P12, Airdrop, Steam, Gaming, Game Development, GameFi, Project Twelve" />
+        <meta name="description" content="P12 | Project Twelve | Genesis Airdrop" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Layout>

@@ -19,30 +19,30 @@ export function MyP12() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold">My $P12</h3>
+      <h3 className="text-xl font-medium">My $P12</h3>
       <div className="mt-3 flex rounded-2xl border border-p12-line py-[30px]">
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(leastOneGame) || ''} width={26} height={26} alt="icon" />
-            <p className="font-bold">Verified at least 1</p>
+            <p className="font-medium">Verified at least 1</p>
           </div>
-          <p className="font-bold">steam game as a developer</p>
+          <p className="font-medium">steam game as a developer</p>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(leastOneGame && isAllClaimed) || ''} width={26} height={26} alt="icon" />
-            <p className="font-bold">{leastOneGame ? 'Airdrop NFT' : 'NOT Eligible'}</p>
+            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NOT Eligible'}</p>
           </div>
-          {leastOneGame && !isAllClaimed && <p className="font-bold">you have unclaimed NFT</p>}
+          {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line">
           <Image src={iconStatus.get(isAllClicked) || ''} width={26} height={26} alt="icon" />
-          <p className="font-bold">Join us</p>
+          <p className="font-medium">Join us</p>
           <SocialMedia />
         </div>
         <div className="flex flex-1 items-center justify-center gap-2">
           <Image src={iconStatus.get(false) || ''} width={26} height={26} alt="icon" />
-          <p className="font-bold">P12 token ICO</p>
+          <p className="font-medium">P12 token ICO</p>
         </div>
       </div>
     </div>

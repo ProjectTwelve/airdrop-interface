@@ -48,7 +48,7 @@ function DeveloperStatus() {
           <Tag type="error" size="large" value="Not Eligible" />
         )}
       </div>
-      <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-['D-DIN'] text-xl">
+      <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-['D-DIN'] text-xl font-bold">
         <span className="text-p12-success">{games.length}</span>Games
       </div>
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">

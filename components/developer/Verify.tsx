@@ -94,7 +94,7 @@ function Verify() {
     <div className="px-8 pt-12">
       <div className="flex gap-[60px] border-b border-p12-line pb-12">
         <div className="w-full">
-          <h2 className="text-xl font-bold">
+          <h2 className="text-xl font-medium">
             Step1: Add steam games
             <span className="text-sm font-normal">&nbsp;(you can add 3 games at once)</span>
           </h2>
@@ -118,18 +118,18 @@ function Verify() {
                 style={{ borderRadius: 16, height: 72 }}
                 onClick={() => onAddSteamApp(count)}
               >
-                <p className="text-[32px] font-bold">+</p>
+                <p className="text-[32px] font-medium">+</p>
               </Button>
             )}
           </div>
         </div>
         <div className="w-full">
-          <h2 className="text-xl font-bold">Step2：Verify Ownership</h2>
+          <h2 className="text-xl font-medium">Step2：Verify Ownership</h2>
           <div className="mt-7">
             <OwnershipTips />
           </div>
           <div className="mt-7">
-            <h3 className="font-bold">
+            <h3 className="font-medium">
               YOUR CODE <span className="text-sm font-normal">(you can check for the code later too)</span>
             </h3>
             <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/60 p-6 pb-14">

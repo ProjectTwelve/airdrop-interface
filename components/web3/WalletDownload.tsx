@@ -28,7 +28,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
   return (
     <div className="p-6">
       <Back onClick={() => setWalletType?.(WalletType.CONNECT)} />
-      <h4 className="text-center text-xl font-bold">Download & Setup</h4>
+      <h4 className="text-center text-xl font-medium">Download & Setup</h4>
       <div
         className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-p12-sub py-2 px-4"
         onClick={() => setIsOpen(!isOpen)}

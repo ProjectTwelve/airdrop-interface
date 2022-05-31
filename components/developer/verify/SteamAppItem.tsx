@@ -39,12 +39,12 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             style={{ backgroundImage: `url(${app.header_image})` }}
           >
             <div className="absolute bottom-0 left-0 h-[42px] w-[42px]">
-              <span className="absolute top-5 left-1 z-10 text-sm font-bold">0{index}</span>
+              <span className="absolute top-5 left-1 z-10 text-sm font-medium">0{index}</span>
               <Image src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
           <div className="flex h-full flex-1 flex-col items-start justify-around">
-            <p className="max-w-[295px] truncate font-bold">{app.name}</p>
+            <p className="max-w-[295px] truncate font-medium">{app.name}</p>
             <p className="text-sm">
               {app.release_date?.date} &nbsp;&nbsp;
               {app.recommendations?.total} reviews
@@ -76,7 +76,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             disabled={!value}
             type={value ? 'gradient' : 'default'}
             size="small"
-            className="text-sm font-bold"
+            className="text-sm font-medium"
             onClick={refetch}
           >
             confirm

@@ -75,7 +75,7 @@ function Tokens() {
         <div className="flex items-center justify-between py-8">
           <div className="flex items-center justify-start">
             <p className="mr-3 text-p12-sub">{pieces} pieces</p>
-            <p className="mr-4 text-lg font-bold">Total:</p>
+            <p className="mr-4 text-lg font-medium">Total:</p>
             <p
               className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
               onClick={() => pieces && setOpen(true)}
@@ -85,7 +85,7 @@ function Tokens() {
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
           <div>
-            <Button className="w-[280px] font-bold" disabled size="large">
+            <Button className="w-[280px] font-medium" disabled size="large">
               Claim to my wallet
             </Button>
           </div>

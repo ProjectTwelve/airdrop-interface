@@ -29,7 +29,7 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
 
   return (
     <div className="flex flex-col items-center justify-center py-6">
-      <h4 className="text-xl font-bold">Connect wallet</h4>
+      <h4 className="text-xl font-medium">Connect wallet</h4>
       <Button
         type="bordered"
         className="mt-6 flex w-[170px] items-center justify-center gap-2"

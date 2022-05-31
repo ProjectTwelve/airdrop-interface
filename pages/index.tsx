@@ -16,12 +16,12 @@ const Home: NextPage = () => {
         <Image width={394} height={180} src="/svg/logo.svg" alt="logo" />
       </div>
       <div className="mt-16 text-center">
-        <h2 className="text-[36px] font-bold">Claim your Airdrop</h2>
-        <h2 className="text-[36px] font-bold">Experience Fantastic Metaverse</h2>
+        <h2 className="text-[34px] font-medium">Claim your Airdrop</h2>
+        <h2 className="text-[34px] font-medium">Experience Fantastic Metaverse</h2>
       </div>
       <div className="mt-24 flex flex-col items-center gap-6">
         <Button className="w-[470px]" size="large" type="bordered" onClick={() => setOpen(true)}>
-          My invite address
+          My invite link
         </Button>
         <Button
           className="w-[470px]"

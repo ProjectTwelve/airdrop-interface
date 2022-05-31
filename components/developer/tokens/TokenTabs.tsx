@@ -74,11 +74,11 @@ export default function TokenTabs() {
                   <div className="flex-1">
                     {game.name ? (
                       <>
-                        <h4 className="my-2 max-w-[170px] truncate font-bold">{game.name}</h4>
+                        <h4 className="my-2 max-w-[170px] truncate font-medium">{game.name}</h4>
                         {claimComponents[game.nft_claim]}
                       </>
                     ) : (
-                      <p className="font-bold leading-[72px]">NOT Eligible</p>
+                      <p className="font-medium leading-[72px]">NOT Eligible</p>
                     )}
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export default function TokenTabs() {
                   </>
                 ) : (
                   <>
-                    <h4 className="text-center text-xl font-bold text-p12-success">
+                    <h4 className="text-center text-xl font-medium text-p12-success">
                       {selectedGame.nft_claim === NFTClaim.PENDING
                         ? 'Pending: update in few minutes'
                         : 'Congrats! you are eligible'}
@@ -144,7 +144,7 @@ export default function TokenTabs() {
               </div>
             ) : (
               <div>
-                <h4 className="text-center text-xl font-bold text-p12-error">Sorry, you are NOT eligible</h4>
+                <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you are NOT eligible</h4>
                 <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
                   verify my game
                 </Button>
@@ -161,8 +161,8 @@ export default function TokenTabs() {
           )}
         </div>
         <div className="basis-1/2 p-9">
-          <h2 className="mt-8 text-[30px] font-bold">P12 Genesis</h2>
-          <h3 className="mt-9 text-xl font-bold">Project twelve Airdrop</h3>
+          <h2 className="mt-8 text-[30px] font-medium">P12 Genesis</h2>
+          <h3 className="mt-9 text-xl font-medium">Project twelve Airdrop</h3>
           <p className="mt-2 text-sm text-p12-sub">
             Birthday:{' '}
             {selectedGame.updatedAt && selectedGame.credential <= 10
@@ -184,21 +184,21 @@ export default function TokenTabs() {
           <div className="mt-9 flex rounded-2xl border border-p12-line py-[30px]">
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">ID</p>
-              <p className="font-bold">{selectedGame.nft_id || '--'}</p>
+              <p className="font-medium">{selectedGame.nft_id || '--'}</p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">Contract address</p>
-              <p className="font-bold">
+              <p className="font-medium">
                 {selectedGame.appid && selectedGame.credential <= 10 ? shortenAddress(NFT_CONTRACT_ADDRESS) : '--'}
               </p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
               <p className="text-sm text-p12-sub">Character</p>
-              <p className="font-bold">{selectedGame.appid ? 'Developer' : '--'}</p>
+              <p className="font-medium">{selectedGame.appid ? 'Developer' : '--'}</p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center">
               <p className="text-sm text-p12-sub">Status</p>
-              <p className="font-bold">
+              <p className="font-medium">
                 {selectedGame.appid
                   ? {
                       [NFTClaim.UNCLAIMED]: 'Eligible',
