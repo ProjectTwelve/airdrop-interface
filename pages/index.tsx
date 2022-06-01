@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Button from '../components/button';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
@@ -11,9 +10,9 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="fixed top-1/2 -translate-y-1/2 left-0 right-0 flex flex-col items-center justify-start">
+    <div className="fixed top-1/2 left-0 right-0 flex -translate-y-1/2 flex-col items-center justify-start">
       <div className="mt-16">
-        <Image width={394} height={180} src="/svg/logo.svg" alt="logo" />
+        <div className="h-[180px] w-[394px] bg-[image:var(--logo)] bg-cover"></div>
       </div>
       <div className="mt-16 text-center">
         <h2 className="text-[34px] font-medium">Tribute to Gamers</h2>

@@ -1,0 +1,23 @@
+.p12-theme-01 {
+    --logo: url('/img/theme/01/logo.svg');
+    --select: url('/img/theme/01/select.svg');
+    --gradient: repeating-linear-gradient(to right, #A011FF, #FF9E76);
+}
+
+.p12-theme-02 {
+    --logo: url('/img/theme/02/logo.svg');
+    --select: url('/img/theme/02/select.svg');
+    --gradient: repeating-linear-gradient(to right, #09BDA0, #A3D365);
+}
+
+.p12-theme-03 {
+    --logo: url('/img/theme/03/logo.svg');
+    --select: url('/img/theme/03/select.svg');
+    --gradient: repeating-linear-gradient(to right, #D9214D, #FFB876);
+}
+
+.p12-theme-04 {
+    --logo: url('/img/theme/04/logo.svg');
+    --select: url('/img/theme/04/select.svg');
+    --gradient: repeating-linear-gradient(to right, #A072FF, #3592FF);
+}

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Web3Status from '../web3/Web3Status';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -10,14 +9,7 @@ function LayoutHeader() {
   return (
     <header className="relative z-10 flex justify-between">
       <div className="flex items-center justify-start">
-        <Image
-          width={80}
-          height={36}
-          onClick={() => router.push('/')}
-          className="cursor-pointer"
-          src="/svg/logo.svg"
-          alt="logo"
-        />
+        <div className="h-[36px] w-[80px] cursor-pointer bg-[image:var(--logo)] bg-cover" onClick={() => router.push('/')} />
         <div className="ml-8">
           <LayoutHeaderExtra />
         </div>

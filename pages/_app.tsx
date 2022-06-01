@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from '../components/layout';
 import type { AppProps } from 'next/app';
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="P12, Airdrop, Steam, Gaming, Game Development, GameFi, Project Twelve" />
         <meta name="description" content="P12 | Project Twelve | Genesis Airdrop" />
       </Head>
+      <Script id="theme" src="/js/theme.min.js" strategy="beforeInteractive" />
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />

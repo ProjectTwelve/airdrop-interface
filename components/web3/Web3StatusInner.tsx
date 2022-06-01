@@ -10,7 +10,7 @@ function Web3StatusInner() {
     return (
       <div className="flex items-center justify-center gap-3 px-3">
         <p>{shortenAddress(account)}</p>
-        <div className="h-8 w-8 overflow-hidden rounded-full border border-white bg-gradient">
+        <div className="h-8 w-8 overflow-hidden rounded-full border border-white bg-[image:var(--gradient)]">
           <Jazzicon diameter={32} seed={jsNumberForAddress(account ?? '')} />
         </div>
       </div>

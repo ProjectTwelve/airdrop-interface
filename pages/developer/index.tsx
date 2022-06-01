@@ -19,7 +19,7 @@ export default function Developer() {
   return (
     <div className="mt-8">
       <Back onClick={() => router.back()} />
-      <div className="my-4" onClick={event => event.stopPropagation()}>
+      <div className="my-4" onClick={(event) => event.stopPropagation()}>
         <div className="backdrop-box rounded-2xl">
           <Tabs forceRenderTabPanel onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
             <TabList className="relative flex items-center justify-center gap-4 border-b border-p12-line text-xl font-medium">
@@ -31,7 +31,7 @@ export default function Developer() {
                   {tab}
                   {index === selectedTab ? (
                     <motion.div className="absolute left-0 bottom-0 w-full" layoutId="underline">
-                      <div className="mx-auto h-[3px] w-[60px] bg-gradient"></div>
+                      <div className="mx-auto h-[3px] w-[60px] bg-[image:var(--gradient)]"></div>
                     </motion.div>
                   ) : null}
                   {index === 1 && allUnclaimed.length ? (

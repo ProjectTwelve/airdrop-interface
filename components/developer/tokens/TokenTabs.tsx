@@ -83,9 +83,7 @@ export default function TokenTabs() {
                   </div>
                 </div>
                 {selectedGame.appid === game.appid && (
-                  <div className="absolute -bottom-[10px] left-0 h-[10px] w-full">
-                    <Image src="/svg/select.svg" layout="fill" alt="select" />
-                  </div>
+                  <div className="absolute -bottom-[10px] left-0 h-[10px] w-full bg-[image:var(--select)] bg-cover" />
                 )}
               </div>
             ))}
