@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Dialog from '../dialog';
 import Button from '../button';
+import Message from '../message';
 import { useRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
 import { useWeb3React } from '@web3-react/core';
@@ -45,7 +46,7 @@ function InviteDialog() {
                   type="gradient"
                   onClick={() => {
                     copyToClipboard(inviteLink);
-                    toast.success('Copied to clipboard');
+                    toast.success(<Message message="Copied to clipboard" title="Succeed" />);
                   }}
                 >
                   copy

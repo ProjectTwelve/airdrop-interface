@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { AddGameTips, OwnershipTips } from './verify/Tips';
 import Button from '../button';
 import SteamAppItem from './verify/SteamAppItem';
+import Message from '../message';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useWeb3React } from '@web3-react/core';
@@ -12,6 +12,7 @@ import { fetchDeveloperVerify } from '../../lib/api';
 import { DeveloperVerifyData, DeveloperVerifyParams, GameInfo, Response } from '../../lib/types';
 import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
+import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom } from '../../store/developer/state';
 
 export type SteamApp = Partial<GameInfo> & { index: number };
@@ -36,10 +37,10 @@ function Verify() {
       onSuccess: (data) => {
         if (data.code !== 0) {
           const { failedGames } = data.data;
-          toast.error(getErrorToast(failedGames));
+          toast.error(<Message message={getErrorToast(failedGames)} title="Failed" />);
           return;
         }
-        toast.success('Verify successfully!');
+        toast.success(<Message message="Verify successfully!" title="Succeed" />);
         queryClient.refetchQueries(['developer_info', account]).then();
         setSelectedTab(1);
       },
@@ -57,7 +58,7 @@ function Verify() {
       const list = [...appList];
       const isDuplicate = list.some((item) => item.steam_appid === app.steam_appid);
       if (isDuplicate) {
-        toast.error('Includes the same steam game.');
+        toast.error(<Message message="Includes the same steam game." title="Failed" />);
       } else {
         list[index] = app;
       }
@@ -142,7 +143,7 @@ function Verify() {
                       size="small"
                       onClick={() => {
                         copyToClipboard(signature);
-                        toast.success('Copied to clipboard');
+                        toast.success(<Message message="Copied to clipboard!" title="Succeed" />);
                       }}
                     >
                       copy

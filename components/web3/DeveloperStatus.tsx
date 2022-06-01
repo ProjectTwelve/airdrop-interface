@@ -22,7 +22,9 @@ function DeveloperStatus() {
       if (data.code !== 0) return;
       if (claimingGame) {
         const currentGame = games.find((game) => game.appid === claimingGame.appid);
-        currentGame?.nft_claim !== NFTClaim.CLAIMED && window.open(BADGES[claimingGame.nft_level].claim);
+        currentGame?.nft_claim !== NFTClaim.CLAIMED &&
+          claimingGame.nft_level !== undefined &&
+          window.open(BADGES[claimingGame.nft_level].claim);
         setClaimingGame(undefined);
       }
       setGames(data.data.account_info || []);

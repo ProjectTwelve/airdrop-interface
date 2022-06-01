@@ -8,16 +8,16 @@ type ToastIconProps = {
 function ToastIcon({ type }: ToastIconProps) {
   if (type === 'success') {
     return (
-      <div className="h-[20px] w-[20px]">
-        <Image src="/svg/check_success.svg" width={20} height={20} alt="success" />
+      <div className="mt-2 h-[28x] w-[28x]">
+        <Image src="/svg/check_success.svg" width={28} height={28} alt="success" />
       </div>
     );
   }
 
   if (type === 'error') {
     return (
-      <div className="h-[20px] w-[20px]">
-        <Image src="/svg/close_error.svg" width={20} height={20} alt="error" />
+      <div className="mt-2 h-[28x] w-[28x]">
+        <Image src="/svg/close_error.svg" width={28} height={28} alt="error" />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../button';
 import Image from 'next/image';
+import Message from '../../message';
 import { CloseCircle } from '../../svg/CloseCircle';
 import { useQuery } from 'react-query';
 import { fetchDeveloperGame } from '../../../lib/api';
@@ -23,7 +24,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
     enabled: false,
     onSuccess: (data) => {
       if (data.code !== 0) {
-        toast.error(data.msg);
+        toast.error(<Message message={data.msg} title="Failed" />);
         return;
       }
       onConfirm(data.data.game_info);

@@ -10,7 +10,7 @@ const initialGame = {
   nft_claim: 0,
   nft_id: null,
   appid: 0,
-  nft_level: 0,
+  nft_level: undefined,
   credential: 0,
   updatedAt: '',
 };

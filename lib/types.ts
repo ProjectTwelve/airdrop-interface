@@ -41,7 +41,7 @@ export type AccountInfo = {
   nft_claim: NFTClaim;
   nft_id: number | null;
   appid: number;
-  nft_level: NFTLevel;
+  nft_level?: NFTLevel;
   credential: number;
   updatedAt: string;
 };
