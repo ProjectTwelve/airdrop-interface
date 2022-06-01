@@ -6,11 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --root-main: rgba(46, 50, 75, 0.8);
-    --root-border-1: rgba(221, 207, 233, 0.45);
-    --root-border-2: rgba(221, 207, 233, 0.1);
-}
 
 body {
     background: #000;
@@ -24,9 +19,8 @@ body {
 }
 
 .backdrop-box {
-    background: repeating-linear-gradient(to bottom, var(--root-main), var(--root-main)), repeating-linear-gradient(to bottom, var(--root-border-1), var(--root-border-2));
-    background-clip: content-box, padding-box;
-    padding: 2px;
+    background: rgba(68, 70, 95, 0.6);
+    border: 2px solid rgb(70, 75, 90);
     backdrop-filter: blur(16px);
 }
 
@@ -39,21 +33,9 @@ body {
 .toast-container {
     position: relative;
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(68, 70, 95, 0.6);
+    border: 2px solid rgb(70, 75, 90);
     font-size: 14px;
-}
-
-.toast-container::before {
-    content: '';
-    display: block;
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(to bottom, var(--root-main), var(--root-main)), repeating-linear-gradient(to bottom, var(--root-border-1), var(--root-border-2));
-    background-clip: content-box, padding-box;
-    padding: 2px;
-    backdrop-filter: blur(16px);
-    border-radius: 12px;
-    z-index: -1;
 }
 
 .vertical-scroll::-webkit-scrollbar {

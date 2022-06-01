@@ -49,7 +49,7 @@ function Dialog({ render, open: passedOpen = false, children, onOpenChange }: Re
               style={{
                 display: 'grid',
                 placeItems: 'center',
-                background: 'rgba(12, 18, 44, 0.65)',
+                background: 'rgba(12, 12, 12, 0.60)',
                 backdropFilter: 'blur(20px)',
                 zIndex: 20,
               }}

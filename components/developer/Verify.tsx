@@ -132,7 +132,7 @@ function Verify() {
             <h3 className="font-medium">
               YOUR CODE <span className="text-sm font-normal">(you can check for the code later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/60 p-6 pb-14">
+            <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/80 p-6 pb-14">
               <span className="text-sm">{account ? signature : 'Please connect your wallet first.'}</span>
               <div className="absolute right-5 bottom-5">
                 {account ? (

@@ -9,15 +9,17 @@ import InviteDialog from '../dialog/InviteDialog';
 import RoadmapDialog from '../dialog/RoadmapDialog';
 import ToastIcon from '../svg/ToastIcon';
 import ButterflyGL from '../butterflyGL';
+import LayoutFooter from './LayoutFooter';
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <Web3ReactProvider getLibrary={(provider) => new Web3Provider(provider)}>
       <Web3ReactManage>
         <RecoilRoot>
-          <div className="mx-auto px-4 pt-14 xl:container xl:px-0">
+          <div className="relative mx-auto min-h-screen px-4 pt-14 xl:container xl:px-0">
             <LayoutHeader />
             <main>{children}</main>
+            <LayoutFooter />
           </div>
           <InviteDialog />
           <RoadmapDialog />

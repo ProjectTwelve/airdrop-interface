@@ -1,5 +1,5 @@
-import Web3Status from '../web3/Web3Status';
 import React from 'react';
+import Web3Status from '../web3/Web3Status';
 import { useRouter } from 'next/router';
 import LayoutHeaderExtra from './LayoutHeaderExtra';
 

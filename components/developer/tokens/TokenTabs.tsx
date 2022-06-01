@@ -57,7 +57,7 @@ export default function TokenTabs() {
               <div
                 key={game.appid}
                 className={classNames(
-                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-p12-black/60 p-2.5',
+                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-p12-black/80 p-2.5',
                   selectedGame.appid === game.appid ? 'opacity-100' : 'opacity-60',
                   'cursor-pointer last:mr-0 hover:opacity-100',
                 )}
@@ -95,11 +95,16 @@ export default function TokenTabs() {
           </div>
         )}
       </div>
-      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-p12-black/60">
+      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-p12-black/80">
         <div className="relative flex max-w-[643px] basis-1/2 items-center justify-center overflow-hidden bg-[url('/img/no_badge_bg.jpg')] bg-cover bg-center">
           <div className="absolute top-0 left-0 h-full w-full blur-3xl">
             {selectedGame.nft_claim === NFTClaim.CLAIMED && (
-              <Image src={BADGES[selectedGame.nft_level].asset} layout="fill" objectFit="cover" alt="badge" />
+              <div
+                className="h-full w-full bg-cover"
+                style={{
+                  backgroundImage: `url(${BADGES[selectedGame.nft_level].asset})`,
+                }}
+              />
             )}
           </div>
           <div className="relative z-10 flex aspect-square w-full items-center justify-center">
@@ -111,7 +116,12 @@ export default function TokenTabs() {
                       <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
                         <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                       </div>
-                      <Image src={BADGES[selectedGame.nft_level].asset} width={420} height={420} alt="badge" />
+                      <div
+                        className="h-[420px] w-[420px] bg-cover"
+                        style={{
+                          backgroundImage: `url(${BADGES[selectedGame.nft_level].asset})`,
+                        }}
+                      />
                     </div>
                     {selectedGame.credential <= 10 && (
                       <Button type="bordered" className="mt-9 w-[260px]" onClick={() => window.open(GALAXY_LIST)}>

@@ -10,10 +10,8 @@ const Home: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="fixed top-1/2 left-0 right-0 flex -translate-y-1/2 flex-col items-center justify-start">
-      <div className="mt-16">
-        <div className="h-[180px] w-[394px] bg-[image:var(--logo)] bg-cover"></div>
-      </div>
+    <div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 160px)' }}>
+      <div className="h-[180px] w-[394px] bg-[image:var(--logo)] bg-cover"></div>
       <div className="mt-16 text-center">
         <h2 className="text-[34px] font-medium">Tribute to Gamers</h2>
         <h2 className="text-[34px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>

@@ -31,7 +31,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   });
 
   return (
-    <div className="h-[72px] overflow-hidden rounded-2xl bg-p12-black/60">
+    <div className="h-[72px] overflow-hidden rounded-2xl bg-p12-black/80">
       {app.steam_appid ? (
         <div className="relative flex h-full items-center justify-start gap-4">
           <div
