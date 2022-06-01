@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
-import NextImage from 'next/image';
+import Image from 'next/image';
 import Tag from '../../tag';
 import Button from '../../button';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -9,7 +9,7 @@ import { claimingGameAtom, developerGameAtom, NFTClaim, tabSelectAtom } from '..
 import { LeftCircle } from '../../svg/LeftCircle';
 import { useClickScroll } from '../../../hooks/useClickScroll';
 import { useSelectedGame } from '../../../hooks/useSelectedGame';
-import { GALAXY_LIST, NFT_CONTRACT_ADDRESS } from '../../../constants';
+import { BADGES, GALAXY_LIST, NFT_CONTRACT_ADDRESS } from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 import { useBadgeLoad } from '../../../hooks/useBadgeLoad';
 import { useWeb3React } from '@web3-react/core';
@@ -37,6 +37,7 @@ export default function TokenTabs() {
   const setSelectedTab = useSetRecoilState(tabSelectAtom);
   const ref = useRef<HTMLDivElement>(null);
   const count = useClickScroll(ref);
+
   const badge = useBadgeLoad(selectedGame.nft_level);
 
   return (
@@ -101,7 +102,10 @@ export default function TokenTabs() {
         <div className="relative flex max-w-[643px] basis-1/2 items-center justify-center overflow-hidden bg-[url('/img/no_badge_bg.jpg')] bg-cover bg-center">
           <div className="absolute top-0 left-0 h-full w-full blur-3xl">
             {selectedGame.nft_claim === NFTClaim.CLAIMED && (
-              <div className="h-full w-full bg-cover" style={{ backgroundImage: `url(${badge.src})` }} />
+              <div
+                className="h-full w-full bg-cover"
+                style={{ backgroundImage: `url(${BADGES[selectedGame.nft_level].asset})` }}
+              />
             )}
           </div>
           <div className="relative z-10 flex aspect-square w-full items-center justify-center">
@@ -110,13 +114,15 @@ export default function TokenTabs() {
                 {selectedGame.nft_claim === NFTClaim.CLAIMED ? (
                   <>
                     <div className="relative h-[420px] w-[420px]">
-                      {badge.isLoading ? (
+                      {badge.isLoading && (
                         <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
-                          <NextImage className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
+                          <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                         </div>
-                      ) : (
-                        <img src={badge.src} alt="badge" />
                       )}
+                      <div
+                        className="h-[420px] w-[420px] bg-cover"
+                        style={{ backgroundImage: `url(${BADGES[selectedGame.nft_level].asset})` }}
+                      />
                     </div>
                     {selectedGame.credential <= 10 && (
                       <Button type="bordered" className="mt-9 w-[260px]" onClick={() => window.open(GALAXY_LIST)}>
@@ -181,7 +187,7 @@ export default function TokenTabs() {
               >
                 {selectedGame.nft_claim === NFTClaim.CLAIMED ? '?,???' : '-,---'}
               </p>
-              <NextImage src="/img/p12.png" width={48} height={48} alt="p12" />
+              <Image src="/img/p12.png" width={48} height={48} alt="p12" />
             </div>
           </div>
           <div className="mt-9 flex rounded-2xl border border-p12-line py-[30px]">
