@@ -165,7 +165,7 @@ export default function TokenTabs() {
           )}
           {selectedGame.credential > 10 && (
             <p className="absolute bottom-8 text-center text-sm text-p12-sub">
-              You&apos;ve got 10 identical NFTs that reached our limit <br /> $P12 unaffected
+              You&apos;ve got 10 identical NFTs that reached our limit <br /> P12 tokens unaffected
             </p>
           )}
         </div>
@@ -179,7 +179,7 @@ export default function TokenTabs() {
               : '--'}
           </p>
           <div className="mt-9 rounded-2xl border border-white/80 py-6 px-[30px]">
-            <p>Amount of $P12 from this game</p>
+            <p>Amount of P12 tokens from this game</p>
             <div className="mt-5 flex items-center justify-between">
               <p
                 className="cursor-pointer font-['D-DIN'] text-[48px] font-bold"

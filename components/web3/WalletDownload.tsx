@@ -74,7 +74,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       </div>
       <div>
         <p className="text-sm">What is the Wallet for?</p>
-        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as $P12, ETH and NFTs.</p>
+        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 tokens, ETH and NFTs.</p>
         <p className="text-sm leading-6 text-p12-sub">· Sending Blockchain transactions.</p>
       </div>
     </div>

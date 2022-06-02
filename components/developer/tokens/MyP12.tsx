@@ -19,7 +19,7 @@ export function MyP12() {
 
   return (
     <div>
-      <h3 className="text-xl font-medium">My $P12</h3>
+      <h3 className="text-xl font-medium">My P12 tokens</h3>
       <div className="mt-3 flex rounded-2xl border border-p12-line py-[30px]">
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">

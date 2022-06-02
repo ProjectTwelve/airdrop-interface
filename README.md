@@ -19,7 +19,7 @@ all Steam Gamers & Developers!
 ### Airdrop Tributes
 
 1. Developer specific NFT.
-2. $P12 tokens.
+2. P12 tokens.
 
 ### Mechanism
 
@@ -37,7 +37,7 @@ will be rewarded with tributes following rules:
 
 1. Each verified game will get 1 Developer specific NFT.
 2. The NFT has 4 categories: orange, purple, blue and green.
-3. The amount of $P12 that developers can claim is based on their games' reviews and publish date.
+3. The amount of P12 tokens that developers can claim is based on their games' reviews and publish date.
 
 ### Result Files
 

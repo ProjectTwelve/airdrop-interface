@@ -15,7 +15,7 @@ export function AddGameTips() {
         &nbsp; to ask for help.
       </div>
       <div className="mt-2 text-xs leading-5">
-        2. Why is my amount of $P12 tokens displayed with a question mark - &apos;?&apos;
+        2. Why is my amount of P12 tokens displayed with a question mark - &apos;?&apos;
         <span className="cursor-pointer text-p12-link" onClick={() => setOpen(true)}>
           &nbsp;click here&nbsp;
         </span>

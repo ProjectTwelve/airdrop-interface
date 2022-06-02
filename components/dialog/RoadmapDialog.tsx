@@ -56,7 +56,7 @@ export default function RoadmapDialog() {
                       <Image src="/svg/check.svg" width={16} height={16} alt="check" />
                     </div>
                     Invitation-reward function is available, when developers successfully verify their games through the invite
-                    link, every inviter will be able to get 18% of $P12 for each game as rewards.
+                    link, every inviter will be able to get 18% of P12 tokens for each game as rewards.
                   </p>
                   <div className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
@@ -69,7 +69,7 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    Specific amount of $P12 and the calculation formula will be displayed.
+                    Specific amount of P12 tokens and the calculation formula will be displayed.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
@@ -86,11 +86,11 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    $P12 ICO.
+                    P12 tokens ICO.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    Developers and gamers are able to claim $P12 to wallets.
+                    Developers and gamers are able to claim P12 tokens to wallets.
                   </p>
                 </div>
               </div>

@@ -37,11 +37,11 @@ export default function ButterflyGL() {
   });
 
   useEvent('click', () => {
-    butterflyRef.current && butterflyRef.current.reset();
+    butterflyRef.current?.reset();
   });
 
   useEvent('resize', () => {
-    butterflyRef.current && butterflyRef.current.resize(window.innerWidth, window.innerHeight);
+    butterflyRef.current?.resize(window.innerWidth, window.innerHeight);
   });
 
   useInterval(
