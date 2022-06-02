@@ -13,7 +13,7 @@ import { DeveloperVerifyData, DeveloperVerifyParams, GameInfo, Response } from '
 import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
-import { tabSelectAtom } from '../../store/developer/state';
+import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
 
 export type SteamApp = Partial<GameInfo> & { index: number };
 
@@ -25,6 +25,7 @@ function Verify() {
   const [count, setCount] = useState(0);
   const [signature, setSignature] = useState('Please click the generate button.');
   const setSelectedTab = useSetRecoilState(tabSelectAtom);
+  const setVerifiedSteamApp = useSetRecoilState(verifiedSteamAppAtom);
   const [, copyToClipboard] = useCopyToClipboard();
   const router = useRouter();
   const submittedSteamApps = useMemo(() => steamAppList.filter((app) => app.steam_appid), [steamAppList]);
@@ -89,7 +90,8 @@ function Verify() {
       wallet_address: account,
       referral_code: code as string,
     });
-  }, [account, mutation, router.query, submittedSteamApps]);
+    setVerifiedSteamApp(ids);
+  }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
     <div className="px-8 pt-12">

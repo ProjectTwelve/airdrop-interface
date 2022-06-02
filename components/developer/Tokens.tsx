@@ -52,7 +52,7 @@ function Tokens() {
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
             <p className="mt-2 text-xs text-p12-sub">
-              From <span className="text-p12-success"> {claimGroup[NFTClaim.CLAIMED].length} </span> verified Games
+              From <span className="text-p12-success"> {claimGroup[NFTClaim.CLAIMED].length} </span> verified games
             </p>
           </div>
           <div className="rounded-lg bg-p12-black/80 p-3">

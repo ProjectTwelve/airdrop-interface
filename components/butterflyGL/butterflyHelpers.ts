@@ -23,6 +23,7 @@ const getInputXY = (evt: any, wall: any) => {
     y: 1 - ((evt.clientY - rect.top) / rect.height) * 2,
   };
 };
+
 const decideOneRandomChoice = (choices: string[]) => choices[Math.floor(Math.random() * choices.length)];
 
 const startParamDrift = (defaultProperties: Record<string, number>, properties: Record<string, number>) => {

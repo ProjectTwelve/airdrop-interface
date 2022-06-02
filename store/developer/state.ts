@@ -19,6 +19,11 @@ export const tabSelectAtom = atom({
   default: 0,
 });
 
+export const verifiedSteamAppAtom = atom<number[]>({
+  key: 'verified_steam_app',
+  default: [],
+});
+
 export const developerGameAtom = atom<AccountInfo[]>({
   key: 'developer_game',
   default: [],

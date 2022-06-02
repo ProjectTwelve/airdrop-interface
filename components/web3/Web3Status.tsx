@@ -22,7 +22,7 @@ function Web3Status() {
 
   if (account) {
     return (
-      <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm">
+      <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
         <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
         <Web3StatusInner />
       </div>

@@ -36,7 +36,7 @@ export function InviteRecordDialog({ close }: { close?: () => void }) {
 
   return (
     <div className="w-[600px]">
-      <h2 className="text-center text-xl">My P12 Airdrop Invite Link</h2>
+      <h2 className="text-center text-xl">My P12 Airdrop Invite List</h2>
       <div className="mt-8">
         <Table dataSource={data?.data.invitation_info || []} columns={columns} />
       </div>

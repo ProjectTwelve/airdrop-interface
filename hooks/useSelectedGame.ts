@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Dispatch, useEffect, useState } from 'react';
 import { AccountInfo } from '../lib/types';
-import { useRecoilValue } from 'recoil';
-import { developerGameAtom } from '../store/developer/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { developerGameAtom, verifiedSteamAppAtom } from '../store/developer/state';
 
 const initialGame = {
   name: '',
@@ -18,10 +19,20 @@ const initialGame = {
 export const useSelectedGame = (): [AccountInfo, Dispatch<AccountInfo>] => {
   const [selectedGame, setSelectedGame] = useState<AccountInfo>(initialGame);
   const games = useRecoilValue(developerGameAtom);
+  const [verifiedSteamApp, setVerifiedSteamApp] = useRecoilState(verifiedSteamAppAtom);
 
   useEffect(() => {
     // Initialization selects the first game
     if (games.length) {
+      // is verified app
+      if (verifiedSteamApp.length) {
+        const verifiedGame = games.find((game) => verifiedSteamApp.includes(game.appid));
+        if (verifiedGame) {
+          setSelectedGame(verifiedGame);
+          setVerifiedSteamApp([]);
+        }
+        return;
+      }
       if (!selectedGame.appid) {
         setSelectedGame(games[0]);
       } else {

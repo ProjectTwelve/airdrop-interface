@@ -12,14 +12,14 @@ export function AddGameTips() {
       <div className="text-xs leading-5">
         1. Can&apos;t find my game? Please double check your app ID, or join our Discord &nbsp;
         <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
-        &nbsp; to ask for help
+        &nbsp; to ask for help.
       </div>
       <div className="mt-2 text-xs leading-5">
         2. Why is my amount of $P12 tokens displayed with a question mark - &apos;?&apos;
         <span className="cursor-pointer text-p12-link" onClick={() => setOpen(true)}>
           &nbsp;click here&nbsp;
         </span>
-        to learn
+        to learn.
       </div>
     </div>
   );

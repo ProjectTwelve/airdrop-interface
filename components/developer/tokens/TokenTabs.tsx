@@ -171,9 +171,9 @@ export default function TokenTabs() {
         </div>
         <div className="basis-1/2 p-9">
           <h2 className="mt-8 text-[30px] font-medium">P12 Genesis</h2>
-          <h3 className="mt-9 text-xl font-medium">Project twelve Airdrop</h3>
+          <h3 className="mt-9 text-xl font-medium">Project Twelve Airdrop</h3>
           <p className="mt-2 text-sm text-p12-sub">
-            Birthday:{' '}
+            Birthday:&nbsp;
             {selectedGame.updatedAt && selectedGame.credential <= 10
               ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD')
               : '--'}

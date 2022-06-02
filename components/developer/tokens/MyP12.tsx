@@ -26,7 +26,7 @@ export function MyP12() {
             <Image src={iconStatus.get(leastOneGame) || ''} width={26} height={26} alt="icon" />
             <p className="font-medium">Verified at least 1</p>
           </div>
-          <p className="font-medium">steam game as a developer</p>
+          <p className="font-medium">Steam game as a developer</p>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">
