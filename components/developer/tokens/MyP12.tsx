@@ -24,25 +24,25 @@ export function MyP12() {
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(leastOneGame) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">Verified at least 1</p>
+            <p className="font-medium">Verified at least</p>
           </div>
-          <p className="font-medium">Steam game as a developer</p>
+          <p className="font-medium">one game as developer</p>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(leastOneGame && isAllClaimed) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NOT Eligible'}</p>
+            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NO TOKEN YET'}</p>
           </div>
           {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line">
           <Image src={iconStatus.get(isAllClicked) || ''} width={26} height={26} alt="icon" />
-          <p className="font-medium">Join us</p>
+          <p className="font-medium">Join us on</p>
           <SocialMedia />
         </div>
         <div className="flex flex-1 items-center justify-center gap-2">
           <Image src={iconStatus.get(false) || ''} width={26} height={26} alt="icon" />
-          <p className="font-medium">P12 token ICO</p>
+          <p className="font-medium">P12 token TGE</p>
         </div>
       </div>
     </div>

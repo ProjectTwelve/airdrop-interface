@@ -49,7 +49,7 @@ const Home: NextPage = () => {
               </motion.div>
               <div className="flex flex-1 items-center justify-center gap-2">
                 <Image src="/svg/invite-2.svg" style={{ strokeWidth: 10 }} width={24} height={24} alt="invite" />
-                My invite link
+                My invitation link
               </div>
               <motion.div
                 animate={btnClick && !isHovered ? {} : { x: [0, -12, 4, -12, 0] }}

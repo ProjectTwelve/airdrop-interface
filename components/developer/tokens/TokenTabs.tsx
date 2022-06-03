@@ -81,7 +81,7 @@ export default function TokenTabs() {
                         {claimComponents[game.nft_claim]}
                       </>
                     ) : (
-                      <p className="font-medium leading-[72px]">NOT Eligible</p>
+                      <p className="font-medium leading-[72px]">NO GAME YET</p>
                     )}
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function TokenTabs() {
                     </div>
                     {selectedGame.credential <= 10 && (
                       <Button type="bordered" className="mt-9 w-[260px]" onClick={() => window.open(GALAXY_LIST)}>
-                        My NTF at Galaxy
+                        My NFT at Galaxy
                       </Button>
                     )}
                   </>
@@ -134,8 +134,8 @@ export default function TokenTabs() {
                   <>
                     <h4 className="text-center text-xl font-medium text-p12-success">
                       {selectedGame.nft_claim === NFTClaim.PENDING
-                        ? 'Pending: update in few minutes'
-                        : 'Congrats! you are eligible'}
+                        ? 'Pending: update in a few minutes'
+                        : 'Congrats! P12 Genesis NFT to be claimed'}
                     </h4>
                     <Button
                       type="bordered"
@@ -153,25 +153,25 @@ export default function TokenTabs() {
               </div>
             ) : (
               <div>
-                <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you are NOT eligible</h4>
+                <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you have no NFT yet</h4>
                 <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
-                  verify my game
+                  Verify my game
                 </Button>
               </div>
             )}
           </div>
           {selectedGame.nft_claim !== NFTClaim.CLAIMED && (
-            <p className="absolute bottom-8 text-center text-sm text-p12-sub">The Airdrop NFT is powered by Project GALAXY</p>
+            <p className="absolute bottom-8 text-center text-sm text-p12-sub">The airdrop is in collaboration with and powered by Project Galaxy</p>
           )}
           {selectedGame.credential > 10 && (
             <p className="absolute bottom-8 text-center text-sm text-p12-sub">
-              You&apos;ve got 10 identical NFTs that reached our limit <br /> P12 tokens unaffected
+              You&apos;ve got 10 identical NFTs that reached our limit
             </p>
           )}
         </div>
         <div className="basis-1/2 p-9">
-          <h2 className="mt-8 text-[30px] font-medium">P12 Genesis</h2>
-          <h3 className="mt-9 text-xl font-medium">Project Twelve Airdrop</h3>
+          <h2 className="mt-8 text-[30px] font-medium">P12 | Project Twelve | Genesis</h2>
+          <h3 className="mt-9 text-xl font-medium">Genesis Soul-Bound NFT</h3>
           <p className="mt-2 text-sm text-p12-sub">
             Birthday:&nbsp;
             {selectedGame.updatedAt && selectedGame.credential <= 10
@@ -179,7 +179,7 @@ export default function TokenTabs() {
               : '--'}
           </p>
           <div className="mt-9 rounded-2xl border border-white/80 py-6 px-[30px]">
-            <p>Amount of P12 tokens from this game</p>
+            <p>Amount of tokens from this game</p>
             <div className="mt-5 flex items-center justify-between">
               <p
                 className="cursor-pointer font-['D-DIN'] text-[48px] font-bold"
@@ -202,7 +202,7 @@ export default function TokenTabs() {
               </p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line">
-              <p className="text-sm text-p12-sub">Character</p>
+              <p className="text-sm text-p12-sub">Role</p>
               <p className="font-medium">{selectedGame.appid ? 'Developer' : '--'}</p>
             </div>
             <div className="flex flex-1 flex-col items-center justify-center">
@@ -214,7 +214,7 @@ export default function TokenTabs() {
                       [NFTClaim.PENDING]: 'Pending',
                       [NFTClaim.CLAIMED]: 'Obtained',
                     }[selectedGame.nft_claim]
-                  : 'NOT Eligible'}
+                  : 'NO NFT YET'}
               </p>
             </div>
           </div>

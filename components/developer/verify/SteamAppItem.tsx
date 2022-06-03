@@ -80,7 +80,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             className="text-sm font-medium"
             onClick={refetch}
           >
-            confirm
+            Add
           </Button>
         </div>
       )}

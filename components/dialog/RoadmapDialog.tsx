@@ -15,7 +15,7 @@ export default function RoadmapDialog() {
       onOpenChange={(op) => setOpen(op)}
       render={() => (
         <div className="w-[780px]">
-          <h2 className="text-center text-xl">P12 Airdrop Roadmap</h2>
+          <h2 className="text-center text-xl">P12 Genesis Airdrop Roadmap</h2>
           <div className="flex gap-5">
             <div className="flex flex-col items-center justify-start">
               <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
@@ -32,31 +32,30 @@ export default function RoadmapDialog() {
             </div>
             <div className="flex-1">
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1（Released）</h3>
+                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1（LIVE）</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    P12 Airdrop for Steam developers launched.
+                    P12 Genesis Airdrop for Steam developers launch.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    Developers are able to verify their games and get Airdrop NFT - &quot;P12 Genesis&quot;.
+                    Developers verify their games and get Airdrop NFT - &quot;P12 Genesis&quot;.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    &quot;P12 Genesis&quot; has 4 forms: Orange, Purple, Blue and Green.
+                    &quot;P12 Genesis&quot; has 5 forms: Legendary, Epic, Rare, Uncommon, and Common.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5 text-p12-success">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    Amount of your verified P12 is shown as &apos;?&apos; in Stage 1, which will unfold in Stage2 as well as
-                    calculation formula.
+                    Amount of token granted is shown as &apos;?&apos; in Stage 1, which will unveil in Stage2.
                   </p>
                   <p className="flex items-start justify-start gap-1.5 leading-5">
                     <div className="flex h-5 w-4 flex-none items-center justify-center">
                       <Image src="/svg/check.svg" width={16} height={16} alt="check" />
                     </div>
-                    Invitation-reward function is available, when developers successfully verify their games through the invite
-                    link, every inviter will be able to get 18% of P12 tokens for each game as rewards.
+                    Referral mechanism - when other developers successfully verify their games through your invitation
+                    link, as referrer you get 18% of that game&apos;s token.
                   </p>
                   <div className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
@@ -65,19 +64,15 @@ export default function RoadmapDialog() {
                 </div>
               </div>
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2</h3>
+                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (Coming in 22Q3)</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    Specific amount of P12 tokens and the calculation formula will be displayed.
+                    P12 Airdrop for Steam gamers launch. Gamers can verify steam accounts to get Gamer Genesis NFT, in a fair way.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    P12 Airdrop for Steam gamers launched.
-                  </p>
-                  <p className="flex justify-start gap-1.5 leading-5">
-                    <span className="h-4 w-4 text-center text-sm">·</span>
-                    Gamers are able to verify steam accounts and get airdrop NFT.
+                    Amount of tokens and calculation formula will be revealed.
                   </p>
                 </div>
               </div>
@@ -86,11 +81,7 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    P12 tokens ICO.
-                  </p>
-                  <p className="flex justify-start gap-1.5 leading-5">
-                    <span className="h-4 w-4 text-center text-sm">·</span>
-                    Developers and gamers are able to claim P12 tokens to wallets.
+                    P12 Platform go live. All developers and gamers who held P12 Genesis NFT can claim tokens from within P12 Platform.
                   </p>
                 </div>
               </div>

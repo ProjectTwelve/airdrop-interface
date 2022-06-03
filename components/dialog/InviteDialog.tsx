@@ -29,7 +29,7 @@ function InviteDialog() {
       onOpenChange={(op) => setOpen(op)}
       render={() => (
         <div className="w-[720px]">
-          <h2 className="text-center text-xl">My P12 Airdrop Invite Link</h2>
+          <h2 className="text-center text-xl">My P12 Airdrop Invitation Link</h2>
           <div className="mt-8 rounded-lg py-4 text-xs">
             <div className="flex items-center justify-around">
               <Image src="/img/invite_step_01.png" alt="invite_01" width={100} height={100} />
@@ -56,16 +56,16 @@ function InviteDialog() {
             </div>
             <div className="mt-5 flex items-start justify-around">
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Connect wallet and copy your Invite link below.
+                Connect wallet and copy your invitation link below.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Send the link to your Steam game developer friends.
+                Send the link to your game developer friends.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Steam game developer verify games with your link.
+                Game developers verify their games with your link.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                As the inviter, you will be able to get 18% of P12 tokens from each verified game as rewards.
+                As the inviter, you will get 18% of tokens from all verified games as rewards.
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@ function InviteDialog() {
                 type="gradient"
                 onClick={() => {
                   copyToClipboard(inviteLink);
-                  toast.success(<Message message="Copied to clipboard" title="Succeed" />);
+                  toast.success(<Message message="Copied to clipboard" title="We Shall Prevail" />);
                 }}
               >
                 copy

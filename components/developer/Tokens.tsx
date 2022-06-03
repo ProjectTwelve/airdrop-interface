@@ -67,14 +67,14 @@ function Tokens() {
             </div>
             <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
               <p className="mt-2 cursor-pointer text-xs text-p12-link">
-                My invitation list <span className="pl-11 text-p12-link">&gt;</span>
+                My referral list <span className="pl-11 text-p12-link">&gt;</span>
               </p>
             </Dialog>
           </div>
         </div>
         <div className="flex items-center justify-between py-8">
           <div className="flex items-center justify-start">
-            <p className="mr-3 text-p12-sub">{pieces} pieces</p>
+            <p className="mr-3 text-p12-sub">{pieces} NFTs</p>
             <p className="mr-4 text-lg font-medium">Total:</p>
             <p
               className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
@@ -86,7 +86,7 @@ function Tokens() {
           </div>
           <div>
             <Button className="w-[280px] font-medium" disabled size="large">
-              Claim to my wallet
+              Claim to my wallet (Coming)
             </Button>
           </div>
         </div>

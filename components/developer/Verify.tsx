@@ -42,7 +42,7 @@ function Verify() {
           toast.error(<Message message={getErrorToast(failedGames)} title="Failed" />);
           return;
         }
-        toast.success(<Message message="Verify successfully!" title="Succeed" />);
+        toast.success(<Message message="Verified successfully!" title="We Shall Prevail" />);
         setSelectedTab(1);
       },
     },
@@ -98,7 +98,7 @@ function Verify() {
       <div className="flex gap-[60px] border-b border-p12-line pb-12">
         <div className="w-full">
           <h2 className="text-xl font-medium">
-            Step1: Add steam games
+            Step One: Add Steam games
             <span className="text-sm font-normal">&nbsp;(you can add 3 games at once)</span>
           </h2>
           <div className="mt-7">
@@ -127,13 +127,13 @@ function Verify() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="text-xl font-medium">Step2：Verify Ownership</h2>
+          <h2 className="text-xl font-medium">Step Two: Verify ownership</h2>
           <div className="mt-7">
             <OwnershipTips />
           </div>
           <div className="mt-7">
             <h3 className="font-medium">
-              YOUR CODE <span className="text-sm font-normal">(you can check for the code later too)</span>
+              YOUR SIGNATURE <span className="text-sm font-normal">(you can check later too)</span>
             </h3>
             <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/80 p-6 pb-14">
               <span className="text-sm">{account ? signature : 'Please connect your wallet first.'}</span>
@@ -145,14 +145,14 @@ function Verify() {
                       size="small"
                       onClick={() => {
                         copyToClipboard(signature);
-                        toast.success(<Message message="Copied to clipboard!" title="Succeed" />);
+                        toast.success(<Message message="Copied to clipboard!" title="We Shall Prevail" />);
                       }}
                     >
-                      copy
+                      Copy
                     </Button>
                   ) : (
                     <Button type="gradient" size="small" onClick={generateSignature}>
-                      generate
+                      Generate
                     </Button>
                   )
                 ) : null}
@@ -163,7 +163,7 @@ function Verify() {
       </div>
       <div className="flex items-center justify-between py-8">
         <div className="text-[18px]">
-          Select <span className="text-p12-success">{submittedSteamApps.length}</span> games to Verify
+          Selected <span className="text-p12-success">{submittedSteamApps.length}</span> games to verify
         </div>
         <Button
           className="w-[280px]"
