@@ -13,7 +13,7 @@ const defaultProperties = {
   scatterDivider: 32,
   scatterDividerPowInv: 0.5,
   pulseDuration: 48,
-  pulseIntervalRatio: 48,
+  pulseIntervalRatio: 0.5,
 };
 
 const getInputXY = (evt: any, wall: any) => {
