@@ -80,7 +80,7 @@ function InviteDialog() {
                   toast.success(<Message message="Copied to clipboard" title="We Shall Prevail" />);
                 }}
               >
-                copy
+                Copy
               </Button>
             )}
           </div>

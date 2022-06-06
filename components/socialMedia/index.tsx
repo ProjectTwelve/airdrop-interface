@@ -15,7 +15,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
   const socialMedia = [
     { name: SocialMediaType.Twitter, url: 'https://twitter.com/_p12_' },
     { name: SocialMediaType.Telegram, url: 'https://t.me/project_twelve' },
-    { name: SocialMediaType.Discord, url: 'https://discord.com/invite/EMrbsZPbxs' },
+    { name: SocialMediaType.Discord, url: 'https://discord.com/invite/p12' },
   ];
 
   const onSocialMediaClick = useCallback(

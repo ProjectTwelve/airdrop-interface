@@ -8,18 +8,22 @@ type MessageCodeDialogProps = {
 
 export default function MessageCodeDialog({ close }: MessageCodeDialogProps) {
   return (
-    <div className="flex h-[618px] w-[780px] flex-col">
+    <div className="flex h-[730px] w-[780px] flex-col">
       <h2 className="text-center text-xl">Add Message Code</h2>
       <div className="vertical-scroll mt-8 w-full overflow-auto text-xs">
         <div className="ml-[150px]">
           <p className="leading-5">1. Log in to your Steamworks account.</p>
           <p className="leading-5">2. Find your listed games and enter &quot;Store Presence - Edit Store Page&quot;.</p>
           <div className="mt-5 mb-7">
-            <Image src="/img/message_code_step_01@2x.jpg" width={310} height={155} alt="message_code_01" />
+            <Image src="/img/message_code_step_01.jpg" width={310} height={155} alt="message_code_01" />
           </div>
           <p className="leading-5">3. Add your SIGNATURE on your game description and save.</p>
+          <div className="mt-5 mb-7">
+            <Image src="/img/message_code_step_02.jpg" width={413} height={260} alt="message_code_02" />
+          </div>
+          <p className="leading-5">4. Publish to public.</p>
           <div className="mt-5">
-            <Image src="/img/message_code_step_02@2x.jpg" width={413} height={295} alt="message_code_02" />
+            <Image src="/img/message_code_step_03.jpg" width={413} height={100} alt="message_code_02" />
           </div>
         </div>
       </div>

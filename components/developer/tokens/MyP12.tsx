@@ -41,7 +41,7 @@ export function MyP12() {
           <SocialMedia />
         </div>
         <div className="flex flex-1 items-center justify-center gap-2">
-          <Image src={iconStatus.get(false) || ''} width={26} height={26} alt="icon" />
+          <Image src="/svg/wait_info.svg" width={26} height={26} alt="icon" />
           <p className="font-medium">P12 token TGE</p>
         </div>
       </div>

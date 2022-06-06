@@ -51,7 +51,8 @@ function DeveloperStatus() {
         )}
       </div>
       <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-['D-DIN'] text-xl font-bold">
-        <span className="text-p12-success">{games.length}</span>Games
+        <span className="text-p12-success">{games.length}</span>
+        {games.length > 1 ? 'Games' : 'Game'}
       </div>
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         <p className="cursor-pointer font-['D-DIN'] font-bold" onClick={() => setOpen(true)}>

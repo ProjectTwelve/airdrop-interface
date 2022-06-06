@@ -78,7 +78,7 @@ function Verify() {
   const generateSignature = useCallback(async () => {
     if (!library || !account) return;
     const signature = await library.send('personal_sign', [account, JSON.stringify(getSignData(account))]);
-    setSignature('sig:' + signature);
+    setSignature('sig:' + signature + '\np12.network-GameFi ecosystem-Editor|Infra|Econs');
   }, [account, library]);
 
   const onVerifySteamApps = useCallback(() => {
@@ -124,6 +124,7 @@ function Verify() {
                 <p className="text-[32px] font-medium">+</p>
               </Button>
             )}
+            <p className="text-center text-xs text-[#A3A6B3]">Game data was collected on May 1, 2022.</p>
           </div>
         </div>
         <div className="w-full">
@@ -163,7 +164,8 @@ function Verify() {
       </div>
       <div className="flex items-center justify-between py-8">
         <div className="text-[18px]">
-          Selected <span className="text-p12-success">{submittedSteamApps.length}</span> games to verify
+          Selected <span className="text-p12-success">{submittedSteamApps.length}</span>{' '}
+          {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify
         </div>
         <Button
           className="w-[280px]"

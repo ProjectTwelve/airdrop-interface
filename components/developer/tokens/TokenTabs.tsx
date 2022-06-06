@@ -161,7 +161,12 @@ export default function TokenTabs() {
             )}
           </div>
           {selectedGame.nft_claim !== NFTClaim.CLAIMED && (
-            <p className="absolute bottom-8 text-center text-sm text-p12-sub">The airdrop is in collaboration with and powered by Project Galaxy</p>
+            <p className="absolute bottom-8 z-10 text-center text-sm text-p12-sub">
+              The airdrop is in collaboration with and powered by&nbsp;
+              <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
+                Project Galaxy
+              </a>
+            </p>
           )}
           {selectedGame.credential > 10 && (
             <p className="absolute bottom-8 text-center text-sm text-p12-sub">
