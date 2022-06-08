@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { NFTLevel } from '../store/developer/state';
 import { BADGES } from '../constants';
+import { AccountInfo } from '../lib/types';
 
-export const useBadgeLoad = (badgeLevel?: NFTLevel) => {
+export const useBadgeLoad = (game: AccountInfo) => {
   const [state, setState] = useState<{ src: string; isLoading: boolean }>({ src: '', isLoading: false });
   const badgesRef = useRef(
     new Map<NFTLevel, boolean>([
@@ -14,9 +15,9 @@ export const useBadgeLoad = (badgeLevel?: NFTLevel) => {
   );
 
   useEffect(() => {
-    if (badgeLevel === undefined) return;
-    const item = BADGES[badgeLevel];
-    if (badgesRef.current.get(badgeLevel)) {
+    if (!game.appid) return;
+    const item = BADGES[game.nft_level];
+    if (badgesRef.current.get(game.nft_level)) {
       setState({ src: item.asset, isLoading: false });
       return;
     }
@@ -24,10 +25,10 @@ export const useBadgeLoad = (badgeLevel?: NFTLevel) => {
     const img = new Image();
     img.src = item.asset;
     img.onload = () => {
-      badgesRef.current.set(badgeLevel, true);
+      badgesRef.current.set(game.nft_level, true);
       setState({ src: item.asset, isLoading: false });
     };
-  }, [badgeLevel]);
+  }, [game]);
 
   return state;
 };

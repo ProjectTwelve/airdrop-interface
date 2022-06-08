@@ -38,7 +38,7 @@ export default function TokenTabs() {
   const ref = useRef<HTMLDivElement>(null);
   const count = useClickScroll(ref);
 
-  const badge = useBadgeLoad(selectedGame.nft_level);
+  const badge = useBadgeLoad(selectedGame);
 
   return (
     <div className="relative">
