@@ -5,6 +5,8 @@ import { WalletType } from './WalletPopover';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { injected, walletConnect } from '../../connectors';
 import { AbstractConnector } from '@web3-react/abstract-connector';
+import { useRecoilState } from 'recoil';
+import { downloadClickAtom } from '../../store/download/state';
 
 type WalletConnectProps = {
   setWalletType?: (type: WalletType) => void;
@@ -12,6 +14,7 @@ type WalletConnectProps = {
 
 function WalletConnect({ setWalletType }: WalletConnectProps) {
   const { activate } = useWeb3React();
+  const [downloadClick, setDownloadClick] = useRecoilState(downloadClickAtom);
   const wallets = {
     metaMask: injected,
     walletConnect: walletConnect,
@@ -52,8 +55,14 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
         </Button>
       </div>
       <div className="mt-[50px] text-xs text-p12-sub">
-        Don&apos;t have one?&nbsp;
-        <span className="cursor-pointer text-p12-link" onClick={() => setWalletType?.(WalletType.DOWNLOAD)}>
+        {downloadClick ? 'Please refresh page after installation. Re-install ' : "Don't have one? "}
+        <span
+          className="cursor-pointer text-p12-link"
+          onClick={() => {
+            setDownloadClick(true);
+            setWalletType?.(WalletType.DOWNLOAD);
+          }}
+        >
           click here
         </span>
       </div>
