@@ -19,9 +19,9 @@ import { shortenAddress } from '../../../utils';
 import styles from './tokens.module.css';
 
 const claimComponents: Record<NFTClaim, JSX.Element> = {
-  [NFTClaim.UNCLAIMED]: <Tag size="small" type="error" value="Unclaimed" />,
+  [NFTClaim.UNCLAIMED]: <Tag size="small" type="red" value="Unclaimed" />,
   [NFTClaim.PENDING]: <p className="text-xs text-p12-bg">Update in few minutes</p>,
-  [NFTClaim.CLAIMED]: <Tag size="small" type="success" value="Obtained" />,
+  [NFTClaim.CLAIMED]: <Tag size="small" type="green" value="Obtained" />,
 };
 
 export default function TokenTabs() {
@@ -175,7 +175,9 @@ export default function TokenTabs() {
           )}
         </div>
         <div className="basis-1/2 p-9">
-          <h2 className="mt-8 text-[30px] font-medium">P12 | Project Twelve | Genesis</h2>
+          <h2 className="mt-8 text-[30px] font-medium">
+            {selectedGame.appid ? BADGES[selectedGame.nft_level].title : 'P12 | Project Twelve | Genesis'}
+          </h2>
           <h3 className="mt-9 text-xl font-medium">Genesis Soul-Bound NFT</h3>
           <p className="mt-2 text-sm text-p12-sub">
             Birthday:&nbsp;

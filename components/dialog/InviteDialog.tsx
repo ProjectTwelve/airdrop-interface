@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Dialog from '../dialog';
 import Button from '../button';
 import Message from '../message';
+import Tag from '../tag';
 import { useRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
 import { useWeb3React } from '@web3-react/core';
@@ -9,7 +11,6 @@ import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
 import { fetchReferralCode } from '../../lib/api';
-import Image from 'next/image';
 
 function InviteDialog() {
   const { account } = useWeb3React();
@@ -65,7 +66,65 @@ function InviteDialog() {
                 Game developers verify their games with your link.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                As the inviter, you will get 18% of tokens from all verified games as rewards.
+                As the referrer, you will be able to get <span className="font-bold">x%</span> P12 tokens from each verified
+                game as rewards.
+              </div>
+            </div>
+          </div>
+          <div className="my-4 h-[1px] bg-p12-line"></div>
+          <div className="py-4">
+            <p className="text-xs leading-5">
+              The proportion of reward token is based on the rarity of P12 badge you hold. It will be confirmed when you claim
+              the P12 tokens to your wallet after P12 TGE. →P12 Badge updates in &nbsp;
+              <a href="https://discord.com/invite/p12" target="_blank">
+                <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
+              </a>
+            </p>
+            <div className="mt-7 flex items-start justify-center gap-2">
+              <div>
+                <div className="flex h-6 items-center justify-start text-xs">Rarity-&gt;</div>
+                <div className="mt-2.5 flex items-center justify-start text-xs leading-5">Get tokens-&gt;</div>
+              </div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <Tag size="small" value="Orange" type="orange" />
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">24%</div>
+              </div>
+              <div>&gt;</div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <Tag size="small" value="Purple" type="purple" />
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">18%</div>
+              </div>
+              <div>&gt;</div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <Tag size="small" value="Blue" type="blue" />
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">16%</div>
+              </div>
+              <div>&gt;</div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <Tag size="small" value="Green" type="green" />
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">12%</div>
+              </div>
+              <div>&gt;</div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <Tag size="small" value="White" type="white" />
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">9%</div>
+              </div>
+              <div>&gt;</div>
+              <div>
+                <div className="flex h-6 flex-none items-center justify-center text-xs">
+                  <span className="text-xs text-p12-sub">No Badge</span>
+                </div>
+                <div className="mt-2.5 text-center text-sm font-bold">8%</div>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['cdn.galaxy.eco'],
+    domains: ['cdn.galaxy.eco', 'cdn1.p12.games'],
   },
   reactStrictMode: false,
 }

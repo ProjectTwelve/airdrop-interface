@@ -32,7 +32,7 @@ function DeveloperStatus() {
   });
 
   const tagType = useMemo(
-    () => (claimGroup[NFTClaim.CLAIMED].length === games.length ? 'success' : 'error'),
+    () => (claimGroup[NFTClaim.CLAIMED].length === games.length ? 'green' : 'red'),
     [claimGroup, games.length],
   );
 
@@ -47,7 +47,7 @@ function DeveloperStatus() {
         {games.length ? (
           <Tag type={tagType} size="large" value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
-          <Tag type="error" size="large" value="No NFT yet" />
+          <Tag type="red" size="large" value="No NFT yet" />
         )}
       </div>
       <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-['D-DIN'] text-xl font-bold">

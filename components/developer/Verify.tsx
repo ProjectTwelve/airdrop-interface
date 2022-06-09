@@ -37,6 +37,10 @@ function Verify() {
     {
       onSuccess: (data) => {
         queryClient.refetchQueries(['developer_info', account]).then();
+        if (data.code === 1) {
+          toast.error(<Message message={data.msg} title="Failed" />);
+          return;
+        }
         if (data.code !== 0) {
           const { failedGames } = data.data;
           toast.error(<Message message={getErrorToast(failedGames)} title="Failed" />);

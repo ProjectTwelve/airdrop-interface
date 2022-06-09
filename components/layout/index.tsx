@@ -24,7 +24,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
           <InviteDialog />
           <RoadmapDialog />
           <ToastContainer theme="dark" toastClassName="toast-container" icon={<ToastIcon />} autoClose={3000} hideProgressBar />
-          <ButterflyGL />
+          {process.env.NODE_ENV === 'production' && <ButterflyGL />}
         </RecoilRoot>
       </Web3ReactManage>
     </Web3ReactProvider>
