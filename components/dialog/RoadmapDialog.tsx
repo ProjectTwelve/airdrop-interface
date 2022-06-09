@@ -44,7 +44,7 @@ export default function RoadmapDialog() {
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
-                    &quot;P12 Genesis&quot; has 5 forms: Legendary, Epic, Rare, Uncommon, and Common.
+                    &quot;P12 Genesis&quot; has 4 forms: Legendary, Epic, Rare and Uncommon.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5 text-p12-success">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
@@ -54,8 +54,8 @@ export default function RoadmapDialog() {
                     <div className="flex h-5 w-4 flex-none items-center justify-center">
                       <Image src="/svg/check.svg" width={16} height={16} alt="check" />
                     </div>
-                    Referral mechanism - when other developers successfully verify their games through your invitation
-                    link, as referrer you get 18% of that game&apos;s token.
+                    Referral mechanism - when other developers successfully verify their games through your invitation link, as
+                    referrer you get up to 24% of that game&apos;s token.
                   </p>
                   <div className="flex justify-start gap-1.5 leading-5">
                     <Image src="/svg/check.svg" width={16} height={16} alt="check" />
@@ -68,7 +68,8 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    P12 Airdrop for Steam gamers launch. Gamers can verify steam accounts to get Gamer Genesis NFT, in a fair way.
+                    P12 Airdrop for Steam gamers launch. Gamers can verify steam accounts to get Gamer Genesis NFT, in a fair
+                    way.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
@@ -81,7 +82,8 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    P12 Platform go live. All developers and gamers who held P12 Genesis NFT can claim tokens from within P12 Platform.
+                    P12 Platform go live. All developers and gamers who held P12 Genesis NFT can claim tokens from within P12
+                    Platform.
                   </p>
                 </div>
               </div>

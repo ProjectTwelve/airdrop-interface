@@ -1,6 +1,6 @@
 type MessageProps = {
   title?: JSX.Element | string;
-  message: JSX.Element | string;
+  message?: JSX.Element | string;
 };
 
 export default function Message({ title, message }: MessageProps) {

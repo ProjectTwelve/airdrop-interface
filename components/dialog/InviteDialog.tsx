@@ -73,9 +73,8 @@ function InviteDialog() {
           </div>
           <div className="my-4 h-[1px] bg-p12-line"></div>
           <div className="py-4">
-            <p className="text-xs leading-5">
-              The proportion of reward token is based on the rarity of P12 badge you hold. It will be confirmed when you claim
-              the P12 tokens to your wallet after P12 TGE. →P12 Badge updates in &nbsp;
+            <p className="text-center text-xs leading-5">
+              The proportion of reward token is based on the rarity of P12 badge you hold. →P12 Badge updates in &nbsp;
               <a href="https://discord.com/invite/p12" target="_blank">
                 <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
               </a>
