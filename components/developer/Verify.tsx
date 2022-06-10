@@ -109,6 +109,12 @@ function Verify() {
             <AddGameTips />
           </div>
           <div className="mt-7 flex flex-col gap-4">
+            <h3 className="font-medium">
+              YOUR GAMES&nbsp;
+              <span className="text-sm font-normal">
+                (Game data was snapshoted on <span className="text-base font-medium">1 May 2022</span>)
+              </span>
+            </h3>
             {steamAppList.map((app, index) => (
               <SteamAppItem
                 key={app.steam_appid || app.index}
@@ -128,7 +134,6 @@ function Verify() {
                 <p className="text-[32px] font-medium">+</p>
               </Button>
             )}
-            <p className="text-center text-xs text-[#A3A6B3]">Game data was collected on May 1, 2022.</p>
           </div>
         </div>
         <div className="w-full">
