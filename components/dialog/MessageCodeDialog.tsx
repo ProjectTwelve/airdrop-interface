@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../button';
-import Image from 'next/image';
 
 type MessageCodeDialogProps = {
   close?: () => void;
@@ -14,15 +13,27 @@ export default function MessageCodeDialog({ close }: MessageCodeDialogProps) {
         <p className="leading-5">1. Log in to your Steamworks account.</p>
         <p className="leading-5">2. Find your listed games and enter &quot;Store Presence - Edit Store Page&quot;.</p>
         <div className="mt-5 mb-7">
-          <Image src="/img/message_code_step_01.jpg" width={440} height={220} alt="message_code_01" />
+          <img
+            className="h-[220px] w-[440px]"
+            src="https://cdn1.p12.games/airdrop/img/message_code_step_01_0610.jpg"
+            alt="message_code_01"
+          />
         </div>
         <p className="leading-5">3. Add your SIGNATURE on your game description and save.</p>
         <div className="mt-5 mb-7">
-          <Image src="/img/message_code_step_02.jpg" width={720} height={453} alt="message_code_02" />
+          <img
+            className="h-[453px] w-[720px]"
+            src="https://cdn1.p12.games/airdrop/img/message_code_step_02_0610.jpg"
+            alt="message_code_02"
+          />
         </div>
         <p className="leading-5">4. Publish to public.</p>
         <div className="mt-5">
-          <Image src="/img/message_code_step_03.jpg" width={572} height={218} alt="message_code_02" />
+          <img
+            className="h-[218px] w-[572px]"
+            src="https://cdn1.p12.games/airdrop/img/message_code_step_03_0610.jpg"
+            alt="message_code_03"
+          />
         </div>
       </div>
       <div className="flex justify-end pt-[30px]">
