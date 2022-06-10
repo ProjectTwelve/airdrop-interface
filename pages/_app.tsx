@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
 import Script from 'next/script';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from '../components/layout';
 import type { AppProps } from 'next/app';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
+import '../utils/analytics';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = useMemo(() => new QueryClient(), []);
