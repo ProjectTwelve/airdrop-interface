@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../button';
-import Image from 'next/image';
 import { WalletType } from './WalletPopover';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { injected, walletConnect } from '../../connectors';
@@ -36,25 +35,25 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
   return (
     <div className="flex flex-col items-center justify-center py-6">
       <h4 className="text-xl font-medium">Connect wallet</h4>
-      <div className="mt-6 flex w-full items-center justify-center gap-3 px-4">
+      <div className="mt-6 flex w-full items-center justify-center gap-3 px-4 md:flex-col">
         <Button
           type="bordered"
-          className="flex w-full items-center justify-center gap-2"
+          className="flex w-full min-w-[170px] items-center justify-center gap-2"
           onClick={() => connectWallet(wallets.metaMask)}
         >
-          <Image src="/img/metamask@2x.png" width={30} height={30} alt="metamask" />
+          <img className="h-[30px] w-[30px]" src="/img/metamask@2x.png" alt="meta_mask" />
           <span className="text-sm">MetaMask</span>
         </Button>
         <Button
           type="bordered"
-          className="flex w-full items-center justify-center gap-2"
+          className="flex w-full min-w-[170px] items-center justify-center gap-2"
           onClick={() => connectWallet(wallets.walletConnect)}
         >
-          <Image src="/img/walletconnet@2x.png" width={30} height={30} alt="metamask" />
+          <img className="h-[30px] w-[30px]" src="/img/walletconnet@2x.png" alt="wallet_connet" />
           <span className="text-sm">WalletConnect</span>
         </Button>
       </div>
-      <div className="mt-[50px] text-xs text-p12-sub">
+      <div className="mt-[50px] px-4 text-xs text-p12-sub">
         {downloadClick ? 'Please refresh page after installation. Re-install ' : "Don't have one? "}
         <span
           className="cursor-pointer text-p12-link"

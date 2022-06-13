@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { useMemo } from 'react';
 import classNames from 'classnames';
-import { useTable } from 'react-table';
+import { useBlockLayout, useTable } from 'react-table';
 import Empty from '../empty';
 
 type TableProps = {
@@ -12,10 +12,13 @@ type TableProps = {
 
 export default function Table({ dataSource, columns, className }: TableProps) {
   const data = useMemo(() => dataSource, [dataSource]);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
-    columns,
-    data,
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    {
+      columns,
+      data,
+    },
+    useBlockLayout,
+  );
   return (
     <div className={classNames('react-table', className)}>
       <table className="table-auto" {...getTableProps()}>

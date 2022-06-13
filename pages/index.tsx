@@ -20,16 +20,16 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: 'calc(100vh - 160px)' }}>
-      <div className="h-[180px] w-[394px] bg-[image:var(--logo)] bg-cover"></div>
+    <div className="flex flex-col items-center justify-center md:pt-4" style={{ minHeight: 'calc(100vh - 160px)' }}>
+      <div className="aspect-[2.19/1] w-full max-w-[394px] bg-[image:var(--logo)] bg-cover"></div>
       <div className="mt-16 text-center">
         <h2 className="text-[34px] font-medium">Tribute to Gamers</h2>
         <h2 className="text-[34px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
       </div>
-      <div className="mt-24 flex flex-col items-center gap-6">
-        <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <div className="mt-24 flex w-full flex-col items-center gap-6">
+        <div className="w-full max-w-[470px]" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           <Button
-            className="w-[470px]"
+            className="w-full"
             size="large"
             type="bordered"
             onClick={() => {
@@ -62,14 +62,14 @@ const Home: NextPage = () => {
           </Button>
         </div>
         <Button
-          className="w-[470px]"
+          className="w-full max-w-[470px]"
           size="large"
           type="gradient"
           onClick={() => router.push({ pathname: '/developer', query: router.query })}
         >
           I am a Steam Game Dev
         </Button>
-        <Button disabled className="w-[470px]" size="large">
+        <Button disabled className="w-full max-w-[470px]" size="large">
           I am a Steam Gamer
         </Button>
       </div>

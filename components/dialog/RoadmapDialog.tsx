@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../button';
-import Image from 'next/image';
 import SocialMedia from '../socialMedia';
 import Dialog from './index';
 import { useRecoilState } from 'recoil';
@@ -14,7 +13,7 @@ export default function RoadmapDialog() {
       open={open}
       onOpenChange={(op) => setOpen(op)}
       render={() => (
-        <div className="w-[780px]">
+        <div className="max-w-[780px]">
           <h2 className="text-center text-xl">P12 Genesis Airdrop Roadmap</h2>
           <div className="flex gap-5">
             <div className="flex flex-col items-center justify-start">
@@ -35,30 +34,30 @@ export default function RoadmapDialog() {
                 <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1（LIVE）</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     P12 Genesis Airdrop for Steam developers launch.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     Developers verify their games and get Airdrop NFT - &quot;P12 Genesis&quot;.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     &quot;P12 Genesis&quot; has 4 forms: Legendary, Epic, Rare and Uncommon.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5 text-p12-success">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     Amount of token granted is shown as &apos;?&apos; in Stage 1, which will unveil in Stage2.
                   </p>
-                  <p className="flex items-start justify-start gap-1.5 leading-5">
+                  <div className="flex items-start justify-start gap-1.5 leading-5">
                     <div className="flex h-5 w-4 flex-none items-center justify-center">
-                      <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                      <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     </div>
                     Referral mechanism - when other developers successfully verify their games through your invitation link, as
                     referrer you get up to 24% of that game&apos;s token.
-                  </p>
+                  </div>
                   <div className="flex justify-start gap-1.5 leading-5">
-                    <Image src="/svg/check.svg" width={16} height={16} alt="check" />
+                    <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     Airdrop community channels in <SocialMedia size="small" />
                   </div>
                 </div>

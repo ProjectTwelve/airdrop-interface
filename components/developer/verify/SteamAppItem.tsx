@@ -34,7 +34,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   return (
     <div className="h-[72px] overflow-hidden rounded-2xl bg-p12-black/80">
       {app.steam_appid ? (
-        <div className="relative flex h-full items-center justify-start gap-4">
+        <div className="relative flex h-full items-center justify-start gap-4 md:gap-2">
           <div
             className="relative h-full w-[168px] bg-[#CEDCFF]/10 bg-cover"
             style={{ backgroundImage: `url(${app.header_image})` }}
@@ -46,12 +46,12 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
           </div>
           <div className="flex h-full flex-1 flex-col items-start justify-around">
             <p className="max-w-[295px] truncate font-medium">{app.name}</p>
-            <p className="text-sm">
-              {app.release_date?.date} &nbsp;&nbsp;&nbsp;&nbsp;
-              {app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}
-            </p>
+            <div className="flex gap-2 text-sm md:flex-col xs:hidden">
+              <p>{app.release_date?.date}</p>
+              <p>{app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}</p>
+            </div>
           </div>
-          <div className="flex w-[120px] items-center justify-center gap-2">
+          <div className="mr-4 flex items-center justify-center gap-2">
             <span className="cursor-pointer font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
               ?,???
             </span>
@@ -62,13 +62,13 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
           </div>
         </div>
       ) : (
-        <div className="flex h-full items-center justify-between gap-5 px-5">
-          <div className="flex flex-1 items-center justify-start gap-5 text-sm">
+        <div className="flex h-full items-center justify-between gap-5 px-5 md:gap-2 md:px-2">
+          <div className="flex flex-1 items-center justify-start gap-5 text-sm md:gap-2">
             <p>App ID:</p>
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="flex-1 bg-black/0"
+              className="w-full flex-1 bg-black/0"
               placeholder="Please enter"
             />
           </div>
@@ -77,7 +77,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             disabled={!value}
             type={value ? 'gradient' : 'default'}
             size="small"
-            className="text-sm font-medium"
+            className="min-w-[56px] text-sm font-medium"
             onClick={refetch}
           >
             Add

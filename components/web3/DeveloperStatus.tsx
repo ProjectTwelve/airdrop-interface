@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Tag from '../tag';
 import { useQuery } from 'react-query';
+import { isMobile } from 'react-device-detect';
 import { fetchDeveloperInfo } from '../../lib/api';
 import { useWeb3React } from '@web3-react/core';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -22,9 +23,11 @@ function DeveloperStatus() {
       if (data.code !== 0) return;
       if (claimingGame) {
         const currentGame = games.find((game) => game.appid === claimingGame.appid);
-        currentGame?.nft_claim !== NFTClaim.CLAIMED &&
-          claimingGame.nft_level !== undefined &&
-          window.open(BADGES[claimingGame.nft_level].claim);
+        if (currentGame?.nft_claim !== NFTClaim.CLAIMED && claimingGame.nft_level !== undefined) {
+          isMobile
+            ? (window.location.href = BADGES[claimingGame.nft_level].claim)
+            : window.open(BADGES[claimingGame.nft_level].claim, '_blank');
+        }
         setClaimingGame(undefined);
       }
       setGames(data.data.account_info || []);

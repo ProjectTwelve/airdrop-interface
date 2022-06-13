@@ -98,8 +98,8 @@ function Verify() {
   }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
-    <div className="px-8 pt-12">
-      <div className="flex gap-[60px] border-b border-p12-line pb-12">
+    <div className="px-8 pt-12 md:px-4 pt-6">
+      <div className="flex gap-[60px] border-b border-p12-line pb-12 md:flex-col">
         <div className="w-full">
           <h2 className="text-xl font-medium">
             Step One: Add Steam games
@@ -171,7 +171,7 @@ function Verify() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between py-8">
+      <div className="flex items-center justify-between py-8 gap-4 md:flex-col">
         <div className="text-[18px]">
           Selected <span className="text-p12-success">{submittedSteamApps.length}</span>{' '}
           {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify

@@ -10,7 +10,7 @@ function LayoutHeader() {
     <header className="relative z-10 flex justify-between">
       <div className="flex items-center justify-start">
         <div className="h-[36px] w-[80px] cursor-pointer bg-[image:var(--logo)] bg-cover" onClick={() => router.push('/')} />
-        <div className="ml-8">
+        <div className="ml-8 md:hidden">
           <LayoutHeaderExtra />
         </div>
       </div>
