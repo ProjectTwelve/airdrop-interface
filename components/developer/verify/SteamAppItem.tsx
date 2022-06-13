@@ -36,7 +36,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
       {app.steam_appid ? (
         <div className="relative flex h-full items-center justify-start gap-4 md:gap-2">
           <div
-            className="relative h-full w-[168px] bg-[#CEDCFF]/10 bg-cover"
+            className="relative h-full w-[168px] flex-none bg-[#CEDCFF]/10 bg-cover"
             style={{ backgroundImage: `url(${app.header_image})` }}
           >
             <div className="absolute bottom-0 left-0 h-[42px] w-[42px]">
@@ -44,18 +44,20 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
               <Image src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
-          <div className="flex h-full flex-1 flex-col items-start justify-around">
-            <p className="max-w-[295px] truncate font-medium">{app.name}</p>
-            <div className="flex gap-2 text-sm md:flex-col xs:hidden">
-              <p>{app.release_date?.date}</p>
-              <p>{app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}</p>
+          <div className="flex flex-1 items-center justify-start xs:flex-col xs:items-start">
+            <div className="flex flex-1 flex-col items-start justify-around">
+              <p className="max-w-[180px] truncate font-medium lg:max-w-[230px] xs:max-w-[120px]">{app.name}</p>
+              <div className="flex gap-2 text-sm xs:hidden">
+                <p>{app.release_date?.date}</p>
+                <p>{app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}</p>
+              </div>
             </div>
-          </div>
-          <div className="mr-4 flex items-center justify-center gap-2">
-            <span className="cursor-pointer font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
-              ?,???
-            </span>
-            <Image src="/img/p12.png" width={30} height={30} alt="p12" />
+            <div className="mr-4 flex flex-none items-center justify-center gap-2">
+              <span className="cursor-pointer font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
+                ?,???
+              </span>
+              <Image src="/img/p12.png" width={30} height={30} alt="p12" />
+            </div>
           </div>
           <div className="absolute top-1.5 right-1.5" onClick={onRemove}>
             <CloseCircle />

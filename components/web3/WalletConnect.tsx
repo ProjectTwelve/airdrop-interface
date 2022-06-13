@@ -6,6 +6,7 @@ import { injected, walletConnect } from '../../connectors';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { useRecoilState } from 'recoil';
 import { downloadClickAtom } from '../../store/download/state';
+import { isMobile } from 'react-device-detect';
 
 type WalletConnectProps = {
   setWalletType?: (type: WalletType) => void;
@@ -24,6 +25,10 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
    * @param connector
    */
   const connectWallet = (connector: AbstractConnector | undefined) => {
+    if (isMobile && !window.ethereum) {
+      window.open('https://metamask.app.link/dapp/' + window.location.hostname);
+      return;
+    }
     connector &&
       activate(connector, undefined, true).catch((error) => {
         if (error instanceof UnsupportedChainIdError) {

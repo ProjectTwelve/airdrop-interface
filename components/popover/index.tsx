@@ -11,7 +11,6 @@ import {
   useDismiss,
   useClick,
   FloatingFocusManager,
-  FloatingPortal,
 } from '@floating-ui/react-dom-interactions';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -47,35 +46,33 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
   return (
     <>
       {cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
-      <FloatingPortal>
-        <AnimatePresence>
-          {open && (
-            <FloatingFocusManager context={context}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{ opacity: 1, scale: 1, originY: 0 }}
-                exit={{ opacity: 0, scale: 0.85 }}
-                transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                {...getFloatingProps({
-                  ref: floating,
-                  style: {
-                    position: strategy,
-                    top: y ?? '',
-                    left: x ?? '',
-                  },
-                })}
-              >
-                {render({
-                  close: () => {
-                    setOpen(false);
-                    onOpenChange?.(false);
-                  },
-                })}
-              </motion.div>
-            </FloatingFocusManager>
-          )}
-        </AnimatePresence>
-      </FloatingPortal>
+      <AnimatePresence>
+        {open && (
+          <FloatingFocusManager context={context}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1, originY: 0 }}
+              exit={{ opacity: 0, scale: 0.85 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+              {...getFloatingProps({
+                ref: floating,
+                style: {
+                  position: strategy,
+                  top: y ?? '',
+                  left: x ?? '',
+                },
+              })}
+            >
+              {render({
+                close: () => {
+                  setOpen(false);
+                  onOpenChange?.(false);
+                },
+              })}
+            </motion.div>
+          </FloatingFocusManager>
+        )}
+      </AnimatePresence>
     </>
   );
 }
