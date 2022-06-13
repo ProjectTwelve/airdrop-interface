@@ -63,8 +63,8 @@ function Dialog({ render, open: passedOpen = false, children, onOpenChange }: Re
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
                   {...getFloatingProps({ ref: floating })}
                 >
-                  <div className="relative p-7">
-                    <div className="absolute right-7 top-7 flex h-4 w-4 cursor-pointer items-center justify-center">
+                  <div className="relative p-7 md:p-2">
+                    <div className="absolute right-7 top-7 flex h-4 w-4 cursor-pointer items-center justify-center md:right-3 md:top-3">
                       <Image src="/svg/close.svg" width={14} height={14} alt="close" onClick={() => onClose(false)} />
                     </div>
                     {render({

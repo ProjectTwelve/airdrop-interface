@@ -22,7 +22,7 @@ export default function Developer() {
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
         <div className="backdrop-box rounded-2xl">
           <Tabs forceRenderTabPanel onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
-            <TabList className="relative flex items-center justify-center gap-4 border-b border-p12-line text-xl font-medium">
+            <TabList className="relative flex items-center justify-center gap-4 border-b border-p12-line text-center text-xl font-medium md:gap-0">
               {tabs.map((tab, index) => (
                 <Tab
                   key={index}
@@ -35,13 +35,13 @@ export default function Developer() {
                     </motion.div>
                   ) : null}
                   {index === 1 && allUnclaimed.length ? (
-                    <div className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-p12-error px-2 text-sm leading-5">
+                    <div className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-p12-error px-2 text-sm leading-5 md:hidden">
                       {allUnclaimed.length} NFT
                     </div>
                   ) : null}
                 </Tab>
               ))}
-              <div className="absolute right-8">
+              <div className="absolute right-8 md:-top-10">
                 <SocialMedia />
               </div>
             </TabList>

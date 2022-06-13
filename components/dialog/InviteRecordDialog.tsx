@@ -14,20 +14,24 @@ export function InviteRecordDialog({ close }: { close?: () => void }) {
 
   const columns = [
     {
+      width: 150,
       Header: 'Dev address',
       accessor: 'wallet_address',
       Cell: ({ value }: any) => shortenAddress(value),
     },
     {
+      width: 150,
       Header: 'Game name',
       accessor: 'name',
       Cell: ({ value }: any) => <p className="max-w-[200px] truncate">{value}</p>,
     },
     {
+      width: 150,
       Header: 'Game id',
       accessor: 'appid',
     },
     {
+      width: 150,
       Header: 'Verify time',
       accessor: 'createAt',
       Cell: ({ value }: any) => dayjs(value).format('YYYY/MM/DD'),
@@ -35,10 +39,10 @@ export function InviteRecordDialog({ close }: { close?: () => void }) {
   ];
 
   return (
-    <div className="w-[600px]">
+    <div>
       <h2 className="text-center text-xl">My P12 Airdrop Referral List</h2>
       <div className="mt-8">
-        <Table dataSource={data?.data.invitation_info || []} columns={columns} />
+        <Table className="max-w-[80vw] overflow-x-auto" dataSource={data?.data.invitation_info || []} columns={columns} />
       </div>
       <div className="mt-14 flex justify-end border-t border-p12-line pt-7">
         <Button type="bordered" onClick={close}>

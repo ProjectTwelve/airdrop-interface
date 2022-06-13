@@ -34,7 +34,7 @@ function Tokens() {
   }, [claimGroup, invitation]);
 
   return (
-    <div className="relative px-8 pt-12">
+    <div className="relative px-8 pt-12 md:px-4 md:pt-6">
       <div className="flex flex-col">
         <TokenTabs />
         <div className="mt-8">
@@ -68,12 +68,12 @@ function Tokens() {
             </div>
             <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
               <p className="mt-2 cursor-pointer text-xs text-p12-link">
-                My referral list <span className="pl-11 text-p12-link">&gt;</span>
+                My referral list <span className="pl-11 text-p12-link md:pl-1">&gt;</span>
               </p>
             </Dialog>
           </div>
         </div>
-        <div className="flex items-center justify-between py-8">
+        <div className="flex items-center justify-between gap-4 py-8 md:flex-col">
           <div className="flex items-center justify-start">
             <p className="mr-3 text-p12-sub">
               {pieces} {pieces > 1 ? 'NFTs' : 'NFT'}

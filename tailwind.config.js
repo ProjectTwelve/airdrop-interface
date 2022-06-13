@@ -6,6 +6,8 @@ module.exports = {
         center: true,
       },
       screens: {
+        xs: { max: '475px' },
+        md: { max: '768px' },
         xl: '1366px',
         '2xl': '1366px',
       },

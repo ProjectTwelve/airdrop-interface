@@ -18,7 +18,7 @@ function WalletPopover({}: WalletPopoverProps) {
     [WalletType.DOWNLOAD]: <WalletDownload setWalletType={(type) => setType(type)} />,
   };
 
-  return <div className="backdrop-box w-[400px] rounded-2xl">{walletComponent[type]}</div>;
+  return <div className="backdrop-box max-w-[400px] rounded-2xl">{walletComponent[type]}</div>;
 }
 
 export default WalletPopover;

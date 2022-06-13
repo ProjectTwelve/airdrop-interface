@@ -30,11 +30,11 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       <Back onClick={() => setWalletType?.(WalletType.CONNECT)} />
       <h4 className="text-center text-xl font-medium">Download & Setup</h4>
       <div
-        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-p12-sub py-2 px-4"
+        className="mt-6 flex cursor-pointer select-none items-center justify-between gap-2 border-y border-p12-sub py-2 px-4"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-center gap-2">
-          <Image src="/img/metamask@2x.png" width={30} height={30} quality={100} alt="metamask" />
+          <img className="h-[30px] w-[30px] md:hidden" src="/img/metamask@2x.png" alt="metamask" />
           <span className="text-sm">METAMASK</span>
         </div>
         <div className="flex items-center justify-center gap-3">
