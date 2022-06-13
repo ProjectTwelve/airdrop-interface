@@ -74,6 +74,16 @@ const Home: NextPage = () => {
         </Button>
       </div>
       <p className="mt-3 text-xs text-[#A3A6B3]">Airdrop to gamers coming in stage 2</p>
+      <motion.div
+        transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+        className="my-4 cursor-pointer"
+        layoutId="ranking"
+        onClick={() => router.push('/ranking')}
+      >
+        <div className="backdrop-box w-[400px] rounded-2xl">
+          <div className="h-[400px]">Ranking</div>
+        </div>
+      </motion.div>
     </div>
   );
 };

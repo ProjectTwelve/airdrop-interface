@@ -22,12 +22,13 @@ function LayoutHeaderExtra() {
 
   return (
     <AnimatePresence>
-      {router.pathname === '/developer' && (
+      {router.pathname !== '/' && (
         <motion.div className="relative">
           <motion.div
-            initial={{ opacity: 0.65 }}
+            initial={{ opacity: 0.45 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            transition={{ type: 'spring', stiffness: 200, damping: 30 }}
             className="relative flex gap-3"
           >
             <Button type="bordered" onClick={() => window.open(readmeLink)}>
