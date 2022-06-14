@@ -7,6 +7,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector';
 import { useRecoilState } from 'recoil';
 import { downloadClickAtom } from '../../store/download/state';
 import { isMobile } from 'react-device-detect';
+import { InjectedConnector } from '@web3-react/injected-connector';
 
 type WalletConnectProps = {
   setWalletType?: (type: WalletType) => void;
@@ -25,7 +26,7 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
    * @param connector
    */
   const connectWallet = (connector: AbstractConnector | undefined) => {
-    if (isMobile && !window.ethereum) {
+    if (isMobile && connector instanceof InjectedConnector && !window.ethereum) {
       window.open('https://metamask.app.link/dapp/' + window.location.hostname);
       return;
     }
