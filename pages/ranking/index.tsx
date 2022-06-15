@@ -1,19 +1,23 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Back from '../../components/back';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { rankingLayoutIdAtom } from '../../store/ranking/state';
+import Back from '../../components/back';
 import SocialMedia from '../../components/socialMedia';
 import DeveloperRanking from '../../components/ranking/developer';
 
 export default function Ranking() {
   const router = useRouter();
+  const layoutId = useRecoilValue(rankingLayoutIdAtom);
+
   return (
     <div className="mt-8">
       <Back onClick={() => router.back()} />
       <motion.div
         className="my-4"
-        layoutId="ranking"
+        layoutId={layoutId}
         transition={{ type: 'spring', stiffness: 300, damping: 35 }}
         onClick={(event) => event.stopPropagation()}
       >

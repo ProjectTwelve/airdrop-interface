@@ -1,74 +1,85 @@
 @import "./theme.css";
 @import "./components/tabs.css";
 @import "./components/table.css";
+@import "./components/pagination.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    * {
+        color: #FFF;
+        outline: none;
+    }
 
-body {
-    background: #000;
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
+    body {
+        background: #000;
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+    }
+
+    .backdrop-box {
+        background: rgba(68, 70, 95, 0.6);
+        border: 2px solid rgb(70, 75, 90);
+        backdrop-filter: blur(16px);
+    }
+
+    @font-face {
+        font-family: 'D-DIN';
+        font-weight: 700;
+        src: url('/fonts/D-DIN-Bold.ttf');
+    }
+
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+
+    .vertical-scroll::-webkit-scrollbar {
+        background: rgba(0, 0, 0, 0);
+        width: 4px;
+        border-radius: 4px;
+    }
+
+    .vertical-scroll::-webkit-scrollbar-thumb {
+        background: rgba(206, 220, 255, 0.12);
+        border-radius: 4px;
+    }
+
+    .horizontal-scroll::-webkit-scrollbar {
+        background: rgba(0, 0, 0, 0);
+        width: 0;
+        height: 0;
+    }
 }
 
-* {
-    color: #FFF;
-    outline: none;
-}
+@layer components {
+    .ranking__box {
+        background: linear-gradient(to bottom, rgba(135, 143, 191, 0.5) 0%, rgba(96, 103, 147, 0.5) 33.33%, rgba(57, 64, 102, 0.5) 66.66%, rgba(24, 28, 47, 0.5) 100%);
+        border: 1px solid #616985;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
 
-.backdrop-box {
-    background: rgba(68, 70, 95, 0.6);
-    border: 2px solid rgb(70, 75, 90);
-    backdrop-filter: blur(16px);
-}
+    .toast-container {
+        position: relative;
+        border-radius: 12px;
+        background: rgba(68, 70, 95, 0.6);
+        border: 2px solid rgb(70, 75, 90);
+        backdrop-filter: blur(16px);
+        font-size: 14px;
+    }
 
-@font-face {
-    font-family: 'D-DIN';
-    font-weight: 700;
-    src: url('/fonts/D-DIN-Bold.ttf');
-}
+    .Toastify__toast-body {
+        align-items: start;
+    }
 
-.toast-container {
-    position: relative;
-    border-radius: 12px;
-    background: rgba(68, 70, 95, 0.6);
-    border: 2px solid rgb(70, 75, 90);
-    backdrop-filter: blur(16px);
-    font-size: 14px;
-}
+    .Toastify__toast-icon {
+        width: 28px;
+    }
 
-.Toastify__toast-body {
-    align-items: start;
-}
-
-.Toastify__toast-icon {
-    width: 28px;
-}
-
-.vertical-scroll::-webkit-scrollbar {
-    background: rgba(0, 0, 0, 0);
-    width: 4px;
-    border-radius: 4px;
-}
-
-.vertical-scroll::-webkit-scrollbar-thumb {
-    background: rgba(206, 220, 255, 0.12);
-    border-radius: 4px;
-}
-
-.horizontal-scroll::-webkit-scrollbar {
-    background: rgba(0, 0, 0, 0);
-    width: 0;
-    height: 0;
-}
-
-/* Hide input[type=number] controls */
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
 }

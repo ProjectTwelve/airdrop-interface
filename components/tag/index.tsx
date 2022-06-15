@@ -21,7 +21,7 @@ export default function Tag({ value, type, size }: TagProps) {
     red: 'text-p12-error border-p12-error bg-[#640018]/30',
     orange: 'text-[#FFAA2C] border-[#FFAA2C] bg-[#F36E22]/20',
     purple: 'text-[#FC59FF] border-[#FC59FF] bg-[#FC59FF]/20',
-    blue: 'text-[#43BBFF] border-[#4383FF] bg-[#4383FF]/20',
+    blue: 'text-p12-link border-[#4383FF] bg-[#4383FF]/20',
     green: 'text-p12-success border-p12-success bg-[#16F497]/20',
     white: 'text-[#99A7C3] border-[#99A7C3] bg-[#99A7C3]/20',
   };
