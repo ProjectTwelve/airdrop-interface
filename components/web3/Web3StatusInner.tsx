@@ -1,17 +1,17 @@
 import React from 'react';
-import { useWeb3React } from '@web3-react/core';
 import { shortenAddress } from '../../utils';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+import { useAccount } from 'wagmi';
 
 function Web3StatusInner() {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
 
-  if (account) {
+  if (account?.address) {
     return (
       <div className="flex items-center justify-center gap-3 px-3">
-        <p>{shortenAddress(account)}</p>
+        <p>{shortenAddress(account.address)}</p>
         <div className="h-8 w-8 overflow-hidden rounded-full border border-white bg-[image:var(--gradient)]">
-          <Jazzicon diameter={32} seed={jsNumberForAddress(account ?? '')} />
+          <Jazzicon diameter={32} seed={jsNumberForAddress(account.address ?? '')} />
         </div>
       </div>
     );

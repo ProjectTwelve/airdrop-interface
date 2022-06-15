@@ -4,21 +4,22 @@ import Tag from '../tag';
 import { useQuery } from 'react-query';
 import { isMobile } from 'react-device-detect';
 import { fetchDeveloperInfo } from '../../lib/api';
-import { useWeb3React } from '@web3-react/core';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
 import { claimGroupSelector, claimingGameAtom, developerGameAtom, NFTClaim } from '../../store/developer/state';
 import { BADGES } from '../../constants';
 import { roadmapModalAtom } from '../../store/roadmap/state';
+import { useAccount } from 'wagmi';
 
 function DeveloperStatus() {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
   const [games, setGames] = useRecoilState(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
   const [claimingGame, setClaimingGame] = useRecoilState(claimingGameAtom);
   const setOpen = useSetRecoilState(roadmapModalAtom);
-  useQuery(['developer_info', account], () => fetchDeveloperInfo({ addr: account }), {
-    enabled: !!account,
+
+  useQuery(['developer_info', account?.address], () => fetchDeveloperInfo({ addr: account?.address }), {
+    enabled: !!account?.address,
     onSuccess: (data) => {
       if (data.code !== 0) return;
       if (claimingGame) {

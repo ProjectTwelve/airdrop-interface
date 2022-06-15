@@ -1,6 +1,7 @@
 @import "./theme.css";
 @import "./components/tabs.css";
 @import "./components/table.css";
+@import "./components/toast.css";
 @import "./components/pagination.css";
 
 @tailwind base;
@@ -64,22 +65,4 @@
         border-radius: 1rem;
         overflow: hidden;
     }
-
-    .toast-container {
-        position: relative;
-        border-radius: 12px;
-        background: rgba(68, 70, 95, 0.6);
-        border: 2px solid rgb(70, 75, 90);
-        backdrop-filter: blur(16px);
-        font-size: 14px;
-    }
-
-    .Toastify__toast-body {
-        align-items: start;
-    }
-
-    .Toastify__toast-icon {
-        width: 28px;
-    }
-
 }

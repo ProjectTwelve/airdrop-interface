@@ -3,14 +3,14 @@ import dayjs from 'dayjs';
 import Button from '../button';
 import Table from '../table';
 import { useQueryClient } from 'react-query';
-import { useWeb3React } from '@web3-react/core';
 import { shortenAddress } from '../../utils';
 import { DeveloperInvitationData, Response } from '../../lib/types';
+import { useAccount } from 'wagmi';
 
 export function InviteRecordDialog({ close }: { close?: () => void }) {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<Response<DeveloperInvitationData>>(['invitation_info', account]);
+  const data = queryClient.getQueryData<Response<DeveloperInvitationData>>(['invitation_info', account?.address]);
 
   const columns = [
     {

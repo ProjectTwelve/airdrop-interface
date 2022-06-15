@@ -4,7 +4,6 @@ import SteamAppItem from './verify/SteamAppItem';
 import Message from '../message';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
-import { useWeb3React } from '@web3-react/core';
 import { getSignData } from '../../utils';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
@@ -14,13 +13,21 @@ import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
+import { useAccount, useSignMessage } from 'wagmi';
 
 export type SteamApp = Partial<GameInfo> & { index: number };
 
 function Verify() {
-  const { account, library } = useWeb3React();
+  const { data: account } = useAccount();
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
+  const { signMessage } = useSignMessage({
+    message: JSON.stringify(getSignData(account?.address)),
+    onSuccess(data) {
+      setSignature('sig:' + data + '\np12.network-GameFi ecosystem-Editor|Infra|Econs');
+    },
+  });
+
   // prevent duplication of index
   const [count, setCount] = useState(0);
   const [signature, setSignature] = useState('Please click the generate button.');
@@ -29,14 +36,17 @@ function Verify() {
   const [, copyToClipboard] = useCopyToClipboard();
   const router = useRouter();
   const submittedSteamApps = useMemo(() => steamAppList.filter((app) => app.steam_appid), [steamAppList]);
-  const canVerify = useMemo(() => submittedSteamApps.length > 0 && account, [account, submittedSteamApps.length]);
+  const canVerify = useMemo(
+    () => submittedSteamApps.length > 0 && account?.address,
+    [account?.address, submittedSteamApps.length],
+  );
   const mutation = useMutation<Response<DeveloperVerifyData>, any, DeveloperVerifyParams, any>(
     (data) => {
       return fetchDeveloperVerify(data);
     },
     {
       onSuccess: (data) => {
-        queryClient.refetchQueries(['developer_info', account]).then();
+        queryClient.refetchQueries(['developer_info', account?.address]).then();
         if (data.code === 1) {
           toast.error(<Message message={data.msg} title="Failed" />);
           return;
@@ -79,26 +89,20 @@ function Verify() {
     });
   }, []);
 
-  const generateSignature = useCallback(async () => {
-    if (!library || !account) return;
-    const signature = await library.send('personal_sign', [account, JSON.stringify(getSignData(account))]);
-    setSignature('sig:' + signature + '\np12.network-GameFi ecosystem-Editor|Infra|Econs');
-  }, [account, library]);
-
   const onVerifySteamApps = useCallback(() => {
-    if (!account) return;
+    if (!account?.address) return;
     const { code } = router.query;
     const ids = submittedSteamApps.map((app) => app.steam_appid!);
     mutation.mutate({
       steam_appids: ids,
-      wallet_address: account,
+      wallet_address: account.address,
       referral_code: code as string,
     });
     setVerifiedSteamApp(ids);
   }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
-    <div className="px-8 pt-12 md:px-4 pt-6">
+    <div className="px-8 pt-12 pt-6 md:px-4">
       <div className="flex gap-[60px] border-b border-p12-line pb-12 md:flex-col">
         <div className="w-full">
           <h2 className="text-xl font-medium">
@@ -161,7 +165,7 @@ function Verify() {
                       Copy
                     </Button>
                   ) : (
-                    <Button type="gradient" size="small" onClick={generateSignature}>
+                    <Button type="gradient" size="small" onClick={() => signMessage()}>
                       Generate
                     </Button>
                   )
@@ -171,7 +175,7 @@ function Verify() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between py-8 gap-4 md:flex-col">
+      <div className="flex items-center justify-between gap-4 py-8 md:flex-col">
         <div className="text-[18px]">
           Selected <span className="text-p12-success">{submittedSteamApps.length}</span>{' '}
           {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify

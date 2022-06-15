@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Tag from '../../tag';
 import Button from '../../button';
+import { useAccount } from 'wagmi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimingGameAtom, developerGameAtom, NFTClaim, tabSelectAtom } from '../../../store/developer/state';
 import { LeftCircle } from '../../svg/LeftCircle';
@@ -12,7 +13,6 @@ import { useSelectedGame } from '../../../hooks/useSelectedGame';
 import { BADGES, GALAXY_LIST, NFT_CONTRACT_ADDRESS } from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 import { useBadgeLoad } from '../../../hooks/useBadgeLoad';
-import { useWeb3React } from '@web3-react/core';
 import { useIsFetching, useQueryClient } from 'react-query';
 import { shortenAddress } from '../../../utils';
 
@@ -25,9 +25,9 @@ const claimComponents: Record<NFTClaim, JSX.Element> = {
 };
 
 export default function TokenTabs() {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
   const games = useRecoilValue(developerGameAtom);
-  const isFetching = useIsFetching(['developer_info', account]);
+  const isFetching = useIsFetching(['developer_info', account?.address]);
   const setClaimingGame = useSetRecoilState(claimingGameAtom);
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const queryClient = useQueryClient();
@@ -149,7 +149,7 @@ export default function TokenTabs() {
                       onClick={() => {
                         if (isFetching) return;
                         setClaimingGame(selectedGame);
-                        queryClient.refetchQueries(['developer_info', account]).then();
+                        queryClient.refetchQueries(['developer_info', account?.address]).then();
                       }}
                     >
                       Claim
