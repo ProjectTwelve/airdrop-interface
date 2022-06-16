@@ -22,6 +22,9 @@ export const BNBSmartChain: Chain = {
 
 export const metamaskConnector = new MetaMaskConnector({
   chains: [...defaultChains, BNBSmartChain],
+  options: {
+    shimChainChangedDisconnect: false,
+  }
 });
 
 export const walletConnect = new WalletConnectConnector({

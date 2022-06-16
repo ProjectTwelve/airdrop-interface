@@ -11,6 +11,8 @@ import {
   DeveloperInfoData,
   DeveloperInvitationParams,
   DeveloperInvitationData,
+  DeveloperRank,
+  DeveloperRankList,
 } from './types';
 
 /**
@@ -47,3 +49,29 @@ export const fetchDeveloperInfo = (params: DeveloperInfoParams) =>
  */
 export const fetchDeveloperInvitation = (params: DeveloperInvitationParams) =>
   request.get<any, Response<DeveloperInvitationData>>('/api/developer/invitation', { params });
+
+/**
+ * get developer token rank
+ * @param params
+ */
+export const fetchDeveloperTokenRank = (params: { page: number; size: number }) =>
+  request.get<any, Response<DeveloperRankList>>('/api/developer/token/rank', { params });
+
+/**
+ * get developer time rank
+ * @param params
+ */
+export const fetchDeveloperTimeRank = (params: { page: number; size: number }) =>
+  request.get<any, Response<DeveloperRankList>>('/api/developer/time/rank', { params });
+
+/**
+ * get developer rank
+ * @param params
+ */
+export const fetchDeveloperRank = (params: { addr?: string }) =>
+  request.get<any, Response<DeveloperRank>>('/api/developer/rank', { params });
+
+/**
+ * get developer verified count
+ */
+export const fetchDeveloperVerifiedCount = () => request.get<any, Response<{ total: number }>>('/api/developer/verified/count');

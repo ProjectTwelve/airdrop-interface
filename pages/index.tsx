@@ -7,8 +7,10 @@ import { inviteModalAtom } from '../store/invite/state';
 import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-import TimeRankingItem from '../components/ranking/TimeRankingItem';
-import TokenRankingItem from '../components/ranking/TokenRakingItem';
+import TimeRankingItem, { TimeRankingHeader } from '../components/ranking/TimeRankingItem';
+import TokenRankingItem, { TokenRankingHeader } from '../components/ranking/TokenRakingItem';
+import Loading from '../components/loading';
+import { useDeveloperTimeRank, useDeveloperTokenRank, useTokenAnimation } from '../components/ranking/hooks';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
@@ -16,6 +18,10 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
+  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
+  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: 1, size: 50 });
+  useDeveloperTokenRank({ page: 1, size: 10 });
+  const animateY = useTokenAnimation(tokenRankData?.rankList);
 
   useEffect(() => {
     const currentStatus = getLocalStorage('invite_btn_click');
@@ -24,7 +30,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
-      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-[image:var(--logo)] bg-cover"></div>
+      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-[image:var(--logo)] bg-cover xs:hidden"></div>
       <div className="mt-4 text-center">
         <h2 className="text-[24px] font-medium">Tribute to Gamers</h2>
         <h2 className="text-[24px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
@@ -78,30 +84,27 @@ const Home: NextPage = () => {
           </Button>
         </div>
       </div>
-      <div className="mt-[60px] flex w-full items-center justify-center gap-8 md:flex-col">
+      <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
         <RankingHomeCard title="Developer Latest Verify List" layoutId="ranking_01">
-          <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium">
-            <p className="w-[60px]">Rank</p>
-            <p className="w-[120px]">Timestamp</p>
-            <p>Game</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <TimeRankingItem hover={false} />
-            <TimeRankingItem hover={false} />
-            <TimeRankingItem hover={false} />
+          <TimeRankingHeader />
+          <div className="h-[350px] overflow-hidden">
+            <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
+              {isTimeRankLoading && <Loading size={48} />}
+              {timeRankData?.rankList.slice(0, 3).map((item) => (
+                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid} />
+              ))}
+            </div>
           </div>
         </RankingHomeCard>
         <RankingHomeCard title="Developer Token Ranking" layoutId="ranking_02">
-          <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium">
-            <p className="w-[60px]">Rank</p>
-            <p className="flex-1">Game</p>
-            <p className="w-[100px]">Reward</p>
-            <p className="w-[60px]">Badge</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <TokenRankingItem hover={false} />
-            <TokenRankingItem hover={false} />
-            <TokenRankingItem hover={false} />
+          <TokenRankingHeader />
+          <div className="h-[350px] overflow-hidden">
+            <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
+              {isTokenRankLoading && <Loading size={48} />}
+              {tokenRankData?.rankList.map((item) => (
+                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid} />
+              ))}
+            </motion.div>
           </div>
         </RankingHomeCard>
       </div>

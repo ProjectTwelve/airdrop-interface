@@ -1,6 +1,5 @@
 import { NFTLevel } from '../store/developer/state';
 
-export const CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_CHAIN_ID ?? '1');
 export const NFT_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
 export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 
