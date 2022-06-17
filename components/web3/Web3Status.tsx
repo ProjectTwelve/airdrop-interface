@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Button from '../button';
 import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
@@ -11,11 +11,10 @@ import { useAccount, useNetwork } from 'wagmi';
 function Web3Status() {
   const router = useRouter();
   const { data: account } = useAccount();
-  const { activeChain, chains, switchNetwork } = useNetwork();
-  const networkError = useMemo(() => !chains.find((chain) => chain.id === activeChain?.id), [activeChain, chains]);
+  const { activeChain, switchNetwork } = useNetwork();
 
   if (account?.address) {
-    if (networkError) {
+    if (activeChain?.unsupported) {
       return (
         <Button type="error" onClick={() => switchNetwork?.(1)}>
           Wrong Network
