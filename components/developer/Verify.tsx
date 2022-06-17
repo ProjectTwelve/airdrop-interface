@@ -4,7 +4,7 @@ import SteamAppItem from './verify/SteamAppItem';
 import Message from '../message';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
-import { getSignData } from '../../utils';
+import { getVerifySignData } from '../../utils';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import { fetchDeveloperVerify } from '../../lib/api';
@@ -22,7 +22,7 @@ function Verify() {
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
   const { signMessage } = useSignMessage({
-    message: JSON.stringify(getSignData(account?.address)),
+    message: JSON.stringify(getVerifySignData(account?.address)),
     onSuccess(data) {
       setSignature('sig:' + data + '\np12.network-GameFi ecosystem-Editor|Infra|Econs');
     },

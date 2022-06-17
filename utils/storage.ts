@@ -2,11 +2,7 @@
  * Operation Storage
  */
 function setStorage(type: 'localStorage' | 'sessionStorage', key: string, value: any) {
-  if (typeof value === 'object') {
-    window[type].setItem(key, JSON.stringify(value));
-  } else {
-    window[type].setItem(key, value);
-  }
+  window[type].setItem(key, JSON.stringify(value));
 }
 
 /**

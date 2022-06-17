@@ -116,3 +116,9 @@ export type DeveloperRankList = {
 export type DeveloperRank = {
   games: GameRank[];
 };
+
+export type DeveloperEmailParams = {
+  wallet_address?: string;
+  email: string;
+  signature: string;
+};

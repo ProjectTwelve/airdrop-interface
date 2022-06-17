@@ -90,8 +90,8 @@ const Home: NextPage = () => {
           <div className="h-[350px] overflow-hidden">
             <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
               {isTimeRankLoading && <Loading size={48} />}
-              {timeRankData?.rankList.slice(0, 3).map((item) => (
-                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid} />
+              {timeRankData?.rankList.slice(0, 3).map((item, index) => (
+                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
               ))}
             </div>
           </div>
@@ -101,8 +101,8 @@ const Home: NextPage = () => {
           <div className="h-[350px] overflow-hidden">
             <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
               {isTokenRankLoading && <Loading size={48} />}
-              {tokenRankData?.rankList.map((item) => (
-                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid} />
+              {tokenRankData?.rankList.map((item, index) => (
+                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
               ))}
             </motion.div>
           </div>

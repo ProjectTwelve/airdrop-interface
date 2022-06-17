@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-import Back from '../../components/back';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Back from '../../components/back';
 import SocialMedia from '../../components/socialMedia';
 import Verify from '../../components/developer/Verify';
 import Tokens from '../../components/developer/Tokens';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import DeveloperEmailDialog from '../../components/dialog/DeveloperEmailDialog';
 import { claimGroupSelector, NFTClaim, tabSelectAtom } from '../../store/developer/state';
 
 export default function Developer() {
@@ -48,6 +49,7 @@ export default function Developer() {
           </Tabs>
         </div>
       </div>
+      <DeveloperEmailDialog />
     </div>
   );
 }

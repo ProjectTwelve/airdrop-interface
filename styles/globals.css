@@ -29,7 +29,7 @@
     @font-face {
         font-family: 'D-DIN';
         font-weight: 700;
-        src: url('/fonts/D-DIN-Bold.ttf');
+        src: url(https://cdn1.p12.games/fonts/D-DIN-Bold.ttf);
     }
 
     input[type=number]::-webkit-inner-spin-button {

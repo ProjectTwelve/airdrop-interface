@@ -13,6 +13,7 @@ import {
   DeveloperInvitationData,
   DeveloperRank,
   DeveloperRankList,
+  DeveloperEmailParams,
 } from './types';
 
 /**
@@ -75,3 +76,9 @@ export const fetchDeveloperRank = (params: { addr?: string }) =>
  * get developer verified count
  */
 export const fetchDeveloperVerifiedCount = () => request.get<any, Response<{ total: number }>>('/api/developer/verified/count');
+
+/**
+ * setDeveloperEmail
+ */
+export const fetchDeveloperEmail = (data: DeveloperEmailParams) =>
+  request.post<any, Response<any>>('/api/developer/email', data);

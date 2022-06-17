@@ -49,3 +49,11 @@ export const claimingGameAtom = atom<AccountInfo | undefined>({
   key: 'claiming_game',
   default: undefined,
 });
+
+export const hasClaimGameSelector = selector({
+  key: 'has_claim_game',
+  get: ({ get }) => {
+    const developerGame = get(developerGameAtom);
+    return developerGame.some((item) => item.nft_claim !== NFTClaim.UNCLAIMED);
+  },
+});

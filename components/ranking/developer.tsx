@@ -141,8 +141,8 @@ function DeveloperRanking() {
           <TimeRankingHeader />
           <div className="flex flex-col gap-4">
             {isTimeRankLoading && <Loading size={48} />}
-            {timeRankData?.rankList.map((item) => (
-              <TimeRankingItem data={item} key={item.appid} />
+            {timeRankData?.rankList.map((item, index) => (
+              <TimeRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
@@ -156,8 +156,8 @@ function DeveloperRanking() {
           <TokenRankingHeader />
           <div className="flex flex-col gap-4">
             {isTokenRankLoading && <Loading size={48} />}
-            {tokenRankData?.rankList.map((item) => (
-              <TokenRankingItem data={item} key={item.appid} />
+            {tokenRankData?.rankList.map((item, index) => (
+              <TokenRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">

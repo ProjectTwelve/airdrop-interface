@@ -18,31 +18,33 @@ export function shortenAddress(address: string, chars = 4): string {
 
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
-export const getSignData = (account?: string) => ({
+export const getVerifySignData = (account?: string) => ({
   types: {
     EIP712Domain: [
-      {
-        name: 'name',
-        type: 'string',
-      },
-      {
-        name: 'version',
-        type: 'string',
-      },
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
     ],
-    Permit: [
-      {
-        name: 'account',
-        type: 'address',
-      },
-    ],
+    Permit: [{ name: 'account', type: 'address' }],
   },
-  domain: {
-    name: 'P12 Verifier',
-    version: '1',
-  },
+  domain: { name: 'P12 Verifier', version: '1' },
   primaryType: 'Permit',
   message: {
     account: account || '',
   },
+});
+
+export const getEmailSignData = ({ account, email }: { account: string; email: string }) => ({
+  types: {
+    EIP712Domain: [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+    ],
+    Permit: [
+      { name: 'account', type: 'address' },
+      { name: 'email', type: 'string' },
+    ],
+  },
+  domain: { name: 'P12 Email Verifier', version: '1' },
+  primaryType: 'Permit',
+  message: { account, email },
 });

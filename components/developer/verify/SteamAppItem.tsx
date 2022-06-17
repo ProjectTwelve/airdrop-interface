@@ -36,15 +36,13 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
       {app.steam_appid ? (
         <div className="relative h-[72px] overflow-hidden rounded-2xl bg-p12-black/80 pr-4">
           <div
-            className="static float-left mr-4 flex h-full bg-[#CEDCFF]/10 bg-cover items-center justify-start"
+            className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover"
             style={{ maxWidth: 'min(33%, 168px)' }}
           >
-            <div className="relative">
-              <img src={app.header_image} className="h-auto w-full" alt="header_image" />
-              <div className="absolute bottom-0 left-0 h-[42px] w-[42px] md:hidden">
-                <span className="absolute top-5 left-1 z-10 text-sm font-medium">0{index}</span>
-                <img src="/svg/index.svg" width={42} height={42} alt="index" />
-              </div>
+            <img src={app.header_image} className="h-auto w-full object-cover" alt="header_image" />
+            <div className="absolute bottom-0 left-0 h-[42px] w-[42px] md:hidden">
+              <span className="absolute top-5 left-1 z-10 text-sm font-medium">0{index}</span>
+              <img src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
           <div className="xs:flex xs:flex-col-reverse">
