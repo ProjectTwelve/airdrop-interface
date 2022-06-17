@@ -8,6 +8,7 @@ import { LeftCircle } from '../svg/LeftCircle';
 import { AnimatePresence, motion } from 'framer-motion';
 import { wrap } from 'popmotion';
 import Loading from '../loading';
+import classNames from 'classnames';
 
 const variants = {
   enter: (direction: number) => {
@@ -58,10 +59,22 @@ function DeveloperRanking() {
         <div className="flex-1">
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
           <div className="ranking__box mt-3 h-[90px] xs:h-[150px]">
-            <div className="absolute -left-[18px] top-1/2 z-10 -translate-y-1/2 select-none" onClick={() => paginate(-1)}>
+            <div
+              className={classNames(
+                'absolute -left-[18px] top-1/2 z-10 -translate-y-1/2 select-none',
+                !developerRankData?.games.length && 'hidden',
+              )}
+              onClick={() => paginate(-1)}
+            >
               <LeftCircle />
             </div>
-            <div className="absolute -right-[18px] top-1/2 z-10 -translate-y-1/2 select-none" onClick={() => paginate(1)}>
+            <div
+              className={classNames(
+                'absolute -right-[18px] top-1/2 z-10 -translate-y-1/2 select-none',
+                !developerRankData?.games.length && 'hidden',
+              )}
+              onClick={() => paginate(1)}
+            >
               <LeftCircle className="rotate-180" />
             </div>
             <div className="relative h-full w-full overflow-hidden">
@@ -133,7 +146,9 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            {verified && verified.total > 10 && (
+              <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            )}
           </div>
         </div>
         <div className="w-full">
@@ -146,7 +161,9 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            {verified && verified.total > 10 && (
+              <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            )}
           </div>
         </div>
       </div>

@@ -18,7 +18,20 @@ export default function Report() {
         </div>
       </div>
       <div className="flex flex-col gap-[30px] py-6">
-        <div className="rounded-2xl bg-[#7980AF]/20 p-[30px]">1</div>
+        <div className="flex rounded-2xl bg-[#7980AF]/20 p-[30px]">
+          <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
+            <p className="text-center font-['D-DIN'] text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
+            <p className="my-3 h-[1px] bg-[#FFAA2C]/30"></p>
+            <p className="text-center text-xl leading-5 text-[#FFAA2C]">Current Rank</p>
+          </div>
+          <div className="h-[128px] w-[200px] overflow-hidden rounded-2xl">
+            <img
+              src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg?t=1650611880"
+              alt="steam_game"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
         <div className="rounded-2xl bg-[#7980AF]/20 p-[30px]">2</div>
       </div>
     </div>
