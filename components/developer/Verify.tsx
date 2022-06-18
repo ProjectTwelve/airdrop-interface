@@ -102,21 +102,19 @@ function Verify() {
   }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
-    <div className="px-8 pt-12 pt-6 md:px-4">
+    <div className="px-8 pt-12 md:px-4 md:pt-6">
       <div className="flex gap-[60px] border-b border-p12-line pb-12 md:flex-col">
         <div className="w-full">
-          <h2 className="text-xl font-medium">
-            Step One: Add Steam games
-            <span className="text-sm font-normal">&nbsp;(you can add 3 games at once)</span>
-          </h2>
+          <h2 className="text-[30px] font-medium">Step One: Add Steam games</h2>
+          <p className="">you can add 3 games at once</p>
           <div className="mt-7">
             <AddGameTips />
           </div>
           <div className="mt-7 flex flex-col gap-4">
-            <h3 className="font-medium">
+            <h3 className="text-xl font-medium">
               YOUR GAMES&nbsp;
-              <span className="text-sm font-normal">
-                (Game data was snapshoted on <span className="text-base font-medium">1 May 2022</span>)
+              <span className="text-base font-normal">
+                (Game data was snapshoted on <span className="text-xl font-medium">1 May 2022</span>)
               </span>
             </h3>
             {steamAppList.map((app, index) => (
@@ -141,16 +139,16 @@ function Verify() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="text-xl font-medium">Step Two: Verify ownership</h2>
+          <h2 className="text-[30px] font-medium">Step Two: Verify ownership</h2>
           <div className="mt-7">
             <OwnershipTips />
           </div>
           <div className="mt-7">
-            <h3 className="font-medium">
-              YOUR SIGNATURE <span className="text-sm font-normal">(you can check later too)</span>
+            <h3 className="text-xl font-medium">
+              YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] break-words rounded-2xl bg-p12-black/80 p-6 pb-14">
-              <span className="text-sm">{account ? signature : 'Please connect your wallet first.'}</span>
+            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-p12-black/80 p-6 pb-16">
+              {account ? signature : 'Please connect your wallet first.'}
               <div className="absolute right-5 bottom-5">
                 {account ? (
                   isSig ? (

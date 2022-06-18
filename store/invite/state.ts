@@ -7,7 +7,7 @@ export const inviteModalAtom = atom({
 
 export enum SocialMediaType {
   Twitter = 'twitter',
-  Telegram = 'telegram',
+  Mirror = 'mirror',
   Discord = 'discord',
 }
 
@@ -15,7 +15,7 @@ export const socialMediaClickAtom = atom({
   key: 'social_media_click',
   default: {
     [SocialMediaType.Twitter]: false,
-    [SocialMediaType.Telegram]: false,
+    [SocialMediaType.Mirror]: false,
     [SocialMediaType.Discord]: false,
   },
 });

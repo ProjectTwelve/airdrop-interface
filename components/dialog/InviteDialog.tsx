@@ -75,7 +75,7 @@ function InviteDialog() {
           <div className="py-4">
             <p className="text-center text-xs leading-5">
               The proportion of reward token is based on the rarity of P12 badge you hold. →P12 Badge updates in &nbsp;
-              <a href="https://discord.com/invite/p12" target="_blank">
+              <a href="https://discord.gg/p12" target="_blank">
                 <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
               </a>
             </p>
