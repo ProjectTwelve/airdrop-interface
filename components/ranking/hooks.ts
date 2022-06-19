@@ -49,14 +49,14 @@ export const useDeveloperTokenRank = ({ page, size }: { page: number; size: numb
   });
 };
 
-export const useTokenAnimation = (list?: any[]) => {
+export const useTokenAnimation = (list?: any[], start = true) => {
   const len = useMemo(() => list?.length || 0, [list]);
   const [index, setIndex] = useState(1);
   const progress = useMotionValue(0);
   const value = useTransform(progress, (latest) => latest * -120);
 
   useEffect(() => {
-    if (!len || index > len - 3) return () => {};
+    if (!start || !len || index > len - 3) return () => {};
     const controls = animate(progress, index, {
       duration: 0.8,
       delay: 2,
@@ -66,7 +66,7 @@ export const useTokenAnimation = (list?: any[]) => {
       },
     });
     return () => controls.stop;
-  }, [index, len, progress]);
+  }, [index, len, progress, start]);
 
   return value;
 };

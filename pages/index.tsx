@@ -7,21 +7,17 @@ import { inviteModalAtom } from '../store/invite/state';
 import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-import TimeRankingItem, { TimeRankingHeader } from '../components/ranking/TimeRankingItem';
-import TokenRankingItem, { TokenRankingHeader } from '../components/ranking/TokenRakingItem';
-import Loading from '../components/loading';
-import { useDeveloperTimeRank, useDeveloperTokenRank, useTokenAnimation } from '../components/ranking/hooks';
+// import { useDeveloperTokenRank } from '../components/ranking/hooks';
 import type { NextPage } from 'next';
+import DeveloperTabs from '../components/ranking/DeveloperTabs';
+import GamerTabs from '../components/ranking/GamerTabs';
 
 const Home: NextPage = () => {
   const setOpen = useSetRecoilState(inviteModalAtom);
   const router = useRouter();
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
-  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
-  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: 1, size: 50 });
-  useDeveloperTokenRank({ page: 1, size: 10 });
-  const animateY = useTokenAnimation(tokenRankData?.rankList);
+  // useDeveloperTokenRank({ page: 1, size: 10 });
 
   useEffect(() => {
     const currentStatus = getLocalStorage('invite_btn_click');
@@ -90,27 +86,11 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
-        <RankingHomeCard title="Developer Latest Verify List" layoutId="ranking_01">
-          <TimeRankingHeader />
-          <div className="h-[350px] overflow-hidden">
-            <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
-              {isTimeRankLoading && <Loading size={48} />}
-              {timeRankData?.rankList.slice(0, 3).map((item, index) => (
-                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
-              ))}
-            </div>
-          </div>
+        <RankingHomeCard title="Developer" layoutId="ranking_developer">
+          <DeveloperTabs />
         </RankingHomeCard>
-        <RankingHomeCard title="Developer Token Ranking" layoutId="ranking_02">
-          <TokenRankingHeader />
-          <div className="h-[350px] overflow-hidden">
-            <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
-              {isTokenRankLoading && <Loading size={48} />}
-              {tokenRankData?.rankList.map((item, index) => (
-                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
-              ))}
-            </motion.div>
-          </div>
+        <RankingHomeCard title="Gamer" layoutId="ranking_gamer">
+          <GamerTabs />
         </RankingHomeCard>
       </div>
     </div>
