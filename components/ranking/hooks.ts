@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions } from 'react-query';
 import {
   fetchDeveloperRank,
   fetchDeveloperTimeRank,
@@ -7,6 +7,13 @@ import {
 } from '../../lib/api';
 import { useEffect, useMemo, useState } from 'react';
 import { animate, useMotionValue, useTransform } from 'framer-motion';
+
+type Pagination = {
+  page: number;
+  size: number;
+};
+
+type Options = Pick<UseQueryOptions, 'staleTime' | 'enabled'>;
 
 export const useDeveloperVerifiedCount = () => {
   return useQuery('developer_verified_count', () => fetchDeveloperVerifiedCount(), {
@@ -23,7 +30,7 @@ export const useDeveloperRank = (addr?: string) => {
   });
 };
 
-export const useDeveloperTimeRank = ({ page, size }: { page: number; size: number }) => {
+export const useDeveloperTimeRank = ({ page, size }: Pagination) => {
   return useQuery(['time_rank', { page, size }], () => fetchDeveloperTimeRank({ page, size }), {
     select: (data) => data.data,
     placeholderData: {
@@ -36,7 +43,7 @@ export const useDeveloperTimeRank = ({ page, size }: { page: number; size: numbe
   });
 };
 
-export const useDeveloperTokenRank = ({ page, size }: { page: number; size: number }) => {
+export const useDeveloperTokenRank = ({ page, size }: Pagination, options?: Options) => {
   return useQuery(['token_rank', { page, size }], () => fetchDeveloperTokenRank({ page, size }), {
     select: (data) => data.data,
     placeholderData: {
@@ -46,6 +53,7 @@ export const useDeveloperTokenRank = ({ page, size }: { page: number; size: numb
       data: { rankLength: 10, size: 10, page: 1, rankList: new Array(10).fill({}) },
     },
     refetchOnWindowFocus: false,
+    ...options,
   });
 };
 

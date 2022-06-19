@@ -13,7 +13,10 @@ export default function GamerTabs() {
   const router = useRouter();
   const [selectedTab, setSelectedTab] = useState(0);
   const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
-  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: 1, size: 50 });
+  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank(
+    { page: 1, size: 50 },
+    { enabled: selectedTab === 1, staleTime: Infinity },
+  );
   const animateY = useTokenAnimation(tokenRankData?.rankList, selectedTab === 1);
   const setLayoutId = useSetRecoilState(rankingLayoutIdAtom);
 
