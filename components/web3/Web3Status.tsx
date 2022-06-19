@@ -4,6 +4,7 @@ import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
 import WalletPopover from './WalletPopover';
 import DeveloperStatus from './DeveloperStatus';
+import GamerStatus from './GamerStatus';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { useAccount, useNetwork } from 'wagmi';
@@ -25,6 +26,7 @@ function Web3Status() {
       <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
         <div className="md:hidden">
           <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
+          <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
         </div>
         <Web3StatusInner />
       </div>

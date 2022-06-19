@@ -8,6 +8,10 @@ export function isAddress(value: any): string | false {
   }
 }
 
+export function shortenSteamId(steamId: string): string {
+  return steamId.substring(0, 3) + '...' + steamId.substring(steamId.length - 3);
+}
+
 export function shortenAddress(address: string, chars = 4): string {
   const parsed = isAddress(address);
   if (!parsed) {

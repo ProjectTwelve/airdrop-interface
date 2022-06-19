@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Button from '../button';
-import MyP12 from './tokens/MyP12';
+import DevP12 from './tokens/DevP12';
 import Dialog from '../dialog';
 import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
@@ -36,9 +36,9 @@ function Tokens() {
       <div className="flex flex-col">
         <TokenTabs />
         <div className="mt-8">
-          <MyP12 />
+          <DevP12 />
         </div>
-        <div className="flex gap-4 border-b border-p12-line py-4">
+        <div className="flex gap-4 border-b border-p12-line py-8">
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-['D-DIN'] text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
@@ -82,7 +82,7 @@ function Tokens() {
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
           <div>
-            <Button className="w-[280px] font-medium" disabled size="large">
+            <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
               Claim to my wallet (Coming)
             </Button>
           </div>

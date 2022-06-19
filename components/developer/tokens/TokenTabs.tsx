@@ -105,7 +105,7 @@ export default function TokenTabs() {
         </div>
       </div>
       <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
-        <div className="relative flex max-w-[643px] basis-1/2 items-center justify-center overflow-hidden bg-[url('/img/no_badge_bg.jpg')] bg-cover bg-center md:max-w-full md:basis-auto">
+        <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-[url('/img/no_badge_bg.jpg')] bg-cover bg-center md:max-w-full">
           <div className="absolute top-0 left-0 h-full w-full blur-3xl">
             {selectedGame.nft_claim === NFTClaim.CLAIMED && (
               <div
@@ -167,7 +167,7 @@ export default function TokenTabs() {
             )}
           </div>
           {selectedGame.nft_claim !== NFTClaim.CLAIMED && (
-            <p className="absolute bottom-8 z-10 text-center text-sm text-p12-sub">
+            <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub">
               The airdrop is in collaboration with and powered by&nbsp;
               <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
                 Project Galaxy
@@ -175,12 +175,12 @@ export default function TokenTabs() {
             </p>
           )}
           {selectedGame.credential > 10 && (
-            <p className="absolute bottom-8 text-center text-sm text-p12-sub">
+            <p className="absolute bottom-8 w-full text-center text-sm text-p12-sub">
               You&apos;ve got 10 identical NFTs that reached our limit
             </p>
           )}
         </div>
-        <div className="basis-1/2 p-9 md:basis-auto md:p-4">
+        <div className="basis-1/2 p-9 md:p-4">
           <h2 className="mt-8 text-[30px] font-medium md:mt-2">
             {selectedGame.appid ? BADGES[selectedGame.nft_level].title : 'P12 | Project Twelve | Genesis'}
           </h2>

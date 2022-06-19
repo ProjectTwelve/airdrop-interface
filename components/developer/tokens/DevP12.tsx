@@ -5,8 +5,8 @@ import { isSocialMediaClickSelector } from '../../../store/invite/state';
 import { useRecoilValue } from 'recoil';
 import { claimGroupSelector, developerGameAtom, NFTClaim } from '../../../store/developer/state';
 
-export function MyP12() {
-  const isAllClicked = useRecoilValue(isSocialMediaClickSelector);
+export function DevP12() {
+  const isClicked = useRecoilValue(isSocialMediaClickSelector);
   const games = useRecoilValue(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
   const leastOneGame = useMemo(() => games.some((game) => game.appid), [games]);
@@ -36,7 +36,7 @@ export function MyP12() {
           {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
-          <Image src={iconStatus.get(isAllClicked) || ''} width={26} height={26} alt="icon" />
+          <Image src={iconStatus.get(isClicked) || ''} width={26} height={26} alt="icon" />
           <p className="font-medium">Join us on</p>
           <SocialMedia />
         </div>
@@ -49,4 +49,4 @@ export function MyP12() {
   );
 }
 
-export default MyP12;
+export default DevP12;

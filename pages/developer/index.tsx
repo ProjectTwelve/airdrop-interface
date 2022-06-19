@@ -11,10 +11,10 @@ import DeveloperEmailDialog from '../../components/dialog/DeveloperEmailDialog';
 import { claimGroupSelector, NFTClaim, tabSelectAtom } from '../../store/developer/state';
 
 export default function Developer() {
+  const router = useRouter();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const allUnclaimed = useMemo(() => [...claimGroup[NFTClaim.PENDING], ...claimGroup[NFTClaim.UNCLAIMED]], [claimGroup]);
   const [selectedTab, setSelectedTab] = useRecoilState(tabSelectAtom);
-  const router = useRouter();
 
   return (
     <div className="mt-8">

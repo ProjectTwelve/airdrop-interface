@@ -79,8 +79,13 @@ const Home: NextPage = () => {
           >
             I am a Steam Game Dev
           </Button>
-          <Button disabled className="w-full max-w-[470px]" size="large">
-            I am a Steam Gamer (coming in stage2)
+          <Button
+            className="w-full max-w-[470px]"
+            size="large"
+            type="gradient"
+            onClick={() => router.push({ pathname: '/gamer', query: router.query })}
+          >
+            I am a Steam Gamer
           </Button>
         </div>
       </div>
