@@ -16,6 +16,7 @@ function Tokens() {
   const { account } = useWeb3React();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
+  const claimGames = useMemo(() => claimGroup[NFTClaim.CLAIMED].length || 0, [claimGroup]);
 
   const { data: invitation } = useQuery(['invitation_info', account], () => fetchDeveloperInvitation({ addr: account }), {
     enabled: !!account,
@@ -25,13 +26,6 @@ function Tokens() {
       return data.data.invitation_info;
     },
   });
-
-  const pieces = useMemo(() => {
-    let piece = 0;
-    claimGroup[NFTClaim.CLAIMED].length > 0 && (piece += 1);
-    invitation && invitation.length > 0 && (piece += 1);
-    return piece;
-  }, [claimGroup, invitation]);
 
   return (
     <div className="relative px-8 pt-12 md:px-4 md:pt-6">
@@ -43,17 +37,13 @@ function Tokens() {
         <div className="flex gap-4 border-b border-p12-line py-6">
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
-              <p
-                className="cursor-pointer font-['D-DIN'] text-xl font-bold"
-                onClick={() => claimGroup[NFTClaim.CLAIMED].length && setOpen(true)}
-              >
-                {claimGroup[NFTClaim.CLAIMED].length ? '?,???' : '-,---'}
+              <p className="cursor-pointer font-['D-DIN'] text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
+                {claimGames ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
             <p className="mt-2 text-xs text-p12-sub">
-              From <span className="text-p12-success"> {claimGroup[NFTClaim.CLAIMED].length} </span> verified{' '}
-              {claimGroup[NFTClaim.CLAIMED].length > 1 ? 'games' : 'game'}
+              From <span className="text-p12-success"> {claimGames} </span> verified {claimGames > 1 ? 'games' : 'game'}
             </p>
           </div>
           <div className="rounded-lg bg-p12-black/80 p-3">
@@ -76,14 +66,14 @@ function Tokens() {
         <div className="flex items-center justify-between gap-4 py-8 md:flex-col">
           <div className="flex items-center justify-start">
             <p className="mr-3 text-p12-sub">
-              {pieces} {pieces > 1 ? 'NFTs' : 'NFT'}
+              {claimGames} {claimGames > 1 ? 'NFTs' : 'NFT'}
             </p>
             <p className="mr-4 text-lg font-medium">Total:</p>
             <p
               className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
-              onClick={() => pieces && setOpen(true)}
+              onClick={() => claimGames && setOpen(true)}
             >
-              {pieces > 0 ? '?,???' : '-,---'}
+              {claimGames > 0 ? '?,???' : '-,---'}
             </p>
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
