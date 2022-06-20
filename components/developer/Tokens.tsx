@@ -38,7 +38,7 @@ function Tokens() {
         <div className="mt-8">
           <MyP12 />
         </div>
-        <div className="flex gap-4 border-b border-p12-line py-6">
+        <div className="flex gap-4 border-b border-p12-line py-4">
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-['D-DIN'] text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
