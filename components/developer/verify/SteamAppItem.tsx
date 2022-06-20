@@ -56,7 +56,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
               <p className="truncate font-medium">{app.name}</p>
               <div className="flex gap-2 text-sm xs:hidden">
                 <p>{app.release_date?.date}</p>
-                <p>{app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}</p>
+                <p>{app.total_reviews ? app.total_reviews + ' reviews' : 0 + ' review'}</p>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
-import Dialog from '../../dialog';
 import React from 'react';
+import Dialog from '../../dialog';
 import MessageCodeDialog from '../../dialog/MessageCodeDialog';
 import { useSetRecoilState } from 'recoil';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
@@ -42,7 +42,7 @@ export function OwnershipTips() {
       <div className=" mt-2">
         2. &nbsp;How to add the signature?
         <Dialog render={({ close }) => <MessageCodeDialog close={close} />}>
-          <span className="cursor-pointer text-p12-link"> Click here </span>
+          <span className="cursor-pointer text-p12-link"> click here </span>
         </Dialog>
         to see a step-by-step guide.
       </div>
