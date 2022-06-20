@@ -1,12 +1,35 @@
-import { InjectedConnector } from '@web3-react/injected-connector';
-import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { Chain, defaultChains } from 'wagmi';
 
-export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 56],
+export const BNBSmartChain: Chain = {
+  id: 56,
+  name: 'BNB Smart Chain',
+  network: 'bsc',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BNB',
+    symbol: 'BNB',
+  },
+  rpcUrls: {
+    default: 'https://bsc-dataseed1.binance.org/',
+  },
+  blockExplorers: {
+    default: { name: 'Bscscan', url: 'https://bscscan.com/' },
+  },
+  testnet: false,
+};
+
+export const metamaskConnector = new MetaMaskConnector({
+  chains: [...defaultChains, BNBSmartChain],
+  options: {
+    shimChainChangedDisconnect: false,
+  }
 });
 
 export const walletConnect = new WalletConnectConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 56],
-  bridge: 'https://bridge.walletconnect.org',
-  qrcode: true,
+  chains: [...defaultChains, BNBSmartChain],
+  options: {
+    qrcode: true,
+  },
 });

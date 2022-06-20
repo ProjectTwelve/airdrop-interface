@@ -34,31 +34,33 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   return (
     <div className="h-[72px] overflow-hidden rounded-2xl bg-p12-black/80">
       {app.steam_appid ? (
-        <div className="relative flex h-full items-center justify-start gap-4 md:gap-2">
+        <div className="relative h-[72px] overflow-hidden rounded-2xl bg-p12-black/80 pr-4">
           <div
-            className="relative h-full w-[168px] flex-none bg-[#CEDCFF]/10 bg-cover"
-            style={{ backgroundImage: `url(${app.header_image})` }}
+            className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover"
+            style={{ maxWidth: 'min(33%, 168px)' }}
           >
-            <div className="absolute bottom-0 left-0 h-[42px] w-[42px]">
+            <img src={app.header_image} className="h-auto w-full object-cover" alt="header_image" />
+            <div className="absolute bottom-0 left-0 h-[42px] w-[42px] md:hidden">
               <span className="absolute top-5 left-1 z-10 text-sm font-medium">0{index}</span>
-              <Image src="/svg/index.svg" width={42} height={42} alt="index" />
+              <img src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
-          <div className="flex flex-1 items-center justify-start xs:flex-col xs:items-start">
-            <div className="flex flex-1 flex-col items-start justify-around">
-              <p className="max-w-[180px] truncate font-medium lg:max-w-[230px] xs:max-w-[120px]">{app.name}</p>
-              <div className="flex gap-2 text-sm xs:hidden">
-                <p>{app.release_date?.date}</p>
-                <p>{app.recommendations ? app.recommendations.total + ' reviews' : 0 + ' review'}</p>
-              </div>
-            </div>
-            <div className="mr-4 flex flex-none items-center justify-center gap-2">
-              <span className="cursor-pointer font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
+          <div className="xs:flex xs:flex-col-reverse">
+            <div className="float-right mt-6 xs:float-none xs:mt-0">
+              <span className="mr-2 cursor-pointer align-top font-['D-DIN'] text-2xl font-bold" onClick={() => setOpen(true)}>
                 ?,???
               </span>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
+            <div className="truncate pt-3">
+              <p className="truncate font-medium">{app.name}</p>
+              <div className="flex gap-2 text-sm xs:hidden">
+                <p>{app.release_date?.date}</p>
+                <p>{app.total_reviews ? app.total_reviews + ' reviews' : 0 + ' review'}</p>
+              </div>
+            </div>
           </div>
+          <div className="clear-both"></div>
           <div className="absolute top-1.5 right-1.5" onClick={onRemove}>
             <CloseCircle />
           </div>

@@ -8,24 +8,28 @@ import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector, NFTClaim } from '../../store/developer/state';
 import { useQuery } from 'react-query';
-import { useWeb3React } from '@web3-react/core';
+import { useAccount } from 'wagmi';
 import { fetchDeveloperInvitation } from '../../lib/api';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 
 function Tokens() {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const claimGames = useMemo(() => claimGroup[NFTClaim.CLAIMED].length || 0, [claimGroup]);
 
-  const { data: invitation } = useQuery(['invitation_info', account], () => fetchDeveloperInvitation({ addr: account }), {
-    enabled: !!account,
-    refetchOnWindowFocus: false,
-    select: (data) => {
-      if (data.code !== 0) return [];
-      return data.data.invitation_info;
+  const { data: invitation } = useQuery(
+    ['invitation_info', account?.address],
+    () => fetchDeveloperInvitation({ addr: account?.address }),
+    {
+      enabled: !!account?.address,
+      refetchOnWindowFocus: false,
+      select: (data) => {
+        if (data.code !== 0) return [];
+        return data.data.invitation_info;
+      },
     },
-  });
+  );
 
   return (
     <div className="relative px-8 pt-12 md:px-4 md:pt-6">

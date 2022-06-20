@@ -51,6 +51,26 @@ export type InvitationInfo = {
   name: string;
   time: string;
 };
+export type RankInfo = {
+  header_image: string;
+  name: string;
+  release_date: string;
+  developers: string[];
+  genres: string[];
+  appid: number;
+  nft_level: NFTLevel;
+  index: number;
+  createdAt: string;
+};
+export type GameRank = {
+  appid: number;
+  name: string;
+  developers?: string[];
+  header_image: string;
+  release_date: string;
+  timeRank: number;
+  tokenRank: number;
+};
 
 export type ReferralCodeParams = { wallet_address?: string | null };
 export type ReferralCodeData = { referral_code?: string };
@@ -84,4 +104,21 @@ export type DeveloperInvitationParams = {
 };
 export type DeveloperInvitationData = {
   invitation_info: InvitationInfo[];
+};
+
+export type DeveloperRankList = {
+  rankLength: number;
+  page: number;
+  size: number;
+  rankList: Partial<RankInfo>[];
+};
+
+export type DeveloperRank = {
+  games: GameRank[];
+};
+
+export type DeveloperEmailParams = {
+  wallet_address?: string;
+  email: string;
+  signature: string;
 };

@@ -6,6 +6,11 @@ import { useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../store/invite/state';
 import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
+import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
+import TimeRankingItem, { TimeRankingHeader } from '../components/ranking/TimeRankingItem';
+import TokenRankingItem, { TokenRankingHeader } from '../components/ranking/TokenRakingItem';
+import Loading from '../components/loading';
+import { useDeveloperTimeRank, useDeveloperTokenRank, useTokenAnimation } from '../components/ranking/hooks';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
@@ -13,6 +18,10 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
+  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
+  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: 1, size: 50 });
+  useDeveloperTokenRank({ page: 1, size: 10 });
+  const animateY = useTokenAnimation(tokenRankData?.rankList);
 
   useEffect(() => {
     const currentStatus = getLocalStorage('invite_btn_click');
@@ -20,13 +29,13 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center md:pt-4" style={{ minHeight: 'calc(100vh - 160px)' }}>
-      <div className="aspect-[2.19/1] w-full max-w-[394px] bg-[image:var(--logo)] bg-cover"></div>
-      <div className="mt-16 text-center">
-        <h2 className="text-[34px] font-medium">Tribute to Gamers</h2>
-        <h2 className="text-[34px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
+    <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
+      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-[image:var(--logo)] bg-cover xs:hidden"></div>
+      <div className="mt-4 text-center">
+        <h2 className="text-[24px] font-medium">Tribute to Gamers</h2>
+        <h2 className="text-[24px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
       </div>
-      <div className="mt-24 flex w-full flex-col items-center gap-6">
+      <div className="mt-9 flex w-full flex-col items-center gap-6">
         <div className="w-full max-w-[470px]" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           <Button
             className="w-full"
@@ -61,19 +70,44 @@ const Home: NextPage = () => {
             </div>
           </Button>
         </div>
-        <Button
-          className="w-full max-w-[470px]"
-          size="large"
-          type="gradient"
-          onClick={() => router.push({ pathname: '/developer', query: router.query })}
-        >
-          I am a Steam Game Dev
-        </Button>
-        <Button disabled className="w-full max-w-[470px]" size="large">
-          I am a Steam Gamer
-        </Button>
+        <div className="flex w-full items-center justify-center gap-6 md:flex-col">
+          <Button
+            className="w-full max-w-[470px]"
+            size="large"
+            type="gradient"
+            onClick={() => router.push({ pathname: '/developer', query: router.query })}
+          >
+            I am a Steam Game Dev
+          </Button>
+          <Button disabled className="w-full max-w-[470px]" size="large">
+            I am a Steam Gamer (coming in stage2)
+          </Button>
+        </div>
       </div>
-      <p className="mt-3 text-xs text-[#A3A6B3]">Airdrop to gamers coming in stage 2</p>
+      <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
+        <RankingHomeCard title="Developer Latest Verify List" layoutId="ranking_01">
+          <TimeRankingHeader />
+          <div className="h-[350px] overflow-hidden">
+            <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
+              {isTimeRankLoading && <Loading size={48} />}
+              {timeRankData?.rankList.slice(0, 3).map((item, index) => (
+                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
+              ))}
+            </div>
+          </div>
+        </RankingHomeCard>
+        <RankingHomeCard title="Developer Token Ranking" layoutId="ranking_02">
+          <TokenRankingHeader />
+          <div className="h-[350px] overflow-hidden">
+            <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
+              {isTokenRankLoading && <Loading size={48} />}
+              {tokenRankData?.rankList.map((item, index) => (
+                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
+              ))}
+            </motion.div>
+          </div>
+        </RankingHomeCard>
+      </div>
     </div>
   );
 };

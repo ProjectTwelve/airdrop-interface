@@ -6,20 +6,20 @@ import Message from '../message';
 import Tag from '../tag';
 import { useRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
-import { useWeb3React } from '@web3-react/core';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
 import { fetchReferralCode } from '../../lib/api';
+import { useAccount } from 'wagmi';
 
 function InviteDialog() {
-  const { account } = useWeb3React();
+  const { data: account } = useAccount();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
   const [inviteLink, setInviteLink] = useState('Please connect your wallet first');
   const [, copyToClipboard] = useCopyToClipboard();
 
-  useQuery(['invite', account], () => fetchReferralCode({ wallet_address: account }), {
-    enabled: !!account,
+  useQuery(['invite', account?.address], () => fetchReferralCode({ wallet_address: account?.address }), {
+    enabled: !!account?.address,
     refetchOnWindowFocus: false,
     onSuccess: (data) => setInviteLink(window.location.origin + '?code=' + data.data.referral_code),
   });
@@ -75,7 +75,7 @@ function InviteDialog() {
           <div className="py-4">
             <p className="text-center text-xs leading-5">
               The proportion of reward token is based on the rarity of P12 badge you hold. →P12 Badge updates in &nbsp;
-              <a href="https://discord.com/invite/p12" target="_blank">
+              <a href="https://discord.gg/p12" target="_blank">
                 <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
               </a>
             </p>
@@ -129,7 +129,7 @@ function InviteDialog() {
           </div>
           <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
             {inviteLink}
-            {account && (
+            {account?.address && (
               <Button
                 size="small"
                 type="gradient"

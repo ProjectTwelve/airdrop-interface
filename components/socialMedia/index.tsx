@@ -14,8 +14,8 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
   const setSocialMediaClickStatus = useSetRecoilState(socialMediaClickAtom);
   const socialMedia = [
     { name: SocialMediaType.Twitter, url: 'https://twitter.com/_p12_' },
-    { name: SocialMediaType.Telegram, url: 'https://t.me/project_twelve' },
-    { name: SocialMediaType.Discord, url: 'https://discord.com/invite/p12' },
+    { name: SocialMediaType.Mirror, url: 'https://mirror.xyz/p12.eth' },
+    { name: SocialMediaType.Discord, url: 'https://discord.gg/p12' },
   ];
 
   const onSocialMediaClick = useCallback(
