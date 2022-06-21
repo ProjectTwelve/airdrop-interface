@@ -20,11 +20,6 @@
         min-height: 100vh;
     }
 
-    body::-webkit-scrollbar {
-        width: 0;
-        background: transparent;
-    }
-
     .backdrop-box {
         background: rgba(68, 70, 95, 0.6);
         border: 2px solid rgb(70, 75, 90);

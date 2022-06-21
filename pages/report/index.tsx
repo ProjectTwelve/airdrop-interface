@@ -47,7 +47,7 @@ export default function Report() {
             </div>
           </div>
           <div className="h-[128px] w-[128px]">
-            <img className="h-full w-full" src="/report/badge_blue.png" alt="badge" />
+            <img className="h-full w-full" src="/report/dev_badge_blue.png" alt="badge" />
           </div>
           <div className="absolute -right-3 -top-3">
             <img src="/report/referral.png" alt="referral" />
@@ -81,7 +81,7 @@ export default function Report() {
             </div>
           </div>
           <div className="h-[128px] w-[128px]">
-            <img className="h-full w-full" src="/report/badge_blue.png" alt="badge" />
+            <img className="h-full w-full" src="/report/dev_badge_blue.png" alt="badge" />
           </div>
           <div className="absolute -right-3 -top-3">
             <img src="/report/referral.png" alt="referral" />

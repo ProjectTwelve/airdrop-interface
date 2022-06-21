@@ -11,6 +11,7 @@ import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 
 export default function Gamer() {
   const router = useRouter();
+
   return (
     <div className="mt-8">
       <Back onClick={() => router.back()} />
@@ -67,7 +68,7 @@ export default function Gamer() {
             <div className="mt-8">
               <GamerP12 />
             </div>
-            <div className="flex gap-4 border-b border-p12-line py-8">
+            <div className="flex gap-4 border-b border-p12-line py-4">
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
                   <p className="cursor-pointer font-['D-DIN'] text-xl font-bold">-,---</p>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Back from '../back';
+import Image from 'next/image';
 import { WalletType } from './WalletPopover';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { openLink } from '../../utils';
 
 type WalletDownloadProps = {
   setWalletType?: (type: WalletType) => void;
@@ -63,7 +64,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
               <div
                 className="flex cursor-pointer items-center justify-center gap-1"
                 key={item.name}
-                onClick={() => window.open(item.url)}
+                onClick={() => openLink(item.url)}
               >
                 <Image src={item.icon} width={20} height={20} alt="icon" />
                 <span className="text-xs text-p12-link">{item.name}</span>

@@ -82,3 +82,8 @@ export const fetchDeveloperVerifiedCount = () => request.get<any, Response<{ tot
  */
 export const fetchDeveloperEmail = (data: DeveloperEmailParams) =>
   request.post<any, Response<any>>('/api/developer/email', data);
+
+/**
+ * get Steam Gamer Info
+ */
+export const fetchGamerInfo = (params: { addr?: string }) => request.get<any, Response<any>>('/api/Gamer/Info', { params });

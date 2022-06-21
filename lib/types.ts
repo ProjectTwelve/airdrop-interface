@@ -1,4 +1,4 @@
-import { NFTClaim, NFTLevel } from '../store/developer/state';
+import { DEV_NFT_CLAIM, DEV_NFT_LEVEL } from '../store/developer/state';
 
 export type Response<T> = {
   status: string;
@@ -38,10 +38,10 @@ export type AccountInfo = {
   total_reviews: number;
   header_image: string;
   release_date?: ReleaseDate;
-  nft_claim: NFTClaim;
+  nft_claim: DEV_NFT_CLAIM;
   nft_id: number | null;
   appid: number;
-  nft_level: NFTLevel;
+  nft_level: DEV_NFT_LEVEL;
   credential: number;
   updatedAt: string;
 };
@@ -58,7 +58,7 @@ export type RankInfo = {
   developers: string[];
   genres: string[];
   appid: number;
-  nft_level: NFTLevel;
+  nft_level: DEV_NFT_LEVEL;
   index: number;
   createdAt: string;
 };

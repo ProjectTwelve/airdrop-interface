@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useSetRecoilState } from 'recoil';
 import { socialMediaClickAtom, SocialMediaType } from '../../store/invite/state';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
+import { openLink } from '../../utils';
 
 type SocialMediaProps = {
   size?: 'small' | 'medium';
@@ -42,7 +43,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
           className="cursor-pointer"
           onClick={() => {
             onSocialMediaClick(item.name);
-            window.open(item.url);
+            openLink(item.url);
           }}
           src={`/img/${item.name}.png`}
           width={sizes[size][0]}

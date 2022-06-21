@@ -6,7 +6,7 @@ import Dialog from '../dialog';
 import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { claimGroupSelector, NFTClaim } from '../../store/developer/state';
+import { claimGroupSelector, DEV_NFT_CLAIM } from '../../store/developer/state';
 import { useQuery } from 'react-query';
 import { useAccount } from 'wagmi';
 import { fetchDeveloperInvitation } from '../../lib/api';
@@ -16,7 +16,7 @@ function Tokens() {
   const { data: account } = useAccount();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
-  const claimGames = useMemo(() => claimGroup[NFTClaim.CLAIMED].length || 0, [claimGroup]);
+  const claimGames = useMemo(() => claimGroup[DEV_NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
 
   const { data: invitation } = useQuery(
     ['invitation_info', account?.address],
@@ -38,7 +38,7 @@ function Tokens() {
         <div className="mt-8">
           <DevP12 />
         </div>
-        <div className="flex gap-4 border-b border-p12-line py-8">
+        <div className="flex gap-4 border-b border-p12-line py-4">
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-['D-DIN'] text-xl font-bold" onClick={() => claimGames && setOpen(true)}>

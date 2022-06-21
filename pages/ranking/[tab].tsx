@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { rankingLayoutIdAtom } from '../../store/ranking/state';
 import Back from '../../components/back';
 import SocialMedia from '../../components/socialMedia';
@@ -11,13 +11,19 @@ import GamerRanking from '../../components/ranking/Gamer';
 
 export default function Ranking(props: { tabIndex: number }) {
   const router = useRouter();
-  const layoutId = useRecoilValue(rankingLayoutIdAtom);
+  const [layoutId, setLayoutId] = useRecoilState(rankingLayoutIdAtom);
   const [selectedTab, setSelectedTab] = useState(props.tabIndex);
+  const LayoutIdRef = useRef(layoutId);
   const tabs = ['developer', 'gamer'];
 
   return (
     <div className="mt-8">
-      <Back onClick={() => router.back()} />
+      <Back
+        onClick={() => {
+          setLayoutId(LayoutIdRef.current);
+          router.back();
+        }}
+      />
       <motion.div
         className="my-4"
         layoutId={layoutId}
@@ -28,6 +34,7 @@ export default function Ranking(props: { tabIndex: number }) {
           <Tabs
             onSelect={(index) => {
               setSelectedTab(index);
+              setLayoutId('');
               router.replace('/ranking/' + tabs[index]).then();
             }}
             selectedIndex={selectedTab}

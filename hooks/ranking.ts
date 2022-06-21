@@ -1,12 +1,5 @@
 import { useQuery, UseQueryOptions } from 'react-query';
-import {
-  fetchDeveloperRank,
-  fetchDeveloperTimeRank,
-  fetchDeveloperTokenRank,
-  fetchDeveloperVerifiedCount,
-} from '../../lib/api';
-import { useEffect, useMemo, useState } from 'react';
-import { animate, useMotionValue, useTransform } from 'framer-motion';
+import { fetchDeveloperRank, fetchDeveloperTimeRank, fetchDeveloperTokenRank, fetchDeveloperVerifiedCount } from '../lib/api';
 
 type Pagination = {
   page: number;
@@ -55,26 +48,4 @@ export const useDeveloperTokenRank = ({ page, size }: Pagination, options?: Opti
     refetchOnWindowFocus: false,
     ...options,
   });
-};
-
-export const useTokenAnimation = (list?: any[], start = true) => {
-  const len = useMemo(() => list?.length || 0, [list]);
-  const [index, setIndex] = useState(1);
-  const progress = useMotionValue(0);
-  const value = useTransform(progress, (latest) => latest * -120);
-
-  useEffect(() => {
-    if (!start || !len || index > len - 3) return () => {};
-    const controls = animate(progress, index, {
-      duration: 0.8,
-      delay: 2,
-      ease: 'easeOut',
-      onComplete: () => {
-        setIndex(index + 1);
-      },
-    });
-    return () => controls.stop;
-  }, [index, len, progress, start]);
-
-  return value;
 };

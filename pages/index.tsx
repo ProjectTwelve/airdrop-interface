@@ -7,17 +7,15 @@ import { inviteModalAtom } from '../store/invite/state';
 import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-// import { useDeveloperTokenRank } from '../components/ranking/hooks';
-import type { NextPage } from 'next';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   const setOpen = useSetRecoilState(inviteModalAtom);
   const router = useRouter();
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
-  // useDeveloperTokenRank({ page: 1, size: 10 });
 
   useEffect(() => {
     const currentStatus = getLocalStorage('invite_btn_click');
@@ -86,10 +84,10 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
-        <RankingHomeCard title="Developer" layoutId="ranking_developer">
+        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
           <DeveloperTabs />
         </RankingHomeCard>
-        <RankingHomeCard title="Gamer" layoutId="ranking_gamer">
+        <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
           <GamerTabs />
         </RankingHomeCard>
       </div>

@@ -1,13 +1,13 @@
 import { atom, selector } from 'recoil';
 import { AccountInfo } from '../../lib/types';
 
-export enum NFTClaim {
+export enum DEV_NFT_CLAIM {
   UNCLAIMED = 0,
   PENDING,
   CLAIMED,
 }
 
-export enum NFTLevel {
+export enum DEV_NFT_LEVEL {
   ORANGE = 0,
   PURPLE,
   BLUE,
@@ -33,10 +33,10 @@ export const claimGroupSelector = selector({
   key: 'claim_group',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    const filters: Record<NFTClaim, AccountInfo[]> = {
-      [NFTClaim.UNCLAIMED]: [],
-      [NFTClaim.PENDING]: [],
-      [NFTClaim.CLAIMED]: [],
+    const filters: Record<DEV_NFT_CLAIM, AccountInfo[]> = {
+      [DEV_NFT_CLAIM.UNCLAIMED]: [],
+      [DEV_NFT_CLAIM.PENDING]: [],
+      [DEV_NFT_CLAIM.CLAIMED]: [],
     };
     developerGame.forEach((item) => {
       filters[item.nft_claim].push(item);
@@ -45,15 +45,10 @@ export const claimGroupSelector = selector({
   },
 });
 
-export const claimingGameAtom = atom<AccountInfo | undefined>({
-  key: 'claiming_game',
-  default: undefined,
-});
-
-export const hasClaimGameSelector = selector({
-  key: 'has_claim_game',
+export const hasClaimedGameSelector = selector({
+  key: 'has_claimed_game',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    return developerGame.some((item) => item.nft_claim !== NFTClaim.UNCLAIMED);
+    return developerGame.some((item) => item.nft_claim !== DEV_NFT_CLAIM.UNCLAIMED);
   },
 });

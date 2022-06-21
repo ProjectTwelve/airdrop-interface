@@ -11,12 +11,12 @@ import { toast } from 'react-toastify';
 import Message from '../message';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue } from 'recoil';
-import { hasClaimGameSelector } from '../../store/developer/state';
+import { hasClaimedGameSelector } from '../../store/developer/state';
 import dayjs from 'dayjs';
 
 export default function DeveloperEmailDialog() {
   const { data: account } = useAccount();
-  const hasClaimGame = useRecoilValue(hasClaimGameSelector);
+  const claimedGame = useRecoilValue(hasClaimedGameSelector);
   const [open, setOpen] = useState<boolean>(false);
   const mutation = useMutation<Response<any>, any, DeveloperEmailParams, any>((data) => fetchDeveloperEmail(data), {
     onSuccess: () => {
@@ -47,11 +47,11 @@ export default function DeveloperEmailDialog() {
     const day = dayjs().format('YYYY-MM-DD');
     const emailSubmit = getLocalStorage('dev_email_submit');
     const emailDaily = getLocalStorage('dev_email_daily');
-    if (!emailSubmit && emailDaily !== day && hasClaimGame) {
+    if (!emailSubmit && emailDaily !== day && claimedGame) {
       setOpen(true);
       setLocalStorage('dev_email_daily', day);
     }
-  }, [hasClaimGame]);
+  }, [claimedGame]);
 
   return (
     <Dialog

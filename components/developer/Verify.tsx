@@ -21,6 +21,7 @@ function Verify() {
   const { data: account } = useAccount();
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
+  const [signature, setSignature] = useState('Please click the generate button.');
   const { signMessage } = useSignMessage({
     message: JSON.stringify(getVerifySignData(account?.address)),
     onSuccess(data) {
@@ -30,7 +31,6 @@ function Verify() {
 
   // prevent duplication of index
   const [count, setCount] = useState(0);
-  const [signature, setSignature] = useState('Please click the generate button.');
   const setSelectedTab = useSetRecoilState(tabSelectAtom);
   const setVerifiedSteamApp = useSetRecoilState(verifiedSteamAppAtom);
   const [, copyToClipboard] = useCopyToClipboard();

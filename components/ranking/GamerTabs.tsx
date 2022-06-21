@@ -1,29 +1,16 @@
 import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { motion } from 'framer-motion';
-import TimeRankingItem, { TimeRankingHeader } from './TimeRankingItem';
-import TokenRankingItem, { TokenRankingHeader } from './TokenRakingItem';
-import { useDeveloperTimeRank, useDeveloperTokenRank, useTokenAnimation } from './hooks';
-import Loading from '../loading';
-import { useSetRecoilState } from 'recoil';
-import { rankingLayoutIdAtom } from '../../store/ranking/state';
-import { useRouter } from 'next/router';
+import { useDeveloperTimeRank, useDeveloperTokenRank } from '../../hooks/ranking';
+import DevTimeRankingItem from './DevTimeRankingItem';
+import DevTokenRankingItem from './DevTokenRankingItem';
+import { GamerTimeRankingHeader } from './GamerTimeRankingItem';
+import { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 
 export default function GamerTabs() {
-  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
-  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank(
-    { page: 1, size: 50 },
-    { enabled: selectedTab === 1, staleTime: Infinity },
-  );
-  const animateY = useTokenAnimation(tokenRankData?.rankList, selectedTab === 1);
-  const setLayoutId = useSetRecoilState(rankingLayoutIdAtom);
-
-  const handleGoToRanking = () => {
-    setLayoutId('ranking_gamer');
-    router.push('/ranking/gamer').then();
-  };
+  const { data: timeRankData } = useDeveloperTimeRank({ page: 1, size: 20 });
+  const { data: tokenRankData } = useDeveloperTokenRank({ page: 1, size: 20 }, { enabled: selectedTab === 1 });
 
   return (
     <Tabs onSelect={(index) => setSelectedTab(index)}>
@@ -37,24 +24,22 @@ export default function GamerTabs() {
           <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="gamer_tab_underline" />}</div>
         </Tab>
       </TabList>
-      <TabPanel onClick={handleGoToRanking}>
-        <TimeRankingHeader />
-        <div className="h-[350px] overflow-hidden">
-          <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
-            {isTimeRankLoading && <Loading size={48} />}
-            {timeRankData?.rankList.slice(0, 3).map((item, index) => (
-              <TimeRankingItem steamStore={false} data={item} key={item.appid || index} />
+      <TabPanel>
+        <GamerTimeRankingHeader />
+        <div className="h-[350px] overflow-y-auto">
+          <div className="flex flex-col gap-4">
+            {timeRankData?.rankList.map((item, index) => (
+              <DevTimeRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
             ))}
           </div>
         </div>
       </TabPanel>
-      <TabPanel onClick={handleGoToRanking}>
-        <TokenRankingHeader />
-        <div className="h-[350px] overflow-hidden">
-          <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
-            {isTokenRankLoading && <Loading size={48} />}
+      <TabPanel>
+        <GamerTokenRankingHeader />
+        <div className="h-[350px] overflow-y-auto">
+          <motion.div className="flex flex-col gap-4">
             {tokenRankData?.rankList.map((item, index) => (
-              <TokenRankingItem steamStore={false} data={item} key={item.appid || index} />
+              <DevTokenRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
             ))}
           </motion.div>
         </div>

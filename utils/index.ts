@@ -1,4 +1,5 @@
 import { getAddress } from '@ethersproject/address';
+import { isMobile } from 'react-device-detect';
 
 export function isAddress(value: any): string | false {
   try {
@@ -21,6 +22,14 @@ export function shortenAddress(address: string, chars = 4): string {
 }
 
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+export const openLink = (url: string) => {
+  if (isMobile) {
+    window.location.href = url;
+  } else {
+    window.open(url, '_blank');
+  }
+};
 
 export const getVerifySignData = (account?: string) => ({
   types: {

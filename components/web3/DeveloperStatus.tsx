@@ -2,12 +2,10 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Tag from '../tag';
 import { useQuery } from 'react-query';
-import { isMobile } from 'react-device-detect';
 import { fetchDeveloperInfo } from '../../lib/api';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import { claimGroupSelector, claimingGameAtom, developerGameAtom, NFTClaim } from '../../store/developer/state';
-import { BADGES } from '../../constants';
+import { claimGroupSelector, developerGameAtom, DEV_NFT_CLAIM } from '../../store/developer/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { useAccount } from 'wagmi';
 
@@ -15,28 +13,18 @@ function DeveloperStatus() {
   const { data: account } = useAccount();
   const [games, setGames] = useRecoilState(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
-  const [claimingGame, setClaimingGame] = useRecoilState(claimingGameAtom);
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
   useQuery(['developer_info', account?.address], () => fetchDeveloperInfo({ addr: account?.address }), {
     enabled: !!account?.address,
     onSuccess: (data) => {
       if (data.code !== 0) return;
-      if (claimingGame) {
-        const currentGame = games.find((game) => game.appid === claimingGame.appid);
-        if (currentGame?.nft_claim !== NFTClaim.CLAIMED && claimingGame.nft_level !== undefined) {
-          isMobile
-            ? (window.location.href = BADGES[claimingGame.nft_level].claim)
-            : window.open(BADGES[claimingGame.nft_level].claim, '_blank');
-        }
-        setClaimingGame(undefined);
-      }
       setGames(data.data.account_info || []);
     },
   });
 
   const tagType = useMemo(
-    () => (claimGroup[NFTClaim.CLAIMED].length === games.length ? 'green' : 'red'),
+    () => (claimGroup[DEV_NFT_CLAIM.CLAIMED].length === games.length ? 'green' : 'red'),
     [claimGroup, games.length],
   );
 
@@ -49,7 +37,7 @@ function DeveloperStatus() {
     >
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         {games.length ? (
-          <Tag type={tagType} size="large" value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} Airdrop NFT`} />
+          <Tag type={tagType} size="large" value={`${claimGroup[DEV_NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}

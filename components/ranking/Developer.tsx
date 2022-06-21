@@ -1,14 +1,13 @@
-import TimeRankingItem, { TimeRankingHeader } from './TimeRankingItem';
 import React, { useMemo, useState } from 'react';
-import TokenRankingItem, { TokenRankingHeader } from './TokenRakingItem';
-import Pagination from 'rc-pagination';
-import { useDeveloperRank, useDeveloperTimeRank, useDeveloperTokenRank, useDeveloperVerifiedCount } from './hooks';
-import { useAccount } from 'wagmi';
-import { LeftCircle } from '../svg/LeftCircle';
-import { AnimatePresence, motion } from 'framer-motion';
 import { wrap } from 'popmotion';
-import Loading from '../loading';
+import { useAccount } from 'wagmi';
 import classNames from 'classnames';
+import Pagination from 'rc-pagination';
+import { AnimatePresence, motion } from 'framer-motion';
+import { LeftCircle } from '../svg/LeftCircle';
+import DevTimeRankingItem, { DevTimeRankingHeader } from './DevTimeRankingItem';
+import DevTokenRankingItem, { DevTokenRankingHeader } from './DevTokenRankingItem';
+import { useDeveloperRank, useDeveloperTimeRank, useDeveloperTokenRank, useDeveloperVerifiedCount } from '../../hooks/ranking';
 
 const variants = {
   enter: (direction: number) => {
@@ -38,8 +37,8 @@ function DeveloperRanking() {
   const { data: account } = useAccount();
   const { data: verified } = useDeveloperVerifiedCount();
   const { data: developerRankData } = useDeveloperRank(account?.address);
-  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: timeRankPage, size: 10 });
-  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: tokenRankPage, size: 10 });
+  const { data: timeRankData } = useDeveloperTimeRank({ page: timeRankPage, size: 10 });
+  const { data: tokenRankData } = useDeveloperTokenRank({ page: tokenRankPage, size: 10 });
   const imageIndex = wrap(0, developerRankData?.games.length || 0, swipePage);
   const item = useMemo(() => developerRankData?.games[imageIndex], [developerRankData?.games, imageIndex]);
 
@@ -92,7 +91,7 @@ function DeveloperRanking() {
                     opacity: { duration: 0.2 },
                   }}
                 >
-                  <div className="h-[72px] w-[33%] xs:w-[100%]">
+                  <div className="h-[72px] flex-1 xs:basis-full">
                     <div className="relative float-left mr-3 h-[72px] w-[112px] flex-none overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
                       {item ? (
                         <img alt="header_image" loading="lazy" className="h-full w-full object-cover" src={item.header_image} />
@@ -116,7 +115,7 @@ function DeveloperRanking() {
                     onClick={() => {
                       item && setTokenRankPage(Math.floor((item.tokenRank - 1) / 10) + 1);
                     }}
-                    className="flex w-[33%] cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30 xs:basis-1/2"
+                    className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                   >
                     Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.tokenRank || '--'}</span>
                   </div>
@@ -125,7 +124,7 @@ function DeveloperRanking() {
                     onClick={() => {
                       item && setTimeRankPage(Math.floor(((verified?.total || 0) - item.timeRank) / 10) + 1);
                     }}
-                    className="flex w-[33%] cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30 xs:basis-1/2"
+                    className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                   >
                     Time Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.timeRank || '--'}</span>
                   </div>
@@ -138,11 +137,10 @@ function DeveloperRanking() {
       <div className="mt-12 flex gap-8 md:flex-col">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest Verify List</h2>
-          <TimeRankingHeader />
+          <DevTimeRankingHeader />
           <div className="flex flex-col gap-4">
-            {isTimeRankLoading && <Loading size={48} />}
             {timeRankData?.rankList.map((item, index) => (
-              <TimeRankingItem data={item} key={item.appid || index} />
+              <DevTimeRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
@@ -153,11 +151,10 @@ function DeveloperRanking() {
         </div>
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Token RankList</h2>
-          <TokenRankingHeader />
+          <DevTokenRankingHeader />
           <div className="flex flex-col gap-4">
-            {isTokenRankLoading && <Loading size={48} />}
             {tokenRankData?.rankList.map((item, index) => (
-              <TokenRankingItem data={item} key={item.appid || index} />
+              <DevTokenRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">

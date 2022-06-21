@@ -3,14 +3,14 @@ import Image from 'next/image';
 import SocialMedia from '../../socialMedia';
 import { isSocialMediaClickSelector } from '../../../store/invite/state';
 import { useRecoilValue } from 'recoil';
-import { claimGroupSelector, developerGameAtom, NFTClaim } from '../../../store/developer/state';
+import { claimGroupSelector, developerGameAtom, DEV_NFT_CLAIM } from '../../../store/developer/state';
 
 export function DevP12() {
   const isClicked = useRecoilValue(isSocialMediaClickSelector);
   const games = useRecoilValue(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
   const leastOneGame = useMemo(() => games.some((game) => game.appid), [games]);
-  const isAllClaimed = useMemo(() => claimGroup[NFTClaim.CLAIMED].length === games.length, [claimGroup, games.length]);
+  const isAllClaimed = useMemo(() => claimGroup[DEV_NFT_CLAIM.CLAIMED].length === games.length, [claimGroup, games.length]);
 
   const iconStatus = new Map([
     [true, '/svg/check_success.svg'],

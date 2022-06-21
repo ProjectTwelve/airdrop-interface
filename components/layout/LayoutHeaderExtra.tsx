@@ -7,6 +7,7 @@ import { inviteModalAtom } from '../../store/invite/state';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { roadmapModalAtom } from '../../store/roadmap/state';
+import { openLink } from '../../utils';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
@@ -31,7 +32,7 @@ function LayoutHeaderExtra() {
             transition={{ type: 'spring', stiffness: 200, damping: 30 }}
             className="relative flex gap-3"
           >
-            <Button type="bordered" onClick={() => window.open(readmeLink)}>
+            <Button type="bordered" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center gap-2 text-sm">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
                 Readme
