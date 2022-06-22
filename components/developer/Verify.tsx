@@ -8,14 +8,14 @@ import { getVerifySignData } from '../../utils';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import { fetchDeveloperVerify } from '../../lib/api';
-import { DeveloperVerifyData, DeveloperVerifyParams, GameInfo, Response } from '../../lib/types';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
 import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
 import { useAccount, useSignMessage } from 'wagmi';
 
-export type SteamApp = Partial<GameInfo> & { index: number };
+export type SteamApp = Partial<DevGameInfo> & { index: number };
 
 function Verify() {
   const { data: account } = useAccount();

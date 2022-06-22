@@ -6,17 +6,18 @@ import Dialog from '../dialog';
 import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { claimGroupSelector, DEV_NFT_CLAIM } from '../../store/developer/state';
+import { claimGroupSelector } from '../../store/developer/state';
 import { useQuery } from 'react-query';
 import { useAccount } from 'wagmi';
 import { fetchDeveloperInvitation } from '../../lib/api';
 import { roadmapModalAtom } from '../../store/roadmap/state';
+import { NFT_CLAIM } from '../../constants';
 
 function Tokens() {
   const { data: account } = useAccount();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
-  const claimGames = useMemo(() => claimGroup[DEV_NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
+  const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
 
   const { data: invitation } = useQuery(
     ['invitation_info', account?.address],

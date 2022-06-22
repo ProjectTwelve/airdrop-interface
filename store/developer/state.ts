@@ -1,18 +1,6 @@
 import { atom, selector } from 'recoil';
 import { AccountInfo } from '../../lib/types';
-
-export enum DEV_NFT_CLAIM {
-  UNCLAIMED = 0,
-  PENDING,
-  CLAIMED,
-}
-
-export enum DEV_NFT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-}
+import { NFT_CLAIM } from '../../constants';
 
 export const tabSelectAtom = atom({
   key: 'tab_select',
@@ -33,10 +21,10 @@ export const claimGroupSelector = selector({
   key: 'claim_group',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    const filters: Record<DEV_NFT_CLAIM, AccountInfo[]> = {
-      [DEV_NFT_CLAIM.UNCLAIMED]: [],
-      [DEV_NFT_CLAIM.PENDING]: [],
-      [DEV_NFT_CLAIM.CLAIMED]: [],
+    const filters: Record<NFT_CLAIM, AccountInfo[]> = {
+      [NFT_CLAIM.UNCLAIMED]: [],
+      [NFT_CLAIM.PENDING]: [],
+      [NFT_CLAIM.CLAIMED]: [],
     };
     developerGame.forEach((item) => {
       filters[item.nft_claim].push(item);
@@ -49,6 +37,6 @@ export const hasClaimedGameSelector = selector({
   key: 'has_claimed_game',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    return developerGame.some((item) => item.nft_claim !== DEV_NFT_CLAIM.UNCLAIMED);
+    return developerGame.some((item) => item.nft_claim !== NFT_CLAIM.UNCLAIMED);
   },
 });

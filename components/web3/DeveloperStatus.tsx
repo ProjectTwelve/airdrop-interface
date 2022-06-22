@@ -5,9 +5,10 @@ import { useQuery } from 'react-query';
 import { fetchDeveloperInfo } from '../../lib/api';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import { claimGroupSelector, developerGameAtom, DEV_NFT_CLAIM } from '../../store/developer/state';
+import { claimGroupSelector, developerGameAtom } from '../../store/developer/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { useAccount } from 'wagmi';
+import { NFT_CLAIM } from '../../constants';
 
 function DeveloperStatus() {
   const { data: account } = useAccount();
@@ -24,7 +25,7 @@ function DeveloperStatus() {
   });
 
   const tagType = useMemo(
-    () => (claimGroup[DEV_NFT_CLAIM.CLAIMED].length === games.length ? 'green' : 'red'),
+    () => (claimGroup[NFT_CLAIM.CLAIMED].length === games.length ? 'green' : 'red'),
     [claimGroup, games.length],
   );
 
@@ -37,7 +38,7 @@ function DeveloperStatus() {
     >
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         {games.length ? (
-          <Tag type={tagType} size="large" value={`${claimGroup[DEV_NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
+          <Tag type={tagType} size="large" value={`${claimGroup[NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}

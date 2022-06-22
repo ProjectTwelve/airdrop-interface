@@ -15,13 +15,13 @@ export default function GamerRanking() {
       <div className="flex gap-8 md:flex-col md:gap-2">
         <div>
           <h3 className="text-sm font-medium leading-5">Total Verified Games</h3>
-          <div className="ranking__box mt-3 h-[90px] w-[180px] text-center text-[32px] font-medium leading-[90px] xs:w-auto">
+          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
           </div>
         </div>
         <div className="flex-1">
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
-          <div className="ranking__box mt-3 h-[90px] xs:h-[150px]">
+          <div className="gradient__box mt-3 h-[90px] xs:h-[150px]">
             <div className="flex h-full w-full  gap-2 py-2 px-4 xs:flex-wrap xs:gap-0 xs:px-2">
               <div className="flex h-[72px] flex-1 items-center justify-center truncate xs:basis-full">
                 <div className="mr-3 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">

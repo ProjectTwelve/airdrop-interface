@@ -1,6 +1,6 @@
+import React from 'react';
 import ReportLayout from '../../components/layout/ReportLayout';
 import type { ReactElement } from 'react';
-import React from 'react';
 
 export default function Report() {
   return (

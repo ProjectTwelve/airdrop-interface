@@ -1,13 +1,7 @@
-export enum GAMER_NFT_CLAIM {
-  UNCLAIMED = 0,
-  PENDING,
-  CLAIMED,
-}
+import { atom } from 'recoil';
+import { GamerInfoData } from '../../lib/types';
 
-export enum GAMER_NFT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-  WHITE,
-}
+export const gamerInfoAtom = atom<GamerInfoData | undefined>({
+  key: 'gamer_info_atom',
+  default: undefined,
+});

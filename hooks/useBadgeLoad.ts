@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { DEV_NFT_LEVEL } from '../store/developer/state';
-import { DEV_BADGES } from '../constants';
+import { DEV_BADGES, DEV_NFT_LEVEL } from '../constants';
 import { AccountInfo } from '../lib/types';
 
 export const useBadgeLoad = (game: AccountInfo) => {

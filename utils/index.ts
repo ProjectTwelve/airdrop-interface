@@ -31,6 +31,16 @@ export const openLink = (url: string) => {
   }
 };
 
+export const formatMinutes = (min: number) => {
+  const h = min / 60;
+  const floor = Math.floor(min / 60);
+  return (h > floor ? h.toFixed(1) : floor) + ' h';
+};
+
+export function getSteamGameImage(appid: number) {
+  return `https://cdn.akamai.steamstatic.com/steam/apps/${appid}/capsule_184x69.jpg`;
+}
+
 export const getVerifySignData = (account?: string) => ({
   types: {
     EIP712Domain: [

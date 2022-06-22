@@ -14,6 +14,9 @@ import {
   DeveloperRank,
   DeveloperRankList,
   DeveloperEmailParams,
+  BinSteamParams,
+  GamerInfoData,
+  GamerGamesData,
 } from './types';
 
 /**
@@ -86,4 +89,13 @@ export const fetchDeveloperEmail = (data: DeveloperEmailParams) =>
 /**
  * get Steam Gamer Info
  */
-export const fetchGamerInfo = (params: { addr?: string }) => request.get<any, Response<any>>('/api/Gamer/Info', { params });
+export const fetchGamerInfo = (params: { addr?: string }) =>
+  request.get<any, Response<GamerInfoData>>('/api/gamer/info', { params });
+
+/**
+ * bind steam account and wallet
+ */
+export const fetchBindSteam = (data: BinSteamParams) => request.post<any, Response<any>>('/api/gamer/bind', data);
+
+export const fetchGamerGames = (data: { wallet_address?: string }) =>
+  request.post<any, Response<GamerGamesData>>('/api/gamer/games', data);
