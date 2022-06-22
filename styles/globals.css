@@ -14,6 +14,11 @@
         outline: none;
     }
 
+    *::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+
     body {
         background: #000;
         font-family: 'Poppins', sans-serif;

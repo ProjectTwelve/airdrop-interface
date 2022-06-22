@@ -31,7 +31,8 @@ export const openLink = (url: string) => {
   }
 };
 
-export const formatMinutes = (min: number) => {
+export const formatMinutes = (min?: number) => {
+  if (min === undefined || min === null) return '--';
   const h = min / 60;
   const floor = Math.floor(min / 60);
   return (h > floor ? h.toFixed(1) : floor) + ' h';

@@ -12,8 +12,8 @@ type SteamProfileInfoProps = {
 export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfoProps) {
   const list = useMemo(
     () => [
-      { label: 'Total games', value: data?.total_game_count || '--' },
-      { label: 'Total playtime', value: data?.total_playtime ? formatMinutes(data.total_playtime) : '--' },
+      { label: 'Total games', value: data?.total_game_count ?? '--' },
+      { label: 'Total playtime', value: data ? formatMinutes(data.total_playtime) : '--' },
       {
         label: (
           <div className="flex items-center justify-center gap-1 text-p12-sub">
@@ -23,7 +23,7 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
             </Tooltip>
           </div>
         ),
-        value: data?.ss_game_count || '--',
+        value: data?.ss_game_count ?? '--',
       },
       {
         label: (
@@ -34,14 +34,16 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
             </Tooltip>
           </div>
         ),
-        value: data?.ss_game_playtime ? formatMinutes(data.ss_game_playtime) : '--',
+        value: data ? formatMinutes(data.ss_game_playtime) : '--',
       },
       { label: 'Steam years', value: createdTime ? dayjs().diff(dayjs.unix(createdTime), 'year') : '--' },
     ],
-    [createdTime, data?.ss_game_count, data?.ss_game_playtime, data?.total_game_count, data?.total_playtime],
+    [createdTime, data],
   );
+
   return (
-    <div className="gradient__box flex w-full max-w-[888px] py-[22px] xs:flex-col xs:py-0">
+    <div className="relative flex w-full max-w-[888px] py-[22px] xs:flex-col xs:py-0">
+      <div className="gradient__box absolute top-0 left-0 -z-10 h-full w-full" />
       {list.map((item, index) => (
         <div
           key={index}
