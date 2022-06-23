@@ -119,7 +119,7 @@ function DeveloperRanking() {
                     <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
                       onClick={() => {
-                        item && setTokenRankPage(Math.floor((item.tokenRank - 1) / 10) + 1);
+                        item && setTokenRankPage(Math.ceil(item.tokenRank / 10));
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
@@ -128,7 +128,7 @@ function DeveloperRanking() {
                     <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
                       onClick={() => {
-                        item && setTimeRankPage(Math.floor(((verified?.total || 0) - item.timeRank) / 10) + 1);
+                        item && setTimeRankPage(Math.ceil(((verified?.total || 0) - item.timeRank + 1) / 10));
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >

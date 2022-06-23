@@ -14,13 +14,11 @@ export default function GamerRanking() {
   const { data: timeRankData } = useGamerTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useGamerTokenRank({ page: tokenRankPage, size: 10 });
 
-  console.log('gamerRankData: ', gamerRankData);
-
   return (
     <div className="px-8 py-12 xs:p-4">
       <div className="flex gap-8 md:flex-col md:gap-2">
         <div>
-          <h3 className="text-sm font-medium leading-5">Total Verified Games</h3>
+          <h3 className="text-sm font-medium leading-5">Total Verified Gamers</h3>
           <div className="gradient__box mt-3 h-[90px] w-[180px] text-center text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
           </div>
@@ -36,11 +34,22 @@ export default function GamerRanking() {
                 <div className="truncate">{gamerRankData?.person_name || 'Sign in please'}</div>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
-              <div className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30">
+              <div
+                onClick={() => {
+                  gamerRankData?.tokenRank && setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
+                }}
+                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+              >
                 Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
-              <div className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30">
+              <div
+                onClick={() => {
+                  gamerRankData?.timeRank &&
+                    setTimeRankPage(Math.ceil(((verified?.total || 0) - gamerRankData.timeRank + 1) / 10));
+                }}
+                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+              >
                 Time Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
               </div>
             </div>
