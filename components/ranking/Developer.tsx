@@ -36,11 +36,11 @@ function DeveloperRanking() {
   const [tokenRankPage, setTokenRankPage] = useState(1);
   const { data: account } = useAccount();
   const { data: verified } = useDeveloperVerifiedCount();
-  const { data: developerRankData } = useDeveloperRank(account?.address);
+  const { data: devRankData } = useDeveloperRank(account?.address);
   const { data: timeRankData } = useDeveloperTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useDeveloperTokenRank({ page: tokenRankPage, size: 10 });
-  const imageIndex = wrap(0, developerRankData?.games.length || 0, swipePage);
-  const item = useMemo(() => developerRankData?.games[imageIndex], [developerRankData?.games, imageIndex]);
+  const imageIndex = wrap(0, devRankData?.games.length || 0, swipePage);
+  const item = useMemo(() => devRankData?.games[imageIndex], [devRankData?.games, imageIndex]);
 
   const paginate = (newDirection: number) => {
     setSwipePage([swipePage + newDirection, newDirection]);
@@ -61,7 +61,7 @@ function DeveloperRanking() {
             <div
               className={classNames(
                 'absolute -left-[18px] top-1/2 z-10 -translate-y-1/2 select-none',
-                !developerRankData?.games.length && 'hidden',
+                !devRankData?.games.length && 'hidden',
               )}
               onClick={() => paginate(-1)}
             >
@@ -70,7 +70,7 @@ function DeveloperRanking() {
             <div
               className={classNames(
                 'absolute -right-[18px] top-1/2 z-10 -translate-y-1/2 select-none',
-                !developerRankData?.games.length && 'hidden',
+                !devRankData?.games.length && 'hidden',
               )}
               onClick={() => paginate(1)}
             >

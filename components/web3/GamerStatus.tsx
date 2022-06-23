@@ -17,7 +17,9 @@ export default function GamerStatus() {
     >
       {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? (
         <Tag type="green" size="large">
-          <img src="/svg/check.svg" alt="check" /> NFT
+          <p className="flex items-center justify-center gap-1.5 text-p12-success">
+            <img src="/svg/check.svg" alt="check" /> NFT
+          </p>
         </Tag>
       ) : (
         <Tag type="red" size="large" value="No NFT yet" />

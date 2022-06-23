@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import { useDeveloperTimeRank, useDeveloperTokenRank } from '../../hooks/ranking';
+import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '../../hooks/ranking';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
+import Pagination from 'rc-pagination';
+import { useAccount } from 'wagmi';
 
 export default function GamerRanking() {
-  const [verified] = useState({ total: 0 });
-  const [timeRankPage] = useState(1);
-  const [tokenRankPage] = useState(1);
-  const { data: timeRankData } = useDeveloperTimeRank({ page: timeRankPage, size: 10 });
-  const { data: tokenRankData } = useDeveloperTokenRank({ page: tokenRankPage, size: 10 });
+  const { data: verified } = useGamerVerifiedCount();
+  const [timeRankPage, setTimeRankPage] = useState(1);
+  const [tokenRankPage, setTokenRankPage] = useState(1);
+  const { data: account } = useAccount();
+  const { data: gamerRankData } = useGamerRank(account?.address);
+  const { data: timeRankData } = useGamerTimeRank({ page: timeRankPage, size: 10 });
+  const { data: tokenRankData } = useGamerTokenRank({ page: tokenRankPage, size: 10 });
+
+  console.log('gamerRankData: ', gamerRankData);
 
   return (
     <div className="px-8 py-12 xs:p-4">
@@ -25,20 +31,17 @@ export default function GamerRanking() {
             <div className="flex h-full w-full  gap-2 py-2 px-4 xs:flex-wrap xs:gap-0 xs:px-2">
               <div className="flex h-[72px] flex-1 items-center justify-center truncate xs:basis-full">
                 <div className="mr-3 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
-                  <img
-                    src="https://avatars.cloudflare.steamstatic.com/6cfc2cdffb409479bc9551e5044b06a8c4260aa8_full.jpg"
-                    alt="avatar"
-                  />
+                  {gamerRankData?.avatar_full && <img src={gamerRankData.avatar_full} alt="avatar" />}
                 </div>
-                <div className="truncate">Sign in please</div>
+                <div className="truncate">{gamerRankData?.person_name || 'Sign in please'}</div>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30">
-                Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">--</span>
+                Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30">
-                Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">--</span>
+                Time Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
               </div>
             </div>
           </div>
@@ -50,8 +53,13 @@ export default function GamerRanking() {
           <GamerTimeRankingHeader />
           <div className="flex flex-col gap-4">
             {timeRankData?.rankList.map((item, index) => (
-              <GamerTimeRankingItem key={item.appid || index} />
+              <GamerTimeRankingItem data={item} key={item.steam_id || index} />
             ))}
+          </div>
+          <div className="mt-4 flex items-center justify-center">
+            {verified && verified.total > 10 && (
+              <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            )}
           </div>
         </div>
         <div className="w-full">
@@ -59,8 +67,13 @@ export default function GamerRanking() {
           <GamerTokenRankingHeader />
           <div className="flex flex-col gap-4">
             {tokenRankData?.rankList.map((item, index) => (
-              <GamerTokenRankingItem key={item.appid || index} />
+              <GamerTokenRankingItem data={item} key={item.steam_id || index} />
             ))}
+          </div>
+          <div className="mt-4 flex items-center justify-center">
+            {verified && verified.total > 10 && (
+              <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            )}
           </div>
         </div>
       </div>

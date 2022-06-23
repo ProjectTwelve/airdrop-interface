@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import Empty from '../empty';
 import Button from '../button';
 import Loading from '../loading';
-import { shortenSteamId } from '../../utils';
+import { getSteamProfileEdit, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
 import { gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
@@ -72,11 +72,7 @@ export default function SteamStatus() {
                     <div className=" rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
                       We cannot find your profile. Please go to Privacy Settings, and set &apos;My profile&apos; to
                       &apos;Public&apos;. &nbsp;&nbsp;
-                      <a
-                        className="text-p12-link"
-                        target="_blank"
-                        href={`https://steamcommunity.com/profiles/${gamerInfo.steam_id}/edit/settings`}
-                      >
+                      <a className="text-p12-link" target="_blank" href={getSteamProfileEdit(gamerInfo.steam_id)}>
                         Open on Steam &gt;
                       </a>
                     </div>

@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import { RankInfo } from '../../lib/types';
+import { DevRankInfo } from '../../lib/types';
 import { openLink } from '../../utils';
 
 export function DevTimeRankingHeader() {
@@ -16,8 +16,8 @@ export function DevTimeRankingHeader() {
 
 type DevTimeRankingItemProps = {
   hover?: boolean;
-  data: Partial<RankInfo>;
   steamStore?: boolean;
+  data: Partial<DevRankInfo>;
 };
 export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
@@ -29,7 +29,7 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
     <div
       onClick={steamStore ? handleToSteamStore : undefined}
       className={classNames(
-        'overflow-hidden rounded-2xl bg-p12-black/80 p-4',
+        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >

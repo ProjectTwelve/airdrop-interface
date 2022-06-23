@@ -4,6 +4,7 @@ import { Tooltip } from '../tooltip';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { formatMinutes } from '../../utils';
+import QuestionSVG from '../svg/Question';
 
 type SteamProfileInfoProps = {
   data?: GamerGamesData;
@@ -19,7 +20,9 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
           <div className="flex items-center justify-center gap-1 text-p12-sub">
             SS games
             <Tooltip label="Super Saiyan Game: game playtime ≥ 1000 hours">
-              <img className="cursor-pointer" src="/svg/question.svg" alt="question" />
+              <div>
+                <QuestionSVG />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -30,7 +33,9 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
           <div className="flex items-center justify-center gap-1 text-p12-sub">
             SS playtime
             <Tooltip label="Total playtime of Super Saiyan games">
-              <img className="cursor-pointer" src="/svg/question.svg" alt="question" />
+              <div>
+                <QuestionSVG />
+              </div>
             </Tooltip>
           </div>
         ),
@@ -48,7 +53,7 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
         <div
           key={index}
           className={classNames(
-            'flex flex-1 flex-col items-center justify-center border-r border-p12-line',
+            'flex flex-1 flex-col items-center justify-center border-r border-[#949FA9]',
             'xs:flex-row xs:gap-2 xs:border-r-0 xs:border-b xs:py-2',
             'last:border-none',
           )}

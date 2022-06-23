@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { DEV_BADGES } from '../../constants';
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
-import { RankInfo } from '../../lib/types';
+import { DevRankInfo } from '../../lib/types';
 import { openLink } from '../../utils';
 
 export function DevTokenRankingHeader() {
@@ -18,8 +18,8 @@ export function DevTokenRankingHeader() {
 
 type DevDevTokenRankingItemProps = {
   hover?: boolean;
-  data: RankInfo;
   steamStore?: boolean;
+  data: Partial<DevRankInfo>;
 };
 export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevTokenRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
@@ -31,7 +31,7 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
     <div
       onClick={steamStore ? handleToSteamStore : undefined}
       className={classNames(
-        'overflow-hidden rounded-2xl bg-p12-black/80 p-4',
+        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >

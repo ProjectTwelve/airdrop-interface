@@ -69,7 +69,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             {...getFloatingProps({
               ref: floating,
-              className: 'backdrop-box max-w-[300px] p-4 rounded-lg',
+              className: 'tooltip__container max-w-[300px] rounded-lg',
               style: {
                 position: strategy,
                 top: y ?? 0,
@@ -78,7 +78,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
               },
             })}
           >
-            {label}
+            <div className="p-4">{label}</div>
           </motion.div>
         )}
       </AnimatePresence>

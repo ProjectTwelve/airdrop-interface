@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { motion } from 'framer-motion';
-import { useDeveloperTimeRank, useDeveloperTokenRank } from '../../hooks/ranking';
-import DevTimeRankingItem from './DevTimeRankingItem';
-import DevTokenRankingItem from './DevTokenRankingItem';
-import { GamerTimeRankingHeader } from './GamerTimeRankingItem';
-import { GamerTokenRankingHeader } from './GamerTokenRankingItem';
+import { useGamerTimeRank, useGamerTokenRank } from '../../hooks/ranking';
+import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
+import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 
 export default function GamerTabs() {
   const [selectedTab, setSelectedTab] = useState(0);
-  const { data: timeRankData } = useDeveloperTimeRank({ page: 1, size: 20 });
-  const { data: tokenRankData } = useDeveloperTokenRank({ page: 1, size: 20 }, { enabled: selectedTab === 1 });
+  const { data: timeRankData } = useGamerTimeRank({ page: 1, size: 20 });
+  const { data: tokenRankData } = useGamerTokenRank({ page: 1, size: 20 }, { enabled: selectedTab === 1 });
 
   return (
     <Tabs onSelect={(index) => setSelectedTab(index)}>
@@ -29,7 +27,7 @@ export default function GamerTabs() {
         <div className="h-[350px] overflow-y-auto">
           <div className="flex flex-col gap-4">
             {timeRankData?.rankList.map((item, index) => (
-              <DevTimeRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
+              <GamerTimeRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
             ))}
           </div>
         </div>
@@ -39,7 +37,7 @@ export default function GamerTabs() {
         <div className="h-[350px] overflow-y-auto">
           <motion.div className="flex flex-col gap-4">
             {tokenRankData?.rankList.map((item, index) => (
-              <DevTokenRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
+              <GamerTokenRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
             ))}
           </motion.div>
         </div>

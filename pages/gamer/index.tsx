@@ -10,17 +10,31 @@ import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo } from '../../hooks/gamer';
-import { useRecoilValue } from 'recoil';
-import { gamerInfoAtom } from '../../store/gamer/state';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
-import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
+import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import { openLink } from '../../utils';
+import GamerEmailDialog from '../../components/dialog/GamerEmailDialog';
+import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
+import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
 
 export default function Gamer() {
   const router = useRouter();
   const { data: account } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   useGamerInfo(account?.address);
+
+  const badge = useGamerBadgeLoad(gamerInfo);
+
+  const handleClaim = () => {
+    if (gamerInfo?.email) {
+      openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
+    } else {
+      setGamerEmailShow(true);
+    }
+  };
 
   return (
     <div className="mt-8">
@@ -36,27 +50,44 @@ export default function Gamer() {
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
                     <div
                       className="h-full w-full bg-cover"
-                      style={{
-                        backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})`,
-                      }}
-                    ></div>
+                      style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
+                    />
                   )}
                 </div>
                 <div className="relative z-10 flex aspect-square w-full items-center justify-center">
                   {gamerInfo?.credential ? (
                     <div className="flex w-full flex-col items-center justify-center">
-                      <h4 className="text-center text-xl font-medium text-p12-success">
-                        {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED
-                          ? 'Pending: update in a few minutes'
-                          : 'Congrats! P12 Genesis NFT to be claimed'}
-                      </h4>
-                      <Button
-                        type="bordered"
-                        className="mt-9 w-[260px]"
-                        onClick={() => openLink(GAMER_BADGES[gamerInfo.nft_level!].claim)}
-                      >
-                        Claim
-                      </Button>
+                      {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
+                        <>
+                          <h4 className="text-center text-xl font-medium text-p12-success">
+                            Congrats! P12 Genesis NFT to be claimed
+                          </h4>
+                          <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
+                            Claim
+                          </Button>
+                        </>
+                      )}
+                      {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
+                        <h4 className="text-center text-xl font-medium text-p12-success">Pending: update in a few minutes</h4>
+                      )}
+                      {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED && (
+                        <>
+                          <div className="relative aspect-square w-full max-w-[420px]">
+                            {badge.isLoading && (
+                              <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                                <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
+                              </div>
+                            )}
+                            <div
+                              className="aspect-square max-w-[420px] bg-cover"
+                              style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
+                            />
+                          </div>
+                          <Button type="bordered" className="mt-9 w-[260px]" onClick={() => openLink(GALAXY_LIST)}>
+                            My NFT at Galaxy
+                          </Button>
+                        </>
+                      )}
                     </div>
                   ) : (
                     <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you have no NFT yet</h4>
@@ -131,6 +162,8 @@ export default function Gamer() {
           </div>
         </div>
       </div>
+      <GamerEmailDialog />
+      <GamerClaimSuccess />
     </div>
   );
 }

@@ -27,13 +27,7 @@ export default function Tag({ value, type, size, children }: React.PropsWithChil
   };
 
   return (
-    <span
-      className={classNames(
-        'flex items-center justify-center gap-1.5 whitespace-nowrap rounded-full',
-        types[type],
-        sizes[size || 'medium'],
-      )}
-    >
+    <span className={classNames('whitespace-nowrap rounded-full', types[type], sizes[size || 'medium'])}>
       {value || children}
     </span>
   );

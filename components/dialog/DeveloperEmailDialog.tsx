@@ -1,5 +1,6 @@
 import Dialog from './index';
 import Button from '../button';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import ToastIcon from '../svg/ToastIcon';
 import { useMutation } from 'react-query';
@@ -12,7 +13,6 @@ import Message from '../message';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue } from 'recoil';
 import { hasClaimedGameSelector } from '../../store/developer/state';
-import dayjs from 'dayjs';
 
 export default function DeveloperEmailDialog() {
   const { data: account } = useAccount();
@@ -40,7 +40,7 @@ export default function DeveloperEmailDialog() {
       message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
     }).then((signature) => {
       mutation.mutate({ wallet_address: account.address, email: value, signature });
-    });
+    }).catch(error => error);
   };
 
   useEffect(() => {

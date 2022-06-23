@@ -18,7 +18,7 @@ import {
   GALAXY_P12_SPACE,
 } from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
-import { useBadgeLoad } from '../../../hooks/useBadgeLoad';
+import {useDevBadgeLoad} from '../../../hooks/useBadgeLoad';
 import { openLink, shortenAddress } from '../../../utils';
 
 import styles from './tokens.module.css';
@@ -39,7 +39,7 @@ export default function TokenTabs() {
   const ref = useRef<HTMLDivElement>(null);
   const count = useClickScroll(ref);
 
-  const badge = useBadgeLoad(selectedGame);
+  const badge = useDevBadgeLoad(selectedGame);
 
   return (
     <div className="relative">

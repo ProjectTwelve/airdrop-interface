@@ -100,7 +100,7 @@ export const GAMER_BADGES = {
   [GAMER_NFT_LEVEL.WHITE]: {
     asset:
       'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655799310.png',
-    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green.png',
+    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_white.png',
     claim: GAMER_BADGE_WHITE,
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
   },

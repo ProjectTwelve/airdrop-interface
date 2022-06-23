@@ -17,6 +17,9 @@ import {
   BinSteamParams,
   GamerInfoData,
   GamerGamesData,
+  GamerEmailParams,
+  GamerRankList,
+  GamerRank,
 } from './types';
 
 /**
@@ -97,5 +100,40 @@ export const fetchGamerInfo = (params: { addr?: string }) =>
  */
 export const fetchBindSteam = (data: BinSteamParams) => request.post<any, Response<any>>('/api/gamer/bind', data);
 
+/**
+ * get gamer Steam games
+ * @param data
+ */
 export const fetchGamerGames = (data: { wallet_address?: string }) =>
   request.post<any, Response<GamerGamesData>>('/api/gamer/games', data);
+
+/**
+ * bind gamer email
+ */
+export const fetchGamerEmail = (data: GamerEmailParams) => request.post<any, Response<any>>('/api/gamer/email', data);
+
+/**
+ * get gamer token rank
+ * @param params
+ */
+export const fetchGamerTokenRank = (params: { page: number; size: number }) =>
+  request.get<any, Response<GamerRankList>>('/api/gamer/token/rank', { params });
+
+/**
+ * get developer time rank
+ * @param params
+ */
+export const fetchGamerTimeRank = (params: { page: number; size: number }) =>
+  request.get<any, Response<GamerRankList>>('/api/gamer/time/rank', { params });
+
+/**
+ * get developer rank
+ * @param params
+ */
+export const fetchGamerRank = (params: { addr?: string }) =>
+  request.get<any, Response<GamerRank>>('/api/gamer/rank', { params });
+
+/**
+ * get developer verified count
+ */
+export const fetchGamerVerifiedCount = () => request.get<any, Response<{ total: number }>>('/api/gamer/count');

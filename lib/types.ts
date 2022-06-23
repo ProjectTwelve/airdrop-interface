@@ -51,7 +51,7 @@ export type InvitationInfo = {
   name: string;
   time: string;
 };
-export type RankInfo = {
+export type DevRankInfo = {
   header_image: string;
   name: string;
   release_date: string;
@@ -61,6 +61,17 @@ export type RankInfo = {
   nft_level: DEV_NFT_LEVEL;
   index: number;
   createdAt: string;
+};
+export type GamerRankInfo = {
+  person_name: string;
+  time_created: number;
+  steam_id: string;
+  ss_game_count: number;
+  avatar_full: string;
+  ss_game_playtime: number;
+  nft_level: GAMER_NFT_LEVEL;
+  createdAt: string;
+  index: number;
 };
 export type GameRank = {
   appid: number;
@@ -118,7 +129,7 @@ export type DeveloperRankList = {
   rankLength: number;
   page: number;
   size: number;
-  rankList: Partial<RankInfo>[];
+  rankList: Partial<DevRankInfo>[];
 };
 
 export type DeveloperRank = {
@@ -156,4 +167,25 @@ export type GamerGamesData = {
   ss_game_playtime?: number;
   total_game_count?: number;
   total_playtime?: number;
+};
+
+export type GamerEmailParams = {
+  wallet_address?: string;
+  email: string;
+  signature: string;
+};
+
+export type GamerRankList = {
+  rankLength: number;
+  page: number;
+  size: number;
+  rankList: Partial<GamerRankInfo>[];
+};
+
+export type GamerRank = {
+  avatar_full?: string;
+  person_name?: string;
+  steam_id?: string;
+  timeRank?: number;
+  tokenRank?: number;
 };

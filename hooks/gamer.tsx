@@ -4,6 +4,8 @@ import { BinSteamParams, Response } from '../lib/types';
 import { useAccount } from 'wagmi';
 import { useSetRecoilState } from 'recoil';
 import { gamerInfoAtom } from '../store/gamer/state';
+import { toast } from 'react-toastify';
+import Message from '../components/message';
 
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
@@ -26,6 +28,8 @@ export const useBindSteamAccount = () => {
     onSuccess: (data) => {
       if (data.code === 0) {
         queryClient.refetchQueries(['gamer_info', account?.address]).then();
+      } else {
+        toast.error(<Message title="Failed" message={data.msg} />);
       }
     },
   });
