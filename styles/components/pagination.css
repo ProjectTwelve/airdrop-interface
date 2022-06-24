@@ -249,7 +249,7 @@
 .rc-pagination-simple .rc-pagination-prev .rc-pagination-item-link::after,
 .rc-pagination-simple .rc-pagination-next .rc-pagination-item-link::after {
     height: 24px;
-    line-height: 24px;
+    line-height: 22px;
 }
 
 .rc-pagination-simple .rc-pagination-simple-pager {

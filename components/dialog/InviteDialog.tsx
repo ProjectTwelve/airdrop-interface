@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
 import { fetchReferralCode } from '../../lib/api';
 import { useAccount } from 'wagmi';
+import { InviteRecordDialog } from './InviteRecordDialog';
 
 function InviteDialog() {
   const { data: account } = useAccount();
@@ -142,8 +143,12 @@ function InviteDialog() {
               </Button>
             )}
           </div>
-          <div className="mt-7 h-[1px] bg-p12-line"></div>
-          <div className="mt-7 flex justify-end">
+          <div className="mt-3 ml-4">
+            <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
+              <p className="cursor-pointer text-p12-link">My Referral List</p>
+            </Dialog>
+          </div>
+          <div className="mt-3 flex justify-end">
             <Button type="bordered" onClick={() => setOpen(false)}>
               Confirm
             </Button>

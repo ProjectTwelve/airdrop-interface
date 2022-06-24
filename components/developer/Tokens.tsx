@@ -7,30 +7,17 @@ import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector } from '../../store/developer/state';
-import { useQuery } from 'react-query';
 import { useAccount } from 'wagmi';
-import { fetchDeveloperInvitation } from '../../lib/api';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { NFT_CLAIM } from '../../constants';
+import { useDevInvitation } from '../../hooks/developer';
 
 function Tokens() {
   const { data: account } = useAccount();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
-
-  const { data: invitation } = useQuery(
-    ['invitation_info', account?.address],
-    () => fetchDeveloperInvitation({ addr: account?.address }),
-    {
-      enabled: !!account?.address,
-      refetchOnWindowFocus: false,
-      select: (data) => {
-        if (data.code !== 0) return [];
-        return data.data.invitation_info;
-      },
-    },
-  );
+  const { data: invitation } = useDevInvitation(account?.address);
 
   return (
     <div className="relative px-8 pt-12 md:px-4 md:pt-6">
@@ -61,7 +48,7 @@ function Tokens() {
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
-            <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
+            <Dialog render={({ close }) => <InviteRecordDialog close={close} tab="developer" />}>
               <p className="mt-2 cursor-pointer text-xs text-p12-link">
                 My referral list <span className="pl-11 text-p12-link md:pl-1">&gt;</span>
               </p>

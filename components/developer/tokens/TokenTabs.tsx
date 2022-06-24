@@ -18,7 +18,7 @@ import {
   GALAXY_P12_SPACE,
 } from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
-import {useDevBadgeLoad} from '../../../hooks/useBadgeLoad';
+import { useDevBadgeLoad } from '../../../hooks/useBadgeLoad';
 import { openLink, shortenAddress } from '../../../utils';
 
 import styles from './tokens.module.css';
@@ -132,7 +132,7 @@ export default function TokenTabs() {
                       />
                     </div>
                     {selectedGame.credential <= 10 && (
-                      <Button type="bordered" className="mt-9 w-[260px]" onClick={() => openLink(GALAXY_LIST)}>
+                      <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
                         My NFT at Galaxy
                       </Button>
                     )}
@@ -164,7 +164,7 @@ export default function TokenTabs() {
             )}
           </div>
           {selectedGame.nft_claim !== NFT_CLAIM.CLAIMED && (
-            <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub">
+            <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
               The airdrop is in collaboration with and powered by&nbsp;
               <a className="text-p12-link" href={GALAXY_P12_SPACE} target="_blank">
                 Project Galaxy

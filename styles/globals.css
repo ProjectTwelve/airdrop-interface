@@ -87,9 +87,8 @@
     }
 
     .tooltip__container {
-        background: repeating-linear-gradient(to bottom, #4E5372, #4E5372), repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.8), #4E5372);
+        background: repeating-linear-gradient(to bottom, #4E5372, #4E5372), repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.6), #4E5372);
         background-clip: content-box, padding-box;
-        padding: 2px;
-        backdrop-filter: blur(16px);
+        padding: 0.1rem;
     }
 }

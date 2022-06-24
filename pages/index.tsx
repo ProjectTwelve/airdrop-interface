@@ -12,15 +12,17 @@ import GamerTabs from '../components/ranking/GamerTabs';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
-  const setOpen = useSetRecoilState(inviteModalAtom);
   const router = useRouter();
+  const setOpen = useSetRecoilState(inviteModalAtom);
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
 
   useEffect(() => {
+    const { code } = router.query;
     const currentStatus = getLocalStorage('invite_btn_click');
+    setLocalStorage('invite_code', code);
     setBtnClick(currentStatus ?? false);
-  }, []);
+  }, [router.query]);
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">

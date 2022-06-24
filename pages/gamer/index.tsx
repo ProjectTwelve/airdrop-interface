@@ -9,7 +9,7 @@ import Button from '../../components/button';
 import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
-import { useGamerInfo } from '../../hooks/gamer';
+import { useGamerInfo, useGamerInvitation } from '../../hooks/gamer';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
@@ -18,12 +18,15 @@ import { openLink } from '../../utils';
 import GamerEmailDialog from '../../components/dialog/GamerEmailDialog';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
 import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
+import { roadmapModalAtom } from '../../store/roadmap/state';
 
 export default function Gamer() {
   const router = useRouter();
   const { data: account } = useAccount();
+  const setOpen = useSetRecoilState(roadmapModalAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
+  const { data: invitation } = useGamerInvitation(account?.address);
   useGamerInfo(account?.address);
 
   const badge = useGamerBadgeLoad(gamerInfo);
@@ -36,9 +39,15 @@ export default function Gamer() {
     }
   };
 
+  const handleClaimedRoadmap = () => {
+    if (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) {
+      setOpen(true);
+    }
+  };
+
   return (
     <div className="mt-8">
-      <Back onClick={() => router.back()} />
+      <Back onClick={() => router.push({ pathname: '/', query: router.query })} />
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
         <div className="backdrop-box rounded-2xl p-8 xs:p-4">
           <SteamStatus />
@@ -83,7 +92,7 @@ export default function Gamer() {
                               style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
                             />
                           </div>
-                          <Button type="bordered" className="mt-9 w-[260px]" onClick={() => openLink(GALAXY_LIST)}>
+                          <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
                             My NFT at Galaxy
                           </Button>
                         </>
@@ -93,7 +102,7 @@ export default function Gamer() {
                     <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you have no NFT yet</h4>
                   )}
                 </div>
-                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub">
+                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
                   <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
                     Project Galaxy
@@ -111,7 +120,7 @@ export default function Gamer() {
                 <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
                   <p>Amount of tokens from this game</p>
                   <div className="mt-5 flex items-center justify-between">
-                    <p className="cursor-pointer font-['D-DIN'] text-[48px] font-bold">
+                    <p onClick={handleClaimedRoadmap} className="cursor-pointer font-['D-DIN'] text-[48px] font-bold">
                       {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
@@ -126,7 +135,7 @@ export default function Gamer() {
             <div className="flex gap-4 border-b border-p12-line py-4">
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
-                  <p className="cursor-pointer font-['D-DIN'] text-xl font-bold">
+                  <p onClick={handleClaimedRoadmap} className="cursor-pointer font-['D-DIN'] text-xl font-bold">
                     {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                   </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
@@ -135,10 +144,15 @@ export default function Gamer() {
               </div>
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
-                  <p className="cursor-pointer font-['D-DIN'] text-xl font-bold">-,---</p>
+                  <p
+                    className="cursor-pointer font-['D-DIN'] text-xl font-bold"
+                    onClick={() => invitation?.length && setOpen(true)}
+                  >
+                    {invitation?.length ? '?,???' : '-,---'}
+                  </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
                 </div>
-                <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
+                <Dialog render={({ close }) => <InviteRecordDialog close={close} tab="gamer" />}>
                   <p className="mt-2 cursor-pointer text-xs text-p12-link">
                     My referral list <span className="pl-11 text-p12-link md:pl-1">&gt;</span>
                   </p>
@@ -148,7 +162,10 @@ export default function Gamer() {
             <div className="flex items-center justify-between gap-4 pt-8 md:flex-col">
               <div className="flex items-center justify-start">
                 <p className="mr-4 text-lg font-medium">Total:</p>
-                <p className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]">
+                <p
+                  onClick={handleClaimedRoadmap}
+                  className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
+                >
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                 </p>
                 <Image src="/img/p12.png" width={60} height={60} alt="p12" />

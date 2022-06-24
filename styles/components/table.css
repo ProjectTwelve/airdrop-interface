@@ -19,6 +19,7 @@
 
 .react-table-thead > tr > th {
     text-align: left;
+    font-weight: 500;
 }
 
 .react-table-tbody > tr > td {

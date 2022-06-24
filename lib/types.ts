@@ -45,7 +45,13 @@ export type AccountInfo = {
   credential: number;
   updatedAt: string;
 };
-export type InvitationInfo = {
+export type DevInvitationInfo = {
+  wallet_address: string;
+  appid: string;
+  name: string;
+  time: string;
+};
+export type GamerInvitationInfo = {
   wallet_address: string;
   appid: string;
   name: string;
@@ -122,7 +128,7 @@ export type DeveloperInvitationParams = {
   addr?: string | null;
 };
 export type DeveloperInvitationData = {
-  invitation_info: InvitationInfo[];
+  invitation_info: DevInvitationInfo[];
 };
 
 export type DeveloperRankList = {
@@ -188,4 +194,11 @@ export type GamerRank = {
   steam_id?: string;
   timeRank?: number;
   tokenRank?: number;
+};
+
+export type GamerInvitationParams = {
+  addr?: string | null;
+};
+export type GamerInvitationData = {
+  invitation_info: GamerInvitationInfo[];
 };

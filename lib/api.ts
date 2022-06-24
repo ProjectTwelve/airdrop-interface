@@ -20,6 +20,8 @@ import {
   GamerEmailParams,
   GamerRankList,
   GamerRank,
+  GamerInvitationParams,
+  GamerInvitationData,
 } from './types';
 
 /**
@@ -104,7 +106,7 @@ export const fetchBindSteam = (data: BinSteamParams) => request.post<any, Respon
  * get gamer Steam games
  * @param data
  */
-export const fetchGamerGames = (data: { wallet_address?: string }) =>
+export const fetchGamerGames = (data: { wallet_address?: string; referral_code?: string }) =>
   request.post<any, Response<GamerGamesData>>('/api/gamer/games', data);
 
 /**
@@ -137,3 +139,10 @@ export const fetchGamerRank = (params: { addr?: string }) =>
  * get developer verified count
  */
 export const fetchGamerVerifiedCount = () => request.get<any, Response<{ total: number }>>('/api/gamer/count');
+
+/**
+ * get gamer invitation
+ * @param params
+ */
+export const fetchGamerInvitation = (params: GamerInvitationParams) =>
+  request.get<any, Response<GamerInvitationData>>('/api/gamer/invitation', { params });

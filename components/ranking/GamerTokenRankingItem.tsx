@@ -41,7 +41,7 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
         <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
+        <div className="float-right ml-2 w-[95px] flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">SS Games</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
             {data.ss_game_count}/{formatMinutes(data.ss_game_playtime)}
