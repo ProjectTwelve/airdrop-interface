@@ -35,6 +35,7 @@ export const formatMinutes = (min?: number) => {
   if (min === undefined || min === null) return '--';
   const h = min / 60;
   const floor = Math.floor(min / 60);
+  if (floor >= 100) return floor + ' h';
   return (h > floor && h > 0.1 ? h.toFixed(1) : floor) + ' h';
 };
 
