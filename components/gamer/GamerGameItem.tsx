@@ -31,7 +31,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
         <div className="float-right h-[72px] pr-6 xs:hidden">
           <div className="flex h-full items-center justify-center gap-3">
             <p className="text-sm">Playtime</p>
-            <p className="font-['D-DIN'] text-2xl">{formatMinutes(data.playtime_forever)}</p>
+            <p className="font-din text-2xl">{formatMinutes(data.playtime_forever)}</p>
           </div>
         </div>
         <div className="truncate pt-3">

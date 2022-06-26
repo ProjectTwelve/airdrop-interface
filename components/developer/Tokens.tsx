@@ -29,7 +29,7 @@ function Tokens() {
         <div className="flex gap-4 border-b border-p12-line py-4">
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
-              <p className="cursor-pointer font-['D-DIN'] text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
+              <p className="cursor-pointer font-din text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
                 {claimGames ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
@@ -41,7 +41,7 @@ function Tokens() {
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
               <p
-                className="cursor-pointer font-['D-DIN'] text-xl font-bold"
+                className="cursor-pointer font-din text-xl font-bold"
                 onClick={() => invitation?.length && setOpen(true)}
               >
                 {invitation?.length ? '?,???' : '-,---'}
@@ -62,7 +62,7 @@ function Tokens() {
             </p>
             <p className="mr-4 text-lg font-medium">Total:</p>
             <p
-              className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
+              className="mr-6 cursor-pointer font-din text-[64px] font-bold leading-[64px]"
               onClick={() => claimGames && setOpen(true)}
             >
               {claimGames > 0 ? '?,???' : '-,---'}

@@ -21,6 +21,9 @@ module.exports = {
         'p12-line': '#4E556D',
         'p12-bg': '#74788B',
       },
+      fontFamily: {
+        'din': ['D-DIN']
+      }
     },
   },
   plugins: [],

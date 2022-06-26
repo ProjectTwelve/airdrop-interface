@@ -53,7 +53,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-['D-DIN'] text-2xl font-bold">?,???</p>
+          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -73,7 +73,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-['D-DIN'] text-2xl font-bold">?,???</p>
+          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -110,7 +110,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-['D-DIN'] text-2xl font-bold">?,???</p>
+          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -130,7 +130,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-['D-DIN'] text-2xl font-bold">?,???</p>
+          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -139,7 +139,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
 
   return (
     <div>
-      <h2 className="text-center text-xl">My P12 Airdrop Referral List</h2>
+      <h2 className="mb-[18px] text-center text-xl">My P12 Airdrop Referral List</h2>
       <Tabs onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
         <TabList>
           <Tab style={{ padding: '14px 16px', fontSize: 18 }}>

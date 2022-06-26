@@ -51,7 +51,7 @@ function DeveloperRanking() {
       <div className="flex gap-8 md:flex-col md:gap-2">
         <div>
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
-          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center text-[32px] font-medium leading-[90px] xs:w-auto">
+          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-din text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
           </div>
         </div>
@@ -123,7 +123,7 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      By Token Rarity <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.tokenRank || '--'}</span>
+                      By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{item?.tokenRank || '--'}</span>
                     </div>
                     <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
@@ -132,7 +132,7 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      By Claim Time <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.timeRank || '--'}</span>
+                      By Claim Time <span className="pl-3 font-din text-2xl font-bold">{item?.timeRank || '--'}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

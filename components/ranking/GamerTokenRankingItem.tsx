@@ -62,7 +62,7 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
         </div>
       </div>
       <div className="float-right mx-4 flex h-[72px] items-center justify-between gap-2 xs:hidden">
-        <p className="cursor-pointer font-['D-DIN'] text-xl font-bold">?,???</p>
+        <p className="cursor-pointer font-din text-xl font-bold">?,???</p>
         <Image layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
       </div>
       <div className={classNames('float-right h-[72px] w-[72px] flex-none xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>

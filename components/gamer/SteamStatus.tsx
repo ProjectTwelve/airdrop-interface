@@ -73,7 +73,7 @@ export default function SteamStatus() {
                   <>
                     <div className=" rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
                       We cannot view your profile. Please go to Privacy Settings and set profile to &apos;Public&apos;. You can
-                      turn off after the airdrop&excl;&nbsp;&nbsp;
+                      turn off after the airdrop!&nbsp;&nbsp;
                       <a className="text-p12-link" target="_blank" href={getSteamProfileEdit(gamerInfo.steam_id)}>
                         Open on Steam &gt;
                       </a>

@@ -10,7 +10,7 @@ export default function ReportLayout({ children }: React.PropsWithChildren<{}>) 
         <div className="mt-[56px] flex items-center gap-5">
           <p className="rounded-full bg-[#4383FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#43BBFF]">Daily</p>
           <p className="rounded-full bg-[#C859FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#C859FF]">Weekly</p>
-          <p className="text-[30px] font-medium leading-[30px]">[06/15/2022]</p>
+          <p className="text-[30px] font-semibold leading-[30px]">[06/15/2022]</p>
         </div>
       </header>
       <main className="relative z-[2]">{children}</main>

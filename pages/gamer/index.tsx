@@ -125,7 +125,7 @@ export default function Gamer() {
                 <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
                   <p>Amount of tokens from this game</p>
                   <div className="mt-5 flex items-center justify-between">
-                    <p onClick={handleClaimedRoadmap} className="cursor-pointer font-['D-DIN'] text-[48px] font-bold">
+                    <p onClick={handleClaimedRoadmap} className="cursor-pointer font-din text-[48px] font-bold">
                       {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
@@ -140,7 +140,7 @@ export default function Gamer() {
             <div className="flex gap-4 border-b border-p12-line py-4">
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
-                  <p onClick={handleClaimedRoadmap} className="cursor-pointer font-['D-DIN'] text-xl font-bold">
+                  <p onClick={handleClaimedRoadmap} className="cursor-pointer font-din text-xl font-bold">
                     {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                   </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
@@ -150,7 +150,7 @@ export default function Gamer() {
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
                   <p
-                    className="cursor-pointer font-['D-DIN'] text-xl font-bold"
+                    className="cursor-pointer font-din text-xl font-bold"
                     onClick={() => invitation?.length && setOpen(true)}
                   >
                     {invitation?.length ? '?,???' : '-,---'}
@@ -169,7 +169,7 @@ export default function Gamer() {
                 <p className="mr-4 text-lg font-medium">Total:</p>
                 <p
                   onClick={handleClaimedRoadmap}
-                  className="mr-6 cursor-pointer font-['D-DIN'] text-[64px] font-bold leading-[64px]"
+                  className="mr-6 cursor-pointer font-din text-[64px] font-bold leading-[64px]"
                 >
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                 </p>
