@@ -33,7 +33,7 @@ export default function GamerRanking() {
                     <img src={gamerRankData.avatar_full} alt="avatar" />
                   </div>
                 )}
-                <div className="truncate">{gamerRankData?.person_name || 'Sign in please'}</div>
+                <div className="truncate">{gamerRankData?.person_name || 'Please login first'}</div>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
@@ -42,7 +42,7 @@ export default function GamerRanking() {
                 }}
                 className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
               >
-                Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
+                By Token Rarity <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
               <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
@@ -52,7 +52,7 @@ export default function GamerRanking() {
                 }}
                 className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
               >
-                Time Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
+                By Claim Time <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function GamerRanking() {
       </div>
       <div className="mt-12 flex gap-8 md:flex-col">
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest Verify List</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <GamerTimeRankingHeader />
           <div className="flex flex-col gap-4">
             {timeRankData?.rankList.map((item, index) => (
@@ -74,7 +74,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Token RankList</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
           <GamerTokenRankingHeader />
           <div className="flex flex-col gap-4">
             {tokenRankData?.rankList.map((item, index) => (

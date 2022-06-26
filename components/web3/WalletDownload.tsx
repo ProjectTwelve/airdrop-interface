@@ -74,8 +74,8 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
         </motion.div>
       </div>
       <div>
-        <p className="text-sm">What is the Wallet for?</p>
-        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 tokens, ETH and NFTs.</p>
+        <p className="text-sm">What is a wallet for?</p>
+        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 NFTs, P12 tokens, ETH and more.</p>
         <p className="text-sm leading-6 text-p12-sub">· Sending Blockchain transactions.</p>
       </div>
     </div>

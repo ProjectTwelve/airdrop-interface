@@ -50,13 +50,13 @@ function DeveloperRanking() {
     <div className="px-8 py-12 xs:p-4">
       <div className="flex gap-8 md:flex-col md:gap-2">
         <div>
-          <h3 className="text-sm font-medium leading-5">Total Verified Games</h3>
+          <h3 className="text-sm font-medium leading-5">Total Games</h3>
           <div className="gradient__box mt-3 h-[90px] w-[180px] text-center text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
           </div>
         </div>
         <div className="flex-1">
-          <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
+          <h3 className="text-sm font-medium leading-5">Your Rankings</h3>
           <div className="relative">
             <div
               className={classNames(
@@ -123,7 +123,7 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      Token Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.tokenRank || '--'}</span>
+                      By Token Rarity <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.tokenRank || '--'}</span>
                     </div>
                     <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
@@ -132,7 +132,7 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      Time Ranking <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.timeRank || '--'}</span>
+                      By Claim Time <span className="pl-3 font-['D-DIN'] text-2xl font-bold">{item?.timeRank || '--'}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -143,7 +143,7 @@ function DeveloperRanking() {
       </div>
       <div className="mt-12 flex gap-8 md:flex-col">
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest Verify List</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
           <div className="flex flex-col gap-4">
             {timeRankData?.rankList.map((item, index) => (
@@ -157,7 +157,7 @@ function DeveloperRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Token RankList</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
           <DevTokenRankingHeader />
           <div className="flex flex-col gap-4">
             {tokenRankData?.rankList.map((item, index) => (
