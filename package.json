@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "author": "Lincheng <1139489076@qq.com>",
-  "description": "P12 airdrop on steam platform",
+  "description": "P12 airdrop on Steam platform",
   "keywords": [
     "p12",
-    "airdrop",
-    "steam"
+    "airdrop"
   ],
   "scripts": {
     "dev": "next dev",

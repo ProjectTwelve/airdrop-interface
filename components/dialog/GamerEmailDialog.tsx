@@ -22,7 +22,7 @@ export default function GamerEmailDialog() {
   const [error, setError] = useState<string>('');
   const mutation = useMutation<Response<any>, any, GamerEmailParams, any>((data) => fetchGamerEmail(data), {
     onSuccess: () => {
-      toast.success(<Message message="Bind email successfully" title="We Shall Prevail" />);
+      toast.success(<Message message="Bind email successfully" title="Mission Complete" />);
       setLocalStorage('dev_email_submit', 1);
       setOpen(false);
       openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);

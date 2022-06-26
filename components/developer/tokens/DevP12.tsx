@@ -32,7 +32,7 @@ export function DevP12() {
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(leastOneGame && isAllClaimed) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NO TOKEN YET'}</p>
+            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
           {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
         </div>

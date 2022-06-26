@@ -30,7 +30,7 @@ export const useBindSteamAccount = () => {
       if (data.code === 0) {
         queryClient.refetchQueries(['gamer_info', account?.address]).then();
       } else {
-        toast.error(<Message title="Failed" message={data.msg} />);
+        toast.error(<Message title="Ah shit, here we go again" message={data.msg} />);
       }
     },
   });

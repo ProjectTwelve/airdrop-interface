@@ -23,7 +23,7 @@ all Steam Gamers & Developers!
 
 ### Mechanism
 
-Through Steam API, we get a list of all steam games with their app ID, names, reviews, etc., and we use the signature
+Through Steam API, we get a list of all Steam games with their app ID, names, reviews, etc., and we use the signature
 method to determine the ownership between developers and games.
 
 Here are the rules and the results:

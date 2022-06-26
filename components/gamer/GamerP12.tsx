@@ -27,7 +27,7 @@ export default function GamerP12() {
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center gap-2">
             <Image src={iconStatus.get(false) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">NO TOKEN YET</p>
+            <p className="font-medium">NO NFT YET</p>
           </div>
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line  md:border-r-0 md:border-b md:py-2">

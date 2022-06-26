@@ -156,7 +156,7 @@ export default function TokenTabs() {
               </div>
             ) : (
               <div>
-                <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you have no NFT yet</h4>
+                <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
                 <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
                   Verify my game
                 </Button>
@@ -173,7 +173,7 @@ export default function TokenTabs() {
           )}
           {selectedGame.credential > 10 && (
             <p className="absolute bottom-8 w-full text-center text-sm text-p12-sub">
-              You&apos;ve got 10 identical NFTs that reached our limit
+              You&apos;ve got 10 identical NFTs which reached our limit
             </p>
           )}
         </div>

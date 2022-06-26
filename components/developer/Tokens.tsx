@@ -71,7 +71,7 @@ function Tokens() {
           </div>
           <div>
             <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
-              Claim to my wallet (Coming)
+              Claim via P12 (Under Construction)
             </Button>
           </div>
         </div>
