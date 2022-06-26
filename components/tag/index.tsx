@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 type TagProps = {
-  value: string;
+  value?: string;
   type: 'red' | 'orange' | 'purple' | 'blue' | 'green' | 'white';
   size?: 'small' | 'medium' | 'large';
 };
@@ -11,7 +11,7 @@ type TagProps = {
  * Tag
  * @constructor
  */
-export default function Tag({ value, type, size }: TagProps) {
+export default function Tag({ value, type, size, children }: React.PropsWithChildren<TagProps>) {
   const sizes = {
     small: 'px-3 leading-[18px] border text-xs',
     medium: 'px-5 py-[5px] leading-[20px] border text-sm',
@@ -26,5 +26,9 @@ export default function Tag({ value, type, size }: TagProps) {
     white: 'text-[#99A7C3] border-[#99A7C3] bg-[#99A7C3]/20',
   };
 
-  return <span className={classNames('whitespace-nowrap rounded-full', types[type], sizes[size || 'medium'])}>{value}</span>;
+  return (
+    <span className={classNames('whitespace-nowrap rounded-full', types[type], sizes[size || 'medium'])}>
+      {value || children}
+    </span>
+  );
 }

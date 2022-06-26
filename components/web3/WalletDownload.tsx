@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Back from '../back';
+import Image from 'next/image';
 import { WalletType } from './WalletPopover';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { openLink } from '../../utils';
 
 type WalletDownloadProps = {
   setWalletType?: (type: WalletType) => void;
@@ -63,7 +64,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
               <div
                 className="flex cursor-pointer items-center justify-center gap-1"
                 key={item.name}
-                onClick={() => window.open(item.url)}
+                onClick={() => openLink(item.url)}
               >
                 <Image src={item.icon} width={20} height={20} alt="icon" />
                 <span className="text-xs text-p12-link">{item.name}</span>
@@ -73,8 +74,8 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
         </motion.div>
       </div>
       <div>
-        <p className="text-sm">What is the Wallet for?</p>
-        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 tokens, ETH and NFTs.</p>
+        <p className="text-sm">What is a wallet for?</p>
+        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 NFTs, P12 tokens, ETH and more.</p>
         <p className="text-sm leading-6 text-p12-sub">· Sending Blockchain transactions.</p>
       </div>
     </div>

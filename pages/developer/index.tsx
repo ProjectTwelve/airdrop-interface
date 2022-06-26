@@ -8,13 +8,14 @@ import Verify from '../../components/developer/Verify';
 import Tokens from '../../components/developer/Tokens';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import DeveloperEmailDialog from '../../components/dialog/DeveloperEmailDialog';
-import { claimGroupSelector, NFTClaim, tabSelectAtom } from '../../store/developer/state';
+import { claimGroupSelector, tabSelectAtom } from '../../store/developer/state';
+import { NFT_CLAIM } from '../../constants';
 
 export default function Developer() {
-  const claimGroup = useRecoilValue(claimGroupSelector);
-  const allUnclaimed = useMemo(() => [...claimGroup[NFTClaim.PENDING], ...claimGroup[NFTClaim.UNCLAIMED]], [claimGroup]);
-  const [selectedTab, setSelectedTab] = useRecoilState(tabSelectAtom);
   const router = useRouter();
+  const claimGroup = useRecoilValue(claimGroupSelector);
+  const allUnclaimed = useMemo(() => [...claimGroup[NFT_CLAIM.PENDING], ...claimGroup[NFT_CLAIM.UNCLAIMED]], [claimGroup]);
+  const [selectedTab, setSelectedTab] = useRecoilState(tabSelectAtom);
 
   return (
     <div className="mt-8">

@@ -2,41 +2,30 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Tag from '../tag';
 import { useQuery } from 'react-query';
-import { isMobile } from 'react-device-detect';
 import { fetchDeveloperInfo } from '../../lib/api';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import { claimGroupSelector, claimingGameAtom, developerGameAtom, NFTClaim } from '../../store/developer/state';
-import { BADGES } from '../../constants';
+import { claimGroupSelector, developerGameAtom } from '../../store/developer/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { useAccount } from 'wagmi';
+import { NFT_CLAIM } from '../../constants';
 
 function DeveloperStatus() {
   const { data: account } = useAccount();
   const [games, setGames] = useRecoilState(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
-  const [claimingGame, setClaimingGame] = useRecoilState(claimingGameAtom);
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
   useQuery(['developer_info', account?.address], () => fetchDeveloperInfo({ addr: account?.address }), {
     enabled: !!account?.address,
     onSuccess: (data) => {
       if (data.code !== 0) return;
-      if (claimingGame) {
-        const currentGame = games.find((game) => game.appid === claimingGame.appid);
-        if (currentGame?.nft_claim !== NFTClaim.CLAIMED && claimingGame.nft_level !== undefined) {
-          isMobile
-            ? (window.location.href = BADGES[claimingGame.nft_level].claim)
-            : window.open(BADGES[claimingGame.nft_level].claim, '_blank');
-        }
-        setClaimingGame(undefined);
-      }
       setGames(data.data.account_info || []);
     },
   });
 
   const tagType = useMemo(
-    () => (claimGroup[NFTClaim.CLAIMED].length === games.length ? 'green' : 'red'),
+    () => (claimGroup[NFT_CLAIM.CLAIMED].length === games.length ? 'green' : 'red'),
     [claimGroup, games.length],
   );
 
@@ -49,17 +38,17 @@ function DeveloperStatus() {
     >
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
         {games.length ? (
-          <Tag type={tagType} size="large" value={`${claimGroup[NFTClaim.CLAIMED].length}/${games.length} Airdrop NFT`} />
+          <Tag type={tagType} size="large" value={`${claimGroup[NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}
       </div>
-      <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-['D-DIN'] text-xl font-bold">
+      <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-din text-xl font-bold">
         <span className="text-p12-success">{games.length}</span>
         {games.length > 1 ? 'Games' : 'Game'}
       </div>
       <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
-        <p className="cursor-pointer font-['D-DIN'] font-bold" onClick={() => setOpen(true)}>
+        <p className="cursor-pointer font-din font-bold" onClick={() => setOpen(true)}>
           ?,???
         </p>
         <div className="h-[30px] w-[30px]">

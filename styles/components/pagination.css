@@ -138,7 +138,7 @@
 
 .rc-pagination-prev button,
 .rc-pagination-next button {
-    color: #A3A6B3;
+    color: #fff;
     cursor: pointer;
     user-select: none;
 }
@@ -189,7 +189,7 @@
 .rc-pagination-disabled .rc-pagination-item-link,
 .rc-pagination-disabled:hover .rc-pagination-item-link,
 .rc-pagination-disabled:focus .rc-pagination-item-link {
-    color: rgba(0, 0, 0, 0.25);
+    color: #A3A6B3;
     border-color: #d9d9d9;
     cursor: not-allowed;
 }
@@ -249,7 +249,7 @@
 .rc-pagination-simple .rc-pagination-prev .rc-pagination-item-link::after,
 .rc-pagination-simple .rc-pagination-next .rc-pagination-item-link::after {
     height: 24px;
-    line-height: 24px;
+    line-height: 22px;
 }
 
 .rc-pagination-simple .rc-pagination-simple-pager {

@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../button';
 import { WalletType } from './WalletPopover';
 import { useRecoilState } from 'recoil';
-import { downloadClickAtom } from '../../store/download/state';
+import { downloadClickAtom } from '../../store/web3/state';
 import { isMobile } from 'react-device-detect';
 import { useConnect } from 'wagmi';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';

@@ -1,9 +1,10 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import { RankInfo } from '../../lib/types';
+import { DevRankInfo } from '../../lib/types';
+import { openLink } from '../../utils';
 
-export function TimeRankingHeader() {
+export function DevTimeRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
       <p className="w-[55px]">Rank</p>
@@ -13,23 +14,23 @@ export function TimeRankingHeader() {
   );
 }
 
-type TimeRankingItemProps = {
+type DevTimeRankingItemProps = {
   hover?: boolean;
-  data: Partial<RankInfo>;
   steamStore?: boolean;
+  data: Partial<DevRankInfo>;
 };
-export default function TimeRankingItem({ hover, data, steamStore }: TimeRankingItemProps) {
+export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    window.open('https://store.steampowered.com/app/' + data.appid, '_blank');
+    openLink('https://store.steampowered.com/app/' + data.appid);
   };
 
   return (
     <div
       onClick={steamStore ? handleToSteamStore : undefined}
       className={classNames(
-        'cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4',
-        hover ? 'hover:bg-[#7980AF]/20' : '',
+        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
+        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{data.index}</div>
@@ -63,7 +64,7 @@ export default function TimeRankingItem({ hover, data, steamStore }: TimeRanking
   );
 }
 
-TimeRankingItem.defaultProps = {
+DevTimeRankingItem.defaultProps = {
   hover: true,
   steamStore: true,
 };

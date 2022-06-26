@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import { BADGES } from '../../constants';
+import { DEV_BADGES } from '../../constants';
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
-import { RankInfo } from '../../lib/types';
+import { DevRankInfo } from '../../lib/types';
+import { openLink } from '../../utils';
 
-export function TokenRankingHeader() {
+export function DevTokenRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
       <p className="w-[55px]">Rank</p>
@@ -15,23 +16,23 @@ export function TokenRankingHeader() {
   );
 }
 
-type TokenRankingItemProps = {
+type DevDevTokenRankingItemProps = {
   hover?: boolean;
-  data: RankInfo;
   steamStore?: boolean;
+  data: Partial<DevRankInfo>;
 };
-export default function TokenRankingItem({ hover, data, steamStore }: TokenRankingItemProps) {
+export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevTokenRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    window.open('https://store.steampowered.com/app/' + data.appid, '_blank');
+    openLink('https://store.steampowered.com/app/' + data.appid);
   };
 
   return (
     <div
       onClick={steamStore ? handleToSteamStore : undefined}
       className={classNames(
-        'cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4',
-        hover ? 'hover:bg-[#7980AF]/20' : '',
+        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
+        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{data.index}</div>
@@ -42,10 +43,10 @@ export default function TokenRankingItem({ hover, data, steamStore }: TokenRanki
           )}
         </div>
         <div className={classNames('float-right h-[72px] w-[72px] xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
-          {data.nft_level !== undefined && <img src={BADGES[data.nft_level].img} className="w-full" alt="badge" />}
+          {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
         <div className="float-right mx-4 flex h-[72px] items-center justify-between gap-2 xs:hidden">
-          <p className="cursor-pointer font-['D-DIN'] text-xl font-bold">?,???</p>
+          <p className="cursor-pointer font-din text-xl font-bold">?,???</p>
           <Image src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
         <div className="truncate">
@@ -68,7 +69,7 @@ export default function TokenRankingItem({ hover, data, steamStore }: TokenRanki
   );
 }
 
-TokenRankingItem.defaultProps = {
+DevTokenRankingItem.defaultProps = {
   hover: true,
   steamStore: true,
 };

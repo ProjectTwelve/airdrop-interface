@@ -56,7 +56,7 @@ export default function ButterflyGL() {
 
   useEffect(() => {
     if (isLoaded) {
-      const className = document.documentElement.className;
+      const className = document.documentElement.classList[0];
       const theme = themes[className] || themes['p12-theme-01'];
       const butterfly = window.hpgButterfly;
       const _defaultProperties = butterflyHelpers.defaultProperties;
@@ -98,7 +98,12 @@ export default function ButterflyGL() {
 
   return (
     <>
-      <Script id="butterfly" src="https://cdn1.p12.games/js/butterfly.min.js" strategy="lazyOnload" onLoad={() => setIsLoaded(true)} />
+      <Script
+        id="butterfly"
+        src="https://cdn1.p12.games/js/butterfly.min.js"
+        strategy="lazyOnload"
+        onLoad={() => setIsLoaded(true)}
+      />
       <div ref={containerRef} className="butterfly-gl fixed top-0 left-0 right-0 bottom-0 -z-10 opacity-70">
         <canvas ref={canvasRef} className="butterfly-canvas absolute h-full w-full"></canvas>
       </div>

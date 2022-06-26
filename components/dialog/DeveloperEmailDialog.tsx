@@ -1,5 +1,6 @@
 import Dialog from './index';
 import Button from '../button';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import ToastIcon from '../svg/ToastIcon';
 import { useMutation } from 'react-query';
@@ -11,16 +12,15 @@ import { toast } from 'react-toastify';
 import Message from '../message';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue } from 'recoil';
-import { hasClaimGameSelector } from '../../store/developer/state';
-import dayjs from 'dayjs';
+import { hasClaimedGameSelector } from '../../store/developer/state';
 
 export default function DeveloperEmailDialog() {
   const { data: account } = useAccount();
-  const hasClaimGame = useRecoilValue(hasClaimGameSelector);
+  const claimedGame = useRecoilValue(hasClaimedGameSelector);
   const [open, setOpen] = useState<boolean>(false);
   const mutation = useMutation<Response<any>, any, DeveloperEmailParams, any>((data) => fetchDeveloperEmail(data), {
     onSuccess: () => {
-      toast.success(<Message message="Bind email successfully" title="We Shall Prevail" />);
+      toast.success(<Message message="Bind email successfully" title="Mission Complete" />);
       setLocalStorage('dev_email_submit', 1);
       setOpen(false);
     },
@@ -40,18 +40,18 @@ export default function DeveloperEmailDialog() {
       message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
     }).then((signature) => {
       mutation.mutate({ wallet_address: account.address, email: value, signature });
-    });
+    }).catch(error => error);
   };
 
   useEffect(() => {
     const day = dayjs().format('YYYY-MM-DD');
     const emailSubmit = getLocalStorage('dev_email_submit');
     const emailDaily = getLocalStorage('dev_email_daily');
-    if (!emailSubmit && emailDaily !== day && hasClaimGame) {
+    if (!emailSubmit && emailDaily !== day && claimedGame) {
       setOpen(true);
       setLocalStorage('dev_email_daily', day);
     }
-  }, [hasClaimGame]);
+  }, [claimedGame]);
 
   return (
     <Dialog

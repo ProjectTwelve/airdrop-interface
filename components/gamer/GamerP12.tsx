@@ -1,17 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import SocialMedia from '../../socialMedia';
-import { isSocialMediaClickSelector } from '../../../store/invite/state';
+import SocialMedia from '../socialMedia';
 import { useRecoilValue } from 'recoil';
-import { claimGroupSelector, developerGameAtom, NFTClaim } from '../../../store/developer/state';
+import { isSocialMediaClickSelector } from '../../store/invite/state';
+import { gamerInfoAtom } from '../../store/gamer/state';
+import { NFT_CLAIM } from '../../constants';
 
-export function MyP12() {
-  const isAllClicked = useRecoilValue(isSocialMediaClickSelector);
-  const games = useRecoilValue(developerGameAtom);
-  const claimGroup = useRecoilValue(claimGroupSelector);
-  const leastOneGame = useMemo(() => games.some((game) => game.appid), [games]);
-  const isAllClaimed = useMemo(() => claimGroup[NFTClaim.CLAIMED].length === games.length, [claimGroup, games.length]);
-
+export default function GamerP12() {
+  const isClicked = useRecoilValue(isSocialMediaClickSelector);
+  const gamerInfo = useRecoilValue(gamerInfoAtom);
   const iconStatus = new Map([
     [true, '/svg/check_success.svg'],
     [false, '/svg/close_error.svg'],
@@ -23,20 +20,19 @@ export function MyP12() {
       <div className="mt-3 mb-8 flex rounded-2xl border border-p12-line py-[30px] md:flex-col md:py-0">
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center gap-2">
-            <Image src={iconStatus.get(leastOneGame) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">Verified at least</p>
+            <Image src={iconStatus.get(!!gamerInfo?.steam_id) || ''} width={26} height={26} alt="icon" />
+            <p className="font-medium">Sign in with Steam</p>
           </div>
-          <p className="font-medium">one game as developer</p>
+          <p className="font-medium">account and sync profile</p>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center gap-2">
-            <Image src={iconStatus.get(leastOneGame && isAllClaimed) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">{leastOneGame ? 'Airdrop NFT' : 'NO TOKEN YET'}</p>
+            <Image src={iconStatus.get(gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) || ''} width={26} height={26} alt="icon" />
+            <p className="font-medium">{gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
-          {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
-          <Image src={iconStatus.get(isAllClicked) || ''} width={26} height={26} alt="icon" />
+          <Image src={iconStatus.get(isClicked) || ''} width={26} height={26} alt="icon" />
           <p className="font-medium">Join us on</p>
           <SocialMedia />
         </div>
@@ -48,5 +44,3 @@ export function MyP12() {
     </div>
   );
 }
-
-export default MyP12;

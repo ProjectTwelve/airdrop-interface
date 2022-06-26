@@ -1,4 +1,4 @@
-import { NFTClaim, NFTLevel } from '../store/developer/state';
+import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
 
 export type Response<T> = {
   status: string;
@@ -11,7 +11,7 @@ export type ReleaseDate = {
   coming_soon: boolean;
   date: string;
 };
-export type GameInfo = {
+export type DevGameInfo = {
   index: number;
   proxy_country: string;
   steam_appid: number;
@@ -38,29 +38,46 @@ export type AccountInfo = {
   total_reviews: number;
   header_image: string;
   release_date?: ReleaseDate;
-  nft_claim: NFTClaim;
+  nft_claim: NFT_CLAIM;
   nft_id: number | null;
   appid: number;
-  nft_level: NFTLevel;
+  nft_level: DEV_NFT_LEVEL;
   credential: number;
   updatedAt: string;
 };
-export type InvitationInfo = {
+export type DevInvitationInfo = {
   wallet_address: string;
   appid: string;
   name: string;
   time: string;
 };
-export type RankInfo = {
+export type GamerInvitationInfo = {
+  wallet_address: string;
+  appid: string;
+  name: string;
+  time: string;
+};
+export type DevRankInfo = {
   header_image: string;
   name: string;
   release_date: string;
   developers: string[];
   genres: string[];
   appid: number;
-  nft_level: NFTLevel;
+  nft_level: DEV_NFT_LEVEL;
   index: number;
   createdAt: string;
+};
+export type GamerRankInfo = {
+  person_name: string;
+  time_created: number;
+  steam_id: string;
+  ss_game_count: number;
+  avatar_full: string;
+  ss_game_playtime: number;
+  nft_level: GAMER_NFT_LEVEL;
+  createdAt: string;
+  index: number;
 };
 export type GameRank = {
   appid: number;
@@ -71,6 +88,14 @@ export type GameRank = {
   timeRank: number;
   tokenRank: number;
 };
+export type GamerGameInfo = {
+  appid: number;
+  genres?: string[];
+  img_icon_url: string;
+  name: string;
+  playtime_forever: number;
+  ss_game: number;
+};
 
 export type ReferralCodeParams = { wallet_address?: string | null };
 export type ReferralCodeData = { referral_code?: string };
@@ -79,7 +104,7 @@ export type DeveloperGameParams = {
   appid: string | number;
 };
 export type DeveloperGameData = {
-  game_info: GameInfo;
+  game_info: DevGameInfo;
 };
 
 export type DeveloperVerifyParams = {
@@ -103,14 +128,14 @@ export type DeveloperInvitationParams = {
   addr?: string | null;
 };
 export type DeveloperInvitationData = {
-  invitation_info: InvitationInfo[];
+  invitation_info: DevInvitationInfo[];
 };
 
 export type DeveloperRankList = {
   rankLength: number;
   page: number;
   size: number;
-  rankList: Partial<RankInfo>[];
+  rankList: Partial<DevRankInfo>[];
 };
 
 export type DeveloperRank = {
@@ -121,4 +146,59 @@ export type DeveloperEmailParams = {
   wallet_address?: string;
   email: string;
   signature: string;
+};
+
+export type GamerInfoData = {
+  avatar_full: string;
+  person_name: string;
+  steam_id: string;
+  time_created?: number;
+  birthday?: number;
+  credential?: number;
+  email?: string;
+  nft_claim?: NFT_CLAIM;
+  nft_level?: GAMER_NFT_LEVEL;
+  nft_id?: number;
+};
+
+export type BinSteamParams = {
+  wallet_address?: string;
+  secret_token?: string;
+  referral_code?: string;
+};
+
+export type GamerGamesData = {
+  games: GamerGameInfo[];
+  ss_game_count?: number;
+  ss_game_playtime?: number;
+  total_game_count?: number;
+  total_playtime?: number;
+};
+
+export type GamerEmailParams = {
+  wallet_address?: string;
+  email: string;
+  signature: string;
+};
+
+export type GamerRankList = {
+  rankLength: number;
+  page: number;
+  size: number;
+  rankList: Partial<GamerRankInfo>[];
+};
+
+export type GamerRank = {
+  avatar_full?: string;
+  person_name?: string;
+  steam_id?: string;
+  timeRank?: number;
+  tokenRank?: number;
+};
+
+export type GamerInvitationParams = {
+  addr?: string | null;
+};
+export type GamerInvitationData = {
+  invitation_info: GamerInvitationInfo[];
 };

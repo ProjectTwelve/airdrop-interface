@@ -11,7 +11,7 @@ export function LeftCircle({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="18" cy="18" r="17" fill="#24273B" stroke="#555367" strokeWidth="2" />
+      <circle cx="18" cy="18" r="17" fill="#24273B" stroke="#555367" strokeWidth="1" />
       <path
         className="fill-p12-bg group-hover:fill-white"
         fillRule="evenodd"

@@ -7,6 +7,7 @@ import { inviteModalAtom } from '../../store/invite/state';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { roadmapModalAtom } from '../../store/roadmap/state';
+import { openLink } from '../../utils';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
@@ -31,7 +32,7 @@ function LayoutHeaderExtra() {
             transition={{ type: 'spring', stiffness: 200, damping: 30 }}
             className="relative flex gap-3"
           >
-            <Button type="bordered" onClick={() => window.open(readmeLink)}>
+            <Button type="bordered" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center gap-2 text-sm">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
                 Readme
@@ -59,7 +60,7 @@ function LayoutHeaderExtra() {
                   className="backdrop-box absolute -top-1/2 w-[190px] rounded-lg text-xs"
                 >
                   <div className="p-4">
-                    Share your invitation link and get rewards
+                    Share your invitation link and get a share of tokens
                     <div className="mt-2 flex justify-end">
                       <div
                         className="cursor-pointer text-p12-link"
@@ -68,7 +69,7 @@ function LayoutHeaderExtra() {
                           setLocalStorage('invite_tips_click', true);
                         }}
                       >
-                        I got it
+                      Okay
                       </div>
                     </div>
                   </div>

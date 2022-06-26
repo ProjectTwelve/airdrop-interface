@@ -7,26 +7,22 @@ import { inviteModalAtom } from '../store/invite/state';
 import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-import TimeRankingItem, { TimeRankingHeader } from '../components/ranking/TimeRankingItem';
-import TokenRankingItem, { TokenRankingHeader } from '../components/ranking/TokenRakingItem';
-import Loading from '../components/loading';
-import { useDeveloperTimeRank, useDeveloperTokenRank, useTokenAnimation } from '../components/ranking/hooks';
+import DeveloperTabs from '../components/ranking/DeveloperTabs';
+import GamerTabs from '../components/ranking/GamerTabs';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
-  const setOpen = useSetRecoilState(inviteModalAtom);
   const router = useRouter();
+  const setOpen = useSetRecoilState(inviteModalAtom);
   const [btnClick, setBtnClick] = useState(false);
   const [isHovered, setHovered] = useState(false);
-  const { data: timeRankData, isLoading: isTimeRankLoading } = useDeveloperTimeRank({ page: 1, size: 10 });
-  const { data: tokenRankData, isLoading: isTokenRankLoading } = useDeveloperTokenRank({ page: 1, size: 50 });
-  useDeveloperTokenRank({ page: 1, size: 10 });
-  const animateY = useTokenAnimation(tokenRankData?.rankList);
 
   useEffect(() => {
+    const { code } = router.query;
     const currentStatus = getLocalStorage('invite_btn_click');
+    setLocalStorage('invite_code', code);
     setBtnClick(currentStatus ?? false);
-  }, []);
+  }, [router.query]);
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
@@ -79,33 +75,22 @@ const Home: NextPage = () => {
           >
             I am a Steam Game Dev
           </Button>
-          <Button disabled className="w-full max-w-[470px]" size="large">
-            I am a Steam Gamer (coming in stage2)
+          <Button
+            className="w-full max-w-[470px]"
+            size="large"
+            type="gradient"
+            onClick={() => router.push({ pathname: '/gamer', query: router.query })}
+          >
+            I am a Steam Gamer
           </Button>
         </div>
       </div>
       <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
-        <RankingHomeCard title="Developer Latest Verify List" layoutId="ranking_01">
-          <TimeRankingHeader />
-          <div className="h-[350px] overflow-hidden">
-            <div className="flex h-[460px] flex-col gap-4 overflow-hidden">
-              {isTimeRankLoading && <Loading size={48} />}
-              {timeRankData?.rankList.slice(0, 3).map((item, index) => (
-                <TimeRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
-              ))}
-            </div>
-          </div>
+        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
+          <DeveloperTabs />
         </RankingHomeCard>
-        <RankingHomeCard title="Developer Token Ranking" layoutId="ranking_02">
-          <TokenRankingHeader />
-          <div className="h-[350px] overflow-hidden">
-            <motion.div style={{ y: animateY }} className="flex flex-col gap-4">
-              {isTokenRankLoading && <Loading size={48} />}
-              {tokenRankData?.rankList.map((item, index) => (
-                <TokenRankingItem steamStore={false} data={item} hover={false} key={item.appid || index} />
-              ))}
-            </motion.div>
-          </div>
+        <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+          <GamerTabs />
         </RankingHomeCard>
       </div>
     </div>

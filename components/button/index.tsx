@@ -14,7 +14,7 @@ type ButtonProps = {
 function Loading() {
   return (
     <div className="h-full p-1">
-      <img src="/svg/loading.svg" className="h-full mx-auto animate-spin" alt="loading" />
+      <img src="/svg/loading.svg" className="mx-auto h-full animate-spin" alt="loading" />
     </div>
   );
 }
@@ -40,7 +40,7 @@ const Button = React.forwardRef(function ButtonInner(
       ref={ref}
       onClick={loading ? undefined : onClick}
       className={classNames(
-        'relative overflow-hidden backdrop-blur rounded-full px-4 text-center',
+        'relative overflow-hidden rounded-full px-4 text-center backdrop-blur',
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
         'disabled:cursor-not-allowed',
         bg[type || 'default'],

@@ -8,19 +8,20 @@ import { getVerifySignData } from '../../utils';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import { fetchDeveloperVerify } from '../../lib/api';
-import { DeveloperVerifyData, DeveloperVerifyParams, GameInfo, Response } from '../../lib/types';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
 import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
 import { useAccount, useSignMessage } from 'wagmi';
 
-export type SteamApp = Partial<GameInfo> & { index: number };
+export type SteamApp = Partial<DevGameInfo> & { index: number };
 
 function Verify() {
   const { data: account } = useAccount();
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
+  const [signature, setSignature] = useState('Please click the generate button.');
   const { signMessage } = useSignMessage({
     message: JSON.stringify(getVerifySignData(account?.address)),
     onSuccess(data) {
@@ -30,7 +31,6 @@ function Verify() {
 
   // prevent duplication of index
   const [count, setCount] = useState(0);
-  const [signature, setSignature] = useState('Please click the generate button.');
   const setSelectedTab = useSetRecoilState(tabSelectAtom);
   const setVerifiedSteamApp = useSetRecoilState(verifiedSteamAppAtom);
   const [, copyToClipboard] = useCopyToClipboard();
@@ -48,15 +48,15 @@ function Verify() {
       onSuccess: (data) => {
         queryClient.refetchQueries(['developer_info', account?.address]).then();
         if (data.code === 1) {
-          toast.error(<Message message={data.msg} title="Failed" />);
+          toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
           return;
         }
         if (data.code !== 0) {
           const { failedGames } = data.data;
-          toast.error(<Message message={getErrorToast(failedGames)} title="Failed" />);
+          toast.error(<Message message={getErrorToast(failedGames)} title="Ah shit, here we go again" />);
           return;
         }
-        toast.success(<Message message="Verified successfully!" title="We Shall Prevail" />);
+        toast.success(<Message message="Verified successfully" title="Mission Complete" />);
         setSelectedTab(1);
       },
     },
@@ -73,7 +73,7 @@ function Verify() {
       const list = [...appList];
       const isDuplicate = list.some((item) => item.steam_appid === app.steam_appid);
       if (isDuplicate) {
-        toast.error(<Message message="Includes the same steam game." title="Failed" />);
+        toast.error(<Message message="Duplicate Steam game" title="Ah shit, here we go again" />);
       } else {
         list[index] = app;
       }
@@ -157,7 +157,7 @@ function Verify() {
                       size="small"
                       onClick={() => {
                         copyToClipboard(signature);
-                        toast.success(<Message message="Copied to clipboard!" title="We Shall Prevail" />);
+                        toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                       }}
                     >
                       Copy
