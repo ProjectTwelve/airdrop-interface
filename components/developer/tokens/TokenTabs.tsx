@@ -12,7 +12,7 @@ import { useSelectedGame } from '../../../hooks/useSelectedGame';
 import {
   DEV_BADGES,
   GALAXY_LIST,
-  DEV_NFT_CONTRACT_ADDRESS,
+  BADGE_CONTRACT_ADDRESS,
   NFT_CLAIM_TYPE,
   NFT_CLAIM,
   GALAXY_P12_SPACE,
@@ -205,7 +205,7 @@ export default function TokenTabs() {
               { label: 'ID', value: selectedGame.nft_id || '--' },
               {
                 label: 'Contract address',
-                value: selectedGame.appid && selectedGame.credential <= 10 ? shortenAddress(DEV_NFT_CONTRACT_ADDRESS) : '--',
+                value: selectedGame.appid && selectedGame.credential <= 10 ? shortenAddress(BADGE_CONTRACT_ADDRESS) : '--',
               },
               { label: 'Role', value: selectedGame.appid ? 'Developer' : '--' },
               {

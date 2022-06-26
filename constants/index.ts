@@ -1,5 +1,4 @@
-export const DEV_NFT_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
-export const GAMER_NFT_CONTRACT_ADDRESS = '0x900b8215FA5231C24f30C694850481e25300845c';
+export const BADGE_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
 export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 export const GALAXY_P12_SPACE = 'https://galaxy.eco/P12/';
 
