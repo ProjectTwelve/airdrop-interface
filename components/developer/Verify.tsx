@@ -48,15 +48,15 @@ function Verify() {
       onSuccess: (data) => {
         queryClient.refetchQueries(['developer_info', account?.address]).then();
         if (data.code === 1) {
-          toast.error(<Message message={data.msg} title="Failed" />);
+          toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
           return;
         }
         if (data.code !== 0) {
           const { failedGames } = data.data;
-          toast.error(<Message message={getErrorToast(failedGames)} title="Failed" />);
+          toast.error(<Message message={getErrorToast(failedGames)} title="Ah shit, here we go again" />);
           return;
         }
-        toast.success(<Message message="Verified successfully!" title="We Shall Prevail" />);
+        toast.success(<Message message="Verified successfully" title="Mission Complete" />);
         setSelectedTab(1);
       },
     },
@@ -73,7 +73,7 @@ function Verify() {
       const list = [...appList];
       const isDuplicate = list.some((item) => item.steam_appid === app.steam_appid);
       if (isDuplicate) {
-        toast.error(<Message message="Includes the same steam game." title="Failed" />);
+        toast.error(<Message message="Duplicate Steam game" title="Ah shit, here we go again" />);
       } else {
         list[index] = app;
       }
@@ -157,7 +157,7 @@ function Verify() {
                       size="small"
                       onClick={() => {
                         copyToClipboard(signature);
-                        toast.success(<Message message="Copied to clipboard!" title="We Shall Prevail" />);
+                        toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                       }}
                     >
                       Copy

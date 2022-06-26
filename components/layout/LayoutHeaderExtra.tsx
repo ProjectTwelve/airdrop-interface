@@ -60,7 +60,7 @@ function LayoutHeaderExtra() {
                   className="backdrop-box absolute -top-1/2 w-[190px] rounded-lg text-xs"
                 >
                   <div className="p-4">
-                    Share your invitation link and get rewards
+                    Share your invitation link and get a share of tokens
                     <div className="mt-2 flex justify-end">
                       <div
                         className="cursor-pointer text-p12-link"
@@ -69,7 +69,7 @@ function LayoutHeaderExtra() {
                           setLocalStorage('invite_tips_click', true);
                         }}
                       >
-                        I got it
+                      Okay
                       </div>
                     </div>
                   </div>

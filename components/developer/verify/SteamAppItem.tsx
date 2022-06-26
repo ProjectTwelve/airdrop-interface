@@ -24,7 +24,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
     enabled: false,
     onSuccess: (data) => {
       if (data.code !== 0) {
-        toast.error(<Message message={data.msg} title="Failed" />);
+        toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
         return;
       }
       onConfirm(data.data.game_info);

@@ -31,9 +31,9 @@ export default function GamerClaimSuccess() {
           <div className="my-[30px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
             <ol className="flex list-decimal flex-col gap-1 pl-5">
-              <li>Your NFT has been claimed and it will take a few seconds to sync status.</li>
-              <li>Your game data has been snapshotted and will not be updated.</li>
-              <li>Your wallet can only be bound to one Steam account and claim one NFT.</li>
+              <li>Your NFT has been claimed and will take a few seconds to sync.</li>
+              <li>Your game data has been snapshotted and will remain as-is.</li>
+              <li>One address can only be bound to one Steam account and thus only one NFT.</li>
             </ol>
           </div>
           <div className="mt-8 flex justify-end">

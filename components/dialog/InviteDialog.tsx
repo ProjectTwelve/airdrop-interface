@@ -136,7 +136,7 @@ function InviteDialog() {
                 type="gradient"
                 onClick={() => {
                   copyToClipboard(inviteLink);
-                  toast.success(<Message message="Copied to clipboard" title="We Shall Prevail" />);
+                  toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                 }}
               >
                 Copy

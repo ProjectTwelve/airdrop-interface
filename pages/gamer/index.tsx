@@ -99,7 +99,7 @@ export default function Gamer() {
                       )}
                     </div>
                   ) : (
-                    <h4 className="text-center text-xl font-medium text-p12-error">Sorry, you have no NFT yet</h4>
+                    <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
                   )}
                 </div>
                 <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
@@ -172,7 +172,7 @@ export default function Gamer() {
               </div>
               <div>
                 <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
-                  Claim to my wallet (Coming)
+                  Claim via P12 (Under Construction)
                 </Button>
               </div>
             </div>

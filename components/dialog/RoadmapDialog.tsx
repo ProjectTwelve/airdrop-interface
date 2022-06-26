@@ -67,7 +67,7 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start gap-1.5 leading-5">
                     <span className="h-4 w-4 text-center text-sm">·</span>
-                    P12 Airdrop for Steam gamers launch. Gamers can verify steam accounts to get Gamer Genesis NFT, in a fair
+                    P12 Airdrop for Steam gamers launch. Gamers can verify Steam accounts to get Gamer Genesis NFT, in a fair
                     way.
                   </p>
                   <p className="flex justify-start gap-1.5 leading-5">

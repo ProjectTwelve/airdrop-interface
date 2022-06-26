@@ -14,11 +14,11 @@ export default function GamerTabs() {
     <Tabs onSelect={(index) => setSelectedTab(index)}>
       <TabList>
         <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-          Latest Verify List
+          Latest
           <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="gamer_tab_underline" />}</div>
         </Tab>
         <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-          Token Ranking
+          Rankings
           <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="gamer_tab_underline" />}</div>
         </Tab>
       </TabList>
