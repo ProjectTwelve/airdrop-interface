@@ -35,11 +35,11 @@ const DEV_BADGE_PURPLE = process.env.NEXT_PUBLIC_DEV_BADGE_PURPLE || 'https://ga
 const DEV_BADGE_BLUE = process.env.NEXT_PUBLIC_DEV_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCi9CUUrni';
 const DEV_BADGE_GREEN = process.env.NEXT_PUBLIC_DEV_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCV4JUU7eR';
 
-const GAMER_BADGE_ORANGE = process.env.NEXT_PUBLIC_GAMER_BADGE_ORANGE || 'https://galaxy.eco/P12/campaign/GCt9JUUJCJ';
-const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https://galaxy.eco/P12/campaign/GCteJUUM7z';
-const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCi9CUUrni';
-const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCV4JUU7eR';
-const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galaxy.eco/P12/campaign/GCV4JUU7eR';
+const GAMER_BADGE_ORANGE = process.env.NEXT_PUBLIC_GAMER_BADGE_ORANGE || 'https://galaxy.eco/P12/campaign/GCZ74Utyqp';
+const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https://galaxy.eco/P12/campaign/GCZm4UtEeE';
+const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCuBwUtL6P';
+const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCrkwUtqiz';
+const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galaxy.eco/P12/campaign/GCirwUtCCS';
 
 export const DEV_BADGES = {
   [DEV_NFT_LEVEL.ORANGE]: {
@@ -70,36 +70,31 @@ export const DEV_BADGES = {
 
 export const GAMER_BADGES = {
   [GAMER_NFT_LEVEL.ORANGE]: {
-    asset:
-      'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655800375.png',
+    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655032051514527675.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange.png',
     claim: GAMER_BADGE_ORANGE,
     title: 'P12 XII-PLORER Badge [Orange Rarity]',
   },
   [GAMER_NFT_LEVEL.PURPLE]: {
-    asset:
-      'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655800311.png',
+    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655018352989957058.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple.png',
     claim: GAMER_BADGE_PURPLE,
     title: 'P12 XII-PLORER Badge [Purple Rarity]',
   },
   [GAMER_NFT_LEVEL.BLUE]: {
-    asset:
-      'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655800235.png',
+    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655015953876061494.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue.png',
     claim: GAMER_BADGE_BLUE,
     title: 'P12 XII-PLORER Badge [Blue Rarity]',
   },
   [GAMER_NFT_LEVEL.GREEN]: {
-    asset:
-      'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655799890.png',
+    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655017682753443868.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green.png',
     claim: GAMER_BADGE_GREEN,
     title: 'P12 XII-PLORER Badge [Green Rarity]',
   },
   [GAMER_NFT_LEVEL.WHITE]: {
-    asset:
-      'https://d257b89266utxb.cloudfront.net/galaxy/images/avatar/0x618bb5466c13747049af8f3b237f929c95de5d7e-1655799310.png',
+    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655005918287504872.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_white.png',
     claim: GAMER_BADGE_WHITE,
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
