@@ -1,18 +1,21 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
+import { useAccount, useNetwork } from 'wagmi';
+import { AnimatePresence } from 'framer-motion';
 import Button from '../button';
 import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
 import WalletPopover from './WalletPopover';
 import DeveloperStatus from './DeveloperStatus';
 import GamerStatus from './GamerStatus';
-import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
-import { useAccount, useNetwork } from 'wagmi';
+import { isConnectPopoverOpen } from '../../store/web3/state';
 
 function Web3Status() {
   const router = useRouter();
   const { data: account } = useAccount();
   const { activeChain, switchNetwork } = useNetwork();
+  const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
 
   if (account?.address) {
     if (activeChain?.unsupported) {
@@ -34,7 +37,7 @@ function Web3Status() {
   } else {
     return (
       <div>
-        <Popover render={({ close }) => <WalletPopover close={close} />}>
+        <Popover open={isOpen} onOpenChange={(op) => setIsOpen(op)} render={({ close }) => <WalletPopover close={close} />}>
           <Button type="gradient" className="w-[120px]">
             Connect
           </Button>

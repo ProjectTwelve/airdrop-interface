@@ -4,6 +4,7 @@ import SocialMedia from '../socialMedia';
 import { useRecoilValue } from 'recoil';
 import { isSocialMediaClickSelector } from '../../store/invite/state';
 import { gamerInfoAtom } from '../../store/gamer/state';
+import { NFT_CLAIM } from '../../constants';
 
 export default function GamerP12() {
   const isClicked = useRecoilValue(isSocialMediaClickSelector);
@@ -26,8 +27,8 @@ export default function GamerP12() {
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center gap-2">
-            <Image src={iconStatus.get(false) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium">NO NFT YET</p>
+            <Image src={iconStatus.get(gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) || ''} width={26} height={26} alt="icon" />
+            <p className="font-medium">{gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
         </div>
         <div className="flex flex-1 items-center justify-center gap-2 border-r border-p12-line  md:border-r-0 md:border-b md:py-2">

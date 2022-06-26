@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import Pagination from 'rc-pagination';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useQueryClient } from 'react-query';
 import Empty from '../empty';
 import Button from '../button';
@@ -12,6 +12,7 @@ import { gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
 import { useSteamSignIn } from '../../hooks/useSteamSignIn';
+import { isConnectPopoverOpen } from '../../store/web3/state';
 
 export default function SteamStatus() {
   const pageSize = 6;
@@ -20,6 +21,7 @@ export default function SteamStatus() {
   const [steamSignIn] = useSteamSignIn();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { data: gamesData, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
@@ -70,8 +72,8 @@ export default function SteamStatus() {
                 ) : (
                   <>
                     <div className=" rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
-                      We cannot view your profile. Please go to Privacy Settings and set profile to
-                      &apos;Public&apos;. You can turn off after the airdrop&excl;&nbsp;&nbsp;
+                      We cannot view your profile. Please go to Privacy Settings and set profile to &apos;Public&apos;. You can
+                      turn off after the airdrop&excl;&nbsp;&nbsp;
                       <a className="text-p12-link" target="_blank" href={getSteamProfileEdit(gamerInfo.steam_id)}>
                         Open on Steam &gt;
                       </a>
@@ -106,18 +108,17 @@ export default function SteamStatus() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-12 xs:py-4">
-          <Button
-            type={account?.address ? 'bordered' : 'default'}
-            onClick={steamSignIn}
-            className="w-[305px]"
-            disabled={!account?.address}
-          >
-            Sign in with Steam
-          </Button>
+          {account?.address ? (
+            <Button type="gradient" onClick={steamSignIn} className="w-[305px]">
+              Sign in with Steam
+            </Button>
+          ) : (
+            <Button type="gradient" onClick={() => setConnectOpen(true)} className="w-[305px]">
+              Please connect wallet
+            </Button>
+          )}
           <p className="mt-5 text-sm text-p12-sub">
-            {account?.address
-              ? 'We cannot access your profile. Please log in to your Steam account.'
-              : 'Please connect your wallet first.'}
+            {account?.address && 'We cannot access your profile. Please log in to your Steam account.'}
           </p>
         </div>
       )}

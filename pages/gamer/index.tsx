@@ -77,7 +77,12 @@ export default function Gamer() {
                         </>
                       )}
                       {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
-                        <h4 className="text-center text-xl font-medium text-p12-success">Pending: update in a few minutes</h4>
+                        <>
+                          <h4 className="text-center text-xl font-medium text-p12-success">Pending: update in a few minutes</h4>
+                          <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
+                            Check on Galaxy
+                          </Button>
+                        </>
                       )}
                       {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED && (
                         <>
