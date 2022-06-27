@@ -8,6 +8,7 @@ module.exports = {
       screens: {
         xs: { max: '475px' },
         md: { max: '768px' },
+        tablet: '640px',
         xl: '1366px',
         '2xl': '1366px',
       },
@@ -22,8 +23,8 @@ module.exports = {
         'p12-bg': '#74788B',
       },
       fontFamily: {
-        'din': ['D-DIN']
-      }
+        din: ['D-DIN'],
+      },
     },
   },
   plugins: [],

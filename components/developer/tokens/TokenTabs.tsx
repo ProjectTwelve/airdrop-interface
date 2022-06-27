@@ -115,62 +115,63 @@ export default function TokenTabs() {
               />
             )}
           </div>
-          <div className="relative z-10 flex aspect-square w-full items-center justify-center">
-            {selectedGame.appid ? (
-              <div className="flex w-full flex-col items-center justify-center">
-                {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? (
-                  <>
-                    <div className="relative aspect-square w-full max-w-[420px]">
-                      {badge.isLoading && (
-                        <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
-                          <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
-                        </div>
+          <div className="relative z-10">
+            <div className="w-full pb-[100%]"></div>
+            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+              {selectedGame.appid ? (
+                <div className="flex w-full flex-col items-center justify-center xs:w-auto">
+                  {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? (
+                    <>
+                      <div className="relative aspect-square w-full max-w-[420px]">
+                        {badge.isLoading && (
+                          <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                            <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
+                          </div>
+                        )}
+                        <div
+                          className="aspect-square max-w-[420px] bg-cover"
+                          style={{ backgroundImage: `url(${DEV_BADGES[selectedGame.nft_level].asset})` }}
+                        />
+                      </div>
+                      {selectedGame.credential <= 10 && (
+                        <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
+                          My NFT at Galaxy
+                        </Button>
                       )}
-                      <div
-                        className="aspect-square max-w-[420px] bg-cover"
-                        style={{ backgroundImage: `url(${DEV_BADGES[selectedGame.nft_level].asset})` }}
-                      />
-                    </div>
-                    {selectedGame.credential <= 10 && (
-                      <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
-                        My NFT at Galaxy
+                    </>
+                  ) : (
+                    <>
+                      <h4 className="text-center text-xl font-medium text-p12-success">
+                        {selectedGame.nft_claim === NFT_CLAIM.PENDING
+                          ? 'Pending: update in a few minutes'
+                          : 'Congrats! P12 Genesis NFT to be claimed'}
+                      </h4>
+                      <Button
+                        type="bordered"
+                        className="mt-9 w-[260px]"
+                        onClick={() => openLink(DEV_BADGES[selectedGame.nft_level].claim)}
+                      >
+                        Claim
                       </Button>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <h4 className="text-center text-xl font-medium text-p12-success">
-                      {selectedGame.nft_claim === NFT_CLAIM.PENDING
-                        ? 'Pending: update in a few minutes'
-                        : 'Congrats! P12 Genesis NFT to be claimed'}
-                    </h4>
-                    <Button
-                      type="bordered"
-                      className="mt-9 w-[260px]"
-                      onClick={() => openLink(DEV_BADGES[selectedGame.nft_level].claim)}
-                    >
-                      Claim
-                    </Button>
-                  </>
-                )}
-              </div>
-            ) : (
-              <div>
-                <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
-                <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
-                  Verify my game
-                </Button>
-              </div>
-            )}
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
+                  <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
+                    Verify my game
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
-          {selectedGame.nft_claim !== NFT_CLAIM.CLAIMED && (
-            <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
-              The airdrop is in collaboration with and powered by&nbsp;
-              <a className="text-p12-link" href={GALAXY_P12_SPACE} target="_blank">
-                Project Galaxy
-              </a>
-            </p>
-          )}
+          <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
+            The airdrop is in collaboration with and powered by&nbsp;
+            <a className="text-p12-link" href={GALAXY_P12_SPACE} target="_blank">
+              Project Galaxy
+            </a>
+          </p>
           {selectedGame.credential > 10 && (
             <p className="absolute bottom-8 w-full text-center text-sm text-p12-sub">
               You&apos;ve got 10 identical NFTs which reached our limit

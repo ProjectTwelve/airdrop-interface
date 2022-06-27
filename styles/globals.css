@@ -69,8 +69,8 @@
         background: linear-gradient(180deg, rgba(78, 86, 145, 0.5) 0%, rgba(59, 65, 103, 0.5) 9.38%, rgba(60, 65, 100, 0.5) 15.66%, rgba(60, 65, 100, 0.5) 100%);
         border: 1px solid #616985;
         border-radius: 1rem;
-        backdrop-filter: blur(16px);
         overflow: hidden;
+        @apply tablet:backdrop-blur-lg;
     }
 
     .gradient__box::after {

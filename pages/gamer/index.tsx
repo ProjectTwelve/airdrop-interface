@@ -45,6 +45,7 @@ export default function Gamer() {
     }
   };
 
+
   return (
     <div className="mt-8">
       <Back onClick={() => router.push({ pathname: '/', query: router.query })} />
@@ -63,49 +64,54 @@ export default function Gamer() {
                     />
                   )}
                 </div>
-                <div className="relative z-10 flex aspect-square w-full items-center justify-center">
-                  {gamerInfo?.credential ? (
-                    <div className="flex w-full flex-col items-center justify-center">
-                      {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
-                        <>
-                          <h4 className="text-center text-xl font-medium text-p12-success">
-                            Congrats! P12 Genesis NFT to be claimed
-                          </h4>
-                          <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
-                            Claim
-                          </Button>
-                        </>
-                      )}
-                      {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
-                        <>
-                          <h4 className="text-center text-xl font-medium text-p12-success">Pending: update in a few minutes</h4>
-                          <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
-                            Check on Galaxy
-                          </Button>
-                        </>
-                      )}
-                      {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED && (
-                        <>
-                          <div className="relative aspect-square w-full max-w-[420px]">
-                            {badge.isLoading && (
-                              <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
-                                <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
-                              </div>
-                            )}
-                            <div
-                              className="aspect-square max-w-[420px] bg-cover"
-                              style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
-                            />
-                          </div>
-                          <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
-                            My NFT at Galaxy
-                          </Button>
-                        </>
-                      )}
-                    </div>
-                  ) : (
-                    <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
-                  )}
+                <div className="relative z-10">
+                  <div className="w-full pb-[100%]"></div>
+                  <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+                    {gamerInfo?.credential ? (
+                      <div className="flex w-full flex-col items-center justify-center xs:w-auto">
+                        {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
+                          <>
+                            <h4 className="text-center text-xl font-medium text-p12-success">
+                              Congrats! P12 Genesis NFT to be claimed
+                            </h4>
+                            <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
+                              Claim
+                            </Button>
+                          </>
+                        )}
+                        {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
+                          <>
+                            <h4 className="text-center text-xl font-medium text-p12-success">
+                              Pending: update in a few minutes
+                            </h4>
+                            <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
+                              Check on Galaxy
+                            </Button>
+                          </>
+                        )}
+                        {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED && (
+                          <>
+                            <div className="relative aspect-square w-full max-w-[420px]">
+                              {badge.isLoading && (
+                                <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                                  <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
+                                </div>
+                              )}
+                              <div
+                                className="aspect-square max-w-[420px] bg-cover"
+                                style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
+                              />
+                            </div>
+                            <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
+                              My NFT at Galaxy
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
+                    )}
+                  </div>
                 </div>
                 <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
