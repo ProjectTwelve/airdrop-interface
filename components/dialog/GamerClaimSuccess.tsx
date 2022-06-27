@@ -24,15 +24,15 @@ export default function GamerClaimSuccess() {
       open={open}
       render={({ close }) => (
         <div>
-          <div className="flex h-[28px] items-center justify-center gap-3 text-xl">
+          <div className="flex h-[28px] items-center justify-center text-xl">
             <ToastIcon type="success" />
-            Claim Success
+            <p className="ml-3">Claim Success</p>
           </div>
           <div className="my-[30px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
-            <ol className="flex list-decimal flex-col gap-1 pl-5">
-              <li>Your NFT has been claimed and will take a few seconds to sync.</li>
-              <li>Your game data has been snapshotted and will remain as-is.</li>
+            <ol className="flex list-decimal flex-col pl-5">
+              <li className="mb-1">Your NFT has been claimed and will take a few seconds to sync.</li>
+              <li className="mb-1">Your game data has been snapshotted and will remain as-is.</li>
               <li>One address can only be bound to one Steam account and thus only one NFT.</li>
             </ol>
           </div>

@@ -29,8 +29,8 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
           />
         </div>
         <div className="float-right h-[72px] pr-6 xs:hidden">
-          <div className="flex h-full items-center justify-center gap-3">
-            <p className="text-sm">Playtime</p>
+          <div className="flex h-full items-center justify-center">
+            <p className="mr-3 text-sm">Playtime</p>
             <p className="font-din text-2xl">{formatMinutes(data.playtime_forever)}</p>
           </div>
         </div>
@@ -43,9 +43,9 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
             )}
             {data.name}
           </p>
-          <div className="relative mt-1.5 flex h-[20px] flex-wrap gap-1.5">
+          <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}

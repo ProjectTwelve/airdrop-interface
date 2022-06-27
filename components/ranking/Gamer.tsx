@@ -16,17 +16,17 @@ export default function GamerRanking() {
 
   return (
     <div className="px-8 py-12 xs:p-4">
-      <div className="flex gap-8 md:flex-col md:gap-2">
-        <div>
+      <div className="flex md:flex-col">
+        <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Verified Gamers</h3>
-          <div className="gradient__box mt-3 h-[90px] w-[180px] font-din text-center text-[32px] font-medium leading-[90px] xs:w-auto">
+          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-din text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
           </div>
         </div>
         <div className="flex-1">
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
           <div className="gradient__box mt-3 h-[90px] xs:h-[150px]">
-            <div className="flex h-full w-full  gap-2 py-2 px-4 xs:flex-wrap xs:gap-0 xs:px-2">
+            <div className="flex h-full w-full py-2 px-4 xs:flex-wrap xs:px-2">
               <div className="flex h-[72px] flex-1 items-center justify-center truncate xs:basis-full">
                 {gamerRankData?.avatar_full && (
                   <div className="mr-3 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
@@ -35,7 +35,7 @@ export default function GamerRanking() {
                 )}
                 <div className="truncate">{gamerRankData?.person_name || 'Please login first'}</div>
               </div>
-              <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
+              <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
                 onClick={() => {
                   gamerRankData?.tokenRank && setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
@@ -44,7 +44,7 @@ export default function GamerRanking() {
               >
                 By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
-              <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
+              <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
                 onClick={() => {
                   gamerRankData?.timeRank &&
@@ -58,11 +58,11 @@ export default function GamerRanking() {
           </div>
         </div>
       </div>
-      <div className="mt-12 flex gap-8 md:flex-col">
+      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <GamerTimeRankingHeader />
-          <div className="flex flex-col gap-4">
+          <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
               <GamerTimeRankingItem data={item} key={item.steam_id || index} />
             ))}
@@ -76,7 +76,7 @@ export default function GamerRanking() {
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
           <GamerTokenRankingHeader />
-          <div className="flex flex-col gap-4">
+          <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
               <GamerTokenRankingItem data={item} key={item.steam_id || index} />
             ))}

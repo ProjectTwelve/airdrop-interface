@@ -23,11 +23,11 @@ export default function GamerTokenStatus({ data }: { data?: GamerInfoData }) {
           key={item.label}
           className={classNames(
             'flex flex-1 flex-col items-center justify-center border-r border-p12-line',
-            'md:flex-row md:gap-2 md:border-r-0 md:border-b md:py-2',
+            'md:flex-row md:border-r-0 md:border-b md:py-2',
             'last:border-none',
           )}
         >
-          <p className="text-sm text-p12-sub">{item.label}</p>
+          <p className="text-sm text-p12-sub md:mr-2">{item.label}</p>
           <p className="font-medium">{item.value}</p>
         </div>
       ))}

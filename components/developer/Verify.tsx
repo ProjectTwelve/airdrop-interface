@@ -103,14 +103,14 @@ function Verify() {
 
   return (
     <div className="px-8 pt-12 md:px-4 md:pt-6">
-      <div className="flex gap-[60px] border-b border-p12-line pb-12 md:flex-col">
+      <div className="grid grid-cols-2 gap-[60px] border-b border-p12-line pb-12 md:grid-cols-1">
         <div className="w-full">
           <h2 className="text-[30px] font-medium">Step One: Add Steam games</h2>
           <p className="">you can add 3 games at once</p>
           <div className="mt-7">
             <AddGameTips />
           </div>
-          <div className="mt-7 flex flex-col gap-4">
+          <div className="mt-7 grid gap-4">
             <h3 className="text-xl font-medium">
               YOUR GAMES&nbsp;
               <span className="text-base font-normal">
@@ -173,8 +173,8 @@ function Verify() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-4 py-8 md:flex-col">
-        <div className="text-[18px]">
+      <div className="flex items-center justify-between py-8 md:flex-col">
+        <div className="text-[18px] md:mb-4">
           Selected <span className="text-p12-success">{submittedSteamApps.length}</span>{' '}
           {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify
         </div>

@@ -65,17 +65,17 @@ function InviteDialog() {
             </div>
             <div className="mt-5 flex items-start justify-around">
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Connect wallet and copy your invitation link below.
+                Connect wallet and copy your referral link below.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Send the link to your Steam developer or game friends.
+                Send the link to your Steam developer or gamer friends.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Game developers verify their games with your link. Gamers sign in and sync their profile.
+                Game developers verify their published games with your link. Gamers sign in and sync their profile.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                As the referrer, you will be able to get <span className="font-bold">x%</span> P12 tokens from each verified
-                game or account as rewards.
+                As the referrer, you will get <span className="font-bold">x%</span> tokens as rewards from each verified game or
+                referred gamer.
               </div>
             </div>
           </div>

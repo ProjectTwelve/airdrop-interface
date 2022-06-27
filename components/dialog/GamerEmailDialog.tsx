@@ -52,7 +52,7 @@ export default function GamerEmailDialog() {
       onOpenChange={(op) => setOpen(op)}
       render={() => (
         <div>
-          <div className="flex h-[28px] items-center justify-center gap-3 text-xl">One more step</div>
+          <div className="flex h-[28px] items-center justify-center text-xl">One more step</div>
           <div className="my-[30px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
             <p className="text-sm">Enter your email address and continue with your claim process.</p>

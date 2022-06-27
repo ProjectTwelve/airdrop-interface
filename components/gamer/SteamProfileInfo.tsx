@@ -17,8 +17,8 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
       { label: 'Total playtime', value: data ? formatMinutes(data.total_playtime) : '--' },
       {
         label: (
-          <div className="flex items-center justify-center gap-1 text-p12-sub">
-            SS games
+          <div className="flex items-center justify-center text-p12-sub">
+            SS games&nbsp;
             <Tooltip label="Super Saiyan Game: game playtime ≥ 1000 hours">
               <div>
                 <QuestionSVG />
@@ -30,8 +30,8 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
       },
       {
         label: (
-          <div className="flex items-center justify-center gap-1 text-p12-sub">
-            SS playtime
+          <div className="flex items-center justify-center text-p12-sub">
+            SS playtime&nbsp;
             <Tooltip label="Total playtime of Super Saiyan games">
               <div>
                 <QuestionSVG />
@@ -54,11 +54,11 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
           key={index}
           className={classNames(
             'flex flex-1 flex-col items-center justify-center border-r border-[#949FA9]',
-            'xs:flex-row xs:gap-2 xs:border-r-0 xs:border-b xs:py-2',
+            'xs:flex-row xs:border-r-0 xs:border-b xs:py-2',
             'last:border-none',
           )}
         >
-          <div className="text-sm text-p12-sub">{item.label}</div>
+          <div className="text-sm text-p12-sub xs:mr-2">{item.label}</div>
           <div className="font-medium">{item.value}</div>
         </div>
       ))}

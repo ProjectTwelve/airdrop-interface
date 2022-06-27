@@ -137,8 +137,8 @@ export default function Gamer() {
             <div className="mt-8">
               <GamerP12 />
             </div>
-            <div className="flex gap-4 border-b border-p12-line py-4">
-              <div className="rounded-lg bg-p12-black/80 p-3">
+            <div className="flex border-b border-p12-line py-4">
+              <div className="mr-4 rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
                   <p onClick={handleClaimedRoadmap} className="cursor-pointer font-din text-xl font-bold">
                     {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
@@ -161,8 +161,8 @@ export default function Gamer() {
                 </Dialog>
               </div>
             </div>
-            <div className="flex items-center justify-between gap-4 pt-8 md:flex-col">
-              <div className="flex items-center justify-start">
+            <div className="flex items-center justify-between pt-8 md:flex-col">
+              <div className="flex items-center justify-start md:mb-4">
                 <p className="mr-4 text-lg font-medium">Total:</p>
                 <p onClick={handleClaimedRoadmap} className="mr-6 cursor-pointer font-din text-[64px] font-bold leading-[64px]">
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
