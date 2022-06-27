@@ -43,11 +43,11 @@ export default function RoadmapDialog() {
                   </p>
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
-                    &quot;P12 Genesis&quot; has 4 forms: Legendary, Epic, Rare and Uncommon.
+                    Rarities: Legendary, Epic, Rare, Uncommon, Common.
                   </p>
                   <p className="flex justify-start leading-5 text-p12-success">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
-                    Amount of token granted is shown as &apos;?&apos; in Stage 1, which will unveil in Stage2.
+                    Amount of token granted is shown as &apos;?&apos;.
                   </p>
                   <div className="flex items-start justify-start leading-5">
                     <div className="mr-1.5 flex h-5 w-4 flex-none items-center justify-center">
@@ -69,10 +69,6 @@ export default function RoadmapDialog() {
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
                     P12 Airdrop for Steam gamers launch. Gamers can verify Steam accounts to get Gamer Genesis NFT, in a fair
                     way.
-                  </p>
-                  <p className="flex justify-start leading-5">
-                    <span className="mr-1.5 h-4 w-4 text-center text-sm">·</span>
-                    Amount of tokens and calculation formula will be revealed.
                   </p>
                 </div>
               </div>
