@@ -40,10 +40,7 @@ function Tokens() {
           </div>
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
-              <p
-                className="cursor-pointer font-din text-xl font-bold"
-                onClick={() => invitation?.length && setOpen(true)}
-              >
+              <p className="cursor-pointer font-din text-xl font-bold" onClick={() => invitation?.length && setOpen(true)}>
                 {invitation?.length ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
@@ -55,7 +52,7 @@ function Tokens() {
             </Dialog>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-4 py-8 md:flex-col">
+        <div className="flex items-center justify-between py-8 md:flex-col">
           <div className="flex items-center justify-start">
             <p className="mr-3 text-p12-sub">
               {claimGames} {claimGames > 1 ? 'NFTs' : 'NFT'}
@@ -69,7 +66,7 @@ function Tokens() {
             </p>
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
-          <div>
+          <div className="md:mt-4">
             <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
               Claim via P12 (Under Construction)
             </Button>

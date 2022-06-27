@@ -36,19 +36,19 @@ function DeveloperStatus() {
       exit={{ opacity: 0, width: 0 }}
       className="flex overflow-hidden"
     >
-      <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
+      <div className="flex items-center justify-center border-r border-p12-line px-3 text-xl">
         {games.length ? (
           <Tag type={tagType} size="large" value={`${claimGroup[NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}
       </div>
-      <div className="flex items-center justify-center gap-2 border-r border-p12-line px-3 font-din text-xl font-bold">
-        <span className="text-p12-success">{games.length}</span>
+      <div className="flex items-center justify-center border-r border-p12-line px-3 font-din text-xl font-bold">
+        <span className="mr-2 text-p12-success">{games.length}</span>
         {games.length > 1 ? 'Games' : 'Game'}
       </div>
-      <div className="flex items-center justify-center gap-3 border-r border-p12-line px-3 text-xl">
-        <p className="cursor-pointer font-din font-bold" onClick={() => setOpen(true)}>
+      <div className="flex items-center justify-center border-r border-p12-line px-3 text-xl">
+        <p className="mr-3 cursor-pointer font-din font-bold" onClick={() => setOpen(true)}>
           ?,???
         </p>
         <div className="h-[30px] w-[30px]">

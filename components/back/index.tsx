@@ -12,7 +12,7 @@ type BackProps = {
 function Back({ onClick }: BackProps) {
   return (
     <div className="flex">
-      <div className="flex cursor-pointer items-center justify-start gap-0.5 text-white/50 hover:text-white" onClick={onClick}>
+      <div className="flex cursor-pointer items-center justify-start text-white/50 hover:text-white" onClick={onClick}>
         <Image width={16} height={16} src="/svg/left.svg" alt="" />
         <p className="text-sm text-inherit">Back</p>
       </div>

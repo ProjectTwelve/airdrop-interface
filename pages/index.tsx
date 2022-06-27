@@ -52,9 +52,9 @@ const Home: NextPage = () => {
               >
                 <Image src="/svg/left.svg" width={24} height={24} alt="invite" />
               </motion.div>
-              <div className="flex flex-1 items-center justify-center gap-2">
+              <div className="flex flex-1 items-center justify-center">
                 <Image src="/svg/invite-2.svg" style={{ strokeWidth: 10 }} width={24} height={24} alt="invite" />
-                My invitation link
+                &nbsp; My invitation link
               </div>
               <motion.div
                 animate={btnClick && !isHovered ? {} : { x: [0, -12, 4, -12, 0] }}
@@ -89,7 +89,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[60px] grid grid-cols-2 w-full gap-8 md:grid-cols-1">
+      <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
         <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
           <DeveloperTabs />
         </RankingHomeCard>

@@ -33,21 +33,21 @@ function LayoutHeaderExtra() {
             className="relative flex gap-3"
           >
             <Button type="bordered" onClick={() => openLink(readmeLink)}>
-              <div className="flex items-center justify-center gap-2 text-sm">
+              <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
-                Readme
+                &nbsp;Readme
               </div>
             </Button>
             <Button type="bordered" onClick={() => setRoadmapOpen(true)}>
-              <div className="flex items-center justify-center gap-2 text-sm">
+              <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
-                Airdrop roadmap
+                &nbsp;Airdrop roadmap
               </div>
             </Button>
             <Button type="bordered" onClick={() => setInviteOpen(true)}>
-              <div className="flex items-center justify-center gap-2 text-sm">
+              <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
-                My invitation link
+                &nbsp;My invitation link
               </div>
             </Button>
             <AnimatePresence>
@@ -69,7 +69,7 @@ function LayoutHeaderExtra() {
                           setLocalStorage('invite_tips_click', true);
                         }}
                       >
-                      Okay
+                        Okay
                       </div>
                     </div>
                   </div>

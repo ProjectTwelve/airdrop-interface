@@ -31,15 +31,15 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       <Back onClick={() => setWalletType?.(WalletType.CONNECT)} />
       <h4 className="text-center text-xl font-medium">Download & Setup</h4>
       <div
-        className="mt-6 flex cursor-pointer select-none items-center justify-between gap-2 border-y border-p12-sub py-2 px-4"
+        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-p12-sub py-2 px-4"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex items-center justify-center gap-2">
-          <img className="h-[30px] w-[30px] md:hidden" src="/img/metamask@2x.png" alt="metamask" />
+        <div className="flex items-center justify-center">
+          <img className="mr-2 h-[30px] w-[30px] md:hidden" src="/img/metamask@2x.png" alt="metamask" />
           <span className="text-sm">METAMASK</span>
         </div>
-        <div className="flex items-center justify-center gap-3">
-          <span className="text-xs">Download</span>
+        <div className="flex items-center justify-center">
+          <span className="pr-3 text-xs">Download</span>
           <svg width="10" height="6">
             <motion.path
               animate={{ rotate: isOpen ? 180 : 0 }}
@@ -62,12 +62,12 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
           <div className="flex justify-around py-3">
             {links.map((item) => (
               <div
-                className="flex cursor-pointer items-center justify-center gap-1"
+                className="flex cursor-pointer items-center justify-center"
                 key={item.name}
                 onClick={() => openLink(item.url)}
               >
                 <Image src={item.icon} width={20} height={20} alt="icon" />
-                <span className="text-xs text-p12-link">{item.name}</span>
+                <span className="pl-1 text-xs text-p12-link">{item.name}</span>
               </div>
             ))}
           </div>
