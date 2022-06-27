@@ -36,7 +36,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
   }, [setSocialMediaClickStatus]);
 
   return (
-    <div className={classNames('flex items-center justify-center', sizes[size])}>
+    <div className={classNames('grid grid-cols-3', sizes[size])}>
       {socialMedia.map((item) => (
         <Image
           key={item.name}

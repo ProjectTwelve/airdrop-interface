@@ -121,9 +121,9 @@ export default function Report() {
               </p>
             </div>
             <div className="mr-3 w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">7</p>
+              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
-              <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam years</p>
+              <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam year</p>
             </div>
             <div className="w-[148px] rounded bg-[#4383FF]/20">
               <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>
@@ -159,9 +159,9 @@ export default function Report() {
               </p>
             </div>
             <div className="mr-3 w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">7</p>
+              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
-              <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam years</p>
+              <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam year</p>
             </div>
             <div className="w-[148px] rounded bg-[#4383FF]/20">
               <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>

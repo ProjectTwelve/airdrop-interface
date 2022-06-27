@@ -41,7 +41,7 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
         ),
         value: data ? formatMinutes(data.ss_game_playtime) : '--',
       },
-      { label: 'Steam years', value: createdTime ? dayjs().diff(dayjs.unix(createdTime), 'year') : '--' },
+      { label: 'Steam year', value: createdTime ? dayjs.unix(createdTime).format('YYYY') : '--' },
     ],
     [createdTime, data],
   );

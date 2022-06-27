@@ -36,7 +36,7 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
-      <div className="mr-4 h-[72px] w-[50px] text-center font-medium leading-[72px]">{data.index}</div>
+      <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">{data.index}</div>
       <div>
         <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
@@ -47,10 +47,10 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
             {data.ss_game_count}/{formatMinutes(data.ss_game_playtime)}
           </p>
         </div>
-        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1">
-          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam years</p>
+        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:ml-0">
+          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
-            {data.time_created && dayjs().diff(dayjs.unix(data.time_created), 'year')}
+            {data.time_created && dayjs.unix(data.time_created).format('YYYY')}
           </p>
         </div>
         <div className="overflow-hidden">

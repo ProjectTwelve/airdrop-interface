@@ -31,10 +31,10 @@ const Home: NextPage = () => {
         <h2 className="text-[24px] font-medium">Tribute to Gamers</h2>
         <h2 className="text-[24px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
       </div>
-      <div className="mt-9 flex w-full flex-col items-center gap-6">
-        <div className="w-full max-w-[470px]" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <div className="mt-9 grid w-full gap-6">
+        <div className="flex justify-center" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           <Button
-            className="w-full"
+            className="w-full max-w-[470px]"
             size="large"
             type="bordered"
             onClick={() => {
@@ -66,26 +66,30 @@ const Home: NextPage = () => {
             </div>
           </Button>
         </div>
-        <div className="flex w-full items-center justify-center gap-6 md:flex-col">
-          <Button
-            className="w-full max-w-[470px]"
-            size="large"
-            type="gradient"
-            onClick={() => router.push({ pathname: '/developer', query: router.query })}
-          >
-            I am a Steam Game Dev
-          </Button>
-          <Button
-            className="w-full max-w-[470px]"
-            size="large"
-            type="gradient"
-            onClick={() => router.push({ pathname: '/gamer', query: router.query })}
-          >
-            I am a Steam Gamer
-          </Button>
+        <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-1">
+          <div className="flex justify-end">
+            <Button
+              className="w-full max-w-[470px]"
+              size="large"
+              type="gradient"
+              onClick={() => router.push({ pathname: '/developer', query: router.query })}
+            >
+              I am a Steam Game Dev
+            </Button>
+          </div>
+          <div className="flex justify-start">
+            <Button
+              className="w-full max-w-[470px]"
+              size="large"
+              type="gradient"
+              onClick={() => router.push({ pathname: '/gamer', query: router.query })}
+            >
+              I am a Steam Gamer
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="mt-[60px] flex w-full items-start justify-center gap-8 md:flex-col">
+      <div className="mt-[60px] grid grid-cols-2 w-full gap-8 md:grid-cols-1">
         <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
           <DeveloperTabs />
         </RankingHomeCard>

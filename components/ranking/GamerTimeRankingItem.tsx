@@ -49,10 +49,10 @@ export default function GamerTimeRankingItem({ hover, data, steamProfile }: Game
             {data.ss_game_count}/{formatMinutes(data.ss_game_playtime)}
           </p>
         </div>
-        <div className="float-right mr-2 rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:float-right xs:mr-0">
-          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam years</p>
+        <div className="float-right mr-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1  xs:mr-0">
+          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
-            {data.time_created && dayjs().diff(dayjs.unix(data.time_created), 'year')}
+            {data.time_created && dayjs.unix(data.time_created).format('YYYY')}
           </p>
         </div>
         <div className="mr-2 overflow-hidden">

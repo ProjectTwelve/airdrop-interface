@@ -48,8 +48,8 @@ function DeveloperRanking() {
 
   return (
     <div className="px-8 py-12 xs:p-4">
-      <div className="flex gap-8 md:flex-col md:gap-2">
-        <div>
+      <div className="flex md:flex-col">
+        <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
           <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-din text-[32px] font-medium leading-[90px] xs:w-auto">
             {verified?.total}
@@ -145,7 +145,7 @@ function DeveloperRanking() {
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
-          <div className="flex flex-col gap-4">
+          <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
               <DevTimeRankingItem data={item} key={item.appid || index} />
             ))}
@@ -159,7 +159,7 @@ function DeveloperRanking() {
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
           <DevTokenRankingHeader />
-          <div className="flex flex-col gap-4">
+          <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
               <DevTokenRankingItem data={item} key={item.appid || index} />
             ))}

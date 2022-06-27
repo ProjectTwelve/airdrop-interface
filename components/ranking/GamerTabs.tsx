@@ -25,7 +25,7 @@ export default function GamerTabs() {
       <TabPanel>
         <GamerTimeRankingHeader />
         <div className="h-[350px] overflow-y-auto">
-          <div className="flex flex-col gap-4">
+          <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
               <GamerTimeRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
             ))}
@@ -35,7 +35,7 @@ export default function GamerTabs() {
       <TabPanel>
         <GamerTokenRankingHeader />
         <div className="h-[350px] overflow-y-auto">
-          <motion.div className="flex flex-col gap-4">
+          <motion.div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
               <GamerTokenRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
             ))}
