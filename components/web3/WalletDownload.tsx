@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { WalletType } from './WalletPopover';
 import { motion } from 'framer-motion';
 import { openLink } from '../../utils';
+import ReactGA from 'react-ga4';
 
 type WalletDownloadProps = {
   setWalletType?: (type: WalletType) => void;
@@ -64,7 +65,10 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
               <div
                 className="flex cursor-pointer items-center justify-center"
                 key={item.name}
-                onClick={() => openLink(item.url)}
+                onClick={() => {
+                  ReactGA.event({ category: 'Download', action: 'Click', label: item.name });
+                  openLink(item.url);
+                }}
               >
                 <Image src={item.icon} width={20} height={20} alt="icon" />
                 <span className="pl-1 text-xs text-p12-link">{item.name}</span>
