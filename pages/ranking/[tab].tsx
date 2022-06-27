@@ -14,7 +14,7 @@ export default function Ranking(props: { tabIndex: number }) {
   const [layoutId, setLayoutId] = useRecoilState(rankingLayoutIdAtom);
   const [selectedTab, setSelectedTab] = useState(props.tabIndex);
   const LayoutIdRef = useRef(layoutId);
-  const tabs = ['developer', 'gamer'];
+  const tabs = ['gamer', 'developer'];
 
   return (
     <div className="mt-8">
@@ -41,11 +41,11 @@ export default function Ranking(props: { tabIndex: number }) {
           >
             <TabList>
               <Tab>
-                Developer Ranking
+                Gamer Ranking
                 <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="dev_underline" />}</div>
               </Tab>
               <Tab>
-                Gamer Ranking
+                Developer Ranking
                 <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="dev_underline" />}</div>
               </Tab>
               <div className="absolute right-8 md:-top-10">
@@ -53,10 +53,10 @@ export default function Ranking(props: { tabIndex: number }) {
               </div>
             </TabList>
             <TabPanel>
-              <DeveloperRanking />
+              <GamerRanking />
             </TabPanel>
             <TabPanel>
-              <GamerRanking />
+              <DeveloperRanking />
             </TabPanel>
           </Tabs>
         </div>
@@ -67,13 +67,13 @@ export default function Ranking(props: { tabIndex: number }) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { tab: 'developer' } }, { params: { tab: 'gamer' } }],
+    paths: [{ params: { tab: 'gamer' } }, { params: { tab: 'developer' } }],
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }: { params: { tab: 'developer' | 'gamer' } }) {
-  const tabs = { developer: 0, gamer: 1 };
+export async function getStaticProps({ params }: { params: { tab: 'gamer' | 'developer' } }) {
+  const tabs = { gamer: 0, developer: 1 };
   return {
     props: { tabIndex: tabs[params.tab] || 0 },
     revalidate: 60 * 60 * 24,

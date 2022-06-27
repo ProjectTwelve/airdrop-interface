@@ -67,17 +67,7 @@ const Home: NextPage = () => {
           </Button>
         </div>
         <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-1">
-          <div className="flex justify-end">
-            <Button
-              className="w-full max-w-[470px]"
-              size="large"
-              type="gradient"
-              onClick={() => router.push({ pathname: '/developer', query: router.query })}
-            >
-              I am a Steam Game Dev
-            </Button>
-          </div>
-          <div className="flex justify-start">
+          <div className="flex justify-end md:justify-center">
             <Button
               className="w-full max-w-[470px]"
               size="large"
@@ -87,14 +77,24 @@ const Home: NextPage = () => {
               I am a Steam Gamer
             </Button>
           </div>
+          <div className="flex justify-start md:justify-center">
+            <Button
+              className="w-full max-w-[470px]"
+              size="large"
+              type="gradient"
+              onClick={() => router.push({ pathname: '/developer', query: router.query })}
+            >
+              I am a Steam Game Dev
+            </Button>
+          </div>
         </div>
       </div>
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
-          <DeveloperTabs />
-        </RankingHomeCard>
         <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
           <GamerTabs />
+        </RankingHomeCard>
+        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
+          <DeveloperTabs />
         </RankingHomeCard>
       </div>
     </div>
