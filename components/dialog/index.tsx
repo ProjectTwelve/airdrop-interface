@@ -14,11 +14,18 @@ import Image from 'next/image';
 type DialogProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onExitComplete?: () => void;
   render: (props: { close: () => void }) => React.ReactNode;
   children?: JSX.Element;
 };
 
-function Dialog({ render, open: passedOpen = false, children, onOpenChange }: React.PropsWithChildren<DialogProps>) {
+function Dialog({
+  render,
+  open: passedOpen = false,
+  children,
+  onOpenChange,
+  onExitComplete,
+}: React.PropsWithChildren<DialogProps>) {
   const [open, setOpen] = useState(false);
 
   const onClose = (value: boolean) => {
@@ -42,7 +49,7 @@ function Dialog({ render, open: passedOpen = false, children, onOpenChange }: Re
     <>
       {children && cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
       <FloatingPortal>
-        <AnimatePresence>
+        <AnimatePresence onExitComplete={onExitComplete}>
           {open && (
             <FloatingOverlay
               lockScroll

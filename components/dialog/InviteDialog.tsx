@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useAccount } from 'wagmi';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import { useCopyToClipboard } from 'react-use';
 import Dialog from '../dialog';
 import Button from '../button';
 import Message from '../message';
 import Tag from '../tag';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../../store/invite/state';
-import { useCopyToClipboard } from 'react-use';
-import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
 import { fetchReferralCode } from '../../lib/api';
-import { useAccount } from 'wagmi';
 import { InviteRecordDialog } from './InviteRecordDialog';
+import { isConnectPopoverOpen } from '../../store/web3/state';
 
 function InviteDialog() {
   const { data: account } = useAccount();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
+  const [isConnect, setIsConnect] = useState<boolean>(false);
+  const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const [inviteLink, setInviteLink] = useState('Please connect your wallet first');
   const [, copyToClipboard] = useCopyToClipboard();
 
@@ -29,6 +32,10 @@ function InviteDialog() {
     <Dialog
       open={open}
       onOpenChange={(op) => setOpen(op)}
+      onExitComplete={() => {
+        setConnectOpen(isConnect);
+        setIsConnect(false);
+      }}
       render={() => (
         <div className="w-[720px]">
           <h2 className="text-center text-xl">My P12 Airdrop Invitation Link</h2>
@@ -128,9 +135,9 @@ function InviteDialog() {
               </div>
             </div>
           </div>
-          <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
-            {inviteLink}
-            {account?.address && (
+          {account?.address && (
+            <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
+              {inviteLink}
               <Button
                 size="small"
                 type="gradient"
@@ -141,17 +148,31 @@ function InviteDialog() {
               >
                 Copy
               </Button>
+            </div>
+          )}
+          <div className="mt-3 ml-4 h-6">
+            {account?.address && (
+              <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
+                <p className="cursor-pointer text-p12-link">My Referral List</p>
+              </Dialog>
             )}
-          </div>
-          <div className="mt-3 ml-4">
-            <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
-              <p className="cursor-pointer text-p12-link">My Referral List</p>
-            </Dialog>
           </div>
           <div className="mt-3 flex justify-end">
             <Button type="bordered" onClick={() => setOpen(false)}>
-              Confirm
+              Cancel
             </Button>
+            {!account?.address && (
+              <Button
+                className="ml-6"
+                type="gradient"
+                onClick={() => {
+                  setOpen(false);
+                  setIsConnect(true);
+                }}
+              >
+                Connect wallet
+              </Button>
+            )}
           </div>
         </div>
       )}

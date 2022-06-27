@@ -44,13 +44,13 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
         <div className="float-right ml-2 w-[95px] flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">SS Games</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
-            {data.ss_game_count}/{formatMinutes(data.ss_game_playtime)}
+            {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
         <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:ml-0">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
-            {data.time_created && dayjs.unix(data.time_created).format('YYYY')}
+            {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}
           </p>
         </div>
         <div className="overflow-hidden">
