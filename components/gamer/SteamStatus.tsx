@@ -43,7 +43,7 @@ export default function SteamStatus() {
         <div>
           <div className="flex items-center justify-between md:flex-col md:items-start">
             <div className="flex md:mb-4">
-              <img className="h-[78px] w-[78px] rounded-lg mr-6" src={gamerInfo.avatar_full} alt="avatar" />
+              <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
               <div className="flex flex-col justify-around">
                 <p className="text-[26px] font-medium">{gamerInfo.person_name}</p>
                 <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
@@ -72,13 +72,13 @@ export default function SteamStatus() {
                 ) : (
                   <>
                     <div className=" rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
-                      We cannot view your profile. Please go to Privacy Settings and set profile to &apos;Public&apos;. You can
-                      turn off after the airdrop!&nbsp;&nbsp;
+                      We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
+                      including secondary options. You can turn off after the airdrop!&nbsp;&nbsp;
                       <a className="text-p12-link" target="_blank" href={getSteamProfileEdit(gamerInfo.steam_id)}>
                         Open on Steam &gt;
                       </a>
                     </div>
-                    <div className="mt-[80px] flex items-center justify-center">
+                    <div className="mt-[80px] flex items-center justify-center md:mt-[20px]">
                       <Button type="bordered" className="w-[260px]" onClick={refetch}>
                         <div className="flex items-center justify-center">
                           <img className="mr-2" src="/svg/reload.svg" alt="reload" />
