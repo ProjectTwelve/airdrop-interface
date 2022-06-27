@@ -58,9 +58,9 @@ export default function DeveloperEmailDialog() {
       open={open}
       render={() => (
         <div>
-          <div className="flex h-[28px] items-center justify-center gap-3 text-xl">
+          <div className="flex h-[28px] items-center justify-center text-xl">
             <ToastIcon type="success" />
-            Claim Success
+            <p className="ml-3">Claim Success</p>
           </div>
           <div className="my-[30px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">

@@ -18,7 +18,7 @@ export default function Report() {
           <p className="text-right text-[30px] font-semibold leading-[30px]">Today</p>
         </div>
       </div>
-      <div className="flex flex-col gap-[30px] py-6">
+      <div className="grid gap-[30px] py-6">
         <div className="relative flex rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
             <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
@@ -39,10 +39,10 @@ export default function Report() {
                 <span>14 Jul, 2014</span>&nbsp;&nbsp;&nbsp;
                 <span>9FingerGames</span>
               </p>
-              <div className="flex h-8 flex-wrap gap-3 overflow-hidden">
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+              <div className="flex h-8 flex-wrap overflow-hidden">
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
               </div>
             </div>
           </div>
@@ -73,10 +73,10 @@ export default function Report() {
                 <span>14 Jul, 2014</span>&nbsp;&nbsp;&nbsp;
                 <span>9FingerGames</span>
               </p>
-              <div className="flex h-8 flex-wrap gap-3 overflow-hidden">
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
-                <p className="rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+              <div className="flex h-8 flex-wrap overflow-hidden">
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
+                <p className="mr-3 rounded bg-[#4383FF]/20 px-3 py-1.5 text-xl leading-5 text-[#43BBFF]">Multi-player</p>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function Report() {
           <p className="text-right text-[30px] font-semibold leading-[30px]">Today</p>
         </div>
       </div>
-      <div className="flex flex-col gap-[30px] py-6">
+      <div className="grid gap-[30px] py-6">
         <div className="relative flex items-center justify-start rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
             <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">200</p>

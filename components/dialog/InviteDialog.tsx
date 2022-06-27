@@ -68,14 +68,14 @@ function InviteDialog() {
                 Connect wallet and copy your invitation link below.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Send the link to your game developer friends.
+                Send the link to your Steam developer or game friends.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
-                Game developers verify their games with your link.
+                Game developers verify their games with your link. Gamers sign in and sync their profile.
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
                 As the referrer, you will be able to get <span className="font-bold">x%</span> P12 tokens from each verified
-                game as rewards.
+                game or account as rewards.
               </div>
             </div>
           </div>
@@ -87,46 +87,46 @@ function InviteDialog() {
                 <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
               </a>
             </p>
-            <div className="mt-7 flex items-start justify-center gap-2">
-              <div>
+            <div className="mt-7 flex items-start justify-center">
+              <div className="mr-2">
                 <div className="flex h-6 items-center justify-start text-xs">Rarity-&gt;</div>
                 <div className="mt-2.5 flex items-center justify-start text-xs leading-5">Get tokens-&gt;</div>
               </div>
-              <div>
+              <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <Tag size="small" value="Orange" type="orange" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">24%</div>
               </div>
-              <div>&gt;</div>
-              <div>
+              <div className="mr-2">&gt;</div>
+              <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <Tag size="small" value="Purple" type="purple" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">18%</div>
               </div>
-              <div>&gt;</div>
-              <div>
+              <div className="mr-2">&gt;</div>
+              <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <Tag size="small" value="Blue" type="blue" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">16%</div>
               </div>
-              <div>&gt;</div>
-              <div>
+              <div className="mr-2">&gt;</div>
+              <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <Tag size="small" value="Green" type="green" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">12%</div>
               </div>
-              <div>&gt;</div>
-              <div>
+              <div className="mr-2">&gt;</div>
+              <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <Tag size="small" value="White" type="white" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">9%</div>
               </div>
-              <div>&gt;</div>
+              <div className="mr-2">&gt;</div>
               <div>
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
                   <span className="text-xs text-p12-sub">No Badge</span>

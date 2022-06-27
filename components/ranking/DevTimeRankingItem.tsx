@@ -50,9 +50,9 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
             {data.release_date} &nbsp;&nbsp;
             {data.developers?.toString()}
           </div>
-          <div className="relative mt-1.5 flex h-[20px] flex-wrap gap-1.5 overflow-hidden">
+          <div className="relative mt-1.5 flex h-[20px] flex-wrap overflow-hidden">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] mr-1.5 text-xs text-p12-link">
                 {genre}
               </span>
             ))}

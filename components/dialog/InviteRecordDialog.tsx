@@ -39,8 +39,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 200,
       Header: 'Game data',
       accessor: (row: any) => (
-        <div className="flex items-center gap-2">
-          <img className="h-[52px] w-[80px] rounded-2xl" src={row.header_image} alt="avatar" />
+        <div className="flex items-center">
+          <img className="h-[52px] w-[80px] rounded-2xl mr-2" src={row.header_image} alt="avatar" />
           <div className="flex flex-col justify-around truncate">
             <p className="truncate font-semibold">{row.name}</p>
             <p>{row.release_date?.date}</p>
@@ -52,8 +52,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 120,
       Header: 'Reward',
       accessor: () => (
-        <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
+        <div className="flex h-full items-center">
+          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -72,8 +72,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 120,
       Header: 'Will get',
       accessor: () => (
-        <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
+        <div className="flex h-full items-center">
+          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -96,8 +96,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 200,
       Header: 'Steam account data',
       accessor: (row: any) => (
-        <div className="flex items-center gap-2">
-          <img width={52} height={52} className="rounded" src={row.avatar} alt="avatar" />
+        <div className="flex items-center">
+          <img width={52} height={52} className="rounded mr-2" src={row.avatar} alt="avatar" />
           <div className="flex flex-col justify-around truncate">
             <p className="truncate font-semibold">{row.person_name}</p>
             <p className="text-xs">Steam ID: {shortenSteamId(row.steam_id)}</p>
@@ -109,8 +109,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 120,
       Header: 'Reward',
       accessor: () => (
-        <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
+        <div className="flex h-full items-center">
+          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -129,8 +129,8 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       width: 120,
       Header: 'Will get',
       accessor: () => (
-        <div className="flex h-full items-center gap-2">
-          <p className="cursor-pointer font-din text-2xl font-bold">?,???</p>
+        <div className="flex h-full items-center">
+          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),

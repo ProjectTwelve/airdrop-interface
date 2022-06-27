@@ -45,8 +45,8 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
         <div className={classNames('float-right h-[72px] w-[72px] xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
-        <div className="float-right mx-4 flex h-[72px] items-center justify-between gap-2 xs:hidden">
-          <p className="cursor-pointer font-din text-xl font-bold">?,???</p>
+        <div className="float-right mx-4 flex h-[72px] items-center justify-between xs:hidden">
+          <p className="cursor-pointer mr-2 font-din text-xl font-bold">?,???</p>
           <Image src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
         <div className="truncate">
@@ -55,9 +55,9 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
             {data.release_date} &nbsp;&nbsp;
             {data.developers?.toString()}
           </div>
-          <div className="relative mt-1.5 flex h-[20px] flex-wrap gap-1.5">
+          <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] mr-1.5 text-xs text-p12-link">
                 {genre}
               </span>
             ))}

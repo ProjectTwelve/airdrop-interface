@@ -30,15 +30,15 @@ function LayoutHeaderExtra() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-            className="relative flex gap-3"
+            className="relative flex"
           >
-            <Button type="bordered" onClick={() => openLink(readmeLink)}>
+            <Button type="bordered" className="mr-3" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
                 &nbsp;Readme
               </div>
             </Button>
-            <Button type="bordered" onClick={() => setRoadmapOpen(true)}>
+            <Button type="bordered" className="mr-3" onClick={() => setRoadmapOpen(true)}>
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
                 &nbsp;Airdrop roadmap

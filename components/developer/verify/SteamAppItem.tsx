@@ -54,8 +54,8 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </div>
             <div className="truncate pt-3">
               <p className="truncate font-medium">{app.name}</p>
-              <div className="flex gap-2 text-sm xs:hidden">
-                <p>{app.release_date?.date}</p>
+              <div className="flex text-sm xs:hidden">
+                <p className="mr-2">{app.release_date?.date}</p>
                 <p>{app.total_reviews ? app.total_reviews + ' reviews' : 0 + ' review'}</p>
               </div>
             </div>
@@ -66,9 +66,9 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
           </div>
         </div>
       ) : (
-        <div className="flex h-full items-center justify-between gap-5 px-5 md:gap-2 md:px-2">
-          <div className="flex flex-1 items-center justify-start gap-5 text-sm md:gap-2">
-            <p>App ID:</p>
+        <div className="flex h-full items-center justify-between px-5 md:px-2">
+          <div className="flex flex-1 items-center justify-start text-sm">
+            <p className="mr-4 md:mr-2">App ID:</p>
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}

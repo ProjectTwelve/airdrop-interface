@@ -78,8 +78,8 @@ export default function TokenTabs() {
                 )}
                 onClick={() => setSelectedGame(game)}
               >
-                <div className="flex gap-3">
-                  <div className="h-[72px] w-[112px] overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
+                <div className="flex">
+                  <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
                     {game.header_image ? (
                       <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                     ) : (
@@ -217,11 +217,11 @@ export default function TokenTabs() {
                 key={item.label}
                 className={classNames(
                   'flex flex-1 flex-col items-center justify-center border-r border-p12-line',
-                  'md:flex-row md:gap-2 md:border-r-0 md:border-b md:py-2',
+                  'md:flex-row md:border-r-0 md:border-b md:py-2',
                   'last:border-none',
                 )}
               >
-                <p className="text-sm text-p12-sub">{item.label}</p>
+                <p className="text-sm text-p12-sub md:mr-2">{item.label}</p>
                 <p className="font-medium">{item.value}</p>
               </div>
             ))}

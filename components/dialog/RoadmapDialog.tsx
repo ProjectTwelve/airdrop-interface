@@ -15,8 +15,8 @@ export default function RoadmapDialog() {
       render={() => (
         <div className="max-w-[780px]">
           <h2 className="text-center text-xl">P12 Genesis Airdrop Roadmap</h2>
-          <div className="flex gap-5">
-            <div className="flex flex-col items-center justify-start">
+          <div className="flex">
+            <div className="flex flex-col items-center justify-start mr-5">
               <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
                 1
               </div>

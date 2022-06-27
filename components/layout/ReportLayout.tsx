@@ -7,9 +7,9 @@ export default function ReportLayout({ children }: React.PropsWithChildren<{}>) 
       <header className="relative z-[2] mt-[90px] px-5 pb-4">
         <img src="/report/p12_logo.svg" alt="logo" />
         <h1 className="mt-[30px] text-[72px] font-bold leading-[72px]">Genesis Airdrop</h1>
-        <div className="mt-[56px] flex items-center gap-5">
-          <p className="rounded-full bg-[#4383FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#43BBFF]">Daily</p>
-          <p className="rounded-full bg-[#C859FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#C859FF]">Weekly</p>
+        <div className="mt-[56px] flex items-center">
+          <p className="rounded-full bg-[#4383FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#43BBFF] mr-5">Daily</p>
+          <p className="rounded-full bg-[#C859FF]/20 py-3 px-5 text-[30px] font-medium leading-[30px] text-[#C859FF] mr-5">Weekly</p>
           <p className="text-[30px] font-semibold leading-[30px]">[06/15/2022]</p>
         </div>
       </header>

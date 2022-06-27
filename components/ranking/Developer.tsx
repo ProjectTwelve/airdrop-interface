@@ -80,7 +80,7 @@ function DeveloperRanking() {
               <div className="relative h-full w-full overflow-hidden">
                 <AnimatePresence initial={false} custom={swipeDirection}>
                   <motion.div
-                    className="absolute flex h-full w-full gap-2 py-2 px-4 xs:flex-wrap xs:gap-0 xs:px-2"
+                    className="absolute flex h-full w-full py-2 px-4 xs:flex-wrap xs:px-2"
                     key={swipePage}
                     custom={swipeDirection}
                     variants={variants}
@@ -116,7 +116,7 @@ function DeveloperRanking() {
                         )}
                       </div>
                     </div>
-                    <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
+                    <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
                       onClick={() => {
                         item && setTokenRankPage(Math.ceil(item.tokenRank / 10));
@@ -125,7 +125,7 @@ function DeveloperRanking() {
                     >
                       By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{item?.tokenRank || '--'}</span>
                     </div>
-                    <div className="my-2 w-[1px] bg-[#949FA9] xs:hidden" />
+                    <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
                       onClick={() => {
                         item && setTimeRankPage(Math.ceil(((verified?.total || 0) - item.timeRank + 1) / 10));
@@ -141,7 +141,7 @@ function DeveloperRanking() {
           </div>
         </div>
       </div>
-      <div className="mt-12 flex gap-8 md:flex-col">
+      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
