@@ -48,7 +48,7 @@ export default function GamerRanking() {
               <div
                 onClick={() => {
                   gamerRankData?.timeRank &&
-                    setTimeRankPage(Math.ceil(((verified?.total || 0) - gamerRankData.timeRank + 1) / 10));
+                    setTimeRankPage(Math.ceil(((timeRankData?.rankLength || 0) - gamerRankData.timeRank + 1) / 10));
                 }}
                 className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
               >
@@ -68,8 +68,13 @@ export default function GamerRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            {timeRankData && timeRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={timeRankPage}
+                total={timeRankData.rankLength}
+                onChange={(page) => setTimeRankPage(page)}
+              />
             )}
           </div>
         </div>
@@ -82,8 +87,13 @@ export default function GamerRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            {tokenRankData && tokenRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={tokenRankPage}
+                total={tokenRankData.rankLength}
+                onChange={(page) => setTokenRankPage(page)}
+              />
             )}
           </div>
         </div>

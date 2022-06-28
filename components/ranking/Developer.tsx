@@ -128,7 +128,7 @@ function DeveloperRanking() {
                     <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
                       onClick={() => {
-                        item && setTimeRankPage(Math.ceil(((verified?.total || 0) - item.timeRank + 1) / 10));
+                        item && setTimeRankPage(Math.ceil(((timeRankData?.rankLength || 0) - item.timeRank + 1) / 10));
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
@@ -151,8 +151,13 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            {timeRankData && timeRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={timeRankPage}
+                total={timeRankData.rankLength}
+                onChange={(page) => setTimeRankPage(page)}
+              />
             )}
           </div>
         </div>
@@ -165,8 +170,13 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            {tokenRankData && tokenRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={tokenRankPage}
+                total={tokenRankData.rankLength}
+                onChange={(page) => setTokenRankPage(page)}
+              />
             )}
           </div>
         </div>

@@ -28,6 +28,16 @@ function InviteDialog() {
     onSuccess: (data) => setInviteLink(window.location.origin + '/?code=' + data.data.referral_code),
   });
 
+  const handleTwitterShareClick = () => {
+    const shareLink = 'Join @_p12_ genesis Soul-Bound NFT Airdrop stage two for gamers and get referral benefits!';
+    window.open(
+      decodeURIComponent(
+        'https://twitter.com/intent/tweet?text=' + shareLink + '&hashtags=NFTGiveaway&hashtags=Metaverse&url=' + inviteLink,
+      ),
+      '_blank',
+    );
+  };
+
   return (
     <Dialog
       open={open}
@@ -69,6 +79,17 @@ function InviteDialog() {
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
                 Send the link to your Steam developer or gamer friends.
+                {account?.address && (
+                  <p className="flex justify-center">
+                    Or share on &nbsp;
+                    <img
+                      onClick={handleTwitterShareClick}
+                      className="cursor-pointer"
+                      src="/img/twitter_share.png"
+                      alt="share"
+                    />
+                  </p>
+                )}
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
                 Game developers verify their published games with your link. Gamers sign in and sync their profile.
