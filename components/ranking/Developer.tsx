@@ -151,8 +151,13 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={timeRankPage} total={verified?.total} onChange={(page) => setTimeRankPage(page)} />
+            {timeRankData && timeRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={timeRankPage}
+                total={timeRankData.rankLength}
+                onChange={(page) => setTimeRankPage(page)}
+              />
             )}
           </div>
         </div>
@@ -165,8 +170,13 @@ function DeveloperRanking() {
             ))}
           </div>
           <div className="mt-4 flex items-center justify-center">
-            {verified && verified.total > 10 && (
-              <Pagination simple current={tokenRankPage} total={verified?.total} onChange={(page) => setTokenRankPage(page)} />
+            {tokenRankData && tokenRankData.rankLength > 10 && (
+              <Pagination
+                simple
+                current={tokenRankPage}
+                total={tokenRankData.rankLength}
+                onChange={(page) => setTokenRankPage(page)}
+              />
             )}
           </div>
         </div>
