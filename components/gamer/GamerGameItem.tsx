@@ -11,7 +11,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
     <div
       className={classNames(
         'relative overflow-hidden rounded-2xl bg-p12-black/80 bg-right bg-no-repeat',
-        isSSGame && 'bg-[url(/img/bg_ss_game.png)]',
+        isSSGame && 'bg-ss-game',
       )}
     >
       <div className="relative z-10">
