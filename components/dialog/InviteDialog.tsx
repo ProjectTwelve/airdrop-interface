@@ -29,10 +29,10 @@ function InviteDialog() {
   });
 
   const handleTwitterShareClick = () => {
-    const shareLink = 'Join @_p12_ genesis Soul-Bound NFT Airdrop stage two for gamers and get referral benefits!';
+    const shareLink = 'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!';
     window.open(
       decodeURIComponent(
-        'https://twitter.com/intent/tweet?text=' + shareLink + '&hashtags=NFTGiveaway&hashtags=Metaverse&url=' + inviteLink,
+        'https://twitter.com/intent/tweet?text=' + shareLink + '&hashtags=NFTGiveaway&hashtags=P12&url=' + inviteLink,
       ),
       '_blank',
     );
