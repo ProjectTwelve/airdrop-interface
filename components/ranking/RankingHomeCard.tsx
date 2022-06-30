@@ -18,7 +18,7 @@ export function RankingHomeCard({ title, layoutId, children, routerId }: React.P
 
   const handleGoToRanking = () => {
     setLayoutId(layoutId);
-    ReactGA.event({ category: 'Ranking', action: 'Click', label: layoutId });
+    ReactGA.event({ category: 'Ranking', action: 'Click', label: routerId });
     router.push('/ranking/' + routerId).then();
   };
   return (
