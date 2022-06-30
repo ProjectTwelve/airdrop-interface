@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import Empty from '../empty';
 import Button from '../button';
 import Loading from '../loading';
-import { getSteamProfileEdit, shortenSteamId } from '../../utils';
+import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
 import { gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
@@ -66,25 +66,43 @@ export default function SteamStatus() {
                 </div>
               )
             ) : (
-              <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
+              <div className="rounded-2xl bg-p12-black/80 p-6 md:p-3">
                 {isFetching ? (
                   <Loading size={58} className="mt-12 opacity-50" />
                 ) : (
                   <>
                     <div className=" rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
                       We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
-                      including secondary options. You can turn off after the airdrop!&nbsp;&nbsp;
-                      <a className="text-p12-link" target="_blank" href={getSteamProfileEdit(gamerInfo.steam_id)}>
-                        Open on Steam &gt;
-                      </a>
+                      including secondary options. You can turn off after the airdrop!
                     </div>
-                    <div className="mt-[80px] flex items-center justify-center md:mt-[20px]">
-                      <Button type="bordered" className="w-[260px]" onClick={refetch}>
-                        <div className="flex items-center justify-center">
-                          <img className="mr-2" src="/svg/reload.svg" alt="reload" />
-                          Reload Stats
+                    <div className="mt-8 flex items-center justify-center md:mt-4 md:flex-col">
+                      <div className="h-[234px] w-full max-w-[760px] overflow-x-scroll">
+                        <div className="h-full w-[760px]">
+                          <img
+                            className="h-full w-full"
+                            src="https://cdn1.p12.games/airdrop/img/steam_setting.jpg"
+                            alt="setting"
+                          />
                         </div>
-                      </Button>
+                      </div>
+                      <div className="ml-[40px] grid gap-6 md:mt-4 md:ml-0 md:w-full md:grid-cols-2 md:gap-2">
+                        <Button
+                          type="gradient"
+                          className="w-[260px] md:w-full"
+                          onClick={() => openLink(getSteamProfileEdit(gamerInfo.steam_id))}
+                        >
+                          <div className="flex items-center justify-center">
+                            Open Steam
+                            <img className="ml-2 w-6 rotate-180 xs:hidden" src="/svg/left.svg" alt="reload" />
+                          </div>
+                        </Button>
+                        <Button type="bordered" className="w-[260px] md:w-full" onClick={refetch}>
+                          <div className="flex items-center justify-center">
+                            Reload Stats
+                            <img className="ml-2 xs:hidden" src="/svg/reload.svg" alt="reload" />
+                          </div>
+                        </Button>
+                      </div>
                     </div>
                   </>
                 )}

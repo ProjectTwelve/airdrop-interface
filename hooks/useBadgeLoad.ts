@@ -41,6 +41,7 @@ export const useGamerBadgeLoad = (gamer?: GamerInfoData) => {
       [GAMER_NFT_LEVEL.BLUE, false],
       [GAMER_NFT_LEVEL.GREEN, false],
       [GAMER_NFT_LEVEL.WHITE, false],
+      [GAMER_NFT_LEVEL.REKT, false],
     ]),
   );
 

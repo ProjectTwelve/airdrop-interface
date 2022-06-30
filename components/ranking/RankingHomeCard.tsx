@@ -4,6 +4,7 @@ import { isMobile } from 'react-device-detect';
 import { useSetRecoilState } from 'recoil';
 import { rankingLayoutIdAtom } from '../../store/ranking/state';
 import { useRouter } from 'next/router';
+import ReactGA from 'react-ga4';
 
 type RankingHomeCardProps = {
   title: string;
@@ -17,6 +18,7 @@ export function RankingHomeCard({ title, layoutId, children, routerId }: React.P
 
   const handleGoToRanking = () => {
     setLayoutId(layoutId);
+    ReactGA.event({ category: 'Ranking', action: 'Click', label: routerId });
     router.push('/ranking/' + routerId).then();
   };
   return (

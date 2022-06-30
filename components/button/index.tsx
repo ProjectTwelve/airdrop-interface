@@ -13,7 +13,7 @@ type ButtonProps = {
 
 function Loading() {
   return (
-    <div className="h-full p-1">
+    <div>
       <img src="/svg/loading.svg" className="mx-auto h-full animate-spin" alt="loading" />
     </div>
   );
@@ -43,6 +43,7 @@ const Button = React.forwardRef(function ButtonInner(
         'relative overflow-hidden rounded-full px-4 text-center backdrop-blur',
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
         'disabled:cursor-not-allowed',
+        loading && 'cursor-not-allowed hover:after:opacity-0',
         bg[type || 'default'],
         sizes[size || 'medium'],
         className,

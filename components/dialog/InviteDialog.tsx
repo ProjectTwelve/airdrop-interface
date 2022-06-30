@@ -84,7 +84,7 @@ function InviteDialog() {
                     Or share on &nbsp;
                     <img
                       onClick={handleTwitterShareClick}
-                      className="cursor-pointer"
+                      className="cursor-pointer w-[70px]"
                       src="/img/twitter_share.png"
                       alt="share"
                     />

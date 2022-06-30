@@ -55,7 +55,7 @@ export default function Gamer() {
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
             <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
-              <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-[url('/img/no_badge_bg.jpg')] bg-cover bg-center md:max-w-full">
+              <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute top-0 left-0 h-full w-full blur-3xl">
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
                     <div
