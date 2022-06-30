@@ -1,12 +1,13 @@
 {
   "name": "airdrop-interface",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.4.0",
+  "license": "AGPL-3.0",
   "author": "Lincheng <1139489076@qq.com>",
-  "description": "P12 airdrop on Steam platform",
+  "description": "P12 Genesis Soul-Bound NFT Airdrop",
   "keywords": [
-    "p12",
-    "airdrop"
+    "P12",
+    "Genesis",
+    "Airdrop"
   ],
   "scripts": {
     "dev": "next dev",
