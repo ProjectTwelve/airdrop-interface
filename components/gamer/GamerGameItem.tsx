@@ -45,7 +45,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
           </p>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="mr-1.5 rounded bg-p12-link/20 h-full px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}
