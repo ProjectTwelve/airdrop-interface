@@ -32,7 +32,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
     {
       width: 100,
       Header: 'Verify time',
-      accessor: 'createAt',
+      accessor: 'createdAt',
       Cell: ({ value }: any) => <p className="flex h-full items-center">{dayjs(value).format('YYYY/MM/DD')}</p>,
     },
     {
@@ -89,7 +89,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
     {
       width: 100,
       Header: 'Verify time',
-      accessor: 'createAt',
+      accessor: 'createdAt',
       Cell: ({ value }: any) => <p className="flex h-full items-center">{dayjs(value).format('YYYY/MM/DD')}</p>,
     },
     {

@@ -47,15 +47,18 @@ export type AccountInfo = {
 };
 export type DevInvitationInfo = {
   wallet_address: string;
-  appid: string;
-  name: string;
-  time: string;
+  createdAt: string;
+  header_image: string;
+  release_date?: { data: string };
+  nft_level: DEV_NFT_LEVEL;
 };
 export type GamerInvitationInfo = {
+  avatar: string;
+  createdAt: string;
+  nft_level: GAMER_NFT_LEVEL;
+  person_name: string;
+  steam_id: string;
   wallet_address: string;
-  appid: string;
-  name: string;
-  time: string;
 };
 export type DevRankInfo = {
   header_image: string;
