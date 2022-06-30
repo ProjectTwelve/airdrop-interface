@@ -9,6 +9,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
+import ReactGA from 'react-ga4';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
             type="bordered"
             onClick={() => {
               setBtnClick(true);
+              ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
               setLocalStorage('invite_btn_click', true);
               setOpen(true);
             }}
