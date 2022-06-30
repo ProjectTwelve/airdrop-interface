@@ -38,20 +38,16 @@ export default function GamerRanking() {
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
                 onClick={() => {
-                  gamerRankData?.tokenRank && setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
+                  gamerRankData?.tokenRank &&
+                    gamerRankData.tokenRank <= 9990 &&
+                    setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
                 }}
                 className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
               >
                 By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
-              <div
-                onClick={() => {
-                  gamerRankData?.timeRank &&
-                    setTimeRankPage(Math.ceil(((timeRankData?.rankLength || 0) - gamerRankData.timeRank + 1) / 10));
-                }}
-                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
-              >
+              <div className="flex flex-1 items-center justify-center rounded-2xl text-sm">
                 By Claim Time <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
               </div>
             </div>
