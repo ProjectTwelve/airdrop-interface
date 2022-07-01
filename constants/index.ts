@@ -95,13 +95,13 @@ export const GAMER_BADGES = {
     title: 'P12 XII-PLORER Badge [Green Rarity]',
   },
   [GAMER_NFT_LEVEL.WHITE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655005918287504872.gif',
-    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_white.png',
+    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656663277830299249.gif',
+    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common.png',
     claim: GAMER_BADGE_WHITE,
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
   },
   [GAMER_NFT_LEVEL.REKT]: {
-    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656487160017009505.gif',
+    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656661630752571203.gif',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt.png',
     claim: GAMER_BADGE_REKT,
     title: 'P12 XII-PLORER Badge [REKT Rarity]',

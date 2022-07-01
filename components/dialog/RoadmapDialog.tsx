@@ -31,7 +31,7 @@ export default function RoadmapDialog() {
             </div>
             <div className="flex-1">
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1（LIVE）</h3>
+                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
@@ -63,7 +63,7 @@ export default function RoadmapDialog() {
                 </div>
               </div>
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (Coming in 22Q3)</h3>
+                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (LIVE)</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
