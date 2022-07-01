@@ -14,7 +14,7 @@ export const useGamerInfo = (addr?: string) => {
     enabled: !!addr,
     onSuccess: (data) => {
       if (data.code === 0 && data.data) {
-        setGamerInfo({...data.data, nft_claim: 2, nft_level: 3});
+        setGamerInfo(data.data);
       } else {
         setGamerInfo(undefined);
       }
