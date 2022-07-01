@@ -27,7 +27,7 @@ export default function DeveloperTabs() {
         <div className="h-[350px] overflow-y-auto">
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
-              <DevTimeRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
+              <DevTimeRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function DeveloperTabs() {
         <div className="h-[350px] overflow-y-auto">
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
-              <DevTokenRankingItem hover={false} steamStore={false} data={item} key={item.appid || index} />
+              <DevTokenRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
         </div>

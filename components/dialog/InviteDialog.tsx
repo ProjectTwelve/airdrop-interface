@@ -116,35 +116,35 @@ function InviteDialog() {
               </div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Orange" type="orange" />
+                  <Tag size="small" value="Legendary" type="orange" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">24%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Purple" type="purple" />
+                  <Tag size="small" value="Epic" type="purple" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">18%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Blue" type="blue" />
+                  <Tag size="small" value="Rare" type="blue" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">16%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Green" type="green" />
+                  <Tag size="small" value="Uncommon" type="green" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">12%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="White" type="white" />
+                  <Tag size="small" value="Common" type="white" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">9%</div>
               </div>

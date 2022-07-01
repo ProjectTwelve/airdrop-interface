@@ -21,7 +21,7 @@ export default function RoadmapDialog() {
                 1
               </div>
               <div className="h-[194px] w-[2px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-sub text-center text-xs font-medium leading-[22px]">
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
                 2
               </div>
               <div className="h-[94px] w-[2px] bg-p12-sub"></div>
