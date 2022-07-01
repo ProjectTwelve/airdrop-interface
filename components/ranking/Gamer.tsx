@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { useAccount } from 'wagmi';
+import classNames from 'classnames';
+import Pagination from 'rc-pagination';
 import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '../../hooks/ranking';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
-import Pagination from 'rc-pagination';
-import { useAccount } from 'wagmi';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -13,6 +14,7 @@ export default function GamerRanking() {
   const { data: gamerRankData } = useGamerRank(account?.address);
   const { data: timeRankData } = useGamerTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useGamerTokenRank({ page: tokenRankPage, size: 10 });
+  const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 9990, [gamerRankData?.tokenRank]);
 
   return (
     <div className="px-8 py-12 xs:p-4">
@@ -38,11 +40,12 @@ export default function GamerRanking() {
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
                 onClick={() => {
-                  gamerRankData?.tokenRank &&
-                    gamerRankData.tokenRank <= 9990 &&
-                    setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
+                  isInRanking && setTokenRankPage(Math.ceil(gamerRankData!.tokenRank! / 10));
                 }}
-                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+                className={classNames(
+                  'flex flex-1 items-center justify-center rounded-2xl text-sm',
+                  isInRanking && 'cursor-pointer hover:bg-[#7980AF]/30',
+                )}
               >
                 By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
