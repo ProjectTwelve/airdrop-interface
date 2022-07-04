@@ -156,6 +156,7 @@ export type GamerInfoData = {
   person_name: string;
   steam_id: string;
   time_created?: number;
+  display?: number;
   birthday?: number;
   credential?: number;
   email?: string;

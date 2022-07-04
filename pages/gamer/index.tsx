@@ -45,7 +45,6 @@ export default function Gamer() {
     }
   };
 
-
   return (
     <div className="mt-8">
       <Back onClick={() => router.push({ pathname: '/', query: router.query })} />
@@ -132,7 +131,7 @@ export default function Gamer() {
                   <p>Amount of tokens from this Steam account</p>
                   <div className="mt-5 flex items-center justify-between">
                     <p onClick={handleClaimedRoadmap} className="cursor-pointer font-din text-[48px] font-bold">
-                      {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
+                      {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
                   </div>
@@ -171,7 +170,7 @@ export default function Gamer() {
               <div className="flex items-center justify-start md:mb-4">
                 <p className="mr-4 text-lg font-medium">Total:</p>
                 <p onClick={handleClaimedRoadmap} className="mr-6 cursor-pointer font-din text-[64px] font-bold leading-[64px]">
-                  {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
+                  {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
                 </p>
                 <Image src="/img/p12.png" width={60} height={60} alt="p12" />
               </div>
