@@ -34,7 +34,14 @@ export default function GamerTimeRankingItem({ hover, data, steamProfile }: Game
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
-      <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">{data.index}</div>
+      <div
+        className={classNames(
+          'mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2',
+          data.index && data.index >= 100000 && 'xs:text-sm xs:leading-[72px]',
+        )}
+      >
+        {data.index}
+      </div>
       <div className="mt-3 mr-4 w-[100px] flex-none break-words font-medium xs:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>

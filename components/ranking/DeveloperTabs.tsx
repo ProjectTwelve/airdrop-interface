@@ -18,7 +18,7 @@ export default function DeveloperTabs() {
           <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="dev_tab_underline" />}</div>
         </Tab>
         <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-          Rankings
+          Leaderboard
           <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="dev_tab_underline" />}</div>
         </Tab>
       </TabList>

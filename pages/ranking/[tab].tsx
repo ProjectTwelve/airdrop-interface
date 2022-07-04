@@ -41,11 +41,11 @@ export default function Ranking(props: { tabIndex: number }) {
           >
             <TabList>
               <Tab>
-                Gamer Ranking
+                Gamer
                 <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="dev_underline" />}</div>
               </Tab>
               <Tab>
-                Developer Ranking
+                Developer
                 <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="dev_underline" />}</div>
               </Tab>
               <div className="absolute right-8 md:-top-10">

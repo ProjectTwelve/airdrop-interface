@@ -54,7 +54,7 @@ function LayoutHeaderExtra() {
             >
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
-                &nbsp;My invitation link
+                &nbsp;My referral link
               </div>
             </Button>
             <AnimatePresence>

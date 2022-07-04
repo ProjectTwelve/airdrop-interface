@@ -52,11 +52,11 @@ function DeveloperRanking() {
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
           <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-din text-[32px] font-medium leading-[90px] xs:w-auto">
-            {verified?.total}
+            {new Intl.NumberFormat().format(verified?.total ?? 0)}
           </div>
         </div>
         <div className="flex-1">
-          <h3 className="text-sm font-medium leading-5">Your Rankings</h3>
+          <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
           <div className="relative">
             <div
               className={classNames(
@@ -162,7 +162,7 @@ function DeveloperRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Leaderboard</h2>
           <DevTokenRankingHeader />
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (

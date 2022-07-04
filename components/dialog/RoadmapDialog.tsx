@@ -53,7 +53,7 @@ export default function RoadmapDialog() {
                     <div className="mr-1.5 flex h-5 w-4 flex-none items-center justify-center">
                       <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     </div>
-                    Referral mechanism - when other developers successfully verify their games through your invitation link, as
+                    Referral mechanism - when other developers successfully verify their games through your referral link, as
                     referrer you get up to 24% of that game&apos;s token.
                   </div>
                   <div className="flex justify-start leading-5">

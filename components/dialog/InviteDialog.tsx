@@ -49,7 +49,7 @@ function InviteDialog() {
       }}
       render={() => (
         <div className="w-[720px]">
-          <h2 className="text-center text-xl">My P12 Airdrop Invitation Link</h2>
+          <h2 className="text-center text-xl">My P12 Airdrop Referral Link</h2>
           <div className="mt-8 rounded-lg py-4 text-xs">
             <div className="flex items-center justify-around">
               <Image src="/img/invite_step_01.png" alt="invite_01" width={100} height={100} />
