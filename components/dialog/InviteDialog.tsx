@@ -29,10 +29,11 @@ function InviteDialog() {
   });
 
   const handleTwitterShareClick = () => {
-    const shareLink = 'Join @_p12_ genesis Soul-Bound NFT Airdrop stage two for gamers and get referral benefits!';
+    const text =
+      'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!';
     window.open(
       decodeURIComponent(
-        'https://twitter.com/intent/tweet?text=' + shareLink + '&hashtags=NFTGiveaway&hashtags=Metaverse&url=' + inviteLink,
+        'https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + inviteLink,
       ),
       '_blank',
     );
@@ -48,7 +49,7 @@ function InviteDialog() {
       }}
       render={() => (
         <div className="w-[720px]">
-          <h2 className="text-center text-xl">My P12 Airdrop Invitation Link</h2>
+          <h2 className="text-center text-xl">My P12 Airdrop Referral Link</h2>
           <div className="mt-8 rounded-lg py-4 text-xs">
             <div className="flex items-center justify-around">
               <Image src="/img/invite_step_01.png" alt="invite_01" width={100} height={100} />
@@ -84,7 +85,7 @@ function InviteDialog() {
                     Or share on &nbsp;
                     <img
                       onClick={handleTwitterShareClick}
-                      className="cursor-pointer"
+                      className="w-[70px] cursor-pointer"
                       src="/img/twitter_share.png"
                       alt="share"
                     />
@@ -115,35 +116,35 @@ function InviteDialog() {
               </div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Orange" type="orange" />
+                  <Tag size="small" value="Legendary" type="orange" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">24%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Purple" type="purple" />
+                  <Tag size="small" value="Epic" type="purple" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">18%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Blue" type="blue" />
+                  <Tag size="small" value="Rare" type="blue" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">16%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Green" type="green" />
+                  <Tag size="small" value="Uncommon" type="green" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">12%</div>
               </div>
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="White" type="white" />
+                  <Tag size="small" value="Common" type="white" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">9%</div>
               </div>

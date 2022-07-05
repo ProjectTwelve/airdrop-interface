@@ -25,6 +25,10 @@ module.exports = {
       fontFamily: {
         din: ['D-DIN'],
       },
+      backgroundImage: {
+        'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',
+        'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
+      },
     },
   },
   plugins: [],

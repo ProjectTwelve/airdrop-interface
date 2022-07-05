@@ -15,7 +15,7 @@ import { setLocalStorage } from '../../utils/storage';
 
 export default function GamerEmailDialog() {
   const { data: account } = useAccount();
-  const { signMessageAsync } = useSignMessage();
+  const { signMessageAsync, isLoading } = useSignMessage();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const [open, setOpen] = useRecoilState(gamerEmailShowAtom);
   const [value, setValue] = useState<string>('');
@@ -68,9 +68,11 @@ export default function GamerEmailDialog() {
               />
             </div>
             <div className="h-8 pt-1 pl-4 text-xs text-p12-error">{error}</div>
-            <div className="flex justify-end">
+            <div className="flex items-center justify-end">
+              {isLoading && <p className="mr-2 text-sm text-p12-success">Please check your wallet and sign.</p>}
               <Button
                 disabled={!value}
+                loading={isLoading}
                 onClick={() => onSubmit(value)}
                 className="w-[118px]"
                 type={value ? 'gradient' : 'default'}

@@ -1,14 +1,14 @@
+import Head from 'next/head';
+import { NextPage } from 'next';
+import Script from 'next/script';
 import { ReactElement, ReactNode, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Head from 'next/head';
-import Script from 'next/script';
 import Layout from '../components/layout';
 import type { AppProps } from 'next/app';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
 import '../utils/analytics';
-import { NextPage } from 'next';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

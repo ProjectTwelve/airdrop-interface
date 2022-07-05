@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { openLink } from '../../utils';
+import ReactGA from 'react-ga4';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
@@ -44,10 +45,16 @@ function LayoutHeaderExtra() {
                 &nbsp;Airdrop roadmap
               </div>
             </Button>
-            <Button type="bordered" onClick={() => setInviteOpen(true)}>
+            <Button
+              type="bordered"
+              onClick={() => {
+                ReactGA.event({ category: 'Invite', action: 'Click', label: 'Header' });
+                setInviteOpen(true);
+              }}
+            >
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
-                &nbsp;My invitation link
+                &nbsp;My referral link
               </div>
             </Button>
             <AnimatePresence>

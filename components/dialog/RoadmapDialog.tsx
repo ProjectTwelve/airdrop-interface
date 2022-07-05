@@ -21,7 +21,7 @@ export default function RoadmapDialog() {
                 1
               </div>
               <div className="h-[194px] w-[2px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-sub text-center text-xs font-medium leading-[22px]">
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
                 2
               </div>
               <div className="h-[94px] w-[2px] bg-p12-sub"></div>
@@ -31,7 +31,7 @@ export default function RoadmapDialog() {
             </div>
             <div className="flex-1">
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1（LIVE）</h3>
+                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
@@ -53,7 +53,7 @@ export default function RoadmapDialog() {
                     <div className="mr-1.5 flex h-5 w-4 flex-none items-center justify-center">
                       <img src="/svg/check.svg" className="h-4 w-4" alt="check" />
                     </div>
-                    Referral mechanism - when other developers successfully verify their games through your invitation link, as
+                    Referral mechanism - when other developers successfully verify their games through your referral link, as
                     referrer you get up to 24% of that game&apos;s token.
                   </div>
                   <div className="flex justify-start leading-5">
@@ -63,7 +63,7 @@ export default function RoadmapDialog() {
                 </div>
               </div>
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (Coming in 22Q3)</h3>
+                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (LIVE)</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />

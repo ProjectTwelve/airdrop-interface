@@ -24,6 +24,7 @@ export default function GamerRanking() {
     ],
     [],
   );
+  const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 9990, [gamerRankData?.tokenRank]);
 
   return (
     <div className="px-8 py-12 xs:p-4">
@@ -33,7 +34,9 @@ export default function GamerRanking() {
           <div className="gradient__box mt-3 grid grid-cols-3 py-2 leading-[90px] tablet:flex tablet:items-center tablet:py-[17px]">
             <div className="h-[54px] border-[#949FA9] tablet:w-[130px] tablet:border-r">
               <p className="h-[16px] text-center text-sm">Total</p>
-              <p className="mt-1 text-center font-din text-[32px] leading-[32px]">150000</p>
+              <p className="mt-1 text-center font-din text-[32px] leading-[32px]">
+                {new Intl.NumberFormat().format(verified?.total ?? 0)}
+              </p>
             </div>
             {totalNums.map((item, index) => (
               <p
@@ -44,7 +47,7 @@ export default function GamerRanking() {
                   item.color,
                 )}
               >
-                {item.num}
+                {new Intl.NumberFormat().format(item.num)}
               </p>
             ))}
           </div>
@@ -64,20 +67,17 @@ export default function GamerRanking() {
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div
                 onClick={() => {
-                  gamerRankData?.tokenRank && setTokenRankPage(Math.ceil(gamerRankData.tokenRank / 10));
+                  isInRanking && setTokenRankPage(Math.ceil(gamerRankData!.tokenRank! / 10));
                 }}
-                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+                className={classNames(
+                  'flex flex-1 items-center justify-center rounded-2xl text-sm',
+                  isInRanking && 'cursor-pointer hover:bg-[#7980AF]/30',
+                )}
               >
                 By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
               </div>
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
-              <div
-                onClick={() => {
-                  gamerRankData?.timeRank &&
-                    setTimeRankPage(Math.ceil(((verified?.total || 0) - gamerRankData.timeRank + 1) / 10));
-                }}
-                className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
-              >
+              <div className="flex flex-1 items-center justify-center rounded-2xl text-sm">
                 By Claim Time <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Rankings</h2>
+          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Leaderboard</h2>
           <GamerTokenRankingHeader />
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item) => (

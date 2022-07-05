@@ -9,6 +9,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
+import ReactGA from 'react-ga4';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
             type="bordered"
             onClick={() => {
               setBtnClick(true);
+              ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
               setLocalStorage('invite_btn_click', true);
               setOpen(true);
             }}
@@ -54,7 +56,7 @@ const Home: NextPage = () => {
               </motion.div>
               <div className="flex flex-1 items-center justify-center">
                 <Image src="/svg/invite-2.svg" style={{ strokeWidth: 10 }} width={24} height={24} alt="invite" />
-                &nbsp; My invitation link
+                &nbsp; My referral link
               </div>
               <motion.div
                 animate={btnClick && !isHovered ? {} : { x: [0, -12, 4, -12, 0] }}

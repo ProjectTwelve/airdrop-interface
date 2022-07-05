@@ -21,6 +21,7 @@ export enum GAMER_NFT_LEVEL {
   BLUE,
   GREEN,
   WHITE,
+  REKT,
 }
 
 export const NFT_CLAIM_TYPE = {
@@ -39,6 +40,7 @@ const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https:
 const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCuBwUtL6P';
 const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCrkwUtqiz';
 const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galaxy.eco/P12/campaign/GCirwUtCCS';
+const GAMER_BADGE_REKT = process.env.NEXT_PUBLIC_GAMER_BADGE_REKT || 'https://galaxy.eco/P12/campaign/GCuagUtMfG';
 
 export const DEV_BADGES = {
   [DEV_NFT_LEVEL.ORANGE]: {
@@ -93,9 +95,15 @@ export const GAMER_BADGES = {
     title: 'P12 XII-PLORER Badge [Green Rarity]',
   },
   [GAMER_NFT_LEVEL.WHITE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655005918287504872.gif',
-    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_white.png',
+    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656663277830299249.gif',
+    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common.png',
     claim: GAMER_BADGE_WHITE,
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
+  },
+  [GAMER_NFT_LEVEL.REKT]: {
+    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656661630752571203.gif',
+    img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt.png',
+    claim: GAMER_BADGE_REKT,
+    title: 'P12 XII-PLORER Badge [REKT Rarity]',
   },
 };

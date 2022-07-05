@@ -18,7 +18,7 @@ export default function GamerTabs() {
           <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="gamer_tab_underline" />}</div>
         </Tab>
         <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-          Rankings
+          Leaderboard
           <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="gamer_tab_underline" />}</div>
         </Tab>
       </TabList>
@@ -27,7 +27,7 @@ export default function GamerTabs() {
         <div className="h-[350px] overflow-y-auto">
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
-              <GamerTimeRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
+              <GamerTimeRankingItem data={item} key={item.appid || index} />
             ))}
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function GamerTabs() {
         <div className="h-[350px] overflow-y-auto">
           <motion.div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
-              <GamerTokenRankingItem hover={false} steamProfile={false} data={item} key={item.appid || index} />
+              <GamerTokenRankingItem data={item} key={item.appid || index} />
             ))}
           </motion.div>
         </div>

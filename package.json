@@ -1,12 +1,13 @@
 {
   "name": "airdrop-interface",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.4.0",
+  "license": "AGPL-3.0",
   "author": "Lincheng <1139489076@qq.com>",
-  "description": "P12 airdrop on Steam platform",
+  "description": "P12 Genesis Soul-Bound NFT Airdrop",
   "keywords": [
-    "p12",
-    "airdrop"
+    "P12",
+    "Genesis",
+    "Airdrop"
   ],
   "scripts": {
     "dev": "next dev",
@@ -16,17 +17,17 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@floating-ui/react-dom-interactions": "^0.6.1",
+    "@floating-ui/react-dom-interactions": "^0.6.6",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.2",
     "ethers": "^5.6.6",
     "framer-motion": "^6.3.11",
-    "next": "12.1.6",
+    "next": "12.2.0",
     "rc-pagination": "^3.1.16",
-    "react": "18.1.0",
+    "react": "18.2.0",
     "react-device-detect": "^2.2.2",
-    "react-dom": "18.1.0",
+    "react-dom": "18.2.0",
     "react-ga4": "^1.4.1",
     "react-jazzicon": "^1.0.4",
     "react-query": "^3.39.0",
