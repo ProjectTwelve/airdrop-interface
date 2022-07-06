@@ -138,7 +138,8 @@ export const fetchGamerRank = (params: { addr?: string }) =>
 /**
  * get developer verified count
  */
-export const fetchGamerVerifiedCount = () => request.get<any, Response<{ total: number }>>('/api/gamer/count');
+export const fetchGamerVerifiedCount = () =>
+  request.get<any, Response<{ total: number; verifiedCount: number[] }>>('/api/gamer/count');
 
 /**
  * get gamer invitation

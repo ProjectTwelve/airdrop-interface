@@ -8,6 +8,7 @@ import { LeftCircle } from '../svg/LeftCircle';
 import DevTimeRankingItem, { DevTimeRankingHeader } from './DevTimeRankingItem';
 import DevTokenRankingItem, { DevTokenRankingHeader } from './DevTokenRankingItem';
 import { useDeveloperRank, useDeveloperTimeRank, useDeveloperTokenRank, useDeveloperVerifiedCount } from '../../hooks/ranking';
+import { getCountMemo } from '../../utils';
 
 const variants = {
   enter: (direction: number) => {
@@ -123,7 +124,8 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{item?.tokenRank || '--'}</span>
+                      By Token Rarity
+                      <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
                     </div>
                     <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
@@ -132,7 +134,8 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
-                      By Claim Time <span className="pl-3 font-din text-2xl font-bold">{item?.timeRank || '--'}</span>
+                      By Claim Time
+                      <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(item?.timeRank) || '--'}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

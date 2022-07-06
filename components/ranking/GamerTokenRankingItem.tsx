@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
-import { formatMinutes, openLink } from '../../utils';
+import { formatMinutes, getCountMemo, openLink } from '../../utils';
 import { GAMER_BADGES } from '../../constants';
 
 export function GamerTokenRankingHeader() {
@@ -36,7 +36,9 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
-      <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">{data.index}</div>
+      <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">
+        {getCountMemo(data.index)}
+      </div>
       <div>
         <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}

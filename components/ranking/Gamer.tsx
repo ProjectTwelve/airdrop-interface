@@ -5,6 +5,7 @@ import Pagination from 'rc-pagination';
 import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '../../hooks/ranking';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
+import { getCountMemo } from '../../utils';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -14,15 +15,23 @@ export default function GamerRanking() {
   const { data: gamerRankData } = useGamerRank(account?.address);
   const { data: timeRankData } = useGamerTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useGamerTokenRank({ page: tokenRankPage, size: 10 });
-  const totalNums = useMemo(
+  const commonCount = useMemo(
+    () => (verified ? (verified.verifiedCount[4] || 0) + (verified.verifiedCount[5] || 0) : 0),
+    [verified],
+  );
+
+  const levelCount = useMemo(
     () => [
-      { color: 'text-[#FFAA2C]', num: 1000 },
-      { color: 'text-[#FC59FF]', num: 300 },
-      { color: 'text-[#43BBFF]', num: 800 },
-      { color: 'text-[#1EDB8C]', num: 8888 },
-      { color: 'text-[#BDC9E3]', num: 7777 },
+      { color: 'text-[#FFAA2C]', num: verified?.verifiedCount[0] ?? 0 },
+      { color: 'text-[#FC59FF]', num: verified?.verifiedCount[1] ?? 0 },
+      { color: 'text-[#43BBFF]', num: verified?.verifiedCount[2] ?? 0 },
+      { color: 'text-[#1EDB8C]', num: verified?.verifiedCount[3] ?? 0 },
+      {
+        color: 'text-[#BDC9E3]',
+        num: commonCount,
+      },
     ],
-    [],
+    [commonCount, verified?.verifiedCount],
   );
   const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 9990, [gamerRankData?.tokenRank]);
 
@@ -38,7 +47,7 @@ export default function GamerRanking() {
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>
             </div>
-            {totalNums.map((item, index) => (
+            {levelCount.map((item, index) => (
               <p
                 key={index}
                 className={classNames(
@@ -74,11 +83,13 @@ export default function GamerRanking() {
                   isInRanking && 'cursor-pointer hover:bg-[#7980AF]/30',
                 )}
               >
-                By Token Rarity <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.tokenRank || '--'}</span>
+                By Token Rarity
+                <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(gamerRankData?.tokenRank) || '--'}</span>
               </div>
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div className="flex flex-1 items-center justify-center rounded-2xl text-sm">
-                By Claim Time <span className="pl-3 font-din text-2xl font-bold">{gamerRankData?.timeRank || '--'}</span>
+                By Claim Time
+                <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(gamerRankData?.timeRank) || '--'}</span>
               </div>
             </div>
           </div>

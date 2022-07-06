@@ -1,10 +1,10 @@
-import { GamerGamesData } from '../../lib/types';
 import React, { useMemo } from 'react';
-import { Tooltip } from '../tooltip';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import { formatMinutes } from '../../utils';
+import { Tooltip } from '../tooltip';
 import QuestionSVG from '../svg/Question';
+import { GamerGamesData } from '../../lib/types';
+import { formatMinutes, getCountMemo } from '../../utils';
 
 type SteamProfileInfoProps = {
   data?: GamerGamesData;
@@ -13,7 +13,7 @@ type SteamProfileInfoProps = {
 export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfoProps) {
   const list = useMemo(
     () => [
-      { label: 'Total games', value: data?.total_game_count ?? '--' },
+      { label: 'Total games', value: getCountMemo(data?.total_game_count) ?? '--' },
       { label: 'Total playtime', value: data ? formatMinutes(data.total_playtime) : '--' },
       {
         label: (
@@ -26,7 +26,7 @@ export default function SteamProfileInfo({ data, createdTime }: SteamProfileInfo
             </Tooltip>
           </div>
         ),
-        value: data?.ss_game_count ?? '--',
+        value: getCountMemo(data?.ss_game_count) ?? '--',
       },
       {
         label: (

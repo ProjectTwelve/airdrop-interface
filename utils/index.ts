@@ -77,3 +77,7 @@ export const getEmailSignData = ({ account, email }: { account: string; email: s
   primaryType: 'Permit',
   message: { account, email },
 });
+
+export const getCountMemo = (count?: number) => {
+  return count === 3 ? '1+2' : count;
+};
