@@ -1,5 +1,8 @@
-import { getAddress } from '@ethersproject/address';
+import React from 'react';
+import { toast } from 'react-toastify';
 import { isMobile } from 'react-device-detect';
+import { getAddress } from '@ethersproject/address';
+import Message from '../components/message';
 
 export function isAddress(value: any): string | false {
   try {
@@ -27,7 +30,10 @@ export const openLink = (url: string) => {
   if (isMobile) {
     window.location.href = url;
   } else {
-    window.open(url, '_blank');
+    const winRef = window.open(url, '_blank');
+    if (!winRef) {
+      toast.error(<Message message="Please allow popups for this website." title="Ah shit, here we go again" />);
+    }
   }
 };
 
