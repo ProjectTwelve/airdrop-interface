@@ -3,7 +3,7 @@ import { DEV_BADGES } from '../../constants';
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 import { DevRankInfo } from '../../lib/types';
-import { openLink } from '../../utils';
+import { getCountMemo, openLink } from '../../utils';
 
 export function DevTokenRankingHeader() {
   return (
@@ -35,7 +35,7 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
-      <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{data.index}</div>
+      <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
       <div>
         <div className="relative float-left mr-3 h-[72px] w-[112px] flex-none overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
           {data.header_image && (

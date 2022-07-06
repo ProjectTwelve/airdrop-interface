@@ -1,8 +1,8 @@
 import React, { MouseEvent } from 'react';
-import classNames from 'classnames';
 import dayjs from 'dayjs';
+import classNames from 'classnames';
 import { DevRankInfo } from '../../lib/types';
-import { openLink } from '../../utils';
+import { openLink, getCountMemo } from '../../utils';
 
 export function DevTimeRankingHeader() {
   return (
@@ -33,7 +33,7 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
         hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
       )}
     >
-      <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{data.index}</div>
+      <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
       <div className="float-left mt-3 mr-4 w-[100px] break-words font-medium xs:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
@@ -52,7 +52,7 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
           </div>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap overflow-hidden">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] mr-1.5 text-xs text-p12-link">
+              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}

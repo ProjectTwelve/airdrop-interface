@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
-import { formatMinutes, openLink } from '../../utils';
+import { formatMinutes, getCountMemo, openLink } from '../../utils';
 import dayjs from 'dayjs';
 
 export function GamerTimeRankingHeader() {
@@ -40,7 +40,7 @@ export default function GamerTimeRankingItem({ hover, data, steamProfile }: Game
           data.index && data.index >= 100000 && 'xs:text-sm xs:leading-[72px]',
         )}
       >
-        {data.index}
+        {getCountMemo(data.index)}
       </div>
       <div className="mt-3 mr-4 w-[100px] flex-none break-words font-medium xs:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>

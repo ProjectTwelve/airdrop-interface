@@ -14,9 +14,9 @@ export default function RoadmapDialog() {
       onOpenChange={(op) => setOpen(op)}
       render={() => (
         <div className="max-w-[780px]">
-          <h2 className="text-center text-xl">P12 Genesis Airdrop Roadmap</h2>
+          <h2 className="text-center text-xl">Stay a while, and listen!</h2>
           <div className="flex">
-            <div className="flex flex-col items-center justify-start mr-5">
+            <div className="mr-5 flex flex-col items-center justify-start">
               <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
                 1
               </div>
@@ -24,7 +24,7 @@ export default function RoadmapDialog() {
               <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
                 2
               </div>
-              <div className="h-[94px] w-[2px] bg-p12-sub"></div>
+              <div className="h-[74px] w-[2px] bg-p12-sub"></div>
               <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-sub text-center text-xs font-medium leading-[22px]">
                 3
               </div>
