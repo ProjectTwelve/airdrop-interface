@@ -66,7 +66,7 @@ function Dialog({
                   className="backdrop-box rounded-2xl"
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.45 }}
+                  exit={{ opacity: 0, scale: 0.85 }}
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
                   {...getFloatingProps({ ref: floating })}
                 >
