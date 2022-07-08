@@ -11,14 +11,13 @@ import { useGamerGames } from '../../hooks/gamer';
 import { gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
-import { useSteamSignIn } from '../../hooks/useSteamSignIn';
 import { isConnectPopoverOpen } from '../../store/web3/state';
+import RoundOneEnd from './RoundOneEnd';
 
 export default function SteamStatus() {
   const pageSize = 6;
   const { data: account } = useAccount();
   const queryClient = useQueryClient();
-  const [steamSignIn] = useSteamSignIn();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
@@ -124,20 +123,13 @@ export default function SteamStatus() {
             )}
           </div>
         </div>
+      ) : account?.address ? (
+        <RoundOneEnd />
       ) : (
         <div className="flex flex-col items-center justify-center py-12 xs:py-4">
-          {account?.address ? (
-            <Button type="gradient" onClick={steamSignIn} className="w-[305px]">
-              Sign in with Steam
-            </Button>
-          ) : (
-            <Button type="gradient" onClick={() => setConnectOpen(true)} className="w-[305px]">
-              Please connect wallet
-            </Button>
-          )}
-          <p className="mt-5 text-sm text-p12-sub">
-            {account?.address && 'We cannot access your profile. Please log in to your Steam account.'}
-          </p>
+          <Button type="gradient" onClick={() => setConnectOpen(true)} className="w-[305px]">
+            Please connect wallet
+          </Button>
         </div>
       )}
     </div>

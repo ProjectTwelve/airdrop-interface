@@ -40,6 +40,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
       {socialMedia.map((item) => (
         <Image
           key={item.name}
+          layout="fixed"
           className="cursor-pointer"
           onClick={() => {
             onSocialMediaClick(item.name);
