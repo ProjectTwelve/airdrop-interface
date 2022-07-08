@@ -26,7 +26,7 @@ export default function GamerClaimSuccess() {
         <div>
           <div className="flex h-[28px] items-center justify-center text-xl">
             <ToastIcon type="success" />
-            <p className="ml-3">Claim Success</p>
+            <p className="ml-3">Winner Winner, Chicken Dinner</p>
           </div>
           <div className="my-[30px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
