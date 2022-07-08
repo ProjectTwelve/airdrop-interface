@@ -30,6 +30,7 @@ export default function GamerP12() {
             <Image src={iconStatus.get(gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) || ''} width={26} height={26} alt="icon" />
             <p className="ml-2 font-medium">{gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
+          {gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED && <p className="font-medium">Hesitation is defeat</p>}
         </div>
         <div className="flex flex-1 items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
           <Image src={iconStatus.get(isClicked) || ''} width={26} height={26} alt="icon" />

@@ -19,7 +19,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
           className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover"
           style={{ maxWidth: 'min(33%, 168px)' }}
         >
-          <p className="absolute -z-10 w-full text-center text-center text-xs leading-[72px] text-p12-bg">No Picture</p>
+          <p className="absolute -z-10 w-full text-center text-center text-xs leading-[72px] text-p12-bg">Damedane</p>
           <img
             src={gameIcon}
             onError={(error) => ((error.target as any).style = 'display: none')}
@@ -45,7 +45,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
           </p>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 rounded bg-p12-link/20 h-full px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="mr-1.5 h-full rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}

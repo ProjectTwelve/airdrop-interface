@@ -64,11 +64,11 @@ function LayoutHeaderExtra() {
                   animate={{ right: -200, opacity: 1, scale: 1 }}
                   exit={{ right: 0, opacity: 0, scale: 0.85 }}
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                  className="backdrop-box absolute -top-1/2 w-[190px] rounded-lg text-xs"
+                  className="tooltip__container absolute z-10 -top-1/2 w-[190px] rounded-lg text-xs"
                 >
                   <div className="p-4">
-                    Share your invitation link and get a share of tokens
-                    <div className="mt-2 flex justify-end">
+                    Share invite address get rewards, It&apos;s dangerous to go alone, take this
+                    <div className="flex justify-end">
                       <div
                         className="cursor-pointer text-p12-link"
                         onClick={() => {
