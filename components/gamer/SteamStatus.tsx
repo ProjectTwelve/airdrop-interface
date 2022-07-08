@@ -11,6 +11,7 @@ import { useGamerGames } from '../../hooks/gamer';
 import { gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
+// import { useSteamSignIn } from '../../hooks/useSteamSignIn';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import RoundOneEnd from './RoundOneEnd';
 
@@ -18,6 +19,7 @@ export default function SteamStatus() {
   const pageSize = 6;
   const { data: account } = useAccount();
   const queryClient = useQueryClient();
+  // const [steamSignIn] = useSteamSignIn();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);

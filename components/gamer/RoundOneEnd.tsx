@@ -26,9 +26,9 @@ export default function RoundOneEnd() {
               </p>
             </div>
             <div className="basis-1/2">
-              <p className="text-[34px] font-semibold xs:text-[24px]">Round One</p>
-              <p className="mt-2 font-medium">
-                XXX - XXX
+              <p className="text-[34px] font-semibold xs:text-[24px] xs:leading-6">Round One</p>
+              <p className="mt-2 font-medium xs:mt-3 xs:text-sm">
+                26 Jun - 12 Jul
                 <span className="ml-2 rounded-full bg-[#F13361] px-3 py-[3px] xs:ml-1 xs:px-2 xs:py-0.5 xs:text-xs">END</span>
               </p>
             </div>
@@ -37,10 +37,10 @@ export default function RoundOneEnd() {
         <div className="round-box round-box__two">
           <div className="ml-[100px] flex items-center justify-between md:ml-0 md:items-start">
             <div>
-              <p className="text-[34px] font-semibold xs:text-[24px]">Round Two</p>
-              <div className="mt-2 h-6 w-[155px] overflow-hidden rounded-full bg-[#99A7C3]/40 text-center font-medium xs:w-[140px]">
+              <p className="text-[34px] font-semibold xs:text-[24px] xs:leading-6">Round Two</p>
+              <div className="mt-2 h-6 w-[155px] overflow-hidden rounded-full bg-[#99A7C3]/40 text-center font-medium xs:mt-3 xs:w-[140px]">
                 <AnimatePresence initial={false} custom={1}>
-                  <motion.p
+                  <motion.div
                     key={swipePage}
                     custom={1}
                     variants={{ enter: { y: 48, zIndex: 1 }, center: { y: 0, zIndex: 1 }, exit: { y: -48, zIndex: 0 } }}
@@ -52,7 +52,7 @@ export default function RoundOneEnd() {
                     <p>COMING SOON</p>
                     <p>COMING SOON</p>
                     <p>COMING SOON</p>
-                  </motion.p>
+                  </motion.div>
                 </AnimatePresence>
               </div>
             </div>
@@ -60,7 +60,7 @@ export default function RoundOneEnd() {
               <p className="font-semibold xs:text-sm">Latest progress on</p>
               <div className="mt-2 flex xs:flex-col xs:items-end">
                 <SocialMedia size="medium" />
-                <p className="px-2 font-medium text-[#1EDB8C]">Join us !</p>
+                <p className="px-2 font-medium text-[#1EDB8C] xs:px-0">Join us !</p>
               </div>
             </div>
           </div>
