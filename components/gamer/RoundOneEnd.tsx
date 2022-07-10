@@ -20,7 +20,7 @@ export default function RoundOneEnd() {
         <div className="round-box round-box__one">
           <div className="mr-[100px] flex items-start justify-between md:mr-0 md:flex-row-reverse">
             <div className="basis-1/2">
-              <p className="font-semibold md:text-right xs:text-sm">Total Verified Games</p>
+              <p className="font-semibold md:text-right xs:text-sm">Total Verified Gamers</p>
               <p className="font-din text-[48px] font-bold text-[#FFAA2C] md:text-right xs:text-[32px]">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>

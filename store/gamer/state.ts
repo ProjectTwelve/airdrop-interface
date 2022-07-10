@@ -10,3 +10,8 @@ export const gamerEmailShowAtom = atom<boolean>({
   key: 'gamer_email_show',
   default: false,
 });
+
+export const gamerInfoCodeAtom = atom<number>({
+  key: 'gamer_info_code',
+  default: 0,
+});
