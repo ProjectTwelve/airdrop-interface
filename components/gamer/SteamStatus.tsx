@@ -8,11 +8,12 @@ import Button from '../button';
 import Loading from '../loading';
 import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
-import { gamerInfoAtom } from '../../store/gamer/state';
+import { gamerInfoAtom, gamerInfoCodeAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
 import { useSteamSignIn } from '../../hooks/useSteamSignIn';
 import { isConnectPopoverOpen } from '../../store/web3/state';
+import RoundOneEnd from './RoundOneEnd';
 
 export default function SteamStatus() {
   const pageSize = 6;
@@ -21,21 +22,35 @@ export default function SteamStatus() {
   const [steamSignIn] = useSteamSignIn();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const gamerInfoCode = useRecoilValue(gamerInfoCodeAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const { data: gamesData, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
+  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
+  const games = useMemo(() => {
+    if (gamesRes?.code === 0) {
+      return gamesRes.data.games;
+    }
+    return [];
+  }, [gamesRes]);
   const useCurrentGames = useMemo(() => {
-    if (!gamesData) return [];
-    return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-  }, [currentPage, gamesData]);
+    return games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }, [currentPage, games]);
+
+  const isPaused = useMemo(() => {
+    return gamerInfoCode === 4003 || gamesRes?.code === 4003;
+  }, [gamerInfoCode, gamesRes?.code]);
 
   useEffect(() => {
     // refresh gamer info
     if (!account?.address) return;
     if (gamerInfo?.credential) return;
-    if (gamesData) {
+    if (gamesRes?.code === 0) {
       queryClient.refetchQueries(['gamer_info', account.address]).then();
     }
-  }, [account?.address, gamesData, gamerInfo?.credential, queryClient]);
+  }, [account?.address, gamesRes, gamerInfo?.credential, queryClient]);
+
+  if (isPaused) {
+    return <RoundOneEnd />;
+  }
 
   return (
     <div>
@@ -49,12 +64,12 @@ export default function SteamStatus() {
                 <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
               </div>
             </div>
-            <SteamProfileInfo data={gamesData} createdTime={gamerInfo.time_created} />
+            <SteamProfileInfo data={gamesRes?.data} createdTime={gamerInfo.time_created} />
           </div>
           <div className="py-8">
             <h3 className="mb-3 text-xl font-semibold">My Game List</h3>
-            {gamesData ? (
-              gamesData.games.length ? (
+            {gamesRes ? (
+              games.length ? (
                 <div className="grid grid-cols-2 gap-y-4 gap-x-8 md:grid-cols-1">
                   {useCurrentGames.map((item) => (
                     <GamerGameItem key={item.appid} data={item} />
@@ -108,17 +123,17 @@ export default function SteamStatus() {
                 )}
               </div>
             )}
-            {gamesData && gamesData.games?.length > 6 && (
+            {games.length > 6 && (
               <div className="mt-4 flex items-center justify-between">
                 <p className="text-xs">
-                  {currentPage * 6 - 5}-{currentPage * 6} of {gamesData.games.length}
+                  {currentPage * 6 - 5}-{currentPage * 6} of {games.length}
                 </p>
                 <Pagination
                   simple
                   current={currentPage}
                   pageSize={pageSize}
                   onChange={(page) => setCurrentPage(page)}
-                  total={gamesData.games.length}
+                  total={games.length}
                 />
               </div>
             )}

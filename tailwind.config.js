@@ -28,6 +28,9 @@ module.exports = {
       backgroundImage: {
         'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',
         'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
+        'round-one': 'var(--round-one)',
+        'round-two': 'url(https://cdn1.p12.games/airdrop/img/first_half_none.png)',
+        'gradient-transparent': 'var(--gradient-transparent)',
       },
     },
   },
