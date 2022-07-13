@@ -28,6 +28,7 @@ module.exports = {
       backgroundImage: {
         'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',
         'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
+        'card-0': 'url(/img/nft/bg_0.jpg)',
       },
     },
   },
