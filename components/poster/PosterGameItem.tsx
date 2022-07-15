@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { formatMinutes, getSteamGameImage } from '../../utils';
 
 export default function PosterGameItem({ data }: { data?: GamerGameInfo }) {
-  const gameIcon = useMemo(() => (data ? getSteamGameImage(data.appid) : ''), [data?.appid]);
+  const gameIcon = useMemo(() => (data ? getSteamGameImage(data.appid) : ''), [data]);
   const isSSGame = !!data?.ss_game;
 
   if (!data) {

@@ -27,8 +27,8 @@ export default function PosterCanvas() {
       useCORS: true,
       allowTaint: true,
       scale: 1,
-      windowWidth: 0,
-      windowHeight: 0,
+      windowWidth: 1080,
+      windowHeight: 2300,
     }).then((canvas) => {
       const img = canvas.toDataURL('image/jpeg', 0.85);
       setPosterCapture(img);

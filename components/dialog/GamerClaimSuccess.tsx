@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import Dialog from './index';
 import Button from '../button';
-import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gamerClaimedPosterAtom, gamerInfoAtom } from '../../store/gamer/state';
 import { NFT_CLAIM } from '../../constants';
+import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 
 export default function GamerClaimSuccess() {
   const { data: account } = useAccount();
   const [open, setOpen] = useState<boolean>(false);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const gamerClaimedPoster = useSetRecoilState(gamerClaimedPosterAtom);
+  const posterCapture = useRecoilValue(posterCaptureAtom);
+  const posterStyles = useRecoilValue(posterStylesAtom);
 
   useEffect(() => {
     const claimedMap = getLocalStorage('gamer_claimed_map') || {};
     const address = account?.address;
-    if (address && gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && !claimedMap[address]) {
+    if (address && gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && !claimedMap[address] && posterCapture) {
       setOpen(true);
       claimedMap[address] = 1;
       setLocalStorage('gamer_claimed_map', claimedMap);
     }
-  }, [account?.address, gamerInfo?.nft_claim]);
+  }, [account?.address, gamerInfo?.nft_claim, posterCapture]);
 
   return (
     <Dialog
@@ -44,8 +48,13 @@ export default function GamerClaimSuccess() {
           </div>
           <motion.div
             layoutId="sharing_poster"
-            className="mx-auto h-[130px] max-w-[540px] overflow-hidden rounded-2xl border border-p12-link"
-          ></motion.div>
+            className={classNames(
+              'relative mx-auto max-w-[540px] overflow-hidden rounded-2xl pb-[24%]',
+              gamerInfo?.nft_level && posterStyles[gamerInfo?.nft_level].border,
+            )}
+          >
+            <img className="absolute w-full" src={posterCapture} alt="poster" />
+          </motion.div>
           <div className="mt-8 mt-8 flex justify-center">
             <Button
               className="w-[260px]"
