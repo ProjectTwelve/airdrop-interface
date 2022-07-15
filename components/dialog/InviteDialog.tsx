@@ -9,7 +9,7 @@ import Button from '../button';
 import Message from '../message';
 import Tag from '../tag';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { inviteModalAtom } from '../../store/invite/state';
+import { inviteModalAtom, referralLinkAtom } from '../../store/invite/state';
 import { fetchReferralCode } from '../../lib/api';
 import { InviteRecordDialog } from './InviteRecordDialog';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -17,15 +17,15 @@ import { isConnectPopoverOpen } from '../../store/web3/state';
 function InviteDialog() {
   const { data: account } = useAccount();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
+  const [referralLink, setReferralLink] = useRecoilState(referralLinkAtom);
   const [isConnect, setIsConnect] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const [inviteLink, setInviteLink] = useState('Please connect your wallet first');
   const [, copyToClipboard] = useCopyToClipboard();
 
   useQuery(['invite', account?.address], () => fetchReferralCode({ wallet_address: account?.address }), {
     enabled: !!account?.address,
     refetchOnWindowFocus: false,
-    onSuccess: (data) => setInviteLink(window.location.origin + '/?code=' + data.data.referral_code),
+    onSuccess: (data) => setReferralLink(window.location.origin + '/?code=' + data.data.referral_code),
   });
 
   const handleTwitterShareClick = () => {
@@ -33,7 +33,7 @@ function InviteDialog() {
       'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!';
     window.open(
       decodeURIComponent(
-        'https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + inviteLink,
+        'https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + referralLink,
       ),
       '_blank',
     );
@@ -159,12 +159,12 @@ function InviteDialog() {
           </div>
           {account?.address && (
             <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
-              {inviteLink}
+              {referralLink}
               <Button
                 size="small"
                 type="gradient"
                 onClick={() => {
-                  copyToClipboard(inviteLink);
+                  copyToClipboard(referralLink);
                   toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                 }}
               >

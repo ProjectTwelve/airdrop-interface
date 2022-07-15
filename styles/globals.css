@@ -91,4 +91,13 @@
         background-clip: content-box, padding-box;
         padding: 0.1rem;
     }
+
+    .poster__button {
+        position: relative;
+        background: var(--card);
+        background-clip: content-box, padding-box;
+        padding: 2px;
+        border-radius: 9999px;
+        overflow: hidden;
+    }
 }

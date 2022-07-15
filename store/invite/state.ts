@@ -27,3 +27,8 @@ export const isSocialMediaClickSelector = selector({
     return Object.values(socialMediaClick).some((v) => v);
   },
 });
+
+export const referralLinkAtom = atom({
+  key: 'referral_link',
+  default: 'Please connect your wallet first',
+});

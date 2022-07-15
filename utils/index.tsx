@@ -12,8 +12,8 @@ export function isAddress(value: any): string | false {
   }
 }
 
-export function shortenSteamId(steamId: string): string {
-  return steamId.substring(0, 2) + '...' + steamId.substring(steamId.length - 2);
+export function shortenSteamId(steamId?: string): string {
+  return steamId ? steamId.substring(0, 2) + '...' + steamId.substring(steamId.length - 2) : '';
 }
 
 export function shortenAddress(address: string, chars = 4): string {
@@ -86,4 +86,11 @@ export const getEmailSignData = ({ account, email }: { account: string; email: s
 
 export const getCountMemo = (count?: number) => {
   return count === 3 ? '1+2' : count;
+};
+
+export const downloadImage = (data: string) => {
+  const downloadLink = document.createElement('a');
+  downloadLink.href = data;
+  downloadLink.download = 'poster.jpg';
+  downloadLink.click();
 };

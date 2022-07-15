@@ -2,7 +2,6 @@ import Dialog from './index';
 import Button from '../button';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import ToastIcon from '../svg/ToastIcon';
 import { useMutation } from 'react-query';
 import { useAccount, useSignMessage } from 'wagmi';
 import { getEmailSignData } from '../../utils';
@@ -61,10 +60,9 @@ export default function DeveloperEmailDialog() {
       render={() => (
         <div>
           <div className="flex h-[28px] items-center justify-center text-xl">
-            <ToastIcon type="success" />
-            <p className="ml-3">Winner Winner, Chicken Dinner</p>
+            Winner Winner, Chicken Dinner
           </div>
-          <div className="my-[30px] h-[1px] bg-p12-line"></div>
+          <div className="my-[28px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
             <p className="text-sm">
               P12 is a GameFi ecosystem with sustainable economylies. We will launch our own editor soon.

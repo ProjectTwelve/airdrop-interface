@@ -2,22 +2,34 @@
     --logo: url('/img/theme/01/logo.svg');
     --select: url('/img/theme/01/select.svg');
     --gradient: repeating-linear-gradient(to right, #A011FF, #FF9E76);
+    --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A011FF, #FF9E76);
+    --gradient-30: repeating-linear-gradient(to right, #A011FF4D, #FF9E764D);
+    --gradient-45: repeating-linear-gradient(to right, #A011FF73, #FF9E7673);
 }
 
 .p12-theme-02 {
     --logo: url('/img/theme/02/logo.svg');
     --select: url('/img/theme/02/select.svg');
     --gradient: repeating-linear-gradient(to right, #09BDA0, #A3D365);
+    --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #09BDA0, #A3D365);
+    --gradient-30: repeating-linear-gradient(to right, #09BDA04D, #A3D3654D);
+    --gradient-45: repeating-linear-gradient(to right, #09BDA073, #A3D36573);
 }
 
 .p12-theme-03 {
     --logo: url('/img/theme/03/logo.svg');
     --select: url('/img/theme/03/select.svg');
     --gradient: repeating-linear-gradient(to right, #D9214D, #FFB876);
+    --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #D9214D, #FFB876);
+    --gradient-30: repeating-linear-gradient(to right, #D9214D4D, #FFB8764D);
+    --gradient-45: repeating-linear-gradient(to right, #D9214D73, #FFB87673);
 }
 
 .p12-theme-04 {
     --logo: url('/img/theme/04/logo.svg');
     --select: url('/img/theme/04/select.svg');
     --gradient: repeating-linear-gradient(to right, #A072FF, #3592FF);
+    --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A072FF, #3592FF);
+    --gradient-30: repeating-linear-gradient(to right, #A072FF4D, #3592FF4D);
+    --gradient-45: repeating-linear-gradient(to right, #A072FF73, #3592FF73);
 }

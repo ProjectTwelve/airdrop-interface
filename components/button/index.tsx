@@ -26,7 +26,7 @@ const Button = React.forwardRef(function ButtonInner(
   const bg = {
     default: 'bg-[#494E69]/40',
     error: 'bg-red-400',
-    gradient: 'bg-[image:var(--gradient)]',
+    gradient: 'bg-p12-gradient',
     bordered: 'border',
   };
   const sizes = {

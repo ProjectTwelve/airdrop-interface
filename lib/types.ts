@@ -163,6 +163,10 @@ export type GamerInfoData = {
   nft_claim?: NFT_CLAIM;
   nft_level?: GAMER_NFT_LEVEL;
   nft_id?: number;
+  invitedBy?: {
+    avatar_full: string;
+    name: string;
+  };
 };
 
 export type BinSteamParams = {

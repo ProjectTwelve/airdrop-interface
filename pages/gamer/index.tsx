@@ -19,7 +19,8 @@ import GamerEmailDialog from '../../components/dialog/GamerEmailDialog';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
 import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
 import { roadmapModalAtom } from '../../store/roadmap/state';
-import Card from '../../components/card';
+import Poster from '../../components/poster';
+import PosterCanvas from '../../components/poster/PosterCanvas';
 
 export default function Gamer() {
   const router = useRouter();
@@ -186,7 +187,8 @@ export default function Gamer() {
       </div>
       <GamerEmailDialog />
       <GamerClaimSuccess />
-      <Card />
+      <Poster />
+      <PosterCanvas />
     </div>
   );
 }

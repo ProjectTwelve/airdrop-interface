@@ -8,7 +8,7 @@ import Button from '../button';
 import Loading from '../loading';
 import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
-import { gamerInfoAtom } from '../../store/gamer/state';
+import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
 import { useSteamSignIn } from '../../hooks/useSteamSignIn';
@@ -22,6 +22,7 @@ export default function SteamStatus() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
+  const setGamerGames = useSetRecoilState(gamerGamesAtom);
   const { data: gamesData, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
@@ -36,6 +37,10 @@ export default function SteamStatus() {
       queryClient.refetchQueries(['gamer_info', account.address]).then();
     }
   }, [account?.address, gamesData, gamerInfo?.credential, queryClient]);
+
+  useEffect(() => {
+    setGamerGames(gamesData);
+  }, [gamesData, setGamerGames]);
 
   return (
     <div>
