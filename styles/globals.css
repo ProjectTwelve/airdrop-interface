@@ -92,6 +92,21 @@
         padding: 0.1rem;
     }
 
+    .round-box {
+        @apply h-[146px] w-full max-w-[701px] bg-cover bg-no-repeat p-8 md:h-auto;
+        @apply md:p-4 md:border md:border-[#616985] md:rounded-2xl md:backdrop-blur md:bg-gradient-to-b md:from-fuchsia-700 xs:px-2;
+    }
+
+    .round-box__one {
+        @apply relative top-0 left-0 bg-round-one;
+        @apply md:bg-gradient-transparent;
+    }
+
+    .round-box__two {
+        @apply absolute top-0 right-0 bg-round-two;
+        @apply md:bg-none md:relative md:mt-4;
+    }
+
     .poster__button {
         position: relative;
         background: var(--card);

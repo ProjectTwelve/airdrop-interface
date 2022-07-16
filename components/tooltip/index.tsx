@@ -46,7 +46,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
     placement,
     open,
     onOpenChange: setOpen,
-    middleware: [offset(4), flip(), shift({ padding: 8 })],
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
     whileElementsMounted: autoUpdate,
   });
 

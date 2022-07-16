@@ -69,7 +69,7 @@ export default function GamerEmailDialog() {
             </div>
             <div className="h-8 pt-1 pl-4 text-xs text-p12-error">{error}</div>
             <div className="flex items-center justify-end">
-              {isLoading && <p className="mr-2 text-sm text-p12-success">Please check your wallet and sign.</p>}
+              {isLoading && <p className="mr-2 text-sm text-p12-success">Please check your wallet (PC or mobile) and sign.</p>}
               <Button
                 disabled={!value}
                 loading={isLoading}

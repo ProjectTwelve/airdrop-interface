@@ -29,6 +29,7 @@ export const isBrowser = !!(typeof window !== 'undefined' && window.document && 
 export const openLink = (url: string) => {
   if (isMobile) {
     window.location.href = url;
+
   } else {
     const winRef = window.open(url, '_blank');
     if (!winRef) {

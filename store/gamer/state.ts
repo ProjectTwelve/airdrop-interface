@@ -16,6 +16,11 @@ export const gamerEmailShowAtom = atom<boolean>({
   default: false,
 });
 
+export const gamerInfoCodeAtom = atom<number>({
+  key: 'gamer_info_code',
+  default: 0,
+});
+
 export const gamerClaimedPosterAtom = atom<boolean>({
   key: 'gamer_claimed_Poster',
   default: false,
