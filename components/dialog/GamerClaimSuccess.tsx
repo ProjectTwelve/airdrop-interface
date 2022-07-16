@@ -50,7 +50,7 @@ export default function GamerClaimSuccess() {
             layoutId="sharing_poster"
             className={classNames(
               'relative mx-auto max-w-[540px] overflow-hidden rounded-2xl pb-[24%]',
-              gamerInfo?.nft_level && posterStyles[gamerInfo?.nft_level].border,
+              posterStyles[gamerInfo?.nft_level || 0].border,
             )}
           >
             <img className="absolute w-full" src={posterCapture} alt="poster" />

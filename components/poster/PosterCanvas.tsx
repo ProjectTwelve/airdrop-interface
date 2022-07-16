@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import QRCode from 'qrcode';
+import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import html2canvas from 'html2canvas';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -10,7 +11,6 @@ import { formatMinutes, shortenSteamId } from '../../utils';
 import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
 import { referralLinkAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
-import { useAccount } from 'wagmi';
 
 export default function PosterCanvas() {
   const { data: account } = useAccount();
@@ -33,7 +33,7 @@ export default function PosterCanvas() {
   useEffect(() => {
     const capture: HTMLElement | null = document.querySelector('#poster-capture');
     if (!capture || !gamerGames) return;
-    if (gamerInfo?.nft_claim === NFT_CLAIM.UNCLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return;
+    if (gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return;
     html2canvas(capture, {
       useCORS: true,
       allowTaint: true,
@@ -47,14 +47,14 @@ export default function PosterCanvas() {
     });
   }, [gamerGames, gamerInfo?.nft_claim, gamerInfo?.nft_level, setPosterCapture]);
 
-  if (gamerInfo?.nft_claim === NFT_CLAIM.UNCLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return null;
+  if (gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return null;
 
   return (
     <div
       id="poster-capture"
       className={classNames(
         'fixed -z-10 h-[2300px] w-[1080px] bg-cover px-[54px] py-[60px]',
-        gamerInfo?.nft_level && posterStyles[gamerInfo.nft_level].bg,
+        posterStyles[gamerInfo?.nft_level || 0].bg,
       )}
     >
       <div className="flex items-start justify-between">
@@ -86,7 +86,7 @@ export default function PosterCanvas() {
       <div
         className={classNames(
           'mt-[54px] flex h-[156px] w-[972px] items-center justify-center bg-cover',
-          gamerInfo?.nft_level && posterStyles[gamerInfo.nft_level].count,
+          posterStyles[gamerInfo?.nft_level || 0].count,
         )}
       >
         {[
@@ -106,9 +106,9 @@ export default function PosterCanvas() {
         ))}
       </div>
       <div className="mt-[50px] grid grid-cols-1 gap-[30px]">
-        <PosterGameItem data={gamerGames?.games[0]} />
-        <PosterGameItem data={gamerGames?.games[1]} />
-        <PosterGameItem data={gamerGames?.games[2]} />
+        <PosterGameItem data={gamerGames?.games?.[0]} />
+        <PosterGameItem data={gamerGames?.games?.[1]} />
+        <PosterGameItem data={gamerGames?.games?.[2]} />
       </div>
       <div className="relative mt-[70px] h-[1227px] w-full">
         <p className="absolute top-[465px] left-[542px] text-xl text-p12-sub">
