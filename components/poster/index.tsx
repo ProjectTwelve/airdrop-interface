@@ -27,8 +27,8 @@ export default function Card() {
               layoutId="sharing_poster"
               className={classNames(
                 'max-h-[100vh] w-[375px] overflow-y-scroll rounded-2xl',
-                gamerInfo?.nft_level && posterStyles[gamerInfo.nft_level].border,
-                gamerInfo?.nft_level && posterStyles[gamerInfo.nft_level].shadow,
+                posterStyles[gamerInfo?.nft_level || 0].border,
+                posterStyles[gamerInfo?.nft_level || 0].shadow,
               )}
             >
               <div>
