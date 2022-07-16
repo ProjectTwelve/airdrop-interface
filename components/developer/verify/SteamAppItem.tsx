@@ -47,7 +47,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
           </div>
           <div className="xs:flex xs:flex-col-reverse">
             <div className="float-right mt-6 xs:float-none xs:mt-0">
-              <span className="mr-2 cursor-pointer align-top font-din text-2xl font-bold" onClick={() => setOpen(true)}>
+              <span className="mr-2 cursor-pointer align-top font-ddin text-2xl font-bold" onClick={() => setOpen(true)}>
                 ?,???
               </span>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />

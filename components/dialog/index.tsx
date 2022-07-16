@@ -15,6 +15,7 @@ type DialogProps = {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   onExitComplete?: () => void;
+  showCloseButton?: boolean;
   render: (props: { close: () => void }) => React.ReactNode;
   children?: JSX.Element;
 };
@@ -23,6 +24,7 @@ function Dialog({
   render,
   open: passedOpen = false,
   children,
+  showCloseButton = true,
   onOpenChange,
   onExitComplete,
 }: React.PropsWithChildren<DialogProps>) {
@@ -51,16 +53,7 @@ function Dialog({
       <FloatingPortal>
         <AnimatePresence onExitComplete={onExitComplete}>
           {open && (
-            <FloatingOverlay
-              lockScroll
-              style={{
-                display: 'grid',
-                placeItems: 'center',
-                background: 'rgba(12, 12, 12, 0.60)',
-                backdropFilter: 'blur(20px)',
-                zIndex: 20,
-              }}
-            >
+            <FloatingOverlay lockScroll className="z-20 grid place-items-center bg-p12-dialog backdrop-blur-lg">
               <FloatingFocusManager context={context}>
                 <motion.div
                   className="backdrop-box rounded-2xl"
@@ -71,9 +64,11 @@ function Dialog({
                   {...getFloatingProps({ ref: floating })}
                 >
                   <div className="relative p-7 md:p-2">
-                    <div className="absolute right-7 top-7 flex h-4 w-4 cursor-pointer items-center justify-center md:right-3 md:top-3">
-                      <Image src="/svg/close.svg" width={14} height={14} alt="close" onClick={() => onClose(false)} />
-                    </div>
+                    {showCloseButton && (
+                      <div className="absolute right-7 top-7 flex h-4 w-4 cursor-pointer items-center justify-center md:right-3 md:top-3">
+                        <Image src="/svg/close.svg" width={14} height={14} alt="close" onClick={() => onClose(false)} />
+                      </div>
+                    )}
                     {render({
                       close: () => onClose(false),
                     })}

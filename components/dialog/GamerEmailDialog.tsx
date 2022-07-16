@@ -53,7 +53,7 @@ export default function GamerEmailDialog() {
       render={() => (
         <div>
           <div className="flex h-[28px] items-center justify-center text-xl">One more step</div>
-          <div className="my-[30px] h-[1px] bg-p12-line"></div>
+          <div className="my-[28px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
             <p className="text-sm">Enter your email address and continue with your claim process.</p>
             <div className="mt-3 rounded-2xl bg-p12-black/60 px-5 py-6">

@@ -8,7 +8,7 @@ import Button from '../button';
 import Loading from '../loading';
 import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
-import { gamerInfoAtom, gamerInfoCodeAtom } from '../../store/gamer/state';
+import { gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom } from '../../store/gamer/state';
 import GamerGameItem from './GamerGameItem';
 import SteamProfileInfo from './SteamProfileInfo';
 import { useSteamSignIn } from '../../hooks/useSteamSignIn';
@@ -24,7 +24,8 @@ export default function SteamStatus() {
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const gamerInfoCode = useRecoilValue(gamerInfoCodeAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
+  const setGamerGames = useSetRecoilState(gamerGamesAtom);
+  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address);
   const games = useMemo(() => {
     if (gamesRes?.code === 0) {
       return gamesRes.data.games;
@@ -47,6 +48,10 @@ export default function SteamStatus() {
       queryClient.refetchQueries(['gamer_info', account.address]).then();
     }
   }, [account?.address, gamesRes, gamerInfo?.credential, queryClient]);
+
+  useEffect(() => {
+    setGamerGames(gamesRes?.data);
+  }, [gamesRes, setGamerGames]);
 
   if (isPaused) {
     return <RoundOneEnd />;

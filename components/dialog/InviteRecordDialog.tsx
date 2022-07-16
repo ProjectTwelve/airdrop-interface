@@ -53,7 +53,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
+          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -73,7 +73,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
+          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -110,7 +110,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
+          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -130,7 +130,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-din text-2xl font-bold mr-2">?,???</p>
+          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),

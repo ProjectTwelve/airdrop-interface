@@ -69,7 +69,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             {...getFloatingProps({
               ref: floating,
-              className: 'tooltip__container max-w-[300px] rounded-lg',
+              className: 'tooltip__container absolute z-40 w-[300px] rounded-lg',
               style: {
                 position: strategy,
                 top: y ?? 0,

@@ -10,18 +10,18 @@ export default function Report() {
       </div>
       <div className="flex justify-between py-6">
         <div>
-          <p className="font-din text-[80px] font-medium leading-[80px]">152</p>
+          <p className="font-ddin text-[80px] font-medium leading-[80px]">152</p>
           <p className="text-[30px] font-semibold leading-[30px]">Total Games</p>
         </div>
         <div>
-          <p className="font-din text-[80px] font-medium leading-[80px]">+3</p>
+          <p className="font-ddin text-[80px] font-medium leading-[80px]">+3</p>
           <p className="text-right text-[30px] font-semibold leading-[30px]">Today</p>
         </div>
       </div>
       <div className="grid gap-[30px] py-6">
         <div className="relative flex rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
-            <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
+            <p className="text-center font-ddin text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
             <p className="my-3 h-[1px] bg-[#FFAA2C]/30"></p>
             <p className="text-center text-xl leading-5 text-[#FFAA2C]">Current Rank</p>
           </div>
@@ -55,7 +55,7 @@ export default function Report() {
         </div>
         <div className="relative flex rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
-            <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
+            <p className="text-center font-ddin text-[60px] font-bold leading-[60px] text-[#FFAA2C]">7</p>
             <p className="my-3 h-[1px] bg-[#FFAA2C]/30"></p>
             <p className="text-center text-xl leading-5 text-[#FFAA2C]">Current Rank</p>
           </div>
@@ -91,18 +91,18 @@ export default function Report() {
       <div className="mt-[120px] border-b border-[#676F8B] py-4 text-center text-[30px] font-medium leading-[36px]">Gamer</div>
       <div className="flex justify-between py-6">
         <div>
-          <p className="font-din text-[80px] font-medium leading-[80px]">1203</p>
+          <p className="font-ddin text-[80px] font-medium leading-[80px]">1203</p>
           <p className="text-[30px] font-semibold leading-[30px]">Total Games</p>
         </div>
         <div>
-          <p className="font-din text-[80px] font-medium leading-[80px]">+102</p>
+          <p className="font-ddin text-[80px] font-medium leading-[80px]">+102</p>
           <p className="text-right text-[30px] font-semibold leading-[30px]">Today</p>
         </div>
       </div>
       <div className="grid gap-[30px] py-6">
         <div className="relative flex items-center justify-start rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
-            <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">200</p>
+            <p className="text-center font-ddin text-[60px] font-bold leading-[60px] text-[#FFAA2C]">200</p>
             <p className="my-3 h-[1px] bg-[#FFAA2C]/30"></p>
             <p className="text-center text-xl leading-5 text-[#FFAA2C]">Current Rank</p>
           </div>
@@ -121,12 +121,12 @@ export default function Report() {
               </p>
             </div>
             <div className="mr-3 w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
+              <p className="my-3 text-center font-ddin text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
               <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam year</p>
             </div>
             <div className="w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>
+              <p className="my-3 text-center font-ddin text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
               <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">SS Games</p>
             </div>
@@ -140,7 +140,7 @@ export default function Report() {
         </div>
         <div className="relative flex items-center justify-start rounded-2xl bg-[#7980AF]/20 p-[30px]">
           <div className="mr-[30px] h-[128px] w-[160px] rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 p-3">
-            <p className="text-center font-din text-[60px] font-bold leading-[60px] text-[#FFAA2C]">201</p>
+            <p className="text-center font-ddin text-[60px] font-bold leading-[60px] text-[#FFAA2C]">201</p>
             <p className="my-3 h-[1px] bg-[#FFAA2C]/30"></p>
             <p className="text-center text-xl leading-5 text-[#FFAA2C]">Current Rank</p>
           </div>
@@ -159,12 +159,12 @@ export default function Report() {
               </p>
             </div>
             <div className="mr-3 w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
+              <p className="my-3 text-center font-ddin text-[30px] leading-[30px] text-[#43BBFF]">2012</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
               <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">Steam year</p>
             </div>
             <div className="w-[148px] rounded bg-[#4383FF]/20">
-              <p className="my-3 text-center font-din text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>
+              <p className="my-3 text-center font-ddin text-[30px] leading-[30px] text-[#43BBFF]">1/2103 h</p>
               <div className="mx-3 h-[1px] bg-[#4383FF]/30" />
               <p className="my-3 text-center text-[20px] leading-[20px] text-[#43BBFF]">SS Games</p>
             </div>

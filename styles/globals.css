@@ -106,4 +106,13 @@
         @apply absolute top-0 right-0 bg-round-two;
         @apply md:bg-none md:relative md:mt-4;
     }
+
+    .poster__button {
+        position: relative;
+        background: var(--card);
+        background-clip: content-box, padding-box;
+        padding: 2px;
+        border-radius: 9999px;
+        overflow: hidden;
+    }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import { useAccount, useNetwork } from 'wagmi';
 import { AnimatePresence } from 'framer-motion';
@@ -10,12 +10,15 @@ import WalletPopover from './WalletPopover';
 import DeveloperStatus from './DeveloperStatus';
 import GamerStatus from './GamerStatus';
 import { isConnectPopoverOpen } from '../../store/web3/state';
+import PosterButton from '../poster/PosterButton';
+import { posterCaptureAtom } from '../../store/poster/state';
 
 function Web3Status() {
   const router = useRouter();
   const { data: account } = useAccount();
   const { activeChain, switchNetwork } = useNetwork();
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
+  const posterCapture = useRecoilValue(posterCaptureAtom);
 
   if (account?.address) {
     if (activeChain?.unsupported) {
@@ -26,12 +29,15 @@ function Web3Status() {
       );
     }
     return (
-      <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
-        <div className="md:hidden">
-          <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
-          <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
+      <div className="flex items-center">
+        {router.pathname === '/gamer' && posterCapture && <PosterButton />}
+        <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
+          <div className="md:hidden">
+            <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
+            <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
+          </div>
+          <Web3StatusInner />
         </div>
-        <Web3StatusInner />
       </div>
     );
   } else {
