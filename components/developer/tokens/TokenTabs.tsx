@@ -193,7 +193,7 @@ export default function TokenTabs() {
             <p>Amount of tokens from this game</p>
             <div className="mt-5 flex items-center justify-between">
               <p
-                className="cursor-pointer font-din text-[48px] font-bold"
+                className="cursor-pointer font-ddin text-[48px] font-bold"
                 onClick={() => selectedGame.nft_claim === NFT_CLAIM.CLAIMED && setOpen(true)}
               >
                 {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}

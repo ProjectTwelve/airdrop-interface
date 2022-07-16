@@ -43,7 +43,7 @@ export default function GamerRanking() {
           <div className="gradient__box mt-3 grid grid-cols-3 py-2 leading-[90px] tablet:flex tablet:items-center tablet:py-[17px]">
             <div className="h-[54px] border-[#949FA9] tablet:w-[130px] tablet:border-r">
               <p className="h-[16px] text-center text-sm">Total</p>
-              <p className="mt-1 text-center font-din text-[32px] leading-[32px]">
+              <p className="mt-1 text-center font-ddin text-[32px] leading-[32px]">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function GamerRanking() {
               <p
                 key={index}
                 className={classNames(
-                  'h-[54px] flex-1 border-[#949FA9]/50 text-center font-din text-2xl leading-[54px]',
+                  'h-[54px] flex-1 border-[#949FA9]/50 text-center font-ddin text-2xl leading-[54px]',
                   'last:border-0 tablet:h-auto tablet:border-r tablet:leading-6',
                   item.color,
                 )}
@@ -84,12 +84,12 @@ export default function GamerRanking() {
                 )}
               >
                 By Token Rarity
-                <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(gamerRankData?.tokenRank) || '--'}</span>
+                <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(gamerRankData?.tokenRank) || '--'}</span>
               </div>
               <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
               <div className="flex flex-1 items-center justify-center rounded-2xl text-sm">
                 By Claim Time
-                <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(gamerRankData?.timeRank) || '--'}</span>
+                <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(gamerRankData?.timeRank) || '--'}</span>
               </div>
             </div>
           </div>

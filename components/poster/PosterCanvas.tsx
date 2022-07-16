@@ -10,8 +10,10 @@ import { formatMinutes, shortenSteamId } from '../../utils';
 import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
 import { referralLinkAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
+import { useAccount } from 'wagmi';
 
 export default function PosterCanvas() {
+  const { data: account } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const gamerGames = useRecoilValue(gamerGamesAtom);
   const referralLink = useRecoilValue(referralLinkAtom);
@@ -21,24 +23,29 @@ export default function PosterCanvas() {
   const regLink = /(https|http):\/\/(.+)/.exec(referralLink);
 
   useEffect(() => {
+    setPosterCapture('');
+  }, [account?.address, setPosterCapture]);
+
+  useEffect(() => {
+    QRCode.toDataURL(referralLink, { margin: 2 }).then((url: string) => setQrCode(url));
+  }, [referralLink]);
+
+  useEffect(() => {
     const capture: HTMLElement | null = document.querySelector('#poster-capture');
-    if (!capture || !gamerInfo || !gamerGames) return;
+    if (!capture || !gamerGames) return;
+    if (gamerInfo?.nft_claim === NFT_CLAIM.UNCLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return;
     html2canvas(capture, {
       useCORS: true,
       allowTaint: true,
       scale: 1,
       windowWidth: 1080,
       windowHeight: 2300,
+      logging: false,
     }).then((canvas) => {
       const img = canvas.toDataURL('image/jpeg', 0.85);
       setPosterCapture(img);
-      capture.remove();
     });
-  }, [gamerInfo, gamerGames, setPosterCapture]);
-
-  useEffect(() => {
-    QRCode.toDataURL(referralLink, { margin: 2 }).then((url: string) => setQrCode(url));
-  }, [referralLink]);
+  }, [gamerGames, gamerInfo?.nft_claim, gamerInfo?.nft_level, setPosterCapture]);
 
   if (gamerInfo?.nft_claim === NFT_CLAIM.UNCLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return null;
 
@@ -94,7 +101,7 @@ export default function PosterCanvas() {
             className="flex h-[72px] basis-1/5 flex-col justify-start border-r border-[#949FA9] text-center last:border-0"
           >
             <p className="-mt-1.5 h-[20px] text-xl leading-5 text-p12-sub">{item.label}</p>
-            <p className="mt-1.5 h-[40px] font-din text-[36px] font-bold leading-[40px]">{item.value}</p>
+            <p className="mt-1.5 h-[40px] font-ddin text-[36px] font-bold leading-[40px]">{item.value}</p>
           </div>
         ))}
       </div>

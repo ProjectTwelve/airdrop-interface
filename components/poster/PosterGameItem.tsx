@@ -35,7 +35,7 @@ export default function PosterGameItem({ data }: { data?: GamerGameInfo }) {
           </div>
           <div className="mr-3 flex items-center justify-center">
             <p className="mr-5 -mt-[24px] text-[24px]">Playtime</p>
-            <p className="-mt-[36px] font-din text-[36px]">{formatMinutes(data.playtime_forever)}</p>
+            <p className="-mt-[36px] font-ddin text-[36px]">{formatMinutes(data.playtime_forever)}</p>
           </div>
         </div>
       </div>

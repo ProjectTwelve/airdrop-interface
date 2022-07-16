@@ -46,7 +46,7 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
         <div className="float-right mx-4 flex h-[72px] items-center justify-between xs:hidden">
-          <p className="cursor-pointer mr-2 font-din text-xl font-bold">?,???</p>
+          <p className="cursor-pointer mr-2 font-ddin text-xl font-bold">?,???</p>
           <Image src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
         <div className="truncate">

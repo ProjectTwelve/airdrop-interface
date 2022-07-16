@@ -52,7 +52,7 @@ function DeveloperRanking() {
       <div className="flex md:flex-col">
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
-          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-din text-[32px] font-medium leading-[90px] xs:w-auto">
+          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[90px] xs:w-auto">
             {new Intl.NumberFormat().format(verified?.total ?? 0)}
           </div>
         </div>
@@ -125,7 +125,7 @@ function DeveloperRanking() {
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
                       By Token Rarity
-                      <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
+                      <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
                     </div>
                     <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
                     <div
@@ -135,7 +135,7 @@ function DeveloperRanking() {
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
                     >
                       By Claim Time
-                      <span className="pl-3 font-din text-2xl font-bold">{getCountMemo(item?.timeRank) || '--'}</span>
+                      <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(item?.timeRank) || '--'}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

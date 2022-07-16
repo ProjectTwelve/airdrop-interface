@@ -21,9 +21,10 @@ module.exports = {
         'p12-tips': '#4383FF',
         'p12-line': '#4E556D',
         'p12-bg': '#74788B',
+        'p12-dialog': '#0C0C0C99'
       },
       fontFamily: {
-        din: ['D-DIN'],
+        ddin: ['D-DIN'],
       },
       backgroundImage: {
         'p12-gradient': 'var(--gradient)',
