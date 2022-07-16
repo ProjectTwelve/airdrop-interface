@@ -11,12 +11,16 @@ import Message from '../components/message';
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
   const setGamerInfoCode = useSetRecoilState(gamerInfoCodeAtom);
+  const { refetch } = useGamerGames(addr);
 
   return useQuery(['gamer_info', addr], () => fetchGamerInfo({ addr }), {
     enabled: !!addr,
     onSuccess: (data) => {
       setGamerInfoCode(data.code);
       if (data.code === 0 && data.data) {
+        if (data.data.steam_id) {
+          refetch().then();
+        }
         setGamerInfo(data.data);
       } else {
         setGamerInfo(undefined);
@@ -39,19 +43,19 @@ export const useBindSteamAccount = () => {
   });
 };
 
-export const useGamerGames = (wallet_address?: string, steamId?: string) => {
+export const useGamerGames = (wallet_address?: string) => {
   const router = useRouter();
   const { code } = router.query;
 
   return useQuery(
-    ['gamer_games', { wallet_address, steamId }],
+    ['gamer_games', { wallet_address }],
     () =>
       fetchGamerGames({
         wallet_address,
         referral_code: code as string,
       }),
     {
-      enabled: !!steamId,
+      enabled: false,
       // select: (data) => (data.code === 0 ? data.data : undefined),
       refetchOnWindowFocus: false,
     },

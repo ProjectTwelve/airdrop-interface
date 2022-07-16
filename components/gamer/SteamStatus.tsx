@@ -25,7 +25,7 @@ export default function SteamStatus() {
   const gamerInfoCode = useRecoilValue(gamerInfoCodeAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const setGamerGames = useSetRecoilState(gamerGamesAtom);
-  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address, gamerInfo?.steam_id);
+  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address);
   const games = useMemo(() => {
     if (gamesRes?.code === 0) {
       return gamesRes.data.games;

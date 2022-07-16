@@ -63,11 +63,11 @@ export default function PosterCanvas() {
           <div className="-mt-5">
             <p className="text-[36px] font-semibold">{gamerInfo?.person_name}</p>
             <p className="text-[24px]">Steam ID: {shortenSteamId(gamerInfo?.steam_id)}</p>
-            {gamerGames?.ss_game_count && (
+            {gamerGames?.ss_game_count ? (
               <div className="mt-12">
                 <img width={230} src="/img/poster/ss_gamer.webp" alt="ss_gamer" />
               </div>
-            )}
+            ) : null}
           </div>
         </div>
         {gamerInfo?.invitedBy && (
