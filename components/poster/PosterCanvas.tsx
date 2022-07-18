@@ -41,7 +41,7 @@ export default function PosterCanvas() {
       windowWidth: 1080,
       windowHeight: 2300,
       logging: false,
-    }).then((canvas: any) => {
+    }).then((canvas: HTMLCanvasElement) => {
       const img = canvas.toDataURL('image/jpeg', 0.85);
       setPosterCapture(img);
     });
