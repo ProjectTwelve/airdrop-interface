@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import ReactGA from 'react-ga4';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
@@ -44,8 +45,15 @@ export default function Card() {
               }}
               alt="close"
             />
-            <div className="absolute top-1/3 -right-[300px] flex flex-col items-center justify-center xs:fixed xs:top-[85vh] xs:left-0 xs:right-0">
-              <Button type="gradient" style={{ width: 278 }} onClick={() => downloadImage(posterCapture)}>
+            <div className="absolute top-1/2 -right-[300px] flex -translate-y-1/2 flex-col items-center justify-center xs:fixed xs:top-[85vh] xs:left-0 xs:right-0 xs:translate-y-0">
+              <Button
+                type="gradient"
+                style={{ width: 278 }}
+                onClick={() => {
+                  ReactGA.event({ category: 'Poster', action: 'Click', label: 'Save Image' });
+                  downloadImage(posterCapture);
+                }}
+              >
                 <div className="flex justify-center text-[18px] font-medium">
                   Save Image <img src="/svg/picture-2.svg" width="20" height="20" className="ml-2" alt="picture" />
                 </div>

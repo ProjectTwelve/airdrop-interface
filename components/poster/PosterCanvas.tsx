@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import QRCode from 'qrcode';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
-import html2canvas from 'html2canvas';
+import html2canvas from './html2canvas.min';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
@@ -41,7 +41,7 @@ export default function PosterCanvas() {
       windowWidth: 1080,
       windowHeight: 2300,
       logging: false,
-    }).then((canvas) => {
+    }).then((canvas: any) => {
       const img = canvas.toDataURL('image/jpeg', 0.85);
       setPosterCapture(img);
     });
@@ -60,7 +60,7 @@ export default function PosterCanvas() {
       <div className="flex items-start justify-between">
         <div className="flex">
           <img width={156} height={156} className="mr-[30px] rounded-2xl" src={gamerInfo?.avatar_full} alt="avatar" />
-          <div className="-mt-5">
+          <div className={gamerGames?.ss_game_count ? '-mt-5' : 'mt-5'}>
             <p className="text-[36px] font-semibold">{gamerInfo?.person_name}</p>
             <p className="text-[24px]">Steam ID: {shortenSteamId(gamerInfo?.steam_id)}</p>
             {gamerGames?.ss_game_count ? (
