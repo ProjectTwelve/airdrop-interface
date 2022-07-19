@@ -21,10 +21,20 @@ module.exports = {
         'p12-tips': '#4383FF',
         'p12-line': '#4E556D',
         'p12-bg': '#74788B',
-        'p12-dialog': '#0C0C0C99'
+        'p12-dialog': '#0C0C0C99',
       },
       fontFamily: {
         ddin: ['D-DIN'],
+      },
+      animation: {
+        backdrop: 'backdrop 2s linear forwards',
+      },
+      keyframes: {
+        backdrop: {
+          '0%': { backdropFilter: 'none' },
+          '50%': { backdropFilter: 'none' },
+          '100%': { backdropFilter: 'blur(16px)' },
+        },
       },
       backgroundImage: {
         'p12-gradient': 'var(--gradient)',
