@@ -18,7 +18,7 @@ export default function PosterButton() {
   };
 
   useEffect(() => {
-    const claimedMap = getLocalStorage('gamer_claimed_map') || {};
+    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
     const address = account?.address;
     if (address && claimedMap[address] && !gamerClaimedPoster) {
       setShow(true);

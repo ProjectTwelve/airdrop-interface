@@ -22,16 +22,17 @@ export default function GamerClaimSuccess() {
 
   const onVideoEnded = () => {
     const address = account?.address;
-    const claimedMap = getLocalStorage('gamer_claimed_map') || {};
+    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
     if (address) {
       setOpen(true);
+      setVideoPlay(false);
       claimedMap[address] = 1;
-      setLocalStorage('gamer_claimed_map', claimedMap);
+      setLocalStorage('gamer_claimed_map_01', claimedMap);
     }
   };
 
   useEffect(() => {
-    const claimedMap = getLocalStorage('gamer_claimed_map') || {};
+    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
     const address = account?.address;
     if (
       address &&
