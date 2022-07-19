@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { GamerGamesData, GamerInfoData } from '../../lib/types';
 
-export const gamerInfoAtom = atom<GamerInfoData | undefined>({
+export const gamerInfoAtom = atom<(GamerInfoData & { addr: string }) | undefined>({
   key: 'gamer_info',
   default: undefined,
 });
