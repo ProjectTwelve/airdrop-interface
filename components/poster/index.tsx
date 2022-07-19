@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactGA from 'react-ga4';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -9,13 +9,19 @@ import { posterBtnShowAtom, posterCaptureAtom, posterStylesAtom } from '../../st
 import { downloadImage } from '../../utils';
 import Button from '../button';
 
-export default function Card() {
+export default function Poster() {
   const ref = useRef(null);
   const [open, setOpen] = useRecoilState(gamerClaimedPosterAtom);
   const setPosterBtnShow = useSetRecoilState(posterBtnShowAtom);
   const posterCapture = useRecoilValue(posterCaptureAtom);
   const posterStyles = useRecoilValue(posterStylesAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+
+  useEffect(() => {
+    if (open) {
+      ReactGA.event({ category: 'Poster', action: 'Click', label: 'show' });
+    }
+  }, [open]);
 
   return (
     <FloatingPortal>
@@ -50,7 +56,7 @@ export default function Card() {
                 type="gradient"
                 style={{ width: 278 }}
                 onClick={() => {
-                  ReactGA.event({ category: 'Poster', action: 'Click', label: 'Save Image' });
+                  ReactGA.event({ category: 'Poster', action: 'Click', label: 'save' });
                   downloadImage(posterCapture);
                 }}
               >
