@@ -33,7 +33,7 @@ module.exports = {
         backdrop: {
           '0%': { backdropFilter: 'none' },
           '50%': { backdropFilter: 'none' },
-          '100%': { backdropFilter: 'blur(16px)' },
+          '100%': { backdropFilter: 'blur(16px)', background: '#0C0C0C99' },
         },
       },
       backgroundImage: {

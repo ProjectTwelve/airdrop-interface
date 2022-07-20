@@ -45,7 +45,7 @@ export default function PosterVideo({ play, onEnded }: PosterVideoProps) {
         </div>
       )}
       {winnerPlay && (
-        <div className="fixed inset-0 z-20 backdrop-blur-lg">
+        <div className="fixed inset-0 z-20 bg-p12-dialog backdrop-blur-lg">
           <video
             className="h-full w-full"
             autoPlay
