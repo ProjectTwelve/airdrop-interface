@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import { isIOS, isMobile } from 'react-device-detect';
 import Dialog from './index';
 import Button from '../button';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
@@ -20,7 +21,7 @@ export default function GamerClaimSuccess() {
   const posterCapture = useRecoilValue(posterCaptureAtom);
   const posterStyles = useRecoilValue(posterStylesAtom);
 
-  const onVideoEnded = () => {
+  const onVideoEnded = useCallback(() => {
     const address = account?.address;
     const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
     if (address) {
@@ -29,7 +30,7 @@ export default function GamerClaimSuccess() {
       claimedMap[address] = 1;
       setLocalStorage('gamer_claimed_map_01', claimedMap);
     }
-  };
+  }, [account?.address]);
 
   useEffect(() => {
     const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
@@ -41,9 +42,13 @@ export default function GamerClaimSuccess() {
       !claimedMap[address] &&
       posterCapture
     ) {
+      if (isMobile && isIOS) {
+        onVideoEnded();
+        return;
+      }
       setVideoPlay(true);
     }
-  }, [account?.address, gamerInfo?.addr, gamerInfo?.nft_claim, posterCapture]);
+  }, [account?.address, gamerInfo?.addr, gamerInfo?.nft_claim, onVideoEnded, posterCapture]);
 
   return (
     <>
