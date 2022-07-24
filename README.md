@@ -63,7 +63,7 @@ will be rewarded with tributes according to the following rules:
 
 1. Each Steam account will get 1 Gamer specific NFT.
 2. The NFT has 5 categories: legendary, epic, rare, uncommon and common.
-3. The amount of tokens that gamers can claim is based on their game hours and account vintage.
+3. The amount of tokens that gamers can claim is based on various relevant metrics.
 
 ## Result Files
 
