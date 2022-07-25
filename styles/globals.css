@@ -116,3 +116,11 @@
         overflow: hidden;
     }
 }
+
+@layer utilities {
+    .bg-gradient-item {
+        background: linear-gradient(to bottom, #4E56917F 0%, #3B41677F 10%, #3C41647F 16%, #3C41647F 100%);
+        backdrop-filter: blur(16px);
+        border: 1px solid #616985;
+    }
+}
