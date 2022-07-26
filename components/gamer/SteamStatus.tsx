@@ -108,11 +108,11 @@ export default function SteamStatus() {
                       including secondary options. You can turn off after the airdrop!
                     </div>
                     <div className="mt-8 flex items-center justify-center md:mt-4 md:flex-col">
-                      <div className="h-[234px] w-full max-w-[760px] overflow-x-scroll">
+                      <div className="h-[346px] w-full max-w-[760px] overflow-x-scroll">
                         <div className="h-full w-[760px]">
                           <img
                             className="h-full w-full"
-                            src="https://cdn1.p12.games/airdrop/img/steam_setting.jpg"
+                            src="https://cdn1.p12.games/airdrop/img/steam_setting_2.webp"
                             alt="setting"
                           />
                         </div>

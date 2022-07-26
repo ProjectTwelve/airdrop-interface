@@ -25,3 +25,8 @@ export const gamerClaimedPosterAtom = atom<boolean>({
   key: 'gamer_claimed_Poster',
   default: false,
 });
+
+export const gamerPermissionSettingAtom = atom<boolean>({
+  key: 'gamer_permission_setting',
+  default: false,
+});

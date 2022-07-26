@@ -1,8 +1,8 @@
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { useAccount, useNetwork } from 'wagmi';
 import { AnimatePresence } from 'framer-motion';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useAccount, useNetwork } from 'wagmi';
 import Button from '../button';
 import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
@@ -53,4 +53,4 @@ function Web3Status() {
   }
 }
 
-export default React.memo(Web3Status);
+export default Web3Status;

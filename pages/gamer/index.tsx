@@ -2,15 +2,15 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Back from '../../components/back';
 import SteamStatus from '../../components/gamer/SteamStatus';
-import Image from 'next/image';
 import Button from '../../components/button';
 import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo, useGamerInvitation } from '../../hooks/gamer';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
@@ -21,6 +21,8 @@ import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import Poster from '../../components/poster';
 import PosterCanvas from '../../components/poster/PosterCanvas';
+import SteamValue from '../../components/gamer/SteamValue';
+import PermissionSettingDialog from '../../components/dialog/PermissionSettingDialog';
 
 export default function Gamer() {
   const router = useRouter();
@@ -51,8 +53,9 @@ export default function Gamer() {
     <div className="mt-8">
       <Back onClick={() => router.push({ pathname: '/', query: router.query })} />
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
-        <div className="backdrop-box rounded-2xl p-8 xs:p-4">
+        <div className="backdrop-box rounded-2xl p-8 xs:p-3">
           <SteamStatus />
+          <SteamValue />
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
             <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
@@ -171,7 +174,10 @@ export default function Gamer() {
             <div className="flex items-center justify-between pt-8 md:flex-col">
               <div className="flex items-center justify-start md:mb-4">
                 <p className="mr-4 text-lg font-medium">Total:</p>
-                <p onClick={handleClaimedRoadmap} className="mr-6 cursor-pointer font-ddin text-[64px] font-bold leading-[64px]">
+                <p
+                  onClick={handleClaimedRoadmap}
+                  className="mr-6 cursor-pointer font-ddin text-[64px] font-bold leading-[64px]"
+                >
                   {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
                 </p>
                 <Image src="/img/p12.png" width={60} height={60} alt="p12" />
@@ -186,6 +192,7 @@ export default function Gamer() {
         </div>
       </div>
       <GamerEmailDialog />
+      <PermissionSettingDialog />
       <GamerClaimSuccess />
       <Poster />
       <PosterCanvas />

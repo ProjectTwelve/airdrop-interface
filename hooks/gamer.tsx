@@ -21,7 +21,7 @@ export const useGamerInfo = (addr?: string) => {
         if (data.data.steam_id) {
           refetch().then();
         }
-        setGamerInfo({...data.data, addr: addr || ''});
+        setGamerInfo({ ...data.data, addr: addr || '' });
       } else {
         setGamerInfo(undefined);
       }

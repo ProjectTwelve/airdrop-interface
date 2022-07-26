@@ -18,7 +18,7 @@ type Pagination = {
 type Options = Pick<UseQueryOptions, 'staleTime' | 'enabled'>;
 
 export const useDeveloperVerifiedCount = () => {
-  return useQuery('dev_verified_count', () => fetchDeveloperVerifiedCount(), {
+  return useQuery(['dev_verified_count'], () => fetchDeveloperVerifiedCount(), {
     select: (data) => data.data,
     refetchOnWindowFocus: false,
   });
@@ -60,7 +60,7 @@ export const useDeveloperTokenRank = ({ page, size }: Pagination, options?: Opti
 };
 
 export const useGamerVerifiedCount = () => {
-  return useQuery('gamer_verified_count', () => fetchGamerVerifiedCount(), {
+  return useQuery(['gamer_verified_count'], () => fetchGamerVerifiedCount(), {
     select: (data) => data.data,
     refetchOnWindowFocus: false,
   });
