@@ -1,6 +1,5 @@
-import { Tooltip } from '../tooltip';
-import QuestionSVG from '../svg/Question';
 import React from 'react';
+import { Tooltip } from '../tooltip';
 
 export default function SteamValue() {
   return (
@@ -9,9 +8,7 @@ export default function SteamValue() {
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Account Value</h4>
           <Tooltip label="My Account Value">
-            <div className="ml-2">
-              <QuestionSVG size={18} />
-            </div>
+            <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
         <div className="mt-3 rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-[#FFAA2C]">
@@ -22,9 +19,7 @@ export default function SteamValue() {
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Inventory Value</h4>
           <Tooltip label="My Account Value">
-            <div className="ml-2">
-              <QuestionSVG size={18} />
-            </div>
+            <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
         <div className="mt-3 grid grid-cols-3 gap-5 xs:grid-cols-1">

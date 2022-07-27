@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Tooltip } from '../tooltip';
-import QuestionSVG from '../svg/Question';
 import { GamerGamesData } from '../../lib/types';
 import { formatMinutes, getCountMemo } from '../../utils';
 
@@ -14,12 +13,10 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
       { label: 'Total playtime', value: data ? formatMinutes(data.total_playtime) : '--' },
       {
         label: (
-          <div className="relative flex items-center justify-center text-p12-sub">
+          <div className="relative flex items-center justify-center">
             SS games&nbsp;
             <Tooltip label="Super Saiyan Game: game playtime ≥ 1000 hours">
-              <div>
-                <QuestionSVG />
-              </div>
+              <img src="/svg/question.svg" className="cursor-pointer" width={14} height={14} alt="question" />
             </Tooltip>
           </div>
         ),
@@ -27,12 +24,10 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
       },
       {
         label: (
-          <div className="flex items-center justify-center text-p12-sub">
+          <div className="flex items-center justify-center">
             SS playtime&nbsp;
             <Tooltip label="Total playtime of Super Saiyan games">
-              <div>
-                <QuestionSVG />
-              </div>
+              <img src="/svg/question.svg" className="cursor-pointer" width={14} height={14} alt="question" />
             </Tooltip>
           </div>
         ),
@@ -48,9 +43,9 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
         I&apos;ve covered wars, you know
       </p>
       {list.map((item, index) => (
-        <div key={index} className="mb-[37px] flex flex-1 flex-row items-center justify-between last:mb-0">
-          <div className="text-sm text-p12-sub">{item.label}</div>
-          <div className="text-center font-medium">{item.value}</div>
+        <div key={index} className="mb-8 flex flex-1 flex-row items-center justify-between last:mb-0">
+          <div className="text-sm">{item.label}</div>
+          <div className="text-center text-xl font-medium">{item.value}</div>
         </div>
       ))}
     </div>
