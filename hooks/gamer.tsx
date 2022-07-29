@@ -1,24 +1,26 @@
 import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchBindSteam, fetchGamerGames, fetchGamerInfo, fetchGamerInvitation, fetchGamerReload } from '../lib/api';
 import { BinSteamParams, Response } from '../lib/types';
-import { gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom } from '../store/gamer/state';
+import { gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom } from '../store/gamer/state';
 import Message from '../components/message';
 
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
   const setGamerInfoCode = useSetRecoilState(gamerInfoCodeAtom);
+  const gamerGames = useRecoilValue(gamerGamesAtom);
   const { refetch } = useGamerGames(addr);
 
   return useQuery(['gamer_info', addr], () => fetchGamerInfo({ addr }), {
     enabled: !!addr,
+    refetchOnWindowFocus: true,
     onSuccess: (data) => {
       setGamerInfoCode(data.code);
       if (data.code === 0 && data.data) {
-        if (data.data.steam_id) {
+        if (data.data.steam_id && !gamerGames) {
           refetch().then();
         }
         setGamerInfo({ ...data.data });
