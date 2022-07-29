@@ -9,6 +9,7 @@ import Loading from '../loading';
 import SteamGamesInfo from './SteamGamesInfo';
 import SteamProfileInfo from './SteamProfileInfo';
 import GamerGameItem from './GamerGameItem';
+import SteamValue from './SteamValue';
 import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
 import { useGamerGames } from '../../hooks/gamer';
 import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
@@ -24,79 +25,77 @@ export default function SteamStatus() {
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const setGamerGames = useSetRecoilState(gamerGamesAtom);
-  const { data: gamesRes, refetch, isFetching } = useGamerGames(account?.address);
-  const games = useMemo(() => {
-    if (gamesRes?.code === 0) {
-      return gamesRes.data.games;
-    }
-    return [];
-  }, [gamesRes]);
+  const { data: gamesData, refetch, isFetching } = useGamerGames(account?.address);
   const useCurrentGames = useMemo(() => {
-    return games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-  }, [currentPage, games]);
+    if (!gamesData) return [];
+    return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }, [currentPage, gamesData]);
 
   useEffect(() => {
     // refresh gamer info
     if (!account?.address) return;
     if (gamerInfo?.credential) return;
-    if (gamesRes?.code === 0) {
+    if (gamesData) {
       queryClient.refetchQueries(['gamer_info', account.address]).then();
     }
-  }, [account?.address, gamesRes, gamerInfo?.credential, queryClient]);
+  }, [account?.address, gamesData, gamerInfo?.credential, queryClient]);
 
   useEffect(() => {
-    setGamerGames(gamesRes?.data);
-  }, [gamesRes, setGamerGames]);
+    setGamerGames(gamesData);
+  }, [gamesData, setGamerGames]);
 
   return (
     <div>
       {gamerInfo ? (
         <div>
           <div className="flex items-center md:flex-col md:items-start">
-            <div className="flex md:mb-4">
+            <div className="mr-5 flex md:mb-4">
               <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
               <div className="flex flex-col justify-around">
                 <p className="text-[26px] font-medium">{gamerInfo.person_name}</p>
                 <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
               </div>
             </div>
-            <SteamProfileInfo />
+            <SteamProfileInfo data={gamerInfo} />
           </div>
           <div className="py-8">
             <h3 className="mb-3 text-xl font-semibold">My Games</h3>
-            {gamesRes ? (
-              <div className="flex items-start justify-start md:flex-col">
-                <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
-                  <SteamGamesInfo data={gamesRes.data} />
+            {gamesData ? (
+              <>
+                <div className="flex items-start justify-start md:flex-col">
+                  <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
+                    <SteamGamesInfo data={gamesData} />
+                  </div>
+                  <div className="flex-1">
+                    {gamesData.games.length ? (
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
+                        {useCurrentGames.map((item) => (
+                          <GamerGameItem key={item.appid} data={item} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
+                        <Empty />
+                      </div>
+                    )}
+                    {gamesData.games.length > 6 && (
+                      <div className="mt-4 flex items-center justify-between">
+                        <p className="text-xs">
+                          {currentPage * 6 - 5}-{currentPage * 6} of {gamesData.games.length}
+                        </p>
+                        <Pagination
+                          simple
+                          current={currentPage}
+                          pageSize={pageSize}
+                          onChange={(page) => setCurrentPage(page)}
+                          total={gamesData.games.length}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="flex-1">
-                  {games.length ? (
-                    <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
-                      {useCurrentGames.map((item) => (
-                        <GamerGameItem key={item.appid} data={item} />
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
-                      <Empty />
-                    </div>
-                  )}
-                  {games.length > 6 && (
-                    <div className="mt-4 flex items-center justify-between">
-                      <p className="text-xs">
-                        {currentPage * 6 - 5}-{currentPage * 6} of {games.length}
-                      </p>
-                      <Pagination
-                        simple
-                        current={currentPage}
-                        pageSize={pageSize}
-                        onChange={(page) => setCurrentPage(page)}
-                        total={games.length}
-                      />
-                    </div>
-                  )}
-                </div>
-              </div>
+                <SteamValue data={gamerInfo} />
+              </>
             ) : (
               <div className="rounded-2xl bg-p12-black/80 p-6 md:p-3">
                 {isFetching ? (

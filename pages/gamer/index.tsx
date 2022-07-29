@@ -21,7 +21,6 @@ import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import Poster from '../../components/poster';
 import PosterCanvas from '../../components/poster/PosterCanvas';
-import SteamValue from '../../components/gamer/SteamValue';
 import PermissionSettingDialog from '../../components/dialog/PermissionSettingDialog';
 
 export default function Gamer() {
@@ -55,9 +54,8 @@ export default function Gamer() {
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
         <div className="backdrop-box rounded-2xl p-8 xs:p-3">
           <SteamStatus />
-          <SteamValue />
           <div>
-            <h3 className="mb-3 mt-10 text-xl font-semibold xs:mt-4">My Airdrop NFT</h3>
+            <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
             <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute top-0 left-0 h-full w-full blur-3xl">

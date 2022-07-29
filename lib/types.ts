@@ -152,6 +152,7 @@ export type DeveloperEmailParams = {
 };
 
 export type GamerInfoData = {
+  wallet_address?: string;
   avatar_full: string;
   person_name: string;
   steam_id: string;
@@ -160,9 +161,18 @@ export type GamerInfoData = {
   birthday?: number;
   credential?: number;
   email?: string;
+  value?: number;
   nft_claim?: NFT_CLAIM;
   nft_level?: GAMER_NFT_LEVEL;
   nft_id?: number;
+  level?: number;
+  tokens?: number;
+  friends_count?: number;
+  badges_count?: number;
+  csgo_value?: number;
+  dota2_value?: number;
+  tf2_value?: number;
+  inventory_switch: boolean;
   invitedBy?: {
     avatar_full: string;
     name: string;

@@ -6,6 +6,7 @@ import { formatMinutes, getCountMemo } from '../../utils';
 type SteamGamesInfoProps = {
   data?: GamerGamesData;
 };
+
 export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
   const list = useMemo(
     () => [
@@ -38,16 +39,16 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
   );
 
   return (
-    <div className="relative w-full rounded-xl border border-[#616985] bg-profile-info bg-cover p-5">
-      <p className="absolute left-0 -bottom-[35px] w-full text-center text-xs text-p12-sub md:hidden">
-        I&apos;ve covered wars, you know
-      </p>
-      {list.map((item, index) => (
-        <div key={index} className="mb-8 flex flex-1 flex-row items-center justify-between last:mb-0">
-          <div className="text-sm">{item.label}</div>
-          <div className="text-center text-xl font-medium">{item.value}</div>
-        </div>
-      ))}
+    <div>
+      <div className="relative w-full rounded-xl border border-[#616985] bg-profile-info bg-cover p-5">
+        {list.map((item, index) => (
+          <div key={index} className="mb-8 flex flex-1 flex-row items-center justify-between last:mb-0">
+            <div className="text-sm">{item.label}</div>
+            <div className="text-center text-xl font-medium">{item.value}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 w-full text-center text-xs leading-6 text-p12-sub md:hidden">I&apos;ve covered wars, you know</p>
     </div>
   );
 }

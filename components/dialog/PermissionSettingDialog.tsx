@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useAccount } from 'wagmi';
 import Dialog from './index';
 import Button from '../button';
 import { getSteamProfileEdit, openLink } from '../../utils';
 import { gamerInfoAtom, gamerPermissionSettingAtom } from '../../store/gamer/state';
+import { useFetchReload } from '../../hooks/gamer';
 
 export default function PermissionSettingDialog() {
-  const [open, setOpen] = useRecoilState(gamerPermissionSettingAtom);
+  const { data: account } = useAccount();
+  const { mutate, isLoading } = useFetchReload();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const [open, setOpen] = useRecoilState(gamerPermissionSettingAtom);
+
+  useEffect(() => {
+    if (!gamerInfo) return;
+    if (gamerInfo.level === null || gamerInfo.friends_count === null || !gamerInfo.inventory_switch) {
+      setOpen(true);
+    }
+  }, [gamerInfo, setOpen]);
 
   return (
     <Dialog
@@ -29,7 +40,12 @@ export default function PermissionSettingDialog() {
               />
             </div>
             <div className="mt-8 flex items-start justify-center xs:mt-4">
-              <Button type="bordered" className="w-[260px] md:w-full">
+              <Button
+                type="bordered"
+                className="w-[260px] md:w-full"
+                loading={isLoading}
+                onClick={() => mutate({ wallet_address: account?.address })}
+              >
                 <div className="flex items-center justify-center">
                   Reload Stats
                   <img className="ml-2 xs:hidden" src="/svg/reload.svg" alt="reload" />
