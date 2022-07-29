@@ -21,8 +21,8 @@ export default function SteamValue({ data }: SteamValueProps) {
   if (!data) return null;
 
   return (
-    <div className="flex md:flex-col mt-8 xs:mt-4">
-      <div className="w-full max-w-[300px] xs:max-w-full">
+    <div className="mt-8 flex md:flex-col xs:mt-4">
+      <div className="w-full max-w-[300px] md:max-w-full">
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Account Value</h4>
           <Tooltip label="Represents your Steam store value of games owned.">
@@ -41,7 +41,7 @@ export default function SteamValue({ data }: SteamValueProps) {
           </Tooltip>
         </div>
         {hasInventoriesValue ? (
-          <div className="mt-3 grid grid-cols-3 gap-5 xs:grid-cols-1">
+          <div className="mt-3 grid grid-cols-3 gap-5 md:grid-cols-1">
             {inventoriesValue.map((item) =>
               item.value ? (
                 <div key={item.name} className="bg-gradient-item flex rounded-xl p-3">

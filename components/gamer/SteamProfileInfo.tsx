@@ -26,7 +26,7 @@ export default function SteamProfileInfo({ data }: { data?: GamerInfoData }) {
       {data?.badges_count ? (
         <div className="bg-gradient-item flex h-[80px] w-[80px] flex-col items-center justify-center overflow-hidden rounded-full text-center">
           <p className="text-sm">Badges</p>
-          <p className="text-xl font-medium">300</p>
+          <p className="text-xl font-medium">{data.badges_count}</p>
         </div>
       ) : null}
     </div>

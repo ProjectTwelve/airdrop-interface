@@ -66,7 +66,7 @@ export default function SteamStatus() {
                   <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
                     <SteamGamesInfo data={gamesData} />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 md:w-full ">
                     {gamesData.games.length ? (
                       <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
                         {useCurrentGames.map((item) => (
