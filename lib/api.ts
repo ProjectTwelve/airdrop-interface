@@ -147,3 +147,8 @@ export const fetchGamerVerifiedCount = () =>
  */
 export const fetchGamerInvitation = (params: GamerInvitationParams) =>
   request.get<any, Response<GamerInvitationData>>('/api/gamer/invitation', { params });
+
+export const fetchGamerReload = (data: { wallet_address?: string }) =>
+  request.post<any, Response<null>>('/api/gamer/reload', data, {
+    timeout: 30000,
+  });

@@ -48,7 +48,7 @@ function DeveloperRanking() {
   };
 
   return (
-    <div className="px-8 py-12 xs:p-4">
+    <div className="px-8 py-12 xs:p-3">
       <div className="flex md:flex-col">
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>

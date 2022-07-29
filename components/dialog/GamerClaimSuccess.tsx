@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -32,23 +32,24 @@ export default function GamerClaimSuccess() {
     }
   }, [account?.address]);
 
+  const isGamerClaimed = useMemo(() => {
+    const address = account?.address;
+    if (!gamerInfo) return false;
+    if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
+    return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === NFT_CLAIM.CLAIMED;
+  }, [account?.address, gamerInfo]);
+
   useEffect(() => {
     const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
     const address = account?.address;
-    if (
-      address &&
-      address === gamerInfo?.addr &&
-      gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED &&
-      !claimedMap[address] &&
-      posterCapture
-    ) {
+    if (address && isGamerClaimed && !claimedMap[address] && posterCapture) {
       if (isMobile && isIOS) {
         onVideoEnded();
         return;
       }
       setVideoPlay(true);
     }
-  }, [account?.address, gamerInfo?.addr, gamerInfo?.nft_claim, onVideoEnded, posterCapture]);
+  }, [account?.address, gamerInfo?.wallet_address, onVideoEnded, posterCapture, isGamerClaimed]);
 
   return (
     <>

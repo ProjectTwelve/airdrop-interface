@@ -10,9 +10,8 @@ import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
 import ReactGA from 'react-ga4';
-import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+export default function Home() {
   const router = useRouter();
   const setOpen = useSetRecoilState(inviteModalAtom);
   const [btnClick, setBtnClick] = useState(false);
@@ -101,6 +100,4 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}

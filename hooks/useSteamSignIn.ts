@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import { useEvent } from 'react-use';
-import { useBindSteamAccount } from './gamer';
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
 import { isMobile } from 'react-device-detect';
+import { useBindSteamAccount } from './gamer';
 
 export const useSteamSignIn = (): [signInCallback: () => void] => {
   const { data: account } = useAccount();
