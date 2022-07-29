@@ -15,8 +15,10 @@ export default function PermissionSettingDialog() {
 
   useEffect(() => {
     if (!gamerInfo) return;
-    if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) {
+    if ((gamerInfo.friends_count === null || !gamerInfo.inventory_switch) && gamerInfo.credential !== null) {
       setOpen(true);
+    } else {
+      setOpen(false);
     }
   }, [gamerInfo, setOpen]);
 
