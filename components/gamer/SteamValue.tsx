@@ -58,7 +58,7 @@ export default function SteamValue({ data }: SteamValueProps) {
           </div>
         ) : (
           <div className="mt-3 h-[98px] w-full rounded-2xl bg-p12-black/80 text-center text-xs leading-[98px] text-p12-bg">
-            No Ornaments Value
+            No data
           </div>
         )}
       </div>

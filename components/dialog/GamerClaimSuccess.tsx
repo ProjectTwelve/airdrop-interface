@@ -35,7 +35,7 @@ export default function GamerClaimSuccess() {
   const isGamerClaimed = useMemo(() => {
     const address = account?.address;
     if (!gamerInfo) return false;
-    if (gamerInfo.level === null || gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
+    if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
     return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === NFT_CLAIM.CLAIMED;
   }, [account?.address, gamerInfo]);
 
