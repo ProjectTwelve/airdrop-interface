@@ -21,11 +21,11 @@ export default function SteamValue({ data }: SteamValueProps) {
   if (!data) return null;
 
   return (
-    <div className="flex md:flex-col">
+    <div className="flex md:flex-col mt-8 xs:mt-4">
       <div className="w-full max-w-[300px] xs:max-w-full">
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Account Value</h4>
-          <Tooltip label="My Account Value">
+          <Tooltip label="Represents your Steam store value of games owned.">
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
@@ -36,7 +36,7 @@ export default function SteamValue({ data }: SteamValueProps) {
       <div className="ml-9 w-full md:ml-0 md:mt-4">
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Inventory Value</h4>
-          <Tooltip label="My Account Value">
+          <Tooltip label="Represents your inventory value of CSGO, DOTA2 and TF2.">
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
