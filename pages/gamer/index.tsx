@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo, useGamerInvitation } from '../../hooks/gamer';
-import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
+import { gamerEmailShowAtom, gamerInfoAtom, gamerInvitationCountAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import { openLink } from '../../utils';
@@ -27,6 +27,7 @@ export default function Gamer() {
   const router = useRouter();
   const { data: account } = useAccount();
   const setOpen = useSetRecoilState(roadmapModalAtom);
+  const setGamerInvitationCount = useSetRecoilState(gamerInvitationCountAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const { data: invitation } = useGamerInvitation(account?.address);
@@ -47,6 +48,13 @@ export default function Gamer() {
       setOpen(true);
     }
   };
+
+  useEffect(() => {
+    if (invitation) {
+      const count = invitation.length;
+      setGamerInvitationCount(count);
+    }
+  }, [invitation, setGamerInvitationCount]);
 
   return (
     <div className="mt-8">

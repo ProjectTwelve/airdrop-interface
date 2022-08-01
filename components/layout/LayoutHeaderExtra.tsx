@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Button from '../button';
 import Image from 'next/image';
-import { useSetRecoilState } from 'recoil';
-import { inviteModalAtom } from '../../store/invite/state';
-import { motion, AnimatePresence } from 'framer-motion';
-import { getLocalStorage, setLocalStorage } from '../../utils/storage';
-import { roadmapModalAtom } from '../../store/roadmap/state';
-import { openLink } from '../../utils';
 import ReactGA from 'react-ga4';
+import { useRouter } from 'next/router';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Button from '../button';
+import { openLink } from '../../utils';
+import { inviteModalAtom } from '../../store/invite/state';
+import { roadmapModalAtom } from '../../store/roadmap/state';
+import { gamerInvitationCountAtom } from '../../store/gamer/state';
+import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
+  const gamerInvitationCount = useRecoilValue(gamerInvitationCountAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
 
   useEffect(() => {
@@ -55,7 +57,11 @@ function LayoutHeaderExtra() {
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
                 &nbsp;My referral link
-                <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">32</p>
+                {router.pathname === '/gamer' && (
+                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
+                    {gamerInvitationCount}
+                  </p>
+                )}
               </div>
             </Button>
             <AnimatePresence>
