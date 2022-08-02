@@ -70,7 +70,7 @@ export default function PosterCanvas() {
     <div
       id="poster-capture"
       className={classNames(
-        'relative z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
+        'fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
         posterStyles[gamerInfo?.nft_level || 0].bg,
       )}
     >
