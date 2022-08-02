@@ -69,12 +69,15 @@ export default function PosterCanvas() {
   return (
     <div
       id="poster-capture"
-      className={classNames('fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]', posterStyles[gamerInfo?.nft_level || 0].bg)}
+      className={classNames(
+        'relative z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
+        posterStyles[gamerInfo?.nft_level || 0].bg,
+      )}
     >
       <div className="flex items-start justify-between">
         <div className="flex">
-          <img width={198} height={198} className="mr-[30px] rounded-2xl" src={gamerInfo?.avatar_full} alt="avatar" />
-          <div className={gamerGames?.ss_game_count ? '-mt-5' : 'mt-5'}>
+          <img className="mr-[30px] h-[198px] w-[198px] rounded-2xl" src={gamerInfo?.avatar_full} alt="avatar" />
+          <div className="-mt-5">
             <div className="text-[36px] font-semibold">
               {gamerInfo?.person_name}
               {gamerGames?.ss_game_count ? (
@@ -134,7 +137,7 @@ export default function PosterCanvas() {
         </div>
         {inventoriesValue.map((item) =>
           item.value ? (
-            <div className="flex h-[110px] overflow-hidden rounded-2xl bg-[#7980AF]/20">
+            <div key={item.name} className="flex h-[110px] overflow-hidden rounded-2xl bg-[#7980AF]/20">
               <img src={item.img} alt="game" className="h-full w-[237px] object-cover" />
               <div className="ml-4 mt-1.5">
                 <p className="text-xl">{item.name}</p>
