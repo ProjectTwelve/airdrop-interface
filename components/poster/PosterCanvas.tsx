@@ -7,7 +7,7 @@ import html2canvas from './html2canvas.min';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { formatMinutes, shortenSteamId } from '../../utils';
+import { formatMinutes, getSteamGameImage, shortenSteamId } from '../../utils';
 import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
 import { referralLinkAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
@@ -32,6 +32,15 @@ export default function PosterCanvas() {
     ];
   }, [gamerInfo]);
 
+  const inventoriesValue = useMemo(
+    () => [
+      { name: 'CS: GO', img: getSteamGameImage(730), value: gamerInfo?.csgo_value },
+      { name: 'DOTA 2', img: getSteamGameImage(570), value: gamerInfo?.dota2_value },
+      { name: 'TF 2', img: getSteamGameImage(440), value: gamerInfo?.tf2_value },
+    ],
+    [gamerInfo?.csgo_value, gamerInfo?.dota2_value, gamerInfo?.tf2_value],
+  );
+
   useEffect(() => {
     setPosterCapture('');
   }, [account?.address, setPosterCapture]);
@@ -48,8 +57,6 @@ export default function PosterCanvas() {
       useCORS: true,
       allowTaint: true,
       scale: 1,
-      windowWidth: 1080,
-      windowHeight: 2300,
       logging: false,
     }).then((canvas: HTMLCanvasElement) => {
       const img = canvas.toDataURL('image/jpeg', 0.85);
@@ -62,7 +69,10 @@ export default function PosterCanvas() {
   return (
     <div
       id="poster-capture"
-      className={classNames('fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]', posterStyles[gamerInfo?.nft_level || 0].bg)}
+      className={classNames(
+        'relative z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
+        posterStyles[gamerInfo?.nft_level || 0].bg,
+      )}
     >
       <div className="flex items-start justify-between">
         <div className="flex">
@@ -74,8 +84,8 @@ export default function PosterCanvas() {
                 <img className="ml-4 mt-6 inline-block" width={118} src="/img/poster/ss_gamer.webp" alt="ss_gamer" />
               ) : null}
             </div>
-            <p className="text-[24px]">Steam ID: {shortenSteamId(gamerInfo?.steam_id)}</p>
-            <div className="mt-5 flex">
+            <p className="text-xl">Steam ID: {shortenSteamId(gamerInfo?.steam_id)}</p>
+            <div className="mt-8 flex">
               {steamInfo.map((item) =>
                 item.value ? (
                   <div key={item.label} className="mr-5 h-[100px] w-[100px] bg-steam-info bg-cover">
@@ -88,8 +98,8 @@ export default function PosterCanvas() {
           </div>
         </div>
         {gamerInfo?.invitedBy && (
-          <div className="absolute right-0 mt-4 flex rounded-l-2xl border border-r-0 border-p12-success bg-[#1EDB8C]/20 p-4">
-            <div className="-mt-2 mr-4 w-[170px] text-right text-[24px] font-medium">
+          <div className="absolute right-0 mt-4 flex rounded-l-[18px] border border-r-0 border-p12-success bg-[#005A34]/20 p-4">
+            <div className="-mt-2 mr-4 text-right text-[24px] font-medium">
               <p className="text-p12-success">Invited by</p>
               <p>{gamerInfo.invitedBy.name}</p>
             </div>
@@ -114,12 +124,34 @@ export default function PosterCanvas() {
         <PosterGameItem data={gamerGames?.games?.[1]} />
         <PosterGameItem data={gamerGames?.games?.[2]} />
       </div>
-      <div className="mt-[130px] py-[54px]">123</div>
+      <div className="my-[86px] mt-[130px] grid grid-cols-2 gap-[30px] pt-[54px]">
+        <div className="flex h-[110px] items-center justify-center rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 py-6 text-center">
+          <div className="-mt-[25px] w-[170px] text-center text-xl font-medium text-[#FFAA2C]">
+            <p className="text-[#FFAA2C]">Account</p>
+            <p className="text-[#FFAA2C]">Value</p>
+          </div>
+          <p className="h-[64px] w-[1px] bg-[#FFAA2C]/50"></p>
+          <p className="-mt-[55px] flex-1 text-center font-ddin text-[60px] text-[#FFAA2C]">
+            {Math.floor(gamerInfo.value || 0)}
+          </p>
+        </div>
+        {inventoriesValue.map((item) =>
+          item.value ? (
+            <div className="flex h-[110px] overflow-hidden rounded-2xl bg-[#7980AF]/20">
+              <img src={item.img} alt="game" className="h-full w-[237px] object-cover" />
+              <div className="ml-4 mt-1.5">
+                <p className="text-xl">{item.name}</p>
+                <p className="font-ddin text-[42px] font-bold leading-[42px] text-p12-success">{Math.floor(item.value)}</p>
+              </div>
+            </div>
+          ) : null,
+        )}
+      </div>
       <div className="relative h-[1093px]">
-        <p className="absolute bottom-[615px] left-[542px] text-xl text-p12-sub">
+        <p className="absolute bottom-[625px] left-[542px] text-xl text-p12-sub">
           Birthday: {gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : ''}
         </p>
-        <p className="absolute bottom-[363px] left-0 w-[242px] text-center text-[24px] font-medium">{gamerInfo?.nft_id}</p>
+        <p className="absolute bottom-[373px] left-0 w-[242px] text-center text-[24px] font-medium">{gamerInfo?.nft_id}</p>
         <div className="absolute right-0 bottom-[10px] flex flex-col items-end">
           <img width={200} height={200} className="rounded-xl" src={qrCode} alt="qrcode" />
           <p className="mt-2 text-[22px]">My exclusive referral link</p>

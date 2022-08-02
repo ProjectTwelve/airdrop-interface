@@ -24,8 +24,8 @@ export default function SteamStatus() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const setGamerGames = useSetRecoilState(gamerGamesAtom);
-  const { data: gamesData, refetch, isFetching } = useGamerGames(account?.address);
+  const gamesData = useRecoilValue(gamerGamesAtom);
+  const { refetch, isFetching } = useGamerGames(account?.address);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
     return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -39,10 +39,6 @@ export default function SteamStatus() {
       queryClient.refetchQueries(['gamer_info', account.address]).then();
     }
   }, [account?.address, gamesData, gamerInfo?.credential, queryClient]);
-
-  useEffect(() => {
-    setGamerGames(gamesData);
-  }, [gamesData, setGamerGames]);
 
   return (
     <div>

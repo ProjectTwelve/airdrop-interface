@@ -48,6 +48,7 @@ export const useBindSteamAccount = () => {
 
 export const useGamerGames = (wallet_address?: string) => {
   const router = useRouter();
+  const setGamerGames = useSetRecoilState(gamerGamesAtom);
   const { code } = router.query;
 
   return useQuery(
@@ -59,7 +60,9 @@ export const useGamerGames = (wallet_address?: string) => {
       }),
     {
       enabled: false,
-      select: (data) => (data.code === 0 ? data.data : undefined),
+      onSuccess: (data) => {
+        setGamerGames(data.code === 0 ? data.data : undefined);
+      },
       refetchOnWindowFocus: false,
     },
   );
