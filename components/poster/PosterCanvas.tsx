@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import QRCode from 'qrcode';
 import { useAccount } from 'wagmi';
@@ -21,6 +21,16 @@ export default function PosterCanvas() {
   const setPosterCapture = useSetRecoilState(posterCaptureAtom);
   const [qrCode, setQrCode] = useState('');
   const regLink = /(https|http):\/\/(.+)/.exec(referralLink);
+
+  const steamInfo = useMemo(() => {
+    if (!gamerInfo) return [];
+    return [
+      { label: 'Level', value: gamerInfo.level },
+      { label: 'Years', value: gamerInfo.time_created ? dayjs.unix(gamerInfo.time_created).format('YYYY') : '' },
+      { label: 'Friends', value: gamerInfo.friends_count },
+      { label: 'Badge', value: gamerInfo.badges_count },
+    ];
+  }, [gamerInfo]);
 
   useEffect(() => {
     setPosterCapture('');
@@ -52,27 +62,34 @@ export default function PosterCanvas() {
   return (
     <div
       id="poster-capture"
-      className={classNames(
-        'fixed -z-10 h-[2300px] w-[1080px] bg-cover px-[54px] py-[60px]',
-        posterStyles[gamerInfo?.nft_level || 0].bg,
-      )}
+      className={classNames('fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]', posterStyles[gamerInfo?.nft_level || 0].bg)}
     >
       <div className="flex items-start justify-between">
         <div className="flex">
-          <img width={156} height={156} className="mr-[30px] rounded-2xl" src={gamerInfo?.avatar_full} alt="avatar" />
+          <img width={198} height={198} className="mr-[30px] rounded-2xl" src={gamerInfo?.avatar_full} alt="avatar" />
           <div className={gamerGames?.ss_game_count ? '-mt-5' : 'mt-5'}>
-            <p className="text-[36px] font-semibold">{gamerInfo?.person_name}</p>
+            <div className="text-[36px] font-semibold">
+              {gamerInfo?.person_name}
+              {gamerGames?.ss_game_count ? (
+                <img className="ml-4 mt-6 inline-block" width={118} src="/img/poster/ss_gamer.webp" alt="ss_gamer" />
+              ) : null}
+            </div>
             <p className="text-[24px]">Steam ID: {shortenSteamId(gamerInfo?.steam_id)}</p>
-            {gamerGames?.ss_game_count ? (
-              <div className="mt-12">
-                <img width={230} src="/img/poster/ss_gamer.webp" alt="ss_gamer" />
-              </div>
-            ) : null}
+            <div className="mt-5 flex">
+              {steamInfo.map((item) =>
+                item.value ? (
+                  <div key={item.label} className="mr-5 h-[100px] w-[100px] bg-steam-info bg-cover">
+                    <p className="mt-2 text-center text-xl">{item.label}</p>
+                    <p className="text-center font-ddin text-[34px] leading-[34px]">{item.value}</p>
+                  </div>
+                ) : null,
+              )}
+            </div>
           </div>
         </div>
         {gamerInfo?.invitedBy && (
-          <div className="mt-4 flex rounded-2xl border border-p12-success bg-[#1EDB8C]/20 p-4">
-            <div className="-mt-2 mr-4 w-[190px] text-right text-[24px] font-medium">
+          <div className="absolute right-0 mt-4 flex rounded-l-2xl border border-r-0 border-p12-success bg-[#1EDB8C]/20 p-4">
+            <div className="-mt-2 mr-4 w-[170px] text-right text-[24px] font-medium">
               <p className="text-p12-success">Invited by</p>
               <p>{gamerInfo.invitedBy.name}</p>
             </div>
@@ -80,28 +97,15 @@ export default function PosterCanvas() {
           </div>
         )}
       </div>
-      <div className="mt-[80px]">
-        <img src="/img/poster/gamer.png" width={970} alt="gamer" />
-      </div>
-      <div
-        className={classNames(
-          'mt-[54px] flex h-[156px] w-[972px] items-center justify-center bg-cover',
-          posterStyles[gamerInfo?.nft_level || 0].count,
-        )}
-      >
+      <div className="mt-[185px] flex h-[156px] w-[972px] items-center justify-center bg-cover">
         {[
           { label: 'Total games', value: gamerGames?.total_game_count },
           { label: 'Total playtime', value: formatMinutes(gamerGames?.total_playtime) },
           { label: 'SS games', value: gamerGames?.ss_game_count },
           { label: 'SS playtime', value: formatMinutes(gamerGames?.ss_game_playtime) },
-          { label: 'Steam year', value: gamerInfo?.time_created && dayjs.unix(gamerInfo.time_created).format('YYYY') },
         ].map((item) => (
-          <div
-            key={item.label}
-            className="flex h-[72px] basis-1/5 flex-col justify-start border-r border-[#949FA9] text-center last:border-0"
-          >
-            <p className="-mt-1.5 h-[20px] text-xl leading-5 text-p12-sub">{item.label}</p>
-            <p className="mt-1.5 h-[40px] font-ddin text-[36px] font-bold leading-[40px]">{item.value}</p>
+          <div key={item.label} className="flex basis-1/4 flex-col justify-start text-center font-ddin text-[36px]">
+            {item.value}
           </div>
         ))}
       </div>
@@ -110,12 +114,13 @@ export default function PosterCanvas() {
         <PosterGameItem data={gamerGames?.games?.[1]} />
         <PosterGameItem data={gamerGames?.games?.[2]} />
       </div>
-      <div className="relative mt-[70px] h-[1227px] w-full">
-        <p className="absolute top-[465px] left-[542px] text-xl text-p12-sub">
+      <div className="mt-[130px] py-[54px]">123</div>
+      <div className="relative h-[1093px]">
+        <p className="absolute bottom-[615px] left-[542px] text-xl text-p12-sub">
           Birthday: {gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : ''}
         </p>
-        <p className="absolute top-[705px] left-0 w-[242px] text-center text-[24px] font-medium">{gamerInfo?.nft_id}</p>
-        <div className="absolute right-0 bottom-[70px] flex flex-col items-end">
+        <p className="absolute bottom-[363px] left-0 w-[242px] text-center text-[24px] font-medium">{gamerInfo?.nft_id}</p>
+        <div className="absolute right-0 bottom-[10px] flex flex-col items-end">
           <img width={200} height={200} className="rounded-xl" src={qrCode} alt="qrcode" />
           <p className="mt-2 text-[22px]">My exclusive referral link</p>
           <p className="text-[22px] text-p12-success">{regLink && regLink[2]}</p>
