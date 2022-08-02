@@ -69,10 +69,7 @@ export default function PosterCanvas() {
   return (
     <div
       id="poster-capture"
-      className={classNames(
-        'relative z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
-        posterStyles[gamerInfo?.nft_level || 0].bg,
-      )}
+      className={classNames('fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]', posterStyles[gamerInfo?.nft_level || 0].bg)}
     >
       <div className="flex items-start justify-between">
         <div className="flex">
