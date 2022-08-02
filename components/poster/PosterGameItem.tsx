@@ -11,13 +11,13 @@ export default function PosterGameItem({ data }: { data?: GamerGameInfo }) {
   }
 
   return (
-    <div className="relative h-[112px] w-full overflow-hidden rounded-2xl bg-[#7980AF]/20">
+    <div className="relative h-[110px] w-full overflow-hidden rounded-2xl bg-[#7980AF]/20">
       {isSSGame && <img className="absolute right-0 top-0" src="/img/poster/bg_ss_game.webp" alt="ss_game" />}
       <div className="absolute left-0 right-0 flex h-full w-full">
-        <div className="h-[112px] w-[320px]">
+        <div className="h-[110px] w-[237px]">
           <img className="h-full w-full object-cover" src={gameIcon} alt="game" />
         </div>
-        <div className="flex w-full items-center justify-between px-6 py-4">
+        <div className="flex flex-1 items-center justify-between px-6 py-4">
           <div>
             <div className="flex h-[32px] items-start justify-start">
               {isSSGame && <img className="mr-4" src="/img/poster/ss_game.webp" alt="ss_game" />}

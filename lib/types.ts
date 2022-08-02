@@ -186,6 +186,7 @@ export type BinSteamParams = {
 };
 
 export type GamerGamesData = {
+  wallet_address?: string;
   games: GamerGameInfo[];
   ss_game_count?: number;
   ss_game_playtime?: number;

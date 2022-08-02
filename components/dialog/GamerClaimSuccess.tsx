@@ -74,7 +74,7 @@ export default function GamerClaimSuccess() {
             <motion.div
               layoutId="sharing_poster"
               className={classNames(
-                'relative mx-auto max-w-[540px] overflow-hidden rounded-2xl pb-[24%]',
+                'relative mx-auto max-w-[540px] overflow-hidden rounded-2xl pb-[26%]',
                 posterStyles[gamerInfo?.nft_level || 0].border,
               )}
             >

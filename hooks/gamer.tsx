@@ -1,7 +1,7 @@
 import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { fetchBindSteam, fetchGamerGames, fetchGamerInfo, fetchGamerInvitation, fetchGamerReload } from '../lib/api';
 import { BinSteamParams, Response } from '../lib/types';
@@ -11,7 +11,7 @@ import Message from '../components/message';
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
   const setGamerInfoCode = useSetRecoilState(gamerInfoCodeAtom);
-  const gamerGames = useRecoilValue(gamerGamesAtom);
+  const [gamerGames, setGamerGames] = useRecoilState(gamerGamesAtom);
   const { refetch } = useGamerGames(addr);
 
   return useQuery(['gamer_info', addr], () => fetchGamerInfo({ addr }), {
@@ -20,7 +20,8 @@ export const useGamerInfo = (addr?: string) => {
     onSuccess: (data) => {
       setGamerInfoCode(data.code);
       if (data.code === 0 && data.data) {
-        if (data.data.steam_id && !gamerGames) {
+        if (data.data.steam_id && gamerGames?.wallet_address !== addr) {
+          setGamerGames(undefined);
           refetch().then();
         }
         setGamerInfo({ ...data.data });
@@ -48,6 +49,7 @@ export const useBindSteamAccount = () => {
 
 export const useGamerGames = (wallet_address?: string) => {
   const router = useRouter();
+  const setGamerGames = useSetRecoilState(gamerGamesAtom);
   const { code } = router.query;
 
   return useQuery(
@@ -59,7 +61,9 @@ export const useGamerGames = (wallet_address?: string) => {
       }),
     {
       enabled: false,
-      select: (data) => (data.code === 0 ? data.data : undefined),
+      onSuccess: (data) => {
+        setGamerGames(data.code === 0 ? { ...data.data, wallet_address } : undefined);
+      },
       refetchOnWindowFocus: false,
     },
   );

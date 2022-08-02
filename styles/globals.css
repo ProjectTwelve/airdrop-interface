@@ -123,4 +123,24 @@
         backdrop-filter: blur(16px);
         border: 1px solid #616985;
     }
+
+    .bg-p12-poster-0 {
+        background: url("/img/poster/bg_0_top.webp") no-repeat top left, url("/img/poster/bg_0_bottom.webp") no-repeat bottom left, #0F182C;
+    }
+
+    .bg-p12-poster-1 {
+        background: url("/img/poster/bg_1_top.webp") no-repeat top left, url("/img/poster/bg_1_bottom.webp") no-repeat bottom left, #0F182C;
+    }
+
+    .bg-p12-poster-2 {
+        background: url("/img/poster/bg_2_top.webp") no-repeat top left, url("/img/poster/bg_2_bottom.webp") no-repeat bottom left, #0F182C;
+    }
+
+    .bg-p12-poster-3 {
+        background: url("/img/poster/bg_3_top.webp") no-repeat top left, url("/img/poster/bg_3_bottom.webp") no-repeat bottom left, #0F182C;
+    }
+
+    .bg-p12-poster-4 {
+        background: url("/img/poster/bg_4_top.webp") no-repeat top left, url("/img/poster/bg_4_bottom.webp") no-repeat bottom left, #0F182C;
+    }
 }
