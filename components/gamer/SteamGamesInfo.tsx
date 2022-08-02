@@ -21,7 +21,7 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
             </Tooltip>
           </div>
         ),
-        value: data ? formatMinutes(data.ss_game_count) : '--',
+        value: getCountMemo(data?.ss_game_count) ?? '--',
       },
       {
         label: (
