@@ -6,10 +6,10 @@ export type CollabShortInfo = {
   name: string;
   desc: string;
   logo: string;
-  startTime: string; // TODO: 存日期格式 转换格式
-  endTime: string;
-  whitePaperUrl?: string; // 白皮书icon跳转链接，无则不显示
-  badgeChainKey?: string; // TODO: 还不知道是什么形式的链icon
+  startTime: string; // TODO: date format should be ISO
+  endTime: string; // TODO: date format should be ISO
+  whitePaperUrl?: string;
+  badgeChainKey?: string;
 };
 
 export const collabListAtom = atom<CollabShortInfo[]>({
