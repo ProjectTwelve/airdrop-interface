@@ -10,7 +10,7 @@ import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
 import ReactGA from 'react-ga4';
-import { HOMECARD_HAS_COLLAB } from '../constants';
+import { P12_HAS_COLLAB } from '../constants';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import { CollabHomeCard } from '../components/collab/CollabHomeCard';
 
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        {HOMECARD_HAS_COLLAB ? (
+        {P12_HAS_COLLAB ? (
           <>
             <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
               <LeaderboardTabs />

@@ -1,8 +1,6 @@
 export const BADGE_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
 export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 export const GALAXY_P12_SPACE = 'https://galaxy.eco/P12/';
-export const HOMECARD_HAS_COLLAB = true
-
 export enum NFT_CLAIM {
   UNCLAIMED = 0,
   PENDING,
@@ -107,4 +105,22 @@ export const GAMER_BADGES = {
     claim: GAMER_BADGE_REKT,
     title: 'P12 XII-PLORER Badge [REKT Rarity]',
   },
+};
+
+// Collab
+export const P12_HAS_COLLAB = process.env.NEXT_PUBLIC_P12_HAS_COLLAB?.toLowerCase() === 'true';
+export const P12_COLLAB_LOGOS: { [key: string]: string } = {
+  // TODO: 类型约束
+  logo1: '/img/collab/logo_1.png',
+  logo2: '/img/collab/logo_2.png',
+  logo3: '/img/collab/logo_3.png',
+  logo4: '/img/collab/logo_4.png',
+  logo5: '/img/collab/logo_5.png',
+  logo6: '/img/collab/logo_6.png',
+};
+export const P12_CHAIN_ICONS: { [key: string]: string } = {
+  chain1: '/img/chains/icon_chain_1.png',
+  chain2: '/img/chains/icon_chain_2.png',
+  chain3: '/img/chains/icon_chain_3.png',
+  chain4: '/img/chains/icon_chain_4.png',
 };
