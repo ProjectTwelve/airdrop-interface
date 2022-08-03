@@ -8,8 +8,8 @@ import Dialog from '../dialog';
 import Button from '../button';
 import Message from '../message';
 import Tag from '../tag';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { inviteModalAtom, referralLinkAtom } from '../../store/invite/state';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { invitationCountSelector, inviteModalAtom, referralLinkAtom } from '../../store/invite/state';
 import { fetchReferralCode } from '../../lib/api';
 import { InviteRecordDialog } from './InviteRecordDialog';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -17,6 +17,7 @@ import { isConnectPopoverOpen } from '../../store/web3/state';
 function InviteDialog() {
   const { data: account } = useAccount();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
+  const invitationCount = useRecoilValue(invitationCountSelector);
   const [referralLink, setReferralLink] = useRecoilState(referralLinkAtom);
   const [isConnect, setIsConnect] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
@@ -172,29 +173,38 @@ function InviteDialog() {
               </Button>
             </div>
           )}
-          <div className="mt-3 ml-4 h-6">
-            {account?.address && (
-              <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
-                <p className="cursor-pointer text-p12-link">My Referral List</p>
-              </Dialog>
-            )}
-          </div>
-          <div className="mt-3 flex justify-end">
-            <Button type="bordered" onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
-            {!account?.address && (
-              <Button
-                className="ml-6"
-                type="gradient"
-                onClick={() => {
-                  setOpen(false);
-                  setIsConnect(true);
-                }}
-              >
-                Connect wallet
+          <div className="mt-8 flex items-center justify-between">
+            <div>
+              {account?.address && (
+                <div className="flex items-center">
+                  <p className="text-[18px] font-medium">My Referrals</p>
+                  <p className="ml-3 text-xl font-medium text-p12-success">{invitationCount}</p>
+                  <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
+                    <p className="ml-3 cursor-pointer text-sm text-p12-link">
+                      More
+                      <img width={16} height={16} className="inline-block" src="/svg/more.svg" alt="more" />
+                    </p>
+                  </Dialog>
+                </div>
+              )}
+            </div>
+            <div>
+              <Button type="bordered" onClick={() => setOpen(false)}>
+                Cancel
               </Button>
-            )}
+              {!account?.address && (
+                <Button
+                  className="ml-6"
+                  type="gradient"
+                  onClick={() => {
+                    setOpen(false);
+                    setIsConnect(true);
+                  }}
+                >
+                  Connect wallet
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       )}

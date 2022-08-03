@@ -32,3 +32,16 @@ export const referralLinkAtom = atom({
   key: 'referral_link',
   default: 'Please connect your wallet first',
 });
+
+export const invitationCountAtom = atom<[number, number]>({
+  key: 'invitation_count',
+  default: [0, 0],
+});
+
+export const invitationCountSelector = selector({
+  key: 'invitation_count_selector',
+  get: ({ get }) => {
+    const counts = get(invitationCountAtom);
+    return counts[0] + counts[1];
+  },
+});

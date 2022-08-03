@@ -19,8 +19,8 @@ type InviteRecordDialogProps = {
 export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
   const { data: account } = useAccount();
   const [selectedTab, setSelectedTab] = useState(tab === 'developer' ? 0 : 1);
-  const { data: devInvitation } = useDevInvitation(account?.address);
-  const { data: gamerInvitation } = useGamerInvitation(account?.address);
+  const { data: devInvitation, isLoading: isDevLoading } = useDevInvitation(account?.address);
+  const { data: gamerInvitation, isLoading: isGamerLoading } = useGamerInvitation(account?.address);
 
   const DevColumns = [
     {
@@ -40,7 +40,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Game data',
       accessor: (row: any) => (
         <div className="flex items-center">
-          <img className="h-[52px] w-[80px] rounded-2xl mr-2" src={row.header_image} alt="avatar" />
+          <img className="mr-2 h-[52px] w-[80px] rounded-2xl" src={row.header_image} alt="avatar" />
           <div className="flex flex-col justify-around truncate">
             <p className="truncate font-semibold">{row.name}</p>
             <p>{row.release_date?.date}</p>
@@ -53,7 +53,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
+          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -73,7 +73,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
+          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -97,7 +97,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Steam account data',
       accessor: (row: any) => (
         <div className="flex items-center">
-          <img width={52} height={52} className="rounded mr-2" src={row.avatar} alt="avatar" />
+          <img width={52} height={52} className="mr-2 rounded" src={row.avatar} alt="avatar" />
           <div className="flex flex-col justify-around truncate">
             <p className="truncate font-semibold">{row.person_name}</p>
             <p className="text-xs">Steam ID: {shortenSteamId(row.steam_id)}</p>
@@ -110,7 +110,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Reward',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
+          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
           <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -130,7 +130,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
       Header: 'Will get',
       accessor: () => (
         <div className="flex h-full items-center">
-          <p className="cursor-pointer font-ddin text-2xl font-bold mr-2">?,???</p>
+          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
           <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
       ),
@@ -153,12 +153,22 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
         </TabList>
         <TabPanel>
           <div className="h-[400px]">
-            <Table className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={devInvitation || []} columns={DevColumns} />
+            <Table
+              loading={isDevLoading}
+              className="mt-6 max-w-[95vw] overflow-x-auto"
+              dataSource={devInvitation || []}
+              columns={DevColumns}
+            />
           </div>
         </TabPanel>
         <TabPanel>
           <div className="h-[400px]">
-            <Table className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={gamerInvitation || []} columns={GamerColumns} />
+            <Table
+              loading={isGamerLoading}
+              className="mt-6 max-w-[95vw] overflow-x-auto"
+              dataSource={gamerInvitation || []}
+              columns={GamerColumns}
+            />
           </div>
         </TabPanel>
       </Tabs>

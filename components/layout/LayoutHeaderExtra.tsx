@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Button from '../button';
 import Image from 'next/image';
-import { useSetRecoilState } from 'recoil';
-import { inviteModalAtom } from '../../store/invite/state';
-import { motion, AnimatePresence } from 'framer-motion';
-import { getLocalStorage, setLocalStorage } from '../../utils/storage';
-import { roadmapModalAtom } from '../../store/roadmap/state';
-import { openLink } from '../../utils';
 import ReactGA from 'react-ga4';
+import { useRouter } from 'next/router';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Button from '../button';
+import { openLink } from '../../utils';
+import { invitationCountSelector, inviteModalAtom } from '../../store/invite/state';
+import { roadmapModalAtom } from '../../store/roadmap/state';
+import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
+  const invitationCount = useRecoilValue(invitationCountSelector);
   const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
 
@@ -55,6 +56,9 @@ function LayoutHeaderExtra() {
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
                 &nbsp;My referral link
+                <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
+                  {invitationCount}
+                </p>
               </div>
             </Button>
             <AnimatePresence>
@@ -64,7 +68,7 @@ function LayoutHeaderExtra() {
                   animate={{ right: -200, opacity: 1, scale: 1 }}
                   exit={{ right: 0, opacity: 0, scale: 0.85 }}
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                  className="tooltip__container absolute z-10 -top-1/2 w-[190px] rounded-lg text-xs"
+                  className="tooltip__container absolute -top-1/2 z-10 w-[190px] rounded-lg text-xs"
                 >
                   <div className="p-4">
                     Share invite address get rewards, It&apos;s dangerous to go alone, take this

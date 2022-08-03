@@ -3,14 +3,16 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 import { useBlockLayout, useTable } from 'react-table';
 import Empty from '../empty';
+import Loading from '../loading';
 
 type TableProps = {
   dataSource: any[];
   columns: any[];
   className?: string;
+  loading?: boolean;
 };
 
-export default function Table({ dataSource, columns, className }: TableProps) {
+export default function Table({ dataSource, columns, className, loading }: TableProps) {
   const data = useMemo(() => dataSource, [dataSource]);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
@@ -49,6 +51,12 @@ export default function Table({ dataSource, columns, className }: TableProps) {
                 </tr>
               );
             })
+          ) : loading ? (
+            <tr>
+              <td colSpan={4}>
+                <Loading className="mt-8" size={48} />
+              </td>
+            </tr>
           ) : (
             <tr>
               <td colSpan={4}>

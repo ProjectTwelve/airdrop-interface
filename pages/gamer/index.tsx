@@ -10,7 +10,7 @@ import Button from '../../components/button';
 import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
-import { useGamerInfo, useGamerInvitation } from '../../hooks/gamer';
+import { useGamerInfo } from '../../hooks/gamer';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
@@ -22,6 +22,7 @@ import { roadmapModalAtom } from '../../store/roadmap/state';
 import Poster from '../../components/poster';
 import PosterCanvas from '../../components/poster/PosterCanvas';
 import PermissionSettingDialog from '../../components/dialog/PermissionSettingDialog';
+import { invitationCountAtom } from '../../store/invite/state';
 
 export default function Gamer() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function Gamer() {
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
-  const { data: invitation } = useGamerInvitation(account?.address);
+  const [, invitation] = useRecoilValue(invitationCountAtom);
   useGamerInfo(account?.address);
 
   const badge = useGamerBadgeLoad(gamerInfo);
@@ -157,8 +158,8 @@ export default function Gamer() {
               </div>
               <div className="rounded-lg bg-p12-black/80 p-3">
                 <div className="flex items-center justify-between">
-                  <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation?.length && setOpen(true)}>
-                    {invitation?.length ? '?,???' : '-,---'}
+                  <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
+                    {invitation ? '?,???' : '-,---'}
                   </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
                 </div>

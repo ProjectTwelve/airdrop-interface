@@ -30,3 +30,4 @@ export const gamerPermissionSettingAtom = atom<boolean>({
   key: 'gamer_permission_setting',
   default: false,
 });
+
