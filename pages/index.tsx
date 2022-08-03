@@ -10,6 +10,9 @@ import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
 import ReactGA from 'react-ga4';
+import { HOMECARD_HAS_COLLAB } from '../constants';
+import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
+import { CollabHomeCard } from '../components/collab/CollabHomeCard';
 
 export default function Home() {
   const router = useRouter();
@@ -91,12 +94,23 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
-          <GamerTabs />
-        </RankingHomeCard>
-        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
-          <DeveloperTabs />
-        </RankingHomeCard>
+        {HOMECARD_HAS_COLLAB ? (
+          <>
+            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+              <LeaderboardTabs />
+            </RankingHomeCard>
+            <CollabHomeCard title="Airdrops" />
+          </>
+        ) : (
+          <>
+            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+              <GamerTabs />
+            </RankingHomeCard>
+            <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
+              <DeveloperTabs />
+            </RankingHomeCard>
+          </>
+        )}
       </div>
     </div>
   );
