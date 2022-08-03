@@ -31,7 +31,3 @@ export const gamerPermissionSettingAtom = atom<boolean>({
   default: false,
 });
 
-export const gamerInvitationCountAtom = atom<number>({
-  key: 'gamer_invitation_count',
-  default: 0,
-});

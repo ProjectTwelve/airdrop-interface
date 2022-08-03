@@ -39,6 +39,7 @@ module.exports = {
       backgroundImage: {
         'profile-info': 'var(--profile-info)',
         'p12-gradient': 'var(--gradient)',
+        'p12-logo': 'var(--logo)',
         'p12-gradient-30': 'var(--gradient-30)',
         'p12-gradient-45': 'var(--gradient-45)',
         'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',

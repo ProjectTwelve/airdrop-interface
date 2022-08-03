@@ -6,17 +6,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Button from '../button';
 import { openLink } from '../../utils';
-import { inviteModalAtom } from '../../store/invite/state';
+import { invitationCountSelector, inviteModalAtom } from '../../store/invite/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
-import { gamerInvitationCountAtom } from '../../store/gamer/state';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
+  const invitationCount = useRecoilValue(invitationCountSelector);
   const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
-  const gamerInvitationCount = useRecoilValue(gamerInvitationCountAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
 
   useEffect(() => {
@@ -57,11 +56,9 @@ function LayoutHeaderExtra() {
               <div className="flex items-center justify-center text-sm">
                 <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
                 &nbsp;My referral link
-                {router.pathname === '/gamer' && (
-                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
-                    {gamerInvitationCount}
-                  </p>
-                )}
+                <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
+                  {invitationCount}
+                </p>
               </div>
             </Button>
             <AnimatePresence>

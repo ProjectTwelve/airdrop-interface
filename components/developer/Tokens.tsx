@@ -7,17 +7,15 @@ import TokenTabs from './tokens/TokenTabs';
 import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector } from '../../store/developer/state';
-import { useAccount } from 'wagmi';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { NFT_CLAIM } from '../../constants';
-import { useDevInvitation } from '../../hooks/developer';
+import { invitationCountAtom } from '../../store/invite/state';
 
 function Tokens() {
-  const { data: account } = useAccount();
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
+  const [invitation] = useRecoilValue(invitationCountAtom);
   const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
-  const { data: invitation } = useDevInvitation(account?.address);
 
   return (
     <div className="relative px-8 pt-12 md:px-4 md:pt-6">
@@ -40,8 +38,8 @@ function Tokens() {
           </div>
           <div className="rounded-lg bg-p12-black/80 p-3">
             <div className="flex items-center justify-between">
-              <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation?.length && setOpen(true)}>
-                {invitation?.length ? '?,???' : '-,---'}
+              <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
+                {invitation ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
