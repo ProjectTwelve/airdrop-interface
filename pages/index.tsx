@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../components/button';
 import Image from 'next/image';
+import ReactGA from 'react-ga4';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
+import Button from '../components/button';
 import { inviteModalAtom } from '../store/invite/state';
-import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
-import ReactGA from 'react-ga4';
-import { P12_HAS_COLLAB } from '../constants';
+import { COLLAB_OPEN } from '../constants';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
-import { CollabHomeCard } from '../components/collab/CollabHomeCard';
+import CollabHomeCard from '../components/collab/CollabHomeCard';
 
 export default function Home() {
   const router = useRouter();
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        {P12_HAS_COLLAB ? (
+        {COLLAB_OPEN ? (
           <>
             <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
               <LeaderboardTabs />

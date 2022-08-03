@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
-import { CollabList } from './CollabList';
+import CollabList from './CollabList';
 
 type CollabHomeCardProps = {
   title: string;
 };
-export function CollabHomeCard({ title }: CollabHomeCardProps) {
+
+export default function CollabHomeCard({ title }: CollabHomeCardProps) {
   return (
     <motion.div className="w-full" whileHover={{ y: -5 }} transition={{ ease: 'linear' }}>
       <div className="backdrop-box rounded-2xl px-6 pt-4 pb-2 xs:px-3">

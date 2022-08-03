@@ -36,7 +36,7 @@ function LayoutHeaderExtra() {
           >
             <Button type="bordered" className="mr-3" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center text-sm">
-                <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
+                <Image src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
                 &nbsp;Readme
               </div>
             </Button>

@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { mockCollabs } from './mock';
+import { mockCollabList } from './mock';
 
 export type CollabShortInfo = {
   id: string;
@@ -14,7 +14,7 @@ export type CollabShortInfo = {
 
 export const collabListAtom = atom<CollabShortInfo[]>({
   key: 'collab_list_atom',
-  default: mockCollabs,
+  default: mockCollabList,
 });
 
 export const collabLayoutIdAtom = atom<number>({

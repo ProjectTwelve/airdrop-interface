@@ -1,9 +1,9 @@
-export const mockCollabs = [
+export const mockCollabList = [
   {
     id: 'item1',
     name: 'StormGain',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin...',
-    logo: 'logo1',
+    logo: '/img/temp/collab/logo_1.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
     whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
@@ -13,7 +13,7 @@ export const mockCollabs = [
     id: 'item2',
     name: 'Rebus',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin...',
-    logo: 'logo2',
+    logo: '/img/temp/collab/logo_2.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
     whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
@@ -23,7 +23,7 @@ export const mockCollabs = [
     id: 'item3',
     name: 'PunkPanda',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo3',
+    logo: '/img/temp/collab/logo_3.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
     whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
@@ -33,7 +33,7 @@ export const mockCollabs = [
     id: 'item4',
     name: 'Velodrome',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo4',
+    logo: '/img/temp/collab/logo_4.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
     whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
@@ -43,7 +43,7 @@ export const mockCollabs = [
     id: 'item5',
     name: 'WYND',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo5',
+    logo: '/img/temp/collab/logo_5.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
   },
@@ -51,7 +51,7 @@ export const mockCollabs = [
     id: 'item6',
     name: 'Lend Flare',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo6',
+    logo: '/img/temp/collab/logo_6.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
   },
@@ -59,7 +59,7 @@ export const mockCollabs = [
     id: 'item7',
     name: 'Lend Flare',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo6',
+    logo: '/img/temp/collab/logo_6.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
   },
@@ -67,7 +67,7 @@ export const mockCollabs = [
     id: 'item8',
     name: 'Lend Flare',
     desc: 'The ORFEUS NETWORK is a one decentralized self-developin... long description test long description test long description test long description test',
-    logo: 'logo6',
+    logo: '/img/temp/collab/logo_6.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
   },

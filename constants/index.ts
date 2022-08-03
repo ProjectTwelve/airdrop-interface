@@ -1,6 +1,7 @@
 export const BADGE_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
 export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 export const GALAXY_P12_SPACE = 'https://galaxy.eco/P12/';
+
 export enum NFT_CLAIM {
   UNCLAIMED = 0,
   PENDING,
@@ -108,17 +109,9 @@ export const GAMER_BADGES = {
 };
 
 // Collab
-export const P12_HAS_COLLAB = process.env.NEXT_PUBLIC_P12_HAS_COLLAB?.toLowerCase() === 'true';
-export const P12_COLLAB_LOGOS: { [key: string]: string } = {
-  // TODO: add Enum Type
-  logo1: '/img/temp/collab/logo_1.png',
-  logo2: '/img/temp/collab/logo_2.png',
-  logo3: '/img/temp/collab/logo_3.png',
-  logo4: '/img/temp/collab/logo_4.png',
-  logo5: '/img/temp/collab/logo_5.png',
-  logo6: '/img/temp/collab/logo_6.png',
-};
-export const P12_CHAIN_ICONS: { [key: string]: string } = {
+export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
+
+export const CHAIN_ICON: { [key: string]: string } = {
   // TODO: add Enum Type
   chain1: '/img/temp/chains/icon_chain_1.png',
   chain2: '/img/temp/chains/icon_chain_2.png',
