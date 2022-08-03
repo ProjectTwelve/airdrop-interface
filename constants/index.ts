@@ -107,3 +107,14 @@ export const GAMER_BADGES = {
     title: 'P12 XII-PLORER Badge [REKT Rarity]',
   },
 };
+
+// Collab
+export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
+
+export const CHAIN_ICON: { [key: string]: string } = {
+  // TODO: add Enum Type
+  chain1: '/img/temp/chains/icon_chain_1.png',
+  chain2: '/img/temp/chains/icon_chain_2.png',
+  chain3: '/img/temp/chains/icon_chain_3.png',
+  chain4: '/img/temp/chains/icon_chain_4.png',
+};

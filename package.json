@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "^0.6.6",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.2",

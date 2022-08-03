@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import { DEV_BADGES } from '../../constants';
 import React, { MouseEvent } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames';
+import { DEV_BADGES } from '../../constants';
 import { DevRankInfo } from '../../lib/types';
 import { getCountMemo, openLink } from '../../utils';
 
@@ -17,11 +17,9 @@ export function DevTokenRankingHeader() {
 }
 
 type DevDevTokenRankingItemProps = {
-  hover?: boolean;
-  steamStore?: boolean;
   data: Partial<DevRankInfo>;
 };
-export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevTokenRankingItemProps) {
+export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     openLink('https://store.steampowered.com/app/' + data.appid);
@@ -29,11 +27,8 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
 
   return (
     <div
-      onClick={steamStore ? handleToSteamStore : undefined}
-      className={classNames(
-        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
-        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
-      )}
+      onClick={handleToSteamStore}
+      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
       <div>
@@ -46,7 +41,7 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
         <div className="float-right mx-4 flex h-[72px] items-center justify-between xs:hidden">
-          <p className="cursor-pointer mr-2 font-ddin text-xl font-bold">?,???</p>
+          <p className="mr-2 cursor-pointer font-ddin text-xl font-bold">?,???</p>
           <Image src="/img/p12.png" width={30} height={30} alt="p12" />
         </div>
         <div className="truncate">
@@ -57,7 +52,7 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
           </div>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="rounded bg-p12-link/20 px-2 py-[1.5px] mr-1.5 text-xs text-p12-link">
+              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}
@@ -68,8 +63,3 @@ export default function DevTokenRankingItem({ hover, data, steamStore }: DevDevT
     </div>
   );
 }
-
-DevTokenRankingItem.defaultProps = {
-  hover: true,
-  steamStore: true,
-};

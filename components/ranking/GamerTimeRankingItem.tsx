@@ -1,8 +1,8 @@
 import React, { MouseEvent } from 'react';
+import dayjs from 'dayjs';
 import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
 import { formatMinutes, getCountMemo, openLink } from '../../utils';
-import dayjs from 'dayjs';
 
 export function GamerTimeRankingHeader() {
   return (
@@ -15,12 +15,10 @@ export function GamerTimeRankingHeader() {
 }
 
 type GamerTimeRankingItemProps = {
-  hover?: boolean;
-  steamProfile?: boolean;
   data: Partial<GamerRankInfo>;
 };
 
-export default function GamerTimeRankingItem({ hover, data, steamProfile }: GamerTimeRankingItemProps) {
+export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps) {
   const handleToSteamProfile = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     openLink('https://steamcommunity.com/profiles/' + data.steam_id);
@@ -28,11 +26,8 @@ export default function GamerTimeRankingItem({ hover, data, steamProfile }: Game
 
   return (
     <div
-      onClick={steamProfile ? handleToSteamProfile : undefined}
-      className={classNames(
-        'flex items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
-        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
-      )}
+      onClick={handleToSteamProfile}
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div
         className={classNames(
@@ -78,8 +73,3 @@ export default function GamerTimeRankingItem({ hover, data, steamProfile }: Game
     </div>
   );
 }
-
-GamerTimeRankingItem.defaultProps = {
-  hover: true,
-  steamProfile: true,
-};

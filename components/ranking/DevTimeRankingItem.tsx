@@ -1,6 +1,5 @@
 import React, { MouseEvent } from 'react';
 import dayjs from 'dayjs';
-import classNames from 'classnames';
 import { DevRankInfo } from '../../lib/types';
 import { openLink, getCountMemo } from '../../utils';
 
@@ -15,11 +14,9 @@ export function DevTimeRankingHeader() {
 }
 
 type DevTimeRankingItemProps = {
-  hover?: boolean;
-  steamStore?: boolean;
   data: Partial<DevRankInfo>;
 };
-export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeRankingItemProps) {
+export default function DevTimeRankingItem({ data }: DevTimeRankingItemProps) {
   const handleToSteamStore = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     openLink('https://store.steampowered.com/app/' + data.appid);
@@ -27,11 +24,8 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
 
   return (
     <div
-      onClick={steamStore ? handleToSteamStore : undefined}
-      className={classNames(
-        'overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
-        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
-      )}
+      onClick={handleToSteamStore}
+      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
       <div className="float-left mt-3 mr-4 w-[100px] break-words font-medium xs:hidden">
@@ -63,8 +57,3 @@ export default function DevTimeRankingItem({ hover, data, steamStore }: DevTimeR
     </div>
   );
 }
-
-DevTimeRankingItem.defaultProps = {
-  hover: true,
-  steamStore: true,
-};
