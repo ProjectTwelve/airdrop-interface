@@ -110,17 +110,18 @@ export const GAMER_BADGES = {
 // Collab
 export const P12_HAS_COLLAB = process.env.NEXT_PUBLIC_P12_HAS_COLLAB?.toLowerCase() === 'true';
 export const P12_COLLAB_LOGOS: { [key: string]: string } = {
-  // TODO: 类型约束
-  logo1: '/img/collab/logo_1.png',
-  logo2: '/img/collab/logo_2.png',
-  logo3: '/img/collab/logo_3.png',
-  logo4: '/img/collab/logo_4.png',
-  logo5: '/img/collab/logo_5.png',
-  logo6: '/img/collab/logo_6.png',
+  // TODO: add Enum Type
+  logo1: '/img/temp/collab/logo_1.png',
+  logo2: '/img/temp/collab/logo_2.png',
+  logo3: '/img/temp/collab/logo_3.png',
+  logo4: '/img/temp/collab/logo_4.png',
+  logo5: '/img/temp/collab/logo_5.png',
+  logo6: '/img/temp/collab/logo_6.png',
 };
 export const P12_CHAIN_ICONS: { [key: string]: string } = {
-  chain1: '/img/chains/icon_chain_1.png',
-  chain2: '/img/chains/icon_chain_2.png',
-  chain3: '/img/chains/icon_chain_3.png',
-  chain4: '/img/chains/icon_chain_4.png',
+  // TODO: add Enum Type
+  chain1: '/img/temp/chains/icon_chain_1.png',
+  chain2: '/img/temp/chains/icon_chain_2.png',
+  chain3: '/img/temp/chains/icon_chain_3.png',
+  chain4: '/img/temp/chains/icon_chain_4.png',
 };
