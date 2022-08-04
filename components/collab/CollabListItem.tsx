@@ -1,7 +1,6 @@
-import { useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import { CHAIN_ICON } from '../../constants';
-import { CollabShortInfo } from '../../store/collab/state';
+import { CollabShortInfo } from '../../lib/types';
 
 type CollabItemProps = {
   data: CollabShortInfo;
@@ -9,18 +8,13 @@ type CollabItemProps = {
 };
 
 export default function CollabListItem({ data }: CollabItemProps) {
+  const router = useRouter();
   const { id, name, desc, logo, startTime, endTime, whitePaperUrl, badgeChainKey } = data;
   const badgeChain = badgeChainKey ? CHAIN_ICON[badgeChainKey] : null;
 
-  const handleClick = useCallback(() => {
-    console.log('click!', id);
-  }, [id]);
-
   return (
-    <motion.div
-      onClick={handleClick}
-      layoutId={id}
-      transition={{ ease: 'linear' }}
+    <div
+      onClick={() => router.push({ pathname: '/collab/[id]', query: { id } })}
       className="flex h-max cursor-pointer cursor-pointer flex-col items-center  gap-2 rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
@@ -50,6 +44,6 @@ export default function CollabListItem({ data }: CollabItemProps) {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

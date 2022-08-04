@@ -22,6 +22,7 @@ import {
   GamerRank,
   GamerInvitationParams,
   GamerInvitationData,
+  CollabShortInfo,
 } from './types';
 
 /**
@@ -155,3 +156,8 @@ export const fetchGamerReload = (data: { wallet_address?: string }) =>
 
 export const fetchInvitationCount = (addr?: string) =>
   request.get<any, Response<number[]>>('/api/invitation/count', { params: { addr } });
+
+export const fetchCollabList = () =>
+  request.get<any, Response<CollabShortInfo[]>>('/api/collab', { baseURL: 'http://localhost:3000' });
+export const fetchCollabItem = (id: string) =>
+  request.get<any, Response<CollabShortInfo>>('/api/collab/' + id, { baseURL: 'http://localhost:3000' });

@@ -221,3 +221,14 @@ export type GamerInvitationParams = {
 export type GamerInvitationData = {
   invitation_info: GamerInvitationInfo[];
 };
+
+export type CollabShortInfo = {
+  id: string;
+  name: string;
+  desc: string;
+  logo: string;
+  startTime: string; // TODO: date format should be ISO
+  endTime: string; // TODO: date format should be ISO
+  whitePaperUrl?: string;
+  badgeChainKey?: string;
+};
