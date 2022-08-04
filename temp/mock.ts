@@ -1,4 +1,6 @@
-export const mockCollabList = [
+import {CollabShortInfo} from "../lib/types";
+
+export const mockCollabList: CollabShortInfo[] = [
   {
     id: 'item1',
     name: 'StormGain',
