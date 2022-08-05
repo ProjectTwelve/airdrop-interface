@@ -94,7 +94,7 @@ export const mockCollabInfoList: CollabInfoType[] = [
     projectDiscord: 'https://discord.com/invite/EMrbsZPbxs',
     tokenAmount: 14543,
     nftTotalAmount: 22,
-    timeWarmup: '2022.06.08', // TODO: 改为timeCommingsoon
+    timeWarmup: '2022.06.08',
     timeJoin: '2022.06.12',
     timeAllocation: '2022.06.20',
     timeClaim: '2022.06.25',
