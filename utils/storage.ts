@@ -30,7 +30,7 @@ export const setLocalStorage = (key: string, value: any) => setStorage('localSto
 /**
  * getLocalStorage
  */
-export const getLocalStorage = (key: string): any => getStorage('localStorage', key);
+export const getLocalStorage = <T = any>(key: string): T => getStorage('localStorage', key);
 
 /**
  * setSessionStorage

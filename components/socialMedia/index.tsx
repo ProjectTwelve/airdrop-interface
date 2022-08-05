@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { socialMediaClickAtom, SocialMediaType } from '../../store/invite/state';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { openLink } from '../../utils';
+import { STORAGE_KEY } from '../../constants';
 
 type SocialMediaProps = {
   size?: 'small' | 'medium';
@@ -23,7 +24,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
     (type: SocialMediaType) => {
       setSocialMediaClickStatus((prevState) => {
         const currentState = { ...prevState, [type]: true };
-        setLocalStorage('social_media_click', currentState);
+        setLocalStorage(STORAGE_KEY.SOCIAL_MEDIA_CLICK, currentState);
         return currentState;
       });
     },
@@ -31,7 +32,7 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
   );
 
   useEffect(() => {
-    const localClickStatus = getLocalStorage('social_media_click');
+    const localClickStatus = getLocalStorage(STORAGE_KEY.SOCIAL_MEDIA_CLICK);
     localClickStatus && setSocialMediaClickStatus(localClickStatus);
   }, [setSocialMediaClickStatus]);
 

@@ -1,19 +1,21 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import Button from '../button';
-import SteamAppItem from './verify/SteamAppItem';
-import Message from '../message';
-import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
-import { getVerifySignData } from '../../utils';
 import { useRouter } from 'next/router';
-import { useMutation, useQueryClient } from 'react-query';
-import { fetchDeveloperVerify } from '../../lib/api';
-import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
-import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
+import { useCopyToClipboard } from 'react-use';
+import { useAccount, useSignMessage } from 'wagmi';
+import { useMutation, useQueryClient } from 'react-query';
+import Button from '../button';
+import Message from '../message';
+import { STORAGE_KEY } from '../../constants';
+import { getVerifySignData } from '../../utils';
+import SteamAppItem from './verify/SteamAppItem';
+import { fetchDeveloperVerify } from '../../lib/api';
+import { getLocalStorage } from '../../utils/storage';
+import { getErrorToast } from '../../utils/developer';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
-import { useAccount, useSignMessage } from 'wagmi';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
 
 export type SteamApp = Partial<DevGameInfo> & { index: number };
 
@@ -93,10 +95,11 @@ function Verify() {
     if (!account?.address) return;
     const { code } = router.query;
     const ids = submittedSteamApps.map((app) => app.steam_appid!);
+    const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
     mutation.mutate({
       steam_appids: ids,
       wallet_address: account.address,
-      referral_code: code as string,
+      referral_code: code || localCode,
     });
     setVerifiedSteamApp(ids);
   }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);

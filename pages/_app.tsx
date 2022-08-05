@@ -1,9 +1,12 @@
+import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Script from 'next/script';
-import { ReactElement, ReactNode, useMemo } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { useRouter } from 'next/router';
 import Layout from '../components/layout';
+import { STORAGE_KEY } from '../constants';
+import { setLocalStorage } from '../utils/storage';
 import type { AppProps } from 'next/app';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,8 +22,14 @@ type AppPropsWithLayout = AppProps & {
 };
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
+  const router = useRouter();
   const queryClient = useMemo(() => new QueryClient(), []);
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+
+  useEffect(() => {
+    const { code } = router.query;
+    code && setLocalStorage(STORAGE_KEY.INVITE_CODE, code);
+  }, [router.query]);
 
   return (
     <>

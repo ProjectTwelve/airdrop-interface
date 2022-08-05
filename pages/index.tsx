@@ -10,7 +10,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
-import { COLLAB_OPEN } from '../constants';
+import { COLLAB_OPEN, STORAGE_KEY } from '../constants';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import CollabHomeCard from '../components/collab/CollabHomeCard';
 
@@ -21,11 +21,9 @@ export default function Home() {
   const [isHovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const { code } = router.query;
-    const currentStatus = getLocalStorage('invite_btn_click');
-    setLocalStorage('invite_code', code);
+    const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK);
     setBtnClick(currentStatus ?? false);
-  }, [router.query]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
@@ -43,7 +41,7 @@ export default function Home() {
             onClick={() => {
               setBtnClick(true);
               ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
-              setLocalStorage('invite_btn_click', true);
+              setLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK, true);
               setOpen(true);
             }}
           >

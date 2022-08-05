@@ -5,6 +5,8 @@ import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
 import { useBindSteamAccount } from './gamer';
+import { getLocalStorage } from '../utils/storage';
+import { STORAGE_KEY } from '../constants';
 
 export const useSteamSignIn = (): [signInCallback: () => void] => {
   const { data: account } = useAccount();
@@ -23,10 +25,10 @@ export const useSteamSignIn = (): [signInCallback: () => void] => {
 
   useEvent('storage', (event: StorageEvent) => {
     if (!event.newValue) return;
-    if (event.key === 'secret_token') {
+    if (event.key === STORAGE_KEY.SECRET_TOKEN) {
       const secretToken = event.newValue;
       setSteamSecretToken(secretToken);
-      Cookies.set('secret_token', secretToken);
+      Cookies.set(STORAGE_KEY.SECRET_TOKEN, secretToken);
     }
   });
 
@@ -35,7 +37,7 @@ export const useSteamSignIn = (): [signInCallback: () => void] => {
     const { secret_token } = router.query;
     if (!secret_token) return;
     setSteamSecretToken(secret_token as string);
-    Cookies.set('secret_token', secret_token);
+    Cookies.set(STORAGE_KEY.SECRET_TOKEN, secret_token);
     const queryParams = { ...router.query };
     delete queryParams.secret_token;
     router.replace({ pathname: router.pathname, query: queryParams }).then();
@@ -44,10 +46,11 @@ export const useSteamSignIn = (): [signInCallback: () => void] => {
   useEffect(() => {
     if (!account?.address || !steamSecretToken) return;
     const { code } = router.query;
+    const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
     mutation.mutate({
       wallet_address: account.address,
       secret_token: steamSecretToken,
-      referral_code: code as string,
+      referral_code: code || localCode,
     });
     setSteamSecretToken(undefined);
   }, [account, mutation, router.query, steamSecretToken]);

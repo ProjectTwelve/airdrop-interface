@@ -2,6 +2,17 @@ export const BADGE_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d4460
 export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
 export const GALAXY_P12_SPACE = 'https://galaxy.eco/P12/';
 
+export const STORAGE_KEY = {
+  INVITE_CODE: 'invite_code',
+  INVITE_TIPS_CLICK: 'invite_tips_click',
+  INVITE_BTN_CLICK: 'invite_btn_click',
+  SECRET_TOKEN: 'secret_token',
+  SOCIAL_MEDIA_CLICK: 'social_media_click',
+  GAMER_CLAIMED_MAP: 'gamer_claimed_map_01',
+  DEV_EMAIL_SUBMIT: 'dev_email_submit',
+  DEV_EMAIL_DAILY: 'dev_email_daily',
+};
+
 export enum NFT_CLAIM {
   UNCLAIMED = 0,
   PENDING,
