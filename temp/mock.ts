@@ -8,7 +8,7 @@ export const mockCollabList: CollabShortInfo[] = [
     logo: '/img/temp/collab/logo_1.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
-    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
+    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf',
     badgeChainKey: 'chain1',
   },
   {
@@ -18,7 +18,7 @@ export const mockCollabList: CollabShortInfo[] = [
     logo: '/img/temp/collab/logo_2.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
-    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
+    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf',
     badgeChainKey: 'chain2',
   },
   {
@@ -28,8 +28,7 @@ export const mockCollabList: CollabShortInfo[] = [
     logo: '/img/temp/collab/logo_3.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
-    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
-    badgeChainKey: 'chain3',
+    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf',
   },
   {
     id: 'item4',
@@ -38,7 +37,7 @@ export const mockCollabList: CollabShortInfo[] = [
     logo: '/img/temp/collab/logo_4.png',
     startTime: '2022.06.08',
     endTime: '2022.07.08',
-    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
+    whitePaperUrl: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf',
     badgeChainKey: 'chain4',
   },
   {
@@ -82,7 +81,7 @@ export const mockCollabInfoList: CollabInfoType[] = [
     projectInfo: `The ORFEUS NETWORK is a decentralized self-developing tourist ecosystem. The ORFEUS network is NOT an online travel agency (OTA) where customers pay a certain commission rate, which can range from 10% to 35%.
   ORFEUS NETWORK is a Blockchain-based travel community of digital nomads around the world. As its base will serve sites in Bulgaria – Hissarya, Plovdiv, Levochevo, and Tryavna, which will gradually expand.`,
     projectLogo: '/img/temp/collab/logo_1.png',
-    projectWhitepaper: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf', // 白皮书icon跳转链接，无则不显示
+    projectWhitepaper: 'https://github.com/ProjectTwelve/whitepaper/blob/main/P12-Whitepaper-v0.1.pdf',
     projectChain: [
       {
         chainid: 43114,
