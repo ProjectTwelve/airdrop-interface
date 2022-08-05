@@ -15,10 +15,10 @@ export default function CollabListItem({ data }: CollabItemProps) {
   return (
     <div
       onClick={() => router.push({ pathname: '/collab/[id]', query: { id } })}
-      className="flex h-max cursor-pointer cursor-pointer flex-col items-center  gap-2 rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
+      className="flex h-max cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
-        <img className="h-[72px] w-[72px] rounded-2xl " src={logo} alt="icon" />
+        <img className="h-[72px] w-[72px] rounded-2xl" src={logo} alt="icon" />
         <div className="flex w-14 flex-grow flex-col gap-2">
           <div className="flex items-center gap-1">
             <h1 className="text-xl font-semibold leading-6">{name}</h1>

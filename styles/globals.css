@@ -123,7 +123,7 @@
         backdrop-filter: blur(16px);
         border: 1px solid #616985;
     }
-
+    
     .bg-p12-poster-0 {
         background: url("/img/poster/bg_0_top.webp") no-repeat top left, url("/img/poster/bg_0_bottom.webp") no-repeat bottom left, #0F182C;
     }
@@ -143,4 +143,18 @@
     .bg-p12-poster-4 {
         background: url("/img/poster/bg_4_top.webp") no-repeat top left, url("/img/poster/bg_4_bottom.webp") no-repeat bottom left, #0F182C;
     }
+    
+    .bg-collab-time-start {
+        background: url("/img/collab/subtract_start.png") no-repeat;
+        background-size: 100% 100%;
+    }
+    .bg-collab-timing{
+        background: url("/img/collab/subtract.png") no-repeat;
+        background-size: 100% 100%;
+    }    
+    .bg-collab-time-end {
+        background: url("/img/collab/subtract_end.png") no-repeat;
+        background-size: 100% 100%;
+
+    } 
 }

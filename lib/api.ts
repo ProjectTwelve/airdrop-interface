@@ -23,6 +23,7 @@ import {
   GamerInvitationParams,
   GamerInvitationData,
   CollabShortInfo,
+  CollabInfoType,
 } from './types';
 
 /**
@@ -159,5 +160,6 @@ export const fetchInvitationCount = (addr?: string) =>
 
 export const fetchCollabList = () =>
   request.get<any, Response<CollabShortInfo[]>>('/api/collab', { baseURL: 'http://localhost:3000' });
+
 export const fetchCollabItem = (id: string) =>
-  request.get<any, Response<CollabShortInfo>>('/api/collab/' + id, { baseURL: 'http://localhost:3000' });
+  request.get<any, Response<CollabInfoType>>('/api/collab/' + id, { baseURL: 'http://localhost:3000' });

@@ -228,7 +228,53 @@ export type CollabShortInfo = {
   desc: string;
   logo: string;
   startTime: string; // TODO: date format should be ISO
-  endTime: string; // TODO: date format should be ISO
+  endTime: string;
   whitePaperUrl?: string;
   badgeChainKey?: string;
 };
+
+export type CollabChainItem = Partial<{
+  chainid: number;
+  url: string;
+  name: string;
+}>;
+export type CollabInfoType = Partial<{
+  id: string;
+  projectName: string;
+  projectLogo: string;
+  projectInfo: string;
+  projectChain: CollabChainItem[];
+  projectDiscord: string;
+  projectTwitter: string;
+  projectWebsite: string;
+  projectWhitepaper: string;
+
+  collabCode: string;
+  collabStatus: number;
+
+  nftAddress: string;
+  nftClaimLink: string;
+  nftImage: string;
+  nftName: string;
+  nftTotalAmount: number;
+
+  timeWarmup: string; // TODO: date format should be ISO
+  timeJoin: string;
+  timeAllocation: string;
+  timeClaim: string;
+  timeClose: string;
+
+  tokenAddress: string;
+  tokenAmount: number;
+  tokenClaimLink: string;
+  tokenIcon: string;
+  tokenName: string;
+  tokenNameAbbre: string;
+
+  partnerLogo: string;
+  partnerName: string;
+  partnerPoster: string;
+
+  taskGleam: string;
+  taskTweetContent: string;
+}>;
