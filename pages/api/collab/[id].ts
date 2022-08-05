@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CollabShortInfo, Response } from '../../../lib/types';
-import { mockCollabList } from '../../../temp/mock';
+import { CollabInfoType, Response } from '../../../lib/types';
+import { mockCollabInfoList } from '../../../temp/mock';
 
-export default function collabItemHandler(req: NextApiRequest, res: NextApiResponse<Response<CollabShortInfo | null>>) {
+export default function collabItemHandler(req: NextApiRequest, res: NextApiResponse<Response<CollabInfoType | null>>) {
   const { id } = req.query;
-  const item = mockCollabList.find((item) => item.id === id);
+  const item = mockCollabInfoList.find((item) => item.id === id);
   if (item) {
     res.status(200).json({
       status: 'success',
