@@ -4,7 +4,7 @@ export type CollabTimeLimeItemProps = {
   startTime: string;
   endTime?: string;
   label: string;
-  type: 'open' | 'close' | 'normal'; // close只有一个日期
+  type: 'open' | 'close' | 'normal';
 };
 export function CollabTimeLineItem({ startTime, endTime, type, label }: CollabTimeLimeItemProps) {
   return (
