@@ -5,7 +5,7 @@ import Button from '../button';
 import { getEmailSignData, openLink } from '../../utils';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { GAMER_BADGES } from '../../constants';
+import {GAMER_BADGES, STORAGE_KEY} from '../../constants';
 import { useMutation } from 'react-query';
 import { GamerEmailParams, Response } from '../../lib/types';
 import { fetchGamerEmail } from '../../lib/api';
@@ -23,7 +23,7 @@ export default function GamerEmailDialog() {
   const mutation = useMutation<Response<any>, any, GamerEmailParams, any>((data) => fetchGamerEmail(data), {
     onSuccess: () => {
       toast.success(<Message message="Bind email successfully" title="Mission Complete" />);
-      setLocalStorage('dev_email_submit', 1);
+      setLocalStorage(STORAGE_KEY.DEV_EMAIL_SUBMIT, 1);
       setOpen(false);
       openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
     },

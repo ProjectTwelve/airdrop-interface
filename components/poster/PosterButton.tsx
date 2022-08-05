@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gamerClaimedPosterAtom } from '../../store/gamer/state';
 import { posterBtnShowAtom, posterCaptureAtom } from '../../store/poster/state';
+import { STORAGE_KEY } from '../../constants';
 
 export default function PosterButton() {
   const { data: account } = useAccount();
@@ -18,7 +19,7 @@ export default function PosterButton() {
   };
 
   useEffect(() => {
-    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
+    const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
     const address = account?.address;
     if (address && claimedMap[address] && !gamerClaimedPoster) {
       setShow(true);

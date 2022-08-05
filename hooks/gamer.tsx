@@ -3,10 +3,12 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { fetchBindSteam, fetchGamerGames, fetchGamerInfo, fetchGamerInvitation, fetchGamerReload } from '../lib/api';
-import { BinSteamParams, Response } from '../lib/types';
-import { gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom } from '../store/gamer/state';
 import Message from '../components/message';
+import { getLocalStorage } from '../utils/storage';
+import { BinSteamParams, Response } from '../lib/types';
+import { fetchBindSteam, fetchGamerGames, fetchGamerInfo, fetchGamerInvitation, fetchGamerReload } from '../lib/api';
+import { gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom } from '../store/gamer/state';
+import { STORAGE_KEY } from '../constants';
 
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
@@ -54,11 +56,13 @@ export const useGamerGames = (wallet_address?: string) => {
 
   return useQuery(
     ['gamer_games', { wallet_address }],
-    () =>
-      fetchGamerGames({
+    () => {
+      const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
+      return fetchGamerGames({
         wallet_address,
-        referral_code: code as string,
-      }),
+        referral_code: code || localCode,
+      });
+    },
     {
       enabled: false,
       onSuccess: (data) => {
