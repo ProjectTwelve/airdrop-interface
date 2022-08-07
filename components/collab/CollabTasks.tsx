@@ -1,5 +1,8 @@
-import { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
 import { CollabInfoType } from '../../lib/types';
+import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
@@ -10,11 +13,21 @@ export type CollabTasksProps = {
 
 export default function CollabTasks({ data }: CollabTasksProps) {
   const { taskGleam, taskTweetContent } = data;
+  const { asPath } = useRouter();
+  const referralCode = useRecoilValue(referralCodeAtom);
 
-  const shareTwitterUrl = useMemo(() => {
-    const shareUrl = `https://airdrop.p12.games/?code=VKwLGWzs`;
-    return `https://twitter.com/intent/tweet?text=${encodeURIComponent(taskTweetContent || '')}&url=${shareUrl}`;
-  }, [taskTweetContent]);
+  const referralLink = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return referralCode ? window.location.origin + asPath + `?code=` + referralCode : 'Please connect your wallet first';
+    }
+    return 'window undefined';
+  }, [referralCode, asPath]);
+
+  const handleTwitterShareClick = useCallback(() => {
+    const text = encodeURIComponent(taskTweetContent);
+    const url = encodeURIComponent(referralLink);
+    window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
+  }, [taskTweetContent, referralLink]);
 
   const handleVerify = () => {
     console.log('verify!'); // TODO: verify api
@@ -51,10 +64,10 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             <>
               <span>Click button to make a tweet</span>
               <CollabSocials
+                onClick={handleTwitterShareClick}
                 icon="/svg/twitter.svg"
                 label="Send Twitter"
                 className="w-fit bg-[#02A9F4]/100"
-                href={shareTwitterUrl}
               />
               <span>
                 Then copy-paste the tweet URL into the below input box{' '}

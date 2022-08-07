@@ -7,15 +7,30 @@ type CollabSocialsProps = {
   className?: string;
   onClick?: () => void;
 };
-export function CollabSocials({ href, label, icon, className, onClick }: CollabSocialsProps) {
+export function SocialsLabel({ label, icon, className, onClick }: CollabSocialsProps) {
   return (
-    <a href={href || '#'} onClick={onClick}>
-      <span
-        className={classNames('flex items-center gap-1 rounded-[100px] bg-[#4383FF]/20 bg-opacity-20 px-3 py-1', className)}
-      >
-        <img src={icon} className="h-4 w-4" alt={label || 'icon'}></img>
-        {label && <span className="text-xs">{label}</span>}
-      </span>
-    </a>
+    <span
+      onClick={onClick}
+      className={classNames(
+        'flex cursor-pointer items-center gap-1 rounded-[100px] bg-[#4383FF]/20 bg-opacity-20 px-3 py-1',
+        className,
+      )}
+    >
+      <img src={icon} className="h-4 w-4" alt={label || 'icon'}></img>
+      {label && <span className="text-xs">{label}</span>}
+    </span>
+  );
+}
+export function CollabSocials({ href, ...args }: CollabSocialsProps) {
+  return (
+    <>
+      {href ? (
+        <a href={href}>
+          <SocialsLabel {...args} />
+        </a>
+      ) : (
+        <SocialsLabel {...args} />
+      )}
+    </>
   );
 }

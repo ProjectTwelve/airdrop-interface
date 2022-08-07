@@ -42,24 +42,23 @@ export async function getStaticPaths() {
   if (process.env.NODE_ENV === 'production') {
     paths.push(...mockCollabList.map((collab) => ({ params: { id: collab.collabCode } })));
   } else {
+    // const data = mockCollabList;
     const { data } = await fetchCollabList();
     paths.push(...data.map((collab) => ({ params: { id: collab.collabCode } })));
   }
-  console.log('paths', paths);
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   let data: CollabInfoType | undefined;
   const id = params.id;
-  console.log('id', id);
   // TODO: need to replace with BE API
   if (process.env.NODE_ENV === 'production') {
     data = mockCollabInfoList.find((collab) => collab.collabCode == id);
   } else {
     const { data: collab } = await fetchCollabItem({ collabCode: id });
     data = collab;
+    // data = mockCollabInfoList.find((collab) => collab.collabCode == id);
   }
-  console.log('getStaticProps', data, 'data');
   return { props: { data } };
 }
