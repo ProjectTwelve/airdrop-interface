@@ -1,30 +1,40 @@
 import { useRouter } from 'next/router';
-import { CHAIN_ICON } from '../../constants';
-import { CollabShortInfo } from '../../lib/types';
+import { useCollabTimes } from '../../hooks/collab';
+import { CollabChainItem, CollabShortInfo } from '../../lib/types';
 
 type CollabItemProps = {
   data: CollabShortInfo;
-  // TODO: data: Partial<CollabInfo>;
 };
 
 export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
-  const { id, name, desc, logo, startTime, endTime, whitePaperUrl, badgeChainKey } = data;
-  const badgeChain = badgeChainKey ? CHAIN_ICON[badgeChainKey] : null;
+  const {
+    collabCode,
+    projectName,
+    projectInfoBrief,
+    projectInfo,
+    projectLogo,
+    timeWarmup,
+    timeClose,
+    projectWhitepaper,
+    projectChain,
+  } = data;
+
+  const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
 
   return (
     <div
-      onClick={() => router.push({ pathname: '/collab/[id]', query: { id } })}
+      onClick={() => router.push({ pathname: '/collab/[id]', query: { id: collabCode } })}
       className="flex h-max cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
-        <img className="h-[72px] w-[72px] rounded-2xl" src={logo} alt="icon" />
+        <img className="h-[72px] w-[72px] rounded-2xl" src={projectLogo} alt="icon" />
         <div className="flex w-14 flex-grow flex-col gap-2">
           <div className="flex items-center gap-1">
-            <h1 className="text-xl font-semibold leading-6">{name}</h1>
+            <h1 className="flex-shrink truncate text-xl font-semibold leading-6	">{projectName}</h1>
             <img src="/svg/door.svg" alt="door icon" />
           </div>
-          <p className="overflow-ellipsis text-xs leading-5 line-clamp-2">{desc}</p>
+          <p className="overflow-ellipsis text-xs leading-5 line-clamp-2">{projectInfoBrief || projectInfo}</p>
         </div>
       </div>
       <div className="flex w-full items-center justify-between">
@@ -32,16 +42,17 @@ export default function CollabListItem({ data }: CollabItemProps) {
           {startTime} ~ {endTime}
         </div>
         <div className="flex gap-2">
-          {whitePaperUrl && (
-            <a href={whitePaperUrl} target="_blank" onClick={(e) => e.stopPropagation()}>
-              <img src="/img/white_paper.png" className="h-5 w-5" alt={whitePaperUrl}></img>
+          {projectWhitepaper && (
+            <a href={projectWhitepaper} target="_blank" onClick={(e) => e.stopPropagation()}>
+              <img src="/img/white_paper.png" className="h-5 w-5" alt={projectWhitepaper}></img>
             </a>
           )}
-          {badgeChain && (
-            <a href={whitePaperUrl} target="_blank" onClick={(e) => e.stopPropagation()}>
-              <img src={badgeChain} className="h-5 w-5" alt={badgeChain}></img>
-            </a>
-          )}
+          {projectChain?.length &&
+            projectChain.map(({ name, url, chainid }: CollabChainItem) => (
+              <a href={projectWhitepaper} key={chainid} target="_blank" onClick={(e) => e.stopPropagation()}>
+                <img src={url} className="h-5 w-5" alt={name}></img>
+              </a>
+            ))}
         </div>
       </div>
     </div>

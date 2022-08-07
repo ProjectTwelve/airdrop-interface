@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { useCollabTimes } from '../../hooks/collab';
 import { CollabInfoType } from '../../lib/types';
 import Button from '../button';
 import { CollabSocials } from '../socialMedia/CollabSocials';
@@ -23,6 +24,8 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     nftTotalAmount,
   } = data;
 
+  const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
+
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
     return projectChain.map(({ url, name }) => {
@@ -32,7 +35,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
   }, [projectChain]);
 
   const handleJoin = useCallback(() => {
-    console.log('join!'); // TODO: api
+    console.log('join!'); // TODO: Join API
   }, []);
 
   return (
@@ -41,9 +44,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
         <img className="h-40 w-40 rounded-3xl" src={projectLogo} alt={`${projectName} Logo`} />
       </div>
       <div className="flex  w-full max-w-full flex-grow flex-col p-9">
-        <div className="text-3xl font-semibold leading-9">{projectName}</div>
+        <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
         <div className="pt-1 text-sm leading-5 text-p12-sub">
-          Time：{timeWarmup} - {timeClose}
+          Time：{startTime} - {endTime}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
           {projectWebsite && <CollabSocials key="website" href={projectWebsite} icon="/svg/door.svg" label="Website" />}

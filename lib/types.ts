@@ -222,24 +222,28 @@ export type GamerInvitationData = {
   invitation_info: GamerInvitationInfo[];
 };
 
-export type CollabShortInfo = {
-  id: string;
-  name: string;
-  desc: string;
-  logo: string;
-  startTime: string; // TODO: date format should be ISO
-  endTime: string;
-  whitePaperUrl?: string;
-  badgeChainKey?: string;
-};
-
 export type CollabChainItem = Partial<{
   chainid: number;
   url: string;
   name: string;
 }>;
-export type CollabInfoType = Partial<{
-  id: string;
+
+export type CollabShortInfo = {
+  collabCode: string;
+  projectName: string;
+  projectInfoBrief?: string;
+  projectInfo: string;
+  projectLogo: string;
+  projectChain: CollabChainItem[];
+  timeWarmup: number;
+  timeClose: number;
+  projectWhitepaper?: string;
+};
+export type CollabItemParam = {
+  collabCode: string;
+};
+export type CollabInfoType = {
+  collabCode: string;
   projectName: string;
   projectLogo: string;
   projectInfo: string;
@@ -249,32 +253,15 @@ export type CollabInfoType = Partial<{
   projectWebsite: string;
   projectWhitepaper: string;
 
-  collabCode: string;
-  collabStatus: number;
+  timeWarmup: number;
+  timeJoin: number;
+  timeAllocation: number;
+  timeClaim: number;
+  timeClose: number;
 
-  nftAddress: string;
-  nftClaimLink: string;
-  nftImage: string;
-  nftName: string;
+  tokenAmount: number;
   nftTotalAmount: number;
 
-  timeWarmup: string; // TODO: date format should be ISO
-  timeJoin: string;
-  timeAllocation: string;
-  timeClaim: string;
-  timeClose: string;
-
-  tokenAddress: string;
-  tokenAmount: number;
-  tokenClaimLink: string;
-  tokenIcon: string;
-  tokenName: string;
-  tokenNameAbbre: string;
-
-  partnerLogo: string;
-  partnerName: string;
-  partnerPoster: string;
-
-  taskGleam: string;
-  taskTweetContent: string;
-}>;
+  taskGleam: string; // gleam链接
+  taskTweetContent: string; // 分享tweet的模版内容
+};
