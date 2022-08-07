@@ -30,14 +30,11 @@ function InviteDialog() {
   });
 
   const handleTwitterShareClick = () => {
-    const text =
-      'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!';
-    window.open(
-      decodeURIComponent(
-        'https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + referralLink,
-      ),
-      '_blank',
+    const text = encodeURIComponent(
+      'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!',
     );
+    const url = encodeURIComponent(referralLink);
+    window.open('https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + url, '_blank');
   };
 
   return (
