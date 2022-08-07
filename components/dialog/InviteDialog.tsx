@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
 import { useQuery } from 'react-query';
@@ -9,7 +9,7 @@ import Button from '../button';
 import Message from '../message';
 import Tag from '../tag';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { invitationCountSelector, inviteModalAtom, referralLinkAtom } from '../../store/invite/state';
+import { invitationCountSelector, inviteModalAtom, referralCodeAtom } from '../../store/invite/state';
 import { fetchReferralCode } from '../../lib/api';
 import { InviteRecordDialog } from './InviteRecordDialog';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -18,15 +18,18 @@ function InviteDialog() {
   const { data: account } = useAccount();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const [referralLink, setReferralLink] = useRecoilState(referralLinkAtom);
+  const [referralCode, setReferralCode] = useRecoilState(referralCodeAtom);
   const [isConnect, setIsConnect] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const [, copyToClipboard] = useCopyToClipboard();
+  const referralLink = useMemo(() => {
+    return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
+  }, [referralCode]);
 
   useQuery(['invite', account?.address], () => fetchReferralCode({ wallet_address: account?.address }), {
     enabled: !!account?.address,
     refetchOnWindowFocus: false,
-    onSuccess: (data) => setReferralLink(window.location.origin + '/?code=' + data.data.referral_code),
+    onSuccess: (data) => data.data.referral_code && setReferralCode(data.data.referral_code),
   });
 
   const handleTwitterShareClick = () => {
