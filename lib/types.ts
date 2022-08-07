@@ -223,7 +223,7 @@ export type GamerInvitationData = {
 };
 
 export type CollabChainItem = Partial<{
-  chainid: number;
+  chainId: number;
   url: string;
   name: string;
 }>;
@@ -244,14 +244,18 @@ export type CollabItemParam = {
 };
 export type CollabInfoType = {
   collabCode: string;
-  projectName: string;
-  projectLogo: string;
+  collabStatus?: number;
+  collabName?: string;
+  projectName?: string;
+  projectLogo?: string;
+  projectInfoBrief?: string;
+
   projectInfo: string;
-  projectChain: CollabChainItem[];
-  projectDiscord: string;
-  projectTwitter: string;
-  projectWebsite: string;
-  projectWhitepaper: string;
+  projectChain?: CollabChainItem[];
+  projectDiscord?: string;
+  projectTwitter?: string;
+  projectWebsite?: string;
+  projectWhitepaper?: string;
 
   timeWarmup: number;
   timeJoin: number;
@@ -259,8 +263,17 @@ export type CollabInfoType = {
   timeClaim: number;
   timeClose: number;
 
-  tokenAmount: number;
-  nftTotalAmount: number;
+  tokenAmount?: number;
+  tokenIcon?: string;
+  tokenName?: string;
+  tokenNameAbbre?: string;
+  tokenAddress?: string;
+  tokenClaimLink?: string;
+
+  nftTotalAmount?: number;
+  nftName?: string;
+  nftImage?: string;
+  nftClaimLink?: string;
 
   taskGleam: string; // gleam链接
   taskTweetContent: string; // 分享tweet的模版内容

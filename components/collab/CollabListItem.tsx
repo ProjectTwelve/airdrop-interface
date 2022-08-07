@@ -48,8 +48,8 @@ export default function CollabListItem({ data }: CollabItemProps) {
             </a>
           )}
           {projectChain?.length &&
-            projectChain.map(({ name, url, chainid }: CollabChainItem) => (
-              <a href={projectWhitepaper} key={chainid} target="_blank" onClick={(e) => e.stopPropagation()}>
+            projectChain.map(({ name, url, chainId }: CollabChainItem) => (
+              <a href={projectWhitepaper} key={chainId} target="_blank" onClick={(e) => e.stopPropagation()}>
                 <img src={url} className="h-5 w-5" alt={name}></img>
               </a>
             ))}

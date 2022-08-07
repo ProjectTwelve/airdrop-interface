@@ -1,15 +1,15 @@
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
-import { useSetRecoilState } from 'recoil';
+// import { useSetRecoilState } from 'recoil';
 import { fetchCollabList } from '../lib/api';
-import { collabShortListAtom } from '../store/collab/state';
+import { CollabShortInfo, Response } from '../lib/types';
+// import { collabShortListAtom } from '../store/collab/state';
 
 export const useFetchCollabList = () => {
-  const setCollabList = useSetRecoilState(collabShortListAtom);
+  // const setCollabList = useSetRecoilState(collabShortListAtom);
   const result = useQuery(['collab_short_list'], () => fetchCollabList(), {
-    select: (data) => (data.code === 200 ? data.data : undefined),
-    onSuccess: (data) => setCollabList(data),
+    select: (data: Response<CollabShortInfo[]>) => (data.code === 200 ? data.data : undefined),
   });
   return result;
 };

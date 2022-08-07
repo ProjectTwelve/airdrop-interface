@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Back from '../../components/back';
-import { mockCollabInfoList, mockCollabList } from '../../temp/mock';
 import { CollabInfoType } from '../../lib/types';
 import CollabInfo from '../../components/collab/CollabInfo';
 import { CollabTimeLime } from '../../components/collab/CollabTimeLime';
@@ -38,27 +37,13 @@ export default function Collab({ data }: { data: CollabInfoType }) {
 
 export async function getStaticPaths() {
   const paths: { params: { id: string } }[] = [];
-  // TODO: need to replace with BE API
-  if (process.env.NODE_ENV === 'production') {
-    paths.push(...mockCollabList.map((collab) => ({ params: { id: collab.collabCode } })));
-  } else {
-    // const data = mockCollabList;
-    const { data } = await fetchCollabList();
-    paths.push(...data.map((collab) => ({ params: { id: collab.collabCode } })));
-  }
+  const { data } = await fetchCollabList();
+  paths.push(...data.map((collab) => ({ params: { id: collab.collabCode } })));
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  let data: CollabInfoType | undefined;
   const id = params.id;
-  // TODO: need to replace with BE API
-  if (process.env.NODE_ENV === 'production') {
-    data = mockCollabInfoList.find((collab) => collab.collabCode == id);
-  } else {
-    const { data: collab } = await fetchCollabItem({ collabCode: id });
-    data = collab;
-    // data = mockCollabInfoList.find((collab) => collab.collabCode == id);
-  }
+  const { data } = await fetchCollabItem({ collabCode: id });
   return { props: { data } };
 }

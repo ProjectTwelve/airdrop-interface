@@ -77,10 +77,10 @@ export default function CollabInfo({ data }: CollabInfoProps) {
         <div className="mt-8 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
-              Token <span className="text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
+              Token <span className="text-[42px] font-bold text-[#FFAA2C]">{tokenAmount || 0}</span>
             </div>
             <div className="border-p12-line pl-7 align-bottom text-2xl font-bold leading-9 text-[#1EDB8C]">
-              NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
+              NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount || 0}</span>
             </div>
           </div>
           <Button type="gradient" className=" min-w-fit max-w-[300px] flex-grow py-4" onClick={handleJoin}>
