@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { CollabInfoType } from '../../lib/types';
@@ -13,17 +12,14 @@ export type CollabTasksProps = {
 
 export default function CollabTasks({ data }: CollabTasksProps) {
   const { taskGleam, taskTweetContent } = data;
-  const { asPath } = useRouter();
   const referralCode = useRecoilValue(referralCodeAtom);
 
   const handleTwitterShareClick = useCallback(() => {
-    const referralLink = referralCode
-      ? window.location.origin + asPath + `?code=` + referralCode
-      : 'Please connect your wallet first';
+    const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(taskTweetContent);
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
-  }, [taskTweetContent, referralCode, asPath]);
+  }, [taskTweetContent, referralCode]);
 
   const handleVerify = () => {
     console.log('verify!'); // TODO: verify api
@@ -41,7 +37,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           title="Genesis Airdrop"
           icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
           content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
-          href="https://p12-games.vercel.app/"
+          href="/"
           hrefLabel="To P12 Genesis Airdrop"
         />
         <CollabTaskItem
