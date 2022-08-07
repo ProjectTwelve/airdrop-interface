@@ -14,11 +14,11 @@ function getStorage(type: 'localStorage' | 'sessionStorage', key: string) {
     if (value) {
       return JSON.parse(value);
     } else {
-      return null;
+      return undefined;
     }
   } catch (e) {
     console.error('JSON.parse getStorage Error', type);
-    return null;
+    return undefined;
   }
 }
 
