@@ -23,7 +23,6 @@ import {
   GamerInvitationParams,
   GamerInvitationData,
   CollabInfoType,
-  CollabItemParam,
   CollabShortInfo,
 } from './types';
 
@@ -161,5 +160,4 @@ export const fetchInvitationCount = (addr?: string) =>
 
 export const fetchCollabList = () => request.get<any, Response<CollabShortInfo[]>>('/v2/collab/list');
 
-export const fetchCollabItem = (params: CollabItemParam) =>
-  request.get<any, Response<CollabInfoType>>(`/v2/collab/list/${params.collabCode || ''}`);
+export const fetchCollabItem = (id: string) => request.get<any, Response<CollabInfoType>>('/v2/collab/list/' + id);

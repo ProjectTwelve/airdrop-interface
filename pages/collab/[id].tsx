@@ -36,14 +36,12 @@ export default function Collab({ data }: { data: CollabInfoType }) {
 }
 
 export async function getStaticPaths() {
-  const paths: { params: { id: string } }[] = [];
   const { data } = await fetchCollabList();
-  paths.push(...data.map((collab) => ({ params: { id: collab.collabCode } })));
-  return { paths, fallback: false };
+  return { paths: data.map((collab) => ({ params: { id: collab.collabCode } })), fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const id = params.id;
-  const { data } = await fetchCollabItem({ collabCode: id });
+  const { data } = await fetchCollabItem(id);
   return { props: { data } };
 }

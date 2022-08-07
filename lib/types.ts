@@ -239,9 +239,7 @@ export type CollabShortInfo = {
   timeClose: number;
   projectWhitepaper?: string;
 };
-export type CollabItemParam = {
-  collabCode: string;
-};
+
 export type CollabInfoType = {
   collabCode: string;
   collabStatus?: number;
@@ -275,6 +273,6 @@ export type CollabInfoType = {
   nftImage?: string;
   nftClaimLink?: string;
 
-  taskGleam: string; // gleam链接
-  taskTweetContent: string; // 分享tweet的模版内容
+  taskGleam: string;
+  taskTweetContent: string;
 };

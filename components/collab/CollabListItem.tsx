@@ -31,7 +31,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
         <img className="h-[72px] w-[72px] rounded-2xl" src={projectLogo} alt="icon" />
         <div className="flex w-14 flex-grow flex-col gap-2">
           <div className="flex items-center gap-1">
-            <h1 className="flex-shrink truncate text-xl font-semibold leading-6	">{projectName}</h1>
+            <h1 className="flex-shrink truncate text-xl font-semibold leading-6">{projectName}</h1>
             <img src="/svg/door.svg" alt="door icon" />
           </div>
           <p className="overflow-ellipsis text-xs leading-5 line-clamp-2">{projectInfoBrief || projectInfo}</p>
