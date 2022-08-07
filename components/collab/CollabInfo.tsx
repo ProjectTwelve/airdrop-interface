@@ -73,7 +73,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
         </div>
-        <div className="mt-8 leading-7">{projectInfo}</div>
+        <div className="mt-8 flex-grow leading-7">{projectInfo}</div>
         <div className="mt-8 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
