@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import { useCollabTimes } from '../../hooks/collab';
 import { CollabInfoType } from '../../lib/types';
 import Button from '../button';
 import { CollabSocials } from '../socialMedia/CollabSocials';
@@ -23,6 +24,8 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     nftTotalAmount,
   } = data;
 
+  const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
+
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
     return projectChain.map(({ url, name }) => {
@@ -32,7 +35,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
   }, [projectChain]);
 
   const handleJoin = useCallback(() => {
-    console.log('join!'); // TODO: api
+    console.log('join!'); // TODO: Join API
   }, []);
 
   return (
@@ -41,9 +44,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
         <img className="h-40 w-40 rounded-3xl" src={projectLogo} alt={`${projectName} Logo`} />
       </div>
       <div className="flex  w-full max-w-full flex-grow flex-col p-9">
-        <div className="text-3xl font-semibold leading-9">{projectName}</div>
+        <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
         <div className="pt-1 text-sm leading-5 text-p12-sub">
-          Time：{timeWarmup} - {timeClose}
+          Time：{startTime} - {endTime}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
           {projectWebsite && <CollabSocials key="website" href={projectWebsite} icon="/svg/door.svg" label="Website" />}
@@ -70,14 +73,14 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
         </div>
-        <div className="mt-8 leading-7">{projectInfo}</div>
+        <div className="mt-8 flex-grow leading-7">{projectInfo}</div>
         <div className="mt-8 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
-              Token <span className="text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
+              Token <span className="text-[42px] font-bold text-[#FFAA2C]">{tokenAmount || 0}</span>
             </div>
             <div className="border-p12-line pl-7 align-bottom text-2xl font-bold leading-9 text-[#1EDB8C]">
-              NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
+              NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount || 0}</span>
             </div>
           </div>
           <Button type="gradient" className=" min-w-fit max-w-[300px] flex-grow py-4" onClick={handleJoin}>

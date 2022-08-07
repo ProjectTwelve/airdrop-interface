@@ -222,59 +222,57 @@ export type GamerInvitationData = {
   invitation_info: GamerInvitationInfo[];
 };
 
-export type CollabShortInfo = {
-  id: string;
-  name: string;
-  desc: string;
-  logo: string;
-  startTime: string; // TODO: date format should be ISO
-  endTime: string;
-  whitePaperUrl?: string;
-  badgeChainKey?: string;
-};
-
 export type CollabChainItem = Partial<{
-  chainid: number;
+  chainId: number;
   url: string;
   name: string;
 }>;
-export type CollabInfoType = Partial<{
-  id: string;
-  projectName: string;
-  projectLogo: string;
-  projectInfo: string;
-  projectChain: CollabChainItem[];
-  projectDiscord: string;
-  projectTwitter: string;
-  projectWebsite: string;
-  projectWhitepaper: string;
 
+export type CollabShortInfo = {
   collabCode: string;
-  collabStatus: number;
+  projectName: string;
+  projectInfoBrief?: string;
+  projectInfo: string;
+  projectLogo: string;
+  projectChain: CollabChainItem[];
+  timeWarmup: number;
+  timeClose: number;
+  projectWhitepaper?: string;
+};
 
-  nftAddress: string;
-  nftClaimLink: string;
-  nftImage: string;
-  nftName: string;
-  nftTotalAmount: number;
+export type CollabInfoType = {
+  collabCode: string;
+  collabStatus?: number;
+  collabName?: string;
+  projectName?: string;
+  projectLogo?: string;
+  projectInfoBrief?: string;
 
-  timeWarmup: string; // TODO: date format should be ISO
-  timeJoin: string;
-  timeAllocation: string;
-  timeClaim: string;
-  timeClose: string;
+  projectInfo: string;
+  projectChain?: CollabChainItem[];
+  projectDiscord?: string;
+  projectTwitter?: string;
+  projectWebsite?: string;
+  projectWhitepaper?: string;
 
-  tokenAddress: string;
-  tokenAmount: number;
-  tokenClaimLink: string;
-  tokenIcon: string;
-  tokenName: string;
-  tokenNameAbbre: string;
+  timeWarmup: number;
+  timeJoin: number;
+  timeAllocation: number;
+  timeClaim: number;
+  timeClose: number;
 
-  partnerLogo: string;
-  partnerName: string;
-  partnerPoster: string;
+  tokenAmount?: number;
+  tokenIcon?: string;
+  tokenName?: string;
+  tokenNameAbbre?: string;
+  tokenAddress?: string;
+  tokenClaimLink?: string;
+
+  nftTotalAmount?: number;
+  nftName?: string;
+  nftImage?: string;
+  nftClaimLink?: string;
 
   taskGleam: string;
   taskTweetContent: string;
-}>;
+};
