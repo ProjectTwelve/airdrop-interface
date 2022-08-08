@@ -279,3 +279,25 @@ export type CollabInfoType = {
   taskGleam: string;
   taskTweetContent: string;
 } & CollabTimes;
+
+export enum CollabStatus {
+  NO = 0,
+  YES,
+}
+export type CollabUserParams = { collabCode: string; walletAddress: string };
+
+export type CollabUserInfo = {
+  id: number | null;
+  walletAddress: string;
+  collabCode: string;
+  joinStatus: CollabStatus; // 1 joined
+  taskGleamStatus: CollabStatus;
+  taskTweetUrl: string;
+  taskTweetStatus: CollabStatus;
+  projectWhitelist: CollabStatus; // is the address of the whitelist
+  resultStatus: CollabStatus; // whether is win
+  tokenClaim: CollabStatus;
+  nftClaim: CollabStatus;
+  tokenResult: number;
+  nftResult: number;
+};

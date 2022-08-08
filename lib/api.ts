@@ -24,6 +24,8 @@ import {
   GamerInvitationData,
   CollabInfoType,
   CollabShortInfo,
+  CollabUserInfo,
+  CollabUserParams,
 } from './types';
 
 /**
@@ -161,3 +163,8 @@ export const fetchInvitationCount = (addr?: string) =>
 export const fetchCollabList = () => request.get<any, Response<CollabShortInfo[]>>('/v2/collab/list');
 
 export const fetchCollabItem = (id: string) => request.get<any, Response<CollabInfoType>>('/v2/collab/list/' + id);
+
+export const fetchCollabUserInfo = (data: CollabUserParams) =>
+  request.post<any, Response<CollabUserInfo>>('/v2/collab/addr/info', data);
+
+export const fetchCollabJoin = (data: CollabUserParams) => request.post<any, Response<CollabUserInfo>>('/v2/collab/join', data);

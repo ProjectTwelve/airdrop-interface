@@ -1,16 +1,16 @@
 import classNames from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabInfoType } from '../../lib/types';
-import Button from '../button';
 import { CollabSocials } from '../socialMedia/CollabSocials';
+import CollabInfoButton from './CollabInfoButton';
 
 type CollabInfoProps = {
   data: CollabInfoType;
 };
-
 export default function CollabInfo({ data }: CollabInfoProps) {
   const {
+    collabCode,
     projectName,
     projectInfo,
     projectLogo,
@@ -20,11 +20,13 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     projectTwitter,
     projectDiscord,
     timeWarmup,
+    timeJoin,
+    timeAllocation,
+    timeClaim,
     timeClose,
     tokenAmount,
     nftTotalAmount,
   } = data;
-
   const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
 
   const badgeChains = useMemo(() => {
@@ -34,10 +36,6 @@ export default function CollabInfo({ data }: CollabInfoProps) {
       return <CollabSocials key={url} icon={url} label={name} />;
     });
   }, [projectChain]);
-
-  const handleJoin = useCallback(() => {
-    console.log('join!'); // TODO: Join API
-  }, []);
 
   return (
     <div className="flex bg-p12-black/80 md:flex-wrap">
@@ -92,9 +90,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
               </div>
             ) : null}
           </div>
-          <Button type="gradient" className=" min-w-fit max-w-[300px] flex-grow py-4" onClick={handleJoin}>
-            Join
-          </Button>
+          <CollabInfoButton {...{ collabCode, timeJoin, timeAllocation, timeClaim, timeClose }} />
         </div>
       </div>
     </div>

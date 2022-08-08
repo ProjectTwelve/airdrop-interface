@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Back from '../../components/back';
@@ -8,13 +8,22 @@ import { CollabTimeLime } from '../../components/collab/CollabTimeLime';
 import CollabTasks from '../../components/collab/CollabTasks';
 import { fetchCollabItem, fetchCollabList } from '../../lib/api';
 import CollabReward from '../../components/collab/CollabReward';
-import { useCollabClaimed, useCollabTimes } from '../../hooks/collab';
+import { useCollabClaimed, useCollabTimes, useFetchCollabUserInfo } from '../../hooks/collab';
+import { useSetRecoilState } from 'recoil';
+import { collabUserInfoAtom } from '../../store/collab/state';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
-  const { timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose } = data;
+  const { timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
   const { shortTimes } = useCollabTimes({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose });
-  const isClaim = useCollabClaimed(timeClaim);
+  const isClaimed = useCollabClaimed(timeClaim);
+  const { data: collabUserInfo } = useFetchCollabUserInfo(collabCode);
+  const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
+
+  useEffect(() => {
+    if (!collabUserInfo) return;
+    setNowUserInfo(collabUserInfo);
+  }, [collabUserInfo, setNowUserInfo]);
 
   return (
     <div className="mt-8">
@@ -24,7 +33,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
           <CollabInfo data={data} />
           <CollabTimeLime {...shortTimes} />
           <CollabTasks data={data} />
-          <CollabReward show={isClaim} data={data} />
+          <CollabReward show={isClaimed} data={data} />
         </motion.div>
       </div>
     </div>

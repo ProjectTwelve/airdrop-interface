@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
-import { CollabShortInfo } from '../../lib/types';
+import { CollabUserInfo } from '../../lib/types';
 
-export const collabShortListAtom = atom<CollabShortInfo[] | undefined>({
-  key: 'collab_short_list',
-  default: undefined,
+export const collabUserInfoAtom = atom<CollabUserInfo | null>({
+  key: 'collab_user_info',
+  default: null,
 });
