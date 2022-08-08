@@ -23,7 +23,6 @@ export default function CollabTaskItem({
         </div>
         <div className="flex flex-wrap gap-1 leading-7">{content}</div>
       </div>
-
       {href ? (
         <div className="flex cursor-pointer items-center gap-2 border-t border-p12-line pt-6">
           <a className="font-semibold leading-5 text-[#43BBFF]" href={href}>
@@ -32,7 +31,6 @@ export default function CollabTaskItem({
           <img src="/svg/more.svg" className="aspect-square h-4" alt="more.svg" />
         </div>
       ) : null}
-
       {children}
     </div>
   );

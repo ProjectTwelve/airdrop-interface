@@ -44,13 +44,13 @@ export default function CollabListItem({ data }: CollabItemProps) {
         <div className="flex gap-2">
           {projectWhitepaper && (
             <a href={projectWhitepaper} target="_blank" onClick={(e) => e.stopPropagation()}>
-              <img src="/img/white_paper.png" className="h-5 w-5" alt={projectWhitepaper}></img>
+              <img src="/img/white_paper.png" title="whitepaper" className="h-5 w-5" alt={projectWhitepaper}></img>
             </a>
           )}
           {projectChain?.length &&
             projectChain.map(({ name, url, chainId }: CollabChainItem) => (
               <a href={projectWhitepaper} key={chainId} target="_blank" onClick={(e) => e.stopPropagation()}>
-                <img src={url} className="h-5 w-5" alt={name}></img>
+                <img src={url} title={name} className="h-5 w-5" alt={name}></img>
               </a>
             ))}
         </div>
