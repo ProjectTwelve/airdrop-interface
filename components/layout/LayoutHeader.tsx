@@ -10,11 +10,11 @@ import { invitationCountAtom } from '../../store/invite/state';
 
 function LayoutHeader() {
   const router = useRouter();
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const setInvitationCount = useSetRecoilState(invitationCountAtom);
 
-  useQuery(['invitation_count', { addr: account?.address }], () => fetchInvitationCount(account?.address), {
-    enabled: !!account?.address,
+  useQuery(['invitation_count', { addr: address }], () => fetchInvitationCount(address), {
+    enabled: !!address,
     onSuccess: ({ data, code }) => {
       if (code === 0) {
         setInvitationCount([data[0], data[1]]);

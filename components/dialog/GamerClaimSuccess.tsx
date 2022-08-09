@@ -13,7 +13,7 @@ import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import PosterVideo from '../poster/PosterVideo';
 
 export default function GamerClaimSuccess() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [open, setOpen] = useState<boolean>(false);
   const [videoPlay, setVideoPlay] = useState<boolean>(false);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
@@ -22,7 +22,6 @@ export default function GamerClaimSuccess() {
   const posterStyles = useRecoilValue(posterStylesAtom);
 
   const onVideoEnded = useCallback(() => {
-    const address = account?.address;
     const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
     if (address) {
       setOpen(true);
@@ -30,18 +29,16 @@ export default function GamerClaimSuccess() {
       claimedMap[address] = 1;
       setLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP, claimedMap);
     }
-  }, [account?.address]);
+  }, [address]);
 
   const isGamerClaimed = useMemo(() => {
-    const address = account?.address;
     if (!gamerInfo) return false;
     if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
     return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === NFT_CLAIM.CLAIMED;
-  }, [account?.address, gamerInfo]);
+  }, [address, gamerInfo]);
 
   useEffect(() => {
     const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
-    const address = account?.address;
     if (address && isGamerClaimed && !claimedMap[address] && posterCapture) {
       if (isMobile && isIOS) {
         onVideoEnded();
@@ -49,7 +46,7 @@ export default function GamerClaimSuccess() {
       }
       setVideoPlay(true);
     }
-  }, [account?.address, gamerInfo?.wallet_address, onVideoEnded, posterCapture, isGamerClaimed]);
+  }, [address, gamerInfo?.wallet_address, onVideoEnded, posterCapture, isGamerClaimed]);
 
   return (
     <>

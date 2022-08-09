@@ -8,7 +8,7 @@ import { posterBtnShowAtom, posterCaptureAtom } from '../../store/poster/state';
 import { STORAGE_KEY } from '../../constants';
 
 export default function PosterButton() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [gamerClaimedPoster, setGamerClaimedPoster] = useRecoilState(gamerClaimedPosterAtom);
   const [show, setShow] = useRecoilState<boolean>(posterBtnShowAtom);
   const posterCapture = useRecoilValue(posterCaptureAtom);
@@ -20,13 +20,12 @@ export default function PosterButton() {
 
   useEffect(() => {
     const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
-    const address = account?.address;
     if (address && claimedMap[address] && !gamerClaimedPoster) {
       setShow(true);
       return;
     }
     setShow(false);
-  }, [account?.address, gamerClaimedPoster, setShow]);
+  }, [address, gamerClaimedPoster, setShow]);
 
   return (
     <div className="relative">

@@ -9,7 +9,7 @@ import { getLocalStorage } from '../utils/storage';
 import { STORAGE_KEY } from '../constants';
 
 export const useSteamSignIn = (): [signInCallback: () => void] => {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [steamSecretToken, setSteamSecretToken] = useState<string>();
   const mutation = useBindSteamAccount();
   const router = useRouter();
@@ -44,16 +44,16 @@ export const useSteamSignIn = (): [signInCallback: () => void] => {
   }, [router, router.pathname, router.query]);
 
   useEffect(() => {
-    if (!account?.address || !steamSecretToken) return;
+    if (!address || !steamSecretToken) return;
     const { code } = router.query;
     const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
     mutation.mutate({
-      wallet_address: account.address,
+      wallet_address: address,
       secret_token: steamSecretToken,
       referral_code: code || localCode,
     });
     setSteamSecretToken(undefined);
-  }, [account, mutation, router.query, steamSecretToken]);
+  }, [address, mutation, router.query, steamSecretToken]);
 
   return [steamSignInCallback];
 };

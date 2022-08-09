@@ -17,10 +17,10 @@ type InviteRecordDialogProps = {
 };
 
 export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [selectedTab, setSelectedTab] = useState(tab === 'developer' ? 0 : 1);
-  const { data: devInvitation, isLoading: isDevLoading } = useDevInvitation(account?.address);
-  const { data: gamerInvitation, isLoading: isGamerLoading } = useGamerInvitation(account?.address);
+  const { data: devInvitation, isLoading: isDevLoading } = useDevInvitation(address);
+  const { data: gamerInvitation, isLoading: isGamerLoading } = useGamerInvitation(address);
 
   const DevColumns = [
     {
