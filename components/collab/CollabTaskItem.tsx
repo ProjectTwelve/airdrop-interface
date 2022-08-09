@@ -15,7 +15,7 @@ export default function CollabTaskItem({
   children,
 }: React.PropsWithChildren<CollabTaskItemProps>) {
   return (
-    <div className="flex flex-col justify-between gap-6 rounded-[15px] bg-p12-black/80 p-7">
+    <div className="flex flex-col justify-between gap-6 rounded-2xl bg-p12-black/80 p-7">
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3">
           {icon && <div>{icon}</div>}
