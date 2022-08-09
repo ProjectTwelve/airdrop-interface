@@ -228,6 +228,15 @@ export type CollabChainItem = Partial<{
   name: string;
 }>;
 
+export type CollabTimes = {
+  // unix time stamp
+  timeWarmup: number;
+  timeJoin: number;
+  timeAllocation: number;
+  timeClaim: number;
+  timeClose: number;
+};
+
 export type CollabShortInfo = {
   collabCode: string;
   projectName: string;
@@ -255,12 +264,6 @@ export type CollabInfoType = {
   projectWebsite?: string;
   projectWhitepaper?: string;
 
-  timeWarmup: number;
-  timeJoin: number;
-  timeAllocation: number;
-  timeClaim: number;
-  timeClose: number;
-
   tokenAmount?: number;
   tokenIcon?: string;
   tokenName?: string;
@@ -275,4 +278,4 @@ export type CollabInfoType = {
 
   taskGleam: string;
   taskTweetContent: string;
-};
+} & CollabTimes;
