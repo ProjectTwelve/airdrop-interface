@@ -9,7 +9,7 @@ export type CollabRewardProps = {
 };
 
 export default function CollabReward({ data }: CollabRewardProps) {
-  const { projectLogo, projectName, tokenIcon, nftImage } = data;
+  const { projectLogo, projectName, tokenIcon, nftImage, collabName, tokenName, nftName } = data;
   const userInfo = useRecoilValue(collabUserInfoAtom);
   const tokenAmount = useMemo(() => (userInfo?.tokenResult == undefined ? null : userInfo.tokenResult), [userInfo]);
   const nftAmount = useMemo(() => (userInfo?.nftResult == undefined ? null : userInfo.nftResult), [userInfo]);
@@ -22,8 +22,8 @@ export default function CollabReward({ data }: CollabRewardProps) {
           logo={projectLogo}
           icon={tokenIcon}
           amount={tokenAmount}
-          title={projectName}
-          desc="Special Airdrop for P12 (Token)"
+          title={collabName || projectName}
+          desc={tokenName || 'Token Lucky Draw'}
         />
       ) : null}
       {nftAmount != null ? (
@@ -32,8 +32,8 @@ export default function CollabReward({ data }: CollabRewardProps) {
           logo={projectLogo}
           icon={<img className="max-w-[72px]" src={nftImage} alt={nftImage} />}
           amount={nftAmount}
-          title={projectName}
-          desc="Special Airdrop for P12 (NFT)"
+          title={collabName || projectName}
+          desc={nftName || 'NFT Lucky Draw'}
         />
       ) : null}
     </div>
