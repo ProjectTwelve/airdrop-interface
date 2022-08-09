@@ -8,12 +8,13 @@ import ToastIcon from '../svg/ToastIcon';
 import ButterflyGL from '../butterflyGL';
 import LayoutFooter from './LayoutFooter';
 import { createClient, WagmiConfig } from 'wagmi';
-import { metamaskConnector, walletConnect } from '../../connectors';
+import { metamaskConnector, walletConnect, provider } from '../../connectors';
 
 const client = createClient({
   autoConnect: true,
   connectors: [metamaskConnector, walletConnect],
-  persister: null!,
+  provider,
+  persister: null,
 });
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {

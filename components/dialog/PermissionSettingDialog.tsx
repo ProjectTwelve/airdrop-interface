@@ -8,7 +8,7 @@ import { gamerInfoAtom, gamerPermissionSettingAtom } from '../../store/gamer/sta
 import { useFetchReload } from '../../hooks/gamer';
 
 export default function PermissionSettingDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const { mutate, isLoading } = useFetchReload();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const [open, setOpen] = useRecoilState(gamerPermissionSettingAtom);
@@ -46,7 +46,7 @@ export default function PermissionSettingDialog() {
                 type="bordered"
                 className="w-[260px] md:w-full"
                 loading={isLoading}
-                onClick={() => mutate({ wallet_address: account?.address })}
+                onClick={() => mutate({ wallet_address: address })}
               >
                 <div className="flex items-center justify-center">
                   Reload Stats

@@ -35,13 +35,13 @@ export const useGamerInfo = (addr?: string) => {
 };
 
 export const useBindSteamAccount = () => {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const queryClient = useQueryClient();
 
   return useMutation<Response<any>, any, BinSteamParams, any>((data) => fetchBindSteam(data), {
     onSuccess: (data) => {
       if (data.code === 0) {
-        queryClient.refetchQueries(['gamer_info', account?.address]).then();
+        queryClient.refetchQueries(['gamer_info', address]).then();
       } else {
         toast.error(<Message title="Ah shit, here we go again" message={data.msg} />);
       }
@@ -85,14 +85,14 @@ export const useGamerInvitation = (addr?: string) => {
 };
 
 export const useFetchReload = () => {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const queryClient = useQueryClient();
   const setOpen = useSetRecoilState(gamerPermissionSettingAtom);
 
   return useMutation<any, any, { wallet_address?: string }>((data) => fetchGamerReload(data), {
     onSuccess: (data) => {
       if (data.code === 0) {
-        queryClient.refetchQueries(['gamer_info', account?.address]).then();
+        queryClient.refetchQueries(['gamer_info', address]).then();
         setOpen(false);
       } else {
         toast.error(<Message title="Ah shit, here we go again" message={data.msg} />);

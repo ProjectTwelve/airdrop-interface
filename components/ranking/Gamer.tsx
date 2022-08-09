@@ -11,8 +11,8 @@ export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
   const [timeRankPage, setTimeRankPage] = useState(1);
   const [tokenRankPage, setTokenRankPage] = useState(1);
-  const { data: account } = useAccount();
-  const { data: gamerRankData } = useGamerRank(account?.address);
+  const { address } = useAccount();
+  const { data: gamerRankData } = useGamerRank(address);
   const { data: timeRankData } = useGamerTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useGamerTokenRank({ page: tokenRankPage, size: 10 });
   const commonCount = useMemo(

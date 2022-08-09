@@ -15,7 +15,7 @@ import { hasClaimedGameSelector } from '../../store/developer/state';
 import { STORAGE_KEY } from '../../constants';
 
 export default function DeveloperEmailDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const claimedGame = useRecoilValue(hasClaimedGameSelector);
   const [open, setOpen] = useState<boolean>(false);
   const mutation = useMutation<Response<any>, any, DeveloperEmailParams, any>((data) => fetchDeveloperEmail(data), {
@@ -29,7 +29,7 @@ export default function DeveloperEmailDialog() {
   const [error, setError] = useState<string>('');
   const { signMessageAsync } = useSignMessage();
   const onSubmit = (email: string) => {
-    if (!account?.address) {
+    if (!address) {
       return;
     }
     if (!/^[\w.+-]+@[\w-]+\.[\w-.]+$/.test(email)) {
@@ -37,10 +37,10 @@ export default function DeveloperEmailDialog() {
       return;
     }
     signMessageAsync({
-      message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
+      message: JSON.stringify(getEmailSignData({ account: address, email: value })),
     })
       .then((signature) => {
-        mutation.mutate({ wallet_address: account.address, email: value, signature });
+        mutation.mutate({ wallet_address: address, email: value, signature });
       })
       .catch((error) => error);
   };

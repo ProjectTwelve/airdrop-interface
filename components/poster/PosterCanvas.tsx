@@ -13,7 +13,7 @@ import { referralCodeAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
 
 export default function PosterCanvas() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const gamerGames = useRecoilValue(gamerGamesAtom);
   const referralCode = useRecoilValue(referralCodeAtom);
@@ -43,7 +43,7 @@ export default function PosterCanvas() {
 
   useEffect(() => {
     setPosterCapture('');
-  }, [account?.address, setPosterCapture]);
+  }, [address, setPosterCapture]);
 
   useEffect(() => {
     setLink(window.location.host + '/?code=' + referralCode);
