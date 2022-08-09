@@ -35,14 +35,14 @@ export default function CollabInfo({ data }: CollabInfoProps) {
   }, [projectChain]);
 
   return (
-    <div className="flex bg-p12-black/80 md:flex-wrap">
-      <div className="flex aspect-square w-[420px] min-w-[420px] items-center justify-center bg-collab-info md:min-w-full">
+    <div className="flex rounded-2xl bg-p12-black/80 md:flex-wrap">
+      <div className="flex aspect-square w-[420px] min-w-[420px] items-center justify-center bg-collab-info bg-cover md:min-w-full">
         <img className="h-40 w-40 rounded-3xl" src={projectLogo} alt={`${projectName} Logo`} />
       </div>
       <div className="flex w-full max-w-full flex-grow flex-col p-9">
         <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
         <div className="pt-1 text-sm leading-5 text-p12-sub">
-          Time：{startTime} - {endTime}
+          Time: {startTime} - {endTime}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
           {projectWebsite && <CollabSocials key="website" href={projectWebsite} icon="/svg/door.svg" label="Website" />}

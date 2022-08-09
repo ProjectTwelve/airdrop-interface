@@ -99,8 +99,8 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className="w-full rounded-full bg-[#494E69]/60 px-5 py-[.875rem] text-xs leading-4 hover:bg-[#494E69]/80"
-              placeholder="Paste the tweet URL here"
+              className="w-full rounded-full bg-[#494E69]/60 px-5 py-[.875rem] leading-4 hover:bg-[#494E69]/80"
+              placeholder="Paste the tweet URL"
             />
             <Button type="gradient" className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
               Verify
