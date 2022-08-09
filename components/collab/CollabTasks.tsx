@@ -86,7 +86,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
                 onClick={handleTwitterShareClick}
                 icon="/svg/twitter.svg"
                 label="Send Twitter"
-                className="w-fit bg-[#02A9F4]/100"
+                className="bg-[#02A9F4]/100"
               />
               <span>
                 Then copy-paste the tweet URL into the below input box{' '}
@@ -102,7 +102,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
               className="w-full rounded-[100px] bg-[#494E69]/60 px-5 py-[.875rem] text-xs leading-4 hover:bg-[#494E69]/80"
               placeholder="Paste the tweet URL here"
             />
-            <Button type="gradient" className="w-28 min-w-fit flex-grow py-4 px-7" onClick={handleVerify}>
+            <Button type="gradient" className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
               Verify
             </Button>
           </div>

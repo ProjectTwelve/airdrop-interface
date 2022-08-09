@@ -54,7 +54,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const generateDisableButton = useCallback(
     (className: string, label: string) => (
-      <Button className={className} disabled={true}>
+      <Button size="large" className={className} disabled={true}>
         {label}
       </Button>
     ),
@@ -63,7 +63,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const generateConnectButton = useCallback(
     (className: string) => (
-      <Button type="gradient" className={className} onClick={() => setConnectOpen(true)}>
+      <Button size="large" type="gradient" className={className} onClick={() => setConnectOpen(true)}>
         Connect Wallet
       </Button>
     ),
@@ -72,7 +72,13 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const generateJoinButton = useCallback(
     (className: string) => (
-      <Button type={nowUserInfo ? 'default' : 'gradient'} className={className} onClick={handleJoin} disabled={!!nowUserInfo}>
+      <Button
+        size="large"
+        type={nowUserInfo ? 'default' : 'gradient'}
+        className={className}
+        onClick={handleJoin}
+        disabled={!!nowUserInfo}
+      >
         Join
       </Button>
     ),
@@ -82,11 +88,17 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const generateClaimButton = useCallback(
     (className: string) =>
       isWin ? (
-        <Button type={isClaimed ? 'default' : 'gradient'} className={className} onClick={handleClaim} disabled={!!isClaimed}>
+        <Button
+          size="large"
+          type={isClaimed ? 'default' : 'gradient'}
+          className={className}
+          onClick={handleClaim}
+          disabled={!!isClaimed}
+        >
           {isClaimed ? 'Claimed' : 'Claim'}
         </Button>
       ) : (
-        <Button type="default" className={className} disabled={true}>
+        <Button size="large" type="default" className={className} disabled={true}>
           Claim
         </Button>
       ),
@@ -94,7 +106,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   );
 
   const generateButton = useCallback(() => {
-    const className = 'min-w-fit max-w-[300px] flex-grow py-4';
+    const className = 'min-w-fit max-w-[300px] flex-grow';
     if (!address) {
       return generateConnectButton(className);
     }

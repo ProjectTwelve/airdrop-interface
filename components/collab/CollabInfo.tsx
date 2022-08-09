@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useMemo } from 'react';
+import { CHAIN_ICON, CHAIN_ID } from '../../constants';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabInfoType } from '../../lib/types';
 import { CollabSocials } from '../socialMedia/CollabSocials';
@@ -27,16 +28,16 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
-    return projectChain.map(({ url, name }) => {
-      if (!url) return null;
-      return <CollabSocials key={url} icon={url} label={name} />;
+    return projectChain.map(({ chainId, name }) => {
+      if (!chainId) return null;
+      return <CollabSocials key={chainId} icon={CHAIN_ICON[chainId as CHAIN_ID]} label={name} />;
     });
   }, [projectChain]);
 
   return (
     <div className="flex bg-p12-black/80 md:flex-wrap">
       <div className="flex aspect-square w-[420px] min-w-[420px] items-center justify-center bg-collab-info md:min-w-full">
-        <img className="h-40 w-40 rounded-3xl" src={projectLogo} alt={`${projectName} Logo`} />
+        <img className="h-40 w-40 rounded-3xl bg-black" src={projectLogo} alt={`${projectName} Logo`} />
       </div>
       <div className="flex  w-full max-w-full flex-grow flex-col p-9">
         <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
@@ -78,11 +79,11 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             ) : null}
             {nftTotalAmount ? (
               <div
-                className={classNames('border-p12-line align-bottom text-2xl font-bold leading-9 text-[#1EDB8C]', {
+                className={classNames('border-p12-line align-bottom font-ddin text-2xl font-bold leading-9 text-[#1EDB8C]', {
                   'pl-7': tokenAmount,
                 })}
               >
-                NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
+                NFT <span className="font-ddin text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
               </div>
             ) : null}
           </div>
