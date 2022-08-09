@@ -1,18 +1,37 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import { CollabInfoType } from '../../lib/types';
+import { fetchCollabTweetVerify } from '../../lib/api';
 import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';
+import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
+import { useAccount } from 'wagmi';
+import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
   data: CollabInfoType;
 };
 
 export default function CollabTasks({ data }: CollabTasksProps) {
-  const { taskGleam, taskTweetContent } = data;
+  const { taskGleam, taskTweetContent, collabCode } = data;
   const referralCode = useRecoilValue(referralCodeAtom);
+  const { address } = useAccount();
+  const [value, setValue] = useState('');
+  const mutationVerify = useMutation<Response<CollabUserInfo>, any, CollabTweetVerifyParams, any>(
+    (data) => fetchCollabTweetVerify(data),
+    {
+      onSuccess: (data) => {
+        if (!data.data) {
+          toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
+          return;
+        }
+        toast.success(<Message message="Verified successfully!" />);
+      },
+    },
+  );
 
   const handleTwitterShareClick = useCallback(() => {
     const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
@@ -21,9 +40,17 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
   }, [taskTweetContent, referralCode]);
 
-  const handleVerify = () => {
-    console.log('verify!'); // TODO: verify api
-  };
+  const handleVerify = useCallback(() => {
+    if (!address) {
+      toast.error(<Message message="Please connect your wallet first." title="Oops" />);
+      return;
+    }
+    const reg = new RegExp(/(https:\/\/twitter.com\/.*\/status\/)([0-9]{19})/);
+    if (reg.test(value)) {
+      console.log(value);
+      mutationVerify.mutate({ collabCode, walletAddress: address, taskTweetUrl: value });
+    } else toast.error(<Message message="Not a legitimate twitter link!" />);
+  }, [mutationVerify, value, collabCode, address]);
 
   return (
     <div className="mt-12 flex flex-col gap-1">
@@ -70,8 +97,8 @@ export default function CollabTasks({ data }: CollabTasksProps) {
         >
           <div className="flex gap-3">
             <input
-              // value={value}
-              // onChange={(e) => setValue(e.target.value)}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
               className="w-full rounded-[100px] bg-[#494E69]/60 px-5 py-[.875rem] text-xs leading-4 hover:bg-[#494E69]/80"
               placeholder="Paste the tweet URL here"
             />

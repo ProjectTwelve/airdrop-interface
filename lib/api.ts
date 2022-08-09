@@ -26,6 +26,7 @@ import {
   CollabShortInfo,
   CollabUserInfo,
   CollabUserParams,
+  CollabTweetVerifyParams,
 } from './types';
 
 /**
@@ -168,3 +169,6 @@ export const fetchCollabUserInfo = (data: CollabUserParams) =>
   request.post<any, Response<CollabUserInfo>>('/v2/collab/addr/info', data);
 
 export const fetchCollabJoin = (data: CollabUserParams) => request.post<any, Response<CollabUserInfo>>('/v2/collab/join', data);
+
+export const fetchCollabTweetVerify = (data: CollabTweetVerifyParams) =>
+  request.post<any, Response<CollabUserInfo>>('/v2/collab/tweet/verify', data);

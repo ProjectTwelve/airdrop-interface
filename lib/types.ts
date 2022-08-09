@@ -286,6 +286,8 @@ export enum CollabStatus {
 }
 export type CollabUserParams = { collabCode: string; walletAddress: string };
 
+export type CollabTweetVerifyParams = { collabCode: string; walletAddress: string; taskTweetUrl: string };
+
 export type CollabUserInfo = {
   id: number | null;
   walletAddress: string;
