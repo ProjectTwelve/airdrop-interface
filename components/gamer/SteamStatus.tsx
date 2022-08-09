@@ -100,7 +100,9 @@ export default function SteamStatus() {
                   <>
                     <div className="rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
                       We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
-                      including secondary options. You can turn off after the airdrop!
+                      including secondary options. You can turn them off after the airdrop. We noticed that there may be some
+                      issues with the steam inventory system. If your settings are correct but cannot complete verification, we
+                      suggest you try it later.
                     </div>
                     <div className="mt-8 flex items-center justify-center md:mt-4 md:flex-col">
                       <div className="h-[346px] w-full max-w-[760px] overflow-x-scroll">
