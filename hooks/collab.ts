@@ -15,8 +15,7 @@ export const useFetchCollabList = () => {
 };
 
 export const useFetchCollabUserInfo = (collabCode: string) => {
-  const { data: account } = useAccount();
-  const address = account?.address;
+  const { address } = useAccount();
   return useQuery(['collab_user_info'], () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }), {
     enabled: !!address,
     select: (data: Response<CollabUserInfo>) => (data.code === 200 ? data.data : undefined),

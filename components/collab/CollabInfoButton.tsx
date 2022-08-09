@@ -18,7 +18,7 @@ export type CollabInfoButtonProps = {
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, nftClaimLink, tokenClaimLink } = data;
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [nowUserInfo, setUserInfo] = useRecoilState(collabUserInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const isClaimed = useCollabIsClaimed();
@@ -36,9 +36,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   });
 
   const handleJoin = useCallback(() => {
-    if (!account?.address) return;
-    mutationJoin.mutate({ collabCode, walletAddress: account?.address });
-  }, [collabCode, account, mutationJoin]);
+    if (!address) return;
+    mutationJoin.mutate({ collabCode, walletAddress: address });
+  }, [collabCode, address, mutationJoin]);
 
   const handleClaim = useCallback(() => {
     if (!tokenClaimLink && !nftClaimLink) return toast.error(<Message message="No claim link" title="Oops" />);
@@ -95,7 +95,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const generateButton = useCallback(() => {
     const className = 'min-w-fit max-w-[300px] flex-grow py-4';
-    if (!account?.address) {
+    if (!address) {
       return generateConnectButton(className);
     }
     dayjs.extend(isBetween);
@@ -110,7 +110,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     if (nowDate.isBetween(claimDate, closeDate, null, '[]')) return generateClaimButton(className);
     if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
   }, [
-    account,
+    address,
     timeJoin,
     timeAllocation,
     timeClaim,
