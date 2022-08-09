@@ -14,7 +14,7 @@ import Message from '../message';
 import { setLocalStorage } from '../../utils/storage';
 
 export default function GamerEmailDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const { signMessageAsync, isLoading } = useSignMessage();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const [open, setOpen] = useRecoilState(gamerEmailShowAtom);
@@ -30,7 +30,7 @@ export default function GamerEmailDialog() {
   });
 
   const onSubmit = (email: string) => {
-    if (!account?.address) {
+    if (!address) {
       return;
     }
     if (!/^[\w.+-]+@[\w-]+\.[\w-.]+$/.test(email)) {
@@ -38,10 +38,10 @@ export default function GamerEmailDialog() {
       return;
     }
     signMessageAsync({
-      message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
+      message: JSON.stringify(getEmailSignData({ account: address, email: value })),
     })
       .then((signature) => {
-        mutation.mutate({ wallet_address: account.address, email: value, signature });
+        mutation.mutate({ wallet_address: address, email: value, signature });
       })
       .catch((error) => error);
   };

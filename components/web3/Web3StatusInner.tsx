@@ -7,21 +7,21 @@ import { useRecoilValue } from 'recoil';
 import { gamerInfoAtom } from '../../store/gamer/state';
 
 function Web3StatusInner() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
 
-  if (account?.address) {
+  if (address) {
     return (
       <div className="flex items-center justify-center px-3 xs:h-6">
         {gamerInfo?.email ? (
           <Tooltip placement="bottom" label={gamerInfo?.email}>
-            <p className="cursor-pointer">{shortenAddress(account.address)}</p>
+            <p className="cursor-pointer">{shortenAddress(address)}</p>
           </Tooltip>
         ) : (
-          <p className="cursor-pointer">{shortenAddress(account.address)}</p>
+          <p className="cursor-pointer">{shortenAddress(address)}</p>
         )}
         <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient xs:hidden">
-          <Jazzicon diameter={32} seed={jsNumberForAddress(account.address ?? '')} />
+          <Jazzicon diameter={32} seed={jsNumberForAddress(address ?? '')} />
         </div>
       </div>
     );

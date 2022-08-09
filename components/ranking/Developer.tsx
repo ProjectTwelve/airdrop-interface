@@ -35,9 +35,9 @@ function DeveloperRanking() {
   const [[swipePage, swipeDirection], setSwipePage] = useState([0, 0]);
   const [timeRankPage, setTimeRankPage] = useState(1);
   const [tokenRankPage, setTokenRankPage] = useState(1);
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const { data: verified } = useDeveloperVerifiedCount();
-  const { data: devRankData } = useDeveloperRank(account?.address);
+  const { data: devRankData } = useDeveloperRank(address);
   const { data: timeRankData } = useDeveloperTimeRank({ page: timeRankPage, size: 10 });
   const { data: tokenRankData } = useDeveloperTokenRank({ page: tokenRankPage, size: 10 });
   const imageIndex = wrap(0, devRankData?.games.length || 0, swipePage);

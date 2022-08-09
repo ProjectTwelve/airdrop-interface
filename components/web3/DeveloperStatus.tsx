@@ -11,13 +11,13 @@ import { useAccount } from 'wagmi';
 import { NFT_CLAIM } from '../../constants';
 
 function DeveloperStatus() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [games, setGames] = useRecoilState(developerGameAtom);
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
-  useQuery(['developer_info', account?.address], () => fetchDeveloperInfo({ addr: account?.address }), {
-    enabled: !!account?.address,
+  useQuery(['developer_info', address], () => fetchDeveloperInfo({ addr: address }), {
+    enabled: !!address,
     onSuccess: (data) => {
       if (data.code !== 0) return;
       setGames(data.data.account_info || []);

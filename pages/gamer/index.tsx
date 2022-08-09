@@ -26,12 +26,12 @@ import { invitationCountAtom } from '../../store/invite/state';
 
 export default function Gamer() {
   const router = useRouter();
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const [, invitation] = useRecoilValue(invitationCountAtom);
-  useGamerInfo(account?.address);
+  useGamerInfo(address);
 
   const badge = useGamerBadgeLoad(gamerInfo);
 

@@ -1,6 +1,7 @@
-import { Chain, defaultChains } from 'wagmi';
+import { Chain, configureChains, defaultChains } from 'wagmi';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { publicProvider } from 'wagmi/providers/public';
 
 export const BNBSmartChain: Chain = {
   id: 56,
@@ -20,15 +21,17 @@ export const BNBSmartChain: Chain = {
   testnet: false,
 };
 
+export const { chains, provider } = configureChains([...defaultChains, BNBSmartChain], [publicProvider()]);
+
 export const metamaskConnector = new MetaMaskConnector({
-  chains: [...defaultChains, BNBSmartChain],
+  chains: chains,
   options: {
     shimChainChangedDisconnect: false,
   },
 });
 
 export const walletConnect = new WalletConnectConnector({
-  chains: [...defaultChains, BNBSmartChain],
+  chains,
   options: {
     qrcode: true,
   },
