@@ -1,9 +1,9 @@
 export type CollabRewardItemProps = {
-  icon: JSX.Element | string;
+  amount: number;
+  icon?: JSX.Element | string;
   title?: string;
   desc?: string;
   logo?: string;
-  amount?: number;
 };
 
 export default function CollabRewardItem({ logo, amount, icon, title, desc }: CollabRewardItemProps) {

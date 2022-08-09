@@ -10,7 +10,6 @@ type CollabInfoProps = {
 };
 export default function CollabInfo({ data }: CollabInfoProps) {
   const {
-    collabCode,
     projectName,
     projectInfo,
     projectLogo,
@@ -20,9 +19,6 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     projectTwitter,
     projectDiscord,
     timeWarmup,
-    timeJoin,
-    timeAllocation,
-    timeClaim,
     timeClose,
     tokenAmount,
     nftTotalAmount,
@@ -90,7 +86,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
               </div>
             ) : null}
           </div>
-          <CollabInfoButton {...{ collabCode, timeJoin, timeAllocation, timeClaim, timeClose }} />
+          <CollabInfoButton data={data} />
         </div>
       </div>
     </div>

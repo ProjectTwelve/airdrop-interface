@@ -58,12 +58,8 @@ export const useCollabIsWin = () => {
   return isWin;
 };
 
-export const useCollabClaimed = (timeClaim: number) => {
+export const useCollabIsClaimed = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
-  const isClaimed = useMemo(() => {
-    const nowDate = dayjs();
-    const claimDate = dayjs.unix(timeClaim);
-    return !!(nowDate.isAfter(claimDate) && userInfo?.nftClaim);
-  }, [timeClaim, userInfo]);
+  const isClaimed = useMemo(() => !!(userInfo?.tokenClaim || userInfo?.nftClaim), [userInfo]);
   return isClaimed;
 };

@@ -8,7 +8,7 @@ import { CollabTimeLime } from '../../components/collab/CollabTimeLime';
 import CollabTasks from '../../components/collab/CollabTasks';
 import { fetchCollabItem, fetchCollabList } from '../../lib/api';
 import CollabReward from '../../components/collab/CollabReward';
-import { useCollabClaimed, useCollabTimes, useFetchCollabUserInfo } from '../../hooks/collab';
+import { useCollabIsClaimed, useCollabTimes, useFetchCollabUserInfo } from '../../hooks/collab';
 import { useSetRecoilState } from 'recoil';
 import { collabUserInfoAtom } from '../../store/collab/state';
 
@@ -16,7 +16,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
   const { timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
   const { shortTimes } = useCollabTimes({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose });
-  const isClaimed = useCollabClaimed(timeClaim);
+  const isClaimed = useCollabIsClaimed();
   const { data: collabUserInfo } = useFetchCollabUserInfo(collabCode);
   const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
 
@@ -33,7 +33,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
           <CollabInfo data={data} />
           <CollabTimeLime {...shortTimes} />
           <CollabTasks data={data} />
-          <CollabReward show={isClaimed} data={data} />
+          {isClaimed && <CollabReward data={data} />}
         </motion.div>
       </div>
     </div>

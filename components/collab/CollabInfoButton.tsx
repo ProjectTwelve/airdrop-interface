@@ -4,33 +4,24 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
-import { useCollabClaimed, useCollabIsWin } from '../../hooks/collab';
+import { useCollabIsClaimed, useCollabIsWin } from '../../hooks/collab';
 import { fetchCollabJoin } from '../../lib/api';
 import { collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
 import { toast } from 'react-toastify';
-import type { CollabUserInfo, CollabUserParams, Response } from '../../lib/types';
 import Message from '../message';
+import type { CollabInfoType, CollabUserInfo, CollabUserParams, Response } from '../../lib/types';
 
 export type CollabInfoButtonProps = {
-  collabCode: string;
-  timeJoin: number;
-  timeAllocation: number;
-  timeClaim: number;
-  timeClose: number;
+  data: CollabInfoType;
 };
-export default function CollabInfoButton({
-  collabCode,
-  timeJoin,
-  timeAllocation,
-  timeClaim,
-  timeClose,
-}: CollabInfoButtonProps) {
+export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
+  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, nftClaimLink, tokenClaimLink } = data;
   const { data: account } = useAccount();
   const [nowUserInfo, setUserInfo] = useRecoilState(collabUserInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const isClaimed = useCollabClaimed(timeClaim);
+  const isClaimed = useCollabIsClaimed();
   const isWin = useCollabIsWin();
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
@@ -40,19 +31,26 @@ export default function CollabInfoButton({
         return;
       }
       setUserInfo(data.data);
-      toast.success(<Message message="Verified successfully" title="Mission Complete" />);
+      toast.success(<Message message="Join successfully!" />);
     },
   });
 
   const handleJoin = useCallback(() => {
     if (!account?.address) return;
-    console.log('join!'); // TODO: Join API
     mutationJoin.mutate({ collabCode, walletAddress: account?.address });
   }, [collabCode, account, mutationJoin]);
 
   const handleClaim = useCallback(() => {
-    console.log('claim!'); // TODO: Join API
-  }, []);
+    if (!tokenClaimLink && !nftClaimLink) return toast.error(<Message message="No claim link" title="Oops" />);
+    if (nftClaimLink) {
+      window.open(nftClaimLink, '_blank');
+      return;
+    }
+    if (tokenClaimLink) {
+      window.open(tokenClaimLink, '_blank');
+      return;
+    }
+  }, [tokenClaimLink, nftClaimLink]);
 
   const generateDisableButton = useCallback(
     (className: string, label: string) => (
@@ -101,15 +99,15 @@ export default function CollabInfoButton({
       return generateConnectButton(className);
     }
     dayjs.extend(isBetween);
-    const nowDate = dayjs('2022.08.03 12:00:00'); // TODO: dayjs(new Date());
+    const nowDate = dayjs(); // TODO: dayjs(new Date());
     const joinDate = dayjs.unix(timeJoin);
     const allocDate = dayjs.unix(timeAllocation);
     const claimDate = dayjs.unix(timeClaim);
     const closeDate = dayjs.unix(timeClose);
     if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
-    if (nowDate.isBetween(joinDate, allocDate)) return generateJoinButton(className);
-    if (nowDate.isBetween(allocDate, claimDate)) return generateDisableButton(className, 'Picking');
-    if (nowDate.isBetween(claimDate, closeDate)) return generateClaimButton(className);
+    if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
+    if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Picking');
+    if (nowDate.isBetween(claimDate, closeDate, null, '[]')) return generateClaimButton(className);
     if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
   }, [
     account,
