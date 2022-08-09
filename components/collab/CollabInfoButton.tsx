@@ -11,18 +11,28 @@ import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
 import { toast } from 'react-toastify';
 import Message from '../message';
+import { useIsMounted } from '../../hooks/useIsMounted';
 import type { CollabInfoType, CollabUserInfo, CollabUserParams, Response } from '../../lib/types';
+
+dayjs.extend(isBetween);
 
 export type CollabInfoButtonProps = {
   data: CollabInfoType;
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, nftClaimLink, tokenClaimLink } = data;
+  const nowDate = dayjs();
+  const joinDate = dayjs.unix(timeJoin);
+  const allocDate = dayjs.unix(timeAllocation);
+  const claimDate = dayjs.unix(timeClaim);
+  const closeDate = dayjs.unix(timeClose);
   const { address } = useAccount();
   const [nowUserInfo, setUserInfo] = useRecoilState(collabUserInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const isClaimed = useCollabIsClaimed();
   const isWin = useCollabIsWin();
+  const isMounted = useIsMounted();
+  const className = 'min-w-fit max-w-[300px] flex-grow py-4';
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
     onSuccess: (data) => {
@@ -82,7 +92,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const generateClaimButton = useCallback(
     (className: string) =>
       isWin ? (
-        <Button type={isClaimed ? 'default' : 'gradient'} className={className} onClick={handleClaim} disabled={!!isClaimed}>
+        <Button type={isClaimed ? 'default' : 'gradient'} className={className} onClick={handleClaim} disabled={isClaimed}>
           {isClaimed ? 'Claimed' : 'Claim'}
         </Button>
       ) : (
@@ -93,32 +103,12 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     [isWin, isClaimed, handleClaim],
   );
 
-  const generateButton = useCallback(() => {
-    const className = 'min-w-fit max-w-[300px] flex-grow py-4';
-    if (!address) {
-      return generateConnectButton(className);
-    }
-    dayjs.extend(isBetween);
-    const nowDate = dayjs(); // TODO: dayjs(new Date());
-    const joinDate = dayjs.unix(timeJoin);
-    const allocDate = dayjs.unix(timeAllocation);
-    const claimDate = dayjs.unix(timeClaim);
-    const closeDate = dayjs.unix(timeClose);
-    if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
-    if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
-    if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Picking');
-    if (nowDate.isBetween(claimDate, closeDate, null, '[]')) return generateClaimButton(className);
-    if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
-  }, [
-    address,
-    timeJoin,
-    timeAllocation,
-    timeClaim,
-    timeClose,
-    generateConnectButton,
-    generateJoinButton,
-    generateClaimButton,
-    generateDisableButton,
-  ]);
-  return <>{generateButton()}</>;
+  if (!isMounted) return null;
+  if (!address) return generateConnectButton(className);
+  if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
+  if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
+  if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Picking');
+  if (nowDate.isBetween(claimDate, closeDate, null, '[]')) return generateClaimButton(className);
+  if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
+  return null;
 }

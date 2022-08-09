@@ -7,12 +7,13 @@ type CollabSocialsProps = {
   className?: string;
   onClick?: () => void;
 };
+
 export function SocialsLabel({ label, icon, className, onClick }: CollabSocialsProps) {
   return (
     <span
       onClick={onClick}
       className={classNames(
-        'flex cursor-pointer items-center gap-1 rounded-[100px] bg-[#4383FF]/20 bg-opacity-20 px-3 py-1',
+        'flex cursor-pointer items-center gap-1 rounded-full bg-[#4383FF]/20 bg-opacity-20 px-3 py-1',
         className,
       )}
     >
@@ -21,6 +22,7 @@ export function SocialsLabel({ label, icon, className, onClick }: CollabSocialsP
     </span>
   );
 }
+
 export function CollabSocials({ href, ...args }: CollabSocialsProps) {
   return (
     <>
