@@ -38,11 +38,11 @@ export type CollabTimeLimeProps = {
 export function CollabTimeLime({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose }: CollabTimeLimeProps) {
   return (
     <div className="grid grid-cols-5 md:grid-cols-1  md:gap-3">
-      <CollabTimeLineItem key={timeWarmup} startTime={timeWarmup} endTime={timeJoin} type="open" label="Comming Soon" />
-      <CollabTimeLineItem key={timeJoin} startTime={timeJoin} endTime={timeAllocation} label="Join Period" />
-      <CollabTimeLineItem key={timeAllocation} startTime={timeAllocation} endTime={timeClaim} label="Allocation Period" />
-      <CollabTimeLineItem key={timeClaim} startTime={timeClaim} endTime={timeClose} label="Claim Period" />
-      <CollabTimeLineItem key={timeClose} startTime={timeClose} type="close" label="Close" />
+      <CollabTimeLineItem key="timeWarmup" startTime={timeWarmup} endTime={timeJoin} type="open" label="Coming Soon" />
+      <CollabTimeLineItem key="timeJoin" startTime={timeJoin} endTime={timeAllocation} label="Join Period" />
+      <CollabTimeLineItem key="timeAllocation" startTime={timeAllocation} endTime={timeClaim} label="Allocation Period" />
+      <CollabTimeLineItem key="timeClaim" startTime={timeClaim} endTime={timeClose} label="Claim Period" />
+      <CollabTimeLineItem key="timeClose" startTime={timeClose} type="close" label="Close" />
     </div>
   );
 }
