@@ -51,6 +51,12 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
   return { startTime, endTime, shortTimes };
 };
 
+export const useCollabIsJoined = () => {
+  const userInfo = useRecoilValue(collabUserInfoAtom);
+  const isJoined = useMemo(() => !!userInfo?.joinStatus, [userInfo]);
+  return isJoined;
+};
+
 export const useCollabIsWin = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
   return useMemo(() => !!userInfo?.resultStatus, [userInfo]);

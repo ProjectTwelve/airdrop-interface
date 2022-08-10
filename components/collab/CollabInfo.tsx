@@ -36,8 +36,8 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   return (
     <div className="flex rounded-2xl bg-p12-black/80 md:flex-wrap">
-      <div className="flex items-center justify-center bg-collab-info bg-cover md:min-w-full">
-        <img className="aspect-square max-h-full" src={nftImage || projectLogo} alt={`${projectName} Logo`} />
+      <div className="flex min-w-[480px] items-center justify-center bg-collab-info bg-cover md:min-w-full">
+        <img className="aspect-square bg-contain" src={nftImage || projectLogo} alt={`${projectName} Logo`} />
       </div>
       <div className="flex w-full max-w-full flex-grow flex-col p-9">
         <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
@@ -54,7 +54,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
           {projectWhitepaper && (
-            <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="WhitePaper" />
+            <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="Whitepaper" />
           )}
           {badgeChains}
           {projectTwitter && (

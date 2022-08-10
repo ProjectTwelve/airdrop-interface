@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation } from 'react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
-import { useCollabIsClaimed, useCollabIsWin } from '../../hooks/collab';
+import { useCollabIsClaimed, useCollabIsJoined, useCollabIsWin } from '../../hooks/collab';
 import { fetchCollabJoin } from '../../lib/api';
 import { collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -28,8 +28,10 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const claimDate = dayjs.unix(timeClaim);
   const closeDate = dayjs.unix(timeClose);
   const { address } = useAccount();
-  const [nowUserInfo, setUserInfo] = useRecoilState(collabUserInfoAtom);
-  const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
+  const setUserInfo = useSetRecoilState(collabUserInfoAtom);
+  const [isConnectOpen, setConnectOpen] = useRecoilState(isConnectPopoverOpen);
+  const isJoined = useCollabIsJoined();
+  const isConnected = useMemo(() => !!address, [address]);
   const isClaimed = useCollabIsClaimed();
   const isWin = useCollabIsWin();
   const isMounted = useIsMounted();
@@ -47,15 +49,22 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   });
 
   const handleJoin = useCallback(() => {
+    if (isJoined) return;
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'join' });
     if (!address) {
       ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'connect' });
       setConnectOpen(true);
-      // TODO: connect callback should join again
       return;
     }
     mutationJoin.mutate({ collabCode, walletAddress: address });
-  }, [collabCode, address, mutationJoin, setConnectOpen]);
+  }, [collabCode, address, mutationJoin, setConnectOpen, isJoined]);
+
+  useEffect(() => {
+    if (isConnectOpen && isConnected && address && !isJoined) {
+      mutationJoin.mutate({ collabCode, walletAddress: address });
+      setConnectOpen(false);
+    }
+  }, [isConnectOpen, isConnected, address, collabCode, mutationJoin, setConnectOpen, isJoined]);
 
   const handleClaim = useCallback(() => {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
@@ -79,28 +88,19 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     [],
   );
 
-  const generateConnectButton = useCallback(
-    (className: string) => (
-      <Button size="large" type="gradient" className={className} onClick={() => setConnectOpen(true)}>
-        Connect Wallet
-      </Button>
-    ),
-    [setConnectOpen],
-  );
-
   const generateJoinButton = useCallback(
     (className: string) => (
       <Button
         size="large"
-        type={nowUserInfo ? 'default' : 'gradient'}
+        type={isJoined ? 'default' : 'gradient'}
         className={className}
         onClick={handleJoin}
-        disabled={!!nowUserInfo}
+        disabled={isJoined}
       >
         Join
       </Button>
     ),
-    [nowUserInfo, handleJoin],
+    [isJoined, handleJoin],
   );
 
   const generateClaimButton = useCallback(
@@ -124,7 +124,6 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   );
 
   if (!isMounted) return null;
-  if (!address) return generateConnectButton(className);
   if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
   if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
   if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Picking');
