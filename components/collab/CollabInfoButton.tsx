@@ -39,11 +39,12 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
     onSuccess: (data) => {
-      if (data.code !== 200) {
+      if (data.code !== 200 || !data.data) {
         toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
         return;
       }
       setUserInfo(data.data);
+      if (data.data?.joinStatus) return;
       toast.success(<Message message="Join successfully!" />);
     },
   });
