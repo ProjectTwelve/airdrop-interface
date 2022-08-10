@@ -12,6 +12,7 @@ import Button from '../button';
 import { toast } from 'react-toastify';
 import Message from '../message';
 import { useIsMounted } from '../../hooks/useIsMounted';
+import ReactGA from 'react-ga4';
 import type { CollabInfoType, CollabUserInfo, CollabUserParams, Response } from '../../lib/types';
 
 dayjs.extend(isBetween);
@@ -46,11 +47,18 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   });
 
   const handleJoin = useCallback(() => {
-    if (!address) return;
+    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'join' });
+    if (!address) {
+      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'connect' });
+      setConnectOpen(true);
+      // TODO: connect callback should join again
+      return;
+    }
     mutationJoin.mutate({ collabCode, walletAddress: address });
-  }, [collabCode, address, mutationJoin]);
+  }, [collabCode, address, mutationJoin, setConnectOpen]);
 
   const handleClaim = useCallback(() => {
+    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
     if (!tokenClaimLink && !nftClaimLink) return toast.error(<Message message="No claim link" title="Oops" />);
     if (nftClaimLink) {
       window.open(nftClaimLink, '_blank');

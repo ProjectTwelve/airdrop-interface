@@ -1,4 +1,6 @@
+import ReactGA from 'react-ga4';
 export type CollabTaskItemProps = {
+  key: string;
   title: string;
   icon?: JSX.Element;
   content: string | JSX.Element;
@@ -7,6 +9,7 @@ export type CollabTaskItemProps = {
 };
 
 export default function CollabTaskItem({
+  key,
   title,
   icon,
   content,
@@ -25,7 +28,11 @@ export default function CollabTaskItem({
       </div>
       {href ? (
         <div className="flex cursor-pointer items-center gap-2 border-t border-p12-line pt-6">
-          <a className="font-semibold leading-5 text-[#43BBFF]" href={href}>
+          <a
+            className="font-semibold leading-5 text-[#43BBFF]"
+            href={href}
+            onClick={() => ReactGA.event({ category: 'Collab-Item', action: 'Click', label: key })}
+          >
             {hrefLabel}
           </a>
           <img src="/svg/more.svg" className="aspect-square h-4" alt="more.svg" />
