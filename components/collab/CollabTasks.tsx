@@ -25,11 +25,11 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     (data) => fetchCollabTweetVerify(data),
     {
       onSuccess: (data) => {
-        if (!data.data) {
-          toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
+        if (!data?.data?.taskTweetStatus) {
+          toast.error(<Message message="Verify failed!" />);
           return;
         }
-        toast.success(<Message message="Verified successfully!" />);
+        toast.success(<Message message="Verify successfully!" />);
       },
     },
   );

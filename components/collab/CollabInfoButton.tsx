@@ -104,18 +104,15 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   );
 
   const generateJoinButton = useCallback(
-    (className: string) => (
-      <Button
-        size="large"
-        type={isJoined ? 'default' : 'gradient'}
-        className={className}
-        onClick={handleJoin}
-        disabled={isJoined}
-      >
-        Join
-      </Button>
-    ),
-    [isJoined, handleJoin],
+    (className: string) =>
+      isJoined ? (
+        generateDisableButton(className, 'Join Successfully')
+      ) : (
+        <Button size="large" type="gradient" className={className} onClick={handleJoin}>
+          Join
+        </Button>
+      ),
+    [isJoined, handleJoin, generateDisableButton],
   );
 
   const generateClaimButton = useCallback(
