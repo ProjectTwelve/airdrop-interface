@@ -6,6 +6,7 @@ export type CollabTimeLimeItemProps = {
   label: string;
   type: 'open' | 'close' | 'normal';
 };
+
 export function CollabTimeLineItem({ startTime, endTime, type, label }: CollabTimeLimeItemProps) {
   return (
     <div
@@ -24,6 +25,7 @@ export function CollabTimeLineItem({ startTime, endTime, type, label }: CollabTi
     </div>
   );
 }
+
 CollabTimeLineItem.defaultProps = {
   type: 'normal',
 };
@@ -33,6 +35,7 @@ export type CollabTimeLimeProps = {
   timeAllocation: string;
   timeClaim: string;
   timeClose: string;
+  [key: string]: string;
 };
 
 export function CollabTimeLime({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose }: CollabTimeLimeProps) {

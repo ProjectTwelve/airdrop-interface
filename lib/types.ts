@@ -235,6 +235,7 @@ export type CollabTimes = {
   timeAllocation: number;
   timeClaim: number;
   timeClose: number;
+  [key: string]: number;
 };
 
 export type CollabShortInfo = {
@@ -285,6 +286,7 @@ export enum CollabStatus {
   NO = 0,
   YES,
 }
+
 export type CollabUserParams = { collabCode: string; walletAddress: string };
 
 export type CollabTweetVerifyParams = { collabCode: string; walletAddress: string; taskTweetUrl: string };

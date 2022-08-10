@@ -1,12 +1,12 @@
+import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
-import { useMemo } from 'react';
+import { useAccount } from 'wagmi';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
-import { useAccount } from 'wagmi';
-import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 import { fetchCollabList, fetchCollabUserInfo } from '../lib/api';
 import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/types';
 import { collabUserInfoAtom } from '../store/collab/state';
+import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -23,29 +23,29 @@ export const useFetchCollabUserInfo = (collabCode: string) => {
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
-  const { timeWarmup, timeClose } = times;
-  const { startTime, endTime } = useMemo(() => {
-    if (!timeWarmup || !timeClose) return { startTime: timeWarmup || 'unknown', endTime: timeClose || 'unknown' };
-    return {
-      startTime: dayjs.unix(timeWarmup).format('YYYY.MM.DD'),
-      endTime: dayjs.unix(timeClose).format('YYYY.MM.DD'),
-    };
-  }, [timeWarmup, timeClose]);
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [shortTimes, setShortTimes] = useState<CollabTimeLimeProps>({
+    timeWarmup: '',
+    timeJoin: '',
+    timeAllocation: '',
+    timeClaim: '',
+    timeClose: '',
+  });
 
-  const shortTimes = useMemo(() => {
-    let shortTimes: CollabTimeLimeProps = {
-      timeWarmup: 'unknown',
-      timeJoin: 'unknown',
-      timeAllocation: 'unknown',
-      timeClaim: 'unknown',
-      timeClose: 'unknown',
-    };
-    let key: keyof CollabTimes;
-    for (key in times) {
-      if (!key || !times[key]) continue;
-      shortTimes[key] = dayjs.unix(times[key] as number).format('MM.DD');
-    }
-    return shortTimes;
+  useEffect(() => {
+    if (!times.timeWarmup || !times.timeClose) return;
+    setStartTime(dayjs.unix(times.timeWarmup).format('YYYY.MM.DD'));
+    setEndTime(dayjs.unix(times.timeClose).format('YYYY.MM.DD'));
+  }, [times.timeClose, times.timeWarmup]);
+
+  useEffect(() => {
+    setShortTimes((_times) => {
+      Object.keys(_times).forEach((key) => {
+        _times[key] = times[key] ? dayjs.unix(times[key]!).format('MM.DD') : '';
+      });
+      return _times;
+    });
   }, [times]);
 
   return { startTime, endTime, shortTimes };
@@ -53,12 +53,10 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
 
 export const useCollabIsWin = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
-  const isWin = useMemo(() => !!userInfo?.resultStatus, [userInfo]);
-  return isWin;
+  return useMemo(() => !!userInfo?.resultStatus, [userInfo]);
 };
 
 export const useCollabIsClaimed = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
-  const isClaimed = useMemo(() => !!(userInfo?.tokenClaim || userInfo?.nftClaim), [userInfo]);
-  return isClaimed;
+  return useMemo(() => !!(userInfo?.tokenClaim || userInfo?.nftClaim), [userInfo]);
 };
