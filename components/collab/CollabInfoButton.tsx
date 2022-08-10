@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import { useCollabIsClaimed, useCollabIsJoined, useCollabIsWin } from '../../hooks/collab';
-import { fetchCollabJoin } from '../../lib/api';
+import { fetchCollabJoin, fetchCollabUserInfo } from '../../lib/api';
 import { collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
@@ -44,10 +44,25 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
         return;
       }
       setUserInfo(data.data);
-      if (data.data?.joinStatus) return;
       toast.success(<Message message="Join successfully!" />);
     },
   });
+
+  const mutationUserInfo = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>(
+    (data) => fetchCollabUserInfo(data),
+    {
+      onSuccess: (data) => {
+        if (data.code !== 200) {
+          return;
+        }
+        setUserInfo(data.data);
+        if (!data.data?.joinStatus) {
+          const { collabCode, walletAddress } = data.data;
+          mutationJoin.mutate({ collabCode, walletAddress });
+        }
+      },
+    },
+  );
 
   const handleJoin = useCallback(() => {
     if (isJoined) return;
@@ -62,10 +77,10 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   useEffect(() => {
     if (isConnectOpen && isConnected && address && !isJoined) {
-      mutationJoin.mutate({ collabCode, walletAddress: address });
+      mutationUserInfo.mutate({ collabCode, walletAddress: address });
       setConnectOpen(false);
     }
-  }, [isConnectOpen, isConnected, address, collabCode, mutationJoin, setConnectOpen, isJoined]);
+  }, [isConnectOpen, isConnected, address, collabCode, mutationUserInfo, setConnectOpen, isJoined]);
 
   const handleClaim = useCallback(() => {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
