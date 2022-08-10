@@ -54,7 +54,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
           {projectWhitepaper && (
-            <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="White Paper" />
+            <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="WhitePaper" />
           )}
           {badgeChains}
           {projectTwitter && (
