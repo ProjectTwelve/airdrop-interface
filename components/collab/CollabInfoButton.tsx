@@ -57,8 +57,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
         }
         setUserInfo(data.data);
         if (!data.data?.joinStatus) {
-          const { collabCode, walletAddress } = data.data;
-          mutationJoin.mutate({ collabCode, walletAddress });
+          mutationJoin.mutate({ collabCode: collabCode, walletAddress: address as string });
         }
       },
     },
