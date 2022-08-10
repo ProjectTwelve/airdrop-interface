@@ -246,6 +246,7 @@ export type CollabShortInfo = {
   projectChain: CollabChainItem[];
   timeWarmup: number;
   timeClose: number;
+  projectWebsite?: string;
   projectWhitepaper?: string;
 };
 

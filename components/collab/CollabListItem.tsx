@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabChainItem, CollabShortInfo } from '../../lib/types';
+import ReactGA from 'react-ga4';
 
 type CollabItemProps = {
   data: CollabShortInfo;
@@ -18,13 +19,17 @@ export default function CollabListItem({ data }: CollabItemProps) {
     timeClose,
     projectWhitepaper,
     projectChain,
+    projectWebsite,
   } = data;
 
   const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
 
   return (
     <div
-      onClick={() => router.push({ pathname: '/collab/[id]', query: { id: collabCode } })}
+      onClick={() => {
+        ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
+        router.push({ pathname: '/collab/[id]', query: { id: collabCode } });
+      }}
       className="flex h-max cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
@@ -32,7 +37,11 @@ export default function CollabListItem({ data }: CollabItemProps) {
         <div className="flex w-14 flex-grow flex-col gap-2">
           <div className="flex items-center gap-1">
             <h1 className="flex-shrink truncate text-xl font-semibold leading-6">{projectName}</h1>
-            <img src="/svg/door.svg" alt="door icon" />
+            {projectWebsite && (
+              <a href={projectWebsite} onClick={(e) => e.stopPropagation()}>
+                <img src="/svg/website.svg" alt="door icon" />
+              </a>
+            )}
           </div>
           <p className="overflow-ellipsis text-xs leading-5 line-clamp-2">{projectInfoBrief || projectInfo}</p>
         </div>
@@ -49,9 +58,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
           )}
           {projectChain?.length &&
             projectChain.map(({ name, url, chainId }: CollabChainItem) => (
-              <a href={projectWhitepaper} key={chainId} target="_blank" onClick={(e) => e.stopPropagation()}>
-                <img src={url} title={name} className="h-5 w-5" alt={name}></img>
-              </a>
+              <img src={url} key={chainId} title={name} className="h-5 w-5" alt={name}></img>
             ))}
         </div>
       </div>

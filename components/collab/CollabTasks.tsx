@@ -9,6 +9,7 @@ import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
 import { useAccount } from 'wagmi';
+import ReactGA from 'react-ga4';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
@@ -34,6 +35,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   );
 
   const handleTwitterShareClick = useCallback(() => {
+    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'twitter' });
     const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(taskTweetContent);
@@ -41,6 +43,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   }, [taskTweetContent, referralCode]);
 
   const handleVerify = useCallback(() => {
+    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'verify' });
     if (!address) {
       toast.error(<Message message="Please connect your wallet first." title="Oops" />);
       return;
@@ -60,7 +63,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
       </p>
       <div className=" mt-5 grid grid-cols-3 gap-7 md:grid-cols-1">
         <CollabTaskItem
-          key="Genesis Airdrop"
+          key="airdrop"
           title="Genesis Airdrop"
           icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
           content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
@@ -68,7 +71,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           hrefLabel="To P12 Genesis Airdrop"
         />
         <CollabTaskItem
-          key="Gleam"
+          key="gleam"
           title="Gleam"
           icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
           content="Complete all required tasks on Gleam is a must step."
@@ -76,7 +79,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           hrefLabel="To Gleam"
         />
         <CollabTaskItem
-          key="Share"
+          key="share"
           title="Share"
           icon={<img className="aspect-square h-8" src="/img/collab/share.png" alt="Share icon" />}
           content={
