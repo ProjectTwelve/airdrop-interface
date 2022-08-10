@@ -6,15 +6,16 @@ export type CollabTaskItemProps = {
   content: string | JSX.Element;
   href?: string;
   hrefLabel?: string;
+  gaKey?: string;
 };
 
 export default function CollabTaskItem({
-  key,
   title,
   icon,
   content,
   href,
   hrefLabel,
+  gaKey,
   children,
 }: React.PropsWithChildren<CollabTaskItemProps>) {
   return (
@@ -31,7 +32,7 @@ export default function CollabTaskItem({
           <a
             className="font-semibold leading-5 text-[#43BBFF]"
             href={href}
-            onClick={() => ReactGA.event({ category: 'Collab-Item', action: 'Click', label: key })}
+            onClick={() => (gaKey ? ReactGA.event({ category: 'Collab-Item', action: 'Click', label: gaKey }) : null)}
           >
             {hrefLabel}
           </a>

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCollabTimes } from '../../hooks/collab';
-import { CollabChainItem, CollabShortInfo } from '../../lib/types';
+import { CollabShortInfo } from '../../lib/types';
 import ReactGA from 'react-ga4';
 
 type CollabItemProps = {
@@ -9,18 +9,7 @@ type CollabItemProps = {
 
 export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
-  const {
-    collabCode,
-    projectName,
-    projectInfoBrief,
-    projectInfo,
-    projectLogo,
-    timeWarmup,
-    timeClose,
-    projectWhitepaper,
-    projectChain,
-    projectWebsite,
-  } = data;
+  const { collabCode, projectName, projectInfoBrief, projectInfo, projectLogo, timeWarmup, timeClose, projectWebsite } = data;
 
   const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
 
@@ -38,8 +27,8 @@ export default function CollabListItem({ data }: CollabItemProps) {
           <div className="flex items-center gap-1">
             <h1 className="flex-shrink truncate text-xl font-semibold leading-6">{projectName}</h1>
             {projectWebsite && (
-              <a href={projectWebsite} onClick={(e) => e.stopPropagation()}>
-                <img src="/svg/website.svg" alt="door icon" />
+              <a href={projectWebsite} onClick={(e) => e.stopPropagation()} className="min-w-[20px]">
+                <img className="aspect-square min-w-[20px] hover:brightness-200" src="/svg/website.svg" alt="website icon" />
               </a>
             )}
           </div>
@@ -49,17 +38,6 @@ export default function CollabListItem({ data }: CollabItemProps) {
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center text-xs leading-5 text-p12-sub">
           {startTime} ~ {endTime}
-        </div>
-        <div className="flex gap-2">
-          {projectWhitepaper && (
-            <a href={projectWhitepaper} target="_blank" onClick={(e) => e.stopPropagation()}>
-              <img src="/img/white_paper.png" title="whitepaper" className="h-5 w-5" alt={projectWhitepaper}></img>
-            </a>
-          )}
-          {projectChain?.length &&
-            projectChain.map(({ name, url, chainId }: CollabChainItem) => (
-              <img src={url} key={chainId} title={name} className="h-5 w-5" alt={name}></img>
-            ))}
         </div>
       </div>
     </div>

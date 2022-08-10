@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 type CollabSocialsProps = {
   href?: string; // url
-  icon: string;
+  icon: string | JSX.Element;
   label?: string; // label for the link
   className?: string;
   onClick?: () => void;
@@ -17,7 +17,7 @@ export function SocialsLabel({ label, icon, className, onClick }: CollabSocialsP
         className,
       )}
     >
-      <img src={icon} className="h-4 w-4" alt={label || 'icon'}></img>
+      {typeof icon === 'string' ? <img src={icon} className="h-4 w-4" alt={label || 'icon'}></img> : icon}
       {label && <span className="text-xs">{label}</span>}
     </span>
   );

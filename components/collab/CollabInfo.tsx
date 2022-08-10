@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { useMemo } from 'react';
-import { CHAIN_ICON, CHAIN_ID } from '../../constants';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabInfoType } from '../../lib/types';
 import { CollabSocials } from '../socialMedia/CollabSocials';
@@ -29,9 +28,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
-    return projectChain.map(({ chainId, name }) => {
-      if (!chainId) return null;
-      return <CollabSocials key={chainId} icon={CHAIN_ICON[chainId as CHAIN_ID]} label={name} />;
+    return projectChain.map(({ chainId, name, url }) => {
+      if (!chainId || !url) return null;
+      return <CollabSocials key={chainId} icon={url} label={name} />;
     });
   }, [projectChain]);
 
@@ -46,7 +45,14 @@ export default function CollabInfo({ data }: CollabInfoProps) {
           Time: {startTime} - {endTime}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
-          {projectWebsite && <CollabSocials key="website" href={projectWebsite} icon="/svg/website.svg" label="Website" />}
+          {projectWebsite && (
+            <CollabSocials
+              key="website"
+              href={projectWebsite}
+              icon={<img src="/svg/website.svg" className="h-4 w-4 brightness-200" alt="White Paper"></img>}
+              label="Website"
+            />
+          )}
           {projectWhitepaper && (
             <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="White Paper" />
           )}
@@ -70,7 +76,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
         </div>
-        <div className="mt-8 flex-grow leading-7">{projectInfo}</div>
+        <div className="mt-8 flex-grow whitespace-pre-wrap leading-7">{projectInfo}</div>
         <div className="mt-8 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             {tokenAmount ? (

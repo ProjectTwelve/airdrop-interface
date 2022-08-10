@@ -52,5 +52,10 @@ module.exports = {
       },
     },
   },
+  variants: {
+    extend: {
+      brightness: ['hover'],
+    },
+  },
   plugins: [require('@tailwindcss/line-clamp')],
 };

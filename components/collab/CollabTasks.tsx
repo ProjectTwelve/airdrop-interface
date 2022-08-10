@@ -64,6 +64,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
       <div className=" mt-5 grid grid-cols-3 gap-7 md:grid-cols-1">
         <CollabTaskItem
           key="airdrop"
+          gaKey="airdrop"
           title="Genesis Airdrop"
           icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
           content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
@@ -72,6 +73,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
         />
         <CollabTaskItem
           key="gleam"
+          gaKey="gleam"
           title="Gleam"
           icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
           content="Complete all required tasks on Gleam is a must step."

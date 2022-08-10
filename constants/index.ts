@@ -121,11 +121,3 @@ export const GAMER_BADGES = {
 
 // Collab
 export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
-
-export enum CHAIN_ID {
-  BSC = 56,
-}
-
-export const CHAIN_ICON: { [chainId in CHAIN_ID]: string } = {
-  [CHAIN_ID.BSC]: '/svg/chain/bsc.svg',
-};
