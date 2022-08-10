@@ -27,7 +27,7 @@ export function CollabSocials({ href, ...args }: CollabSocialsProps) {
   return (
     <>
       {href ? (
-        <a href={href}>
+        <a href={href} target="_blank">
           <SocialsLabel {...args} />
         </a>
       ) : (
