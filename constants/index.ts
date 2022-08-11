@@ -11,6 +11,7 @@ export const STORAGE_KEY = {
   GAMER_CLAIMED_MAP: 'gamer_claimed_map_01',
   DEV_EMAIL_SUBMIT: 'dev_email_submit',
   DEV_EMAIL_DAILY: 'dev_email_daily',
+  COLLAB_FIRST_CLAIM_MAP: 'collab_first_claim_map',
 };
 
 export enum NFT_CLAIM {

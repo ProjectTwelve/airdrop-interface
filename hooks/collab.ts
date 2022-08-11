@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useQuery } from 'react-query';
@@ -7,6 +7,8 @@ import { fetchCollabList, fetchCollabUserInfo } from '../lib/api';
 import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/types';
 import { collabUserInfoAtom } from '../store/collab/state';
 import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
+import { useLocalStorage } from 'react-use';
+import { STORAGE_KEY } from '../constants';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -60,4 +62,21 @@ export const useCollabIsJoined = () => {
 export const useCollabIsClaim = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
   return useMemo(() => !!userInfo?.resultStatus, [userInfo]);
+};
+
+export const useCollabIsFirstClaim = (collabCode: string): [boolean, (status: boolean) => void] => {
+  const [collabFirstClaimMap, setCollabFirstClaimMap] = useLocalStorage(STORAGE_KEY.COLLAB_FIRST_CLAIM_MAP, {
+    [collabCode]: true,
+  });
+  const setFirstClaim = useCallback(
+    (status: boolean) => {
+      setCollabFirstClaimMap({ ...collabFirstClaimMap, [collabCode]: status });
+    },
+    [setCollabFirstClaimMap, collabFirstClaimMap, collabCode],
+  );
+  const isFirstClaim = useMemo(() => {
+    if (collabFirstClaimMap?.[collabCode] === false) return false;
+    return true;
+  }, [collabFirstClaimMap, collabCode]);
+  return [isFirstClaim, setFirstClaim];
 };
