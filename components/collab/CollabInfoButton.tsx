@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation } from 'react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
-import { useCollabIsClaimed, useCollabIsJoined, useCollabIsWin } from '../../hooks/collab';
+import { useCollabIsJoined, useCollabIsClaim } from '../../hooks/collab';
 import { fetchCollabJoin, fetchCollabUserInfo } from '../../lib/api';
 import { collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -32,8 +32,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const [isConnectOpen, setConnectOpen] = useRecoilState(isConnectPopoverOpen);
   const isJoined = useCollabIsJoined();
   const isConnected = useMemo(() => !!address, [address]);
-  const isClaimed = useCollabIsClaimed();
-  const isWin = useCollabIsWin();
+  const isClaim = useCollabIsClaim();
   const isMounted = useIsMounted();
   const className = 'min-w-fit max-w-[300px] flex-grow';
 
@@ -117,22 +116,14 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const generateClaimButton = useCallback(
     (className: string) =>
-      isWin ? (
-        <Button
-          size="large"
-          type={isClaimed ? 'default' : 'gradient'}
-          className={className}
-          onClick={handleClaim}
-          disabled={isClaimed}
-        >
-          {isClaimed ? 'Claimed' : 'Claim'}
-        </Button>
-      ) : (
-        <Button size="large" type="default" className={className} disabled={true}>
+      isClaim ? (
+        <Button size="large" type="gradient" className={className} onClick={handleClaim}>
           Claim
         </Button>
+      ) : (
+        generateDisableButton(className, 'Claim')
       ),
-    [isWin, isClaimed, handleClaim],
+    [isClaim, handleClaim, generateDisableButton],
   );
 
   if (!isMounted) return null;

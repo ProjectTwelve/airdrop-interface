@@ -57,12 +57,7 @@ export const useCollabIsJoined = () => {
   return isJoined;
 };
 
-export const useCollabIsWin = () => {
+export const useCollabIsClaim = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
   return useMemo(() => !!userInfo?.resultStatus, [userInfo]);
-};
-
-export const useCollabIsClaimed = () => {
-  const userInfo = useRecoilValue(collabUserInfoAtom);
-  return useMemo(() => !!(userInfo?.tokenClaim || userInfo?.nftClaim), [userInfo]);
 };

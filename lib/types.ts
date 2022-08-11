@@ -255,6 +255,7 @@ export type CollabInfoType = {
   collabCode: string;
   collabStatus?: number;
   collabName?: string;
+  collabPoster?: string;
 
   projectName?: string;
   projectLogo?: string;
