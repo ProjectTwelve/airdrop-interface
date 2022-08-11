@@ -15,10 +15,11 @@ import classNames from 'classnames';
 import { useLocalStorage } from 'react-use';
 import { CollabClaimDialog } from '../../components/dialog/CollabClaimDialog';
 import { useAccount } from 'wagmi';
+import Head from 'next/head';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
-  const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
+  const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode, collabPoster } = data;
   const { shortTimes } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
   const [isFirstClaim, setIsFirstClaim] = useLocalStorage('collab_is_first_claim', true);
   const setClaimModal = useSetRecoilState(collabClaimModalAtom);
@@ -41,21 +42,28 @@ export default function Collab({ data }: { data: CollabInfoType }) {
   }, [collabUserInfo, setNowUserInfo, isFirstClaim, setIsFirstClaim, setClaimModal]);
 
   return (
-    <div className="mt-8">
-      <Back onClick={() => router.back()} />
-      <div className="my-4" onClick={(event) => event.stopPropagation()}>
-        <motion.div
-          layoutId="collab"
-          className={classNames('backdrop-box flex flex-col gap-8 rounded-2xl p-8 xs:p-3', { 'pb-[60px]': !isClaimed })}
-        >
-          <CollabInfo data={data} />
-          <CollabTimeLime {...shortTimes} />
-          <CollabTasks data={data} />
-          {isClaimed && <CollabReward data={data} />}
-          <CollabClaimDialog data={data} />
-        </motion.div>
+    <>
+      {collabPoster && (
+        <Head>
+          <meta property="og:image" content={collabPoster} />
+        </Head>
+      )}
+      <div className="mt-8">
+        <Back onClick={() => router.back()} />
+        <div className="my-4" onClick={(event) => event.stopPropagation()}>
+          <motion.div
+            layoutId="collab"
+            className={classNames('backdrop-box flex flex-col gap-8 rounded-2xl p-8 xs:p-3', { 'pb-[60px]': !isClaimed })}
+          >
+            <CollabInfo data={data} />
+            <CollabTimeLime {...shortTimes} />
+            <CollabTasks data={data} />
+            {isClaimed && <CollabReward data={data} />}
+            <CollabClaimDialog data={data} />
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
