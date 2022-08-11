@@ -26,7 +26,7 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [shortTimes, setShortTimes] = useState<CollabTimeLimeProps>({
-    timeWarmup: '',
+    timeComingSoon: '',
     timeJoin: '',
     timeAllocation: '',
     timeClaim: '',
@@ -34,10 +34,10 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
   });
 
   useEffect(() => {
-    if (!times.timeWarmup || !times.timeClose) return;
-    setStartTime(dayjs.unix(times.timeWarmup).format('YYYY.MM.DD'));
+    if (!times.timeComingSoon || !times.timeClose) return;
+    setStartTime(dayjs.unix(times.timeComingSoon).format('YYYY.MM.DD'));
     setEndTime(dayjs.unix(times.timeClose).format('YYYY.MM.DD'));
-  }, [times.timeClose, times.timeWarmup]);
+  }, [times.timeClose, times.timeComingSoon]);
 
   useEffect(() => {
     setShortTimes((_times) => {

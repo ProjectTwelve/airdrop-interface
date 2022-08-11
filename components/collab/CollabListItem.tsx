@@ -9,9 +9,10 @@ type CollabItemProps = {
 
 export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
-  const { collabCode, projectName, projectInfoBrief, projectInfo, projectLogo, timeWarmup, timeClose, projectWebsite } = data;
+  const { collabCode, projectName, projectInfoBrief, projectInfo, projectLogo, timeComingSoon, timeClose, projectWebsite } =
+    data;
 
-  const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
+  const { startTime, endTime } = useCollabTimes({ timeComingSoon, timeClose });
 
   return (
     <div

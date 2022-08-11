@@ -30,7 +30,7 @@ CollabTimeLineItem.defaultProps = {
   type: 'normal',
 };
 export type CollabTimeLimeProps = {
-  timeWarmup: string;
+  timeComingSoon: string;
   timeJoin: string;
   timeAllocation: string;
   timeClaim: string;
@@ -38,10 +38,10 @@ export type CollabTimeLimeProps = {
   [key: string]: string;
 };
 
-export function CollabTimeLime({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose }: CollabTimeLimeProps) {
+export function CollabTimeLime({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose }: CollabTimeLimeProps) {
   return (
     <div className="mt-4 grid grid-cols-5 md:grid-cols-1 md:gap-3">
-      <CollabTimeLineItem key="timeWarmup" startTime={timeWarmup} endTime={timeJoin} type="open" label="Coming Soon" />
+      <CollabTimeLineItem key="timeComingSoon" startTime={timeComingSoon} endTime={timeJoin} type="open" label="Coming Soon" />
       <CollabTimeLineItem key="timeJoin" startTime={timeJoin} endTime={timeAllocation} label="Join" />
       <CollabTimeLineItem key="timeAllocation" startTime={timeAllocation} endTime={timeClaim} label="Allocation" />
       <CollabTimeLineItem key="timeClaim" startTime={timeClaim} endTime={timeClose} label="Claim" />

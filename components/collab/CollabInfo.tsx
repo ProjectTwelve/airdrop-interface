@@ -19,12 +19,12 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     projectWebsite,
     projectTwitter,
     projectDiscord,
-    timeWarmup,
+    timeComingSoon,
     timeClose,
     tokenAmount,
     nftTotalAmount,
   } = data;
-  const { startTime, endTime } = useCollabTimes({ timeWarmup, timeClose });
+  const { startTime, endTime } = useCollabTimes({ timeComingSoon, timeClose });
 
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;

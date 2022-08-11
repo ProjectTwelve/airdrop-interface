@@ -15,8 +15,8 @@ import classNames from 'classnames';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
-  const { timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
-  const { shortTimes } = useCollabTimes({ timeWarmup, timeJoin, timeAllocation, timeClaim, timeClose });
+  const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
+  const { shortTimes } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
   const isClaimed = useCollabIsClaimed();
   const { data: collabUserInfo } = useFetchCollabUserInfo(collabCode);
   const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);

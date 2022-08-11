@@ -16,7 +16,7 @@ export default function CollabRewardItem({ logo, amount, icon, title, desc }: Co
           <p className="leading-5">{desc}</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-5 font-ddin">
         {amount ? (
           <>
             <div className="text-5xl font-bold leading-[52px]">{amount}</div>
