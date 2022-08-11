@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
 import { useQuery } from 'react-query';
@@ -9,35 +9,37 @@ import Button from '../button';
 import Message from '../message';
 import Tag from '../tag';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { invitationCountSelector, inviteModalAtom, referralLinkAtom } from '../../store/invite/state';
+import { invitationCountSelector, inviteModalAtom, referralCodeAtom } from '../../store/invite/state';
 import { fetchReferralCode } from '../../lib/api';
 import { InviteRecordDialog } from './InviteRecordDialog';
 import { isConnectPopoverOpen } from '../../store/web3/state';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 function InviteDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
+  const isMounted = useIsMounted();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const [referralLink, setReferralLink] = useRecoilState(referralLinkAtom);
+  const [referralCode, setReferralCode] = useRecoilState(referralCodeAtom);
   const [isConnect, setIsConnect] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const [, copyToClipboard] = useCopyToClipboard();
+  const referralLink = useMemo(() => {
+    return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
+  }, [referralCode]);
 
-  useQuery(['invite', account?.address], () => fetchReferralCode({ wallet_address: account?.address }), {
-    enabled: !!account?.address,
+  useQuery(['invite', address], () => fetchReferralCode({ wallet_address: address }), {
+    enabled: !!address,
     refetchOnWindowFocus: false,
-    onSuccess: (data) => setReferralLink(window.location.origin + '/?code=' + data.data.referral_code),
+    onSuccess: (data) => data.data.referral_code && setReferralCode(data.data.referral_code),
   });
 
   const handleTwitterShareClick = () => {
-    const text =
-      'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!';
-    window.open(
-      decodeURIComponent(
-        'https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + referralLink,
-      ),
-      '_blank',
+    const text = encodeURIComponent(
+      'Join @_p12_ P12 Genesis Airdrop Steam gamers and get Soul-Bound NFT which captures your unique gaming credentials for free!',
     );
+    const url = encodeURIComponent(referralLink);
+    window.open('https://twitter.com/intent/tweet?text=' + text + '&hashtags=NFTGiveaway&hashtags=P12&url=' + url, '_blank');
   };
 
   return (
@@ -81,7 +83,7 @@ function InviteDialog() {
               </div>
               <div className="basis-1/4 px-2.5 text-center text-xs leading-5">
                 Send the link to your Steam developer or gamer friends.
-                {account?.address && (
+                {isMounted && address && (
                   <p className="flex justify-center">
                     Or share on &nbsp;
                     <img
@@ -158,7 +160,7 @@ function InviteDialog() {
               </div>
             </div>
           </div>
-          {account?.address && (
+          {isMounted && address && (
             <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
               {referralLink}
               <Button
@@ -175,7 +177,7 @@ function InviteDialog() {
           )}
           <div className="mt-8 flex items-center justify-between">
             <div>
-              {account?.address && (
+              {isMounted && address && (
                 <div className="flex items-center">
                   <p className="text-[18px] font-medium">My Referrals</p>
                   <p className="ml-3 text-xl font-medium text-p12-success">{invitationCount}</p>
@@ -192,7 +194,7 @@ function InviteDialog() {
               <Button type="bordered" onClick={() => setOpen(false)}>
                 Cancel
               </Button>
-              {!account?.address && (
+              {isMounted && !address && (
                 <Button
                   className="ml-6"
                   type="gradient"

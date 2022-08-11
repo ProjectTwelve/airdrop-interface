@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../components/button';
 import Image from 'next/image';
+import ReactGA from 'react-ga4';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
+import Button from '../components/button';
 import { inviteModalAtom } from '../store/invite/state';
-import { motion } from 'framer-motion';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
-import ReactGA from 'react-ga4';
+import { COLLAB_OPEN, STORAGE_KEY } from '../constants';
+import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
+import CollabHomeCard from '../components/collab/CollabHomeCard';
 
 export default function Home() {
   const router = useRouter();
@@ -18,11 +21,9 @@ export default function Home() {
   const [isHovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const { code } = router.query;
-    const currentStatus = getLocalStorage('invite_btn_click');
-    setLocalStorage('invite_code', code);
+    const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK);
     setBtnClick(currentStatus ?? false);
-  }, [router.query]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
@@ -40,7 +41,7 @@ export default function Home() {
             onClick={() => {
               setBtnClick(true);
               ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
-              setLocalStorage('invite_btn_click', true);
+              setLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK, true);
               setOpen(true);
             }}
           >
@@ -91,12 +92,23 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
-          <GamerTabs />
-        </RankingHomeCard>
-        <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
-          <DeveloperTabs />
-        </RankingHomeCard>
+        {COLLAB_OPEN ? (
+          <>
+            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+              <LeaderboardTabs />
+            </RankingHomeCard>
+            <CollabHomeCard title="Airdrops" />
+          </>
+        ) : (
+          <>
+            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+              <GamerTabs />
+            </RankingHomeCard>
+            <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
+              <DeveloperTabs />
+            </RankingHomeCard>
+          </>
+        )}
       </div>
     </div>
   );

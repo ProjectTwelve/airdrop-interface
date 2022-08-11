@@ -12,15 +12,16 @@ import Message from '../message';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue } from 'recoil';
 import { hasClaimedGameSelector } from '../../store/developer/state';
+import { STORAGE_KEY } from '../../constants';
 
 export default function DeveloperEmailDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const claimedGame = useRecoilValue(hasClaimedGameSelector);
   const [open, setOpen] = useState<boolean>(false);
   const mutation = useMutation<Response<any>, any, DeveloperEmailParams, any>((data) => fetchDeveloperEmail(data), {
     onSuccess: () => {
       toast.success(<Message message="Bind email successfully" title="Mission Complete" />);
-      setLocalStorage('dev_email_submit', 1);
+      setLocalStorage(STORAGE_KEY.DEV_EMAIL_SUBMIT, 1);
       setOpen(false);
     },
   });
@@ -28,7 +29,7 @@ export default function DeveloperEmailDialog() {
   const [error, setError] = useState<string>('');
   const { signMessageAsync } = useSignMessage();
   const onSubmit = (email: string) => {
-    if (!account?.address) {
+    if (!address) {
       return;
     }
     if (!/^[\w.+-]+@[\w-]+\.[\w-.]+$/.test(email)) {
@@ -36,21 +37,21 @@ export default function DeveloperEmailDialog() {
       return;
     }
     signMessageAsync({
-      message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
+      message: JSON.stringify(getEmailSignData({ account: address, email: value })),
     })
       .then((signature) => {
-        mutation.mutate({ wallet_address: account.address, email: value, signature });
+        mutation.mutate({ wallet_address: address, email: value, signature });
       })
       .catch((error) => error);
   };
 
   useEffect(() => {
     const day = dayjs().format('YYYY-MM-DD');
-    const emailSubmit = getLocalStorage('dev_email_submit');
-    const emailDaily = getLocalStorage('dev_email_daily');
+    const emailSubmit = getLocalStorage(STORAGE_KEY.DEV_EMAIL_SUBMIT);
+    const emailDaily = getLocalStorage(STORAGE_KEY.DEV_EMAIL_DAILY);
     if (!emailSubmit && emailDaily !== day && claimedGame) {
       setOpen(true);
-      setLocalStorage('dev_email_daily', day);
+      setLocalStorage(STORAGE_KEY.DEV_EMAIL_DAILY, day);
     }
   }, [claimedGame]);
 
@@ -59,9 +60,7 @@ export default function DeveloperEmailDialog() {
       open={open}
       render={() => (
         <div>
-          <div className="flex h-[28px] items-center justify-center text-xl">
-            Winner Winner, Chicken Dinner
-          </div>
+          <div className="flex h-[28px] items-center justify-center text-xl">Winner Winner, Chicken Dinner</div>
           <div className="my-[28px] h-[1px] bg-p12-line"></div>
           <div className="max-w-[420px]">
             <p className="text-sm">

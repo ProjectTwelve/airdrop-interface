@@ -38,6 +38,7 @@ module.exports = {
       },
       backgroundImage: {
         'profile-info': 'var(--profile-info)',
+        'collab-info': 'var(--collab-info)',
         'p12-gradient': 'var(--gradient)',
         'p12-logo': 'var(--logo)',
         'p12-gradient-30': 'var(--gradient-30)',
@@ -51,5 +52,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  variants: {
+    extend: {
+      brightness: ['hover'],
+    },
+  },
+  plugins: [require('@tailwindcss/line-clamp')],
 };

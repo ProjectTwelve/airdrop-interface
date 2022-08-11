@@ -18,11 +18,9 @@ export function GamerTokenRankingHeader() {
 }
 
 type GamerTokenRankingItemProps = {
-  hover?: boolean;
-  steamProfile?: boolean;
   data: Partial<GamerRankInfo>;
 };
-export default function GamerTokenRankingItem({ hover, data, steamProfile }: GamerTokenRankingItemProps) {
+export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemProps) {
   const handleToSteamProfile = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     openLink('https://steamcommunity.com/profiles/' + data.steam_id);
@@ -30,11 +28,8 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
 
   return (
     <div
-      onClick={steamProfile ? handleToSteamProfile : undefined}
-      className={classNames(
-        'flex items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 xs:px-2',
-        hover ? 'cursor-pointer hover:bg-[#7980AF]/20' : '',
-      )}
+      onClick={handleToSteamProfile}
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
       <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">
         {getCountMemo(data.index)}
@@ -79,8 +74,3 @@ export default function GamerTokenRankingItem({ hover, data, steamProfile }: Gam
     </div>
   );
 }
-
-GamerTokenRankingItem.defaultProps = {
-  hover: true,
-  steamProfile: true,
-};

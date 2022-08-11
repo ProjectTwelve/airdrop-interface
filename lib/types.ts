@@ -221,3 +221,89 @@ export type GamerInvitationParams = {
 export type GamerInvitationData = {
   invitation_info: GamerInvitationInfo[];
 };
+
+export type CollabChainItem = Partial<{
+  chainId: number;
+  url: string;
+  name: string;
+}>;
+
+export type CollabTimes = {
+  // unix time stamp
+  timeComingSoon: number;
+  timeJoin: number;
+  timeAllocation: number;
+  timeClaim: number;
+  timeClose: number;
+  [key: string]: number;
+};
+
+export type CollabShortInfo = {
+  collabCode: string;
+  projectName: string;
+  projectInfoBrief?: string;
+  projectInfo: string;
+  projectLogo: string;
+  projectChain: CollabChainItem[];
+  timeComingSoon: number;
+  timeClose: number;
+  projectWebsite?: string;
+  projectWhitepaper?: string;
+};
+
+export type CollabInfoType = {
+  collabCode: string;
+  collabStatus?: number;
+  collabName?: string;
+  collabPoster?: string;
+
+  projectName?: string;
+  projectLogo?: string;
+  projectInfoBrief?: string;
+  projectInfo: string;
+  projectChain?: CollabChainItem[];
+  projectDiscord?: string;
+  projectTwitter?: string;
+  projectWebsite?: string;
+  projectWhitepaper?: string;
+
+  tokenAmount?: number;
+  tokenIcon?: string;
+  tokenName?: string;
+  tokenNameAbbre?: string;
+  tokenAddress?: string;
+  tokenClaimLink?: string;
+
+  nftTotalAmount?: number;
+  nftName?: string;
+  nftImage?: string;
+  nftClaimLink?: string;
+
+  taskGleam: string;
+  taskTweetContent: string;
+} & CollabTimes;
+
+export enum CollabStatus {
+  NO = 0,
+  YES,
+}
+
+export type CollabUserParams = { collabCode: string; walletAddress: string };
+
+export type CollabTweetVerifyParams = { collabCode: string; walletAddress: string; taskTweetUrl: string };
+
+export type CollabUserInfo = {
+  id: number | null;
+  walletAddress: string;
+  collabCode: string;
+  joinStatus: CollabStatus; // 1 joined
+  taskGleamStatus: CollabStatus;
+  taskTweetUrl: string;
+  taskTweetStatus: CollabStatus;
+  projectWhitelist: CollabStatus; // is the address of the whitelist
+  resultStatus: CollabStatus; // whether is win
+  tokenClaim: CollabStatus;
+  nftClaim: CollabStatus;
+  tokenResult: number;
+  nftResult: number;
+};

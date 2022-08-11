@@ -15,17 +15,19 @@ import { useGamerGames } from '../../hooks/gamer';
 import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import { useSteamSignIn } from '../../hooks/useSteamSignIn';
 import { isConnectPopoverOpen } from '../../store/web3/state';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 export default function SteamStatus() {
   const pageSize = 6;
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const queryClient = useQueryClient();
   const [steamSignIn] = useSteamSignIn();
+  const isMounted = useIsMounted();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const gamesData = useRecoilValue(gamerGamesAtom);
-  const { refetch, isFetching } = useGamerGames(account?.address);
+  const { refetch, isFetching } = useGamerGames(address);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
     return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -33,12 +35,12 @@ export default function SteamStatus() {
 
   useEffect(() => {
     // refresh gamer info
-    if (!account?.address) return;
+    if (!address) return;
     if (gamerInfo?.credential) return;
     if (gamesData) {
-      queryClient.refetchQueries(['gamer_info', account.address]).then();
+      queryClient.refetchQueries(['gamer_info', address]).then();
     }
-  }, [account?.address, gamesData, gamerInfo?.credential, queryClient]);
+  }, [address, gamesData, gamerInfo?.credential, queryClient]);
 
   return (
     <div>
@@ -139,7 +141,7 @@ export default function SteamStatus() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-12 xs:py-4">
-          {account?.address ? (
+          {isMounted && address ? (
             <Button type="gradient" onClick={steamSignIn} className="w-[305px]">
               Sign in with Steam
             </Button>
@@ -149,7 +151,7 @@ export default function SteamStatus() {
             </Button>
           )}
           <p className="mt-5 text-sm text-p12-sub">
-            {account?.address && 'We cannot access your profile. Please log in to your Steam account.'}
+            {isMounted && address && 'We cannot access your profile. Please log in to your Steam account.'}
           </p>
         </div>
       )}

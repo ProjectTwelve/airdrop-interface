@@ -1,29 +1,33 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import Button from '../button';
-import SteamAppItem from './verify/SteamAppItem';
-import Message from '../message';
-import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
-import { getVerifySignData } from '../../utils';
 import { useRouter } from 'next/router';
-import { useMutation, useQueryClient } from 'react-query';
-import { fetchDeveloperVerify } from '../../lib/api';
-import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
-import { getErrorToast } from '../../utils/developer';
 import { useSetRecoilState } from 'recoil';
+import { useCopyToClipboard } from 'react-use';
+import { useAccount, useSignMessage } from 'wagmi';
+import { useMutation, useQueryClient } from 'react-query';
+import Button from '../button';
+import Message from '../message';
+import { STORAGE_KEY } from '../../constants';
+import { getVerifySignData } from '../../utils';
+import SteamAppItem from './verify/SteamAppItem';
+import { fetchDeveloperVerify } from '../../lib/api';
+import { getLocalStorage } from '../../utils/storage';
+import { getErrorToast } from '../../utils/developer';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
-import { useAccount, useSignMessage } from 'wagmi';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 export type SteamApp = Partial<DevGameInfo> & { index: number };
 
 function Verify() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
+  const isMounted = useIsMounted();
   const [steamAppList, setSteamAppList] = useState<SteamApp[]>([]);
   const queryClient = useQueryClient();
   const [signature, setSignature] = useState('Please click the generate button.');
   const { signMessage } = useSignMessage({
-    message: JSON.stringify(getVerifySignData(account?.address)),
+    message: JSON.stringify(getVerifySignData(address)),
     onSuccess(data) {
       setSignature('sig:' + data + '\np12.network-GameFi ecosystem-Editor|Infra|Econs');
     },
@@ -36,17 +40,14 @@ function Verify() {
   const [, copyToClipboard] = useCopyToClipboard();
   const router = useRouter();
   const submittedSteamApps = useMemo(() => steamAppList.filter((app) => app.steam_appid), [steamAppList]);
-  const canVerify = useMemo(
-    () => submittedSteamApps.length > 0 && account?.address,
-    [account?.address, submittedSteamApps.length],
-  );
+  const canVerify = useMemo(() => submittedSteamApps.length > 0 && address, [address, submittedSteamApps.length]);
   const mutation = useMutation<Response<DeveloperVerifyData>, any, DeveloperVerifyParams, any>(
     (data) => {
       return fetchDeveloperVerify(data);
     },
     {
       onSuccess: (data) => {
-        queryClient.refetchQueries(['developer_info', account?.address]).then();
+        queryClient.refetchQueries(['developer_info', address]).then();
         if (data.code === 1) {
           toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
           return;
@@ -90,16 +91,17 @@ function Verify() {
   }, []);
 
   const onVerifySteamApps = useCallback(() => {
-    if (!account?.address) return;
+    if (!address) return;
     const { code } = router.query;
     const ids = submittedSteamApps.map((app) => app.steam_appid!);
+    const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
     mutation.mutate({
       steam_appids: ids,
-      wallet_address: account.address,
-      referral_code: code as string,
+      wallet_address: address,
+      referral_code: code || localCode,
     });
     setVerifiedSteamApp(ids);
-  }, [account, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
+  }, [address, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
     <div className="px-8 pt-12 md:px-4 md:pt-6">
@@ -148,9 +150,9 @@ function Verify() {
               YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
             </h3>
             <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-p12-black/80 p-6 pb-16">
-              {account ? signature : 'Please connect your wallet first.'}
+              {isMounted && address ? signature : 'Please connect your wallet first.'}
               <div className="absolute right-5 bottom-5">
-                {account ? (
+                {isMounted && address ? (
                   isSig ? (
                     <Button
                       type="gradient"

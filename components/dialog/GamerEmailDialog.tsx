@@ -5,7 +5,7 @@ import Button from '../button';
 import { getEmailSignData, openLink } from '../../utils';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { GAMER_BADGES } from '../../constants';
+import {GAMER_BADGES, STORAGE_KEY} from '../../constants';
 import { useMutation } from 'react-query';
 import { GamerEmailParams, Response } from '../../lib/types';
 import { fetchGamerEmail } from '../../lib/api';
@@ -14,7 +14,7 @@ import Message from '../message';
 import { setLocalStorage } from '../../utils/storage';
 
 export default function GamerEmailDialog() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const { signMessageAsync, isLoading } = useSignMessage();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const [open, setOpen] = useRecoilState(gamerEmailShowAtom);
@@ -23,14 +23,14 @@ export default function GamerEmailDialog() {
   const mutation = useMutation<Response<any>, any, GamerEmailParams, any>((data) => fetchGamerEmail(data), {
     onSuccess: () => {
       toast.success(<Message message="Bind email successfully" title="Mission Complete" />);
-      setLocalStorage('dev_email_submit', 1);
+      setLocalStorage(STORAGE_KEY.DEV_EMAIL_SUBMIT, 1);
       setOpen(false);
       openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
     },
   });
 
   const onSubmit = (email: string) => {
-    if (!account?.address) {
+    if (!address) {
       return;
     }
     if (!/^[\w.+-]+@[\w-]+\.[\w-.]+$/.test(email)) {
@@ -38,10 +38,10 @@ export default function GamerEmailDialog() {
       return;
     }
     signMessageAsync({
-      message: JSON.stringify(getEmailSignData({ account: account.address, email: value })),
+      message: JSON.stringify(getEmailSignData({ account: address, email: value })),
     })
       .then((signature) => {
-        mutation.mutate({ wallet_address: account.address, email: value, signature });
+        mutation.mutate({ wallet_address: address, email: value, signature });
       })
       .catch((error) => error);
   };

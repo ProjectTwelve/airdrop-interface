@@ -8,12 +8,12 @@ import Button from '../button';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gamerClaimedPosterAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { NFT_CLAIM } from '../../constants';
+import { NFT_CLAIM, STORAGE_KEY } from '../../constants';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import PosterVideo from '../poster/PosterVideo';
 
 export default function GamerClaimSuccess() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const [open, setOpen] = useState<boolean>(false);
   const [videoPlay, setVideoPlay] = useState<boolean>(false);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
@@ -22,26 +22,23 @@ export default function GamerClaimSuccess() {
   const posterStyles = useRecoilValue(posterStylesAtom);
 
   const onVideoEnded = useCallback(() => {
-    const address = account?.address;
-    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
+    const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
     if (address) {
       setOpen(true);
       setVideoPlay(false);
       claimedMap[address] = 1;
-      setLocalStorage('gamer_claimed_map_01', claimedMap);
+      setLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP, claimedMap);
     }
-  }, [account?.address]);
+  }, [address]);
 
   const isGamerClaimed = useMemo(() => {
-    const address = account?.address;
     if (!gamerInfo) return false;
     if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
     return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === NFT_CLAIM.CLAIMED;
-  }, [account?.address, gamerInfo]);
+  }, [address, gamerInfo]);
 
   useEffect(() => {
-    const claimedMap = getLocalStorage('gamer_claimed_map_01') || {};
-    const address = account?.address;
+    const claimedMap = getLocalStorage(STORAGE_KEY.GAMER_CLAIMED_MAP) || {};
     if (address && isGamerClaimed && !claimedMap[address] && posterCapture) {
       if (isMobile && isIOS) {
         onVideoEnded();
@@ -49,7 +46,7 @@ export default function GamerClaimSuccess() {
       }
       setVideoPlay(true);
     }
-  }, [account?.address, gamerInfo?.wallet_address, onVideoEnded, posterCapture, isGamerClaimed]);
+  }, [address, gamerInfo?.wallet_address, onVideoEnded, posterCapture, isGamerClaimed]);
 
   return (
     <>

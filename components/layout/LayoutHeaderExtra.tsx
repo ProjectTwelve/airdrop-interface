@@ -9,6 +9,7 @@ import { openLink } from '../../utils';
 import { invitationCountSelector, inviteModalAtom } from '../../store/invite/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
+import { STORAGE_KEY } from '../../constants';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
@@ -19,7 +20,7 @@ function LayoutHeaderExtra() {
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
 
   useEffect(() => {
-    const currentStatus = getLocalStorage('invite_tips_click');
+    const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_TIPS_CLICK);
     setTipsClick(currentStatus ?? false);
   }, []);
 
@@ -36,7 +37,7 @@ function LayoutHeaderExtra() {
           >
             <Button type="bordered" className="mr-3" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center text-sm">
-                <Image src="/svg/whitepaper.svg" width={24} height={24} alt="whitepaper" />
+                <Image src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
                 &nbsp;Readme
               </div>
             </Button>
@@ -77,7 +78,7 @@ function LayoutHeaderExtra() {
                         className="cursor-pointer text-p12-link"
                         onClick={() => {
                           setTipsClick(true);
-                          setLocalStorage('invite_tips_click', true);
+                          setLocalStorage(STORAGE_KEY.INVITE_TIPS_CLICK, true);
                         }}
                       >
                         Okay

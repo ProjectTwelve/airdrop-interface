@@ -28,9 +28,9 @@ export const isSocialMediaClickSelector = selector({
   },
 });
 
-export const referralLinkAtom = atom({
-  key: 'referral_link',
-  default: 'Please connect your wallet first',
+export const referralCodeAtom = atom<string>({
+  key: 'referral_code',
+  default: undefined,
 });
 
 export const invitationCountAtom = atom<[number, number]>({

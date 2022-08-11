@@ -24,7 +24,7 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
       window.open('https://metamask.app.link/dapp/' + window.location.hostname);
       return;
     }
-    connector && connect(connector);
+    connector && connect({ connector });
   };
 
   return (

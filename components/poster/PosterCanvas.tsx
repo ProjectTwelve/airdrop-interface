@@ -3,24 +3,24 @@ import dayjs from 'dayjs';
 import QRCode from 'qrcode';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
-import html2canvas from './html2canvas.min';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import html2canvas from './html2canvas.min';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import { formatMinutes, getSteamGameImage, shortenSteamId } from '../../utils';
 import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
-import { referralLinkAtom } from '../../store/invite/state';
+import { referralCodeAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
 
 export default function PosterCanvas() {
-  const { data: account } = useAccount();
+  const { address } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const gamerGames = useRecoilValue(gamerGamesAtom);
-  const referralLink = useRecoilValue(referralLinkAtom);
+  const referralCode = useRecoilValue(referralCodeAtom);
   const posterStyles = useRecoilValue(posterStylesAtom);
   const setPosterCapture = useSetRecoilState(posterCaptureAtom);
   const [qrCode, setQrCode] = useState('');
-  const regLink = /(https|http):\/\/(.+)/.exec(referralLink);
+  const [link, setLink] = useState('');
 
   const steamInfo = useMemo(() => {
     if (!gamerInfo) return [];
@@ -43,11 +43,12 @@ export default function PosterCanvas() {
 
   useEffect(() => {
     setPosterCapture('');
-  }, [account?.address, setPosterCapture]);
+  }, [address, setPosterCapture]);
 
   useEffect(() => {
-    QRCode.toDataURL(referralLink, { margin: 2 }).then((url: string) => setQrCode(url));
-  }, [referralLink]);
+    setLink(window.location.host + '/?code=' + referralCode);
+    QRCode.toDataURL(window.location.origin + '/?code=' + referralCode, { margin: 2 }).then((url: string) => setQrCode(url));
+  }, [referralCode]);
 
   useEffect(() => {
     const capture: HTMLElement | null = document.querySelector('#poster-capture');
@@ -69,10 +70,7 @@ export default function PosterCanvas() {
   return (
     <div
       id="poster-capture"
-      className={classNames(
-        'fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]',
-        posterStyles[gamerInfo?.nft_level || 0].bg,
-      )}
+      className={classNames('fixed -z-10 w-[1080px] bg-cover px-[54px] py-[60px]', posterStyles[gamerInfo?.nft_level || 0].bg)}
     >
       <div className="flex items-start justify-between">
         <div className="flex">
@@ -155,7 +153,7 @@ export default function PosterCanvas() {
         <div className="absolute right-0 bottom-[10px] flex flex-col items-end">
           <img width={200} height={200} className="rounded-xl" src={qrCode} alt="qrcode" />
           <p className="mt-2 text-[22px]">My exclusive referral link</p>
-          <p className="text-[22px] text-p12-success">{regLink && regLink[2]}</p>
+          <p className="text-[22px] text-p12-success">{link}</p>
         </div>
       </div>
     </div>

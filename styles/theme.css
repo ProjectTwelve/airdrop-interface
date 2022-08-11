@@ -2,6 +2,7 @@
     --logo: url('/img/theme/01/logo.svg');
     --select: url('/img/theme/01/select.svg');
     --profile-info: url('/img/theme/01/profile_info.webp');
+    --collab-info: url('/img/theme/01/collab_info.webp');
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_purple.png');
     --gradient: repeating-linear-gradient(to right, #A011FF, #FF9E76);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A011FF, #FF9E76);
@@ -14,6 +15,7 @@
     --logo: url('/img/theme/02/logo.svg');
     --select: url('/img/theme/02/select.svg');
     --profile-info: url('/img/theme/02/profile_info.webp');
+    --collab-info: url('/img/theme/02/collab_info.webp');
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_green.png');
     --gradient: repeating-linear-gradient(to right, #09BDA0, #A3D365);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #09BDA0, #A3D365);
@@ -26,6 +28,7 @@
     --logo: url('/img/theme/03/logo.svg');
     --select: url('/img/theme/03/select.svg');
     --profile-info: url('/img/theme/03/profile_info.webp');
+    --collab-info: url('/img/theme/03/collab_info.webp');
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_orange.png');
     --gradient: repeating-linear-gradient(to right, #D9214D, #FFB876);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #D9214D, #FFB876);
@@ -38,6 +41,7 @@
     --logo: url('/img/theme/04/logo.svg');
     --select: url('/img/theme/04/select.svg');
     --profile-info: url('/img/theme/04/profile_info.webp');
+    --collab-info: url('/img/theme/04/collab_info.webp');
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_blue.png');
     --gradient: repeating-linear-gradient(to right, #A072FF, #3592FF);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A072FF, #3592FF);
