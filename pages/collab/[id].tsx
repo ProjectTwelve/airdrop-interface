@@ -10,21 +10,35 @@ import { fetchCollabItem, fetchCollabList } from '../../lib/api';
 import CollabReward from '../../components/collab/CollabReward';
 import { useCollabIsClaimed, useCollabTimes, useFetchCollabUserInfo } from '../../hooks/collab';
 import { useSetRecoilState } from 'recoil';
-import { collabUserInfoAtom } from '../../store/collab/state';
+import { collabClaimModalAtom, collabUserInfoAtom } from '../../store/collab/state';
 import classNames from 'classnames';
+import { useLocalStorage } from 'react-use';
+import { CollabClaimDialog } from '../../components/dialog/CollabClaimDialog';
+import { useAccount } from 'wagmi';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
   const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
   const { shortTimes } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
+  const [isFirstClaim, setIsFirstClaim] = useLocalStorage('collab_is_first_claim', true);
+  const setClaimModal = useSetRecoilState(collabClaimModalAtom);
   const isClaimed = useCollabIsClaimed();
-  const { data: collabUserInfo } = useFetchCollabUserInfo(collabCode);
+  const { address } = useAccount();
+  const { data: collabUserInfo, refetch: refetchCollabUserInfo } = useFetchCollabUserInfo(collabCode);
   const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
+
+  useEffect(() => {
+    if (address && !collabUserInfo) refetchCollabUserInfo();
+  }, [address, refetchCollabUserInfo, collabUserInfo]);
 
   useEffect(() => {
     if (!collabUserInfo) return;
     setNowUserInfo(collabUserInfo);
-  }, [collabUserInfo, setNowUserInfo]);
+    if (collabUserInfo?.resultStatus && isFirstClaim) {
+      setIsFirstClaim(false);
+      setClaimModal(true);
+    }
+  }, [collabUserInfo, setNowUserInfo, isFirstClaim, setIsFirstClaim, setClaimModal]);
 
   return (
     <div className="mt-8">
@@ -38,6 +52,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
           <CollabTimeLime {...shortTimes} />
           <CollabTasks data={data} />
           {isClaimed && <CollabReward data={data} />}
+          <CollabClaimDialog data={data} />
         </motion.div>
       </div>
     </div>
