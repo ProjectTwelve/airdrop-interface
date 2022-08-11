@@ -59,9 +59,14 @@ export const useCollabIsJoined = () => {
   return isJoined;
 };
 
-export const useCollabIsClaim = () => {
+export const useCollabIsClaim = (timeClaim: number) => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
-  return useMemo(() => !!userInfo?.resultStatus, [userInfo]);
+  return useMemo(() => {
+    const nowDate = dayjs();
+    const claimDate = dayjs.unix(timeClaim);
+    if (nowDate.isBefore(claimDate)) return false;
+    return !!userInfo?.resultStatus;
+  }, [userInfo, timeClaim]);
 };
 
 export const useCollabIsFirstClaim = (collabCode: string): [boolean, (status: boolean) => void] => {

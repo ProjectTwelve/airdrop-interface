@@ -22,7 +22,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
   const { shortTimes } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
   const [isFirstClaim, setIsFirstClaim] = useCollabIsFirstClaim(collabCode);
   const setClaimModal = useSetRecoilState(collabClaimModalAtom);
-  const isClaim = useCollabIsClaim();
+  const isClaim = useCollabIsClaim(timeClaim);
   const { address } = useAccount();
   const { data: collabUserInfo, refetch: refetchCollabUserInfo } = useFetchCollabUserInfo(collabCode);
   const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);

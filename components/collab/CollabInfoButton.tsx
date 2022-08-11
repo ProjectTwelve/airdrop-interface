@@ -32,7 +32,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const [isConnectOpen, setConnectOpen] = useRecoilState(isConnectPopoverOpen);
   const isJoined = useCollabIsJoined();
   const isConnected = useMemo(() => !!address, [address]);
-  const isClaim = useCollabIsClaim();
+  const isClaim = useCollabIsClaim(timeClaim);
   const isMounted = useIsMounted();
   const className = 'min-w-fit max-w-[300px] flex-grow';
 
