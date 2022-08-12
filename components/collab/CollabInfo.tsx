@@ -40,7 +40,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
         {nftImage ? (
           <img className="aspect-square w-full" src={nftImage} alt={`${projectName} nftImage`} />
         ) : (
-          <img className="aspect-square h-40" src={projectLogo} alt={`${projectName} Logo`} />
+          <img className="aspect-square h-[120px]" src={projectLogo} alt={`${projectName} Logo`} />
         )}
       </div>
       <div className="flex w-full max-w-full flex-grow flex-col p-[30px]">
