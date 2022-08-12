@@ -44,7 +44,7 @@ const Button = React.forwardRef(function ButtonInner(
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
         'disabled:cursor-not-allowed',
         loading && 'cursor-not-allowed hover:after:opacity-0',
-        bg[type || 'default'],
+        disabled ? bg['default'] : bg[type || 'default'],
         sizes[size || 'medium'],
         className,
       )}

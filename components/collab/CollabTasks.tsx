@@ -1,15 +1,16 @@
-import { useCallback, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useCallback, useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+import ReactGA from 'react-ga4';
+import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import { useMutation } from 'react-query';
 import { fetchCollabTweetVerify } from '../../lib/api';
 import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';
 import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
-import { useAccount } from 'wagmi';
-import ReactGA from 'react-ga4';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
@@ -18,6 +19,7 @@ export type CollabTasksProps = {
 
 export default function CollabTasks({ data }: CollabTasksProps) {
   const { taskGleam, taskTweetContent, collabCode } = data;
+  const [isJoinDisable, setIsJoinDisable] = useState<boolean>(false);
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
   const [value, setValue] = useState('');
@@ -55,10 +57,16 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     } else toast.error(<Message message="Not a legitimate twitter link!" />);
   }, [mutationVerify, value, collabCode, address]);
 
+  useEffect(() => {
+    const now = dayjs().unix();
+    const isOpen = now > data.timeJoin && now < data.timeAllocation;
+    setIsJoinDisable(!isOpen);
+  }, [data.timeAllocation, data.timeJoin]);
+
   return (
     <div className="mt-9 flex flex-col gap-1">
       <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
-      <p className="leading-7 text-[#9A9DAA] text-sm">
+      <p className="text-sm leading-7 text-[#9A9DAA]">
         Click the above Join Button and finish the following three steps to finish verification.
       </p>
       <div className="mt-4 grid grid-cols-3 gap-7 md:grid-cols-1">
@@ -108,7 +116,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
               className="w-full rounded-full bg-[#494E69]/60 px-5 leading-4 hover:bg-[#494E69]/80"
               placeholder="Paste the tweet URL"
             />
-            <Button type="gradient" className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
+            <Button type="gradient" disabled={isJoinDisable} className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
               Verify
             </Button>
           </div>
