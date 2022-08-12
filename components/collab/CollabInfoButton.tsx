@@ -140,7 +140,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   if (!isMounted) return null;
   if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
   if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
-  if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Picking');
+  if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Allocating');
   if (nowDate.isBetween(claimDate, closeDate, null, '[]'))
     return address ? generateClaimButton(className) : generateDisableButton(className, 'Connect Wallet');
   if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
