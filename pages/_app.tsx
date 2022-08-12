@@ -25,6 +25,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const queryClient = useMemo(() => new QueryClient(), []);
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+  const isCollab = useMemo(() => router.pathname.indexOf('/collab') !== -1, [router]);
 
   useEffect(() => {
     const { code } = router.query;
@@ -45,7 +46,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           key="keywords"
         />
         <meta property="og:description" content="P12 | Project Twelve | Genesis Airdrop" key="description" />
-        <meta property="og:image" content="https://cdn1.p12.games/airdrop/twitter_share.jpg" />
+        {!isCollab && <meta property="og:image" content="https://cdn1.p12.games/airdrop/twitter_share.jpg" />}
         <meta name="twitter:card" content="summary_large_image" />
         <meta content="light" name="twitter:widgets:theme" />
       </Head>
