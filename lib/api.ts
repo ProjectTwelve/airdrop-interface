@@ -159,7 +159,7 @@ export const fetchGamerReload = (data: { wallet_address?: string }) =>
   });
 
 export const fetchInvitationCount = (addr?: string) =>
-  request.get<any, Response<number[]>>('/v2/collab/list', { params: { addr } });
+  request.get<any, Response<number[]>>('/api/invitation/count', { params: { addr } });
 
 export const fetchCollabList = () => request.get<any, Response<CollabShortInfo[]>>('/v2/collab/list');
 

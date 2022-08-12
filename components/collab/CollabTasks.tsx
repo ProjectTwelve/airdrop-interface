@@ -56,12 +56,12 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   }, [mutationVerify, value, collabCode, address]);
 
   return (
-    <div className="mt-12 flex flex-col gap-1">
+    <div className="mt-9 flex flex-col gap-1">
       <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
-      <p className="leading-7 text-[#9A9DAA]">
+      <p className="leading-7 text-[#9A9DAA] text-sm">
         Click the above Join Button and finish the following three steps to finish verification.
       </p>
-      <div className=" mt-5 grid grid-cols-3 gap-7 md:grid-cols-1">
+      <div className="mt-4 grid grid-cols-3 gap-7 md:grid-cols-1">
         <CollabTaskItem
           key="airdrop"
           gaKey="airdrop"
@@ -78,6 +78,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
           content="Complete all required tasks on Gleam is a must step."
           href={taskGleam}
+          target="_blank"
           hrefLabel="To Gleam"
         />
         <CollabTaskItem

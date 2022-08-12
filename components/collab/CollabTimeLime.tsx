@@ -17,11 +17,11 @@ export function CollabTimeLineItem({ startTime, endTime, type, label }: CollabTi
         { 'bg-collab-timing -ml-4 md:ml-0 md:bg-none': type === 'normal' },
       )}
     >
-      <div className="text-[#1BD386]">
+      <div className="text-[#1BD386] text-sm">
         {startTime}
         {type !== 'close' && ` - ${endTime}`}
       </div>
-      <div>{label}</div>
+      <div className="text-sm">{label}</div>
     </div>
   );
 }
@@ -40,7 +40,7 @@ export type CollabTimeLimeProps = {
 
 export function CollabTimeLime({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose }: CollabTimeLimeProps) {
   return (
-    <div className="mt-4 grid grid-cols-5 md:grid-cols-1 md:gap-3">
+    <div className="grid grid-cols-5 md:grid-cols-1 md:gap-3">
       <CollabTimeLineItem key="timeComingSoon" startTime={timeComingSoon} endTime={timeJoin} type="open" label="Coming Soon" />
       <CollabTimeLineItem key="timeJoin" startTime={timeJoin} endTime={timeAllocation} label="Join" />
       <CollabTimeLineItem key="timeAllocation" startTime={timeAllocation} endTime={timeClaim} label="Allocation" />
