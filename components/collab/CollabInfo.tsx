@@ -36,7 +36,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   return (
     <div className="flex rounded-2xl bg-p12-black/80 md:flex-wrap">
-      <div className="flex w-[380px] flex-none items-center justify-center bg-collab-info bg-cover md:min-w-full">
+      <div className="flex aspect-square w-[380px] flex-none items-center justify-center bg-collab-info bg-cover md:w-full">
         {nftImage ? (
           <img className="aspect-square w-full" src={nftImage} alt={`${projectName} nftImage`} />
         ) : (
