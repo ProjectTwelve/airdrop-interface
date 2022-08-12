@@ -52,7 +52,7 @@ export default function Collab({ data }: { data: CollabInfoType }) {
         <div className="my-4" onClick={(event) => event.stopPropagation()}>
           <motion.div
             layoutId="collab"
-            className={classNames('backdrop-box flex flex-col gap-8 rounded-2xl p-8 xs:p-3', { 'pb-[60px]': !isClaim })}
+            className={classNames('backdrop-box flex flex-col gap-6 rounded-2xl p-8 xs:p-3', { 'pb-[60px]': !isClaim })}
           >
             <CollabInfo data={data} />
             <CollabTimeLime {...shortTimes} />

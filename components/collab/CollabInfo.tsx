@@ -35,17 +35,17 @@ export default function CollabInfo({ data }: CollabInfoProps) {
   }, [projectChain]);
 
   return (
-    <div className="flex min-h-[480px] rounded-2xl bg-p12-black/80 md:flex-wrap">
-      <div className="flex min-h-[340px] min-w-[480px] items-center justify-center bg-collab-info bg-cover md:min-w-full">
+    <div className="flex rounded-2xl bg-p12-black/80 md:flex-wrap">
+      <div className="flex w-[380px] flex-none items-center justify-center bg-collab-info bg-cover md:min-w-full">
         {nftImage ? (
           <img className="aspect-square w-full" src={nftImage} alt={`${projectName} nftImage`} />
         ) : (
           <img className="aspect-square h-40" src={projectLogo} alt={`${projectName} Logo`} />
         )}
       </div>
-      <div className="flex w-full max-w-full flex-grow flex-col p-9">
+      <div className="flex w-full max-w-full flex-grow flex-col p-[30px]">
         <h1 className="text-3xl font-semibold leading-9">{projectName}</h1>
-        <div className="pt-1 text-sm leading-5 text-p12-sub">
+        <div className="text-xs leading-5 text-p12-sub">
           Time: {startTime} - {endTime}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -80,8 +80,11 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             />
           )}
         </div>
-        <div className="mt-8 flex-grow whitespace-pre-wrap leading-7">{projectInfo}</div>
-        <div className="mt-8 flex items-center justify-between gap-4 md:flex-wrap">
+        <div
+          className="mt-5 flex-grow whitespace-pre-wrap text-sm leading-7"
+          dangerouslySetInnerHTML={{ __html: projectInfo }}
+        />
+        <div className="mt-5 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             {tokenAmount ? (
               <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
