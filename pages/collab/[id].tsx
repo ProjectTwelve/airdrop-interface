@@ -34,11 +34,11 @@ export default function Collab({ data }: { data: CollabInfoType }) {
   useEffect(() => {
     if (!collabUserInfo) return;
     setNowUserInfo(collabUserInfo);
-    if (collabUserInfo?.resultStatus && isFirstClaim) {
+    if (isClaim && isFirstClaim) {
       setIsFirstClaim(false);
       setClaimModal(true);
     }
-  }, [collabUserInfo, setNowUserInfo, isFirstClaim, setIsFirstClaim, setClaimModal]);
+  }, [collabUserInfo, setNowUserInfo, isFirstClaim, setIsFirstClaim, setClaimModal, isClaim]);
 
   return (
     <>
