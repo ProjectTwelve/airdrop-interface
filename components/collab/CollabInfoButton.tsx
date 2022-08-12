@@ -74,11 +74,22 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   }, [collabCode, address, mutationJoin, setConnectOpen, isJoined]);
 
   useEffect(() => {
-    if (isConnectOpen && isConnected && address && !isJoined) {
+    if (isConnectOpen && isConnected && address && !isJoined && nowDate.isBetween(joinDate, allocDate, null, '[)')) {
       mutationUserInfo.mutate({ collabCode, walletAddress: address });
       setConnectOpen(false);
     }
-  }, [isConnectOpen, isConnected, address, collabCode, mutationUserInfo, setConnectOpen, isJoined]);
+  }, [
+    isConnectOpen,
+    isConnected,
+    address,
+    collabCode,
+    mutationUserInfo,
+    setConnectOpen,
+    isJoined,
+    nowDate,
+    joinDate,
+    allocDate,
+  ]);
 
   const handleClaim = useCallback(() => {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
