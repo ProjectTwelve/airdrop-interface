@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import dayjs from 'dayjs';
+import ReactGA from 'react-ga4';
+import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import { useMutation } from 'react-query';
 import { fetchCollabTweetVerify } from '../../lib/api';
 import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';
 import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
-import { useAccount } from 'wagmi';
-import ReactGA from 'react-ga4';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
@@ -57,8 +58,8 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   }, [mutationVerify, value, collabCode, address]);
 
   useEffect(() => {
-    const now = new Date();
-    const isOpen = now.getTime() < data.timeJoin && now.getTime() > data.timeAllocation;
+    const now = dayjs().unix();
+    const isOpen = now > data.timeJoin && now < data.timeAllocation;
     setIsJoinDisable(!isOpen);
   }, [data.timeAllocation, data.timeJoin]);
 
@@ -115,12 +116,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
               className="w-full rounded-full bg-[#494E69]/60 px-5 leading-4 hover:bg-[#494E69]/80"
               placeholder="Paste the tweet URL"
             />
-            <Button
-              type={isJoinDisable ? 'default' : 'gradient'}
-              disabled={isJoinDisable}
-              className="w-28 min-w-fit flex-grow"
-              onClick={handleVerify}
-            >
+            <Button type="gradient" disabled={isJoinDisable} className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
               Verify
             </Button>
           </div>

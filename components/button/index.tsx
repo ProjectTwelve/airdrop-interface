@@ -26,7 +26,6 @@ const Button = React.forwardRef(function ButtonInner(
   const bg = {
     default: 'bg-[#494E69]/40',
     error: 'bg-red-400',
-    disabled: 'bg-[#494E69]/40',
     gradient: 'bg-p12-gradient',
     bordered: 'border',
   };
@@ -45,7 +44,7 @@ const Button = React.forwardRef(function ButtonInner(
         disabled || 'after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-20',
         'disabled:cursor-not-allowed',
         loading && 'cursor-not-allowed hover:after:opacity-0',
-        disabled ? bg['disabled'] : bg[type || 'default'],
+        disabled ? bg['default'] : bg[type || 'default'],
         sizes[size || 'medium'],
         className,
       )}
