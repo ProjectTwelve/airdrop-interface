@@ -19,6 +19,7 @@
   "dependencies": {
     "@floating-ui/react-dom-interactions": "^0.9.1",
     "@tailwindcss/line-clamp": "^0.4.0",
+    "@tanstack/react-query": "4.0.10",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "dayjs": "^1.11.2",
@@ -32,13 +33,12 @@
     "react-dom": "18.2.0",
     "react-ga4": "^1.4.1",
     "react-jazzicon": "^1.0.4",
-    "react-query": "4.0.0-beta.23",
     "react-table": "^7.8.0",
     "react-tabs": "^5.1.0",
     "react-toastify": "^9.0.8",
     "react-use": "^17.4.0",
     "recoil": "^0.7.4",
-    "wagmi": "0.6.1"
+    "wagmi": "0.6.3"
   },
   "devDependencies": {
     "@types/node": "17.0.35",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAccount } from 'wagmi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import Web3Status from '../web3/Web3Status';

@@ -3,7 +3,7 @@ import Button from '../../button';
 import Image from 'next/image';
 import Message from '../../message';
 import { CloseCircle } from '../../svg/CloseCircle';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchDeveloperGame } from '../../../lib/api';
 import { toast } from 'react-toastify';
 import { SteamApp } from '../Verify';
