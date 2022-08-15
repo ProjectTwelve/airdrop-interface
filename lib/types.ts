@@ -227,7 +227,6 @@ export type CollabChainItem = Partial<{
   url: string;
   name: string;
   contractAddress?: string;
-  opensea?: string;
 }>;
 
 export type CollabTimes = {
@@ -268,6 +267,7 @@ export type CollabInfoType = {
   projectTwitter?: string;
   projectWebsite?: string;
   projectWhitepaper?: string;
+  projectOpensea?: string;
 
   tokenAmount?: number;
   tokenIcon?: string;
