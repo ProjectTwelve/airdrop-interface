@@ -28,9 +28,14 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
-    return projectChain.map(({ chainId, name, url }) => {
+    return projectChain.map(({ chainId, name, url, opensea, contractAddress }) => {
       if (!chainId || !url) return null;
-      return <CollabSocials key={chainId} icon={url} label={name} />;
+      return (
+        <>
+          <CollabSocials key={chainId} icon={url} label={name} href={contractAddress} />
+          {opensea ? <CollabSocials key={opensea} icon="/svg/opensea.svg" label="OpenSea" href={opensea} /> : null}
+        </>
+      );
     });
   }, [projectChain]);
 

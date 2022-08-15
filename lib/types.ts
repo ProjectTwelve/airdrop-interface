@@ -226,6 +226,8 @@ export type CollabChainItem = Partial<{
   chainId: number;
   url: string;
   name: string;
+  contractAddress?: string;
+  opensea?: string;
 }>;
 
 export type CollabTimes = {
