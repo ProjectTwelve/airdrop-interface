@@ -19,6 +19,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     projectWebsite,
     projectTwitter,
     projectDiscord,
+    projectOpensea,
     timeComingSoon,
     timeClose,
     tokenAmount,
@@ -28,9 +29,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
 
   const badgeChains = useMemo(() => {
     if (!projectChain?.length) return null;
-    return projectChain.map(({ chainId, name, url }) => {
+    return projectChain.map(({ chainId, name, url, contractAddress }) => {
       if (!chainId || !url) return null;
-      return <CollabSocials key={chainId} icon={url} label={name} />;
+      return <CollabSocials key={chainId} icon={url} label={name} href={contractAddress} />;
     });
   }, [projectChain]);
 
@@ -61,6 +62,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             <CollabSocials key="white_paper" href={projectWhitepaper} icon="/svg/white_paper_2.svg" label="Whitepaper" />
           )}
           {badgeChains}
+          {projectOpensea && (
+            <CollabSocials key="projectOpensea" icon="/svg/opensea.svg" label="OpenSea" href={projectOpensea} />
+          )}
           {projectTwitter && (
             <CollabSocials
               key="twitter"
