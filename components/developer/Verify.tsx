@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useSignMessage } from 'wagmi';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Button from '../button';
 import Message from '../message';
 import { STORAGE_KEY } from '../../constants';

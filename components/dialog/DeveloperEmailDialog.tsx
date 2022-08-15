@@ -2,7 +2,7 @@ import Dialog from './index';
 import Button from '../button';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAccount, useSignMessage } from 'wagmi';
 import { getEmailSignData } from '../../utils';
 import { fetchDeveloperEmail } from '../../lib/api';

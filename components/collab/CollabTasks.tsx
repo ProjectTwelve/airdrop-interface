@@ -4,7 +4,7 @@ import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { fetchCollabTweetVerify } from '../../lib/api';
 import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';

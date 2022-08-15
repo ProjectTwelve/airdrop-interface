@@ -2,7 +2,7 @@ import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Message from '../components/message';
 import { getLocalStorage } from '../utils/storage';
 import { BinSteamParams, Response } from '../lib/types';

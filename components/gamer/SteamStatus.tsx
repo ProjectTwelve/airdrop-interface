@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import Pagination from 'rc-pagination';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import Empty from '../empty';
 import Button from '../button';
 import Loading from '../loading';
