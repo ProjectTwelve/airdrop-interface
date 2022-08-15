@@ -94,7 +94,7 @@ export default function Home() {
       <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
         {COLLAB_OPEN ? (
           <>
-            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
+            <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
               <LeaderboardTabs />
             </RankingHomeCard>
             <CollabHomeCard title="Airdrops" />
