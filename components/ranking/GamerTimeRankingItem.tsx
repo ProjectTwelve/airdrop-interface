@@ -2,12 +2,11 @@ import React, { MouseEvent } from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
-import { formatMinutes, getCountMemo, openLink } from '../../utils';
+import { formatMinutes, openLink } from '../../utils';
 
 export function GamerTimeRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
-      <p className="w-[65px]">Rank</p>
       <p className="w-[120px] xs:hidden">Timestamp</p>
       <p>User Info</p>
     </div>
@@ -24,20 +23,17 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
     openLink('https://steamcommunity.com/profiles/' + data.steam_id);
   };
 
+  const handleToGamerProfile = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    openLink('/gamer/' + data.wallet_address);
+  };
+
   return (
     <div
       onClick={handleToSteamProfile}
       className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
-      <div
-        className={classNames(
-          'mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2',
-          data.index && data.index >= 100000 && 'xs:text-sm xs:leading-[72px]',
-        )}
-      >
-        {getCountMemo(data.index)}
-      </div>
-      <div className="mt-3 mr-4 w-[100px] flex-none break-words font-medium xs:hidden">
+      <div className="mt-3 mr-4 h-[72px] w-[100px] flex-none break-words font-medium xs:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
       </div>
@@ -45,7 +41,22 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
         <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="float-right w-[95px] rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
+        <div className="group float-right flex h-[55px] items-center justify-between xs:hidden" onClick={handleToGamerProfile}>
+          <span className="pr-1 text-p12-sub group-hover:text-white">Details</span>
+          <svg
+            className="stroke-p12-sub group-hover:stroke-white"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M16.1376 2.875L19.625 6.36244V14V21.125H13H4.375V14V2.875H16.1376Z" strokeWidth="1.75" />
+            <path d="M16.5 15H7.5" strokeWidth="1.75" />
+            <path d="M16.5 10L7.5 10" strokeWidth="1.75" />
+          </svg>
+        </div>
+        <div className="float-right mr-2 w-[95px] rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">SS Games</p>
           <p
             className={classNames(
@@ -56,7 +67,7 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
             {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
-        <div className="float-right mr-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1  xs:mr-0">
+        <div className="float-right mr-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:mr-0">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
             {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}

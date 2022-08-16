@@ -72,6 +72,7 @@ export type DevRankInfo = {
   createdAt: string;
 };
 export type GamerRankInfo = {
+  wallet_address: string;
   person_name: string;
   time_created: number;
   steam_id: string;

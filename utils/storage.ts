@@ -17,7 +17,7 @@ function getStorage(type: 'localStorage' | 'sessionStorage', key: string) {
       return undefined;
     }
   } catch (e) {
-    console.error('JSON.parse getStorage Error', type);
+    console.error('JSON.parse getStorage Error: ' + key);
     return undefined;
   }
 }
