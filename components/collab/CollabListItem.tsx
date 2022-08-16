@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabShortInfo } from '../../lib/types';
 import ReactGA from 'react-ga4';
+import dayjs from 'dayjs';
 
 type CollabItemProps = {
   data: CollabShortInfo;
@@ -13,6 +14,8 @@ export default function CollabListItem({ data }: CollabItemProps) {
     data;
 
   const { startTime, endTime } = useCollabTimes({ timeComingSoon, timeClose });
+  const nowTime = dayjs();
+  const closeTime = dayjs.unix(timeClose);
 
   return (
     <div
@@ -40,6 +43,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
         <div className="flex items-center text-xs leading-5 text-p12-sub">
           {startTime} ~ {endTime}
         </div>
+        {nowTime.isAfter(closeTime) && <div className="flex items-center text-xs leading-5 text-p12-sub">Closed</div>}
       </div>
     </div>
   );
