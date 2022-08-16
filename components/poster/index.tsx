@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import ReactGA from 'react-ga4';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
+import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
 import { gamerClaimedPosterAtom, gamerInfoAtom } from '../../store/gamer/state';
 import { posterBtnShowAtom, posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import { downloadImage } from '../../utils';
@@ -11,6 +12,7 @@ import Button from '../button';
 
 export default function Poster() {
   const ref = useRef(null);
+  const router = useRouter();
   const [open, setOpen] = useRecoilState(gamerClaimedPosterAtom);
   const setPosterBtnShow = useSetRecoilState(posterBtnShowAtom);
   const posterCapture = useRecoilValue(posterCaptureAtom);
@@ -64,20 +66,22 @@ export default function Poster() {
                   Save Image <img src="/svg/picture-2.svg" width="20" height="20" className="ml-2" alt="picture" />
                 </div>
               </Button>
-              <div className="mt-5 flex flex-col items-center xs:hidden">
-                <p>Share with your friends</p>
-                <div className="mt-2 grid grid-cols-3 gap-3">
-                  <a href="https://discord.gg/p12" target="_blank">
-                    <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
-                  </a>
-                  <a href="https://twitter.com/home" target="_blank">
-                    <img className="inline h-5 w-5" src="/img/twitter.png" width={20} height={20} alt="twitter" />
-                  </a>
-                  <a href="https://www.facebook.com/" target="_blank">
-                    <img className="inline h-5 w-5" src="/img/facebook.png" width={20} height={20} alt="facebook" />
-                  </a>
+              {router.pathname !== '/gamer/[address]' && (
+                <div className="mt-5 flex flex-col items-center xs:hidden">
+                  <p>Share with your friends</p>
+                  <div className="mt-2 grid grid-cols-3 gap-3">
+                    <a href="https://discord.gg/p12" target="_blank">
+                      <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
+                    </a>
+                    <a href="https://twitter.com/home" target="_blank">
+                      <img className="inline h-5 w-5" src="/img/twitter.png" width={20} height={20} alt="twitter" />
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank">
+                      <img className="inline h-5 w-5" src="/img/facebook.png" width={20} height={20} alt="facebook" />
+                    </a>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </FloatingOverlay>
