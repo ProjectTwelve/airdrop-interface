@@ -69,7 +69,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
         <>
           <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
           <p className="text-sm leading-7 text-[#9A9DAA]">
-            Click the above Join Button and finish the following three steps to finish verification.
+            Click the above Join Button and finish the following the steps to finish verification.
           </p>
         </>
       ) : null}
@@ -78,7 +78,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           <div className="flex flex-col gap-5">
             <h1 className="mt-7 text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
             <p className="text-sm leading-7 text-[#9A9DAA]">
-              Click the above Join Button and finish the following three steps to finish verification.
+              Click the above Join Button and finish the following the steps to finish verification.
             </p>
           </div>
         )}
