@@ -35,13 +35,13 @@ function Web3Status() {
     }
     return (
       <div className="flex items-center">
-        {router.pathname === '/gamer' && posterCapture && <PosterButton />}
+        {router.pathname.indexOf('/gamer') !== -1 && posterCapture && <PosterButton />}
         <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
           <div className="md:hidden">
             <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
             <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
           </div>
-          <Web3StatusInner />
+          {router.pathname !== '/gamer/[address]' && <Web3StatusInner />}
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
+import { useRouter } from 'next/router';
 import Pagination from 'rc-pagination';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useQueryClient } from '@tanstack/react-query';
@@ -20,6 +21,8 @@ import { useIsMounted } from '../../hooks/useIsMounted';
 export default function SteamStatus() {
   const pageSize = 6;
   const { address } = useAccount();
+  const router = useRouter();
+  const { query } = router;
   const queryClient = useQueryClient();
   const [steamSignIn] = useSteamSignIn();
   const isMounted = useIsMounted();
@@ -27,7 +30,7 @@ export default function SteamStatus() {
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const gamesData = useRecoilValue(gamerGamesAtom);
-  const { refetch, isFetching } = useGamerGames(address);
+  const { refetch, isFetching } = useGamerGames((query.address as string | undefined) ?? address);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
     return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);

@@ -1,18 +1,16 @@
 import React, { MouseEvent } from 'react';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
-import { formatMinutes, getCountMemo, openLink } from '../../utils';
 import { GAMER_BADGES } from '../../constants';
+import { formatMinutes, getCountMemo, openLink } from '../../utils';
 
 export function GamerTokenRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
       <p className="w-[65px]">Rank</p>
       <p className="flex-1">User Info</p>
-      <p className="w-[100px] xs:hidden">Reward</p>
-      <p className="w-[60px] xs:hidden">Badge</p>
+      <p className="w-[160px] xs:hidden">Badge</p>
     </div>
   );
 }
@@ -24,6 +22,11 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   const handleToSteamProfile = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     openLink('https://steamcommunity.com/profiles/' + data.steam_id);
+  };
+
+  const handleToGamerProfile = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    openLink('/gamer/' + data.wallet_address);
   };
 
   return (
@@ -63,12 +66,25 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
           <div className="w-48" />
         </div>
       </div>
-      <div className="float-right mx-4 flex h-[72px] items-center justify-between xs:hidden">
-        <p className="mr-2 cursor-pointer font-ddin text-xl font-bold">?,???</p>
-        <Image layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-      </div>
-      <div className={classNames('float-right h-[72px] w-[72px] flex-none xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
+      <div
+        className={classNames('float-right mx-4 h-[72px] w-[72px] flex-none xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}
+      >
         {data.nft_level !== undefined && <img src={GAMER_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
+      </div>
+      <div className="group float-right flex h-[72px] items-center justify-between xs:hidden" onClick={handleToGamerProfile}>
+        <span className="pr-1 text-p12-sub group-hover:text-white">Details</span>
+        <svg
+          className="stroke-p12-sub group-hover:stroke-white"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M16.1376 2.875L19.625 6.36244V14V21.125H13H4.375V14V2.875H16.1376Z" strokeWidth="1.75" />
+          <path d="M16.5 15H7.5" strokeWidth="1.75" />
+          <path d="M16.5 10L7.5 10" strokeWidth="1.75" />
+        </svg>
       </div>
       <div className="clear-both" />
     </div>

@@ -47,21 +47,23 @@ function LayoutHeaderExtra() {
                 &nbsp;Airdrop roadmap
               </div>
             </Button>
-            <Button
-              type="bordered"
-              onClick={() => {
-                ReactGA.event({ category: 'Invite', action: 'Click', label: 'Header' });
-                setInviteOpen(true);
-              }}
-            >
-              <div className="flex items-center justify-center text-sm">
-                <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
-                &nbsp;My referral link
-                <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
-                  {invitationCount}
-                </p>
-              </div>
-            </Button>
+            {router.pathname !== '/gamer/[address]' && (
+              <Button
+                type="bordered"
+                onClick={() => {
+                  ReactGA.event({ category: 'Invite', action: 'Click', label: 'Header' });
+                  setInviteOpen(true);
+                }}
+              >
+                <div className="flex items-center justify-center text-sm">
+                  <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
+                  &nbsp;My referral link
+                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
+                    {invitationCount}
+                  </p>
+                </div>
+              </Button>
+            )}
             <AnimatePresence>
               {!tipsClick && (
                 <motion.div
