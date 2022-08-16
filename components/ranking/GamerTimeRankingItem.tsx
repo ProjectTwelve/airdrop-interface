@@ -33,7 +33,7 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
       onClick={handleToSteamProfile}
       className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
     >
-      <div className="mt-3 mr-4 h-[72px] w-[100px] flex-none break-words font-medium xs:hidden">
+      <div className="pt-3 mr-4 h-[72px] w-[100px] flex-none break-words font-medium xs:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
       </div>

@@ -53,20 +53,20 @@ export default function Poster() {
               }}
               alt="close"
             />
-            <div className="absolute top-1/2 -right-[300px] flex -translate-y-1/2 flex-col items-center justify-center xs:fixed xs:top-[85vh] xs:left-0 xs:right-0 xs:translate-y-0">
-              <Button
-                type="gradient"
-                style={{ width: 278 }}
-                onClick={() => {
-                  ReactGA.event({ category: 'Poster', action: 'Click', label: 'save' });
-                  downloadImage(posterCapture);
-                }}
-              >
-                <div className="flex justify-center text-[18px] font-medium">
-                  Save Image <img src="/svg/picture-2.svg" width="20" height="20" className="ml-2" alt="picture" />
-                </div>
-              </Button>
-              {router.pathname !== '/gamer/[address]' && (
+            {router.pathname !== '/gamer/[address]' && (
+              <div className="absolute top-1/2 -right-[300px] flex -translate-y-1/2 flex-col items-center justify-center xs:fixed xs:top-[85vh] xs:left-0 xs:right-0 xs:translate-y-0">
+                <Button
+                  type="gradient"
+                  style={{ width: 278 }}
+                  onClick={() => {
+                    ReactGA.event({ category: 'Poster', action: 'Click', label: 'save' });
+                    downloadImage(posterCapture);
+                  }}
+                >
+                  <div className="flex justify-center text-[18px] font-medium">
+                    Save Image <img src="/svg/picture-2.svg" width="20" height="20" className="ml-2" alt="picture" />
+                  </div>
+                </Button>
                 <div className="mt-5 flex flex-col items-center xs:hidden">
                   <p>Share with your friends</p>
                   <div className="mt-2 grid grid-cols-3 gap-3">
@@ -81,8 +81,8 @@ export default function Poster() {
                     </a>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </FloatingOverlay>
       )}
