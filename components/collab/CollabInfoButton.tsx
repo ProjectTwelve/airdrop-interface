@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import { useCallback, useEffect, useMemo } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import { useCollabIsJoined, useCollabIsClaim } from '../../hooks/collab';
@@ -24,6 +24,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, nftClaimLink, tokenClaimLink } = data;
   const nowDate = dayjs();
   const joinDate = dayjs.unix(timeJoin);
+  const comingSoonText = joinDate.format('MMM D, YYYY h:mm A');
   const allocDate = dayjs.unix(timeAllocation);
   const claimDate = dayjs.unix(timeClaim);
   const closeDate = dayjs.unix(timeClose);
@@ -138,7 +139,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   );
 
   if (!isMounted) return null;
-  if (nowDate.isBefore(joinDate)) return generateDisableButton(className, 'Coming Soon');
+  if (nowDate.isBefore(joinDate)) return generateDisableButton(className, comingSoonText);
   if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
   if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Allocating');
   if (nowDate.isBetween(claimDate, closeDate, null, '[]'))

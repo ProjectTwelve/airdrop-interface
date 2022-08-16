@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Button from '../../button';
 import Image from 'next/image';
-import Message from '../../message';
-import { CloseCircle } from '../../svg/CloseCircle';
-import { useQuery } from 'react-query';
-import { fetchDeveloperGame } from '../../../lib/api';
 import { toast } from 'react-toastify';
-import { SteamApp } from '../Verify';
 import { useSetRecoilState } from 'recoil';
+import { useMutation } from '@tanstack/react-query';
+import Button from '../../button';
+import Message from '../../message';
+import { SteamApp } from '../Verify';
+import { CloseCircle } from '../../svg/CloseCircle';
+import { fetchDeveloperGame } from '../../../lib/api';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 
 type SteamGameItemProps = {
@@ -20,8 +20,7 @@ type SteamGameItemProps = {
 function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   const [value, setValue] = useState('');
   const setOpen = useSetRecoilState(roadmapModalAtom);
-  const { isLoading, refetch } = useQuery(['developer_game', app.index], () => fetchDeveloperGame({ appid: value }), {
-    enabled: false,
+  const { isLoading, mutate } = useMutation<any, any, { appid: string }>((data) => fetchDeveloperGame(data), {
     onSuccess: (data) => {
       if (data.code !== 0) {
         toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
@@ -82,7 +81,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             type={value ? 'gradient' : 'default'}
             size="small"
             className="min-w-[56px] text-sm font-medium"
-            onClick={refetch}
+            onClick={() => mutate({ appid: value })}
           >
             Add
           </Button>

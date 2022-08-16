@@ -4,7 +4,7 @@ import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { fetchCollabTweetVerify } from '../../lib/api';
 import { referralCodeAtom } from '../../store/invite/state';
 import Button from '../button';
@@ -65,11 +65,23 @@ export default function CollabTasks({ data }: CollabTasksProps) {
 
   return (
     <div className="mt-9 flex flex-col gap-1">
-      <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
-      <p className="text-sm leading-7 text-[#9A9DAA]">
-        Click the above Join Button and finish the following three steps to finish verification.
-      </p>
+      {taskTweetContent ? (
+        <>
+          <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
+          <p className="text-sm leading-7 text-[#9A9DAA]">
+            Click the above Join Button and finish the following the steps to finish verification.
+          </p>
+        </>
+      ) : null}
       <div className="mt-4 grid grid-cols-3 gap-7 md:grid-cols-1">
+        {taskTweetContent ? null : (
+          <div className="flex flex-col gap-5">
+            <h1 className="mt-7 text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
+            <p className="text-sm leading-7 text-[#9A9DAA]">
+              Click the above Join Button and finish the following the steps to finish verification.
+            </p>
+          </div>
+        )}
         <CollabTaskItem
           key="airdrop"
           gaKey="airdrop"
@@ -89,38 +101,40 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           target="_blank"
           hrefLabel="To Gleam"
         />
-        <CollabTaskItem
-          key="share"
-          title="Share"
-          icon={<img className="aspect-square h-8" src="/img/collab/share.png" alt="Share icon" />}
-          content={
-            <>
-              <span>Click button to make a tweet</span>
-              <CollabSocials
-                onClick={handleTwitterShareClick}
-                icon="/svg/twitter.svg"
-                label="Send Twitter"
-                className="bg-[#02A9F4]/100"
+        {taskTweetContent ? (
+          <CollabTaskItem
+            key="share"
+            title="Share"
+            icon={<img className="aspect-square h-8" src="/img/collab/share.png" alt="Share icon" />}
+            content={
+              <>
+                <span>Click button to make a tweet</span>
+                <CollabSocials
+                  onClick={handleTwitterShareClick}
+                  icon="/svg/twitter.svg"
+                  label="Send Twitter"
+                  className="bg-[#02A9F4]/100"
+                />
+                <span>
+                  Then copy-paste the tweet URL into the below input box{' '}
+                  <img className="inline" src={'/svg/down-2.svg'} alt="down-icon" />
+                </span>
+              </>
+            }
+          >
+            <div className="flex h-11 gap-3">
+              <input
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                className="w-full rounded-full bg-[#494E69]/60 px-5 leading-4 hover:bg-[#494E69]/80"
+                placeholder="Paste the tweet URL"
               />
-              <span>
-                Then copy-paste the tweet URL into the below input box{' '}
-                <img className="inline" src={'/svg/down-2.svg'} alt="down-icon" />
-              </span>
-            </>
-          }
-        >
-          <div className="flex h-11 gap-3">
-            <input
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              className="w-full rounded-full bg-[#494E69]/60 px-5 leading-4 hover:bg-[#494E69]/80"
-              placeholder="Paste the tweet URL"
-            />
-            <Button type="gradient" disabled={isJoinDisable} className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
-              Verify
-            </Button>
-          </div>
-        </CollabTaskItem>
+              <Button type="gradient" disabled={isJoinDisable} className="w-28 min-w-fit flex-grow" onClick={handleVerify}>
+                Verify
+              </Button>
+            </div>
+          </CollabTaskItem>
+        ) : null}
       </div>
     </div>
   );

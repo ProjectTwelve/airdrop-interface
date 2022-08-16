@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useEffect, useMemo } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Script from 'next/script';

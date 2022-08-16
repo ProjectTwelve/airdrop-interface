@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchDeveloperInvitation } from '../lib/api';
 
 export const useDevInvitation = (addr?: string) => {

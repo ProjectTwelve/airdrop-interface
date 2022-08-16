@@ -6,7 +6,7 @@ import { getEmailSignData, openLink } from '../../utils';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
 import {GAMER_BADGES, STORAGE_KEY} from '../../constants';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { GamerEmailParams, Response } from '../../lib/types';
 import { fetchGamerEmail } from '../../lib/api';
 import { toast } from 'react-toastify';

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 import { fetchCollabList, fetchCollabUserInfo } from '../lib/api';
 import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/types';
