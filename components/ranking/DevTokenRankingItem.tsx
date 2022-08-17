@@ -1,5 +1,4 @@
 import React, { MouseEvent } from 'react';
-import Image from 'next/image';
 import classNames from 'classnames';
 import { DEV_BADGES } from '../../constants';
 import { DevRankInfo } from '../../lib/types';
@@ -10,7 +9,6 @@ export function DevTokenRankingHeader() {
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">Game</p>
-      <p className="w-[100px] xs:hidden">Reward</p>
       <p className="w-[60px] xs:hidden">Badge</p>
     </div>
   );
@@ -40,11 +38,7 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
         <div className={classNames('float-right h-[72px] w-[72px] xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
-        <div className="float-right mx-4 flex h-[72px] items-center justify-between xs:hidden">
-          <p className="mr-2 cursor-pointer font-ddin text-xl font-bold">?,???</p>
-          <Image src="/img/p12.png" width={30} height={30} alt="p12" />
-        </div>
-        <div className="truncate">
+        <div className="truncate pr-4">
           <h4 className="truncate font-medium">{data.name}</h4>
           <div className="mt-1.5 truncate text-xs">
             {data.release_date} &nbsp;&nbsp;

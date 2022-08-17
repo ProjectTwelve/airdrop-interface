@@ -11,7 +11,7 @@ import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo } from '../../hooks/gamer';
-import { gamerEmailShowAtom, gamerInfoAtom } from '../../store/gamer/state';
+import { gamerEmailShowAtom, gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import { openLink } from '../../utils';
@@ -29,6 +29,7 @@ export default function Gamer() {
   const { address } = useAccount();
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const gamerGames = useRecoilValue(gamerGamesAtom);
   const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const [, invitation] = useRecoilValue(invitationCountAtom);
   useGamerInfo(address);
@@ -193,8 +194,8 @@ export default function Gamer() {
       <GamerEmailDialog />
       <PermissionSettingDialog />
       <GamerClaimSuccess />
-      <Poster />
-      <PosterCanvas />
+      <Poster gamerInfo={gamerInfo} />
+      <PosterCanvas gamerInfo={gamerInfo} gamerGames={gamerGames} />
     </div>
   );
 }
