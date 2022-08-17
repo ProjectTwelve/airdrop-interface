@@ -5,19 +5,19 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
-import { gamerClaimedPosterAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { posterBtnShowAtom, posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
-import { downloadImage } from '../../utils';
+import { gamerClaimedPosterAtom } from '../../store/gamer/state';
 import Button from '../button';
+import { downloadImage } from '../../utils';
+import { GamerInfoData } from '../../lib/types';
+import { posterBtnShowAtom, posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 
-export default function Poster() {
+export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
   const ref = useRef(null);
   const router = useRouter();
   const [open, setOpen] = useRecoilState(gamerClaimedPosterAtom);
   const setPosterBtnShow = useSetRecoilState(posterBtnShowAtom);
   const posterCapture = useRecoilValue(posterCaptureAtom);
   const posterStyles = useRecoilValue(posterStylesAtom);
-  const gamerInfo = useRecoilValue(gamerInfoAtom);
 
   useEffect(() => {
     if (open) {

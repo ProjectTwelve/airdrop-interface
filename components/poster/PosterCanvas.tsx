@@ -6,16 +6,14 @@ import classNames from 'classnames';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import html2canvas from './html2canvas.min';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
-import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import { formatMinutes, getSteamGameImage, shortenSteamId } from '../../utils';
 import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
 import { referralCodeAtom } from '../../store/invite/state';
 import PosterGameItem from './PosterGameItem';
+import { GamerGamesData, GamerInfoData } from '../../lib/types';
 
-export default function PosterCanvas() {
+export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: GamerInfoData; gamerGames?: GamerGamesData }) {
   const { address } = useAccount();
-  const gamerInfo = useRecoilValue(gamerInfoAtom);
-  const gamerGames = useRecoilValue(gamerGamesAtom);
   const referralCode = useRecoilValue(referralCodeAtom);
   const posterStyles = useRecoilValue(posterStylesAtom);
   const setPosterCapture = useSetRecoilState(posterCaptureAtom);

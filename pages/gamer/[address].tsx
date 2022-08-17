@@ -1,35 +1,121 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { useGamerInfo } from '../../hooks/gamer';
-import SteamStatus from '../../components/gamer/SteamStatus';
 import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
-import { useRecoilValue } from 'recoil';
-import { gamerInfoAtom } from '../../store/gamer/state';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
 import Poster from '../../components/poster';
 import PosterCanvas from '../../components/poster/PosterCanvas';
+import { shortenSteamId } from '../../utils';
+import SteamProfileInfo from '../../components/gamer/SteamProfileInfo';
+import { useQuery } from '@tanstack/react-query';
+import { fetchGamerGames, fetchGamerInfo } from '../../lib/api';
+import Loading from '../../components/loading';
+import SteamGamesInfo from '../../components/gamer/SteamGamesInfo';
+import GamerGameItem from '../../components/gamer/GamerGameItem';
+import Empty from '../../components/empty';
+import Pagination from 'rc-pagination';
+import SteamValue from '../../components/gamer/SteamValue';
 
 export default function GamerProfile() {
+  const pageSize = 6;
   const router = useRouter();
-  const { address } = router.query;
-  const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const address = router.query.address as string | undefined;
+  const { data: gamerInfoData, isLoading: isGamerInfoLoading } = useQuery(
+    ['gamer_info', address],
+    () => fetchGamerInfo({ addr: address }),
+    {
+      enabled: !!address,
+      refetchOnWindowFocus: false,
+    },
+  );
+  const { data: gamerGamesData, isLoading: isGamerGamesLoading } = useQuery(
+    ['gamer_games', address],
+    () => fetchGamerGames({ wallet_address: address }),
+    {
+      enabled: !!address,
+      refetchOnWindowFocus: false,
+    },
+  );
+  const gamerInfo = gamerInfoData?.data;
+  const gamesData = gamerGamesData?.data;
   const badge = useGamerBadgeLoad(gamerInfo);
-  useGamerInfo(address as string);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const useCurrentGames = useMemo(() => {
+    if (!gamesData) return [];
+    return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }, [currentPage, gamesData]);
+  // useGamerInfo(address as string);
 
   return (
     <div className="mt-8">
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
         <div className="backdrop-box rounded-2xl p-8 xs:p-3">
-          <SteamStatus />
+          {isGamerInfoLoading && <Loading size={58} className="my-4 opacity-50" />}
+          {gamerInfo && (
+            <div className="flex items-center md:flex-col md:items-start">
+              <div className="mr-5 flex md:mb-4">
+                <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
+                <div className="flex flex-col justify-around">
+                  <p className="text-[26px] font-medium">{gamerInfo.person_name}</p>
+                  <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
+                </div>
+              </div>
+              <SteamProfileInfo data={gamerInfo} />
+            </div>
+          )}
+          <div className="py-8">
+            <h3 className="mb-3 text-xl font-semibold">Games</h3>
+            {isGamerGamesLoading && (
+              <div className="rounded-2xl bg-p12-black/80 p-6 md:p-3">
+                <Loading size={58} className="my-[72px] opacity-50" />
+              </div>
+            )}
+            {gamesData && (
+              <>
+                <div className="flex items-start justify-start md:flex-col">
+                  <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
+                    <SteamGamesInfo data={gamesData} />
+                  </div>
+                  <div className="flex-1 md:w-full ">
+                    {gamesData.games.length ? (
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
+                        {useCurrentGames.map((item) => (
+                          <GamerGameItem key={item.appid} data={item} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
+                        <Empty />
+                      </div>
+                    )}
+                    {gamesData.games.length > 6 && (
+                      <div className="mt-4 flex items-center justify-between">
+                        <p className="text-xs">
+                          {currentPage * 6 - 5}-{currentPage * 6} of {gamesData.games.length}
+                        </p>
+                        <Pagination
+                          simple
+                          current={currentPage}
+                          pageSize={pageSize}
+                          onChange={(page) => setCurrentPage(page)}
+                          total={gamesData.games.length}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <SteamValue data={gamerInfo} />
+              </>
+            )}
+          </div>
           <div>
-            <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
+            <h3 className="my-3 text-xl font-semibold">Airdrop NFT</h3>
             <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute top-0 left-0 h-full w-full blur-3xl">
-                  {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
+                  {gamerInfo && (
                     <div
                       className="h-full w-full bg-cover"
                       style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
@@ -82,8 +168,8 @@ export default function GamerProfile() {
           </div>
         </div>
       </div>
-      <Poster />
-      <PosterCanvas />
+      <Poster gamerInfo={gamerInfo} />
+      <PosterCanvas gamerInfo={gamerInfo} gamerGames={gamesData} />
     </div>
   );
 }

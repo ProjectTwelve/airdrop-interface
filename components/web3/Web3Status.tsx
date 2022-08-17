@@ -25,6 +25,11 @@ function Web3Status() {
   const posterCapture = useRecoilValue(posterCaptureAtom);
 
   if (!isMounted) return null;
+
+  if (router.pathname === '/gamer/[address]') {
+    return posterCapture ? <PosterButton /> : null;
+  }
+
   if (address) {
     if (chain?.unsupported) {
       return (
@@ -35,13 +40,13 @@ function Web3Status() {
     }
     return (
       <div className="flex items-center">
-        {router.pathname.indexOf('/gamer') !== -1 && posterCapture && <PosterButton />}
+        {router.pathname === '/gamer' && posterCapture && <PosterButton />}
         <div className="flex rounded-full bg-[#44465F]/60  py-2 text-sm backdrop-blur">
           <div className="md:hidden">
             <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
             <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
           </div>
-          {router.pathname !== '/gamer/[address]' && <Web3StatusInner />}
+          <Web3StatusInner />
         </div>
       </div>
     );
