@@ -83,37 +83,37 @@ export const DEV_BADGES = {
 
 export const GAMER_BADGES = {
   [GAMER_NFT_LEVEL.ORANGE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655032051514527675.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_orange.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange.png',
     claim: GAMER_BADGE_ORANGE,
     title: 'P12 XII-PLORER Badge [Orange Rarity]',
   },
   [GAMER_NFT_LEVEL.PURPLE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655018352989957058.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_purple.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple.png',
     claim: GAMER_BADGE_PURPLE,
     title: 'P12 XII-PLORER Badge [Purple Rarity]',
   },
   [GAMER_NFT_LEVEL.BLUE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655015953876061494.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_blue.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue.png',
     claim: GAMER_BADGE_BLUE,
     title: 'P12 XII-PLORER Badge [Blue Rarity]',
   },
   [GAMER_NFT_LEVEL.GREEN]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1655017682753443868.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_green.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green.png',
     claim: GAMER_BADGE_GREEN,
     title: 'P12 XII-PLORER Badge [Green Rarity]',
   },
   [GAMER_NFT_LEVEL.WHITE]: {
-    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656663277830299249.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_white.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common.png',
     claim: GAMER_BADGE_WHITE,
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
   },
   [GAMER_NFT_LEVEL.REKT]: {
-    asset: 'https://d257b89266utxb.cloudfront.net/galaxy/images/p12/1656661630752571203.gif',
+    asset: 'https://cdn1.p12.games/airdrop/badge/gamer_rekt.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt.png',
     claim: GAMER_BADGE_REKT,
     title: 'P12 XII-PLORER Badge [REKT Rarity]',
