@@ -9,7 +9,7 @@ export function DevTokenRankingHeader() {
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">Game</p>
-      <p className="w-[60px] sm:hidden lg:hidden">Badge</p>
+      <p className="w-[40px] 2xl:w-[60px]">Badge</p>
     </div>
   );
 }
@@ -35,11 +35,16 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
             <img loading="lazy" className="h-full w-full object-cover" src={data.header_image} alt="header_image" />
           )}
         </div>
-        <div className={classNames('float-right h-[72px] w-[72px] sm:hidden lg:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
+        <div
+          className={classNames(
+            'float-right mt-2 h-[52px] h-[72px] w-[52px] 2xl:mt-0 2xl:w-[72px]',
+            data.nft_level ?? 'bg-[#CEDCFF]/10',
+          )}
+        >
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
         <div className="truncate pr-4">
-          <h4 className="truncate font-medium">{data.name}</h4>
+          <h4 className="truncate font-medium lg:text-sm">{data.name}</h4>
           <div className="mt-1.5 truncate text-xs">
             {data.release_date} &nbsp;&nbsp;
             {data.developers?.toString()}

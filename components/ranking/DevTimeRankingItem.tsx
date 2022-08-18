@@ -28,7 +28,7 @@ export default function DevTimeRankingItem({ data }: DevTimeRankingItemProps) {
       className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
-      <div className="float-left mt-3 mr-4 w-[100px] break-words font-medium sm:hidden">
+      <div className="float-left mt-3 mr-4 2xl:w-[100px] break-words font-medium sm:hidden lg:text-sm">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
       </div>
@@ -39,7 +39,7 @@ export default function DevTimeRankingItem({ data }: DevTimeRankingItemProps) {
           )}
         </div>
         <div className="truncate">
-          <h4 className="truncate font-medium">{data.name}</h4>
+          <h4 className="truncate font-medium lg:text-sm">{data.name}</h4>
           <div className="mt-1.5 truncate text-xs">
             {data.release_date} &nbsp;&nbsp;
             {data.developers?.toString()}

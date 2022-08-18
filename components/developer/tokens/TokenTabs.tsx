@@ -178,7 +178,7 @@ export default function TokenTabs() {
             </p>
           )}
         </div>
-        <div className="basis-1/2 p-9 md:p-4">
+        <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
           <h2 className="mt-8 text-[30px] font-medium md:mt-2">
             {selectedGame.appid ? DEV_BADGES[selectedGame.nft_level].title : 'P12 | Project Twelve | Genesis'}
           </h2>
@@ -222,8 +222,8 @@ export default function TokenTabs() {
                   'last:border-none',
                 )}
               >
-                <p className="text-sm text-p12-sub md:mr-2">{item.label}</p>
-                <p className="font-medium">{item.value}</p>
+                <p className="text-sm text-p12-sub md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
+                <p className="font-medium lg:text-sm">{item.value}</p>
               </div>
             ))}
           </div>
