@@ -33,7 +33,7 @@ export default function PosterButton() {
     <div className="relative">
       <div onClick={onClick} className="poster__button mr-3 h-[40px] cursor-pointer">
         <div className="flex h-full w-full items-center justify-center bg-p12-gradient-30 px-[18px] text-sm hover:bg-p12-gradient-45">
-          <img src="/svg/picture.svg" width="24" height="24" className="mr-1 sm:hidden" alt="picture" />
+          <img src="/svg/picture.svg" width="24" height="24" className="mr-1" alt="picture" />
           {router.pathname === '/gamer/[address]' ? 'Poster' : 'My Poster'}
         </div>
       </div>

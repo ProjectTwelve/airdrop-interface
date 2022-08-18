@@ -41,7 +41,7 @@ export default function SteamValue({ data }: SteamValueProps) {
           </Tooltip>
         </div>
         {hasInventoriesValue ? (
-          <div className="mt-3 grid grid-cols-3 gap-5 md:grid-cols-1">
+          <div className="mt-3 grid grid-cols-3 gap-5 md:grid-cols-1 lg:mt-5">
             {inventoriesValue.map((item) =>
               item.value ? (
                 <div key={item.name} className="bg-gradient-item flex rounded-xl p-3">

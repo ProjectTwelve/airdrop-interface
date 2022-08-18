@@ -41,7 +41,7 @@ export default function GamerRanking() {
         <div>
           <h3 className="text-sm font-medium leading-5">Verified Gamers</h3>
           <div className="gradient__box mt-3 grid grid-cols-3 py-[17px] py-2 leading-[90px] 2xl:flex 2xl:items-center">
-            <div className="h-[54px] w-full border-[#949FA9]/50 2xl:w-[130px]  2xl:border-r">
+            <div className="h-[54px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
               <p className="h-[16px] text-center text-sm">Total</p>
               <p className="mt-1 text-center font-ddin text-[32px] leading-[32px] lg:text-2xl">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
@@ -52,7 +52,7 @@ export default function GamerRanking() {
                 key={index}
                 className={classNames(
                   'h-[54px] flex-1 border-[#949FA9]/50 text-center font-ddin text-2xl leading-[54px]',
-                  'leading-6 2xl:border-r',
+                  'leading-6 2xl:border-r 2xl:last:border-r-0',
                   item.color,
                 )}
               >
@@ -99,7 +99,7 @@ export default function GamerRanking() {
           </div>
         </div>
       </div>
-      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1">
+      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <GamerTimeRankingHeader />

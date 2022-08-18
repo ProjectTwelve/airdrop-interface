@@ -46,7 +46,6 @@ export default function GamerProfile() {
     if (!gamesData) return [];
     return gamesData.games.slice((currentPage - 1) * pageSize, currentPage * pageSize);
   }, [currentPage, gamesData]);
-  // useGamerInfo(address as string);
 
   return (
     <div className="mt-8">
@@ -55,10 +54,10 @@ export default function GamerProfile() {
           {isGamerInfoLoading && <Loading size={58} className="my-4 opacity-50" />}
           {gamerInfo && (
             <div className="flex items-center md:flex-col md:items-start">
-              <div className="mr-5 flex md:mb-4">
+              <div className="mr-5 flex w-full md:mb-4">
                 <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
-                <div className="flex flex-col justify-around">
-                  <p className="text-[26px] font-medium">{gamerInfo.person_name}</p>
+                <div className="flex w-full flex-col justify-around overflow-hidden">
+                  <p className="truncate text-[26px] font-medium">{gamerInfo.person_name}</p>
                   <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
                 </div>
               </div>

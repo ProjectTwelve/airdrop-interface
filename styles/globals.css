@@ -12,9 +12,11 @@
     * {
         color: #FFF;
         outline: none;
+        -ms-overflow-style: none;
     }
 
     *::-webkit-scrollbar {
+        display: none;
         width: 0;
         background: transparent;
     }

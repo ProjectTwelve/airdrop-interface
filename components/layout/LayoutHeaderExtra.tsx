@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import ReactGA from 'react-ga4';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,15 +34,15 @@ function LayoutHeaderExtra() {
             transition={{ type: 'spring', stiffness: 200, damping: 30 }}
             className="relative flex"
           >
-            <Button type="bordered" className="mr-3" onClick={() => openLink(readmeLink)}>
+            <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => openLink(readmeLink)}>
               <div className="flex items-center justify-center text-sm">
-                <Image src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
+                <img src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
                 &nbsp;Readme
               </div>
             </Button>
-            <Button type="bordered" className="mr-3" onClick={() => setRoadmapOpen(true)}>
+            <Button type="bordered" className="mr-3 lg:hidden" onClick={() => setRoadmapOpen(true)}>
               <div className="flex items-center justify-center text-sm">
-                <Image src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
+                <img src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
                 &nbsp;Airdrop roadmap
               </div>
             </Button>
@@ -56,9 +55,9 @@ function LayoutHeaderExtra() {
                 }}
               >
                 <div className="flex items-center justify-center text-sm">
-                  <Image src="/svg/invite.svg" width={24} height={24} alt="invite" />
+                  <img src="/svg/invite.svg" width={24} height={24} alt="invite" />
                   &nbsp;My referral link
-                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success">
+                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success lg:hidden">
                     {invitationCount}
                   </p>
                 </div>
