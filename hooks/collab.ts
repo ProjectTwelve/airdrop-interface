@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { fetchCollabList, fetchCollabUserInfo } from '../lib/api';
 import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/types';
 import { collabUserInfoAtom } from '../store/collab/state';
@@ -18,10 +18,26 @@ export const useFetchCollabList = () => {
 
 export const useFetchCollabUserInfo = (collabCode: string) => {
   const { address } = useAccount();
-  return useQuery(['collab_user_info'], () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }), {
-    enabled: !!address,
-    select: (data: Response<CollabUserInfo>) => (data.code === 200 ? data.data : undefined),
-  });
+  const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
+
+  useEffect(() => {
+    if (!address) setNowUserInfo(null);
+  }, [address, setNowUserInfo]);
+
+  const { isLoading } = useQuery(
+    ['collab_user_info', collabCode, address],
+    () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }),
+    {
+      enabled: !!address,
+      select: (data: Response<CollabUserInfo>) => {
+        console.log('fetch data', data, collabCode, address);
+        data.code === 200 ? setNowUserInfo(data.data) : setNowUserInfo(null);
+        return data.code === 200 ? data.data : null;
+      },
+    },
+  );
+  // if address null, don't need fetch
+  return { isLoading: address ? isLoading : false };
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
@@ -55,6 +71,7 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
 
 export const useCollabIsJoined = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
+  console.log('userInfo', userInfo);
   const isJoined = useMemo(() => !!userInfo?.joinStatus, [userInfo]);
   return isJoined;
 };

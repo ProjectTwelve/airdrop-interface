@@ -8,12 +8,11 @@ import { CollabTimeLime } from '../../components/collab/CollabTimeLime';
 import CollabTasks from '../../components/collab/CollabTasks';
 import { fetchCollabItem, fetchCollabList } from '../../lib/api';
 import CollabReward from '../../components/collab/CollabReward';
-import { useCollabIsClaim, useCollabIsFirstClaim, useCollabTimes, useFetchCollabUserInfo } from '../../hooks/collab';
+import { useCollabIsClaim, useCollabIsFirstClaim, useCollabTimes } from '../../hooks/collab';
 import { useSetRecoilState } from 'recoil';
-import { collabClaimModalAtom, collabUserInfoAtom } from '../../store/collab/state';
+import { collabClaimModalAtom } from '../../store/collab/state';
 import classNames from 'classnames';
 import { CollabClaimDialog } from '../../components/dialog/CollabClaimDialog';
-import { useAccount } from 'wagmi';
 import Head from 'next/head';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
@@ -23,22 +22,13 @@ export default function Collab({ data }: { data: CollabInfoType }) {
   const [isFirstClaim, setIsFirstClaim] = useCollabIsFirstClaim(collabCode);
   const setClaimModal = useSetRecoilState(collabClaimModalAtom);
   const isClaim = useCollabIsClaim(timeClaim);
-  const { address } = useAccount();
-  const { data: collabUserInfo, refetch: refetchCollabUserInfo } = useFetchCollabUserInfo(collabCode);
-  const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
 
   useEffect(() => {
-    if (address && !collabUserInfo) refetchCollabUserInfo();
-  }, [address, refetchCollabUserInfo, collabUserInfo]);
-
-  useEffect(() => {
-    if (!collabUserInfo) return;
-    setNowUserInfo(collabUserInfo);
     if (isClaim && isFirstClaim) {
       setIsFirstClaim(false);
       setClaimModal(true);
     }
-  }, [collabUserInfo, setNowUserInfo, isFirstClaim, setIsFirstClaim, setClaimModal, isClaim]);
+  }, [isFirstClaim, setIsFirstClaim, setClaimModal, isClaim]);
 
   return (
     <>
