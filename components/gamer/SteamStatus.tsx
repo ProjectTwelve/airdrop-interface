@@ -50,9 +50,9 @@ export default function SteamStatus() {
       {gamerInfo ? (
         <div>
           <div className="flex items-center md:flex-col md:items-start">
-            <div className="mr-5 flex w-full md:mb-4">
+            <div className="mr-5 flex max-w-full md:mb-4">
               <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
-              <div className="flex w-full flex-col justify-around overflow-hidden">
+              <div className="flex flex-col justify-around overflow-hidden">
                 <p className="truncate text-[26px] font-medium">{gamerInfo.person_name}</p>
                 <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
               </div>
