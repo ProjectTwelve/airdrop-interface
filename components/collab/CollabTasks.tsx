@@ -52,7 +52,6 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     }
     const reg = new RegExp(/(https:\/\/twitter.com\/.*\/status\/)([0-9]{19})/);
     if (reg.test(value)) {
-      console.log(value);
       mutationVerify.mutate({ collabCode, walletAddress: address, taskTweetUrl: value });
     } else toast.error(<Message message="Not a legitimate twitter link!" />);
   }, [mutationVerify, value, collabCode, address]);

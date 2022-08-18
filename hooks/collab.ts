@@ -20,22 +20,21 @@ export const useFetchCollabUserInfo = (collabCode: string) => {
   const { address } = useAccount();
   const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
 
-  useEffect(() => {
-    if (!address) setNowUserInfo(null);
-  }, [address, setNowUserInfo]);
-
-  const { isLoading } = useQuery(
+  const { isLoading, data: userInfo } = useQuery(
     ['collab_user_info', collabCode, address],
     () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }),
     {
       enabled: !!address,
-      select: (data: Response<CollabUserInfo>) => {
-        console.log('fetch data', data, collabCode, address);
-        data.code === 200 ? setNowUserInfo(data.data) : setNowUserInfo(null);
-        return data.code === 200 ? data.data : null;
-      },
+      select: (data: Response<CollabUserInfo>) => (data.code === 200 && data?.data ? data.data : null),
     },
   );
+  useEffect(() => {
+    if (!address) setNowUserInfo(null);
+  }, [address, setNowUserInfo]);
+
+  useEffect(() => {
+    userInfo ? setNowUserInfo(userInfo) : setNowUserInfo(null);
+  }, [userInfo, setNowUserInfo, address]);
   // if address null, don't need fetch
   return { isLoading: address ? isLoading : false };
 };
@@ -71,7 +70,6 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
 
 export const useCollabIsJoined = () => {
   const userInfo = useRecoilValue(collabUserInfoAtom);
-  console.log('userInfo', userInfo);
   const isJoined = useMemo(() => !!userInfo?.joinStatus, [userInfo]);
   return isJoined;
 };
