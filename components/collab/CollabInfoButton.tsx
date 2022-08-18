@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
-import { useCollabIsJoined, useCollabIsClaim } from '../../hooks/collab';
+import { useCollabIsJoined, useCollabIsClaim, useFetchCollabUserInfo } from '../../hooks/collab';
 import { fetchCollabJoin, fetchCollabUserInfo } from '../../lib/api';
 import { collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -36,6 +36,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const isClaim = useCollabIsClaim(timeClaim);
   const isMounted = useIsMounted();
   const className = 'min-w-fit max-w-[300px] flex-grow';
+  const { isLoading } = useFetchCollabUserInfo(collabCode);
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
     onSuccess: (data) => {
@@ -119,23 +120,23 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
       isJoined ? (
         generateDisableButton(className, 'Join Successfully')
       ) : (
-        <Button size="large" type="gradient" className={className} onClick={handleJoin}>
+        <Button size="large" type="gradient" className={className} onClick={handleJoin} loading={isLoading}>
           Join
         </Button>
       ),
-    [isJoined, handleJoin, generateDisableButton],
+    [isJoined, handleJoin, generateDisableButton, isLoading],
   );
 
   const generateClaimButton = useCallback(
     (className: string) =>
       isClaim ? (
-        <Button size="large" type="gradient" className={className} onClick={handleClaim}>
+        <Button size="large" type="gradient" className={className} onClick={handleClaim} loading={isLoading}>
           Claim
         </Button>
       ) : (
         generateDisableButton(className, 'Claim')
       ),
-    [isClaim, handleClaim, generateDisableButton],
+    [isClaim, handleClaim, generateDisableButton, isLoading],
   );
 
   if (!isMounted) return null;

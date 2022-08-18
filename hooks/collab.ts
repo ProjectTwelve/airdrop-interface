@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { fetchCollabList, fetchCollabUserInfo } from '../lib/api';
 import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/types';
 import { collabUserInfoAtom } from '../store/collab/state';
@@ -18,10 +18,25 @@ export const useFetchCollabList = () => {
 
 export const useFetchCollabUserInfo = (collabCode: string) => {
   const { address } = useAccount();
-  return useQuery(['collab_user_info'], () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }), {
-    enabled: !!address,
-    select: (data: Response<CollabUserInfo>) => (data.code === 200 ? data.data : undefined),
-  });
+  const setNowUserInfo = useSetRecoilState(collabUserInfoAtom);
+
+  const { isLoading, data: userInfo } = useQuery(
+    ['collab_user_info', collabCode, address],
+    () => fetchCollabUserInfo({ walletAddress: address as string, collabCode }),
+    {
+      enabled: !!address,
+      select: (data: Response<CollabUserInfo>) => (data.code === 200 && data?.data ? data.data : null),
+    },
+  );
+  useEffect(() => {
+    if (!address) setNowUserInfo(null);
+  }, [address, setNowUserInfo]);
+
+  useEffect(() => {
+    userInfo ? setNowUserInfo(userInfo) : setNowUserInfo(null);
+  }, [userInfo, setNowUserInfo, address]);
+  // if address null, don't need fetch
+  return { isLoading: address ? isLoading : false };
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
