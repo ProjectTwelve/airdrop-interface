@@ -6,10 +6,10 @@ import { getCountMemo, openLink } from '../../utils';
 
 export function DevTokenRankingHeader() {
   return (
-    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
+    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">Game</p>
-      <p className="w-[60px] xs:hidden">Badge</p>
+      <p className="w-[40px] 2xl:w-[60px]">Badge</p>
     </div>
   );
 }
@@ -26,7 +26,7 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
   return (
     <div
       onClick={handleToSteamStore}
-      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
+      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
       <div>
@@ -35,18 +35,23 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
             <img loading="lazy" className="h-full w-full object-cover" src={data.header_image} alt="header_image" />
           )}
         </div>
-        <div className={classNames('float-right h-[72px] w-[72px] xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}>
+        <div
+          className={classNames(
+            'float-right mt-2 h-[52px] h-[72px] w-[52px] 2xl:mt-0 2xl:w-[72px]',
+            data.nft_level ?? 'bg-[#CEDCFF]/10',
+          )}
+        >
           {data.nft_level !== undefined && <img src={DEV_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
         </div>
         <div className="truncate pr-4">
-          <h4 className="truncate font-medium">{data.name}</h4>
+          <h4 className="truncate font-medium lg:text-sm">{data.name}</h4>
           <div className="mt-1.5 truncate text-xs">
             {data.release_date} &nbsp;&nbsp;
             {data.developers?.toString()}
           </div>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="mr-1.5 mb-0.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}

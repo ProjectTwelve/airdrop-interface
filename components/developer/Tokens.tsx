@@ -18,7 +18,7 @@ function Tokens() {
   const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
 
   return (
-    <div className="relative px-8 pt-12 md:px-4 md:pt-6">
+    <div className="relative px-3 pt-6 2xl:px-8 2xl:pt-12 ">
       <div className="flex flex-col">
         <TokenTabs />
         <div className="mt-8">
@@ -65,7 +65,7 @@ function Tokens() {
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
           <div className="md:mt-4">
-            <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
+            <Button className="w-[360px] font-medium sm:w-auto" disabled size="large">
               Claim via P12 (Under Construction)
             </Button>
           </div>

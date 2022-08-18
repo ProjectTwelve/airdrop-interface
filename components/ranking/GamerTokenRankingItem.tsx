@@ -7,10 +7,10 @@ import { formatMinutes, getCountMemo, openLink } from '../../utils';
 
 export function GamerTokenRankingHeader() {
   return (
-    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
+    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
       <p className="w-[65px]">Rank</p>
       <p className="flex-1">User Info</p>
-      <p className="w-[160px] xs:hidden">Badge</p>
+      <p className="w-[70px] 2xl:w-[160px]">Badge</p>
     </div>
   );
 }
@@ -32,16 +32,16 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 sm:px-2"
     >
-      <div className="mr-4 h-[72px] w-[50px] flex-none text-center font-medium leading-[72px] xs:mr-2">
+      <div className="mr-2 h-[72px] w-[30px] flex-none text-center font-medium leading-[72px] 2xl:mr-4 2xl:w-[50px]">
         {getCountMemo(data.index)}
       </div>
-      <div>
+      <div className="flex-1">
         <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="float-right ml-2 w-[95px] flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:hidden">
+        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 lg:hidden xs:hidden">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">SS Games</p>
           <p
             className={classNames(
@@ -52,14 +52,14 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
             {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
-        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 xs:ml-0">
+        <div className="float-right ml-2 rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1">
           <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
           <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
             {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}
           </p>
         </div>
-        <div className="overflow-hidden">
-          <p className="my-0.5 truncate font-medium">{data.person_name}</p>
+        <div className="flex-1 overflow-hidden">
+          <p className="my-0.5 truncate text-sm font-medium 2xl:text-base">{data.person_name}</p>
           {data.ss_game_count && data.ss_game_count > 0 ? (
             <span className="whitespace-nowrap rounded bg-[#C859FF]/20 px-2 py-[1.5px] text-xs text-[#FC59FF]">SS Gamer</span>
           ) : null}
@@ -67,14 +67,17 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
         </div>
       </div>
       <div
-        className={classNames('float-right mx-4 h-[72px] w-[72px] flex-none xs:hidden', data.nft_level ?? 'bg-[#CEDCFF]/10')}
+        className={classNames(
+          'float-right ml-1.5 mr-0 h-[52px] w-[52px] flex-none 2xl:mx-4 2xl:h-[72px] 2xl:w-[72px]',
+          data.nft_level ?? 'bg-[#CEDCFF]/10',
+        )}
       >
         {data.nft_level !== undefined && <img src={GAMER_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
       </div>
-      <div className="group float-right flex h-[72px] items-center justify-between xs:hidden" onClick={handleToGamerProfile}>
-        <span className="pr-1 text-p12-sub group-hover:text-white">Details</span>
+      <div className="group float-right flex h-[72px] items-center justify-between" onClick={handleToGamerProfile}>
+        <span className="hidden text-p12-sub group-hover:text-white 2xl:block">Details</span>
         <svg
-          className="stroke-p12-sub group-hover:stroke-white"
+          className="stroke-p12-sub pl-1 group-hover:stroke-white"
           width="24"
           height="24"
           viewBox="0 0 24 24"

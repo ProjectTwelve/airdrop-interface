@@ -64,7 +64,7 @@ export default function TokenTabs() {
           ref={ref}
           className={classNames(
             'horizontal-scroll flex w-full overflow-x-auto rounded-t-2xl pb-[10px]',
-            !enableTabScroll && 'xl:overflow-x-hidden',
+            !enableTabScroll && '2xl:overflow-x-hidden',
           )}
         >
           <div className="whitespace-nowrap">
@@ -119,7 +119,7 @@ export default function TokenTabs() {
             <div className="w-full pb-[100%]"></div>
             <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
               {selectedGame.appid ? (
-                <div className="flex w-full flex-col items-center justify-center xs:w-auto">
+                <div className="flex w-full flex-col items-center justify-center sm:w-auto">
                   {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? (
                     <>
                       <div className="relative aspect-square w-full max-w-[420px]">
@@ -134,7 +134,7 @@ export default function TokenTabs() {
                         />
                       </div>
                       {selectedGame.credential <= 10 && (
-                        <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
+                        <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALAXY_LIST)}>
                           My NFT at Galaxy
                         </Button>
                       )}
@@ -166,7 +166,7 @@ export default function TokenTabs() {
               )}
             </div>
           </div>
-          <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
+          <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
             The airdrop is in collaboration with and powered by&nbsp;
             <a className="text-p12-link" href={GALAXY_P12_SPACE} target="_blank">
               Project Galaxy
@@ -178,7 +178,7 @@ export default function TokenTabs() {
             </p>
           )}
         </div>
-        <div className="basis-1/2 p-9 md:p-4">
+        <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
           <h2 className="mt-8 text-[30px] font-medium md:mt-2">
             {selectedGame.appid ? DEV_BADGES[selectedGame.nft_level].title : 'P12 | Project Twelve | Genesis'}
           </h2>
@@ -222,8 +222,8 @@ export default function TokenTabs() {
                   'last:border-none',
                 )}
               >
-                <p className="text-sm text-p12-sub md:mr-2">{item.label}</p>
-                <p className="font-medium">{item.value}</p>
+                <p className="text-sm text-p12-sub md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
+                <p className="font-medium lg:text-sm">{item.value}</p>
               </div>
             ))}
           </div>

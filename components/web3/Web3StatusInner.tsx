@@ -12,7 +12,7 @@ function Web3StatusInner() {
 
   if (address) {
     return (
-      <div className="flex items-center justify-center px-3 xs:h-6">
+      <div className="flex items-center justify-center px-3 sm:h-6">
         {gamerInfo?.email ? (
           <Tooltip placement="bottom" label={gamerInfo?.email}>
             <p className="cursor-pointer">{shortenAddress(address)}</p>
@@ -20,7 +20,7 @@ function Web3StatusInner() {
         ) : (
           <p className="cursor-pointer">{shortenAddress(address)}</p>
         )}
-        <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient xs:hidden">
+        <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient sm:hidden">
           <Jazzicon diameter={32} seed={jsNumberForAddress(address ?? '')} />
         </div>
       </div>

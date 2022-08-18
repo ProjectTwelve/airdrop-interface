@@ -14,7 +14,7 @@ export default function CollabHomeCard({ title }: CollabHomeCardProps) {
       transition={{ ease: 'linear' }}
       layoutId={isMobile ? undefined : 'collab'}
     >
-      <div className="backdrop-box rounded-2xl px-6 pt-4 pb-2 xs:px-3">
+      <div className="backdrop-box rounded-2xl px-6 pt-4 pb-2 sm:px-3">
         <h2 className="flex items-center justify-between pb-1.5 font-medium">
           <p className="text-[22px]">{title}</p>
         </h2>

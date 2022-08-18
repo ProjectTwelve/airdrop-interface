@@ -20,16 +20,16 @@ export default function RoundOneEnd() {
         <div className="round-box round-box__one">
           <div className="mr-[100px] flex items-start justify-between md:mr-0 md:flex-row-reverse">
             <div className="basis-1/2">
-              <p className="font-semibold md:text-right xs:text-sm">Total Verified Gamers</p>
-              <p className="font-din text-[48px] font-bold text-[#FFAA2C] md:text-right xs:text-[32px]">
+              <p className="font-semibold md:text-right sm:text-sm">Total Verified Gamers</p>
+              <p className="font-din text-[48px] font-bold text-[#FFAA2C] md:text-right sm:text-[32px]">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>
             </div>
             <div className="basis-1/2">
-              <p className="text-[34px] font-semibold xs:text-[24px] xs:leading-6">Round One</p>
-              <p className="mt-2 font-medium xs:mt-3 xs:text-sm">
+              <p className="text-[34px] font-semibold sm:text-[24px] sm:leading-6">Round One</p>
+              <p className="mt-2 font-medium sm:mt-3 sm:text-sm">
                 26 Jun - 12 Jul
-                <span className="ml-2 rounded-full bg-[#F13361] px-3 py-[3px] xs:ml-1 xs:px-2 xs:py-0.5 xs:text-xs">END</span>
+                <span className="ml-2 rounded-full bg-[#F13361] px-3 py-[3px] sm:ml-1 sm:px-2 sm:py-0.5 sm:text-xs">END</span>
               </p>
             </div>
           </div>
@@ -37,8 +37,8 @@ export default function RoundOneEnd() {
         <div className="round-box round-box__two">
           <div className="ml-[100px] flex items-center justify-between md:ml-0 md:items-start">
             <div>
-              <p className="text-[34px] font-semibold xs:text-[24px] xs:leading-6">Round Two</p>
-              <div className="mt-2 h-6 w-[155px] overflow-hidden rounded-full bg-[#99A7C3]/40 text-center font-medium xs:mt-3 xs:w-[140px]">
+              <p className="text-[34px] font-semibold sm:text-[24px] sm:leading-6">Round Two</p>
+              <div className="mt-2 h-6 w-[155px] overflow-hidden rounded-full bg-[#99A7C3]/40 text-center font-medium sm:mt-3 sm:w-[140px]">
                 <AnimatePresence initial={false} custom={1}>
                   <motion.div
                     key={swipePage}
@@ -57,10 +57,10 @@ export default function RoundOneEnd() {
               </div>
             </div>
             <div>
-              <p className="font-semibold xs:text-sm">Latest progress on</p>
-              <div className="mt-2 flex xs:flex-col xs:items-end">
+              <p className="font-semibold sm:text-sm">Latest progress on</p>
+              <div className="mt-2 flex sm:flex-col sm:items-end">
                 <SocialMedia size="medium" />
-                <p className="px-2 font-medium text-[#1EDB8C] xs:px-0">Join us !</p>
+                <p className="px-2 font-medium text-[#1EDB8C] sm:px-0">Join us !</p>
               </div>
             </div>
           </div>

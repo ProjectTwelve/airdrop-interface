@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import Image from 'next/image';
 import SocialMedia from '../../socialMedia';
 import { isSocialMediaClickSelector } from '../../../store/invite/state';
 import { useRecoilValue } from 'recoil';
@@ -24,26 +23,28 @@ export function DevP12() {
       <div className="mt-3 mb-8 flex rounded-2xl border border-p12-line py-[30px] md:flex-col md:py-0">
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
-            <Image src={iconStatus.get(leastOneGame) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium ml-2">Verified at least</p>
+            <img src={iconStatus.get(leastOneGame) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
+            <p className="ml-2 font-medium lg:text-sm">Verified at least</p>
           </div>
-          <p className="font-medium">one game as developer</p>
+          <p className="font-medium lg:text-sm">one game as developer</p>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
-            <Image src={iconStatus.get(leastOneGame && isAllClaimed) || ''} width={26} height={26} alt="icon" />
-            <p className="font-medium ml-2">{leastOneGame ? 'Airdrop NFT' : 'NO NFT YET'}</p>
+            <img src={iconStatus.get(leastOneGame && isAllClaimed) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
+            <p className="ml-2 font-medium lg:text-sm">{leastOneGame ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
-          {leastOneGame && !isAllClaimed && <p className="font-medium">you have unclaimed NFT</p>}
+          {leastOneGame && !isAllClaimed && <p className="font-medium lg:text-sm">you have unclaimed NFT</p>}
         </div>
-        <div className="flex flex-1 items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
-          <Image src={iconStatus.get(isClicked) || ''} width={26} height={26} alt="icon" />
-          <p className="font-medium mx-2">Join us on</p>
+        <div className="flex flex-1 items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2 lg:flex-col lg:gap-2">
+          <div className="flex">
+            <img src={iconStatus.get(isClicked) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
+            <p className="mx-2 font-medium lg:text-sm">Join us on</p>
+          </div>
           <SocialMedia />
         </div>
         <div className="flex flex-1 items-center justify-center md:py-2">
-          <Image src="/svg/wait_info.svg" width={26} height={26} alt="icon" />
-          <p className="font-medium ml-2">P12 token TGE</p>
+          <img src="/svg/wait_info.svg" className="w-5 2xl:w-[26px]" alt="icon" />
+          <p className="ml-2 font-medium lg:text-sm">P12 token TGE</p>
         </div>
       </div>
     </div>

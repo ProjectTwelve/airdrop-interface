@@ -16,36 +16,39 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
     >
       <div className="relative z-10">
         <div
-          className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover"
-          style={{ maxWidth: 'min(33%, 168px)' }}
+          className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover lg:mr-2"
+          style={{ maxWidth: 'min(45%, 168px)' }}
         >
           <p className="absolute -z-10 w-full text-center text-center text-xs leading-[72px] text-p12-bg">Damedane</p>
           <img
             src={gameIcon}
             onError={(error) => ((error.target as any).style = 'display: none')}
             loading="lazy"
-            className="h-full w-full md:h-auto"
+            className="h-auto w-full 2xl:h-full"
             alt="header_image"
           />
         </div>
-        <div className="float-right h-[72px] pr-6 xs:hidden">
-          <div className="flex h-full items-center justify-center">
-            <p className="mr-3 text-sm">Playtime</p>
+        <div className="float-right h-[72px] pr-2 sm:hidden 2xl:pr-6">
+          <div className="flex h-full items-center justify-center lg:hidden">
+            <p className="mr-3 text-sm xl:hidden">Playtime</p>
             <p className="font-ddin text-2xl">{formatMinutes(data.playtime_forever)}</p>
           </div>
         </div>
-        <div className="truncate pt-3">
-          <p className="truncate font-medium">
+        <div className="truncate pt-3 lg:pt-1.5">
+          <p className="truncate font-medium lg:text-xs xl:text-sm">
             {isSSGame && (
-              <span className="mr-1.5 rounded bg-[#C859FF]/20 px-2 py-[1.5px] align-middle text-xs text-[#FC59FF]">
+              <span className="mr-1.5 rounded bg-[#C859FF]/20 px-2 py-[1.5px] align-middle text-xs text-[#FC59FF] lg:px-1">
                 SS Game
               </span>
             )}
-            {data.name}
+            <span className="truncate lg:mt-1 lg:block">{data.name}</span>
           </p>
-          <div className="relative mt-1.5 flex h-[20px] flex-wrap">
+          <div className="relative mt-1.5 flex h-[20px] flex-wrap lg:mt-1">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 h-full rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span
+                key={index}
+                className="mr-1.5 mb-0.5 h-full rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link lg:px-1"
+              >
                 {genre}
               </span>
             ))}

@@ -27,7 +27,7 @@ export default function GamerTokenStatus({ data }: { data?: GamerInfoData }) {
             'last:border-none',
           )}
         >
-          <p className="text-sm text-p12-sub md:mr-2">{item.label}</p>
+          <p className="text-sm text-p12-sub md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
           <p className="font-medium">{item.value}</p>
         </div>
       ))}

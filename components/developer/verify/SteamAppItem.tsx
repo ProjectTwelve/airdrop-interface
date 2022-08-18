@@ -44,8 +44,8 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
               <img src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
-          <div className="xs:flex xs:flex-col-reverse">
-            <div className="float-right mt-6 xs:float-none xs:mt-0">
+          <div className="sm:flex sm:flex-col-reverse">
+            <div className="float-right mt-6 sm:float-none sm:mt-0">
               <span className="mr-2 cursor-pointer align-top font-ddin text-2xl font-bold" onClick={() => setOpen(true)}>
                 ?,???
               </span>
@@ -53,7 +53,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </div>
             <div className="truncate pt-3">
               <p className="truncate font-medium">{app.name}</p>
-              <div className="flex text-sm xs:hidden">
+              <div className="flex text-sm sm:hidden">
                 <p className="mr-2">{app.release_date?.date}</p>
                 <p>{app.total_reviews ? app.total_reviews + ' reviews' : 0 + ' review'}</p>
               </div>

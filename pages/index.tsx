@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
-      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-p12-logo bg-cover xs:hidden"></div>
+      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-p12-logo bg-cover sm:hidden"></div>
       <div className="mt-4 text-center">
         <h2 className="text-[24px] font-medium">Tribute to Gamers</h2>
         <h2 className="text-[24px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
