@@ -65,7 +65,7 @@ function Tokens() {
             <Image src="/img/p12.png" width={60} height={60} alt="p12" />
           </div>
           <div className="md:mt-4">
-            <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
+            <Button className="w-[360px] font-medium sm:w-auto" disabled size="large">
               Claim via P12 (Under Construction)
             </Button>
           </div>

@@ -48,11 +48,11 @@ function DeveloperRanking() {
   };
 
   return (
-    <div className="px-8 py-12 xs:p-3">
+    <div className="px-8 py-12 sm:p-3">
       <div className="flex md:flex-col">
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
-          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[90px] xs:w-auto">
+          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[90px] sm:w-auto">
             {new Intl.NumberFormat().format(verified?.total ?? 0)}
           </div>
         </div>
@@ -77,11 +77,11 @@ function DeveloperRanking() {
             >
               <LeftCircle className="rotate-180" />
             </div>
-            <div className="gradient__box mt-3 h-[90px] xs:h-[150px]">
+            <div className="gradient__box mt-3 h-[90px] sm:h-[150px]">
               <div className="relative h-full w-full overflow-hidden">
                 <AnimatePresence initial={false} custom={swipeDirection}>
                   <motion.div
-                    className="absolute flex h-full w-full py-2 px-4 xs:flex-wrap xs:px-2"
+                    className="absolute flex h-full w-full py-2 px-4 sm:flex-wrap sm:px-2"
                     key={swipePage}
                     custom={swipeDirection}
                     variants={variants}
@@ -93,7 +93,7 @@ function DeveloperRanking() {
                       opacity: { duration: 0.2 },
                     }}
                   >
-                    <div className="h-[72px] flex-1 xs:basis-full">
+                    <div className="h-[72px] flex-1 sm:basis-full">
                       <div className="relative float-left mr-3 h-[72px] w-[112px] flex-none overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
                         {item ? (
                           <img
@@ -117,7 +117,7 @@ function DeveloperRanking() {
                         )}
                       </div>
                     </div>
-                    <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
+                    <div className="m-2 w-[1px] bg-[#949FA9] sm:hidden" />
                     <div
                       onClick={() => {
                         item && setTokenRankPage(Math.ceil(item.tokenRank / 10));
@@ -127,7 +127,7 @@ function DeveloperRanking() {
                       By Token Rarity
                       <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
                     </div>
-                    <div className="m-2 w-[1px] bg-[#949FA9] xs:hidden" />
+                    <div className="m-2 w-[1px] bg-[#949FA9] sm:hidden" />
                     <div
                       onClick={() => {
                         item && setTimeRankPage(Math.ceil(((timeRankData?.rankLength || 0) - item.timeRank + 1) / 10));

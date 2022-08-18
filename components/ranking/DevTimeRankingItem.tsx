@@ -5,9 +5,9 @@ import { openLink, getCountMemo } from '../../utils';
 
 export function DevTimeRankingHeader() {
   return (
-    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium xs:py-2">
+    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
-      <p className="w-[120px] xs:hidden">Timestamp</p>
+      <p className="w-[120px] sm:hidden">Timestamp</p>
       <p>Game</p>
     </div>
   );
@@ -25,10 +25,10 @@ export default function DevTimeRankingItem({ data }: DevTimeRankingItemProps) {
   return (
     <div
       onClick={handleToSteamStore}
-      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 xs:px-2"
+      className="cursor-pointer overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="float-left mr-4 h-[72px] w-[35px] text-center font-medium leading-[72px]">{getCountMemo(data.index)}</div>
-      <div className="float-left mt-3 mr-4 w-[100px] break-words font-medium xs:hidden">
+      <div className="float-left mt-3 mr-4 w-[100px] break-words font-medium sm:hidden">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
       </div>
@@ -46,7 +46,7 @@ export default function DevTimeRankingItem({ data }: DevTimeRankingItemProps) {
           </div>
           <div className="relative mt-1.5 flex h-[20px] flex-wrap overflow-hidden">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
+              <span key={index} className="mr-1.5 mb-0.5 rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link">
                 {genre}
               </span>
             ))}

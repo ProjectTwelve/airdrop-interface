@@ -54,7 +54,7 @@ export default function Gamer() {
     <div className="mt-8">
       <Back onClick={() => router.push({ pathname: '/', query: router.query })} />
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
-        <div className="backdrop-box rounded-2xl p-8 xs:p-3">
+        <div className="backdrop-box rounded-2xl p-4 2xl:p-8">
           <SteamStatus />
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
@@ -72,7 +72,7 @@ export default function Gamer() {
                   <div className="w-full pb-[100%]"></div>
                   <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
                     {gamerInfo?.credential ? (
-                      <div className="flex w-full flex-col items-center justify-center xs:w-auto">
+                      <div className="flex w-full flex-col items-center justify-center sm:w-auto">
                         {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
                           <>
                             <h4 className="text-center text-xl font-medium text-p12-success">
@@ -106,7 +106,7 @@ export default function Gamer() {
                                 style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
                               />
                             </div>
-                            <Button type="bordered" className="mt-9 w-[260px] xs:mt-4" onClick={() => openLink(GALAXY_LIST)}>
+                            <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALAXY_LIST)}>
                               My NFT at Galaxy
                             </Button>
                           </>
@@ -117,14 +117,14 @@ export default function Gamer() {
                     )}
                   </div>
                 </div>
-                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
+                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
                   <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
                     Project Galaxy
                   </a>
                 </p>
               </div>
-              <div className="basis-1/2 p-9 md:basis-auto md:p-4">
+              <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
                 <h2 className="mt-8 text-[30px] font-medium md:mt-2">
                   {gamerInfo?.credential ? GAMER_BADGES[gamerInfo.nft_level!].title : 'P12 | Project Twelve | Genesis'}
                 </h2>
@@ -183,7 +183,7 @@ export default function Gamer() {
                 <Image src="/img/p12.png" width={60} height={60} alt="p12" />
               </div>
               <div>
-                <Button className="w-[360px] font-medium xs:w-auto" disabled size="large">
+                <Button className="w-[360px] font-medium sm:w-auto" disabled size="large">
                   Claim via P12 (Under Construction)
                 </Button>
               </div>

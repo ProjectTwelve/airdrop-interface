@@ -29,8 +29,8 @@ export default function PermissionSettingDialog() {
       render={() => (
         <div className="w-full max-w-[760px]">
           <div className="flex h-[28px] items-center justify-center text-xl">Permission Setting</div>
-          <div className="mt-8 xs:mt-4">
-            <div className="rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error xs:p-2">
+          <div className="mt-8 sm:mt-4">
+            <div className="rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error sm:p-2">
               We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
               including secondary options. You can turn off after the airdrop!
             </div>
@@ -41,7 +41,7 @@ export default function PermissionSettingDialog() {
                 alt="setting"
               />
             </div>
-            <div className="mt-8 flex items-start justify-center xs:mt-4">
+            <div className="mt-8 flex items-start justify-center sm:mt-4">
               <Button
                 type="bordered"
                 className="w-[260px] md:w-full"
@@ -50,7 +50,7 @@ export default function PermissionSettingDialog() {
               >
                 <div className="flex items-center justify-center">
                   Reload Stats
-                  <img className="ml-2 xs:hidden" src="/svg/reload.svg" alt="reload" />
+                  <img className="ml-2 sm:hidden" src="/svg/reload.svg" alt="reload" />
                 </div>
               </Button>
               <Button
@@ -60,7 +60,7 @@ export default function PermissionSettingDialog() {
               >
                 <div className="flex items-center justify-center">
                   Open Steam
-                  <img className="ml-2 w-6 rotate-180 xs:hidden" src="/svg/left.svg" alt="reload" />
+                  <img className="ml-2 w-6 rotate-180 sm:hidden" src="/svg/left.svg" alt="reload" />
                 </div>
               </Button>
             </div>

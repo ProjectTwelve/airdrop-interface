@@ -28,7 +28,7 @@ export function RankingHomeCard({ title, layoutId, children, routerId }: React.P
       className="w-full"
       layoutId={isMobile ? undefined : layoutId}
     >
-      <div className="backdrop-box rounded-2xl px-6 py-4 xs:px-3">
+      <div className="backdrop-box rounded-2xl px-6 py-4 sm:px-3">
         <h2 className="flex items-center justify-between pb-1.5 font-medium">
           <p className="text-[22px]">{title}</p>
           <p onClick={handleGoToRanking} className="cursor-pointer text-xl text-p12-link">

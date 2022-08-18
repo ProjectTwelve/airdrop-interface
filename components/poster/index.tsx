@@ -45,7 +45,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
               </div>
             </motion.div>
             <img
-              className="absolute -right-12 top-0 cursor-pointer xs:fixed xs:right-0"
+              className="absolute -right-12 top-0 cursor-pointer sm:fixed sm:right-0"
               src="/svg/close_circle.svg"
               onClick={() => {
                 setPosterBtnShow(true);
@@ -54,7 +54,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
               alt="close"
             />
             {router.pathname !== '/gamer/[address]' && (
-              <div className="absolute top-1/2 -right-[300px] flex -translate-y-1/2 flex-col items-center justify-center xs:fixed xs:top-[85vh] xs:left-0 xs:right-0 xs:translate-y-0">
+              <div className="absolute top-1/2 -right-[300px] flex -translate-y-1/2 flex-col items-center justify-center sm:fixed sm:top-[85vh] sm:left-0 sm:right-0 sm:translate-y-0">
                 <Button
                   type="gradient"
                   style={{ width: 278 }}
@@ -67,7 +67,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
                     Save Image <img src="/svg/picture-2.svg" width="20" height="20" className="ml-2" alt="picture" />
                   </div>
                 </Button>
-                <div className="mt-5 flex flex-col items-center xs:hidden">
+                <div className="mt-5 flex flex-col items-center sm:hidden">
                   <p>Share with your friends</p>
                   <div className="mt-2 grid grid-cols-3 gap-3">
                     <a href="https://discord.gg/p12" target="_blank">

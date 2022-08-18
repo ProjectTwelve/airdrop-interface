@@ -8,7 +8,7 @@ export function AddGameTips() {
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
   return (
-    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 xs:p-3">
+    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 sm:p-3">
       <div>
         1. &nbsp;Can&apos;t find your game? Please double check your app ID, or join our Discord &nbsp;
         <a href="https://discord.gg/p12" target="_blank">
@@ -29,7 +29,7 @@ export function AddGameTips() {
 
 export function OwnershipTips() {
   return (
-    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 xs:p-3">
+    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 sm:p-3">
       <div className="">
         You need to <span className="font-medium">add the signature on your game description</span> to prove you are the creator
         of the game.

@@ -51,7 +51,7 @@ export default function GamerProfile() {
   return (
     <div className="mt-8">
       <div className="my-4" onClick={(event) => event.stopPropagation()}>
-        <div className="backdrop-box rounded-2xl p-8 xs:p-3">
+        <div className="backdrop-box rounded-2xl p-4 2xl:p-8">
           {isGamerInfoLoading && <Loading size={58} className="my-4 opacity-50" />}
           {gamerInfo && (
             <div className="flex items-center md:flex-col md:items-start">
@@ -138,14 +138,14 @@ export default function GamerProfile() {
                     </div>
                   </div>
                 </div>
-                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub xs:static xs:py-2">
+                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
                   <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
                     Project Galaxy
                   </a>
                 </p>
               </div>
-              <div className="basis-1/2 p-9 md:basis-auto md:p-4">
+              <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
                 <h2 className="mt-8 text-[30px] font-medium md:mt-2">
                   {gamerInfo?.credential ? GAMER_BADGES[gamerInfo.nft_level!].title : 'P12 | Project Twelve | Genesis'}
                 </h2>

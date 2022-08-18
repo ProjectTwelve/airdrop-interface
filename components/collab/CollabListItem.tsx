@@ -23,7 +23,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
         ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
         router.push({ pathname: '/collab/[id]', query: { id: collabCode } });
       }}
-      className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 xs:px-2"
+      className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
         <img className="h-[72px] w-[72px] rounded-2xl" src={projectLogo} alt="icon" />

@@ -70,7 +70,7 @@
         border: 1px solid #616985;
         border-radius: 1rem;
         overflow: hidden;
-        @apply tablet:backdrop-blur-lg;
+        @apply backdrop-blur-lg sm:backdrop-blur-none;
     }
 
     .gradient__box::after {
@@ -94,7 +94,7 @@
 
     .round-box {
         @apply h-[146px] w-full max-w-[701px] bg-cover bg-no-repeat p-8 md:h-auto;
-        @apply md:p-4 md:border md:border-[#616985] md:rounded-2xl md:backdrop-blur md:bg-gradient-to-b md:from-fuchsia-700 xs:px-2;
+        @apply md:p-4 md:border md:border-[#616985] md:rounded-2xl md:backdrop-blur md:bg-gradient-to-b md:from-fuchsia-700 sm:px-2;
     }
 
     .round-box__one {
@@ -123,7 +123,7 @@
         backdrop-filter: blur(16px);
         border: 1px solid #616985;
     }
-    
+
     .bg-p12-poster-0 {
         background: url("/img/poster/bg_0_top.webp") no-repeat top left, url("/img/poster/bg_0_bottom.webp") no-repeat bottom left, #0F182C;
     }
@@ -143,18 +143,20 @@
     .bg-p12-poster-4 {
         background: url("/img/poster/bg_4_top.webp") no-repeat top left, url("/img/poster/bg_4_bottom.webp") no-repeat bottom left, #0F182C;
     }
-    
+
     .bg-collab-time-start {
         background: url("/img/collab/subtract_start.png") no-repeat;
         background-size: 100% 100%;
     }
-    .bg-collab-timing{
+
+    .bg-collab-timing {
         background: url("/img/collab/subtract.png") no-repeat;
         background-size: 100% 100%;
-    }    
+    }
+
     .bg-collab-time-end {
         background: url("/img/collab/subtract_end.png") no-repeat;
         background-size: 100% 100%;
 
-    } 
+    }
 }

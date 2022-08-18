@@ -6,10 +6,11 @@ module.exports = {
         center: true,
       },
       screens: {
-        xs: { max: '475px' },
+        xs: { max: '480px' },
+        sm: { max: '640px' },
         md: { max: '768px' },
-        tablet: '640px',
-        xl: '1366px',
+        lg: { min: '769px', max: '1024px' },
+        xl: { min: '1025px', max: '1365px' },
         '2xl': '1366px',
       },
       colors: {

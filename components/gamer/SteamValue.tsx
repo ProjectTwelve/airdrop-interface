@@ -21,7 +21,7 @@ export default function SteamValue({ data }: SteamValueProps) {
   if (!data) return null;
 
   return (
-    <div className="mt-8 flex md:flex-col xs:mt-4">
+    <div className="mt-8 flex sm:mt-4 md:flex-col">
       <div className="w-full max-w-[300px] md:max-w-full">
         <div className="flex items-center">
           <h4 className="text-xl font-medium">My Account Value</h4>
@@ -45,10 +45,10 @@ export default function SteamValue({ data }: SteamValueProps) {
             {inventoriesValue.map((item) =>
               item.value ? (
                 <div key={item.name} className="bg-gradient-item flex rounded-xl p-3">
-                  <img width={112} height={72} src={item.img} className="rounded-lg object-cover" alt="game" />
-                  <div className="ml-4">
+                  <img width={112} height={72} src={item.img} className="rounded-lg object-cover lg:hidden" alt="game" />
+                  <div className="ml-2 2xl:ml-4">
                     <p className="font-medium">{item.name}</p>
-                    <div className="mt-1.5 font-ddin text-[42px] font-bold leading-[42px] text-p12-success">
+                    <div className="mt-1.5 font-ddin text-[42px] font-bold leading-[42px] text-p12-success lg:text-2xl xl:text-2xl">
                       {Math.floor(item.value)}
                     </div>
                   </div>
