@@ -24,7 +24,6 @@ type AppPropsWithLayout = AppProps & {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const queryClient = useMemo(() => new QueryClient(), []);
-  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
   const isCollab = useMemo(() => router.pathname.indexOf('/collab') !== -1, [router]);
 
   useEffect(() => {
@@ -51,7 +50,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <meta content="light" name="twitter:widgets:theme" />
       </Head>
       <Script id="theme" src="/js/theme.min.js" strategy="beforeInteractive" />
-      <QueryClientProvider client={queryClient}>{getLayout(<Component {...pageProps} />)}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
     </>
   );
 }

@@ -5,20 +5,22 @@ import { useAccount } from 'wagmi';
 import { Tooltip } from '../tooltip';
 import { useRecoilValue } from 'recoil';
 import { gamerInfoAtom } from '../../store/gamer/state';
+import { useSIDName } from '../../hooks/useSIDName';
 
 function Web3StatusInner() {
   const { address } = useAccount();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
+  const { SIDName } = useSIDName({ address });
 
   if (address) {
     return (
       <div className="flex items-center justify-center px-3 sm:h-6">
         {gamerInfo?.email ? (
           <Tooltip placement="bottom" label={gamerInfo?.email}>
-            <p className="cursor-pointer">{shortenAddress(address)}</p>
+            <p className="cursor-pointer">{SIDName ?? shortenAddress(address)}</p>
           </Tooltip>
         ) : (
-          <p className="cursor-pointer">{shortenAddress(address)}</p>
+          <p className="cursor-pointer">{SIDName ?? shortenAddress(address)}</p>
         )}
         <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient sm:hidden">
           <Jazzicon diameter={32} seed={jsNumberForAddress(address ?? '')} />
