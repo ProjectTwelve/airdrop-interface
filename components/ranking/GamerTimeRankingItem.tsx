@@ -1,13 +1,12 @@
 import React, { MouseEvent } from 'react';
 import dayjs from 'dayjs';
-import classNames from 'classnames';
 import { GamerRankInfo } from '../../lib/types';
 import { formatMinutes, openLink } from '../../utils';
 
 export function GamerTimeRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
-      <p className="w-[120px] sm:hidden">Timestamp</p>
+      <p className="w-[90px] sm:hidden">Timestamp</p>
       <p>User Info</p>
     </div>
   );
@@ -31,22 +30,22 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 p-4 hover:bg-[#7980AF]/20 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-xl bg-p12-black/80 px-3 py-[14px] hover:bg-[#7980AF]/20 sm:px-2"
     >
-      <div className="mr-2 h-[72px] flex-none break-words pt-3 font-medium sm:hidden lg:text-sm 2xl:mr-4">
+      <div className="mr-2 h-[44px] flex-none break-words pt-1 text-xs font-medium sm:hidden 2xl:mr-4">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
         <p>{data.createdAt && dayjs(data.createdAt).format('h:mm A')}</p>
       </div>
       <div className="flex-1">
-        <div className="float-left mr-2 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
+        <div className="float-left mr-2 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="group float-right flex h-[55px] items-center justify-between" onClick={handleToGamerProfile}>
-          <span className="hidden text-p12-sub group-hover:text-white 2xl:block">Details</span>
+        <div className="group float-right flex h-[44px] items-center justify-between" onClick={handleToGamerProfile}>
+          <span className="hidden text-xs text-p12-sub group-hover:text-white 2xl:block">Details</span>
           <svg
-            className="stroke-p12-sub pl-1 group-hover:stroke-white"
-            width="24"
-            height="24"
+            className="ml-0.5 stroke-p12-sub group-hover:stroke-white"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,25 +55,20 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
             <path d="M16.5 10L7.5 10" strokeWidth="1.75" />
           </svg>
         </div>
-        <div className="float-right mr-2  flex-none rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1 lg:hidden xs:hidden">
-          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">SS Games</p>
-          <p
-            className={classNames(
-              'mt-1.5 text-center leading-[18px] text-p12-link',
-              data.ss_game_count !== undefined && data.ss_game_count > 10 ? 'text-xs' : 'text-sm',
-            )}
-          >
+        <div className="float-right mr-2 rounded bg-p12-tips/20 py-1 px-2 lg:hidden xs:hidden">
+          <p className="border-b border-p12-tips/30 pb-[3px] text-center text-xs leading-[14px] text-p12-link">SS Games</p>
+          <p className="mt-1 text-center text-xs leading-[14px] text-p12-link">
             {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
-        <div className="float-right mr-2 rounded bg-p12-tips/20 px-2.5 pb-1.5 pt-1">
-          <p className="border-b border-p12-tips/30 pb-1 text-center text-xs text-p12-link">Steam year</p>
-          <p className="mt-1.5 text-center text-sm leading-[18px] text-p12-link">
+        <div className="float-right mr-2 rounded bg-p12-tips/20 py-1 px-2">
+          <p className="border-b border-p12-tips/30 pb-[3px] text-center text-xs leading-[14px] text-p12-link">Steam year</p>
+          <p className="mt-1 text-center text-xs leading-[14px] text-p12-link">
             {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}
           </p>
         </div>
         <div className="mr-2 overflow-hidden">
-          <p className="my-0.5 truncate font-medium">{data.person_name}</p>
+          <p className="truncate text-sm font-medium">{data.person_name}</p>
           {data.ss_game_count && data.ss_game_count > 0 ? (
             <span className="whitespace-nowrap rounded bg-[#C859FF]/20 px-2 py-[1.5px] text-xs text-[#FC59FF]">SS Gamer</span>
           ) : null}

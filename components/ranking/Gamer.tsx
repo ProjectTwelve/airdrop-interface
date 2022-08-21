@@ -36,14 +36,14 @@ export default function GamerRanking() {
   const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 9990, [gamerRankData?.tokenRank]);
 
   return (
-    <div className="px-8 py-12 sm:p-4">
+    <div className="p-8 sm:p-4">
       <div className="grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-2">
         <div>
           <h3 className="text-sm font-medium leading-5">Verified Gamers</h3>
-          <div className="gradient__box mt-3 grid grid-cols-3 py-[17px] py-2 leading-[90px] 2xl:flex 2xl:items-center">
-            <div className="h-[54px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
-              <p className="h-[16px] text-center text-sm">Total</p>
-              <p className="mt-1 text-center font-ddin text-[32px] leading-[32px] lg:text-2xl">
+          <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] py-2 leading-[90px] 2xl:flex 2xl:items-center">
+            <div className="h-[40px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
+              <p className="h-[14px] text-center text-xs">Total</p>
+              <p className="mt-1 text-center font-ddin text-xl leading-5">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>
             </div>
@@ -51,8 +51,8 @@ export default function GamerRanking() {
               <p
                 key={index}
                 className={classNames(
-                  'h-[54px] flex-1 border-[#949FA9]/50 text-center font-ddin text-2xl leading-[54px]',
-                  'leading-6 2xl:border-r 2xl:last:border-r-0',
+                  'h-[40px] flex-1 border-[#949FA9]/50 text-center font-ddin text-lg leading-[40px]',
+                  '2xl:border-r 2xl:last:border-r-0',
                   item.color,
                 )}
               >
@@ -63,43 +63,39 @@ export default function GamerRanking() {
         </div>
         <div>
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
-          <div className="gradient__box mt-3 h-[150px] 2xl:h-[90px]">
+          <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
             <div className="flex h-full w-full flex-wrap py-2 px-4 px-2">
-              <div className="flex h-[72px] basis-full items-center justify-center truncate 2xl:flex-1">
+              <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
                 {gamerRankData?.avatar_full && (
-                  <div className="mr-3 h-[52px] w-[52px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
+                  <div className="mr-3 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
                     <img src={gamerRankData.avatar_full} alt="avatar" />
                   </div>
                 )}
                 <div className="truncate">{gamerRankData?.person_name || 'Please login first'}</div>
               </div>
-              <div className="m-2 hidden w-[1px] bg-[#949FA9] 2xl:block" />
+              <div className="mx-2 my-3.5 hidden w-[1px] bg-[#949FA9] 2xl:block" />
               <div
                 onClick={() => {
                   isInRanking && setTokenRankPage(Math.ceil(gamerRankData!.tokenRank! / 10));
                 }}
                 className={classNames(
-                  'flex flex-1 items-center justify-center rounded-2xl text-sm lg:text-xs',
+                  'flex min-h-[38px] flex-1 items-center justify-center rounded-2xl text-xs',
                   isInRanking && 'cursor-pointer hover:bg-[#7980AF]/30',
                 )}
               >
                 By Token Rarity
-                <span className="pl-3 font-ddin text-2xl font-bold lg:text-xl">
-                  {getCountMemo(gamerRankData?.tokenRank) || '--'}
-                </span>
+                <span className="pl-3 font-ddin text-lg font-bold">{getCountMemo(gamerRankData?.tokenRank) || '--'}</span>
               </div>
-              <div className="m-2 hidden w-[1px] bg-[#949FA9] 2xl:block" />
-              <div className="flex flex-1 items-center justify-center rounded-2xl text-sm lg:text-xs">
+              <div className="mx-2 my-3.5 hidden w-[1px] bg-[#949FA9] 2xl:block" />
+              <div className="flex flex-1 items-center justify-center rounded-2xl text-xs">
                 By Claim Time
-                <span className="pl-3 font-ddin text-2xl font-bold lg:text-xl">
-                  {getCountMemo(gamerRankData?.timeRank) || '--'}
-                </span>
+                <span className="pl-3 font-ddin text-lg font-bold">{getCountMemo(gamerRankData?.timeRank) || '--'}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1 lg:gap-4 xl:gap-4">
+      <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <GamerTimeRankingHeader />
