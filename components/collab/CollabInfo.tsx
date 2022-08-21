@@ -92,7 +92,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
           <div className="flex gap-7 divide-x border-p12-line">
             {tokenAmount ? (
               <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
-                Token <span className="text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
+                Token <span className="font-ddin text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
               </div>
             ) : null}
             {nftTotalAmount ? (
