@@ -48,11 +48,11 @@ function DeveloperRanking() {
   };
 
   return (
-    <div className="px-8 py-12 sm:p-3">
+    <div className="p-8 sm:p-3">
       <div className="flex md:flex-col">
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
-          <div className="gradient__box mt-3 h-[90px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[90px] sm:w-auto">
+          <div className="gradient__box mt-3 h-[84px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[84px] sm:w-auto">
             {new Intl.NumberFormat().format(verified?.total ?? 0)}
           </div>
         </div>
@@ -77,11 +77,11 @@ function DeveloperRanking() {
             >
               <LeftCircle className="rotate-180" />
             </div>
-            <div className="gradient__box mt-3 h-[90px] sm:h-[150px]">
+            <div className="gradient__box mt-3 h-[84px] sm:h-[150px]">
               <div className="relative h-full w-full overflow-hidden">
                 <AnimatePresence initial={false} custom={swipeDirection}>
                   <motion.div
-                    className="absolute flex h-full w-full py-2 px-4 sm:flex-wrap sm:px-2"
+                    className="absolute flex h-full w-full py-3 px-4 sm:flex-wrap sm:px-2"
                     key={swipePage}
                     custom={swipeDirection}
                     variants={variants}
@@ -93,8 +93,8 @@ function DeveloperRanking() {
                       opacity: { duration: 0.2 },
                     }}
                   >
-                    <div className="h-[72px] flex-1 sm:basis-full">
-                      <div className="relative float-left mr-3 h-[72px] w-[112px] flex-none overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
+                    <div className="h-[60px] flex-1 sm:basis-full">
+                      <div className="relative float-left mr-3 h-[60px] w-[112px] flex-none overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
                         {item ? (
                           <img
                             alt="header_image"
@@ -103,7 +103,7 @@ function DeveloperRanking() {
                             src={item.header_image}
                           />
                         ) : (
-                          <p className="text-center text-xs leading-[72px] text-p12-bg">No Game</p>
+                          <p className="text-center text-xs leading-[60px] text-p12-bg">No Game</p>
                         )}
                       </div>
                       <div className="truncate">
@@ -113,7 +113,7 @@ function DeveloperRanking() {
                             <div className="mt-1.5 text-xs">{item?.release_date}</div>
                           </>
                         ) : (
-                          <p className="font-medium leading-[72px]">NO GAME YET</p>
+                          <p className="font-medium leading-[60px]">NO GAME YET</p>
                         )}
                       </div>
                     </div>
@@ -144,7 +144,7 @@ function DeveloperRanking() {
           </div>
         </div>
       </div>
-      <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-1">
+      <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1">
         <div className="w-full">
           <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
