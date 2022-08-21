@@ -91,8 +91,8 @@ export default function CollabInfo({ data }: CollabInfoProps) {
         <div className="mt-5 flex items-center justify-between gap-4 md:flex-wrap">
           <div className="flex gap-7 divide-x border-p12-line">
             {tokenAmount ? (
-              <div className="align-bottom text-2xl font-bold leading-9 text-[#FFAA2C]">
-                Token <span className="font-ddin text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
+              <div className="align-bottom font-ddin text-2xl font-bold leading-9 text-[#FFAA2C]">
+                Token <span className=" text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
               </div>
             ) : null}
             {nftTotalAmount ? (
@@ -101,7 +101,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
                   'pl-7': tokenAmount,
                 })}
               >
-                NFT <span className="font-ddin text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
+                NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
               </div>
             ) : null}
           </div>
