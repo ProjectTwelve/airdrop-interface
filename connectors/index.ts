@@ -36,7 +36,7 @@ export const BNBSmartChainTestnet: Chain = {
   blockExplorers: {
     default: { name: 'tBscScan', url: 'https://testnet.bscscan.com/' },
   },
-  testnet: false,
+  testnet: true,
 };
 
 export const { chains, provider } = configureChains(
