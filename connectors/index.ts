@@ -21,7 +21,28 @@ export const BNBSmartChain: Chain = {
   testnet: false,
 };
 
-export const { chains, provider } = configureChains([...defaultChains, BNBSmartChain], [publicProvider()]);
+export const BNBSmartChainTestnet: Chain = {
+  id: 97,
+  name: 'BNB Smart Chain Testnet',
+  network: 'tbsc',
+  nativeCurrency: {
+    name: 'tBNB',
+    symbol: 'tBNB',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+  },
+  blockExplorers: {
+    default: { name: 'tBscScan', url: 'https://testnet.bscscan.com/' },
+  },
+  testnet: false,
+};
+
+export const { chains, provider } = configureChains(
+  [...defaultChains, BNBSmartChain, BNBSmartChainTestnet],
+  [publicProvider()],
+);
 
 export const metamaskConnector = new MetaMaskConnector({
   chains: chains,
