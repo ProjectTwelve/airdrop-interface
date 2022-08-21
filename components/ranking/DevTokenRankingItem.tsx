@@ -9,7 +9,7 @@ export function DevTokenRankingHeader() {
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">Game</p>
-      <p className="w-[40px] 2xl:w-[60px]">Badge</p>
+      <p className="w-[50px]">Badge</p>
     </div>
   );
 }

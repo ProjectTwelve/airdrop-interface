@@ -52,7 +52,7 @@ function DeveloperRanking() {
       <div className="flex md:flex-col">
         <div className="mr-8 md:mr-0 md:mb-2">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
-          <div className="gradient__box mt-3 h-[84px] w-[180px] text-center font-ddin text-[32px] font-medium leading-[84px] sm:w-auto">
+          <div className="gradient__box mt-3 h-[84px] w-[180px] text-center font-ddin text-2xl font-medium leading-[84px] sm:w-auto">
             {new Intl.NumberFormat().format(verified?.total ?? 0)}
           </div>
         </div>
@@ -109,11 +109,11 @@ function DeveloperRanking() {
                       <div className="truncate">
                         {item ? (
                           <>
-                            <h4 className="mt-2 truncate">{item?.name}</h4>
+                            <h4 className="mt-2 truncate text-sm font-medium">{item?.name}</h4>
                             <div className="mt-1.5 text-xs">{item?.release_date}</div>
                           </>
                         ) : (
-                          <p className="font-medium leading-[60px]">NO GAME YET</p>
+                          <p className="text-sm font-medium leading-[60px]">NO GAME YET</p>
                         )}
                       </div>
                     </div>
@@ -122,20 +122,20 @@ function DeveloperRanking() {
                       onClick={() => {
                         item && setTokenRankPage(Math.ceil(item.tokenRank / 10));
                       }}
-                      className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+                      className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-xs hover:bg-[#7980AF]/30"
                     >
                       By Token Rarity
-                      <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
+                      <span className="pl-3 font-ddin text-xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
                     </div>
                     <div className="m-2 w-[1px] bg-[#949FA9] sm:hidden" />
                     <div
                       onClick={() => {
                         item && setTimeRankPage(Math.ceil(((timeRankData?.rankLength || 0) - item.timeRank + 1) / 10));
                       }}
-                      className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-sm hover:bg-[#7980AF]/30"
+                      className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-xs hover:bg-[#7980AF]/30"
                     >
                       By Claim Time
-                      <span className="pl-3 font-ddin text-2xl font-bold">{getCountMemo(item?.timeRank) || '--'}</span>
+                      <span className="pl-3 font-ddin text-xl font-bold">{getCountMemo(item?.timeRank) || '--'}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>

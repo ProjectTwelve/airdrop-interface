@@ -8,9 +8,9 @@ import { formatMinutes, getCountMemo, openLink } from '../../utils';
 export function GamerTokenRankingHeader() {
   return (
     <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
-      <p className="w-[65px]">Rank</p>
+      <p className="w-[55px]">Rank</p>
       <p className="flex-1">User Info</p>
-      <p className="w-[70px] 2xl:w-[160px]">Badge</p>
+      <p className="w-[70px] 2xl:w-[120px]">Badge</p>
     </div>
   );
 }
