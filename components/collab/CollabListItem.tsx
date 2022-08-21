@@ -26,10 +26,10 @@ export default function CollabListItem({ data }: CollabItemProps) {
       className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
-        <img className="h-[72px] w-[72px] rounded-2xl" src={projectLogo} alt="icon" />
-        <div className="flex w-14 flex-grow flex-col gap-2">
-          <div className="flex items-center gap-1">
-            <h1 className="flex-shrink truncate text-xl font-semibold leading-6">{projectName}</h1>
+        <img className="aspect-square h-[66px] rounded-2xl" src={projectLogo} alt="icon" />
+        <div className="flex w-14 flex-grow flex-col gap-[.375rem]">
+          <div className="flex items-center gap-2">
+            <h1 className="flex-shrink truncate text-base font-semibold leading-5">{projectName}</h1>
             {projectWebsite && (
               <a href={projectWebsite} target="_blank" onClick={(e) => e.stopPropagation()} className="min-w-[20px]">
                 <img className="aspect-square min-w-[20px] hover:brightness-200" src="/svg/website.svg" alt="website icon" />
