@@ -25,7 +25,7 @@ export default function GamerRanking() {
       { color: 'text-[#FFAA2C]', num: verified?.verifiedCount[0] ?? 0 },
       { color: 'text-[#FC59FF]', num: verified?.verifiedCount[1] ?? 0 },
       { color: 'text-[#43BBFF]', num: verified?.verifiedCount[2] ?? 0 },
-      { color: 'text-[#1EDB8C]', num: verified?.verifiedCount[3] ?? 0 },
+      { color: 'text-[#6EEB7A]', num: verified?.verifiedCount[3] ?? 0 },
       {
         color: 'text-[#BDC9E3]',
         num: commonCount,
