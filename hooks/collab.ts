@@ -80,7 +80,7 @@ export const useCollabIsClaim = (timeClaim: number) => {
     const nowDate = dayjs();
     const claimDate = dayjs.unix(timeClaim);
     if (nowDate.isBefore(claimDate)) return false;
-    return userInfo?.resultStatus && (userInfo?.tokenResult || userInfo?.nftResult);
+    return !!(userInfo?.resultStatus && (userInfo?.tokenResult || userInfo?.nftResult));
   }, [userInfo, timeClaim]);
 };
 
