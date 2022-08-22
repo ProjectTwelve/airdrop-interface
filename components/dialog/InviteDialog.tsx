@@ -140,7 +140,7 @@ function InviteDialog() {
               <div className="mr-2">&gt;</div>
               <div className="mr-2">
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <Tag size="small" value="Uncommon" type="green" />
+                  <Tag size="small" value="Uncommon" type="greenLight" />
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">12%</div>
               </div>
@@ -180,7 +180,7 @@ function InviteDialog() {
               {isMounted && address && (
                 <div className="flex items-center">
                   <p className="text-[18px] font-medium">My Referrals</p>
-                  <p className="ml-3 text-xl font-medium text-p12-success">{invitationCount}</p>
+                  <p className="ml-3 text-xl font-medium">{invitationCount}</p>
                   <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
                     <p className="ml-3 cursor-pointer text-sm text-p12-link">
                       More

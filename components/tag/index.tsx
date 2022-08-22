@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type TagProps = {
   value?: string;
-  type: 'red' | 'orange' | 'purple' | 'blue' | 'green' | 'white';
+  type: 'red' | 'orange' | 'purple' | 'blue' | 'green' | 'greenLight' | 'white';
   size?: 'small' | 'medium' | 'large';
 };
 
@@ -23,6 +23,7 @@ export default function Tag({ value, type, size, children }: React.PropsWithChil
     purple: 'text-[#FC59FF] border-[#FC59FF] bg-[#FC59FF]/20',
     blue: 'text-p12-link border-[#4383FF] bg-[#4383FF]/20',
     green: 'text-p12-success border-p12-success bg-[#16F497]/20',
+    greenLight: 'text-[#6EEB7A] border-[#6EEB7A] bg-[#62F82D]/20',
     white: 'text-[#99A7C3] border-[#99A7C3] bg-[#99A7C3]/20',
   };
 
