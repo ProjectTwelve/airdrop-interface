@@ -8,7 +8,7 @@ import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/t
 import { collabUserInfoAtom } from '../store/collab/state';
 import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 import { useLocalStorage } from 'react-use';
-import { STORAGE_KEY } from '../constants';
+import { COLLAB_NFT_STATUS, STORAGE_KEY } from '../constants';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -99,4 +99,15 @@ export const useCollabIsFirstClaim = (collabCode: string): [boolean, (status: bo
     return true;
   }, [collabFirstClaimMap, collabCode]);
   return [isFirstClaim, setFirstClaim];
+};
+
+export const useCollabIsNftHolder = () => {
+  const userInfo = useRecoilValue(collabUserInfoAtom);
+  const { address } = useAccount();
+  const isNftHolder = useMemo(() => {
+    if (!address) return COLLAB_NFT_STATUS.UN_CONNECT;
+    if (userInfo?.p12NftHolder) return COLLAB_NFT_STATUS.IS_HOLDER;
+    else return COLLAB_NFT_STATUS.NOT_HOLDER;
+  }, [userInfo, address]);
+  return isNftHolder;
 };

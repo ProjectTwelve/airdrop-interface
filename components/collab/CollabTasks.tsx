@@ -11,6 +11,9 @@ import Button from '../button';
 import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
+import { useCollabIsNftHolder } from '../../hooks/collab';
+import { COLLAB_NFT_STATUS } from '../../constants';
+import { useIsMounted } from '../../hooks/useIsMounted';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
@@ -23,6 +26,9 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
   const [value, setValue] = useState('');
+  const isNFTholder = useCollabIsNftHolder();
+  const isMounted = useIsMounted();
+
   const mutationVerify = useMutation<Response<CollabUserInfo>, any, CollabTweetVerifyParams, any>(
     (data) => fetchCollabTweetVerify(data),
     {
@@ -62,8 +68,10 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     setIsJoinDisable(!isOpen);
   }, [data.timeAllocation, data.timeJoin]);
 
+  if (!isMounted) return null;
+
   return (
-    <div className="mt-9 flex flex-col gap-1">
+    <div className="mt-9 flex flex-col gap-1" id="collabTasks">
       {taskTweetContent ? (
         <>
           <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
@@ -81,15 +89,49 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             </p>
           </div>
         )}
-        <CollabTaskItem
-          key="airdrop"
-          gaKey="airdrop"
-          title="Genesis Airdrop"
-          icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
-          content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
-          href="/"
-          hrefLabel="To P12 Genesis Airdrop"
-        />
+        {isNFTholder === COLLAB_NFT_STATUS.IS_HOLDER ? (
+          <CollabTaskItem
+            key="airdrop"
+            gaKey="airdrop"
+            title="Genesis Airdrop"
+            icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
+            content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
+            href="/"
+            hrefLabel="To P12 Genesis Airdrop"
+          />
+        ) : (
+          <CollabTaskItem
+            key="airdrop"
+            gaKey="airdrop"
+            title="Genesis Airdrop"
+            icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
+            content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
+            errorLabel={
+              isNFTholder === COLLAB_NFT_STATUS.UN_CONNECT ? (
+                'Please connect your wallet first.'
+              ) : (
+                <>
+                  You are not Holder, please{' '}
+                  <a
+                    className="font-semibold text-[#43BBFF]"
+                    href="/gamer"
+                    target="_blank"
+                    onClick={() =>
+                      ReactGA.event({
+                        category: 'Collab-Item',
+                        action: 'Click',
+                        label: 'airdrop-none-nft',
+                      })
+                    }
+                  >
+                    Click
+                  </a>{' '}
+                  here to claim.
+                </>
+              )
+            }
+          />
+        )}
         <CollabTaskItem
           key="gleam"
           gaKey="gleam"
