@@ -63,9 +63,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const id = params.id;
-  if (!/^[0-9A-Za-z]+$/.test(id)) {
-    return { notFound: true };
-  }
+  if (!/^[0-9A-Za-z]+$/.test(id)) return { notFound: true };
   const { data } = await fetchCollabItem(id);
+  if (!data) return { notFound: true };
   return { props: { data }, revalidate: 60 * 6 };
 }
