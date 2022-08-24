@@ -309,4 +309,5 @@ export type CollabUserInfo = {
   nftClaim: CollabStatus;
   tokenResult: number;
   nftResult: number;
+  p12NftHolder: CollabStatus;
 };

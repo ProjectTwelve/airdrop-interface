@@ -11,6 +11,9 @@ import Button from '../button';
 import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
+import { useCollabIsJoined, useCollabIsNftHolder, useCollabTimes } from '../../hooks/collab';
+import { COLLAB_NFT_STATUS, COLLAB_TIME_STATUS } from '../../constants';
+import { useIsMounted } from '../../hooks/useIsMounted';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
 
 export type CollabTasksProps = {
@@ -18,11 +21,16 @@ export type CollabTasksProps = {
 };
 
 export default function CollabTasks({ data }: CollabTasksProps) {
-  const { taskGleam, taskTweetContent, collabCode } = data;
+  const { taskGleam, taskTweetContent, timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
   const [isJoinDisable, setIsJoinDisable] = useState<boolean>(false);
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
   const [value, setValue] = useState('');
+  const isNFTholder = useCollabIsNftHolder();
+  const isJoined = useCollabIsJoined();
+  const isMounted = useIsMounted();
+  const { timeStatus } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
+
   const mutationVerify = useMutation<Response<CollabUserInfo>, any, CollabTweetVerifyParams, any>(
     (data) => fetchCollabTweetVerify(data),
     {
@@ -62,8 +70,50 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     setIsJoinDisable(!isOpen);
   }, [data.timeAllocation, data.timeJoin]);
 
+  const generateAirdropTask = useCallback(() => {
+    const taskProps = {
+      key: 'airdrop',
+      title: 'Genesis Airdrop',
+      icon: <div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>,
+      content: 'Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT.',
+      gaKey: 'airdrop',
+    };
+    const normal = 'To P12 Genesis Airdrop';
+    const noConnect = 'Please connect your wallet first.';
+    const noNFTinJoined = (
+      <>
+        You are not Holder, please{' '}
+        <a
+          className="font-semibold text-[#43BBFF]"
+          href="/gamer"
+          target="_blank"
+          onClick={() =>
+            ReactGA.event({
+              category: 'Collab-Item',
+              action: 'Click',
+              label: 'airdrop-none-nft',
+            })
+          }
+        >
+          Click
+        </a>{' '}
+        here to claim.
+      </>
+    ); // You are not Holder, please Click here to claim.
+    if (timeStatus === COLLAB_TIME_STATUS.UPCOMING) return <CollabTaskItem {...taskProps} href="/" hrefLabel={normal} />;
+    if (isNFTholder === COLLAB_NFT_STATUS.UN_CONNECT) return <CollabTaskItem {...taskProps} errorLabel={noConnect} />;
+    if (timeStatus === COLLAB_TIME_STATUS.JOIN) {
+      // joined and not holder
+      if (isJoined && isNFTholder !== COLLAB_NFT_STATUS.IS_HOLDER)
+        return <CollabTaskItem {...taskProps} errorLabel={noNFTinJoined} />;
+    }
+    return <CollabTaskItem {...taskProps} href="/" hrefLabel={normal} />;
+  }, [timeStatus, isJoined, isNFTholder]);
+
+  if (!isMounted) return null;
+
   return (
-    <div className="mt-9 flex flex-col gap-1">
+    <div className="mt-9 flex flex-col gap-1" id="collabTasks">
       {taskTweetContent ? (
         <>
           <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
@@ -81,15 +131,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             </p>
           </div>
         )}
-        <CollabTaskItem
-          key="airdrop"
-          gaKey="airdrop"
-          title="Genesis Airdrop"
-          icon={<div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>}
-          content="Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT."
-          href="/"
-          hrefLabel="To P12 Genesis Airdrop"
-        />
+        {generateAirdropTask()}
         <CollabTaskItem
           key="gleam"
           gaKey="gleam"

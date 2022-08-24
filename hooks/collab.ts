@@ -8,7 +8,8 @@ import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/t
 import { collabUserInfoAtom } from '../store/collab/state';
 import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 import { useLocalStorage } from 'react-use';
-import { STORAGE_KEY } from '../constants';
+import { COLLAB_NFT_STATUS, COLLAB_TIME_STATUS, STORAGE_KEY } from '../constants';
+import isBetween from 'dayjs/plugin/isBetween';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -40,8 +41,32 @@ export const useFetchCollabUserInfo = (collabCode: string) => {
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
+  dayjs.extend(isBetween);
+  const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose } = times;
+
+  const dates = useMemo(
+    () => ({
+      joinDate: timeJoin ? dayjs.unix(timeJoin) : dayjs.unix(timeComingSoon!),
+      allocDate: timeAllocation ? dayjs.unix(timeAllocation) : dayjs.unix(timeComingSoon!),
+      claimDate: timeClaim ? dayjs.unix(timeClaim) : dayjs.unix(timeComingSoon!),
+      closeDate: dayjs.unix(timeClose!),
+    }),
+    [timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose],
+  );
+
+  const nowTime = dayjs();
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+
+  const timeStatus = useMemo(() => {
+    const { joinDate, allocDate, claimDate, closeDate } = dates;
+    if (nowTime.isBefore(joinDate)) return COLLAB_TIME_STATUS.UPCOMING;
+    if (nowTime.isBetween(joinDate, allocDate, null, '[)')) return COLLAB_TIME_STATUS.JOIN;
+    if (nowTime.isBetween(allocDate, claimDate, null, '[)')) return COLLAB_TIME_STATUS.ALLOCATE;
+    if (nowTime.isBetween(claimDate, closeDate, null, '[]')) return COLLAB_TIME_STATUS.CLAIM;
+    if (nowTime.isAfter(closeDate)) return COLLAB_TIME_STATUS.CLOSED;
+  }, [nowTime, dates]);
+
   const [shortTimes, setShortTimes] = useState<CollabTimeLimeProps>({
     timeComingSoon: '',
     timeJoin: '',
@@ -65,7 +90,7 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
     });
   }, [times]);
 
-  return { startTime, endTime, shortTimes };
+  return { startTime, endTime, timeStatus, shortTimes };
 };
 
 export const useCollabIsJoined = () => {
@@ -99,4 +124,15 @@ export const useCollabIsFirstClaim = (collabCode: string): [boolean, (status: bo
     return true;
   }, [collabFirstClaimMap, collabCode]);
   return [isFirstClaim, setFirstClaim];
+};
+
+export const useCollabIsNftHolder = () => {
+  const userInfo = useRecoilValue(collabUserInfoAtom);
+  const { address } = useAccount();
+  const isNftHolder = useMemo(() => {
+    if (!address) return COLLAB_NFT_STATUS.UN_CONNECT;
+    if (userInfo?.p12NftHolder) return COLLAB_NFT_STATUS.IS_HOLDER;
+    else return COLLAB_NFT_STATUS.NOT_HOLDER;
+  }, [userInfo, address]);
+  return isNftHolder;
 };

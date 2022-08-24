@@ -122,3 +122,17 @@ export const GAMER_BADGES = {
 
 // Collab
 export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
+
+export enum COLLAB_TIME_STATUS {
+  UPCOMING = 'Upcoming',
+  JOIN = 'Join',
+  ALLOCATE = 'Allocate',
+  CLAIM = 'Claim',
+  CLOSED = 'Closed',
+}
+
+export enum COLLAB_NFT_STATUS {
+  UN_CONNECT = 0,
+  IS_HOLDER,
+  NOT_HOLDER,
+}
