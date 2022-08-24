@@ -100,35 +100,13 @@ export default function CollabTasks({ data }: CollabTasksProps) {
         here to claim.
       </>
     ); // You are not Holder, please Click here to claim.
-    const noNFT = (
-      <>
-        Claim{' '}
-        <a
-          className="font-semibold text-[#43BBFF]"
-          href="/gamer"
-          target="_blank"
-          onClick={() =>
-            ReactGA.event({
-              category: 'Collab-Item',
-              action: 'Click',
-              label: 'airdrop-none-nft',
-            })
-          }
-        >
-          P12 Genesis NFT
-        </a>{' '}
-        to win more rewards!
-      </>
-    ); // Claim P12 Genesis NFT to win more rewards!
-
     if (timeStatus === COLLAB_TIME_STATUS.UPCOMING) return <CollabTaskItem {...taskProps} href="/" hrefLabel={normal} />;
-    if (timeStatus === COLLAB_TIME_STATUS.JOIN && isJoined && isNFTholder !== COLLAB_NFT_STATUS.IS_HOLDER) {
-      // in join time and joined and not holder
-      return (
-        <CollabTaskItem {...taskProps} errorLabel={isNFTholder === COLLAB_NFT_STATUS.UN_CONNECT ? noConnect : noNFTinJoined} />
-      );
+    if (isNFTholder === COLLAB_NFT_STATUS.UN_CONNECT) return <CollabTaskItem {...taskProps} errorLabel={noConnect} />;
+    if (timeStatus === COLLAB_TIME_STATUS.JOIN) {
+      // joined and not holder
+      if (isJoined && isNFTholder !== COLLAB_NFT_STATUS.IS_HOLDER)
+        return <CollabTaskItem {...taskProps} errorLabel={noNFTinJoined} />;
     }
-    if (isNFTholder !== COLLAB_NFT_STATUS.IS_HOLDER) return <CollabTaskItem {...taskProps} errorLabel={noNFT} />;
     return <CollabTaskItem {...taskProps} href="/" hrefLabel={normal} />;
   }, [timeStatus, isJoined, isNFTholder]);
 
