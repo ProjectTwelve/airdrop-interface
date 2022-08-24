@@ -9,6 +9,7 @@ import { collabUserInfoAtom } from '../store/collab/state';
 import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 import { useLocalStorage } from 'react-use';
 import { COLLAB_NFT_STATUS, COLLAB_TIME_STATUS, STORAGE_KEY } from '../constants';
+import isBetween from 'dayjs/plugin/isBetween';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -40,14 +41,32 @@ export const useFetchCollabUserInfo = (collabCode: string) => {
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
+  dayjs.extend(isBetween);
+  const { timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose } = times;
+
+  const dates = useMemo(
+    () => ({
+      joinDate: timeJoin ? dayjs.unix(timeJoin) : dayjs.unix(timeComingSoon!),
+      allocDate: timeAllocation ? dayjs.unix(timeAllocation) : dayjs.unix(timeComingSoon!),
+      claimDate: timeClaim ? dayjs.unix(timeClaim) : dayjs.unix(timeComingSoon!),
+      closeDate: dayjs.unix(timeClose!),
+    }),
+    [timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose],
+  );
+
   const nowTime = dayjs();
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+
   const timeStatus = useMemo(() => {
-    if (nowTime.isBefore(startTime)) return COLLAB_TIME_STATUS.UPCOMING;
-    if (nowTime.isAfter(endTime)) return COLLAB_TIME_STATUS.CLOSED;
-    return COLLAB_TIME_STATUS.LIVE;
-  }, [nowTime, startTime, endTime]);
+    const { joinDate, allocDate, claimDate, closeDate } = dates;
+    if (nowTime.isBefore(joinDate)) return COLLAB_TIME_STATUS.UPCOMING;
+    if (nowTime.isBetween(joinDate, allocDate, null, '[)')) return COLLAB_TIME_STATUS.JOIN;
+    if (nowTime.isBetween(allocDate, claimDate, null, '[)')) return COLLAB_TIME_STATUS.ALLOCATE;
+    if (nowTime.isBetween(claimDate, closeDate, null, '[]')) return COLLAB_TIME_STATUS.CLAIM;
+    if (nowTime.isAfter(closeDate)) return COLLAB_TIME_STATUS.CLOSED;
+  }, [nowTime, dates]);
+
   const [shortTimes, setShortTimes] = useState<CollabTimeLimeProps>({
     timeComingSoon: '',
     timeJoin: '',

@@ -125,7 +125,9 @@ export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
 
 export enum COLLAB_TIME_STATUS {
   UPCOMING = 'Upcoming',
-  LIVE = 'Live',
+  JOIN = 'Join',
+  ALLOCATE = 'Allocate',
+  CLAIM = 'Claim',
   CLOSED = 'Closed',
 }
 
