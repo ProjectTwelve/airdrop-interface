@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCollabTimes } from '../../hooks/collab';
 import { CollabShortInfo } from '../../lib/types';
 import ReactGA from 'react-ga4';
-import dayjs from 'dayjs';
+import { COLLAB_TIME_STATUS } from '../../constants';
 
 type CollabItemProps = {
   data: CollabShortInfo;
@@ -12,10 +12,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
   const { collabCode, projectName, projectInfoBrief, projectInfo, projectLogo, timeComingSoon, timeClose, projectWebsite } =
     data;
-
-  const { startTime, endTime } = useCollabTimes({ timeComingSoon, timeClose });
-  const nowTime = dayjs();
-  const closeTime = dayjs.unix(timeClose);
+  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeClose });
 
   return (
     <div
@@ -43,7 +40,19 @@ export default function CollabListItem({ data }: CollabItemProps) {
         <div className="flex items-center text-xs leading-5 text-p12-sub">
           {startTime} ~ {endTime}
         </div>
-        {nowTime.isAfter(closeTime) && <div className="flex items-center text-xs leading-5 text-p12-sub">Closed</div>}
+        {timeStatus === COLLAB_TIME_STATUS.CLOSED && (
+          <div className="flex items-center text-xs leading-5 text-p12-sub">{COLLAB_TIME_STATUS.CLOSED}</div>
+        )}
+        {timeStatus === COLLAB_TIME_STATUS.LIVE && (
+          <div className="flex items-center rounded bg-[#16F497]/20 px-2 text-xs leading-5 text-[#1EDB8C]">
+            {COLLAB_TIME_STATUS.LIVE}
+          </div>
+        )}
+        {timeStatus === COLLAB_TIME_STATUS.UPCOMING && (
+          <div className="flex items-center rounded bg-[#C859FF]/20 px-2 text-xs leading-5 text-[#FC59FF]">
+            {COLLAB_TIME_STATUS.UPCOMING}
+          </div>
+        )}
       </div>
     </div>
   );

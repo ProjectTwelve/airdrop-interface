@@ -8,7 +8,7 @@ import { CollabShortInfo, CollabTimes, CollabUserInfo, Response } from '../lib/t
 import { collabUserInfoAtom } from '../store/collab/state';
 import { CollabTimeLimeProps } from '../components/collab/CollabTimeLime';
 import { useLocalStorage } from 'react-use';
-import { COLLAB_NFT_STATUS, STORAGE_KEY } from '../constants';
+import { COLLAB_NFT_STATUS, COLLAB_TIME_STATUS, STORAGE_KEY } from '../constants';
 
 export const useFetchCollabList = () => {
   return useQuery(['collab_short_list'], () => fetchCollabList(), {
@@ -40,8 +40,14 @@ export const useFetchCollabUserInfo = (collabCode: string) => {
 };
 
 export const useCollabTimes = (times: Partial<CollabTimes>) => {
+  const nowTime = dayjs();
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
+  const timeStatus = useMemo(() => {
+    if (nowTime.isBefore(startTime)) return COLLAB_TIME_STATUS.UPCOMING;
+    if (nowTime.isAfter(endTime)) return COLLAB_TIME_STATUS.CLOSED;
+    return COLLAB_TIME_STATUS.LIVE;
+  }, [nowTime, startTime, endTime]);
   const [shortTimes, setShortTimes] = useState<CollabTimeLimeProps>({
     timeComingSoon: '',
     timeJoin: '',
@@ -65,7 +71,7 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
     });
   }, [times]);
 
-  return { startTime, endTime, shortTimes };
+  return { startTime, endTime, timeStatus, shortTimes };
 };
 
 export const useCollabIsJoined = () => {
