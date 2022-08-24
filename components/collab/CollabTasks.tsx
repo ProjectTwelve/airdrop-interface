@@ -11,7 +11,7 @@ import Button from '../button';
 import Message from '../message';
 import { CollabSocials } from '../socialMedia/CollabSocials';
 import CollabTaskItem from './CollabTaskItem';
-import { useCollabIsNftHolder } from '../../hooks/collab';
+import { useCollabIsJoined, useCollabIsNftHolder } from '../../hooks/collab';
 import { COLLAB_NFT_STATUS } from '../../constants';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import type { Response, CollabInfoType, CollabUserInfo, CollabTweetVerifyParams } from '../../lib/types';
@@ -27,6 +27,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   const { address } = useAccount();
   const [value, setValue] = useState('');
   const isNFTholder = useCollabIsNftHolder();
+  const isJoined = useCollabIsJoined();
   const isMounted = useIsMounted();
 
   const mutationVerify = useMutation<Response<CollabUserInfo>, any, CollabTweetVerifyParams, any>(
@@ -89,7 +90,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             </p>
           </div>
         )}
-        {isNFTholder === COLLAB_NFT_STATUS.IS_HOLDER ? (
+        {isNFTholder === COLLAB_NFT_STATUS.IS_HOLDER || !isJoined ? (
           <CollabTaskItem
             key="airdrop"
             gaKey="airdrop"

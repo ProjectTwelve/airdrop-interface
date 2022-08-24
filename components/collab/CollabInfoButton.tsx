@@ -46,7 +46,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
       }
       setUserInfo(data.data);
       toast.success(<Message message="Join successfully!" />);
-      window.open('#collabTasks');
+      document.getElementById('collabTasks')?.scrollIntoView();
     },
   });
 
