@@ -15,9 +15,12 @@ export const useSIDName = ({ address }: { address?: string }) => {
     if (isAuthPage) return;
     if (!chain || !provider) return;
     const sid = new SID({ provider, sidAddress: getSidAddress(chain?.id) });
-    sid.getName(address).then((res: { name: string | null }) => {
-      setSIDName(res.name);
-    });
+    sid
+      .getName(address)
+      .then((res: { name: string | null }) => {
+        setSIDName(res.name);
+      })
+      .catch((error: Error) => console.log('Error: ', error));
   }, [address, chain, provider, isAuthPage]);
 
   return useMemo(() => ({ SIDName }), [SIDName]);
