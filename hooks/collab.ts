@@ -46,7 +46,7 @@ export const useCollabTimes = (times: Partial<CollabTimes>) => {
 
   const dates = useMemo(
     () => ({
-      joinDate: timeJoin ? dayjs.unix(timeJoin) : dayjs.unix(timeComingSoon!),
+      joinDate: dayjs.unix(timeJoin!),
       allocDate: timeAllocation ? dayjs.unix(timeAllocation) : dayjs.unix(timeComingSoon!),
       claimDate: timeClaim ? dayjs.unix(timeClaim) : dayjs.unix(timeComingSoon!),
       closeDate: dayjs.unix(timeClose!),
