@@ -59,6 +59,7 @@ export default function ButterflyGL() {
       const className = document.documentElement.classList[0];
       const theme = themes[className] || themes['p12-theme-01'];
       const butterfly = window.hpgButterfly;
+      if (!butterfly) return;
       const _defaultProperties = butterflyHelpers.defaultProperties;
       _defaultProperties.color1Hex = theme[0];
       _defaultProperties.color2Hex = theme[1];

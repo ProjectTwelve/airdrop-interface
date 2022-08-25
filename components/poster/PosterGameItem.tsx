@@ -21,7 +21,7 @@ export default function PosterGameItem({ data }: { data?: GamerGameInfo }) {
           <div>
             <div className="flex h-[32px] items-start justify-start">
               {isSSGame && <img className="mr-4" src="/img/poster/ss_game.webp" alt="ss_game" />}
-              <p className="w-[300px] text-[24px] font-medium leading-[12px]">
+              <p className="w-[330px] text-[24px] font-medium leading-[12px]">
                 {data.name.length > 24 ? data.name.substring(0, 21) + '...' : data.name}
               </p>
             </div>
