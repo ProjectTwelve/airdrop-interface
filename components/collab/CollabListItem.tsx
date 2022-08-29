@@ -11,9 +11,18 @@ type CollabItemProps = {
 
 export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
-  const { collabCode, projectName, projectInfoBrief, projectInfo, projectLogo, timeComingSoon, timeClose, projectWebsite } =
-    data;
-  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeClose });
+  const {
+    collabCode,
+    projectName,
+    projectInfoBrief,
+    projectInfo,
+    projectLogo,
+    timeComingSoon,
+    timeJoin,
+    timeClose,
+    projectWebsite,
+  } = data;
+  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeJoin, timeClose });
 
   const generateStatusLabel = useCallback(() => {
     if (timeStatus === COLLAB_TIME_STATUS.CLOSED)

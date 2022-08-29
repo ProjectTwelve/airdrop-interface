@@ -63,7 +63,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
           )}
           {badgeChains}
           {projectOpensea && (
-            <CollabSocials key="projectOpensea" icon="/svg/opensea.svg" label="OpenSea" href={projectOpensea} />
+            <CollabSocials key="projectOpensea" icon="/svg/opensea.svg" label="Marketplace" href={projectOpensea} />
           )}
           {projectTwitter && (
             <CollabSocials
