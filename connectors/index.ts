@@ -24,7 +24,7 @@ export const BNBSmartChain: Chain = {
 export const BNBSmartChainTestnet: Chain = {
   id: 97,
   name: 'BNB Smart Chain Testnet',
-  network: 'tbsc',
+  network: 'bsc_testnet',
   nativeCurrency: {
     name: 'tBNB',
     symbol: 'tBNB',

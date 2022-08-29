@@ -1,0 +1,10 @@
+import { CHAIN_ID } from './index';
+
+type AddressMap = { [chainId: number]: string };
+
+export const BABT_ADDRESSES: AddressMap = {
+  [CHAIN_ID.BSC_MAINNET]: '0x571db18fff31378E772192352aD207b731827672',
+  [CHAIN_ID.BSC_TESTNET]: '0x571db18fff31378E772192352aD207b731827672',
+};
+
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';

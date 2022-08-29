@@ -50,6 +50,7 @@ module.exports = {
         'round-one': 'var(--round-one)',
         'round-two': 'url(https://cdn1.p12.games/airdrop/img/first_half_none.png)',
         'gradient-transparent': 'var(--gradient-transparent)',
+        'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)'
       },
     },
   },
