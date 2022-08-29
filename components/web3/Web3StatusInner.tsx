@@ -46,7 +46,7 @@ function Web3StatusInner() {
             <img
               width={32}
               height={32}
-              src="https://raw.githubusercontent.com/projecttwelve/icons/main/token/bab.png"
+              src="https://raw.githubusercontent.com/projecttwelve/icons/main/token/bab.jpg"
               alt="bnb"
             />
           ) : (
