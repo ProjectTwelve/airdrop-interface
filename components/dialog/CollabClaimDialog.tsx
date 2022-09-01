@@ -1,10 +1,8 @@
-import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import Dialog from '.';
 import { CollabInfoType } from '../../lib/types';
 import { collabClaimModalAtom } from '../../store/collab/state';
 import Button from '../button';
-import ReactGA from 'react-ga4';
 
 type CollabClaimDialogProps = {
   data: CollabInfoType;
@@ -12,19 +10,7 @@ type CollabClaimDialogProps = {
 
 export function CollabClaimDialog({ data }: CollabClaimDialogProps) {
   const [open, setOpen] = useRecoilState(collabClaimModalAtom);
-  const { nftClaimLink, tokenClaimLink } = data;
-
-  const handleClaim = useCallback(() => {
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
-    if (nftClaimLink) {
-      window.open(nftClaimLink, '_blank');
-      return;
-    }
-    if (tokenClaimLink) {
-      window.open(tokenClaimLink, '_blank');
-      return;
-    }
-  }, [nftClaimLink, tokenClaimLink]);
+  const { claimNote } = data;
 
   return (
     <Dialog
@@ -36,9 +22,13 @@ export function CollabClaimDialog({ data }: CollabClaimDialogProps) {
             <img src={'/svg/check_success.svg'} className="inline-block" alt="check_success.svg" />
             <span className="ml-2 align-middle text-xl leading-6">Congratulates</span>!
           </h2>
-          <p className="border-y border-p12-line py-9">
-            Congratulate on becoming our lucky draw winner! Claim your reward now!
-          </p>
+          <div className="border-t border-p12-line py-9">
+            <p className="text-center text-xl font-semibold leading-6 text-[#1EDB8C]">
+              Congratulate on becoming our lucky draw winner!
+            </p>
+            <p className="mt-8 text-sm leading-6">{claimNote}</p>
+          </div>
+
           <div className="text flex justify-end gap-5">
             <Button
               className="h-[44px] w-[118px] px-5"
@@ -47,17 +37,7 @@ export function CollabClaimDialog({ data }: CollabClaimDialogProps) {
                 close();
               }}
             >
-              Cancel
-            </Button>
-            <Button
-              className="h-[44px] w-[118px] px-5"
-              type="gradient"
-              onClick={() => {
-                handleClaim();
-                close();
-              }}
-            >
-              Claim
+              Confirm
             </Button>
           </div>
         </div>

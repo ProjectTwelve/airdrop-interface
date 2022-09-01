@@ -285,6 +285,8 @@ export type CollabInfoType = {
 
   taskGleam: string;
   taskTweetContent: string;
+
+  claimNote: string;
 } & CollabTimes;
 
 export enum CollabStatus {
