@@ -78,7 +78,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             <CollabSocials
               href={projectDiscord}
               key="discord"
-              icon="/svg/discord.svg"
+              icon="/img/discord-outline.png"
               label="Discord"
               className="bg-[#6882FF]/100"
             />

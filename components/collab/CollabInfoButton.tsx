@@ -135,7 +135,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
           Claim
         </Button>
       ) : (
-        generateDisableButton(className, 'Claim')
+        generateDisableButton(className, 'Unlucky')
       ),
     [isClaim, handleClaim, generateDisableButton, isLoading],
   );
