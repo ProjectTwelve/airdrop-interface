@@ -6,7 +6,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import { useCollabIsJoined, useCollabIsClaim, useFetchCollabUserInfo } from '../../hooks/collab';
 import { fetchCollabJoin, fetchCollabUserInfo } from '../../lib/api';
-import { collabUserInfoAtom } from '../../store/collab/state';
+import { collabClaimModalAtom, collabUserInfoAtom } from '../../store/collab/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ export type CollabInfoButtonProps = {
   data: CollabInfoType;
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
-  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, nftClaimLink, tokenClaimLink } = data;
+  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose} = data;
   const nowDate = dayjs();
   const joinDate = dayjs.unix(timeJoin);
   const comingSoonText = joinDate.format('MMM D, YYYY h:mm A');
@@ -37,6 +37,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const isMounted = useIsMounted();
   const className = 'min-w-fit max-w-[300px] flex-grow';
   const { isLoading } = useFetchCollabUserInfo(collabCode);
+  const setClaimModal = useSetRecoilState(collabClaimModalAtom);
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
     onSuccess: (data) => {
@@ -96,16 +97,8 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const handleClaim = useCallback(() => {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
-    if (!tokenClaimLink && !nftClaimLink) return toast.error(<Message message="No claim link" title="Oops" />);
-    if (nftClaimLink) {
-      window.open(nftClaimLink, '_blank');
-      return;
-    }
-    if (tokenClaimLink) {
-      window.open(tokenClaimLink, '_blank');
-      return;
-    }
-  }, [tokenClaimLink, nftClaimLink]);
+    setClaimModal(true);
+  }, [setClaimModal]);
 
   const generateDisableButton = useCallback(
     (className: string, label: string) => (
@@ -135,7 +128,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
           Claim
         </Button>
       ) : (
-        generateDisableButton(className, 'Claim')
+        generateDisableButton(className, 'Unlucky')
       ),
     [isClaim, handleClaim, generateDisableButton, isLoading],
   );

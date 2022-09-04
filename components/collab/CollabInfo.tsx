@@ -23,7 +23,9 @@ export default function CollabInfo({ data }: CollabInfoProps) {
     timeComingSoon,
     timeClose,
     tokenAmount,
+    tokenName,
     nftTotalAmount,
+    nftName,
   } = data;
   const { startTime, endTime } = useCollabTimes({ timeComingSoon, timeClose });
 
@@ -78,7 +80,7 @@ export default function CollabInfo({ data }: CollabInfoProps) {
             <CollabSocials
               href={projectDiscord}
               key="discord"
-              icon="/svg/discord.svg"
+              icon="/img/discord-outline.png"
               label="Discord"
               className="bg-[#6882FF]/100"
             />
@@ -89,19 +91,21 @@ export default function CollabInfo({ data }: CollabInfoProps) {
           dangerouslySetInnerHTML={{ __html: projectInfo }}
         />
         <div className="mt-5 flex items-center justify-between gap-4 md:flex-wrap">
-          <div className="flex gap-7 divide-x border-p12-line">
+          <div className="flex flex-col">
             {tokenAmount ? (
-              <div className="align-bottom font-ddin text-2xl font-bold leading-9 text-[#FFAA2C]">
-                Token <span className=" text-[42px] font-bold text-[#FFAA2C]">{tokenAmount}</span>
+              <div className="font-ddin text-base font-bold leading-9 text-[#FFAA2C]">
+                <span className="align-middle text-4xl font-bold text-[#FFAA2C]">{tokenAmount} </span>
+                {tokenName || 'Token'}
               </div>
             ) : null}
             {nftTotalAmount ? (
               <div
-                className={classNames('border-p12-line align-bottom font-ddin text-2xl font-bold leading-9 text-[#1EDB8C]', {
-                  'pl-7': tokenAmount,
+                className={classNames('font-ddin font-bold leading-9 text-[#1EDB8C]', {
+                  'pt-1': tokenAmount,
                 })}
               >
-                NFT <span className="text-[42px] font-bold text-[#1EDB8C]">{nftTotalAmount}</span>
+                <span className="align-middle text-4xl font-bold text-[#1EDB8C]">{nftTotalAmount} </span>
+                {nftName || 'NFT'}
               </div>
             ) : null}
           </div>
