@@ -19,10 +19,12 @@ export default function CollabListItem({ data }: CollabItemProps) {
     projectLogo,
     timeComingSoon,
     timeJoin,
+    timeAllocation,
+    timeClaim,
     timeClose,
     projectWebsite,
   } = data;
-  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeJoin, timeClose });
+  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
 
   const generateStatusLabel = useCallback(() => {
     if (timeStatus === COLLAB_TIME_STATUS.CLOSED)
@@ -33,7 +35,10 @@ export default function CollabListItem({ data }: CollabItemProps) {
           {COLLAB_TIME_STATUS.UPCOMING}
         </div>
       );
-    return <div className="flex items-center rounded bg-[#16F497]/20 px-2 text-xs leading-5 text-[#1EDB8C]">Live</div>;
+    if (timeStatus === COLLAB_TIME_STATUS.JOIN)
+      return <div className="flex items-center rounded bg-[#16F497]/20 px-2 text-xs leading-5 text-[#1EDB8C]">Live</div>;
+    // allocate or claim
+    return <div className="flex items-center rounded bg-[#F36E22]/20 px-2 text-xs leading-5 text-[#FFAA2C]">Allocating</div>;
   }, [timeStatus]);
 
   return (
