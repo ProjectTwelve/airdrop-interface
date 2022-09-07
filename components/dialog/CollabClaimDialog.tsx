@@ -26,7 +26,7 @@ export function CollabClaimDialog({ data }: CollabClaimDialogProps) {
             <p className="text-center text-xl font-semibold leading-6 text-[#1EDB8C]">
               Congratulate on becoming our lucky draw winner!
             </p>
-            <p className="mt-8 text-sm leading-6">{claimNote}</p>
+            <p className="mt-8 text-sm leading-6" dangerouslySetInnerHTML={{ __html: claimNote }}></p>
           </div>
 
           <div className="text flex justify-end gap-5">
