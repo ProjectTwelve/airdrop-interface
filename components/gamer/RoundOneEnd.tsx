@@ -13,7 +13,7 @@ export default function RoundOneEnd() {
 
   return (
     <div>
-      <div className="rounded-lg bg-[#F36E22]/20 px-4 py-2 text-sm leading-5 text-[#FFAA2C]">
+      <div className="rounded-lg bg-[#F36E22]/20 px-4 py-2 text-sm leading-5 text-p12-orange">
         P12 Airdrop for Gamer [Paused]
       </div>
       <div className="relative mt-5 md:mt-3">

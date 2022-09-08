@@ -16,7 +16,7 @@ export const posterStylesAtom = atom<Record<GAMER_NFT_LEVEL, { bg: string; borde
   default: {
     [GAMER_NFT_LEVEL.ORANGE]: {
       bg: 'bg-p12-poster-0',
-      border: 'border border-[#FFAA2C]',
+      border: 'border border-p12-orange',
       shadow: 'shadow-2xl shadow-[#FFAA2C]/80',
     },
     [GAMER_NFT_LEVEL.PURPLE]: {

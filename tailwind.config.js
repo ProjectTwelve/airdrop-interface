@@ -14,6 +14,7 @@ module.exports = {
         '2xl': '1366px',
       },
       colors: {
+        'p12-orange': '#FFAA2C',
         'p12-success': '#1EDB8C',
         'p12-error': '#F13361',
         'p12-sub': '#9A9DAA',
@@ -50,7 +51,8 @@ module.exports = {
         'round-one': 'var(--round-one)',
         'round-two': 'url(https://cdn1.p12.games/airdrop/img/first_half_none.png)',
         'gradient-transparent': 'var(--gradient-transparent)',
-        'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)'
+        'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
+        'gradient-prediction': ' linear-gradient(to bottom, #4E569080 0%, #3B416780 10%, #3C416480 16%, #3C416480 100%)',
       },
     },
   },

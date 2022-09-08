@@ -25,7 +25,7 @@ function LayoutHeaderExtra() {
 
   return (
     <AnimatePresence>
-      {router.pathname !== '/' && (
+      {router.pathname !== '/' && router.pathname !== '/arcana' && (
         <motion.div className="relative">
           <motion.div
             initial={{ opacity: 0.45 }}

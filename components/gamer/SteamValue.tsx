@@ -29,7 +29,7 @@ export default function SteamValue({ data }: SteamValueProps) {
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
-        <div className="mt-3 rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-[#FFAA2C]">
+        <div className="mt-3 rounded-lg border border-p12-orange bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-p12-orange">
           {Math.floor(data.value || 0)}
         </div>
       </div>

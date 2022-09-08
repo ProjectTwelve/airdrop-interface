@@ -117,6 +117,11 @@
         border-radius: 9999px;
         overflow: hidden;
     }
+
+    .home__card {
+        @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
+        @apply flex flex-col items-center justify-center;
+    }
 }
 
 @layer utilities {
