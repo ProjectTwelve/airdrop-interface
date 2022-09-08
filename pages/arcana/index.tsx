@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAccount } from 'wagmi';
-import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
-import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
-import CardVotingEntry from '../../components/arcana/CardVotingEntry';
-import CardReferral from '../../components/arcana/CardReferral';
-import CardGuide from '../../components/arcana/CardGuide';
-import { useIsMounted } from '../../hooks/useIsMounted';
-import { useArcanaGamerInfo } from '../../hooks/arcana';
-import PredictionItem from '../../components/arcana/PredictionItem';
+import { useIntersection } from 'react-use';
 import Dialog from '../../components/dialog';
 import Button from '../../components/button';
+import { openLink } from '../../utils';
+import { useIsMounted } from '../../hooks/useIsMounted';
+import { useArcanaGamerInfo } from '../../hooks/arcana';
+import CardGuide from '../../components/arcana/CardGuide';
+import CardReferral from '../../components/arcana/CardReferral';
+import PredictionItem from '../../components/arcana/PredictionItem';
+import CardVotingEntry from '../../components/arcana/CardVotingEntry';
+import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
+import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 
 export default function Arcana() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
+  const intersectionRef = useRef(null);
+  const intersection = useIntersection(intersectionRef, { threshold: 0.8 });
   const { data, isLoading } = useArcanaGamerInfo(address);
+
+  useEffect(() => {
+    if (!intersection) return;
+    const target = intersection.target as HTMLVideoElement;
+    if (intersection.intersectionRatio > 0.8) {
+      target.play().then();
+      intersectionRef.current = null;
+    }
+  }, [intersection]);
 
   return (
     <div>
@@ -83,7 +96,7 @@ export default function Arcana() {
       </div>
       <div className="mt-[60px] mb-8 xs:mt-8">
         <h2 className="text-center text-[30px] font-medium">Arcana</h2>
-        <div className="relative mt-7 flex justify-center">
+        <div className="relative mt-7 flex justify-center overflow-hidden">
           <div className="z-[4] w-[580px]">
             <PredictionItem selected />
           </div>
@@ -104,6 +117,37 @@ export default function Arcana() {
           </div>
           <div className="absolute w-[580px] translate-x-[420px] scale-[70%] blur-lg">
             <PredictionItem />
+          </div>
+        </div>
+      </div>
+      <div className="relative flex w-full items-end justify-center">
+        <h3 className="absolute top-12 text-[30px] font-medium">Join P12 Community</h3>
+        <div className="max-w-[340px]">
+          <video muted ref={intersectionRef}>
+            <source src="https://cdn1.p12.games/airdrop/arcana/abaddon.webm" type="video/webm" />
+          </video>
+        </div>
+        <div className="mb-8">
+          <div
+            className="mb-5 flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+            onClick={() => openLink('https://discord.gg/p12')}
+          >
+            <img className="mr-2" src="/img/discord.png" width={24} height={24} alt="" />
+            Discord
+          </div>
+          <div
+            className="mb-5 flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+            onClick={() => openLink('https://twitter.com/_p12_')}
+          >
+            <img className="mr-2" src="/img/twitter.png" width={24} height={24} alt="" />
+            Twitter
+          </div>
+          <div
+            className="flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+            onClick={() => openLink('https://mirror.xyz/p12.eth')}
+          >
+            <img className="mr-2" src="/img/mirror.png" width={24} height={24} alt="" />
+            Mirror
           </div>
         </div>
       </div>
