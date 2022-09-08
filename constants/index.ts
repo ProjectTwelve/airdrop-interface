@@ -136,3 +136,9 @@ export enum COLLAB_NFT_STATUS {
   IS_HOLDER,
   NOT_HOLDER,
 }
+
+export enum CHAIN_ID {
+  MAINNET = 1,
+  BSC_MAINNET = 56,
+  BSC_TESTNET = 97,
+}

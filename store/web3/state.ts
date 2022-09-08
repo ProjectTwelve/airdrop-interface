@@ -9,3 +9,8 @@ export const isConnectPopoverOpen = atom({
   key: 'connect_popover_open',
   default: false,
 });
+
+export const isBABTHolderAtom = atom<boolean>({
+  key: 'is_babt_holder',
+  default: false,
+});
