@@ -13,7 +13,7 @@ export default function PredictionItem({ selected }: { selected?: boolean }) {
       <div className="h-0.5 bg-p12-gradient"></div>
       <div className="flex flex-col items-center py-8">
         <h2 className="text-[30px] font-medium">Helpless Killer</h2>
-        <p>Player with the most Kills but can&apos;t save the defeat</p>
+        <p>Player with the most Kills but can&apos;t save his team</p>
         <div className="mt-8 h-[260px] w-[260px]">
           {selected ? (
             <img className="w-full" src="/img/arcana/sumail.png" alt="sumail" />
