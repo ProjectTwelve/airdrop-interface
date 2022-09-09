@@ -7,13 +7,13 @@ export default function PredictionItem({ selected }: { selected?: boolean }) {
           <p className="text-sm">
             <span className="font-medium text-p12-link">Project Twelve</span>&nbsp; sponsored this prediction
           </p>
-          <p className="text-sm text-p12-orange">&quot;  Sumail&apos;s 31 kill Tiny can&apos;t save EG. &quot;</p>
+          <p className="text-sm text-p12-orange">&quot; Sumail&apos;s 31 kill Tiny can&apos;t save EG. &quot;</p>
         </div>
       </div>
       <div className="h-0.5 bg-p12-gradient"></div>
       <div className="flex flex-col items-center py-8">
-        <h2 className="text-[30px] font-medium">Killing Machine</h2>
-        <p>Player with most Kills in a single game</p>
+        <h2 className="text-[30px] font-medium">Helpless Killer</h2>
+        <p>Player with the most Kills but can&apos;t save the defeat</p>
         <div className="mt-8 h-[260px] w-[260px]">
           {selected ? (
             <img className="w-full" src="/img/arcana/sumail.png" alt="sumail" />
