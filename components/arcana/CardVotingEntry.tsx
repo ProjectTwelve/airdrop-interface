@@ -16,16 +16,18 @@ export default function CardVotingEntry({ data }: { data: GamerInfoData }) {
     [],
   );
   return (
-    <div className="rounded-2xl bg-p12-black/80 p-4 backdrop-blur 2xl:p-6">
+    <div className="rounded-2xl bg-p12-black/80 p-4 backdrop-blur 2xl:py-6 2xl:px-[30px]">
       <h3 className="text-xl font-medium">Voting Entry</h3>
       <div className="mt-4 flex 2xl:mt-6">
         <div className="flex h-[146px] w-[146px] items-center justify-center 2xl:flex-none">
           <img className="w-full" src={GAMER_BADGES[data.nft_level!].img} alt="" />
         </div>
-        <div className="ml-5">
-          <h3 className="text-lg font-medium">P12 Genesis Soul-Bound NFT</h3>
-          {nftTags[data.nft_level!]}
-          <p className="mt-6 text-sm font-medium text-p12-success 2xl:mt-10">You are eligible to vote!</p>
+        <div className="ml-5 flex flex-col justify-between">
+          <div>
+            <h3 className="text-lg font-medium">P12 Genesis Soul-Bound NFT</h3>
+            {nftTags[data.nft_level!]}
+          </div>
+          <p className="text-sm font-medium text-p12-success">You are eligible to vote!</p>
         </div>
       </div>
     </div>

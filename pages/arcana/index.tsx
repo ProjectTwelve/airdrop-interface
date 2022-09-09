@@ -34,7 +34,7 @@ export default function Arcana() {
     <div>
       <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end overflow-hidden">
         <div className="h-[430px] w-[1920px]">
-          <video autoPlay muted loop>
+          <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/banner.png">
             <source src="https://cdn1.p12.games/airdrop/arcana/banner.webm" type="video/webm" />
           </video>
         </div>
@@ -68,8 +68,8 @@ export default function Arcana() {
             <ArcanaJoinButton />
           </div>
         </div>
-        <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-2xl border-2 border-white/10 bg-[#474747]/20 p-4 backdrop-blur-lg">
-          <video autoPlay muted loop>
+        <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-2xl border-2 border-white/10 bg-[#474747]/20 p-4 backdrop-blur-2xl">
+          <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text.png">
             <source src="https://cdn1.p12.games/airdrop/arcana/text.webm" type="video/webm" />
           </video>
           <img className="mb-4" src="/img/present.png" alt="present" />
@@ -94,36 +94,41 @@ export default function Arcana() {
           <ArcanaNotConnect />
         )}
       </div>
-      <div className="mt-[60px] mb-8 xs:mt-8">
+      <div className="mt-[60px] xs:mt-8">
         <h2 className="text-center text-[30px] font-medium">Arcana</h2>
         <div className="relative mt-7 flex justify-center overflow-hidden">
           <div className="z-[4] w-[580px]">
             <PredictionItem selected />
           </div>
-          <div className="absolute z-[3] w-[580px] -translate-x-[140px] scale-[90%] blur-sm">
+          <div className="absolute z-[3] w-[580px] -translate-x-[140px] scale-[90%] opacity-[90%] blur-sm">
             <PredictionItem />
           </div>
-          <div className="absolute z-[2] w-[580px] -translate-x-[280px] scale-[80%] blur">
+          <div className="absolute z-[2] w-[580px] -translate-x-[280px] scale-[80%] opacity-[85%] blur">
             <PredictionItem />
           </div>
-          <div className="absolute w-[580px] -translate-x-[420px] scale-[70%] blur-lg">
+          <div className="absolute w-[580px] -translate-x-[420px] scale-[70%] opacity-[80%] blur-lg">
             <PredictionItem />
           </div>
-          <div className="absolute z-[3] w-[580px] translate-x-[140px] scale-[90%] blur-sm">
+          <div className="absolute z-[3] w-[580px] translate-x-[140px] scale-[90%] opacity-[90%] blur-sm">
             <PredictionItem />
           </div>
-          <div className="absolute z-[2] w-[580px] translate-x-[280px] scale-[80%] blur">
+          <div className="absolute z-[2] w-[580px] translate-x-[280px] scale-[80%] opacity-[85%] blur">
             <PredictionItem />
           </div>
-          <div className="absolute w-[580px] translate-x-[420px] scale-[70%] blur-lg">
+          <div className="absolute w-[580px] translate-x-[420px] scale-[70%] opacity-[80%] blur-lg">
             <PredictionItem />
           </div>
         </div>
       </div>
-      <div className="relative flex w-full items-end justify-center">
-        <h3 className="absolute top-12 text-[30px] font-medium">Join P12 Community</h3>
-        <div className="max-w-[340px]">
-          <video muted ref={intersectionRef}>
+      <div className="relative mt-[60px] flex w-full items-end justify-center xs:mt-8">
+        <h3 className="absolute top-[60px] text-[30px] font-medium">Join P12 Community</h3>
+        <div className="-ml-8 max-w-[340px] cursor-pointer">
+          <video
+            muted
+            poster="https://cdn1.p12.games/airdrop/arcana/abaddon.png"
+            ref={intersectionRef}
+            onClick={(event) => (event.target as HTMLVideoElement).play()}
+          >
             <source src="https://cdn1.p12.games/airdrop/arcana/abaddon.webm" type="video/webm" />
           </video>
         </div>

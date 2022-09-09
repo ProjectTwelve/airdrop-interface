@@ -23,7 +23,7 @@ export default function PredictionItem({ selected }: { selected?: boolean }) {
         </div>
         <div className="mt-[60px]">
           <h3 className="font-medium">Total Voter</h3>
-          <p className="font-ddin text-[40px] font-bold">8898</p>
+          <p className="font-ddin text-5xl font-bold">8898</p>
         </div>
       </div>
     </div>
