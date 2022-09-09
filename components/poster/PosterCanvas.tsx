@@ -121,7 +121,7 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
         <PosterGameItem data={gamerGames?.games?.[2]} />
       </div>
       <div className="my-[86px] mt-[130px] grid grid-cols-2 gap-[30px] pt-[54px]">
-        <div className="flex h-[110px] items-center justify-center rounded-lg border border-[#FFAA2C] bg-[#F36E22]/20 py-6 text-center">
+        <div className="flex h-[110px] items-center justify-center rounded-lg border border-p12-orange bg-[#F36E22]/20 py-6 text-center">
           <div className="-mt-[25px] w-[170px] text-center text-xl font-medium text-[#FFAA2C]">
             <p className="text-[#FFAA2C]">Account</p>
             <p className="text-[#FFAA2C]">Value</p>

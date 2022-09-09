@@ -21,7 +21,7 @@ export type CollabInfoButtonProps = {
   data: CollabInfoType;
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
-  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose} = data;
+  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose } = data;
   const nowDate = dayjs();
   const joinDate = dayjs.unix(timeJoin);
   const comingSoonText = joinDate.format('MMM D, YYYY h:mm A');

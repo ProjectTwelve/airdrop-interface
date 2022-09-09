@@ -1,97 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import React from 'react';
 import ReactGA from 'react-ga4';
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
-import Button from '../components/button';
 import { inviteModalAtom } from '../store/invite/state';
-import { getLocalStorage, setLocalStorage } from '../utils/storage';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import DeveloperTabs from '../components/ranking/DeveloperTabs';
 import GamerTabs from '../components/ranking/GamerTabs';
-import { COLLAB_OPEN, STORAGE_KEY } from '../constants';
+import { COLLAB_OPEN } from '../constants';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import CollabHomeCard from '../components/collab/CollabHomeCard';
 
 export default function Home() {
   const router = useRouter();
   const setOpen = useSetRecoilState(inviteModalAtom);
-  const [btnClick, setBtnClick] = useState(false);
-  const [isHovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK);
-    setBtnClick(currentStatus ?? false);
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
-      <div className="aspect-[2.19/1] w-full max-w-[300px] bg-p12-logo bg-cover sm:hidden"></div>
-      <div className="mt-4 text-center">
-        <h2 className="text-[24px] font-medium">Tribute to Gamers</h2>
-        <h2 className="text-[24px] font-medium">P12 Genesis Soul-Bound NFT Airdrop</h2>
+      <div
+        className="cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
+        onClick={() => router.push({ pathname: '/arcana', query: router.query })}
+      >
+        <img
+          className="h-[240px] object-cover object-left md:h-[128px]"
+          src="https://cdn1.p12.games/airdrop/arcana/banner_join.webp"
+          alt="arcana_banner"
+        />
       </div>
-      <div className="mt-9 grid w-full gap-6">
-        <div className="flex justify-center" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-          <Button
-            className="w-full max-w-[470px]"
-            size="large"
-            type="bordered"
-            onClick={() => {
-              setBtnClick(true);
-              ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
-              setLocalStorage(STORAGE_KEY.INVITE_BTN_CLICK, true);
-              setOpen(true);
-            }}
-          >
-            <div className="flex items-center justify-center px-2">
-              <motion.div
-                initial={{ rotate: 180 }}
-                animate={btnClick && !isHovered ? {} : { x: [0, 12, 4, 12, 0] }}
-                transition={{ when: false, duration: 0.8, repeatDelay: 0.8, repeat: Infinity }}
-                className="h-6 w-6"
-              >
-                <Image src="/svg/left.svg" width={24} height={24} alt="invite" />
-              </motion.div>
-              <div className="flex flex-1 items-center justify-center">
-                <Image src="/svg/invite-2.svg" style={{ strokeWidth: 10 }} width={24} height={24} alt="invite" />
-                &nbsp; My Referral Link
-              </div>
-              <motion.div
-                animate={btnClick && !isHovered ? {} : { x: [0, -12, 4, -12, 0] }}
-                transition={{ duration: 0.8, repeatDelay: 0.8, repeat: Infinity }}
-                className="h-6 w-6"
-              >
-                <Image src="/svg/left.svg" width={24} height={24} alt="invite" />
-              </motion.div>
-            </div>
-          </Button>
+      <div className="mt-6 grid w-full grid-cols-3 gap-7 md:grid-cols-1 md:gap-4">
+        <div
+          className="home__card bg-white/10 py-7 hover:bg-[#FFFFFF26] xs:py-4"
+          onClick={() => {
+            ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
+            setOpen(true);
+          }}
+        >
+          <img src="/svg/invite-3.svg" className="h-12 w-12 md:h-8 md:w-8" alt="invite" />
+          <p className="md:text-sm">My Referral Link</p>
         </div>
-        <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-1">
-          <div className="flex justify-end md:justify-center">
-            <Button
-              className="w-full max-w-[470px]"
-              size="large"
-              type="gradient"
-              onClick={() => router.push({ pathname: '/gamer', query: router.query })}
-            >
-              I am a Steam Gamer
-            </Button>
-          </div>
-          <div className="flex justify-start md:justify-center">
-            <Button
-              className="w-full max-w-[470px]"
-              size="large"
-              type="gradient"
-              onClick={() => router.push({ pathname: '/developer', query: router.query })}
-            >
-              I am a Steam Game Dev
-            </Button>
-          </div>
+        <div
+          className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
+          onClick={() => router.push({ pathname: '/gamer', query: router.query })}
+        >
+          <img src="/svg/developer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="developer" />
+          <p className="md:text-sm">I am a Steam Gamer</p>
+        </div>
+        <div
+          className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
+          onClick={() => router.push({ pathname: '/developer', query: router.query })}
+        >
+          <img src="/svg/gamer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="gamer" />
+          <p className="md:text-sm">I am a Steam Game Dev</p>
         </div>
       </div>
-      <div className="mt-[60px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
+      <div className="mt-[30px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
         {COLLAB_OPEN ? (
           <>
             <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
