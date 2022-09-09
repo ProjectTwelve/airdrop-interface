@@ -45,7 +45,7 @@ export default function Arcana() {
           </video>
         </motion.div>
       </div>
-      <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end">
+      <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end overflow-hidden">
         <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
         <div className="h-[430px] w-[1920px]">
           <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/banner.png">
