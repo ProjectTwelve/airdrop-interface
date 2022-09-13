@@ -83,8 +83,8 @@ export default function Arcana() {
           </div>
         </div>
         <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-2xl border-2 border-white/10 bg-[#474747]/20 py-2 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
-          <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text.png">
-            <source src="https://cdn1.p12.games/airdrop/arcana/text.webm" type="video/webm" />
+          <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text_2.webp">
+            <source src="https://cdn1.p12.games/airdrop/arcana/text_2.webm" type="video/webm" />
           </video>
           <img src="/img/present.webp" alt="present" />
         </div>
