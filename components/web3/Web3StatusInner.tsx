@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { shortenAddress } from '../../utils';
@@ -19,8 +20,12 @@ function Web3StatusInner() {
   const isBABTHolder = useMemo(() => (balance && balance.toString() !== '0') || false, [balance]);
 
   useEffect(() => {
+    if (!address) return;
+    if (isBABTHolder) {
+      ReactGA.event({ category: 'BABT', action: 'Show', label: address });
+    }
     setIsBABTHolder(isBABTHolder);
-  }, [isBABTHolder, setIsBABTHolder]);
+  }, [isBABTHolder, setIsBABTHolder, address]);
 
   if (address) {
     return (
