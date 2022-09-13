@@ -41,14 +41,14 @@ export default function Home() {
           className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
           onClick={() => router.push({ pathname: '/gamer', query: router.query })}
         >
-          <img src="/svg/developer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="developer" />
+          <img src="/svg/gamer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="developer" />
           <p className="md:text-sm">I am a Steam Gamer</p>
         </div>
         <div
           className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
           onClick={() => router.push({ pathname: '/developer', query: router.query })}
         >
-          <img src="/svg/gamer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="gamer" />
+          <img src="/svg/developer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="gamer" />
           <p className="md:text-sm">I am a Steam Game Dev</p>
         </div>
       </div>
