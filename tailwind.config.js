@@ -15,6 +15,7 @@ module.exports = {
       },
       colors: {
         'p12-orange': '#FFAA2C',
+        'p12-gold': '#FFE7AB',
         'p12-success': '#1EDB8C',
         'p12-error': '#F13361',
         'p12-sub': '#9A9DAA',

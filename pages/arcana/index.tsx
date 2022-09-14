@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useAccount } from 'wagmi';
-import { useIntersection } from 'react-use';
 import { motion } from 'framer-motion';
+import { useIntersection } from 'react-use';
 import Dialog from '../../components/dialog';
 import Button from '../../components/button';
 import { openLink } from '../../utils';
@@ -38,7 +38,7 @@ export default function Arcana() {
           initial={{ scaleY: 0, originY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ duration: 0.6 }}
-          className="w-[1920px] bg-[url('/img/arcana/top_loading_bg.png')] md:w-[1152px]"
+          className="w-full min-w-[1920px] bg-[url('/img/arcana/top_loading_bg.png')] bg-cover md:min-w-[1152px]"
         >
           <video autoPlay muted loop poster="/img/arcana/top_loading.jpg">
             <source src="/img/arcana/top_loading.webm" type="video/webm" />
@@ -49,7 +49,7 @@ export default function Arcana() {
         <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
         <div className="h-[430px] w-[1920px]">
           <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/banner.png">
-            <source src="https://cdn1.p12.games/airdrop/arcana/banner_2.webm" type="video/webm" />
+            <source src="https://cdn1.p12.games/airdrop/arcana/banner_3.webm" type="video/webm" />
           </video>
         </div>
       </div>
