@@ -20,7 +20,7 @@ export default function ArcanaJoinButton() {
         toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
         return;
       }
-      openLink('https://gleam.io/dP1I4/test-campaign-111');
+      openLink('https://gleam.io/MII0p/p12-arcana-ti11-stage-1-ti11-final-tickets-giveaway');
     },
   });
 

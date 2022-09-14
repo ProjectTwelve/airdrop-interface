@@ -100,7 +100,7 @@ export const fetchDeveloperEmail = (data: DeveloperEmailParams) =>
  * get Steam Gamer Info
  */
 export const fetchGamerInfo = (params: { addr?: string }) =>
-  request.get<any, Response<GamerInfoData>>('/api/gamer/info', { params });
+  request.get<any, Response<GamerInfoData>>('/api/gamer/info', { params, timeout: 30000 });
 
 /**
  * bind steam account and wallet
@@ -112,7 +112,7 @@ export const fetchBindSteam = (data: BinSteamParams) => request.post<any, Respon
  * @param data
  */
 export const fetchGamerGames = (data: { wallet_address?: string; referral_code?: string }) =>
-  request.post<any, Response<GamerGamesData>>('/api/gamer/games', data);
+  request.post<any, Response<GamerGamesData>>('/api/gamer/games', data, { timeout: 30000 });
 
 /**
  * bind gamer email
