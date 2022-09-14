@@ -214,6 +214,7 @@ export type GamerRank = {
   steam_id?: string;
   timeRank?: number;
   tokenRank?: number;
+  nft_level?: number;
 };
 
 export type GamerInvitationParams = {

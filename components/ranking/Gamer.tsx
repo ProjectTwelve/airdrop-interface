@@ -6,6 +6,7 @@ import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCoun
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 import { getCountMemo } from '../../utils';
+import { GAMER_NFT_LEVEL } from '../../constants';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -33,7 +34,9 @@ export default function GamerRanking() {
     ],
     [commonCount, verified?.verifiedCount],
   );
-  const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 9990, [gamerRankData?.tokenRank]);
+  const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 1000, [gamerRankData?.tokenRank]);
+
+  const isLowLevelToken = (num?: number) => num === GAMER_NFT_LEVEL.WHITE || num === GAMER_NFT_LEVEL.REKT;
 
   return (
     <div className="p-8 sm:p-4">
@@ -84,7 +87,10 @@ export default function GamerRanking() {
                 )}
               >
                 By Token Rarity
-                <span className="pl-3 font-ddin text-lg font-bold">{getCountMemo(gamerRankData?.tokenRank) || '--'}</span>
+                <span className="pl-3 font-ddin text-lg font-bold">
+                  {getCountMemo(gamerRankData?.tokenRank) || '--'}
+                  {isLowLevelToken(gamerRankData?.nft_level) ? '+' : null}
+                </span>
               </div>
               <div className="mx-2 my-3.5 hidden w-[1px] bg-[#949FA9] 2xl:block" />
               <div className="flex flex-1 items-center justify-center rounded-2xl text-xs">

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useAccount } from 'wagmi';
-import { useIntersection } from 'react-use';
 import { motion } from 'framer-motion';
+import { useIntersection } from 'react-use';
 import Dialog from '../../components/dialog';
 import Button from '../../components/button';
 import { openLink } from '../../utils';
@@ -38,9 +38,9 @@ export default function Arcana() {
           initial={{ scaleY: 0, originY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ duration: 0.6 }}
-          className="w-[1920px] bg-[url('/img/arcana/top_loading_bg.png')] md:w-[1152px]"
+          className="w-full min-w-[1920px] bg-[url('/img/arcana/top_loading_bg.png')] bg-cover md:min-w-[1152px]"
         >
-          <video autoPlay muted loop poster="/img/arcana/top_loading.png">
+          <video autoPlay muted loop poster="/img/arcana/top_loading.jpg">
             <source src="/img/arcana/top_loading.webm" type="video/webm" />
           </video>
         </motion.div>
@@ -49,7 +49,7 @@ export default function Arcana() {
         <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
         <div className="h-[430px] w-[1920px]">
           <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/banner.png">
-            <source src="https://cdn1.p12.games/airdrop/arcana/banner_2.webm" type="video/webm" />
+            <source src="https://cdn1.p12.games/airdrop/arcana/banner_3.webm" type="video/webm" />
           </video>
         </div>
       </div>
@@ -82,14 +82,14 @@ export default function Arcana() {
             <ArcanaJoinButton />
           </div>
         </div>
-        <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-2xl border-2 border-white/10 bg-[#474747]/20 py-2 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
+        <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-lg border-2 border-white/10 bg-[#474747]/20 py-2 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
           <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text_2.webp">
             <source src="https://cdn1.p12.games/airdrop/arcana/text_2.webm" type="video/webm" />
           </video>
           <img src="/img/present.webp" alt="present" />
         </div>
       </div>
-      <div className="mt-12 xs:mt-8">
+      <div className="mt-14 xs:mt-8">
         {isMounted && address ? (
           isLoading ? (
             <div className="flex h-[255px] flex-col items-center justify-center rounded-2xl bg-p12-black/80 backdrop-blur">
