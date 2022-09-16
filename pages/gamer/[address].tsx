@@ -139,8 +139,8 @@ export default function GamerProfile() {
                 </div>
                 <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
-                  <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
-                    Project Galaxy
+                  <a className="text-p12-link" href="https://galxe.com/P12" target="_blank">
+                    Galxe
                   </a>
                 </p>
               </div>

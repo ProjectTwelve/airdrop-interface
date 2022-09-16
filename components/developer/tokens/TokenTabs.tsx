@@ -9,14 +9,7 @@ import { developerGameAtom, tabSelectAtom } from '../../../store/developer/state
 import { LeftCircle } from '../../svg/LeftCircle';
 import { useClickScroll } from '../../../hooks/useClickScroll';
 import { useSelectedGame } from '../../../hooks/useSelectedGame';
-import {
-  DEV_BADGES,
-  GALAXY_LIST,
-  BADGE_CONTRACT_ADDRESS,
-  NFT_CLAIM_TYPE,
-  NFT_CLAIM,
-  GALAXY_P12_SPACE,
-} from '../../../constants';
+import { DEV_BADGES, GALXE_LIST, BADGE_CONTRACT_ADDRESS, NFT_CLAIM_TYPE, NFT_CLAIM, GALXE_P12_SPACE } from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 import { useDevBadgeLoad } from '../../../hooks/useBadgeLoad';
 import { openLink, shortenAddress } from '../../../utils';
@@ -134,8 +127,8 @@ export default function TokenTabs() {
                         />
                       </div>
                       {selectedGame.credential <= 10 && (
-                        <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALAXY_LIST)}>
-                          My NFT at Galaxy
+                        <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALXE_LIST)}>
+                          My NFT at Galxe
                         </Button>
                       )}
                     </>
@@ -168,8 +161,8 @@ export default function TokenTabs() {
           </div>
           <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
             The airdrop is in collaboration with and powered by&nbsp;
-            <a className="text-p12-link" href={GALAXY_P12_SPACE} target="_blank">
-              Project Galaxy
+            <a className="text-p12-link" href={GALXE_P12_SPACE} target="_blank">
+              Galxe
             </a>
           </p>
           {selectedGame.credential > 10 && (
