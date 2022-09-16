@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { useAccount } from 'wagmi';
-import { motion } from 'framer-motion';
 import { useIntersection } from 'react-use';
 import Dialog from '../../components/dialog';
 import Button from '../../components/button';
@@ -14,6 +13,7 @@ import CardVotingEntry from '../../components/arcana/CardVotingEntry';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
+import StatusBar from '../../components/arcana/StatusBar';
 
 export default function Arcana() {
   const { address } = useAccount();
@@ -33,18 +33,6 @@ export default function Arcana() {
 
   return (
     <div>
-      <div className="fixed left-0 top-0 z-50 flex h-[30px] w-full flex-col items-center">
-        <motion.div
-          initial={{ scaleY: 0, originY: 0 }}
-          animate={{ scaleY: 1 }}
-          transition={{ duration: 0.6 }}
-          className="w-full min-w-[1920px] bg-[url('/img/arcana/top_loading_bg.png')] bg-cover md:min-w-[1152px]"
-        >
-          <video autoPlay muted loop poster="/img/arcana/top_loading.jpg">
-            <source src="/img/arcana/top_loading.webm" type="video/webm" />
-          </video>
-        </motion.div>
-      </div>
       <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end overflow-hidden">
         <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
         <div className="h-[430px] w-[1920px]">
@@ -108,6 +96,7 @@ export default function Arcana() {
           <ArcanaNotConnect />
         )}
       </div>
+      <StatusBar />
       <div className="mt-[60px] xs:mt-8">
         <h2 className="text-center text-[30px] font-medium">Arcana</h2>
         <div className="relative mt-7 flex justify-center overflow-hidden">

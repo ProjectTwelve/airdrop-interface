@@ -122,6 +122,15 @@
         @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
         @apply flex flex-col items-center justify-center;
     }
+
+    .copy__btn {
+        background: linear-gradient(180deg, #90EC58 5%, #3E7725 46.81%, #6FBD40 100%);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+        border-radius: 4px;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        font-size: 12px;
+    }
 }
 
 @layer utilities {
@@ -187,5 +196,9 @@
     .task__gold {
         @apply font-semibold text-p12-gold;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .activity {
+        @apply select-none cursor-pointer transition hover:scale-110 active:scale-90;
     }
 }
