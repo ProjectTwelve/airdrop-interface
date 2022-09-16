@@ -1,6 +1,6 @@
 export const BADGE_CONTRACT_ADDRESS = '0xb034d6bA0b6593Fa5107C6a55042b67746d44605';
-export const GALAXY_LIST = 'https://galaxy.eco/mynfts/list';
-export const GALAXY_P12_SPACE = 'https://galaxy.eco/P12/';
+export const GALXE_LIST = 'https://galxe.com/mynfts/list';
+export const GALXE_P12_SPACE = 'https://galxe.com/P12/';
 
 export const STORAGE_KEY = {
   INVITE_CODE: 'invite_code',
@@ -42,17 +42,17 @@ export const NFT_CLAIM_TYPE = {
   [NFT_CLAIM.CLAIMED]: 'Obtained',
 };
 
-const DEV_BADGE_ORANGE = process.env.NEXT_PUBLIC_DEV_BADGE_ORANGE || 'https://galaxy.eco/P12/campaign/GCt9JUUJCJ';
-const DEV_BADGE_PURPLE = process.env.NEXT_PUBLIC_DEV_BADGE_PURPLE || 'https://galaxy.eco/P12/campaign/GCteJUUM7z';
-const DEV_BADGE_BLUE = process.env.NEXT_PUBLIC_DEV_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCi9CUUrni';
-const DEV_BADGE_GREEN = process.env.NEXT_PUBLIC_DEV_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCV4JUU7eR';
+const DEV_BADGE_ORANGE = process.env.NEXT_PUBLIC_DEV_BADGE_ORANGE || 'https://galxe.com/P12/campaign/GCt9JUUJCJ';
+const DEV_BADGE_PURPLE = process.env.NEXT_PUBLIC_DEV_BADGE_PURPLE || 'https://galxe.com/P12/campaign/GCteJUUM7z';
+const DEV_BADGE_BLUE = process.env.NEXT_PUBLIC_DEV_BADGE_BLUE || 'https://galxe.com/P12/campaign/GCi9CUUrni';
+const DEV_BADGE_GREEN = process.env.NEXT_PUBLIC_DEV_BADGE_GREEN || 'https://galxe.com/P12/campaign/GCV4JUU7eR';
 
-const GAMER_BADGE_ORANGE = process.env.NEXT_PUBLIC_GAMER_BADGE_ORANGE || 'https://galaxy.eco/P12/campaign/GCZ74Utyqp';
-const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https://galaxy.eco/P12/campaign/GCZm4UtEeE';
-const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galaxy.eco/P12/campaign/GCuBwUtL6P';
-const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galaxy.eco/P12/campaign/GCrkwUtqiz';
-const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galaxy.eco/P12/campaign/GCirwUtCCS';
-const GAMER_BADGE_REKT = process.env.NEXT_PUBLIC_GAMER_BADGE_REKT || 'https://galaxy.eco/P12/campaign/GCuagUtMfG';
+const GAMER_BADGE_ORANGE = process.env.NEXT_PUBLIC_GAMER_BADGE_ORANGE || 'https://galxe.com/P12/campaign/GCZ74Utyqp';
+const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https://galxe.com/P12/campaign/GCZm4UtEeE';
+const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galxe.com/P12/campaign/GCuBwUtL6P';
+const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galxe.com/P12/campaign/GCrkwUtqiz';
+const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galxe.com/P12/campaign/GCirwUtCCS';
+const GAMER_BADGE_REKT = process.env.NEXT_PUBLIC_GAMER_BADGE_REKT || 'https://galxe.com/P12/campaign/GCuagUtMfG';
 
 export const DEV_BADGES = {
   [DEV_NFT_LEVEL.ORANGE]: {

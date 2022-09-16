@@ -13,7 +13,7 @@ import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo } from '../../hooks/gamer';
 import { gamerEmailShowAtom, gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
-import { GALAXY_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
+import { GALXE_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import { openLink } from '../../utils';
 import GamerEmailDialog from '../../components/dialog/GamerEmailDialog';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
@@ -89,7 +89,7 @@ export default function Gamer() {
                               Pending: update in a few minutes
                             </h4>
                             <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
-                              Check on Galaxy
+                              Check on Galxe
                             </Button>
                           </>
                         )}
@@ -106,8 +106,8 @@ export default function Gamer() {
                                 style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
                               />
                             </div>
-                            <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALAXY_LIST)}>
-                              My NFT at Galaxy
+                            <Button type="bordered" className="mt-9 w-[260px] sm:mt-4" onClick={() => openLink(GALXE_LIST)}>
+                              My NFT at Galxe
                             </Button>
                           </>
                         )}
@@ -119,8 +119,8 @@ export default function Gamer() {
                 </div>
                 <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
-                  <a className="text-p12-link" href="https://galaxy.eco/P12" target="_blank">
-                    Project Galaxy
+                  <a className="text-p12-link" href="https://galxe.com/P12" target="_blank">
+                    Galxe
                   </a>
                 </p>
               </div>
