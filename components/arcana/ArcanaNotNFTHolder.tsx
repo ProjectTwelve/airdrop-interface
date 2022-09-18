@@ -1,18 +1,18 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function ArcanaNotNFTHolder() {
+  const router = useRouter();
+
   return (
-    <div className="flex h-[255px] flex-col items-center justify-center rounded-2xl bg-p12-black/80 backdrop-blur">
-      <img src="/svg/error.svg" alt="error" />
-      <p className="mt-6 text-center text-p12-bg">
-        You are not P12 Genesis NFT holder yet,
-        <br />
-        please&nbsp;
-        <Link href="/gamer" passHref>
-          <a className="font-semibold text-p12-link">claim</a>
-        </Link>
+    <div>
+      <p className="mt-6 w-[250px] text-center text-sm">
+        You are not P12 Genesis NFT holder yet, please&nbsp;
+        <span className="font-semibold text-p12-link">claim</span>
         &nbsp;it first.
       </p>
+      <button className="dota__button dota__gold mt-4 h-[44px] w-[250px]" onClick={() => router.push('/gamer')}>
+        Click to Claim
+      </button>
     </div>
   );
 }

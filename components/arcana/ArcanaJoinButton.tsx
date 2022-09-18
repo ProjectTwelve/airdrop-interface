@@ -43,7 +43,7 @@ export default function ArcanaJoinButton() {
           setOpen(true);
         }}
       >
-        <p className="task__gold text-xl">Join Now</p>
+        <p className="dota__gold text-xl">Join Now</p>
       </div>
       <Dialog
         onOpenChange={(op) => setOpen(op)}
@@ -53,14 +53,14 @@ export default function ArcanaJoinButton() {
             <h3 className="border-b border-p12-line pb-8 text-center text-xl font-medium">Join the Giveaway!</h3>
             <div className="mt-[40px] grid grid-cols-2 gap-x-[30px] gap-y-3">
               <div
-                className="task__button flex flex-col items-center justify-center py-[30px]"
+                className="dota__button flex flex-col items-center justify-center py-[30px]"
                 onClick={() => onTaskSelectClick(TaskType.QUEST3)}
               >
                 <img src="/img/arcana/quest3.png" alt="quest3" />
-                <p className="task__gold mt-2 text-xl">Quest 3</p>
+                <p className="dota__gold mt-2 text-xl">Quest 3</p>
               </div>
               <div
-                className="task__o-button flex flex-col items-center justify-center py-[30px]"
+                className="dota__o-button flex flex-col items-center justify-center py-[30px]"
                 onClick={() => onTaskSelectClick(TaskType.GLEAM)}
               >
                 <img src="/img/arcana/gleam.png" alt="gleam" />

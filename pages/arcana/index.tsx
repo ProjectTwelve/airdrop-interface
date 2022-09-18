@@ -6,10 +6,7 @@ import Button from '../../components/button';
 import { openLink } from '../../utils';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useArcanaGamerInfo } from '../../hooks/arcana';
-import CardGuide from '../../components/arcana/CardGuide';
-import CardReferral from '../../components/arcana/CardReferral';
 import PredictionItem from '../../components/arcana/PredictionItem';
-import CardVotingEntry from '../../components/arcana/CardVotingEntry';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
@@ -78,48 +75,28 @@ export default function Arcana() {
         </div>
       </div>
       <div className="mt-14 xs:mt-8">
-        {isMounted && address ? (
-          isLoading ? (
-            <div className="flex h-[255px] flex-col items-center justify-center rounded-2xl bg-p12-black/80 backdrop-blur">
-              <img className="animate-spin" src="/svg/loading.svg" width={48} height={48} alt="loading" />
+        <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">
+          {!data && (
+            <div className="absolute z-30 flex h-full w-[1000px] items-center justify-center bg-black/50 backdrop-blur md:w-full">
+              {isMounted && address ? (
+                isLoading ? (
+                  <img className="animate-spin" src="/svg/loading.svg" width={48} height={48} alt="loading" />
+                ) : (
+                  <ArcanaNotNFTHolder />
+                )
+              ) : (
+                <ArcanaNotConnect />
+              )}
             </div>
-          ) : data ? (
-            <div className="grid grid-cols-3 gap-7 md:grid-cols-1 md:gap-4">
-              <CardVotingEntry data={data} />
-              <CardReferral />
-              <CardGuide />
-            </div>
-          ) : (
-            <ArcanaNotNFTHolder />
-          )
-        ) : (
-          <ArcanaNotConnect />
-        )}
+          )}
+          <StatusBar />
+        </div>
       </div>
-      <StatusBar />
       <div className="mt-[60px] xs:mt-8">
         <h2 className="text-center text-[30px] font-medium">Arcana</h2>
         <div className="relative mt-7 flex justify-center overflow-hidden">
           <div className="z-[4] w-[580px]">
             <PredictionItem selected />
-          </div>
-          <div className="absolute z-[3] w-[580px] -translate-x-[140px] scale-[90%] opacity-[90%] blur-sm">
-            <PredictionItem />
-          </div>
-          <div className="absolute z-[2] w-[580px] -translate-x-[280px] scale-[80%] opacity-[85%] blur">
-            <PredictionItem />
-          </div>
-          <div className="absolute w-[580px] -translate-x-[420px] scale-[70%] opacity-[80%] blur-lg">
-            <PredictionItem />
-          </div>
-          <div className="absolute z-[3] w-[580px] translate-x-[140px] scale-[90%] opacity-[90%] blur-sm">
-            <PredictionItem />
-          </div>
-          <div className="absolute z-[2] w-[580px] translate-x-[280px] scale-[80%] opacity-[85%] blur">
-            <PredictionItem />
-          </div>
-          <div className="absolute w-[580px] translate-x-[420px] scale-[70%] opacity-[80%] blur-lg">
-            <PredictionItem />
           </div>
         </div>
       </div>

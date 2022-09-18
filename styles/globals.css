@@ -124,12 +124,16 @@
     }
 
     .copy__btn {
-        background: linear-gradient(180deg, #90EC58 5%, #3E7725 46.81%, #6FBD40 100%);
+        background: linear-gradient(180deg, #7CD645 5%, #2E5F19 46.81%, #5EAA30 100%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
         border-radius: 4px;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
         text-align: center;
         font-size: 12px;
+    }
+
+    .copy__btn:hover {
+        background: linear-gradient(180deg, #90EC58 5%, #3E7725 46.81%, #6FBD40 100%);
     }
 }
 
@@ -175,27 +179,32 @@
         background-size: 100% 100%;
     }
 
-    .task__button {
+    .dota__button {
         @apply relative cursor-pointer border border-[#EB6A55];
         background: linear-gradient(to bottom, #98322D 0%, #C84435 50.51%, #C94435 50.52%, #E85136 100%);
     }
 
-    .task__button:hover {
+    .dota__button:hover {
         background: linear-gradient(to bottom, #AA3D37 0%, #DD5040 52.08%, #FC6145 100%);
     }
 
-    .task__o-button {
+    .dota__o-button {
         @apply relative cursor-pointer border border-[#5F647C];
         background: linear-gradient(to bottom, #3F435A 0%, #50546F 49.48%, #535771 100%);
     }
 
-    .task__o-button:hover {
+    .dota__o-button:hover {
         background: linear-gradient(to bottom, #525671 0%, #616683 49.48%, #626783 100%);
     }
 
-    .task__gold {
+    .dota__gold {
         @apply font-semibold text-p12-gold;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .dota__box {
+        @apply border border-[#3A3D3B];
+        background: linear-gradient(0deg, #171619 0%, #201D22 50.51%, #252C30 100%);
     }
 
     .activity {
