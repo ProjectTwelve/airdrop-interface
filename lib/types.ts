@@ -1,4 +1,5 @@
 import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
+import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
 
 export type Response<T> = {
   status: string;
@@ -316,4 +317,52 @@ export type CollabUserInfo = {
   tokenResult: number;
   nftResult: number;
   p12NftHolder: CollabStatus;
+};
+
+// Arcana
+
+export type MemeEvaluateItem = {
+  memeCode: string;
+  memeTitle: string;
+  memeType: string;
+  memeUrl: string;
+  evaluate?: MEME_ICON;
+};
+
+export type ArcanaUserInfo = {
+  avatarFull: string;
+  badgesCount: number;
+  friendsCount: number;
+  level: number;
+  nftLevel: number;
+  personName: string;
+  timeCreated: number;
+};
+
+export type ArcanaUserVotes = {
+  createdAt: number;
+  updatedAt: number;
+  votesBabCurrent: number;
+  votesBabLast: number;
+  votesCommunityNftCurrent: number;
+  votesCommunityNftLast: number;
+  votesGenesisNftCurrent: number;
+  votesGenesisNftLast: number;
+  votesReferralCurrent: number;
+  votesReferralLast: number;
+  votesTotalCurrent: number;
+  votesTotalLast: number;
+  walletAddress: string;
+};
+
+export type ArcanaVotes = {
+  userInfo: ArcanaUserInfo;
+  userVotes: ArcanaUserVotes;
+  memeEvaluate: MemeEvaluateItem[];
+};
+
+export type ArcanaMemeEvaluateParams = {
+  evaluate: MEME_ICON; // 1，2，3
+  memeCode: string;
+  walletAddress: string;
 };

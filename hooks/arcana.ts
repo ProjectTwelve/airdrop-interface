@@ -1,9 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchGamerInfo } from '../lib/api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { fetchArcanaMemeEvaluate, fetchArcanaVotes } from '../lib/api';
+import { ArcanaMemeEvaluateParams } from '../lib/types';
 
-export const useArcanaGamerInfo = (addr?: string) => {
-  return useQuery(['arcana_gamer_info', addr], () => fetchGamerInfo({ addr }), {
-    enabled: !!addr,
-    select: (data) => (data.code === 0 ? data.data : undefined),
+export const useArcanaVotes = (walletAddress?: string) => {
+  return useQuery(['arcana_votes', walletAddress], () => fetchArcanaVotes({ walletAddress }), {
+    enabled: !!walletAddress,
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
   });
+};
+
+export const useArcanaMemeEvaluate = () => {
+  return useMutation<any, any, ArcanaMemeEvaluateParams, any>((params) => fetchArcanaMemeEvaluate(params));
 };

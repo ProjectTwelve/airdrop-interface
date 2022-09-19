@@ -5,19 +5,19 @@ import Dialog from '../../components/dialog';
 import Button from '../../components/button';
 import { openLink } from '../../utils';
 import { useIsMounted } from '../../hooks/useIsMounted';
-import { useArcanaGamerInfo } from '../../hooks/arcana';
+import { useArcanaVotes } from '../../hooks/arcana';
+import StatusBar from '../../components/arcana/StatusBar';
 import PredictionItem from '../../components/arcana/PredictionItem';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
-import StatusBar from '../../components/arcana/StatusBar';
 
 export default function Arcana() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, { threshold: 0.8 });
-  const { data, isLoading } = useArcanaGamerInfo(address);
+  const { data, isLoading } = useArcanaVotes(address);
 
   useEffect(() => {
     if (!intersection) return;
@@ -29,7 +29,7 @@ export default function Arcana() {
   }, [intersection]);
 
   return (
-    <div>
+    <div className="pb-[110px] md:pb-0">
       <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end overflow-hidden">
         <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
         <div className="h-[430px] w-[1920px]">
@@ -89,7 +89,7 @@ export default function Arcana() {
               )}
             </div>
           )}
-          <StatusBar />
+          <StatusBar data={data} />
         </div>
       </div>
       <div className="mt-[60px] xs:mt-8">

@@ -5,8 +5,17 @@ import { useCopyToClipboard } from 'react-use';
 import SkillCard from './SkillCard';
 import Message from '../../message';
 import { referralCodeAtom } from '../../../store/invite/state';
+import { ArcanaUserVotes } from '../../../lib/types';
+import { GAMER_NFT_LEVEL, GAMER_BADGES } from '../../../constants';
+import Dialog from '../../dialog';
+import GenesisVoteDialog from './GenesisVoteDialog';
 
-export default function MainCard() {
+type MainCardProps = {
+  data?: ArcanaUserVotes;
+  nftLevel?: GAMER_NFT_LEVEL;
+};
+
+export default function MainCard({ data, nftLevel }: MainCardProps) {
   const referralCode = useRecoilValue(referralCodeAtom);
   const [, copyToClipboard] = useCopyToClipboard();
   const referralLink = useMemo(() => {
@@ -14,13 +23,15 @@ export default function MainCard() {
   }, [referralCode]);
   return (
     <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
-      {/*<div className="absolute -top-8 left-4 z-10 h-8 w-16 xs:left-3 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">*/}
-      {/*  <div className="group relative cursor-pointer overflow-hidden">*/}
-      {/*    <div className="absolute inset-0 z-10 hidden bg-white/10 group-hover:block"></div>*/}
-      {/*    <img className="relative" src="/img/arcana/statusbar/skill_add.webp" alt="add" />*/}
-      {/*  </div>*/}
-      {/*  /!*<div className="dota__button dota__gold flex h-full w-full items-center justify-center text-xs">Updated</div>*!/*/}
-      {/*</div>*/}
+      {data && (
+        <div className="absolute -top-8 left-4 z-10 h-8 w-16 xs:left-3 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
+          <div className="group relative cursor-pointer overflow-hidden">
+            <div className="absolute inset-0 z-10 hidden bg-white/10 group-hover:block"></div>
+            <img className="relative" src="/img/arcana/statusbar/skill_add.webp" alt="add" />
+          </div>
+          {/*<div className="dota__button dota__gold flex h-full w-full items-center justify-center text-xs">Updated</div>*/}
+        </div>
+      )}
       <div className="flex h-16 justify-between xs:h-[12.8vw]">
         <div className="flex">
           <div
@@ -30,7 +41,7 @@ export default function MainCard() {
             }}
           >
             <span className="h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text text-[36px] font-bold leading-[32px] text-transparent xs:text-[7.2vw]">
-              0
+              {data?.votesTotalCurrent || 0}
             </span>
           </div>
           <div className="ml-2.5 xs:ml-[2.13vw]">
@@ -39,9 +50,16 @@ export default function MainCard() {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <SkillCard votes={20} icon="https://cdn1.p12.games/airdrop/img/gamer_badge_blue.png" />
-          <SkillCard votes={10} icon="/img/arcana/statusbar/skill_invite.webp" />
-          <SkillCard votes={30} icon="/img/arcana/statusbar/skill_task.webp" />
+          <Dialog
+            render={({ close }) => <GenesisVoteDialog close={close} nftLevel={nftLevel} votes={data?.votesGenesisNftCurrent} />}
+          >
+            <SkillCard
+              votes={data?.votesGenesisNftCurrent}
+              icon={nftLevel !== undefined ? GAMER_BADGES[nftLevel].img : undefined}
+            />
+          </Dialog>
+          <SkillCard votes={data?.votesReferralCurrent} icon="/img/arcana/statusbar/skill_invite.webp" />
+          <SkillCard votes={data?.votesCommunityNftCurrent} icon="/img/arcana/statusbar/skill_task.webp" />
         </div>
       </div>
       <div className="mt-3 xs:mt-2">

@@ -27,6 +27,8 @@ import {
   CollabUserInfo,
   CollabUserParams,
   CollabTweetVerifyParams,
+  ArcanaVotes,
+  ArcanaMemeEvaluateParams,
 } from './types';
 
 /**
@@ -172,3 +174,9 @@ export const fetchCollabJoin = (data: CollabUserParams) => request.post<any, Res
 
 export const fetchCollabTweetVerify = (data: CollabTweetVerifyParams) =>
   request.post<any, Response<CollabUserInfo>>('/v2/collab/tweet/verify', data);
+
+export const fetchArcanaVotes = (data: { walletAddress?: string }) =>
+  request.post<any, Response<ArcanaVotes>>('/v2/ti/votes', data);
+
+export const fetchArcanaMemeEvaluate = (data: ArcanaMemeEvaluateParams) =>
+  request.post<any, Response<any>>('/v2/ti/meme/evaluate', data);
