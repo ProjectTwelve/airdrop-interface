@@ -1,5 +1,5 @@
-import { ArcanaUserInfo } from '../../../lib/types';
 import dayjs from 'dayjs';
+import { ArcanaUserInfo } from '../../../lib/types';
 
 export default function InfoCard({ data }: { data?: ArcanaUserInfo }) {
   return (

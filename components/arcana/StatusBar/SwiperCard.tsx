@@ -1,15 +1,15 @@
 import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Autoplay } from 'swiper';
+import { useAccount } from 'wagmi';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Dialog from '../../dialog';
+import InfoDialog from './InfoDialog';
 import { openLink } from '../../../utils';
 import { MemeEvaluateItem } from '../../../lib/types';
+import { useArcanaMemeEvaluate } from '../../../hooks/arcana';
 
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import { useArcanaMemeEvaluate } from '../../../hooks/arcana';
-import { useAccount } from 'wagmi';
-import Dialog from '../../dialog';
-import InfoDialog from './InfoDialog';
 
 export enum AudioStatus {
   PLAY,
@@ -45,7 +45,7 @@ function Card({ data }: { data: MemeEvaluateItem }) {
     setAudioStatus(AudioStatus.PLAY);
   };
 
-  if (data.memeType === 'card') {
+  if (data.memeType === 'image') {
     return <img src={data.memeUrl} className="h-full w-full object-cover" alt="img" />;
   }
   if (data.memeType === 'audio') {

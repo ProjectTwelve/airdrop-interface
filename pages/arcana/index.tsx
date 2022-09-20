@@ -11,6 +11,7 @@ import PredictionItem from '../../components/arcana/PredictionItem';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
+import Participant from '../../components/arcana/Participant';
 
 export default function Arcana() {
   const { address } = useAccount();
@@ -41,9 +42,7 @@ export default function Arcana() {
       <div className="mt-6 flex justify-between md:flex-col">
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="mt-2">
-              <img width={315} src="/img/arcana/p12_arcana.png" alt="p12_arcana" />
-            </h1>
+            <h1 className="font-['Henny_Penny'] text-[36px]">P12 Arcana @ TI11</h1>
             <Dialog
               render={({ close }) => (
                 <div className="w-[480px]">
@@ -60,7 +59,7 @@ export default function Arcana() {
                 </div>
               )}
             >
-              <p className="mt-2 cursor-pointer text-sm text-p12-link">Learn More</p>
+              <p className="cursor-pointer text-sm text-p12-link">Learn More</p>
             </Dialog>
           </div>
           <div className="py-2">
@@ -73,6 +72,9 @@ export default function Arcana() {
           </video>
           <img src="/img/present.webp" alt="present" />
         </div>
+      </div>
+      <div className="mt-12">
+        <Participant />
       </div>
       <div className="mt-14 xs:mt-8">
         <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">

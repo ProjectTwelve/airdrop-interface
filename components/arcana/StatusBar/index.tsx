@@ -18,7 +18,7 @@ export default function StatusBar({ data }: StatusBarProps) {
       {/*</div>*/}
       <div className="flex w-[1000px] md:hidden">
         <InfoCard data={data?.userInfo} />
-        <MainCard data={data?.userVotes} nftLevel={data?.userInfo.nftLevel} />
+        <MainCard data={data?.userVotes} userInfo={data?.userInfo} nftLevel={data?.userInfo.nftLevel} />
         <SwiperCard data={data?.memeEvaluate} />
       </div>
       <div className="hidden w-full overflow-x-scroll bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat md:block">
@@ -27,7 +27,7 @@ export default function StatusBar({ data }: StatusBarProps) {
             <InfoCard data={data?.userInfo} />
             <SwiperCard data={data?.memeEvaluate} />
           </div>
-          <MainCard data={data?.userVotes} nftLevel={data?.userInfo.nftLevel} />
+          <MainCard data={data?.userVotes} userInfo={data?.userInfo} nftLevel={data?.userInfo.nftLevel} />
         </div>
       </div>
     </>

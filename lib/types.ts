@@ -337,6 +337,16 @@ export type ArcanaUserInfo = {
   nftLevel: number;
   personName: string;
   timeCreated: number;
+  createdAt: number;
+  nftId: number;
+};
+
+export type P12CommunityNft = {
+  votesP12DreamWeaver?: number;
+  votesP12BestSupporterPurple?: number;
+  votesP12BestSupporterBlue?: number;
+  votesP12BestSupporterGreen?: number;
+  votesWhiteBadge?: number;
 };
 
 export type ArcanaUserVotes = {
@@ -353,6 +363,7 @@ export type ArcanaUserVotes = {
   votesTotalCurrent: number;
   votesTotalLast: number;
   walletAddress: string;
+  p12CommunityNft: P12CommunityNft;
 };
 
 export type ArcanaVotes = {
@@ -365,4 +376,16 @@ export type ArcanaMemeEvaluateParams = {
   evaluate: MEME_ICON; // 1，2，3
   memeCode: string;
   walletAddress: string;
+};
+
+export type ArcanaInviteesVote = {
+  _id: string;
+  createdAt: number;
+  steamId: string;
+  walletAddress: string;
+  nftLevel: number;
+  nftClaim: number;
+  personName: string;
+  avatar: string;
+  votes: number;
 };

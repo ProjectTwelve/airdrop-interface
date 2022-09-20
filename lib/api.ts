@@ -29,6 +29,7 @@ import {
   CollabTweetVerifyParams,
   ArcanaVotes,
   ArcanaMemeEvaluateParams,
+  ArcanaInviteesVote,
 } from './types';
 
 /**
@@ -180,3 +181,8 @@ export const fetchArcanaVotes = (data: { walletAddress?: string }) =>
 
 export const fetchArcanaMemeEvaluate = (data: ArcanaMemeEvaluateParams) =>
   request.post<any, Response<any>>('/v2/ti/meme/evaluate', data);
+
+export const fetchArcanaInviteesVotes = (data: { walletAddress?: string }) =>
+  request.post<any, Response<ArcanaInviteesVote[]>>('/v2/ti/invitees/votes', data);
+
+export const fetchArcanaDistinctAddressCount = () => request.post<any, Response<number>>('/v2/ti/distinctAddress/count');
