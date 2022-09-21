@@ -23,6 +23,7 @@ module.exports = {
         'p12-error': '#F13361',
         'p12-sub': '#9A9DAA',
         'p12-black': '#1D2030',
+        'p12-darkgray': '#78797D',
         'p12-link': '#43BBFF',
         'p12-tips': '#4383FF',
         'p12-line': '#4E556D',

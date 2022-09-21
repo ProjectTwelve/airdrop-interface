@@ -1,14 +1,27 @@
 import dayjs from 'dayjs';
 import { ArcanaUserInfo } from '../../../lib/types';
 
-export default function InfoCard({ data }: { data?: ArcanaUserInfo }) {
+type InfoCardProps = {
+  data?: ArcanaUserInfo;
+  level: number;
+  onLevelClick: () => void;
+};
+
+export default function InfoCard({ data, level, onLevelClick }: InfoCardProps) {
   return (
     <div className="relative">
-      <img
-        className="absolute left-0 top-0 z-10 h-[160px] w-[78px] xs:h-[29.87vw] xs:w-[14.67vw]"
-        src="/img/arcana/statusbar/left.webp"
-        alt="left"
-      />
+      <div className="absolute left-0 top-0 z-20 h-[160px] w-[78px] xs:h-[29.87vw] xs:w-[14.67vw]">
+        <img className="h-full w-full" src="/img/arcana/statusbar/left.webp" alt="left" />
+        <p
+          className="absolute right-[5px] bottom-[5px] z-10 flex h-[40px] w-[40px] cursor-pointer select-none items-center justify-center text-xl text-[#CCB77E] xs:right-[0.9vw] xs:bottom-[0.9vw] xs:h-[8vw] xs:w-[8vw] xs:text-sm"
+          style={{
+            textShadow: '0 0 6px rgba(255, 131, 41, 0.75)',
+          }}
+          onClick={onLevelClick}
+        >
+          {level}
+        </p>
+      </div>
       <div className="relative ml-[53px] h-[160px] w-[175px] bg-gray-400 xs:ml-[9.87vw] xs:h-[29.87vw] xs:w-[32.5vw]">
         <img className="absolute top-0 left-0 z-10 h-full w-full" src="/img/arcana/statusbar/mask.webp" alt="mask" />
         {data?.avatarFull && <img className="absolute top-0 left-0" src={data.avatarFull} alt="avatar" />}

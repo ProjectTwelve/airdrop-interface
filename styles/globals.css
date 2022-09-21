@@ -207,6 +207,18 @@
         background: linear-gradient(0deg, #171619 0%, #201D22 50.51%, #252C30 100%);
     }
 
+    .dota__easter {
+        cursor: pointer;
+        border: 1px solid #5C5C5C;
+        background: linear-gradient(180deg, #171619 2.63%, #1D2122 50.48%, #252C30 97.37%);
+    }
+
+
+    .dota__easter:hover {
+        border: 1px solid #848484;
+        background: linear-gradient(180deg, #242327 2.63%, #282C2E 50.48%, #363F44 97.37%);
+    }
+
     .activity {
         @apply select-none cursor-pointer transition hover:scale-110 active:scale-90;
     }

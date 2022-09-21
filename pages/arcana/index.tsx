@@ -1,24 +1,65 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useAccount } from 'wagmi';
+import { useRouter } from 'next/router';
 import { useIntersection } from 'react-use';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Dialog from '../../components/dialog';
 import Button from '../../components/button';
 import { openLink } from '../../utils';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useArcanaVotes } from '../../hooks/arcana';
 import StatusBar from '../../components/arcana/StatusBar';
-import PredictionItem from '../../components/arcana/PredictionItem';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 import Participant from '../../components/arcana/Participant';
+import ArcanaProgress, { ProgressItem } from '../../components/arcana/ArcanaProgress';
+import Prediction from '../../components/arcana/Prediction';
+import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 
 export default function Arcana() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
+  const { query } = useRouter();
+  const [originAddress, setOriginAddress] = useRecoilState(arcanaOriginAddressAtom);
+  const setObserver = useSetRecoilState(arcanaObserverAtom);
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, { threshold: 0.8 });
-  const { data, isLoading } = useArcanaVotes(address);
+  const { data, isLoading } = useArcanaVotes(originAddress ?? address);
+
+  const progressList = useMemo<ProgressItem[]>(
+    () => [
+      {
+        cover: '/img/arcana/part1.webp',
+        title: 'TI11 Final Ticket Giveaway',
+        part: 'PART I',
+        startTime: 1663171200000,
+        endTime: 1664553599000,
+      },
+      {
+        cover: '/img/arcana/part2.webp',
+        title: 'P12 Arcana @ TI11',
+        part: 'PART II',
+        startTime: 1664553600000,
+        endTime: 1666195199000,
+      },
+      {
+        cover: '/img/arcana/part3.webp',
+        title: 'TI11 Main Event',
+        part: 'PART III',
+        startTime: 1666195200000,
+        endTime: 1667231999000,
+      },
+      {
+        cover: '/img/arcana/part4.webp',
+        title: 'Treasures Drop',
+        part: 'PART IV',
+        startTime: 1667232000000,
+        endTime: 1667836799000,
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
     if (!intersection) return;
@@ -28,6 +69,13 @@ export default function Arcana() {
       intersectionRef.current = null;
     }
   }, [intersection]);
+
+  useEffect(() => {
+    if (query.address) {
+      setOriginAddress(query.address as string);
+      setObserver(true);
+    }
+  }, [query, setObserver, setOriginAddress]);
 
   return (
     <div className="pb-[110px] md:pb-0">
@@ -40,7 +88,7 @@ export default function Arcana() {
         </div>
       </div>
       <div className="mt-6 flex justify-between md:flex-col">
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between md:ml-2">
           <div>
             <h1 className="font-['Henny_Penny'] text-[36px]">P12 Arcana @ TI11</h1>
             <Dialog
@@ -73,8 +121,11 @@ export default function Arcana() {
           <img src="/img/present.webp" alt="present" />
         </div>
       </div>
-      <div className="mt-12">
+      <div className="mt-12 md:mt-6">
         <Participant />
+      </div>
+      <div className="mt-16 md:mt-8">
+        <ArcanaProgress list={progressList} />
       </div>
       <div className="mt-14 xs:mt-8">
         <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">
@@ -94,13 +145,8 @@ export default function Arcana() {
           <StatusBar data={data} />
         </div>
       </div>
-      <div className="mt-[60px] xs:mt-8">
-        <h2 className="text-center text-[30px] font-medium">Arcana</h2>
-        <div className="relative mt-7 flex justify-center overflow-hidden">
-          <div className="z-[4] w-[580px]">
-            <PredictionItem selected />
-          </div>
-        </div>
+      <div className="mt-16 md:mt-8">
+        <Prediction />
       </div>
       <div className="relative mt-[60px] flex w-full items-end justify-center xs:mt-8">
         <h3 className="absolute top-[60px] text-[30px] font-medium">Join P12 Community</h3>

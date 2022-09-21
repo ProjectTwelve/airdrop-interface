@@ -10,6 +10,8 @@ import { useArcanaMemeEvaluate } from '../../../hooks/arcana';
 
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import { useRecoilValue } from 'recoil';
+import { arcanaObserverAtom } from '../../../store/arcana/state';
 
 export enum AudioStatus {
   PLAY,
@@ -64,6 +66,7 @@ function Card({ data }: { data: MemeEvaluateItem }) {
 
 export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
   const { address } = useAccount();
+  const isObserver = useRecoilValue(arcanaObserverAtom);
   const [memeList, setMemeList] = useState<MemeEvaluateItem[]>([]);
   const [swiperItem, setSwiperItem] = useState<MemeEvaluateItem | null>(null);
   const { mutate } = useArcanaMemeEvaluate();
@@ -97,7 +100,7 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
 
   const onMemeClick = useCallback(
     (type: MEME_ICON, item: MemeEvaluateItem | null) => {
-      if (!item || !address) return;
+      if (!item || !address || isObserver) return;
       setSwiperItem((status) => (status ? { ...status, evaluate: type } : null));
       setMemeList((list) =>
         list.map((i) => {
