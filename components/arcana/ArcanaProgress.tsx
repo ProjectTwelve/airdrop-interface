@@ -25,7 +25,7 @@ function ProgressCard({ data, timestamp }: { data: ProgressItem; timestamp?: num
   }, [data.endTime, data.startTime, timestamp]);
 
   return (
-    <div className="rounded-xl border-2 border-[#FFFFFF29]">
+    <div className="rounded-xl border-2 border-[#FFFFFF29] backdrop-blur-lg">
       <img src={data.cover} alt="cover" className={statusType === PROGRESS_STATUS.UPCOMING ? 'grayscale' : ''} />
       <div className="p-6">
         <div className="flex items-center justify-between">
@@ -69,7 +69,7 @@ export default function ArcanaProgress({ list }: { list: ProgressItem[] }) {
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4 bg-black/30 backdrop-blur-lg md:grid-cols-2 md:gap-2">
+      <div className="grid grid-cols-4 gap-4 bg-black/30 md:grid-cols-2 md:gap-2">
         {list.map((item) => (
           <ProgressCard timestamp={currentTimestamp} key={item.title} data={item} />
         ))}

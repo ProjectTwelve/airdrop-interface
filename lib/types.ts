@@ -389,3 +389,27 @@ export type ArcanaInviteesVote = {
   avatar: string;
   votes: number;
 };
+
+export type PredictionOption = {
+  id: number;
+  name: string;
+  img1: string;
+  img2: string;
+  attr: number;
+};
+
+export type PredictionItemData = {
+  predictionCode: string;
+  releaseDate: number;
+  endDate: number;
+  predictionTitle: string;
+  predictionFull: string;
+  sponsorName: string;
+  sponsorLogo: string;
+  meme: string;
+  currentPrice: number;
+  maxPrice: number;
+  taskUrl: string;
+  ifLock: boolean;
+  optionList: PredictionOption[];
+};

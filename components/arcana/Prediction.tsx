@@ -1,12 +1,17 @@
 import { useAccount } from 'wagmi';
 import { useRecoilValue } from 'recoil';
+import PredictionItem from './PredictionItem';
 import { referralCodeAtom } from '../../store/invite/state';
 import { arcanaObserverAtom } from '../../store/arcana/state';
+import { useArcanaPredictions, useArcanaPredictionsVotesCount } from '../../hooks/arcana';
+import { ZERO_ADDRESS } from '../../constants/addresses';
 
 export default function Prediction() {
   const isObserver = useRecoilValue(arcanaObserverAtom);
   const { address } = useAccount();
   const referralCode = useRecoilValue(referralCodeAtom);
+  const { data } = useArcanaPredictions(address ?? ZERO_ADDRESS);
+  const { data: votesCount } = useArcanaPredictionsVotesCount();
 
   const onShareTwitter = () => {
     if (!address || !referralCode) return;
@@ -39,10 +44,11 @@ export default function Prediction() {
           </button>
         )}
       </div>
-      <div className="mt-8 grid grid-cols-3 gap-8">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+      <div className="mt-8 grid grid-cols-2 gap-4 xl:grid-cols-3 xl:gap-6 2xl:grid-cols-3 2xl:gap-8 xs:grid-cols-1">
+        {data &&
+          data.map((item) => (
+            <PredictionItem key={item.predictionCode} data={item} votes={votesCount ? votesCount[item.predictionCode] : 0} />
+          ))}
       </div>
     </div>
   );

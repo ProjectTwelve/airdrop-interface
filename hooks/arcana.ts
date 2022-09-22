@@ -3,9 +3,12 @@ import {
   fetchArcanaDistinctAddressCount,
   fetchArcanaInviteesVotes,
   fetchArcanaMemeEvaluate,
+  fetchArcanaPredictions,
+  fetchArcanaPredictionsVotesCount,
+  fetchArcanaUnlock,
   fetchArcanaVotes,
 } from '../lib/api';
-import { ArcanaMemeEvaluateParams } from '../lib/types';
+import {ArcanaMemeEvaluateParams, Response} from '../lib/types';
 
 export const useArcanaVotes = (walletAddress?: string) => {
   return useQuery(['arcana_votes', walletAddress], () => fetchArcanaVotes({ walletAddress }), {
@@ -32,4 +35,32 @@ export const useArcanaDistinctAddressCount = () => {
     select: (data) => (data.code === 200 ? data.data : undefined),
     refetchOnWindowFocus: false,
   });
+};
+
+export const useArcanaPredictions = (walletAddress?: string) => {
+  return useQuery(['arcana_predictions', walletAddress], () => fetchArcanaPredictions({ walletAddress }), {
+    enabled: !!walletAddress,
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaPredictionsVotesCount = (walletAddress?: string) => {
+  return useQuery(['arcana_predictions_votes_count', walletAddress], () => fetchArcanaPredictionsVotesCount(), {
+    select: (data) => {
+      if (data.code === 200) {
+        const map: Record<string, number> = {};
+        data.data.forEach((item) => {
+          map[item.predictionCode] = item.totalVotes || 0;
+        });
+        return map;
+      }
+      return undefined;
+    },
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaUnlock = () => {
+  return useMutation<any, any, { walletAddress?: string; predictionCode?: string }, Response<boolean>>((params) => fetchArcanaUnlock(params));
 };

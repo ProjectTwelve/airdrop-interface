@@ -30,6 +30,7 @@ import {
   ArcanaVotes,
   ArcanaMemeEvaluateParams,
   ArcanaInviteesVote,
+  PredictionItemData,
 } from './types';
 
 /**
@@ -186,3 +187,12 @@ export const fetchArcanaInviteesVotes = (data: { walletAddress?: string }) =>
   request.post<any, Response<ArcanaInviteesVote[]>>('/v2/ti/invitees/votes', data);
 
 export const fetchArcanaDistinctAddressCount = () => request.post<any, Response<number>>('/v2/ti/distinctAddress/count');
+
+export const fetchArcanaPredictions = (data: { walletAddress?: string }) =>
+  request.post<any, Response<PredictionItemData[]>>('/v2/ti/predictions', data);
+
+export const fetchArcanaPredictionsVotesCount = () =>
+  request.post<any, Response<{ predictionCode: string; totalVotes: number }[]>>('/v2/ti/predictions/votesCount');
+
+export const fetchArcanaUnlock = (data: { walletAddress?: string; predictionCode?: string }) =>
+  request.post<any, Response<boolean>>('/v2/ti/unlock', data);
