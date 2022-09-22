@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useSetRecoilState } from 'recoil';
 import { useMutation } from '@tanstack/react-query';
@@ -23,9 +24,11 @@ export default function ArcanaJoinButton() {
     if (!address) return;
     mutate({ collabCode: 'TOP12xARCANATi11', walletAddress: address });
     if (type === TaskType.QUEST3) {
+      ReactGA.event({ category: 'Arcana-Join', action: 'Click', label: 'quest3' });
       openLink('https://app.quest3.xyz/quest/687223046918307997');
     }
     if (type === TaskType.GLEAM) {
+      ReactGA.event({ category: 'Arcana-Join', action: 'Click', label: 'gleam' });
       openLink('https://gleam.io/MII0p/p12-arcana-ti11-stage-1-ti11-final-tickets-giveaway');
     }
   };
