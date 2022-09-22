@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { useMutation } from '@tanstack/react-query';
-import Message from '../message';
 import Dialog from '../dialog';
 import { fetchCollabJoin } from '../../lib/api';
 import { CollabUserParams } from '../../lib/types';
@@ -19,32 +17,17 @@ export default function ArcanaJoinButton() {
   const { address } = useAccount();
   const [open, setOpen] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  // TODO: waiting for quest3 new feature
-  // const { mutate } = useMutation<any, any, CollabUserParams, any>((data) => fetchCollabJoin(data));
-  const { mutate } = useMutation<any, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
-    onSuccess: (data) => {
-      if (data.code !== 200 || !data.data) {
-        toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
-        return;
-      }
-      openLink('https://gleam.io/MII0p/p12-arcana-ti11-stage-1-ti11-final-tickets-giveaway');
-    },
-  });
+  const { mutate } = useMutation<any, any, CollabUserParams, any>((data) => fetchCollabJoin(data));
 
   const onTaskSelectClick = (type: TaskType) => {
     if (!address) return;
     mutate({ collabCode: 'TOP12xARCANATi11', walletAddress: address });
     if (type === TaskType.QUEST3) {
-      openLink('https://airdrop.p12.games/');
+      openLink('https://app.quest3.xyz/quest/687223046918307997');
     }
     if (type === TaskType.GLEAM) {
       openLink('https://gleam.io/MII0p/p12-arcana-ti11-stage-1-ti11-final-tickets-giveaway');
     }
-  };
-
-  const onJoinTicketClick = () => {
-    if (!address) return setConnectOpen(true);
-    mutate({ collabCode: 'TOP12xARCANATi11', walletAddress: address });
   };
 
   return (
@@ -52,12 +35,10 @@ export default function ArcanaJoinButton() {
       <p className="text-lg font-medium text-p12-gold">TI 11 Final Ticket Giveaway is on!</p>
       <div
         className="task__button mt-3 flex h-[49px] max-w-[285px] items-center justify-center"
-        onClick={onJoinTicketClick}
-        // TODO: waiting for quest3 new feature
-        // onClick={() => {
-        //   if (!address) return setConnectOpen(true);
-        //   setOpen(true);
-        // }}
+        onClick={() => {
+          if (!address) return setConnectOpen(true);
+          setOpen(true);
+        }}
       >
         <p className="task__gold text-xl">Join Now</p>
       </div>
