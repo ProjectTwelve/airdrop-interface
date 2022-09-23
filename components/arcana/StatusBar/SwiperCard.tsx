@@ -112,7 +112,7 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
       );
       mutate({ memeCode: item.memeCode, evaluate: type, walletAddress: address });
     },
-    [address, mutate],
+    [address, isObserver, mutate],
   );
 
   return (
