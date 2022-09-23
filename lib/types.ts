@@ -1,5 +1,6 @@
 import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
 import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
+import { PREDICTION_TYPE } from '../components/arcana/PredictionItem';
 
 export type Response<T> = {
   status: string;
@@ -390,18 +391,27 @@ export type ArcanaInviteesVote = {
   votes: number;
 };
 
+export enum HERO_ATTRIBUTE {
+  STRENGTH,
+  AGILITY,
+  INTELLIGENCE,
+}
+
 export type PredictionOption = {
   id: number;
-  name: string;
+  team?: string;
+  name?: string;
   img1: string;
   img2: string;
-  attr: number;
+  attr?: HERO_ATTRIBUTE;
 };
 
 export type PredictionItemData = {
   predictionCode: string;
   releaseDate: number;
   endDate: number;
+  optionType: PREDICTION_TYPE;
+  answer?: PredictionOption[];
   predictionTitle: string;
   predictionFull: string;
   sponsorName: string;
@@ -413,3 +423,9 @@ export type PredictionItemData = {
   ifLock: boolean;
   optionList: PredictionOption[];
 };
+
+export type PredictionAnswerParams = {
+  walletAddress: string;
+  predictionCode: string;
+  answer: PredictionOption[];
+}[];

@@ -62,41 +62,47 @@ function UsdcSVG({ type }: { type: PARTICIPANT_STATUS }) {
 
 export default function Participant() {
   const { data: count } = useArcanaDistinctAddressCount();
+  const [numberFormat] = useState(new Intl.NumberFormat());
   const [partStatus, setPartStatus] = useState({
     [PART_PROGRESS.PART1]: {
-      prize: 10000,
+      prize: '10,000',
+      participants: 20000,
       status: PARTICIPANT_STATUS.UPCOMING,
       [PARTICIPANT_STATUS.UPCOMING]: '0 to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: 1000,
+      [PARTICIPANT_STATUS.COMPLETED]: 'BASIC',
     },
     [PART_PROGRESS.PART2]: {
-      prize: 20000,
+      prize: '20,000',
+      participants: 80000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '1000 to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '20K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: 10000,
+      [PARTICIPANT_STATUS.COMPLETED]: '20K',
     },
     [PART_PROGRESS.PART3]: {
-      prize: 30000,
+      prize: '60,000',
+      participants: 120000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '10000 to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '80K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: 30000,
+      [PARTICIPANT_STATUS.COMPLETED]: '80K',
     },
     [PART_PROGRESS.PART4]: {
-      prize: 40000,
+      prize: '80,000',
+      participants: 200000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '30000 to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '120K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: 50000,
+      [PARTICIPANT_STATUS.COMPLETED]: '120K',
     },
     [PART_PROGRESS.PART5]: {
-      prize: 50000,
+      prize: '100,000',
+      participants: Infinity,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '50000 to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '200K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: Infinity,
+      [PARTICIPANT_STATUS.COMPLETED]: '200K',
     },
   });
 
@@ -105,19 +111,19 @@ export default function Participant() {
       if (count === undefined) return status;
       const currentStatus = { ...status };
       currentStatus[PART_PROGRESS.PART1].status = PARTICIPANT_STATUS.ONGOING;
-      if (count >= currentStatus[PART_PROGRESS.PART1][PARTICIPANT_STATUS.COMPLETED]) {
+      if (count >= currentStatus[PART_PROGRESS.PART1].participants) {
         currentStatus[PART_PROGRESS.PART1].status = PARTICIPANT_STATUS.COMPLETED;
         currentStatus[PART_PROGRESS.PART2].status = PARTICIPANT_STATUS.ONGOING;
       }
-      if (count >= currentStatus[PART_PROGRESS.PART2][PARTICIPANT_STATUS.COMPLETED]) {
+      if (count >= currentStatus[PART_PROGRESS.PART2].participants) {
         currentStatus[PART_PROGRESS.PART2].status = PARTICIPANT_STATUS.COMPLETED;
         currentStatus[PART_PROGRESS.PART3].status = PARTICIPANT_STATUS.ONGOING;
       }
-      if (count >= currentStatus[PART_PROGRESS.PART3][PARTICIPANT_STATUS.COMPLETED]) {
+      if (count >= currentStatus[PART_PROGRESS.PART3].participants) {
         currentStatus[PART_PROGRESS.PART3].status = PARTICIPANT_STATUS.COMPLETED;
         currentStatus[PART_PROGRESS.PART4].status = PARTICIPANT_STATUS.ONGOING;
       }
-      if (count >= currentStatus[PART_PROGRESS.PART4][PARTICIPANT_STATUS.COMPLETED]) {
+      if (count >= currentStatus[PART_PROGRESS.PART4].participants) {
         currentStatus[PART_PROGRESS.PART4].status = PARTICIPANT_STATUS.COMPLETED;
         currentStatus[PART_PROGRESS.PART5].status = PARTICIPANT_STATUS.ONGOING;
       }
@@ -145,7 +151,7 @@ export default function Participant() {
                   )}
                 >
                   {partStatus[PART_PROGRESS.PART1].status === PARTICIPANT_STATUS.ONGOING
-                    ? count
+                    ? numberFormat.format(count ?? 0)
                     : partStatus[PART_PROGRESS.PART1][partStatus[PART_PROGRESS.PART1].status]}
                 </p>
               </div>
@@ -181,7 +187,7 @@ export default function Participant() {
                 )}
               >
                 {partStatus[PART_PROGRESS.PART2].status === PARTICIPANT_STATUS.ONGOING
-                  ? count
+                  ? numberFormat.format(count ?? 0)
                   : partStatus[PART_PROGRESS.PART2][partStatus[PART_PROGRESS.PART2].status]}
               </p>
               <div
@@ -213,7 +219,7 @@ export default function Participant() {
                 )}
               >
                 {partStatus[PART_PROGRESS.PART3].status === PARTICIPANT_STATUS.ONGOING
-                  ? count
+                  ? numberFormat.format(count ?? 0)
                   : partStatus[PART_PROGRESS.PART3][partStatus[PART_PROGRESS.PART3].status]}
               </p>
               <div
@@ -245,7 +251,7 @@ export default function Participant() {
                 )}
               >
                 {partStatus[PART_PROGRESS.PART4].status === PARTICIPANT_STATUS.ONGOING
-                  ? count
+                  ? numberFormat.format(count ?? 0)
                   : partStatus[PART_PROGRESS.PART4][partStatus[PART_PROGRESS.PART4].status]}
               </p>
               <div
@@ -277,7 +283,7 @@ export default function Participant() {
                 )}
               >
                 {partStatus[PART_PROGRESS.PART5].status === PARTICIPANT_STATUS.ONGOING
-                  ? count
+                  ? numberFormat.format(count ?? 0)
                   : partStatus[PART_PROGRESS.PART5][partStatus[PART_PROGRESS.PART5].status]}
               </p>
               <div

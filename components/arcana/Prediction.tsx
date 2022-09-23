@@ -1,17 +1,26 @@
 import { useAccount } from 'wagmi';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import PredictionItem from './PredictionItem';
 import { referralCodeAtom } from '../../store/invite/state';
-import { arcanaObserverAtom } from '../../store/arcana/state';
-import { useArcanaPredictions, useArcanaPredictionsVotesCount } from '../../hooks/arcana';
+import { arcanaObserverAtom, arcanaOriginAddressAtom, arcanaPredictionAnswerAtom } from '../../store/arcana/state';
+import { useArcanaPredictions, useArcanaPredictionsAnswerCount } from '../../hooks/arcana';
 import { ZERO_ADDRESS } from '../../constants/addresses';
+import { useEffect } from 'react';
 
 export default function Prediction() {
   const isObserver = useRecoilValue(arcanaObserverAtom);
   const { address } = useAccount();
   const referralCode = useRecoilValue(referralCodeAtom);
-  const { data } = useArcanaPredictions(address ?? ZERO_ADDRESS);
-  const { data: votesCount } = useArcanaPredictionsVotesCount();
+  const originAddress = useRecoilValue(arcanaOriginAddressAtom);
+  const [predictionAnswer, setPredictionAnswer] = useRecoilState(arcanaPredictionAnswerAtom);
+  const { data } = useArcanaPredictions(originAddress ?? address ?? ZERO_ADDRESS);
+  const { data: AnswerCount } = useArcanaPredictionsAnswerCount();
+
+  useEffect(() => {
+    if (!data) return;
+    const answers = data.map((item) => ({ predictionCode: item.predictionCode, answer: item.answer }));
+    setPredictionAnswer(answers);
+  }, [data, setPredictionAnswer]);
 
   const onShareTwitter = () => {
     if (!address || !referralCode) return;
@@ -45,10 +54,18 @@ export default function Prediction() {
         )}
       </div>
       <div className="mt-8 grid grid-cols-2 gap-4 xl:grid-cols-3 xl:gap-6 2xl:grid-cols-3 2xl:gap-8 xs:grid-cols-1">
-        {data &&
-          data.map((item) => (
-            <PredictionItem key={item.predictionCode} data={item} votes={votesCount ? votesCount[item.predictionCode] : 0} />
-          ))}
+        {data
+          ? data.map((item, index) => (
+              <PredictionItem
+                key={item.predictionCode}
+                answer={predictionAnswer[index]}
+                data={item}
+                votes={AnswerCount ? AnswerCount[item.predictionCode] : 0}
+              />
+            ))
+          : Array(6)
+              .fill(undefined)
+              .map((item, index) => <PredictionItem key={index} data={item} />)}
       </div>
     </div>
   );

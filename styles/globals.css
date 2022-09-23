@@ -48,6 +48,7 @@
     }
 
     .vertical-scroll::-webkit-scrollbar {
+        display: block;
         background: rgba(0, 0, 0, 0);
         width: 4px;
         border-radius: 4px;

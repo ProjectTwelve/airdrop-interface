@@ -1,33 +1,39 @@
-import { PredictionItemData } from '../../lib/types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
-import { useArcanaUnlock } from '../../hooks/arcana';
-import { useRecoilValue } from 'recoil';
-import { arcanaObserverAtom } from '../../store/arcana/state';
 import { useAccount } from 'wagmi';
+import { useRecoilValue } from 'recoil';
 import { openLink } from '../../utils';
+import { PredictionItemData } from '../../lib/types';
+import { useArcanaUnlock } from '../../hooks/arcana';
 import PredictionItemDialog from './PredictionItemDialog';
+import { arcanaGenesisNFTHolderAtom, arcanaObserverAtom, PredictionAnswer } from '../../store/arcana/state';
 
 type PredictionItemProps = {
   data?: PredictionItemData;
+  answer?: PredictionAnswer;
   votes?: number;
 };
 
 export enum PREDICTION_TYPE {
-  TEAM,
-  PLAYER,
-  HERO,
-  CARD,
+  TEAM = 'team',
+  PLAYER = 'player',
+  HERO = 'hero',
+  CARD = 'card',
 }
 
-export default function PredictionItem({ data, votes }: PredictionItemProps) {
+export default function PredictionItem({ data, votes, answer }: PredictionItemProps) {
   const isObserver = useRecoilValue(arcanaObserverAtom);
+  const isGenesisNFTHolder = useRecoilValue(arcanaGenesisNFTHolderAtom);
   const { address } = useAccount();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [isTimeLock, setIsTimeLock] = useState<boolean>(false);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
   const [durationTime, setDurationTime] = useState<string>('');
   const [item, setItem] = useState<PredictionItemData | undefined>(data);
   const { mutateAsync, isLoading } = useArcanaUnlock();
+  const answerSelect = useMemo(() => {
+    if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
+  }, [answer]);
 
   const onUnlock = () => {
     if (isObserver || !address || !item || isLoading) return;
@@ -44,13 +50,14 @@ export default function PredictionItem({ data, votes }: PredictionItemProps) {
   };
 
   const onSelect = () => {
-    if (isObserver || !address || !item) return;
+    if (isObserver || !address || !item || isEnd || !isGenesisNFTHolder) return;
     setOpenDialog(true);
   };
 
   useEffect(() => {
     if (!item?.releaseDate) return;
     const releaseDate = dayjs.unix(item.releaseDate);
+    const endDate = dayjs.unix(item.endDate);
     const currentDate = dayjs();
     if (currentDate < releaseDate) {
       setIsTimeLock(true);
@@ -60,12 +67,18 @@ export default function PredictionItem({ data, votes }: PredictionItemProps) {
       if (diffHours > 1) return setDurationTime(`${diffHours} Hrs`);
       return setDurationTime(`<1 Hour`);
     }
-  }, [item?.releaseDate]);
+    if (currentDate > endDate) {
+      setIsEnd(true);
+    }
+  }, [item?.endDate, item?.releaseDate]);
 
   return (
     <div className="relative">
+      {!item && (
+        <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/40 backdrop-blur-lg" />
+      )}
       {isTimeLock && (
-        <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/40 backdrop-blur-lg">
+        <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-2xl bg-black/40 backdrop-blur-lg">
           <p className="text-xl text-p12-gold">Prize of this Tip</p>
           <p className="flex items-center justify-center font-ddin text-[52px] font-bold text-p12-gold">
             <img className="mr-1 w-10" src="/img/arcana/usdc.svg" alt="usdc" />
@@ -92,7 +105,7 @@ export default function PredictionItem({ data, votes }: PredictionItemProps) {
         <div className="h-0.5 bg-p12-gradient"></div>
         <div className="relative flex flex-1 flex-col items-center py-6">
           {!isTimeLock && item?.ifLock && (
-            <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-b-2xl bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat">
+            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-2xl bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat">
               <p className="text-xl text-p12-gold">Prize of this Tip</p>
               <p className="flex items-center justify-center font-ddin text-[52px] font-bold text-p12-gold">
                 <img className="mr-1 w-10" src="/img/arcana/usdc.svg" alt="usdc" />
@@ -117,29 +130,34 @@ export default function PredictionItem({ data, votes }: PredictionItemProps) {
           )}
           <h2 className="text-xl font-medium">{item?.predictionTitle}</h2>
           <p className="text-sm">{item?.predictionFull}</p>
-          <div className="relative mt-6 h-[200px] w-[200px] cursor-pointer" onClick={onSelect}>
-            <div className="absolute top-0 left-0 h-full w-full rounded-lg hover:bg-white/10"></div>
-            <img className="w-full" src="/img/arcana/no_selected.png" alt="no_selected" />
+          <div className="relative mt-6 h-[200px] w-[200px] cursor-pointer overflow-hidden rounded-lg" onClick={onSelect}>
+            <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10"></div>
+            {answerSelect ? (
+              <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
+            ) : (
+              <img loading="lazy" className="h-full w-full" src="/img/arcana/no_selected.png" alt="no_selected" />
+            )}
           </div>
-          <div className="mt-4 h-[24px] text-xl font-medium">Sumail</div>
+          <div className="mt-4 text-xl font-medium leading-[24px]">{answerSelect?.team}</div>
+          <div className="mt-4 text-xl font-medium leading-[24px]">{answerSelect?.name}</div>
           <div className="mt-[44px] flex w-full items-center justify-between px-6">
             <div className="text-center">
               <h3 className="font-medium">Total Tipsters</h3>
-              <p className="font-ddin text-[36px] font-bold">{votes}</p>
+              <p className="font-ddin text-[36px] font-bold">{votes ?? 0}</p>
             </div>
             <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
             <div className="text-center">
               <h3 className="font-medium text-p12-gold">Prize</h3>
               <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
                 <img className="mr-1 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-                {item?.currentPrice}
+                {item?.currentPrice || 0}
               </p>
             </div>
             <div className="text-center">
               <h3 className="font-medium text-p12-gold">Upto</h3>
               <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
                 <img className="mr-1 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-                {item?.maxPrice}
+                {item?.maxPrice || 0}
               </p>
             </div>
           </div>
@@ -147,6 +165,9 @@ export default function PredictionItem({ data, votes }: PredictionItemProps) {
       </div>
       <PredictionItemDialog
         open={openDialog}
+        code={data?.predictionCode}
+        type={data?.optionType}
+        options={data?.optionList}
         title={data?.predictionTitle}
         subTitle={data?.predictionFull}
         onOpenChange={(op) => setOpenDialog(op)}

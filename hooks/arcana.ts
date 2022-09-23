@@ -1,19 +1,26 @@
+import { useSetRecoilState } from 'recoil';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
+  fetchArcanaAnswer,
   fetchArcanaDistinctAddressCount,
   fetchArcanaInviteesVotes,
   fetchArcanaMemeEvaluate,
   fetchArcanaPredictions,
-  fetchArcanaPredictionsVotesCount,
+  fetchArcanaPredictionsAnswerCount,
   fetchArcanaUnlock,
   fetchArcanaVotes,
 } from '../lib/api';
-import {ArcanaMemeEvaluateParams, Response} from '../lib/types';
+import { arcanaGenesisNFTHolderAtom } from '../store/arcana/state';
+import { ArcanaMemeEvaluateParams, ArcanaVotes, PredictionAnswerParams, Response } from '../lib/types';
 
 export const useArcanaVotes = (walletAddress?: string) => {
+  const setGenesisNFTHolder = useSetRecoilState(arcanaGenesisNFTHolderAtom);
   return useQuery(['arcana_votes', walletAddress], () => fetchArcanaVotes({ walletAddress }), {
     enabled: !!walletAddress,
     select: (data) => (data.code === 200 ? data.data : undefined),
+    onSuccess: (data: ArcanaVotes | undefined) => {
+      setGenesisNFTHolder(!!data);
+    },
     refetchOnWindowFocus: false,
   });
 };
@@ -45,13 +52,13 @@ export const useArcanaPredictions = (walletAddress?: string) => {
   });
 };
 
-export const useArcanaPredictionsVotesCount = (walletAddress?: string) => {
-  return useQuery(['arcana_predictions_votes_count', walletAddress], () => fetchArcanaPredictionsVotesCount(), {
+export const useArcanaPredictionsAnswerCount = (walletAddress?: string) => {
+  return useQuery(['arcana_predictions_votes_count', walletAddress], () => fetchArcanaPredictionsAnswerCount(), {
     select: (data) => {
       if (data.code === 200) {
         const map: Record<string, number> = {};
         data.data.forEach((item) => {
-          map[item.predictionCode] = item.totalVotes || 0;
+          map[item.predictionCode] = item.totalAnswers || 0;
         });
         return map;
       }
@@ -62,5 +69,11 @@ export const useArcanaPredictionsVotesCount = (walletAddress?: string) => {
 };
 
 export const useArcanaUnlock = () => {
-  return useMutation<any, any, { walletAddress?: string; predictionCode?: string }, Response<boolean>>((params) => fetchArcanaUnlock(params));
+  return useMutation<any, any, { walletAddress?: string; predictionCode?: string }, Response<boolean>>((params) =>
+    fetchArcanaUnlock(params),
+  );
+};
+
+export const useArcanaAnswer = () => {
+  return useMutation<any, any, PredictionAnswerParams, Response<any>>((params) => fetchArcanaAnswer(params));
 };

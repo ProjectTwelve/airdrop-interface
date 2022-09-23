@@ -1,12 +1,16 @@
-import SwiperCard from './SwiperCard';
+import React, { useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
+import { toast } from 'react-toastify';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import InfoCard from './InfoCard';
 import MainCard from './MainCard';
-import { ArcanaVotes } from '../../../lib/types';
-import { useEffect, useState } from 'react';
 import EasterEgg from './EasterEgg';
-import { useRecoilValue } from 'recoil';
-import { arcanaObserverAtom } from '../../../store/arcana/state';
+import Message from '../../message';
+import SwiperCard from './SwiperCard';
 import { openLink } from '../../../utils';
+import { useArcanaAnswer } from '../../../hooks/arcana';
+import { ArcanaVotes, PredictionAnswerParams } from '../../../lib/types';
+import { arcanaObserverAtom, arcanaPredictionAnswerAtom, arcanaUnSubmitAtom } from '../../../store/arcana/state';
 
 type StatusBarProps = {
   data?: ArcanaVotes;
@@ -14,12 +18,38 @@ type StatusBarProps = {
 
 export default function StatusBar({ data }: StatusBarProps) {
   const [level, setLevel] = useState<number>(30);
+  const { address } = useAccount();
   const isObserver = useRecoilValue(arcanaObserverAtom);
+  const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
+  const [unSubmit, setUnSubmit] = useRecoilState(arcanaUnSubmitAtom);
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
+  const { mutateAsync, isLoading } = useArcanaAnswer();
 
   const onLevelClick = () => {
     if (level === 30) return;
     setEasterEggShow(true);
+  };
+
+  const onSubmitPrediction = () => {
+    if (!address || isLoading) return;
+    const params: PredictionAnswerParams = [];
+    predictionAnswer.forEach((item) => {
+      if (item.answer && item.answer.length > 0) {
+        params.push({
+          walletAddress: address,
+          predictionCode: item.predictionCode,
+          answer: item.answer,
+        });
+      }
+    });
+    mutateAsync(params).then(({ code, msg }) => {
+      if (code !== 200) {
+        toast.error(<Message message={msg} title="Ah shit, here we go again" />);
+        return;
+      }
+      setUnSubmit(false);
+      toast.success(<Message message="Submitted !" title="Mission Complete" />);
+    });
   };
 
   useEffect(() => {
@@ -39,6 +69,16 @@ export default function StatusBar({ data }: StatusBarProps) {
           <button className="dota__button dota__gold px-4 xs:px-2" onClick={() => openLink(window.location.origin + '/arcana')}>
             Back to my Votes
           </button>
+        </div>
+      )}
+      {unSubmit && (
+        <div className="absolute -top-16 z-20 mx-auto flex text-xs md:fixed md:bottom-4 md:top-auto">
+          <div className="dota__box flex items-center justify-center p-1.5">
+            <p className="pl-3">You have unSubmitted Votes</p>
+            <button className="dota__button dota__gold ml-4 h-[34px] px-4 text-xs xs:px-1.5" onClick={onSubmitPrediction}>
+              {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
+            </button>
+          </div>
         </div>
       )}
       <EasterEgg level={level} show={easterEggShow} onMaskClick={() => setEasterEggShow(false)} />

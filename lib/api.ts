@@ -31,6 +31,7 @@ import {
   ArcanaMemeEvaluateParams,
   ArcanaInviteesVote,
   PredictionItemData,
+  PredictionAnswerParams,
 } from './types';
 
 /**
@@ -191,8 +192,10 @@ export const fetchArcanaDistinctAddressCount = () => request.post<any, Response<
 export const fetchArcanaPredictions = (data: { walletAddress?: string }) =>
   request.post<any, Response<PredictionItemData[]>>('/v2/ti/predictions', data);
 
-export const fetchArcanaPredictionsVotesCount = () =>
-  request.post<any, Response<{ predictionCode: string; totalVotes: number }[]>>('/v2/ti/predictions/votesCount');
+export const fetchArcanaPredictionsAnswerCount = () =>
+  request.post<any, Response<{ predictionCode: string; totalAnswers: number }[]>>('/v2/ti/predictions/answerCount');
 
 export const fetchArcanaUnlock = (data: { walletAddress?: string; predictionCode?: string }) =>
   request.post<any, Response<boolean>>('/v2/ti/unlock', data);
+
+export const fetchArcanaAnswer = (data: PredictionAnswerParams) => request.post<any, Response<any>>('/v2/ti/answer', data);
