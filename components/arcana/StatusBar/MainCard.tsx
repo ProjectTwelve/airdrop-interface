@@ -1,17 +1,19 @@
 import { useMemo } from 'react';
 import { toast } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
 import { useCopyToClipboard } from 'react-use';
+import { isIOS, isMobile } from 'react-device-detect';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import SkillCard from './SkillCard';
 import GenesisVoteDialog from './GenesisVoteDialog';
 import Dialog from '../../dialog';
 import Message from '../../message';
+import TaskVoteDialog from './TaskVoteDialog';
+import ReferralVoteDialog from './ReferralVoteDialog';
+import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '../../../store/invite/state';
 import { ArcanaUserInfo, ArcanaUserVotes } from '../../../lib/types';
 import { GAMER_NFT_LEVEL, GAMER_BADGES } from '../../../constants';
-import ReferralVoteDialog from './ReferralVoteDialog';
-import TaskVoteDialog from './TaskVoteDialog';
-import MulticastVoteDialog from './MulticastVoteDialog';
+import { arcanaMulticastVideoAtom, arcanaPredictionAnswerAtom, arcanaPredictionCountAtom } from '../../../store/arcana/state';
 
 type MainCardProps = {
   data?: ArcanaUserVotes;
@@ -21,6 +23,13 @@ type MainCardProps = {
 
 export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   const referralCode = useRecoilValue(referralCodeAtom);
+  const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
+  const predictionCount = useRecoilValue(arcanaPredictionCountAtom);
+  const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
+  const predictionAnswerCount = useMemo(
+    () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
+    [predictionAnswers],
+  );
   const [, copyToClipboard] = useCopyToClipboard();
   const referralLink = useMemo(() => {
     return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
@@ -29,7 +38,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   return (
     <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
       {data && (
-        <Dialog render={({ close }) => <MulticastVoteDialog total={data?.votesTotalCurrent} close={close} />}>
+        <Dialog render={({ close }) => <MulticastVoteDialog close={close} />}>
           <div className="absolute -top-8 left-4 z-10 h-8 w-16 xs:left-3 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
             <div className="group relative cursor-pointer overflow-hidden">
               <div className="absolute inset-0 z-10 hidden bg-white/10 group-hover:block"></div>
@@ -52,7 +61,15 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           </div>
           <div className="ml-2.5 xs:ml-[2.13vw]">
             <p className="h-[24px] text-sm font-medium text-p12-gold xs:h-[4.8vw] xs:text-xs">MultiCast Votes</p>
-            <img src="/img/arcana/statusbar/multicast.webp" className="activity mt-1.5 w-[60px] xs:w-[12vw]" alt="multicast" />
+            <img
+              src="/img/arcana/statusbar/multicast.webp"
+              onClick={() => {
+                if (isMobile && isIOS) return;
+                setMulticastVideo(true);
+              }}
+              className="activity mt-1.5 w-[60px] xs:w-[12vw]"
+              alt="multicast"
+            />
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
@@ -82,13 +99,13 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
       </div>
       <div className="mt-3 xs:mt-2">
         <div className="flex h-[30px] items-center justify-between rounded bg-[url('/img/arcana/statusbar/health.webp')] bg-cover bg-no-repeat px-3 xs:px-1.5">
-          <p className="flex-none text-sm xs:text-[10px]" style={{ textShadow: '0 0 6px #000000' }}>
-            Invite with <span className="text-p12-link">Referral link</span>
+          <p className="flex-none text-sm text-p12-link xs:text-[10px]" style={{ textShadow: '0 0 6px #000000' }}>
+            My Referral Link
           </p>
-          <div className="relative ml-2 h-[24px] truncate pr-12 text-p12-gold">
-            <span className="text-[10px] text-p12-gold">{referralLink.replace(/https?:\/\//g, '')}</span>
+          <div className="dota__gold relative ml-2 h-[24px] truncate pr-12">
+            <span className="dota__gold text-[10px]">{referralLink.replace(/https?:\/\//g, '')}</span>
             <button
-              className="copy__btn absolute top-0.5 right-0 h-[20px] w-[44px]"
+              className="copy__btn absolute top-0.5 right-0 h-[20px] w-[44px] text-white"
               onClick={() => {
                 copyToClipboard(referralLink);
                 toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
@@ -102,10 +119,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           <img
             src="/img/arcana/statusbar/mana.webp"
             alt="mana"
-            className="absolute left-0 top-0 h-full w-full object-none object-left"
+            className="absolute left-0 top-0 h-full object-none object-left"
+            style={{ width: (predictionAnswerCount / predictionCount) * 100 + '%' }}
           />
           <p className="relative z-10 text-sm xs:text-[10px]" style={{ textShadow: '0 0 6px #000000' }}>
-            6/8
+            {predictionAnswerCount}/{predictionCount}
           </p>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function GoldMulticastSVG({ votes }: { votes?: number }) {
+export default function GoldMulticastSVG({ votes, width, height }: { votes?: number; width?: number; height?: number }) {
   return (
-    <svg viewBox="0 0 900 1280" width="210" height="298" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 900 1280" width={width ?? 248} height={height ?? 354} fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect
         x="8"
         y="8"

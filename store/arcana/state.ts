@@ -30,3 +30,28 @@ export const arcanaPredictionAnswerAtom = atom<PredictionAnswer[]>({
   key: 'arcana_prediction_answer_atom',
   default: [],
 });
+
+export const arcanaPredictionCountAtom = atom<number>({
+  key: 'arcana_prediction_count_atom',
+  default: 20,
+});
+
+export const arcanaVoteCountAtom = atom<number>({
+  key: 'arcana_vote_count_atom',
+  default: 0,
+});
+
+export const arcanaSignBindAtom = atom<boolean>({
+  key: 'arcana_sign_bind_atom',
+  default: false,
+});
+
+export const arcanaMulticastVideoAtom = atom<boolean>({
+  key: 'arcana_multicast_video_atom',
+  default: false,
+});
+
+export const arcanaMulticastCardAtom = atom<boolean>({
+  key: 'arcana_multicast_card_atom',
+  default: false,
+});

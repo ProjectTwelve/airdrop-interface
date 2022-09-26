@@ -20,10 +20,10 @@ export default function GenesisVoteDialog({ nftLevel, close, votes, createdAt, n
       <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
         <span className="mr-2 text-[45px] text-p12-success">X</span> {votes || 0}
       </p>
-      {nftLevel !== undefined ? <img className="h-[240px] w-[240px]" src={GAMER_BADGES[nftLevel].imgBig} alt="asset" /> : null}
+      {nftLevel !== undefined ? <img className="h-[220px] w-[220px]" src={GAMER_BADGES[nftLevel].imgBig} alt="asset" /> : null}
       <p className="mt-4 text-xl font-medium">P12 Airdrop Genesis NFT</p>
       <p className="mt-1.5 text-xs text-p12-sub">Birthday: {createdAt ? dayjs(createdAt).format('YYYY/MM/DD') : '--'}</p>
-      <div className="mt-6 flex w-full rounded-2xl border border-p12-line py-4 md:flex-col md:py-0">
+      <div className="mt-6 flex w-full rounded-xl border border-p12-line py-4 md:flex-col md:py-0">
         {[
           { label: 'ID', value: nftId ?? '--' },
           { label: 'Contract address', value: shortenAddress(BADGE_CONTRACT_ADDRESS) },

@@ -75,40 +75,40 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
   return (
     <div className="relative">
       {!item && (
-        <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-black/40 backdrop-blur-lg" />
+        <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-lg" />
       )}
       {isTimeLock && (
-        <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-2xl bg-black/40 backdrop-blur-lg">
+        <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-lg">
           <p className="text-xl text-p12-gold">Prize of this Tip</p>
-          <p className="flex items-center justify-center font-ddin text-[52px] font-bold text-p12-gold">
-            <img className="mr-1 w-10" src="/img/arcana/usdc.svg" alt="usdc" />
+          <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
+            <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
             {item?.currentPrice}
           </p>
           <div className="text-xl text-p12-success"> {durationTime} to Unlock</div>
         </div>
       )}
       <div
-        className="flex h-full flex-col rounded-2xl backdrop-blur-lg"
+        className="flex h-full flex-col rounded-lg backdrop-blur-lg"
         style={{ background: 'linear-gradient(to bottom, #3D444B80 0%, #23262C80 100%)' }}
       >
-        <div className="border-b-none flex items-center justify-items-start rounded-t-2xl border-2 border-b-0 border-[#6F778480] bg-gradient-prediction p-5 backdrop-blur-lg">
-          <div className="h-[38px] w-[38px] rounded-full">
+        <div className="border-b-none flex items-center justify-items-start rounded-t-lg border-2 border-b-0 border-[#6F778480] bg-gradient-prediction p-5 backdrop-blur-lg">
+          <div className="h-[38px] w-[38px] flex-none rounded-full">
             <img src={item?.sponsorLogo} className="h-full w-full object-cover" alt="p12" />
           </div>
           <div className="ml-3">
             <p className="text-sm">
-              <span className="font-medium text-p12-link">{item?.sponsorName}</span>&nbsp; sponsored this prediction
+              <span className="font-medium text-p12-link">{item?.sponsorName}</span>&nbsp; sponsored this prediction:
             </p>
-            <p className="text-sm text-p12-orange">{item?.meme}</p>
+            <p className="text-sm text-p12-orange">&quot;{item?.meme}&quot;</p>
           </div>
         </div>
         <div className="h-0.5 bg-p12-gradient"></div>
-        <div className="relative flex flex-1 flex-col items-center py-6">
+        <div className="relative grid flex-1 grid-cols-1 justify-items-center py-6">
           {!isTimeLock && item?.ifLock && (
-            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-2xl bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat">
+            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-lg bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat">
               <p className="text-xl text-p12-gold">Prize of this Tip</p>
-              <p className="flex items-center justify-center font-ddin text-[52px] font-bold text-p12-gold">
-                <img className="mr-1 w-10" src="/img/arcana/usdc.svg" alt="usdc" />
+              <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
+                <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
                 {item?.currentPrice}
               </p>
               <div className="mt-[100px]">Finish task on Quest3 to Unlock</div>
@@ -129,34 +129,43 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
             </div>
           )}
           <h2 className="text-xl font-medium">{item?.predictionTitle}</h2>
-          <p className="text-sm">{item?.predictionFull}</p>
-          <div className="relative mt-6 h-[200px] w-[200px] cursor-pointer overflow-hidden rounded-lg" onClick={onSelect}>
-            <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10"></div>
+          <p className="px-3 text-sm">{item?.predictionFull}</p>
+          <div
+            className="relative mt-5 flex h-[200px] w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-black/60  hover:bg-white/10"
+            onClick={onSelect}
+          >
             {answerSelect ? (
-              <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
+              <>
+                {data?.optionType === PREDICTION_TYPE.CARD && (
+                  <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10" />
+                )}
+                <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
+              </>
             ) : (
-              <img loading="lazy" className="h-full w-full" src="/img/arcana/no_selected.png" alt="no_selected" />
+              <p className="text-[82px] font-medium">?</p>
             )}
           </div>
-          <div className="mt-4 text-xl font-medium leading-[24px]">{answerSelect?.team}</div>
-          <div className="mt-4 text-xl font-medium leading-[24px]">{answerSelect?.name}</div>
-          <div className="mt-[44px] flex w-full items-center justify-between px-6">
+          <div className="mt-3 flex h-[40px] flex-col items-center justify-around">
+            <div className="text-lg font-medium leading-5">{answerSelect?.team}</div>
+            <div className="text-lg font-medium leading-5">{answerSelect?.name}</div>
+          </div>
+          <div className="mt-[40px] flex w-full items-center justify-between px-6">
             <div className="text-center">
-              <h3 className="font-medium">Total Tipsters</h3>
-              <p className="font-ddin text-[36px] font-bold">{votes ?? 0}</p>
+              <h3 className="text-sm font-medium">Total Tipsters</h3>
+              <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
             </div>
             <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
             <div className="text-center">
-              <h3 className="font-medium text-p12-gold">Prize</h3>
-              <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
-                <img className="mr-1 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
+              <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
+              <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
                 {item?.currentPrice || 0}
               </p>
             </div>
             <div className="text-center">
-              <h3 className="font-medium text-p12-gold">Upto</h3>
-              <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
-                <img className="mr-1 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
+              <h3 className="text-sm font-medium text-p12-gold">Upto</h3>
+              <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
                 {item?.maxPrice || 0}
               </p>
             </div>

@@ -3,8 +3,6 @@ import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
 import { useIntersection } from 'react-use';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import Dialog from '../../components/dialog';
-import Button from '../../components/button';
 import { openLink } from '../../utils';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useArcanaVotes } from '../../hooks/arcana';
@@ -16,6 +14,7 @@ import Participant from '../../components/arcana/Participant';
 import ArcanaProgress, { ProgressItem } from '../../components/arcana/ArcanaProgress';
 import Prediction from '../../components/arcana/Prediction';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
+import MulticastMask from '../../components/arcana/MulticastMask';
 
 export default function Arcana() {
   const { address } = useAccount();
@@ -89,27 +88,7 @@ export default function Arcana() {
       </div>
       <div className="mt-6 flex justify-between md:flex-col">
         <div className="flex flex-col justify-between md:ml-2">
-          <div>
-            <h1 className="font-['Henny_Penny'] text-[36px]">P12 Arcana @ TI11</h1>
-            <Dialog
-              render={({ close }) => (
-                <div className="w-[480px]">
-                  <h2 className="border-b border-p12-line pb-8 text-center text-xl">Treasure Chest</h2>
-                  <p className="py-8 text-sm leading-6">
-                    Unlock the splendid Treasure Chest prepared by P12 and sponsors! Super-duper rare drop list for every DotA
-                    Fans! Join the Vote To Earn Campaign to support your favourite team, heroes in TI 11 and many more!
-                  </p>
-                  <div className="flex justify-end">
-                    <Button onClick={close} type="bordered">
-                      Confirm
-                    </Button>
-                  </div>
-                </div>
-              )}
-            >
-              <p className="cursor-pointer text-sm text-p12-link">Learn More</p>
-            </Dialog>
-          </div>
+          <h1 className="mt-4 font-['Henny_Penny'] text-[36px]">P12 Arcana @ TI11</h1>
           <div className="py-2">
             <ArcanaJoinButton />
           </div>
@@ -121,7 +100,7 @@ export default function Arcana() {
           <img src="/img/present.webp" alt="present" />
         </div>
       </div>
-      <div className="mt-12 md:mt-6">
+      <div className="mt-16 md:mt-8">
         <Participant />
       </div>
       <div className="mt-16 md:mt-8">
@@ -184,6 +163,7 @@ export default function Arcana() {
           </div>
         </div>
       </div>
+      <MulticastMask />
     </div>
   );
 }

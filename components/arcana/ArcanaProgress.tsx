@@ -25,13 +25,22 @@ function ProgressCard({ data, timestamp }: { data: ProgressItem; timestamp?: num
   }, [data.endTime, data.startTime, timestamp]);
 
   return (
-    <div className="rounded-xl border-2 border-[#FFFFFF29] backdrop-blur-lg">
-      <img src={data.cover} alt="cover" className={statusType === PROGRESS_STATUS.UPCOMING ? 'grayscale' : ''} />
-      <div className="p-6">
+    <div className="overflow-hidden rounded-xl border-2 border-[#FFFFFF29] backdrop-blur-lg">
+      <div className="h-[148px]">
+        <img
+          src={data.cover}
+          alt="cover"
+          className={classNames(
+            'h-full w-full object-cover object-bottom',
+            statusType === PROGRESS_STATUS.UPCOMING ? 'grayscale' : '',
+          )}
+        />
+      </div>
+      <div className="p-5">
         <div className="flex items-center justify-between">
           <p
             className={classNames(
-              'text-xl font-medium md:text-base xl:text-lg xs:text-sm',
+              'font-medium xl:text-lg xs:text-sm',
               statusType === PROGRESS_STATUS.UPCOMING ? 'text-p12-darkgray' : 'text-p12-gold',
             )}
           >
@@ -41,7 +50,7 @@ function ProgressCard({ data, timestamp }: { data: ProgressItem; timestamp?: num
         </div>
         <p
           className={classNames(
-            'text-xl font-medium md:text-base xl:text-lg xs:text-sm',
+            'font-medium xl:text-lg xs:text-sm',
             statusType === PROGRESS_STATUS.UPCOMING ? 'text-p12-darkgray' : 'text-p12-gold',
           )}
         >

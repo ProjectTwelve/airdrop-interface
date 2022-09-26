@@ -56,18 +56,18 @@ export default function TaskVoteDialog({ data, close }: TaskVoteDialogProps) {
           >
             <img width={90} src={item.asset} alt="badge" />
             <p className="mt-3 text-xs font-medium">{item.title}</p>
-            <div className="mt-3 flex justify-center text-2xl font-medium">
+            <div className="mt-1 flex justify-center text-2xl font-medium">
               <span className="mr-1 text-lg">x</span> {p12CommunityNft[item.key] || 0}
             </div>
           </div>
         ))}
       </div>
       <div className="mt-12">
-        <p className="text-sm font-medium">BAB Soul-bond Token</p>
+        <p className="text-sm font-medium">Binance Account Bound (BAB) Token</p>
         <div className={classNames('mt-3 flex flex-col items-center', !data?.votesBabCurrent && 'opacity-30')}>
           <img width={90} src="/img/arcana/statusbar/bab_vote.webp" alt="badge" />
           <p className="mt-3 text-xs font-medium">BAB</p>
-          <div className="mt-3 flex justify-center text-2xl font-medium">
+          <div className="mt-1 flex justify-center text-2xl font-medium">
             <span className="mr-1 text-lg">x</span> {data?.votesBabCurrent || 0}
           </div>
         </div>

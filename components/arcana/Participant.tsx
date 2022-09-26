@@ -29,9 +29,9 @@ const poolTextStyle = {
 };
 
 const participantTextStyle = {
-  [PARTICIPANT_STATUS.UPCOMING]: 'text-p12-darkgray',
-  [PARTICIPANT_STATUS.ONGOING]: 'dota__gold',
-  [PARTICIPANT_STATUS.COMPLETED]: 'text-p12-success',
+  [PARTICIPANT_STATUS.UPCOMING]: 'text-p12-darkgray text-xl',
+  [PARTICIPANT_STATUS.ONGOING]: 'dota__gold text-[30px]',
+  [PARTICIPANT_STATUS.COMPLETED]: 'text-p12-success text-[30px]',
 };
 
 function UsdcSVG({ type }: { type: PARTICIPANT_STATUS }) {
@@ -143,10 +143,10 @@ export default function Participant() {
           <div className="relative z-10">
             <div className="mt-4 ml-6">
               <div className="flex items-center">
-                <p className="text-p12-gold">Participants</p>
+                <p className="font-medium text-p12-gold">Participants</p>
                 <p
                   className={classNames(
-                    'flex-1 text-center font-ddin text-[30px] font-bold leading-[30px] text-p12-success',
+                    'flex-1 text-center font-ddin font-bold leading-[30px] text-p12-success',
                     participantTextStyle[partStatus[PART_PROGRESS.PART1].status],
                   )}
                 >
@@ -156,10 +156,10 @@ export default function Participant() {
                 </p>
               </div>
               <div className="mt-3 flex items-center">
-                <p className="flex-none text-p12-gold">Prize Pool</p>
+                <p className="flex-none font-medium text-p12-gold">Prize Pool</p>
                 <div
                   className={classNames(
-                    'flex flex-1 items-center justify-center text-center font-ddin text-[42px] font-bold leading-[42px]',
+                    'flex flex-1 items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
                     poolTextStyle[partStatus[PART_PROGRESS.PART1].status],
                   )}
                 >
@@ -182,7 +182,7 @@ export default function Participant() {
             <div className="mt-4 h-[30px]">
               <p
                 className={classNames(
-                  'text-center font-ddin text-[30px] font-bold leading-[30px]',
+                  'text-center font-ddin font-bold leading-[30px]',
                   participantTextStyle[partStatus[PART_PROGRESS.PART2].status],
                 )}
               >
@@ -192,7 +192,7 @@ export default function Participant() {
               </p>
               <div
                 className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[42px] font-bold leading-[42px]',
+                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
                   poolTextStyle[partStatus[PART_PROGRESS.PART2].status],
                 )}
               >
@@ -214,7 +214,7 @@ export default function Participant() {
             <div className="mt-4 h-[30px]">
               <p
                 className={classNames(
-                  'text-center font-ddin text-[30px] font-bold leading-[30px]',
+                  'text-center font-ddin font-bold leading-[30px]',
                   participantTextStyle[partStatus[PART_PROGRESS.PART3].status],
                 )}
               >
@@ -224,7 +224,7 @@ export default function Participant() {
               </p>
               <div
                 className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[42px] font-bold leading-[42px]',
+                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
                   poolTextStyle[partStatus[PART_PROGRESS.PART3].status],
                 )}
               >
@@ -246,7 +246,7 @@ export default function Participant() {
             <div className="mt-4 h-[30px]">
               <p
                 className={classNames(
-                  'text-center font-ddin text-[30px] font-bold leading-[30px]',
+                  'text-center font-ddin font-bold leading-[30px]',
                   participantTextStyle[partStatus[PART_PROGRESS.PART4].status],
                 )}
               >
@@ -256,7 +256,7 @@ export default function Participant() {
               </p>
               <div
                 className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[42px] font-bold leading-[42px]',
+                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
                   poolTextStyle[partStatus[PART_PROGRESS.PART4].status],
                 )}
               >
@@ -278,7 +278,7 @@ export default function Participant() {
             <div className="mt-4 h-[30px]">
               <p
                 className={classNames(
-                  'text-center font-ddin text-[30px] font-bold leading-[30px]',
+                  'text-center font-ddin font-bold leading-[30px]',
                   participantTextStyle[partStatus[PART_PROGRESS.PART5].status],
                 )}
               >
@@ -288,7 +288,7 @@ export default function Participant() {
               </p>
               <div
                 className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[42px] font-bold leading-[42px]',
+                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
                   poolTextStyle[partStatus[PART_PROGRESS.PART5].status],
                 )}
               >

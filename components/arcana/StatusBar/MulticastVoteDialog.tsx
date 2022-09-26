@@ -7,14 +7,15 @@ import { referralCodeAtom } from '../../../store/invite/state';
 import { useCopyToClipboard } from 'react-use';
 import { toast } from 'react-toastify';
 import Message from '../../message';
+import { arcanaVoteCountAtom } from '../../../store/arcana/state';
 
 type MulticastVoteDialogProps = {
-  total?: number;
   close: () => void;
 };
 
-export default function MulticastVoteDialog({ total, close }: MulticastVoteDialogProps) {
+export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps) {
   const referralCode = useRecoilValue(referralCodeAtom);
+  const voteCount = useRecoilValue(arcanaVoteCountAtom);
   const [, copyToClipboard] = useCopyToClipboard();
   const referralLink = useMemo(() => {
     return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
@@ -23,9 +24,11 @@ export default function MulticastVoteDialog({ total, close }: MulticastVoteDialo
   return (
     <div className="w-[720px]">
       <div className="flex items-center justify-start">
-        <div>{total && total >= 15 ? <GoldMulticastSVG votes={total} /> : <SilverMulticastSVG votes={total} />}</div>
-        <div className="ml-7 flex-1">
-          <h4 className="mt-4 text-xl font-medium">Method One：Plus by P12 Genesis NFT</h4>
+        <div className="ml-3 mt-3">
+          {voteCount >= 15 ? <GoldMulticastSVG votes={voteCount} /> : <SilverMulticastSVG votes={voteCount} />}
+        </div>
+        <div className="ml-12 flex-1">
+          <h4 className="mt-4 text-xl font-medium">1. Genesis NFT Holder</h4>
           <div className="mt-3 grid grid-cols-5 overflow-hidden rounded-lg">
             <div className="bg-[#F36E22]/20 py-1.5">
               <p className="text-center text-xs text-p12-orange">Legendary</p>
@@ -48,45 +51,33 @@ export default function MulticastVoteDialog({ total, close }: MulticastVoteDialo
               <p className="text-center font-ddin text-2xl font-bold text-p12-common">1</p>
             </div>
           </div>
-          <div className="mt-[40px] h-[1px] bg-[#6E7786]/50" />
-          <h4 className="mt-[40px] text-xl font-medium">Method Two：Plus by Valid Invitations</h4>
+          <h4 className="mt-[48px] text-xl font-medium">2. Invite friends</h4>
           <div className="mt-3 flex items-center justify-between">
-            <p className="text-xs">
-              Invite friends with your <span className="text-p12-link">Referral link</span>
-            </p>
-            <p className="text-xs text-p12-success">1 Valid Invitation = 2 MultiCast Votes</p>
-          </div>
-          <div className="mt-3 flex items-center justify-between rounded-full bg-[#494E69]/40 p-1.5">
-            <p className="ml-3 text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
-            <Button
-              type="gradient"
-              size="small"
-              onClick={() => {
-                copyToClipboard(referralLink);
-                toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
-              }}
-            >
-              copy
-            </Button>
-          </div>
-          <div className="mt-[40px] h-[1px] bg-[#6E7786]/50" />
-          <h4 className="mt-[40px] text-xl font-medium">Method Three：Plus by other NFTs & Tasks</h4>
-          <div className="mt-3 flex items-center justify-between">
-            <div className="h-[64px] rounded-lg bg-[#1F2028]/60 py-1.5 px-3">
-              <p className="text-center text-[10px] font-normal text-[#A7A7B6]">P12 Community Badge</p>
-              <p className="mt-1.5 text-center font-ddin text-2xl font-bold leading-6">1 - 30</p>
+            <div className="flex flex-1 items-center justify-between rounded-full bg-[#494E69]/40 p-1.5">
+              <p className="ml-3 text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
+              <Button
+                type="gradient"
+                size="small"
+                onClick={() => {
+                  copyToClipboard(referralLink);
+                  toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
+                }}
+              >
+                copy
+              </Button>
             </div>
-            <div className="flex items-center justify-center text-xs">
-              Join P12 Discord &nbsp;
-              <a href="https://discord.gg/p12" target="_blank">
-                <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
-              </a>
-              &nbsp; to obtain community badges.
-            </div>
+            <p className="ml-3 text-2xl font-medium text-p12-success">x 2</p>
           </div>
-          <div className="mt-4 flex items-center">
-            <img src="/img/arcana/statusbar/bab.webp" width={48} alt="bab" />
-            <p className="ml-4 text-xs">BAB NFT holders will get MultiCast Votes x 6</p>
+          <h4 className="mt-[48px] text-xl font-medium">3. Plus by other NFTs</h4>
+          <div className="mt-3 flex items-center justify-start">
+            <img width={48} src="/img/arcana/community_badge.webp" alt="community_badge" />
+            <p className="ml-3 text-2xl font-medium text-p12-success">X 2 - 18</p>
+            <p className="mx-2 text-xs">Get More</p>
+            <a href="https://discord.gg/p12" target="_blank">
+              <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
+            </a>
+            <img className="ml-12" src="/img/arcana/statusbar/bab.webp" width={48} alt="bab" />
+            <p className="ml-3 text-2xl font-medium text-p12-success">X 5</p>
           </div>
         </div>
       </div>

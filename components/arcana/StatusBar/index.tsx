@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { toast } from 'react-toastify';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { isIOS, isMobile } from 'react-device-detect';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import InfoCard from './InfoCard';
 import MainCard from './MainCard';
 import EasterEgg from './EasterEgg';
@@ -10,7 +11,15 @@ import SwiperCard from './SwiperCard';
 import { openLink } from '../../../utils';
 import { useArcanaAnswer } from '../../../hooks/arcana';
 import { ArcanaVotes, PredictionAnswerParams } from '../../../lib/types';
-import { arcanaObserverAtom, arcanaPredictionAnswerAtom, arcanaUnSubmitAtom } from '../../../store/arcana/state';
+import {
+  arcanaMulticastCardAtom,
+  arcanaMulticastVideoAtom,
+  arcanaObserverAtom,
+  arcanaPredictionAnswerAtom,
+  arcanaSignBindAtom,
+  arcanaUnSubmitAtom,
+  arcanaVoteCountAtom,
+} from '../../../store/arcana/state';
 
 type StatusBarProps = {
   data?: ArcanaVotes;
@@ -20,7 +29,11 @@ export default function StatusBar({ data }: StatusBarProps) {
   const [level, setLevel] = useState<number>(30);
   const { address } = useAccount();
   const isObserver = useRecoilValue(arcanaObserverAtom);
+  const setVoteCount = useSetRecoilState(arcanaVoteCountAtom);
+  const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
+  const setMulticastCard = useSetRecoilState(arcanaMulticastCardAtom);
   const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
+  const signBind = useRecoilValue(arcanaSignBindAtom);
   const [unSubmit, setUnSubmit] = useRecoilState(arcanaUnSubmitAtom);
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
   const { mutateAsync, isLoading } = useArcanaAnswer();
@@ -58,6 +71,18 @@ export default function StatusBar({ data }: StatusBarProps) {
     if (random < 0.6) return setLevel(25);
     setLevel(30);
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    setVoteCount(data.userVotes.votesTotalCurrent);
+    if (!signBind) {
+      if (isMobile && isIOS) {
+        setMulticastCard(true);
+        return;
+      }
+      setMulticastVideo(true);
+    }
+  }, [data, setMulticastCard, setMulticastVideo, setVoteCount, signBind]);
 
   return (
     <>

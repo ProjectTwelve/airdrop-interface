@@ -37,7 +37,7 @@ export default function ArcanaJoinButton() {
     <div>
       <p className="text-lg font-medium text-p12-gold">TI 11 Final Ticket Giveaway is on!</p>
       <div
-        className="task__button mt-3 flex h-[49px] max-w-[285px] items-center justify-center"
+        className="dota__button mt-3 flex h-[49px] max-w-[285px] items-center justify-center"
         onClick={() => {
           if (!address) return setConnectOpen(true);
           setOpen(true);
