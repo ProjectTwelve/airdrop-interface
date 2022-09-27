@@ -80,7 +80,8 @@ export default function StatusBar({ data }: StatusBarProps) {
         setMulticastCard(true);
         return;
       }
-      setMulticastVideo(true);
+      // TODO: add video
+      // setMulticastVideo(true);
     }
   }, [data, setMulticastCard, setMulticastVideo, setVoteCount, signBind]);
 
@@ -99,7 +100,9 @@ export default function StatusBar({ data }: StatusBarProps) {
       {unSubmit && (
         <div className="absolute -top-16 z-20 mx-auto flex text-xs md:fixed md:bottom-4 md:top-auto">
           <div className="dota__box flex items-center justify-center p-1.5">
-            <p className="pl-3">You have unSubmitted Votes</p>
+            <p className="pl-3">
+              You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
+            </p>
             <button className="dota__button dota__gold ml-4 h-[34px] px-4 text-xs xs:px-1.5" onClick={onSubmitPrediction}>
               {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
             </button>

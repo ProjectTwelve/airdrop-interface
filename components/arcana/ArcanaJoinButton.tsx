@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useSetRecoilState } from 'recoil';
@@ -18,7 +18,34 @@ export default function ArcanaJoinButton() {
   const { address } = useAccount();
   const [open, setOpen] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
+  const [title, setTitle] = useState<string>('TI11 Final Ticket Giveaway');
   const { mutate } = useMutation<any, any, CollabUserParams, any>((data) => fetchCollabJoin(data));
+
+  const progressList = useMemo(
+    () => [
+      {
+        title: 'TI11 Final Ticket Giveaway',
+        startTime: 1663171200000,
+        endTime: 1664553599000,
+      },
+      {
+        title: 'P12 Arcana @ TI11',
+        startTime: 1664553600000,
+        endTime: 1666195199000,
+      },
+      {
+        title: 'TI11 Main Event',
+        startTime: 1666195200000,
+        endTime: 1667231999000,
+      },
+      {
+        title: 'Treasures Drop',
+        startTime: 1667232000000,
+        endTime: 1667836799000,
+      },
+    ],
+    [],
+  );
 
   const onTaskSelectClick = (type: TaskType) => {
     if (!address) return;
@@ -33,9 +60,18 @@ export default function ArcanaJoinButton() {
     }
   };
 
+  useEffect(() => {
+    const now = Date.now();
+    progressList.map((item) => {
+      if (now > item.startTime && now < item.endTime) {
+        setTitle(item.title);
+      }
+    });
+  }, [progressList]);
+
   return (
     <div>
-      <p className="text-lg font-medium text-p12-gold">TI 11 Final Ticket Giveaway is on!</p>
+      <p className="text-lg font-medium text-p12-gold">{title}</p>
       <div
         className="dota__button mt-3 flex h-[49px] max-w-[285px] items-center justify-center"
         onClick={() => {

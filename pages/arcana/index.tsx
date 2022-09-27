@@ -128,7 +128,7 @@ export default function Arcana() {
         <Prediction />
       </div>
       <div className="relative mt-[60px] flex w-full items-end justify-center xs:mt-8">
-        <h3 className="absolute top-[60px] text-[30px] font-medium">Join P12 Community</h3>
+        <h3 className="absolute top-[60px] text-[30px] font-medium">Engage in community</h3>
         <div className="-ml-8 max-w-[340px] cursor-pointer">
           <video
             muted

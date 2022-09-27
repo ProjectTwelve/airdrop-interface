@@ -71,13 +71,13 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
           <h4 className="mt-[48px] text-xl font-medium">3. Plus by other NFTs</h4>
           <div className="mt-3 flex items-center justify-start">
             <img width={48} src="/img/arcana/community_badge.webp" alt="community_badge" />
-            <p className="ml-3 text-2xl font-medium text-p12-success">X 2 - 18</p>
+            <p className="ml-3 text-2xl font-medium text-p12-success">X 1 - 30</p>
             <p className="mx-2 text-xs">Get More</p>
             <a href="https://discord.gg/p12" target="_blank">
               <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
             </a>
             <img className="ml-12" src="/img/arcana/statusbar/bab.webp" width={48} alt="bab" />
-            <p className="ml-3 text-2xl font-medium text-p12-success">X 5</p>
+            <p className="ml-3 text-2xl font-medium text-p12-success">X 6</p>
           </div>
         </div>
       </div>
