@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import Tag from '../tag';
 import classNames from 'classnames';
+import Tag from '../tag';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
-export type ProgressItem = {
+type ProgressItem = {
   cover: string;
   title: string;
   part: string;
@@ -17,11 +18,51 @@ enum PROGRESS_STATUS {
   COMPLETED,
 }
 
+const progressList: ProgressItem[] = [
+  {
+    cover: '/img/arcana/part1.webp',
+    title: 'TI11 Final Ticket Giveaway',
+    part: 'PART I',
+    startTime: 1663171200000,
+    endTime: 1664553599000,
+  },
+  {
+    cover: '/img/arcana/part2.webp',
+    title: 'P12 Arcana @ TI11',
+    part: 'PART II',
+    startTime: 1664553600000,
+    endTime: 1666195199000,
+  },
+  {
+    cover: '/img/arcana/part3.webp',
+    title: 'TI11 Main Event',
+    part: 'PART III',
+    startTime: 1666195200000,
+    endTime: 1667231999000,
+  },
+  {
+    cover: '/img/arcana/part4.webp',
+    title: 'Treasures Drop',
+    part: 'PART IV',
+    startTime: 1667232000000,
+    endTime: 1667836799000,
+  },
+];
+
 function ProgressCard({ data, timestamp }: { data: ProgressItem; timestamp?: number }) {
-  const statusType = useMemo<PROGRESS_STATUS>(() => {
-    if (!timestamp || timestamp < data.startTime) return PROGRESS_STATUS.UPCOMING;
-    if (timestamp > data.endTime) return PROGRESS_STATUS.COMPLETED;
-    return PROGRESS_STATUS.ONGOING;
+  const [statusType, setStatusType] = useState<PROGRESS_STATUS>(PROGRESS_STATUS.UPCOMING);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    if (!timestamp || timestamp < data.startTime) {
+      setStatusType(PROGRESS_STATUS.UPCOMING);
+      return;
+    }
+    if (timestamp > data.endTime) {
+      setStatusType(PROGRESS_STATUS.COMPLETED);
+      return;
+    }
+    setStatusType(PROGRESS_STATUS.ONGOING);
   }, [data.endTime, data.startTime, timestamp]);
 
   return (
@@ -57,29 +98,30 @@ function ProgressCard({ data, timestamp }: { data: ProgressItem; timestamp?: num
           {data.title}
         </p>
         <p className={classNames('mt-2 text-sm', statusType === PROGRESS_STATUS.UPCOMING && 'text-p12-darkgray')}>
-          {dayjs(data.startTime).format('MMM D')} - {dayjs(data.endTime).format('MMM D')}
+          {isMounted && dayjs(data.startTime).format('MMM D')} - {isMounted && dayjs(data.endTime).format('MMM D')}
         </p>
       </div>
     </div>
   );
 }
 
-export default function ArcanaProgress({ list }: { list: ProgressItem[] }) {
-  const [currentTimestamp, setCurrentTimestamp] = useState<number>();
-
-  const isInPart3 = useMemo(() => {
-    if (!currentTimestamp) return false;
-    return currentTimestamp > list[2].startTime && currentTimestamp < list[2].endTime;
-  }, [currentTimestamp, list]);
+export default function ArcanaProgress() {
+  const [currentTimestamp, setCurrentTimestamp] = useState<number>(0);
+  const [isInPart3, setIsInPart3] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentTimestamp(Date.now());
   }, []);
 
+  useEffect(() => {
+    if (!currentTimestamp) return;
+    setIsInPart3(currentTimestamp > progressList[2].startTime && currentTimestamp < progressList[2].endTime);
+  }, [currentTimestamp]);
+
   return (
     <div>
       <div className="grid grid-cols-4 gap-4 bg-black/30 md:grid-cols-2 md:gap-2">
-        {list.map((item) => (
+        {progressList.map((item) => (
           <ProgressCard timestamp={currentTimestamp} key={item.title} data={item} />
         ))}
       </div>

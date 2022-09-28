@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { useAccount } from 'wagmi';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 import Participant from '../../components/arcana/Participant';
-import ArcanaProgress, { ProgressItem } from '../../components/arcana/ArcanaProgress';
+import ArcanaProgress  from '../../components/arcana/ArcanaProgress';
 import Prediction from '../../components/arcana/Prediction';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
@@ -26,40 +26,6 @@ export default function Arcana() {
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, { threshold: 0.8 });
   const { data, isLoading } = useArcanaVotes(originAddress ?? address);
-
-  const progressList = useMemo<ProgressItem[]>(
-    () => [
-      {
-        cover: '/img/arcana/part1.webp',
-        title: 'TI11 Final Ticket Giveaway',
-        part: 'PART I',
-        startTime: 1663171200000,
-        endTime: 1664553599000,
-      },
-      {
-        cover: '/img/arcana/part2.webp',
-        title: 'P12 Arcana @ TI11',
-        part: 'PART II',
-        startTime: 1664553600000,
-        endTime: 1666195199000,
-      },
-      {
-        cover: '/img/arcana/part3.webp',
-        title: 'TI11 Main Event',
-        part: 'PART III',
-        startTime: 1666195200000,
-        endTime: 1667231999000,
-      },
-      {
-        cover: '/img/arcana/part4.webp',
-        title: 'Treasures Drop',
-        part: 'PART IV',
-        startTime: 1667232000000,
-        endTime: 1667836799000,
-      },
-    ],
-    [],
-  );
 
   useEffect(() => {
     if (!intersection) return;
@@ -109,7 +75,7 @@ export default function Arcana() {
           <Participant />
         </div>
         <div className="mt-16 md:mt-8">
-          <ArcanaProgress list={progressList} />
+          <ArcanaProgress />
         </div>
         <div className="mt-14 xs:mt-8">
           <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">

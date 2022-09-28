@@ -21,9 +21,10 @@ export function useArcanaContract() {
   const provider = useProvider();
   const { chain } = useNetwork();
   const { data: signer } = useSigner();
+  const address = chain ? ARCANA_ADDRESSES[chain.id] : undefined;
 
   return useContract({
-    addressOrName: chain ? ARCANA_ADDRESSES[chain.id] : ZERO_ADDRESS,
+    addressOrName: address || ZERO_ADDRESS,
     contractInterface: ARCANA_ABI,
     signerOrProvider: signer ?? provider,
   });
@@ -33,9 +34,10 @@ export function useForwarderContract() {
   const provider = useProvider();
   const { chain } = useNetwork();
   const { data: signer } = useSigner();
+  const address = chain ? FORWARDER_ADDRESSES[chain.id] : undefined;
 
   return useContract({
-    addressOrName: chain ? FORWARDER_ADDRESSES[chain.id] : ZERO_ADDRESS,
+    addressOrName: address || ZERO_ADDRESS,
     contractInterface: FORWARDER_ABI,
     signerOrProvider: signer ?? provider,
   });
