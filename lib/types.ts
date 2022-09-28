@@ -368,6 +368,7 @@ export type ArcanaUserVotes = {
 };
 
 export type ArcanaVotes = {
+  bound: boolean;
   userInfo: ArcanaUserInfo;
   userVotes: ArcanaUserVotes;
   memeEvaluate: MemeEvaluateItem[];
@@ -427,5 +428,10 @@ export type PredictionItemData = {
 export type PredictionAnswerParams = {
   walletAddress: string;
   predictionCode: string;
+  ipfsUrl: string;
+  nonce: number;
+  txData: string;
+  signature: string;
+  gasLimit: number;
   answer: PredictionOption[];
 }[];

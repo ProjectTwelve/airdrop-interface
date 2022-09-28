@@ -105,13 +105,15 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
         <div className="h-0.5 bg-p12-gradient"></div>
         <div className="relative grid flex-1 grid-cols-1 justify-items-center py-6">
           {!isTimeLock && item?.ifLock && (
-            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-lg bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat">
-              <p className="text-xl text-p12-gold">Prize of this Tip</p>
-              <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
-                <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-                {item?.currentPrice}
-              </p>
-              <div className="mt-[100px]">Finish task on Quest3 to Unlock</div>
+            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-lg bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat py-[30px]">
+              <div className="flex flex-1 flex-col items-center justify-center">
+                <p className="text-xl text-p12-gold">Prize of this Tip</p>
+                <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
+                  <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
+                  {item?.currentPrice}
+                </p>
+              </div>
+              <div>Finish task on Quest3 to Unlock</div>
               <div className="mt-4 w-full px-7">
                 <button className="dota__button w-full py-3 text-xl" onClick={onUnlock}>
                   <div className="dota__gold h-[28px]">
@@ -130,19 +132,20 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
           )}
           <h2 className="text-xl font-medium">{item?.predictionTitle}</h2>
           <p className="px-3 text-sm">{item?.predictionFull}</p>
-          <div
-            className="relative mt-5 flex h-[200px] w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-black/60  hover:bg-white/10"
-            onClick={onSelect}
-          >
+          <div className="relative mt-5 h-[200px] w-[200px] cursor-pointer overflow-hidden rounded-lg" onClick={onSelect}>
             {answerSelect ? (
               <>
                 {data?.optionType === PREDICTION_TYPE.CARD && (
                   <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10" />
                 )}
-                <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
+                <div className="flex h-full w-full items-center justify-center text-[82px] font-medium hover:bg-white/10">
+                  <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
+                </div>
               </>
             ) : (
-              <p className="text-[82px] font-medium">?</p>
+              <p className="flex h-full w-full items-center justify-center bg-black/60 text-[82px] font-medium hover:bg-white/10">
+                ?
+              </p>
             )}
           </div>
           <div className="mt-3 flex h-[40px] flex-col items-center justify-around">

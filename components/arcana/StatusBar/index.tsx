@@ -1,69 +1,91 @@
-import React, { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { isIOS, isMobile } from 'react-device-detect';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { BigNumber } from '@ethersproject/bignumber';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useAccount, useNetwork, useSignTypedData, useSwitchNetwork } from 'wagmi';
 import InfoCard from './InfoCard';
 import MainCard from './MainCard';
 import EasterEgg from './EasterEgg';
 import Message from '../../message';
 import SwiperCard from './SwiperCard';
 import { openLink } from '../../../utils';
+import { ARCANA_CHAIN_ID } from '../../../constants';
 import { useArcanaAnswer } from '../../../hooks/arcana';
 import { ArcanaVotes, PredictionAnswerParams } from '../../../lib/types';
-import {
-  arcanaMulticastCardAtom,
-  arcanaMulticastVideoAtom,
-  arcanaObserverAtom,
-  arcanaPredictionAnswerAtom,
-  arcanaSignBindAtom,
-  arcanaUnSubmitAtom,
-  arcanaVoteCountAtom,
-} from '../../../store/arcana/state';
+import { useArcanaContract, useForwarderContract } from '../../../hooks/useContract';
+import { getArcanaSignTypeData, getIpfsAnswer } from '../../../utils/arcana';
+import { arcanaObserverAtom, arcanaPredictionAnswerAtom, arcanaUnSubmitAtom } from '../../../store/arcana/state';
 
 type StatusBarProps = {
   data?: ArcanaVotes;
 };
 
 export default function StatusBar({ data }: StatusBarProps) {
+  const GAS_LIMIT = 200000;
   const [level, setLevel] = useState<number>(30);
   const { address } = useAccount();
+  const { chain } = useNetwork();
+  const { switchNetworkAsync } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const isObserver = useRecoilValue(arcanaObserverAtom);
-  const setVoteCount = useSetRecoilState(arcanaVoteCountAtom);
-  const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
-  const setMulticastCard = useSetRecoilState(arcanaMulticastCardAtom);
+  const arcanaContract = useArcanaContract();
+  const forwarderContract = useForwarderContract();
+  const { signTypedDataAsync } = useSignTypedData();
   const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
-  const signBind = useRecoilValue(arcanaSignBindAtom);
   const [unSubmit, setUnSubmit] = useRecoilState(arcanaUnSubmitAtom);
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
-  const { mutateAsync, isLoading } = useArcanaAnswer();
+  const { mutateAsync } = useArcanaAnswer();
 
   const onLevelClick = () => {
     if (level === 30) return;
     setEasterEggShow(true);
   };
 
-  const onSubmitPrediction = () => {
-    if (!address || isLoading) return;
-    const params: PredictionAnswerParams = [];
-    predictionAnswer.forEach((item) => {
-      if (item.answer && item.answer.length > 0) {
-        params.push({
-          walletAddress: address,
-          predictionCode: item.predictionCode,
-          answer: item.answer,
-        });
-      }
-    });
-    mutateAsync(params).then(({ code, msg }) => {
-      if (code !== 200) {
-        toast.error(<Message message={msg} title="Ah shit, here we go again" />);
-        return;
-      }
-      setUnSubmit(false);
-      toast.success(<Message message="Submitted !" title="Mission Complete" />);
-    });
-  };
+  const onSignAnswer = useCallback(async () => {
+    if (!address) return;
+    try {
+      const hash = await getIpfsAnswer(predictionAnswer);
+      const ipfsURL = 'ipfs://' + hash;
+      const tx = await arcanaContract.populateTransaction.updateAnswerUri(BigNumber.from(address), ipfsURL);
+      const nonce = await forwarderContract.getNonce(address);
+      tx.gasLimit = tx.gasLimit || GAS_LIMIT;
+      const signature = await signTypedDataAsync(getArcanaSignTypeData(forwarderContract, tx, nonce));
+      const params: PredictionAnswerParams = [];
+      predictionAnswer.forEach((item) => {
+        if (item.answer && item.answer.length > 0) {
+          params.push({
+            walletAddress: address,
+            predictionCode: item.predictionCode,
+            ipfsUrl: ipfsURL,
+            nonce: nonce.toString(),
+            signature,
+            txData: tx.data,
+            gasLimit: tx.gasLimit.toString(),
+            answer: item.answer,
+          });
+        }
+      });
+      mutateAsync(params).then(({ code, msg }) => {
+        if (code !== 200) {
+          toast.error(<Message message={msg} title="Ah shit, here we go again" />);
+          return;
+        }
+        setUnSubmit(false);
+        toast.success(<Message message="Submitted !" title="Mission Complete" />);
+      });
+      setIsLoading(false);
+    } catch (e: any) {
+      if (e.code === 4001) setIsLoading(false);
+    }
+  }, [
+    address,
+    arcanaContract.populateTransaction,
+    forwarderContract,
+    mutateAsync,
+    predictionAnswer,
+    setUnSubmit,
+    signTypedDataAsync,
+  ]);
 
   useEffect(() => {
     const random = Math.random();
@@ -73,17 +95,13 @@ export default function StatusBar({ data }: StatusBarProps) {
   }, []);
 
   useEffect(() => {
-    if (!data) return;
-    setVoteCount(data.userVotes.votesTotalCurrent);
-    if (!signBind) {
-      if (isMobile && isIOS) {
-        setMulticastCard(true);
-        return;
-      }
-      // TODO: add video
-      // setMulticastVideo(true);
+    if (!chain || !isLoading) return;
+    if (chain.id !== ARCANA_CHAIN_ID) {
+      switchNetworkAsync?.().catch((e) => e.code === 4001 && setIsLoading(false));
+      return;
     }
-  }, [data, setMulticastCard, setMulticastVideo, setVoteCount, signBind]);
+    onSignAnswer().then();
+  }, [chain, isLoading, onSignAnswer, switchNetworkAsync]);
 
   return (
     <>
@@ -103,7 +121,7 @@ export default function StatusBar({ data }: StatusBarProps) {
             <p className="pl-3">
               You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
             </p>
-            <button className="dota__button dota__gold ml-4 h-[34px] px-4 text-xs xs:px-1.5" onClick={onSubmitPrediction}>
+            <button className="dota__button dota__gold ml-4 h-[34px] px-4 text-xs xs:px-1.5" onClick={() => setIsLoading(true)}>
               {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
             </button>
           </div>

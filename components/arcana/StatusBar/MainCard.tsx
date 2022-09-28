@@ -1,13 +1,15 @@
-import { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { useCopyToClipboard } from 'react-use';
 import { isIOS, isMobile } from 'react-device-detect';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import SkillCard from './SkillCard';
-import GenesisVoteDialog from './GenesisVoteDialog';
+import Button from '../../button';
 import Dialog from '../../dialog';
+import SkillCard from './SkillCard';
 import Message from '../../message';
 import TaskVoteDialog from './TaskVoteDialog';
+import GenesisVoteDialog from './GenesisVoteDialog';
 import ReferralVoteDialog from './ReferralVoteDialog';
 import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '../../../store/invite/state';
@@ -26,6 +28,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
   const predictionCount = useRecoilValue(arcanaPredictionCountAtom);
   const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
+  const [playDotaDialog, setPlayDotaDialog] = useState<boolean>(false);
   const predictionAnswerCount = useMemo(
     () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
     [predictionAnswers],
@@ -34,6 +37,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   const referralLink = useMemo(() => {
     return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
   }, [referralCode]);
+
+  const onManaClick = () => {
+    if (predictionAnswerCount !== predictionCount) return;
+    setPlayDotaDialog(true);
+  };
 
   return (
     <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
@@ -122,10 +130,32 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
             className="absolute left-0 top-0 h-full object-none object-left"
             style={{ width: (predictionAnswerCount / predictionCount) * 100 + '%' }}
           />
-          <p className="relative z-10 text-sm xs:text-[10px]" style={{ textShadow: '0 0 6px #000000' }}>
+          <p
+            className={classNames(
+              'relative z-10 select-none text-sm xs:text-[10px]',
+              predictionAnswerCount === predictionCount && 'dota__gold cursor-pointer',
+            )}
+            style={{ textShadow: '0 0 6px #000000' }}
+            onClick={onManaClick}
+          >
             {predictionAnswerCount}/{predictionCount}
           </p>
         </div>
+        <Dialog
+          open={playDotaDialog}
+          onOpenChange={(op) => setPlayDotaDialog(op)}
+          render={({ close }) => (
+            <div>
+              <h2 className="mb-[30px] text-center text-xl font-medium">LETS PLAY SOME DOTA</h2>
+              <video autoPlay loop src="https://cdn1.p12.games/airdrop/video/play_dota.mp4"></video>
+              <div className="mt-[30px] flex w-full justify-end">
+                <Button type="bordered" onClick={close}>
+                  Confirm
+                </Button>
+              </div>
+            </div>
+          )}
+        />
       </div>
     </div>
   );

@@ -199,3 +199,6 @@ export const fetchArcanaUnlock = (data: { walletAddress?: string; predictionCode
   request.post<any, Response<boolean>>('/v2/ti/unlock', data);
 
 export const fetchArcanaAnswer = (data: PredictionAnswerParams) => request.post<any, Response<any>>('/v2/ti/answer', data);
+
+export const fetchArcanaAgent = (data: { signature: string; walletAddress: string }) =>
+  request.post<any, Response<boolean>>('/v2/ti/agent', data);

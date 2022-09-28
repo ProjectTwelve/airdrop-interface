@@ -1,6 +1,17 @@
-import { useSetRecoilState } from 'recoil';
+import { isIOS, isMobile } from 'react-device-detect';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { ArcanaMemeEvaluateParams, ArcanaVotes, PredictionAnswerParams, Response } from '../lib/types';
 import {
+  arcanaGenesisNFTHolderAtom,
+  arcanaMulticastCardAtom,
+  arcanaMulticastVideoAtom,
+  arcanaObserverAtom,
+  arcanaSignBindAtom,
+  arcanaVoteCountAtom,
+} from '../store/arcana/state';
+import {
+  fetchArcanaAgent,
   fetchArcanaAnswer,
   fetchArcanaDistinctAddressCount,
   fetchArcanaInviteesVotes,
@@ -10,16 +21,30 @@ import {
   fetchArcanaUnlock,
   fetchArcanaVotes,
 } from '../lib/api';
-import { arcanaGenesisNFTHolderAtom } from '../store/arcana/state';
-import { ArcanaMemeEvaluateParams, ArcanaVotes, PredictionAnswerParams, Response } from '../lib/types';
 
 export const useArcanaVotes = (walletAddress?: string) => {
   const setGenesisNFTHolder = useSetRecoilState(arcanaGenesisNFTHolderAtom);
+  const setVoteCount = useSetRecoilState(arcanaVoteCountAtom);
+  const setSignBind = useSetRecoilState(arcanaSignBindAtom);
+  const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
+  const setMulticastCard = useSetRecoilState(arcanaMulticastCardAtom);
+  const isObserver = useRecoilValue(arcanaObserverAtom);
+
   return useQuery(['arcana_votes', walletAddress], () => fetchArcanaVotes({ walletAddress }), {
     enabled: !!walletAddress,
     select: (data) => (data.code === 200 ? data.data : undefined),
     onSuccess: (data: ArcanaVotes | undefined) => {
       setGenesisNFTHolder(!!data);
+      if (!data) return;
+      setSignBind(data.bound);
+      setVoteCount(data.userVotes.votesTotalCurrent);
+      if (!data.bound && !isObserver) {
+        if (isMobile && isIOS) {
+          setMulticastCard(true);
+          return;
+        }
+        setMulticastVideo(true);
+      }
     },
     refetchOnWindowFocus: false,
   });
@@ -76,4 +101,10 @@ export const useArcanaUnlock = () => {
 
 export const useArcanaAnswer = () => {
   return useMutation<any, any, PredictionAnswerParams, Response<any>>((params) => fetchArcanaAnswer(params));
+};
+
+export const useArcanaAgent = () => {
+  return useMutation<any, any, { signature: string; walletAddress: string }, Response<boolean>>((params) =>
+    fetchArcanaAgent(params),
+  );
 };

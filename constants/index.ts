@@ -148,3 +148,5 @@ export enum CHAIN_ID {
   BSC_MAINNET = 56,
   BSC_TESTNET = 97,
 }
+
+export const ARCANA_CHAIN_ID: CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_ARCANA_CHAIN_ID || '56');

@@ -1,21 +1,33 @@
 import React, { SyntheticEvent } from 'react';
+import { useAccount, useNetwork, useSignMessage, useSwitchNetwork } from 'wagmi';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import GoldMulticastSVG from './StatusBar/GoldMulticastSVG';
 import {
   arcanaMulticastCardAtom,
   arcanaMulticastVideoAtom,
+  arcanaObserverAtom,
   arcanaSignBindAtom,
   arcanaVoteCountAtom,
 } from '../../store/arcana/state';
 import SilverMulticastSVG from './StatusBar/SilverMulticastSVG';
+import { useArcanaAgent } from '../../hooks/arcana';
+import { ARCANA_CHAIN_ID } from '../../constants';
 
 const multicastURL = 'https://cdn1.p12.games/airdrop/arcana/multicast.webm';
 const tiURL = 'https://cdn1.p12.games/airdrop/arcana/international.webm';
 const tiURLPoster = 'https://cdn1.p12.games/airdrop/arcana/international.webp';
 
 export default function MulticastMask() {
+  const { mutateAsync } = useArcanaAgent();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
+  const { switchNetworkAsync } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
+  const { signMessageAsync } = useSignMessage({
+    message: 'Sign to bind your wallet with specific agent wallet to finish gas free mint.',
+  });
   const [signBind, setSignBind] = useRecoilState(arcanaSignBindAtom);
+  const isObserver = useRecoilValue(arcanaObserverAtom);
   const voteCount = useRecoilValue(arcanaVoteCountAtom);
   const [multicastVideo, setMulticastVideo] = useRecoilState(arcanaMulticastVideoAtom);
   const [multicastCard, setMulticastCard] = useRecoilState(arcanaMulticastCardAtom);
@@ -29,13 +41,30 @@ export default function MulticastMask() {
 
   const onMulticastVideoEnded = () => {
     setMulticastVideo(false);
-    if (!signBind) setMulticastCard(true);
+    if (!signBind && !isObserver) setMulticastCard(true);
+  };
+
+  const onSignBindClick = async () => {
+    try {
+      if (!address || !chain) return;
+      if (chain.id !== ARCANA_CHAIN_ID) {
+        await switchNetworkAsync?.();
+      }
+      const signature = await signMessageAsync();
+      const res = await mutateAsync({ walletAddress: address, signature });
+      if (res.data) {
+        setMulticastCard(false);
+        setSignBind(true);
+      }
+    } catch (e) {
+      console.log('error: ', e);
+    }
   };
 
   if (!multicastVideo && !multicastCard) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-lg">
       <AnimatePresence>
         {multicastVideo && (
           <motion.div
@@ -44,7 +73,7 @@ export default function MulticastMask() {
             exit={{ opacity: 0, scale: 0.65 }}
             className="fixed inset-0 z-10 flex items-center justify-center"
           >
-            <div className="-ml-[120px]">
+            <div className="-ml-[140px]">
               <video
                 className="max-h-[500px]"
                 onTimeUpdate={onMulticastVideoTimeUpdate}
@@ -84,10 +113,7 @@ export default function MulticastMask() {
             )}
             <div
               className="dota__button dota__gold mt-12 h-[50px] w-[320px] text-center text-xl leading-[50px] md:mt-4"
-              onClick={() => {
-                setMulticastCard(false);
-                setSignBind(true);
-              }}
+              onClick={onSignBindClick}
             >
               Click to Activate
             </div>

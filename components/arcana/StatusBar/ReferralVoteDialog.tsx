@@ -35,7 +35,7 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
         <div className="flex items-center">
           <img width={52} height={52} className="mr-2 rounded" src={row.avatar} alt="avatar" />
           <div className="flex flex-col justify-around truncate">
-            <p className="truncate font-semibold">{row.personName}</p>
+            <p className="mb-1 truncate text-base font-semibold">{row.personName}</p>
             <p className="text-xs">Steam ID: {shortenSteamId(row.steamId)}</p>
           </div>
         </div>
