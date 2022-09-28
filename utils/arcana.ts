@@ -1,7 +1,5 @@
-import { ARCANA_CHAIN_ID } from '../constants';
-import { PredictionAnswer } from '../store/arcana/state';
 import Hash from 'ipfs-only-hash';
-import { objectSortByKey } from './index';
+import { ARCANA_CHAIN_ID } from '../constants';
 
 export function getArcanaSignTypeData(contract: any, tx: any, nonce: any) {
   return {
@@ -32,12 +30,6 @@ export function getArcanaSignTypeData(contract: any, tx: any, nonce: any) {
   };
 }
 
-export async function getIpfsAnswer(answer: PredictionAnswer[]): Promise<string> {
-  const data: any[] = [];
-  answer.forEach((item) => {
-    if (item.answer && item.answer.length > 0) {
-      data.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
-    }
-  });
-  return await Hash.of(JSON.stringify({ answers: data }));
+export async function getIpfsAnswer(data: any): Promise<string> {
+  return await Hash.of(JSON.stringify(data));
 }

@@ -1,6 +1,7 @@
-import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
-import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
+import { PredictionAnswer } from '../store/arcana/state';
 import { PREDICTION_TYPE } from '../components/arcana/PredictionItem';
+import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
+import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
 
 export type Response<T> = {
   status: string;
@@ -427,11 +428,10 @@ export type PredictionItemData = {
 
 export type PredictionAnswerParams = {
   walletAddress: string;
-  predictionCode: string;
   ipfsUrl: string;
   nonce: number;
   txData: string;
   signature: string;
   gasLimit: number;
-  answer: PredictionOption[];
-}[];
+  answers: PredictionAnswer[];
+};

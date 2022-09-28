@@ -8,13 +8,18 @@ import MainCard from './MainCard';
 import EasterEgg from './EasterEgg';
 import Message from '../../message';
 import SwiperCard from './SwiperCard';
-import { openLink } from '../../../utils';
 import { ARCANA_CHAIN_ID } from '../../../constants';
 import { useArcanaAnswer } from '../../../hooks/arcana';
+import { objectSortByKey, openLink } from '../../../utils';
 import { ArcanaVotes, PredictionAnswerParams } from '../../../lib/types';
 import { useArcanaContract, useForwarderContract } from '../../../hooks/useContract';
 import { getArcanaSignTypeData, getIpfsAnswer } from '../../../utils/arcana';
-import { arcanaObserverAtom, arcanaPredictionAnswerAtom, arcanaUnSubmitAtom } from '../../../store/arcana/state';
+import {
+  arcanaObserverAtom,
+  arcanaPredictionAnswerAtom,
+  arcanaUnSubmitAtom,
+  PredictionAnswer,
+} from '../../../store/arcana/state';
 
 type StatusBarProps = {
   data?: ArcanaVotes;
@@ -44,27 +49,27 @@ export default function StatusBar({ data }: StatusBarProps) {
   const onSignAnswer = useCallback(async () => {
     if (!address) return;
     try {
-      const hash = await getIpfsAnswer(predictionAnswer);
+      const answers: PredictionAnswer[] = [];
+      predictionAnswer.forEach((item) => {
+        if (item.answer && item.answer.length > 0) {
+          answers.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
+        }
+      });
+      const hash = await getIpfsAnswer({ answers });
       const ipfsURL = 'ipfs://' + hash;
       const tx = await arcanaContract.populateTransaction.updateAnswerUri(BigNumber.from(address), ipfsURL);
       const nonce = await forwarderContract.getNonce(address);
       tx.gasLimit = tx.gasLimit || GAS_LIMIT;
       const signature = await signTypedDataAsync(getArcanaSignTypeData(forwarderContract, tx, nonce));
-      const params: PredictionAnswerParams = [];
-      predictionAnswer.forEach((item) => {
-        if (item.answer && item.answer.length > 0) {
-          params.push({
-            walletAddress: address,
-            predictionCode: item.predictionCode,
-            ipfsUrl: ipfsURL,
-            nonce: nonce.toString(),
-            signature,
-            txData: tx.data,
-            gasLimit: tx.gasLimit.toString(),
-            answer: item.answer,
-          });
-        }
-      });
+      const params: PredictionAnswerParams = {
+        walletAddress: address,
+        ipfsUrl: ipfsURL,
+        nonce: nonce.toString(),
+        signature,
+        txData: tx.data,
+        gasLimit: tx.gasLimit,
+        answers,
+      };
       mutateAsync(params).then(({ code, msg }) => {
         if (code !== 200) {
           toast.error(<Message message={msg} title="Ah shit, here we go again" />);
