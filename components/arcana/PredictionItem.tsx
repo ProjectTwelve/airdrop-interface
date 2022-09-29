@@ -152,25 +152,29 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
             <div className="text-lg font-medium leading-5">{answerSelect?.team}</div>
             <div className="text-lg font-medium leading-5">{answerSelect?.name}</div>
           </div>
-          <div className="mt-[40px] flex w-full items-center justify-between px-6">
-            <div className="text-center">
-              <h3 className="text-sm font-medium">Total Tipsters</h3>
-              <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
+          <div className="mt-[40px] flex w-full items-center">
+            <div className="flex items-center justify-center">
+              <div className="px-6 text-center">
+                <h3 className="text-sm font-medium">Total Tipsters</h3>
+                <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
+              </div>
+              <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
             </div>
-            <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
-              <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
-                <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
-                {item?.currentPrice || 0}
-              </p>
-            </div>
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-p12-gold">Upto</h3>
-              <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
-                <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
-                {item?.maxPrice || 0}
-              </p>
+            <div className="flex flex-1 items-center justify-around px-3">
+              <div className="text-center">
+                <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
+                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                  <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
+                  {item?.currentPrice || 0}
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-medium text-p12-gold">Upto</h3>
+                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                  <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
+                  {item?.maxPrice || 0}
+                </p>
+              </div>
             </div>
           </div>
         </div>
