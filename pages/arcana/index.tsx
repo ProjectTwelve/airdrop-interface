@@ -12,7 +12,7 @@ import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import ArcanaJoinButton from '../../components/arcana/ArcanaJoinButton';
 import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 import Participant from '../../components/arcana/Participant';
-import ArcanaProgress  from '../../components/arcana/ArcanaProgress';
+import ArcanaProgress from '../../components/arcana/ArcanaProgress';
 import Prediction from '../../components/arcana/Prediction';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
@@ -68,7 +68,7 @@ export default function Arcana() {
             <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text_2.webp">
               <source src="https://cdn1.p12.games/airdrop/arcana/text_2.webm" type="video/webm" />
             </video>
-            <img src="/img/present.webp" alt="present" />
+            <img className="py-6" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo.webp" alt="sponsor" />
           </div>
         </div>
         <div className="mt-16 md:mt-8">

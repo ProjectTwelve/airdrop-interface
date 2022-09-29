@@ -54,7 +54,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
           <h4 className="mt-[48px] text-xl font-medium">2. Invite friends</h4>
           <div className="mt-3 flex items-center justify-between">
             <div className="flex flex-1 items-center justify-between rounded-full bg-[#494E69]/40 p-1.5">
-              <p className="ml-3 text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
+              <p className="ml-3 w-[220px] truncate text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
               <Button
                 type="gradient"
                 size="small"
@@ -66,7 +66,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 copy
               </Button>
             </div>
-            <p className="ml-3 text-2xl font-medium text-p12-success">x 2</p>
+            <p className="ml-3 text-2xl font-medium text-p12-success">x 1 - 12</p>
           </div>
           <h4 className="mt-[48px] text-xl font-medium">3. Plus by other NFTs</h4>
           <div className="mt-3 flex items-center justify-start">
