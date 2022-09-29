@@ -190,6 +190,15 @@
         background: linear-gradient(to bottom, #AA3D37 0%, #DD5040 52.08%, #FC6145 100%);
     }
 
+    .dota__button--disable {
+        @apply dota__button grayscale;
+        cursor: not-allowed !important;
+    }
+
+    .dota__button--disable:hover {
+        background: linear-gradient(to bottom, #98322D 0%, #C84435 50.51%, #C94435 50.52%, #E85136 100%);
+    }
+
     .dota__o-button {
         @apply relative cursor-pointer border border-[#5F647C];
         background: linear-gradient(to bottom, #3F435A 0%, #50546F 49.48%, #535771 100%);

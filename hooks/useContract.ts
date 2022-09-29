@@ -1,5 +1,5 @@
 import { useAccount, useContract, useContractRead, useNetwork, useProvider, useSigner } from 'wagmi';
-import { ARCANA_ADDRESSES, BABT_ADDRESSES, FORWARDER_ADDRESSES, ZERO_ADDRESS } from '../constants/addresses';
+import { ARCANA_ADDRESS, BABT_ADDRESSES, FORWARDER_ADDRESS, ZERO_ADDRESS } from '../constants/addresses';
 import BABT_ABI from '../abis/BABT.json';
 import ARCANA_ABI from '../abis/ARCANA.json';
 import FORWARDER_ABI from '../abis/FORWARDER.json';
@@ -19,12 +19,10 @@ export function useBABTBalanceOf({ address }: { address?: string }) {
 
 export function useArcanaContract() {
   const provider = useProvider();
-  const { chain } = useNetwork();
   const { data: signer } = useSigner();
-  const address = chain ? ARCANA_ADDRESSES[chain.id] : undefined;
 
   return useContract({
-    addressOrName: address || ZERO_ADDRESS,
+    addressOrName: ARCANA_ADDRESS,
     contractInterface: ARCANA_ABI,
     signerOrProvider: signer ?? provider,
   });
@@ -32,12 +30,10 @@ export function useArcanaContract() {
 
 export function useForwarderContract() {
   const provider = useProvider();
-  const { chain } = useNetwork();
   const { data: signer } = useSigner();
-  const address = chain ? FORWARDER_ADDRESSES[chain.id] : undefined;
 
   return useContract({
-    addressOrName: address || ZERO_ADDRESS,
+    addressOrName: FORWARDER_ADDRESS,
     contractInterface: FORWARDER_ABI,
     signerOrProvider: signer ?? provider,
   });

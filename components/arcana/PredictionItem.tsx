@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
+import classNames from 'classnames';
 import { useRecoilValue } from 'recoil';
 import { openLink } from '../../utils';
 import { PredictionItemData } from '../../lib/types';
@@ -36,7 +37,7 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
   }, [answer]);
 
   const onUnlock = () => {
-    if (isObserver || !address || !item || isLoading) return;
+    if (isObserver || !address || !item || isLoading || !item.taskUrl) return;
     mutateAsync({ walletAddress: address, predictionCode: item.predictionCode }).then((res) => {
       if (res.data) {
         setItem((status) => {
@@ -115,7 +116,10 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
               </div>
               <div>Finish task on Quest3 to Unlock</div>
               <div className="mt-4 w-full px-7">
-                <button className="dota__button w-full py-3 text-xl" onClick={onUnlock}>
+                <button
+                  className={classNames('dota__button w-full py-3 text-xl', !data?.taskUrl && 'dota__button--disable')}
+                  onClick={onUnlock}
+                >
                   <div className="dota__gold h-[28px]">
                     {isLoading ? (
                       <img className="mx-auto h-full animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
