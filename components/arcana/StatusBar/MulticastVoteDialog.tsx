@@ -77,7 +77,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
               <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
             </a>
             <img className="ml-12" src="/img/arcana/statusbar/bab.webp" width={48} alt="bab" />
-            <p className="ml-3 text-2xl font-medium text-p12-success">X 6</p>
+            <p className="ml-3 text-2xl font-medium text-p12-success">X 4</p>
           </div>
         </div>
       </div>
