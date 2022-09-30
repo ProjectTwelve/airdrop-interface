@@ -41,6 +41,18 @@ export default function StatusBar({ data }: StatusBarProps) {
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
   const { mutateAsync } = useArcanaAnswer();
 
+  useEffect(() => {
+    if (unSubmit) {
+      window.onbeforeunload = (event) => {
+        event.preventDefault();
+        event.returnValue = 'Do you really want to leave?';
+        return 'Do you really want to leave?';
+      };
+    } else {
+      window.onbeforeunload = null;
+    }
+  }, [unSubmit]);
+
   const onLevelClick = () => {
     if (level === 30) return;
     setEasterEggShow(true);
@@ -121,15 +133,13 @@ export default function StatusBar({ data }: StatusBarProps) {
         </div>
       )}
       {unSubmit && (
-        <div className="absolute -top-16 z-20 mx-auto flex text-xs md:fixed md:bottom-4 md:top-auto">
-          <div className="dota__box flex items-center justify-center p-1.5">
-            <p className="pl-3">
-              You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
-            </p>
-            <button className="dota__button dota__gold ml-4 h-[34px] px-4 text-xs xs:px-1.5" onClick={() => setIsLoading(true)}>
-              {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
-            </button>
+        <div className="absolute -top-16 z-20 mx-auto flex text-sm md:fixed md:bottom-4 md:top-auto">
+          <div className="dota__box px-4 py-3 xs:px-2 xs:py-1.5">
+            You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
           </div>
+          <button className="dota__button dota__gold px-4 xs:px-2" onClick={() => setIsLoading(true)}>
+            {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
+          </button>
         </div>
       )}
       <EasterEgg level={level} show={easterEggShow} onMaskClick={() => setEasterEggShow(false)} />

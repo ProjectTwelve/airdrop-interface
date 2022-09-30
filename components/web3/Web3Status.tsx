@@ -28,6 +28,7 @@ function Web3Status() {
 
   useEffect(() => {
     const { ethereum } = window;
+    if (!ethereum) return;
     if (isConnected && connector === connectors[0]) {
       connectRef.current = true;
     }
