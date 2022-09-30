@@ -65,9 +65,7 @@ export default function Arcana() {
             </div>
           </div>
           <div className="flex max-w-[500px] flex-col items-center justify-items-start rounded-lg border-2 border-white/10 bg-[#474747]/20 py-2 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
-            <video autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/text_2.webp">
-              <source src="https://cdn1.p12.games/airdrop/arcana/text_2.webm" type="video/webm" />
-            </video>
+            <h3 className="dota__gold text-2xl leading-[50px]">Epic Prize Pool Sponsored by</h3>
             <img className="py-6" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo.webp" alt="sponsor" />
           </div>
         </div>
