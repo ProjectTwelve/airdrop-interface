@@ -24,7 +24,10 @@ type AppPropsWithLayout = AppProps & {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const queryClient = useMemo(() => new QueryClient(), []);
-  const isCollab = useMemo(() => router.pathname.indexOf('/collab') !== -1, [router]);
+  const isCollab = useMemo(
+    () => router.pathname.indexOf('/collab') !== -1 || router.pathname.indexOf('/arcana') !== -1,
+    [router],
+  );
 
   useEffect(() => {
     const { code } = router.query;

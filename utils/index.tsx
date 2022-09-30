@@ -94,3 +94,12 @@ export const downloadImage = (data: string) => {
   downloadLink.download = 'poster.jpg';
   downloadLink.click();
 };
+
+export const objectSortByKey = (obj: any): any => {
+  const newKey = Object.keys(obj).sort();
+  const newObj: any = {};
+  newKey.forEach((key) => {
+    newObj[key] = obj[key];
+  });
+  return newObj;
+};

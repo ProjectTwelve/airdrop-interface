@@ -1,3 +1,6 @@
+import { PredictionAnswer } from '../store/arcana/state';
+import { PREDICTION_TYPE } from '../components/arcana/PredictionItem';
+import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
 import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
 
 export type Response<T> = {
@@ -316,4 +319,119 @@ export type CollabUserInfo = {
   tokenResult: number;
   nftResult: number;
   p12NftHolder: CollabStatus;
+};
+
+// Arcana
+
+export type MemeEvaluateItem = {
+  memeCode: string;
+  memeTitle: string;
+  memeType: string;
+  memeUrl: string;
+  evaluate?: MEME_ICON;
+};
+
+export type ArcanaUserInfo = {
+  avatarFull: string;
+  badgesCount: number;
+  friendsCount: number;
+  level: number;
+  nftLevel: number;
+  personName: string;
+  timeCreated: number;
+  createdAt: number;
+  nftId: number;
+};
+
+export type P12CommunityNft = {
+  votesP12DreamWeaver?: number;
+  votesP12BestSupporterPurple?: number;
+  votesP12BestSupporterBlue?: number;
+  votesP12BestSupporterGreen?: number;
+  votesWhiteBadge?: number;
+};
+
+export type ArcanaUserVotes = {
+  createdAt: number;
+  updatedAt: number;
+  votesBabCurrent: number;
+  votesBabLast: number;
+  votesCommunityNftCurrent: number;
+  votesCommunityNftLast: number;
+  votesGenesisNftCurrent: number;
+  votesGenesisNftLast: number;
+  votesReferralCurrent: number;
+  votesReferralLast: number;
+  votesTotalCurrent: number;
+  votesTotalLast: number;
+  walletAddress: string;
+  p12CommunityNft: P12CommunityNft;
+};
+
+export type ArcanaVotes = {
+  bound: boolean;
+  userInfo: ArcanaUserInfo;
+  userVotes: ArcanaUserVotes;
+  memeEvaluate: MemeEvaluateItem[];
+};
+
+export type ArcanaMemeEvaluateParams = {
+  evaluate: MEME_ICON; // 1，2，3
+  memeCode: string;
+  walletAddress: string;
+};
+
+export type ArcanaInviteesVote = {
+  _id: string;
+  createdAt: number;
+  steamId: string;
+  walletAddress: string;
+  nftLevel: number;
+  nftClaim: number;
+  personName: string;
+  avatar: string;
+  votes: number;
+};
+
+export enum HERO_ATTRIBUTE {
+  STRENGTH,
+  AGILITY,
+  INTELLIGENCE,
+}
+
+export type PredictionOption = {
+  id: number;
+  team?: string;
+  name?: string;
+  img1: string;
+  img2: string;
+  attr?: HERO_ATTRIBUTE;
+};
+
+export type PredictionItemData = {
+  predictionCode: string;
+  releaseDate: number;
+  endDate: number;
+  optionType: PREDICTION_TYPE;
+  answer?: PredictionOption[];
+  predictionTitle: string;
+  predictionFull: string;
+  sponsorName: string;
+  sponsorLogo: string;
+  meme: string;
+  currentPrice: number;
+  maxPrice: number;
+  taskUrl: string;
+  ifLock: boolean;
+  optionList: PredictionOption[];
+};
+
+export type PredictionAnswerParams = {
+  walletAddress: string;
+  ipfsUrl: string;
+  nonce: number;
+  txData: string;
+  signature: string;
+  gasLimit: number;
+  answers: PredictionAnswer[];
 };

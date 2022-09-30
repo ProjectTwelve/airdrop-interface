@@ -22,7 +22,7 @@ export default function Home() {
       >
         <img
           className="h-[240px] object-cover object-left md:h-[128px]"
-          src="https://cdn1.p12.games/airdrop/arcana/banner_join.webp"
+          src="https://cdn1.p12.games/airdrop/arcana/banner_join_2.webp"
           alt="arcana_banner"
         />
       </div>

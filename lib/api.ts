@@ -27,6 +27,11 @@ import {
   CollabUserInfo,
   CollabUserParams,
   CollabTweetVerifyParams,
+  ArcanaVotes,
+  ArcanaMemeEvaluateParams,
+  ArcanaInviteesVote,
+  PredictionItemData,
+  PredictionAnswerParams,
 } from './types';
 
 /**
@@ -172,3 +177,28 @@ export const fetchCollabJoin = (data: CollabUserParams) => request.post<any, Res
 
 export const fetchCollabTweetVerify = (data: CollabTweetVerifyParams) =>
   request.post<any, Response<CollabUserInfo>>('/v2/collab/tweet/verify', data);
+
+export const fetchArcanaVotes = (data: { walletAddress?: string }) =>
+  request.post<any, Response<ArcanaVotes>>('/v2/ti/votes', data);
+
+export const fetchArcanaMemeEvaluate = (data: ArcanaMemeEvaluateParams) =>
+  request.post<any, Response<any>>('/v2/ti/meme/evaluate', data);
+
+export const fetchArcanaInviteesVotes = (data: { walletAddress?: string }) =>
+  request.post<any, Response<ArcanaInviteesVote[]>>('/v2/ti/invitees/votes', data);
+
+export const fetchArcanaDistinctAddressCount = () => request.post<any, Response<number>>('/v2/ti/distinctAddress/count');
+
+export const fetchArcanaPredictions = (data: { walletAddress?: string }) =>
+  request.post<any, Response<PredictionItemData[]>>('/v2/ti/predictions', data);
+
+export const fetchArcanaPredictionsAnswerCount = () =>
+  request.post<any, Response<{ predictionCode: string; totalAnswers: number }[]>>('/v2/ti/predictions/answerCount');
+
+export const fetchArcanaUnlock = (data: { walletAddress?: string; predictionCode?: string }) =>
+  request.post<any, Response<boolean>>('/v2/ti/unlock', data);
+
+export const fetchArcanaAnswer = (data: PredictionAnswerParams) => request.post<any, Response<any>>('/v2/ti/answer', data);
+
+export const fetchArcanaAgent = (data: { signature: string; walletAddress: string }) =>
+  request.post<any, Response<boolean>>('/v2/ti/agent', data);

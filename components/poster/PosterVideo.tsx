@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type PosterVideoProps = {
   play?: boolean;
@@ -16,7 +16,6 @@ export default function PosterVideo({ play, onEnded }: PosterVideoProps) {
   const [portalPlay, setPortalPlay] = useState<boolean>(false);
   const [winnerPlay, setWinnerPlay] = useState<boolean>(false);
   const [winnerURL, setWinnerURL] = useState<string>('');
-  const portalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const className = document.documentElement.classList[0];
@@ -31,7 +30,7 @@ export default function PosterVideo({ play, onEnded }: PosterVideoProps) {
   return (
     <>
       {portalPlay && (
-        <div ref={portalRef} className="fixed inset-0 z-20 animate-backdrop">
+        <div className="fixed inset-0 z-20 animate-backdrop">
           <video
             className="h-full w-full object-cover"
             autoPlay

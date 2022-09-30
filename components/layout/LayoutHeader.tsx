@@ -15,6 +15,7 @@ function LayoutHeader() {
 
   useQuery(['invitation_count', { addr: address }], () => fetchInvitationCount(address), {
     enabled: !!address,
+    refetchOnWindowFocus: false,
     onSuccess: ({ data, code }) => {
       if (code === 0) {
         setInvitationCount([data[0], data[1]]);
