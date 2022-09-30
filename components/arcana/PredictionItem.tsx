@@ -83,7 +83,7 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
           <p className="text-xl text-p12-gold">Prize of this Tip</p>
           <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
             <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-            {item?.currentPrice}
+            {item?.maxPrice}
           </p>
           <div className="text-xl text-p12-success"> {durationTime} to Unlock</div>
         </div>
@@ -111,7 +111,7 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
                 <p className="text-xl text-p12-gold">Prize of this Tip</p>
                 <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
                   <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-                  {item?.currentPrice}
+                  {item?.maxPrice}
                 </p>
               </div>
               <div>Finish task on Quest3 to Unlock</div>
