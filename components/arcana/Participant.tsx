@@ -65,44 +65,44 @@ export default function Participant() {
   const [numberFormat] = useState(new Intl.NumberFormat());
   const [partStatus, setPartStatus] = useState({
     [PART_PROGRESS.PART1]: {
-      prize: '10,000',
-      participants: 20000,
+      prize: '20,000',
+      participants: 30000,
       status: PARTICIPANT_STATUS.UPCOMING,
       [PARTICIPANT_STATUS.UPCOMING]: '0 to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
       [PARTICIPANT_STATUS.COMPLETED]: 'BASIC',
     },
     [PART_PROGRESS.PART2]: {
-      prize: '20,000',
-      participants: 80000,
+      prize: '30,000',
+      participants: 60000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '20K to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '30K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '20K',
+      [PARTICIPANT_STATUS.COMPLETED]: '30K',
     },
     [PART_PROGRESS.PART3]: {
-      prize: '60,000',
-      participants: 120000,
+      prize: '55,000',
+      participants: 150000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '80K to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '60K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '80K',
+      [PARTICIPANT_STATUS.COMPLETED]: '60K',
     },
     [PART_PROGRESS.PART4]: {
-      prize: '80,000',
-      participants: 200000,
+      prize: '70,000',
+      participants: 300000,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '120K to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '150K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '120K',
+      [PARTICIPANT_STATUS.COMPLETED]: '150K',
     },
     [PART_PROGRESS.PART5]: {
       prize: '100,000',
       participants: Infinity,
       status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '200K to Unlock',
+      [PARTICIPANT_STATUS.UPCOMING]: '300K to Unlock',
       [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '200K',
+      [PARTICIPANT_STATUS.COMPLETED]: '300K',
     },
   });
 
@@ -163,10 +163,16 @@ export default function Participant() {
                     poolTextStyle[partStatus[PART_PROGRESS.PART1].status],
                   )}
                 >
-                  <div className="mr-1">
-                    <UsdcSVG type={partStatus[PART_PROGRESS.PART1].status} />
-                  </div>
-                  {partStatus[PART_PROGRESS.PART1].prize}
+                  {partStatus[PART_PROGRESS.PART1].status === PARTICIPANT_STATUS.UPCOMING ? (
+                    '?,???'
+                  ) : (
+                    <>
+                      <div className="mr-1">
+                        <UsdcSVG type={partStatus[PART_PROGRESS.PART1].status} />
+                      </div>
+                      {partStatus[PART_PROGRESS.PART1].prize}
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -196,10 +202,16 @@ export default function Participant() {
                   poolTextStyle[partStatus[PART_PROGRESS.PART2].status],
                 )}
               >
-                <div className="mr-1">
-                  <UsdcSVG type={partStatus[PART_PROGRESS.PART2].status} />
-                </div>
-                {partStatus[PART_PROGRESS.PART2].prize}
+                {partStatus[PART_PROGRESS.PART2].status === PARTICIPANT_STATUS.UPCOMING ? (
+                  '?,???'
+                ) : (
+                  <>
+                    <div className="mr-1">
+                      <UsdcSVG type={partStatus[PART_PROGRESS.PART2].status} />
+                    </div>
+                    {partStatus[PART_PROGRESS.PART2].prize}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -228,10 +240,16 @@ export default function Participant() {
                   poolTextStyle[partStatus[PART_PROGRESS.PART3].status],
                 )}
               >
-                <div className="mr-1">
-                  <UsdcSVG type={partStatus[PART_PROGRESS.PART3].status} />
-                </div>
-                {partStatus[PART_PROGRESS.PART3].prize}
+                {partStatus[PART_PROGRESS.PART3].status === PARTICIPANT_STATUS.UPCOMING ? (
+                  '?,???'
+                ) : (
+                  <>
+                    <div className="mr-1">
+                      <UsdcSVG type={partStatus[PART_PROGRESS.PART3].status} />
+                    </div>
+                    {partStatus[PART_PROGRESS.PART3].prize}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -260,10 +278,16 @@ export default function Participant() {
                   poolTextStyle[partStatus[PART_PROGRESS.PART4].status],
                 )}
               >
-                <div className="mr-1">
-                  <UsdcSVG type={partStatus[PART_PROGRESS.PART4].status} />
-                </div>
-                {partStatus[PART_PROGRESS.PART4].prize}
+                {partStatus[PART_PROGRESS.PART4].status === PARTICIPANT_STATUS.UPCOMING ? (
+                  '?,???'
+                ) : (
+                  <>
+                    <div className="mr-1">
+                      <UsdcSVG type={partStatus[PART_PROGRESS.PART4].status} />
+                    </div>
+                    {partStatus[PART_PROGRESS.PART4].prize}
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -292,10 +316,16 @@ export default function Participant() {
                   poolTextStyle[partStatus[PART_PROGRESS.PART5].status],
                 )}
               >
-                <div className="mr-1">
-                  <UsdcSVG type={partStatus[PART_PROGRESS.PART5].status} />
-                </div>
-                {partStatus[PART_PROGRESS.PART5].prize}
+                {partStatus[PART_PROGRESS.PART5].status === PARTICIPANT_STATUS.UPCOMING ? (
+                  '?,???'
+                ) : (
+                  <>
+                    <div className="mr-1">
+                      <UsdcSVG type={partStatus[PART_PROGRESS.PART5].status} />
+                    </div>
+                    {partStatus[PART_PROGRESS.PART5].prize}
+                  </>
+                )}
               </div>
             </div>
           </div>
