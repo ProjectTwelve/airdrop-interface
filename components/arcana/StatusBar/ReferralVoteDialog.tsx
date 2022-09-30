@@ -70,7 +70,7 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
       <div className="mt-10 flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-medium">My Referral List</p>
         <p className="text-xs">
-          <span className="text-red-600">*</span> A valid invitee is required to claim P12 Genesis NFT
+          <span className="text-red-600">*</span> A valid invitee is required to claim P12 Genesis NFT after Sep 10th.
         </p>
       </div>
       <div className="h-[400px]">
