@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useAccount, useNetwork, useSwitchNetwork, chainId } from 'wagmi';
+import { useAccount, useNetwork, useSwitchNetwork, chainId, useConnect } from 'wagmi';
 import Button from '../button';
 import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
@@ -16,13 +16,35 @@ import { useIsMounted } from '../../hooks/useIsMounted';
 
 function Web3Status() {
   const router = useRouter();
-  const isMounted = useIsMounted();
-  const { address } = useAccount();
   const { chain } = useNetwork();
+  const isMounted = useIsMounted();
+  const { connect, connectors } = useConnect();
+  const connectRef = useRef<boolean>(false);
+  const { address, connector, isConnected } = useAccount();
   const { switchNetwork } = useSwitchNetwork({ chainId: chainId.mainnet });
 
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
   const posterCapture = useRecoilValue(posterCaptureAtom);
+
+  useEffect(() => {
+    const { ethereum } = window;
+    if (isConnected && connector === connectors[0]) {
+      connectRef.current = true;
+    }
+    const handleChainChanged = () => {
+      if (!isConnected && connectRef.current) {
+        connect({ connector: connectors[0] });
+      }
+    };
+
+    ethereum.on('chainChanged', handleChainChanged);
+
+    return () => {
+      if (ethereum.removeListener) {
+        ethereum.removeListener('chainChanged', handleChainChanged);
+      }
+    };
+  }, [connect, connector, connectors, isConnected]);
 
   if (!isMounted) return null;
 
