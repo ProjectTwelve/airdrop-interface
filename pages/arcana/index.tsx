@@ -46,7 +46,7 @@ export default function Arcana() {
   return (
     <>
       <Head>
-        <meta property="og:image" content="https://cdn1.p12.games/airdrop/poster/arcana.jpeg" />
+        <meta property="og:image" content="https://cdn1.p12.games/airdrop/poster/arcana_2.jpg" />
       </Head>
       <div className="pb-[110px] md:pb-0">
         <div className="absolute left-0 top-0 -z-10 flex h-[430px] w-full flex-col items-center justify-end overflow-hidden">
