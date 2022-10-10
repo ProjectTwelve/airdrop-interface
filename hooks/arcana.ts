@@ -64,7 +64,7 @@ export const useArcanaInviteesVotes = (walletAddress?: string) => {
 
 export const useArcanaDistinctAddressCount = () => {
   return useQuery(['distinct_address_count'], () => fetchArcanaDistinctAddressCount(), {
-    select: (data) => (data.code === 200 ? data.data : undefined),
+    select: (data) => (data.code === 200 ? data.data + 6951 : undefined),
     refetchOnWindowFocus: false,
   });
 };
