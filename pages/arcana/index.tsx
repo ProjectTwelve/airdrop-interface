@@ -14,6 +14,7 @@ import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 import Participant from '../../components/arcana/Participant';
 import ArcanaProgress from '../../components/arcana/ArcanaProgress';
 import Prediction from '../../components/arcana/Prediction';
+import OMG from '../../components/arcana/OMG';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
 
@@ -92,6 +93,9 @@ export default function Arcana() {
             )}
             <StatusBar data={data} />
           </div>
+        </div>
+        <div className="mt-16 md:mt-8">
+          <OMG />
         </div>
         <div className="mt-16 md:mt-8">
           <Prediction />
