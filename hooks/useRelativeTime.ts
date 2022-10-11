@@ -17,7 +17,7 @@ export const useRelativeTime = (timestamp?: number) => {
   const [state, setState] = useState<string>();
   useEffect(() => {
     if (!timestamp) return;
-    setTime(dayjs(timestamp));
+    setTime(dayjs.unix(timestamp));
   }, [timestamp]);
   useInterval(() => setState(getTimeState(time)), timestamp ? 1000 : null);
   return useMemo(() => state ?? getTimeState(time), [state, time]);

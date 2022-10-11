@@ -55,3 +55,18 @@ export const arcanaMulticastCardAtom = atom<boolean>({
   key: 'arcana_multicast_card_atom',
   default: false,
 });
+
+export const arcanaInviteDialogAtom = atom<boolean>({
+  key: 'arcana_invite_modal_atom',
+  default: false,
+});
+
+export const arcanaPredictionOMGAnswerAtom = atom<PredictionAnswer[]>({
+  key: 'arcana_prediction_omg_answer_atom',
+  default: [],
+});
+
+export const arcanaPredictionOMGSubmitAtom = atom<boolean>({
+  key: 'arcana_prediction_omg_submit_atom',
+  default: false,
+});

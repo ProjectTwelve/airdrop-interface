@@ -1,10 +1,11 @@
 import React from 'react';
+import { useConnect } from 'wagmi';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { isMobile } from 'react-device-detect';
 import Button from '../button';
 import { WalletType } from './WalletPopover';
-import { useRecoilState } from 'recoil';
 import { downloadClickAtom } from '../../store/web3/state';
-import { isMobile } from 'react-device-detect';
-import { useConnect } from 'wagmi';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 
 type WalletConnectProps = {
@@ -12,6 +13,7 @@ type WalletConnectProps = {
 };
 
 function WalletConnect({ setWalletType }: WalletConnectProps) {
+  const router = useRouter();
   const { connect, connectors } = useConnect();
   const [downloadClick, setDownloadClick] = useRecoilState(downloadClickAtom);
 
@@ -20,8 +22,10 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
    * @param connector
    */
   const connectWallet = (connector: any | undefined) => {
+    const { code } = router.query;
     if (isMobile && connector instanceof MetaMaskConnector && !window.ethereum) {
-      window.open('https://metamask.app.link/dapp/' + window.location.hostname);
+      const url = code ? window.location.hostname + `?code=${code}` : window.location.hostname;
+      window.open('https://metamask.app.link/dapp/' + url);
       return;
     }
     connector && connect({ connector });

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
+import { useRecoilValue } from 'recoil';
+import { useCopyToClipboard } from 'react-use';
 import Table from '../../table';
 import Button from '../../button';
+import Message from '../../message';
 import { ArcanaUserVotes } from '../../../lib/types';
+import { referralCodeAtom } from '../../../store/invite/state';
+import { useArcanaInviteesVotes } from '../../../hooks/arcana';
 import { shortenAddress, shortenSteamId } from '../../../utils';
 import { GAMER_BADGES, GAMER_NFT_LEVEL } from '../../../constants';
-import { useArcanaInviteesVotes } from '../../../hooks/arcana';
 
 type ReferralVoteDialogProps = {
   close: () => void;
@@ -14,6 +19,11 @@ type ReferralVoteDialogProps = {
 
 export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogProps) {
   const { data: invitation, isLoading } = useArcanaInviteesVotes(data?.walletAddress);
+  const referralCode = useRecoilValue(referralCodeAtom);
+  const [, copyToClipboard] = useCopyToClipboard();
+  const referralLink = useMemo(() => {
+    return referralCode ? window.location.origin + '/?code=' + referralCode : 'Please connect your wallet first';
+  }, [referralCode]);
 
   const referralColumns = [
     {
@@ -67,13 +77,29 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
       <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
         <span className="mr-2 text-[45px] text-p12-success">X</span> {data?.votesReferralCurrent || 0}
       </p>
-      <div className="mt-10 flex flex-wrap items-center justify-between gap-2">
+      <div className="mt-[30px]">
+        <p className="text-sm font-medium">Invite friends with Referral Link</p>
+        <div className="mt-3 flex flex-1 items-center justify-between rounded-full bg-[#494E69]/40 p-1.5">
+          <p className="ml-3 text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
+          <Button
+            type="gradient"
+            size="small"
+            onClick={() => {
+              copyToClipboard(referralLink);
+              toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
+            }}
+          >
+            copy
+          </Button>
+        </div>
+      </div>
+      <div className="mt-[30px] flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-medium">My Referral List</p>
         <p className="text-xs">
           <span className="text-red-600">*</span> A valid invitee is required to claim P12 Genesis NFT after Sep 10th.
         </p>
       </div>
-      <div className="h-[400px]">
+      <div className="h-[300px]">
         <Table
           loading={isLoading}
           className="mt-3 max-w-[95vw] overflow-x-auto"

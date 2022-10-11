@@ -31,7 +31,7 @@ const progressList: ProgressItem[] = [
     title: 'P12 Arcana @ TI11',
     part: 'PART II',
     startTime: 1664553600000,
-    endTime: 1666195199000,
+    endTime: 1666969200000,
   },
   {
     cover: '/img/arcana/part3.webp',

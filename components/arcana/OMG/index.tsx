@@ -1,12 +1,50 @@
-import { useRelativeTime } from '../../../hooks/useRelativeTime';
+import { useEffect, useMemo, useState } from 'react';
+import { useAccount } from 'wagmi';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
 import OMGLuckyDraw from './OMGLuckyDraw';
+import { PredictionItemData } from '../../../lib/types';
+import { ZERO_ADDRESS } from '../../../constants/addresses';
+import { useRelativeTime } from '../../../hooks/useRelativeTime';
+import { useArcanaPredictionsAnswerCount, useArcanaPredictionsOMG } from '../../../hooks/arcana';
+import {
+  arcanaOriginAddressAtom,
+  arcanaPredictionOMGAnswerAtom,
+  arcanaPredictionOMGSubmitAtom,
+} from '../../../store/arcana/state';
+import dayjs from 'dayjs';
 
 export default function OMG() {
-  const timestamp = 1666451600000;
-  const relativeTime = useRelativeTime(timestamp);
-  const isSubmit = true;
+  const { address } = useAccount();
+  const [showOMG, setShowOMG] = useState<boolean>(false);
+  const originAddress = useRecoilValue(arcanaOriginAddressAtom);
+  const [isSubmit, setIsSubmit] = useRecoilState(arcanaPredictionOMGSubmitAtom);
+  const { data: AnswerCount } = useArcanaPredictionsAnswerCount();
+  const { data } = useArcanaPredictionsOMG(originAddress ?? address ?? ZERO_ADDRESS);
+  const [predictionAnswer, setPredictionAnswer] = useRecoilState(arcanaPredictionOMGAnswerAtom);
+  const predictionItem = useMemo<PredictionItemData | undefined>(() => (data ? data[0] : undefined), [data]);
+  const relativeTime = useRelativeTime(predictionItem?.endDate);
+
+  useEffect(() => {
+    if (!data) return;
+    const answers = data.map((item) => ({ predictionCode: item.predictionCode, answer: item.answer }));
+    setPredictionAnswer(answers);
+  }, [data, setPredictionAnswer]);
+
+  useEffect(() => {
+    if (!predictionItem) return;
+    const endDate = dayjs.unix(predictionItem.endDate);
+    const currentDate = dayjs();
+    if (currentDate < endDate) {
+      setShowOMG(true);
+    }
+    if (predictionItem.answer && predictionItem.answer.length > 0) {
+      setIsSubmit(true);
+    }
+  }, [predictionItem, setIsSubmit]);
+
+  if (!showOMG) return null;
 
   return (
     <div className="rounded-xl border border-white/20 bg-black/30 p-7 backdrop-blur-lg">
@@ -20,19 +58,27 @@ export default function OMG() {
         </div>
       </div>
       <div className="mt-12 mb-10">
-        {!isSubmit ? (
-          <div className="flex items-center justify-center">
-            <OMGPrediction />
-          </div>
-        ) : (
+        {isSubmit ? (
           <div>
             <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">Correct Answer!</p>
             <p className="text-center text-xl font-medium leading-[22px]">You have the chance to win the following rewards.</p>
-            <div className="mt-8 flex items-stretch justify-between md:flex-col gap-4">
-              <OMGPrediction />
-              <OMGTopVotes />
+            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col">
+              <OMGPrediction
+                answer={predictionAnswer[0]}
+                item={predictionItem}
+                votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
+              />
+              <OMGTopVotes code={predictionItem?.predictionCode} />
               <OMGLuckyDraw />
             </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center">
+            <OMGPrediction
+              item={predictionItem}
+              answer={predictionAnswer[0]}
+              votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
+            />
           </div>
         )}
       </div>

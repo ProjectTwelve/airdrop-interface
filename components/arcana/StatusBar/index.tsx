@@ -17,6 +17,7 @@ import { getArcanaSignTypeData, getIpfsAnswer } from '../../../utils/arcana';
 import {
   arcanaObserverAtom,
   arcanaPredictionAnswerAtom,
+  arcanaPredictionOMGAnswerAtom,
   arcanaUnSubmitAtom,
   PredictionAnswer,
 } from '../../../store/arcana/state';
@@ -36,6 +37,7 @@ export default function StatusBar({ data }: StatusBarProps) {
   const arcanaContract = useArcanaContract();
   const forwarderContract = useForwarderContract();
   const { signTypedDataAsync } = useSignTypedData();
+  const omgAnswer = useRecoilValue(arcanaPredictionOMGAnswerAtom);
   const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
   const [unSubmit, setUnSubmit] = useRecoilState(arcanaUnSubmitAtom);
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
@@ -62,6 +64,11 @@ export default function StatusBar({ data }: StatusBarProps) {
     if (!address) return;
     try {
       const answers: PredictionAnswer[] = [];
+      omgAnswer.forEach((item) => {
+        if (item.answer && item.answer.length > 0) {
+          answers.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
+        }
+      });
       predictionAnswer.forEach((item) => {
         if (item.answer && item.answer.length > 0) {
           answers.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
@@ -88,7 +95,7 @@ export default function StatusBar({ data }: StatusBarProps) {
           return;
         }
         setUnSubmit(false);
-        toast.success(<Message message="Submitted !" title="Mission Complete" />);
+        toast.success(<Message message="Submitted" title="Mission Complete" />);
       });
       setIsLoading(false);
     } catch (e: any) {
@@ -99,6 +106,7 @@ export default function StatusBar({ data }: StatusBarProps) {
     arcanaContract.populateTransaction,
     forwarderContract,
     mutateAsync,
+    omgAnswer,
     predictionAnswer,
     setUnSubmit,
     signTypedDataAsync,

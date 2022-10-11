@@ -435,3 +435,11 @@ export type PredictionAnswerParams = {
   gasLimit: number;
   answers: PredictionAnswer[];
 };
+
+export type PredictionAnswerOMGItem = {
+  avatarFull: string;
+  personName: string;
+  predictionCode: string;
+  votesTotalCurrent: string;
+  walletAddress: string;
+};

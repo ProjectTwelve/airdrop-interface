@@ -45,10 +45,7 @@ export default function Prediction() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-[30px] font-medium">Tips & Predictions</h2>
-          <p className="mt-2 text-sm">
-            Your pick shall subject to the&nbsp;<span className="font-medium text-p12-success">Main Event (10/20-10/30)</span>
-            &nbsp;results.
-          </p>
+          <p className="mt-2 text-sm">More Votes, More Bounties!</p>
         </div>
         {!isObserver && (
           <button

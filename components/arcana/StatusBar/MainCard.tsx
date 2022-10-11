@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { useCopyToClipboard } from 'react-use';
 import { isIOS, isMobile } from 'react-device-detect';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Button from '../../button';
 import Dialog from '../../dialog';
 import SkillCard from './SkillCard';
@@ -15,7 +15,12 @@ import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '../../../store/invite/state';
 import { ArcanaUserInfo, ArcanaUserVotes } from '../../../lib/types';
 import { GAMER_NFT_LEVEL, GAMER_BADGES } from '../../../constants';
-import { arcanaMulticastVideoAtom, arcanaPredictionAnswerAtom, arcanaPredictionCountAtom } from '../../../store/arcana/state';
+import {
+  arcanaInviteDialogAtom,
+  arcanaMulticastVideoAtom,
+  arcanaPredictionAnswerAtom,
+  arcanaPredictionCountAtom,
+} from '../../../store/arcana/state';
 
 type MainCardProps = {
   data?: ArcanaUserVotes;
@@ -29,6 +34,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   const predictionCount = useRecoilValue(arcanaPredictionCountAtom);
   const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
   const [playDotaDialog, setPlayDotaDialog] = useState<boolean>(false);
+  const [inviteDialog, setInviteDialog] = useRecoilState(arcanaInviteDialogAtom);
   const predictionAnswerCount = useMemo(
     () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
     [predictionAnswers],
@@ -97,9 +103,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               icon={nftLevel !== undefined ? GAMER_BADGES[nftLevel].img : undefined}
             />
           </Dialog>
-          <Dialog render={({ close }) => <ReferralVoteDialog data={data} close={close} />}>
-            <SkillCard votes={data?.votesReferralCurrent} icon="/img/arcana/statusbar/skill_invite.webp" />
-          </Dialog>
+          <SkillCard
+            onClick={() => setInviteDialog(true)}
+            votes={data?.votesReferralCurrent}
+            icon="/img/arcana/statusbar/skill_invite.webp"
+          />
           <Dialog render={({ close }) => <TaskVoteDialog data={data} close={close} />}>
             <SkillCard votes={data?.votesCommunityNftCurrent} icon="/img/arcana/statusbar/skill_task.webp" />
           </Dialog>
@@ -155,6 +163,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               </div>
             </div>
           )}
+        />
+        <Dialog
+          open={inviteDialog}
+          onOpenChange={(op) => setInviteDialog(op)}
+          render={({ close }) => <ReferralVoteDialog data={data} close={close} />}
         />
       </div>
     </div>
