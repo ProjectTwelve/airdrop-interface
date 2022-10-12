@@ -421,6 +421,7 @@ export type PredictionItemData = {
   meme: string;
   currentPrice: number;
   maxPrice: number;
+  taskRequired: string;
   taskUrl: string;
   ifLock: boolean;
   optionList: PredictionOption[];

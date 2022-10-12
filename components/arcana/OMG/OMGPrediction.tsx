@@ -82,7 +82,6 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
           return;
         }
         setIsSubmit(true);
-        toast.success(<Message message="Submitted" title="Mission Complete" />);
       });
       setIsLoading(false);
     } catch (e: any) {

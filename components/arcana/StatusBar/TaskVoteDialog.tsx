@@ -43,7 +43,7 @@ export default function TaskVoteDialog({ data, close }: TaskVoteDialogProps) {
 
   return (
     <div className="max-w-[540px]">
-      <h2 className="text-center font-medium">Get VOTES by Referral</h2>
+      <h2 className="text-center font-medium">Get VOTES by Community</h2>
       <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
         <span className="mr-2 text-[45px] text-p12-success">X</span> {data?.votesCommunityNftCurrent || 0}
       </p>

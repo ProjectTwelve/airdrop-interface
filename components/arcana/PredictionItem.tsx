@@ -2,7 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import Message from '../message';
 import { openLink } from '../../utils';
 import { PredictionItemData } from '../../lib/types';
 import { useArcanaUnlock } from '../../hooks/arcana';
@@ -36,16 +38,26 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
   }, [answer]);
 
+  const tips = useMemo(() => {
+    if (!data) return '';
+    if (data.taskRequired === 'invite1') return 'Invite 1 new gamer to unlock';
+    if (data.taskRequired === 'invite3') return 'Invite 3 new gamer to unlock';
+    if (data.taskRequired === 'quest3') return 'Finish Quest3 task to unlock';
+    return '';
+  }, [data]);
+
   const onUnlock = () => {
-    if (isObserver || !address || !item || isLoading || !item.taskUrl) return;
+    if (isObserver || !address || !item || isLoading) return;
     mutateAsync({ walletAddress: address, predictionCode: item.predictionCode }).then((res) => {
       if (res.data) {
         setItem((status) => {
           if (!status) return undefined;
           return { ...status, ifLock: false };
         });
-      } else {
+      } else if (item.taskRequired === 'quest3' && item.taskUrl) {
         openLink(item.taskUrl);
+      } else {
+        toast.error(<Message message="You haven't finished the task, try again." title="Ah shit, here we go again" />);
       }
     });
   };
@@ -110,10 +122,13 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
                   ${item?.maxPrice}
                 </p>
               </div>
-              <div>Finish task on Quest3 to Unlock</div>
+              <div>{tips}</div>
               <div className="mt-4 w-full px-7">
                 <button
-                  className={classNames('dota__button w-full py-3 text-xl', !data?.taskUrl && 'dota__button--disable')}
+                  className={classNames(
+                    'dota__button w-full py-3 text-xl',
+                    data?.taskRequired === 'quest3' && !data?.taskUrl && 'dota__button--disable',
+                  )}
                   onClick={onUnlock}
                 >
                   <div className="dota__gold h-[28px]">
