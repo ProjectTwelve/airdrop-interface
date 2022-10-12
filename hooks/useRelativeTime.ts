@@ -9,7 +9,7 @@ function getTimeState(time?: Dayjs): string {
   const h = Math.floor((diff - d * 24 * 60 * 60) / (60 * 60));
   const m = Math.floor((diff - d * 24 * 60 * 60 - h * 60 * 60) / 60);
   const s = Math.floor(diff - d * 24 * 60 * 60 - h * 60 * 60 - m * 60);
-  return `${d}d${h}h${m}m${s}s`;
+  return `${d}d ${h}h ${m}m ${s}s`;
 }
 
 export const useRelativeTime = (timestamp?: number) => {

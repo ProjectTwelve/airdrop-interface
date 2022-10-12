@@ -61,8 +61,8 @@ export default function OMG() {
         {isSubmit ? (
           <div>
             <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">Correct Answer!</p>
-            <p className="text-center text-xl font-medium leading-[22px]">You have the chance to win the following rewards.</p>
-            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col">
+            <p className="mt-3 text-center text-xl font-medium leading-[22px]">You have the chance to win the following rewards.</p>
+            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col md:items-center">
               <OMGPrediction
                 answer={predictionAnswer[0]}
                 item={predictionItem}

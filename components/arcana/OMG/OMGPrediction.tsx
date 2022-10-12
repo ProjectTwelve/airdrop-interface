@@ -110,7 +110,10 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
   }, [chain, isLoading, onSignAnswer, switchNetworkAsync]);
 
   return (
-    <div className="dota__box relative w-full max-w-[430px] rounded-lg">
+    <div
+      className="relative w-full max-w-[430px] rounded-lg"
+      style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
+    >
       {isSubmit ? (
         <div className="w-full">
           <div className="rounded-t-lg bg-gradient-prediction px-5 py-4">
@@ -126,12 +129,13 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
           <div className="mt-3 flex h-[20px] flex-col items-center justify-around">
             <div className="text-lg font-medium leading-5">{answerSelect?.name}</div>
           </div>
-          <div className="mt-[60px] mb-[30px] grid grid-cols-2">
-            <div className="flex flex-col items-center justify-center border-r-2 border-[#474C55]/50">
+          <div className="mt-[60px] mb-[30px] flex items-center justify-center">
+            <div className="flex flex-1 flex-col items-center justify-center">
               <h3 className="text-sm font-medium">Total Tipsters</h3>
               <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
+            <div className="flex flex-1 flex-col items-center justify-center">
               <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
               <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">$5000</p>
             </div>

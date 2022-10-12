@@ -9,18 +9,20 @@ type Reward = {
 
 function TopVoteItem({ reward, data }: { reward: Reward; data: PredictionAnswerOMGItem }) {
   return (
-    <div className="flex items-center justify-between rounded border border-[#6F7784]/50 bg-gradient-prediction p-3.5">
-      <div>
-        <p className="text-xs">{reward.index}</p>
-        <p className="font-ddin text-2xl font-bold leading-6 text-p12-gold">${reward.price}</p>
-      </div>
+    <div className="flex items-center justify-between rounded border border-[#6F7784]/50 bg-gradient-prediction p-3.5 xs:p-2">
       <div className="flex items-center justify-center">
-        <div className="h-[44px] w-[44px] overflow-hidden rounded-lg bg-black">
-          <img loading="lazy" className="h-full w-full object-cover" src={data.avatarFull} alt="avatar" />
+        <div className="w-[80px] 2xl:w-[105px] xs:w-[65px]">
+          <p className="text-xs">{reward.index}</p>
+          <p className="font-ddin text-2xl font-bold leading-6 text-p12-gold xs:text-base">${reward.price}</p>
         </div>
-        <p className="ml-2 max-w-[120px] truncate text-sm">{data.personName}</p>
+        <div className="flex items-center justify-center">
+          <div className="h-[44px] w-[44px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
+            <img loading="lazy" className="h-full w-full object-cover" src={data.avatarFull} alt="avatar" />
+          </div>
+          <p className="ml-2 max-w-[120px] truncate text-sm xs:max-w-[60px] xs:text-xs">{data.personName}</p>
+        </div>
       </div>
-      <div className="font-ddin text-2xl font-bold">{data.votesTotalCurrent} Votes</div>
+      <div className="font-ddin text-2xl font-bold xs:text-base">{data.votesTotalCurrent} Votes</div>
     </div>
   );
 }
@@ -34,7 +36,10 @@ export default function OMGTopVotes({ code }: { code?: string }) {
     { index: '3rd', price: 600 },
   ];
   return (
-    <div className="flex w-full max-w-[450px] flex-col rounded-lg">
+    <div
+      className="flex w-full max-w-[450px] flex-col rounded-lg"
+      style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
+    >
       <div
         className="w-full rounded-t-lg border border-[#EB6A55] py-[30px]"
         style={{ background: 'linear-gradient(to top, #98322D 0%, #C84435 51.95%, #C94435 51.96%, #E85136 100%)' }}
@@ -44,7 +49,7 @@ export default function OMGTopVotes({ code }: { code?: string }) {
         </p>
         <p className="dota__gold mt-3 text-center font-ddin text-[42px] leading-[42px]">$2600</p>
       </div>
-      <div className="dota__box flex flex-1 flex-col gap-3 rounded-b-lg px-5 py-12">
+      <div className="flex flex-1 flex-col gap-3 rounded-b-lg px-5 py-12 xs:py-4">
         <p className="text-center text-sm leading-6">Current Winner</p>
         {voteUserList &&
           voteUserList.map((item, index) => <TopVoteItem reward={prices[index]} data={item} key={item.walletAddress} />)}

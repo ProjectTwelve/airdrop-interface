@@ -51,7 +51,7 @@ export default function OMGPredictionDialog({ open, code, onOpenChange, title, s
                 >
                   <div className="relative h-full w-full">
                     <div className="absolute inset-0 left-0 top-0 z-20 hover:bg-[#FFFFFF]/10"></div>
-                    <div className="absolute bottom-0 z-10 flex h-[94px] w-full items-end bg-gradient-to-b from-black/0 to-black px-2 pb-2">
+                    <div className="absolute bottom-0 z-10 flex h-[94px] w-full items-end bg-gradient-to-b from-black/0 to-black">
                       <p className="mb-4 w-full text-center text-lg font-medium">{item.name}</p>
                     </div>
                     <Image src={item.img1} layout="fill" objectFit="cover" alt="omg" />
