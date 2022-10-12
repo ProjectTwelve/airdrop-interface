@@ -73,7 +73,7 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
   ];
   return (
     <div className="max-w-[720px]">
-      <h2 className="text-center font-medium">MULTICAST VOTES</h2>
+      <h2 className="text-center font-medium">Get VOTES by Referral</h2>
       <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
         <span className="mr-2 text-[45px] text-p12-success">X</span> {data?.votesReferralCurrent || 0}
       </p>

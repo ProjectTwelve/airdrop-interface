@@ -16,7 +16,7 @@ type GenesisVoteDialogProps = {
 export default function GenesisVoteDialog({ nftLevel, close, votes, createdAt, nftId }: GenesisVoteDialogProps) {
   return (
     <div className="flex w-[calc(100vw-20px)] max-w-[540px] flex-col items-center justify-center">
-      <h2 className="text-center font-medium">MULTICAST VOTES</h2>
+      <h2 className="text-center font-medium">Get VOTES by Referral</h2>
       <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
         <span className="mr-2 text-[45px] text-p12-success">X</span> {votes || 0}
       </p>
