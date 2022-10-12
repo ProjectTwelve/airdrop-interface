@@ -1,7 +1,8 @@
 import React, { SyntheticEvent } from 'react';
-import { useAccount, useNetwork, useSignMessage, useSwitchNetwork } from 'wagmi';
+import { isMobile } from 'react-device-detect';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { useAccount, useNetwork, useSignMessage, useSwitchNetwork } from 'wagmi';
 import GoldMulticastSVG from './StatusBar/GoldMulticastSVG';
 import {
   arcanaMulticastCardAtom,
@@ -13,6 +14,7 @@ import {
 import SilverMulticastSVG from './StatusBar/SilverMulticastSVG';
 import { useArcanaAgent } from '../../hooks/arcana';
 import { ARCANA_CHAIN_ID } from '../../constants';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 const multicastURL = 'https://cdn1.p12.games/airdrop/arcana/multicast.webm';
 const tiURL = 'https://cdn1.p12.games/airdrop/arcana/international.webm';
@@ -22,6 +24,7 @@ export default function MulticastMask() {
   const { mutateAsync } = useArcanaAgent();
   const { address } = useAccount();
   const { chain } = useNetwork();
+  const isMounted = useIsMounted();
   const { switchNetworkAsync } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const { signMessageAsync } = useSignMessage({
     message: 'Sign to bind your wallet with specific agent wallet to finish gas free mint.',
@@ -61,10 +64,12 @@ export default function MulticastMask() {
     }
   };
 
+  if (!isMounted) return null;
+
   if (!multicastVideo && !multicastCard) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-lg">
       <AnimatePresence>
         {multicastVideo && (
           <motion.div
@@ -106,16 +111,49 @@ export default function MulticastMask() {
             <div className="mb-8 md:mb-4">
               <video autoPlay muted loop src={tiURL} poster={tiURLPoster} />
             </div>
-            {voteCount >= 15 ? (
-              <GoldMulticastSVG votes={voteCount} width={320} height={454} />
-            ) : (
-              <SilverMulticastSVG votes={voteCount} width={320} height={454} />
-            )}
-            <div
-              className="dota__button dota__gold mt-12 h-[50px] w-[320px] text-center text-xl leading-[50px] md:mt-4"
-              onClick={onSignBindClick}
-            >
-              Click to Activate
+            <div className="flex items-center justify-center gap-[60px] md:flex-col md:gap-4">
+              {isMobile ? (
+                <div>{voteCount >= 15 ? <GoldMulticastSVG votes={voteCount} /> : <SilverMulticastSVG votes={voteCount} />}</div>
+              ) : (
+                <div>
+                  {voteCount >= 15 ? (
+                    <GoldMulticastSVG votes={voteCount} width={320} height={454} />
+                  ) : (
+                    <SilverMulticastSVG votes={voteCount} width={320} height={454} />
+                  )}
+                </div>
+              )}
+              <div>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.5 } }}
+                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                >
+                  01. This is your Multicast Votes need Activate.
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1 } }}
+                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                >
+                  02. Invite friends to get more Votes!
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1.5 } }}
+                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                >
+                  03. More Votes, more bounties.
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 2 } }}
+                  className="dota__button dota__gold mt-12 h-[50px] w-[320px] text-center text-xl leading-[50px] md:mt-4 xs:mx-auto"
+                  onClick={onSignBindClick}
+                >
+                  Click to Activate
+                </motion.div>
+              </div>
             </div>
           </motion.div>
         )}

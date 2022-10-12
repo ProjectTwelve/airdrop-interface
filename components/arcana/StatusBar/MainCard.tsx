@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { useCopyToClipboard } from 'react-use';
 import { isIOS, isMobile } from 'react-device-detect';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Button from '../../button';
 import Dialog from '../../dialog';
 import SkillCard from './SkillCard';
@@ -15,7 +15,12 @@ import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '../../../store/invite/state';
 import { ArcanaUserInfo, ArcanaUserVotes } from '../../../lib/types';
 import { GAMER_NFT_LEVEL, GAMER_BADGES } from '../../../constants';
-import { arcanaMulticastVideoAtom, arcanaPredictionAnswerAtom, arcanaPredictionCountAtom } from '../../../store/arcana/state';
+import {
+  arcanaInviteDialogAtom,
+  arcanaMulticastVideoAtom,
+  arcanaPredictionAnswerAtom,
+  arcanaPredictionCountAtom,
+} from '../../../store/arcana/state';
 
 type MainCardProps = {
   data?: ArcanaUserVotes;
@@ -29,6 +34,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   const predictionCount = useRecoilValue(arcanaPredictionCountAtom);
   const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
   const [playDotaDialog, setPlayDotaDialog] = useState<boolean>(false);
+  const [inviteDialog, setInviteDialog] = useRecoilState(arcanaInviteDialogAtom);
   const predictionAnswerCount = useMemo(
     () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
     [predictionAnswers],
@@ -47,7 +53,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
     <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
       {data && (
         <Dialog render={({ close }) => <MulticastVoteDialog close={close} />}>
-          <div className="absolute -top-8 left-4 z-10 h-8 w-16 xs:left-3 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
+          <div className="absolute -top-8 left-[28px] z-20 h-8 w-16 xs:left-6 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
             <div className="group relative cursor-pointer overflow-hidden">
               <div className="absolute inset-0 z-10 hidden bg-white/10 group-hover:block"></div>
               <img className="relative" src="/img/arcana/statusbar/skill_add.webp" alt="add" />
@@ -57,18 +63,8 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
       )}
       <div className="flex h-16 justify-between xs:h-[12.8vw]">
         <div className="flex">
-          <div
-            className="flex h-16 w-16 items-center justify-center rounded-full xs:h-[12.8vw] xs:w-[12.8vw]"
-            style={{
-              background: 'radial-gradient(50% 50% at 50% 50%, #FFFF91 0%, #FFFF98 29.14%, #D18C53 71.76%, #714E37 100%)',
-            }}
-          >
-            <span className="h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text text-[36px] font-bold leading-[32px] text-transparent xs:text-[7.2vw]">
-              {data?.votesTotalCurrent || 0}
-            </span>
-          </div>
-          <div className="ml-2.5 xs:ml-[2.13vw]">
-            <p className="h-[24px] text-sm font-medium text-p12-gold xs:h-[4.8vw] xs:text-xs">MultiCast Votes</p>
+          <div className="mx-3 xs:mx-[2.15vw]">
+            <p className="h-[24px] text-sm font-medium text-p12-gold xs:h-[4.8vw] xs:text-xs">My Votes</p>
             <img
               src="/img/arcana/statusbar/multicast.webp"
               onClick={() => {
@@ -79,8 +75,18 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               alt="multicast"
             />
           </div>
+          <div
+            className="flex h-16 w-16 items-center justify-center rounded-full xs:h-[12.8vw] xs:w-[12.8vw]"
+            style={{
+              background: 'radial-gradient(50% 50% at 50% 50%, #FFFF91 0%, #FFFF98 29.14%, #D18C53 71.76%, #714E37 100%)',
+            }}
+          >
+            <span className="h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text text-[32px] font-bold leading-[32px] text-transparent xs:text-[7.2vw]">
+              {data?.votesTotalCurrent || 0}
+            </span>
+          </div>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="mr-3 grid grid-cols-3 gap-[22px] xs:mr-[2.15vw]">
           <Dialog
             render={({ close }) => (
               <GenesisVoteDialog
@@ -97,9 +103,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               icon={nftLevel !== undefined ? GAMER_BADGES[nftLevel].img : undefined}
             />
           </Dialog>
-          <Dialog render={({ close }) => <ReferralVoteDialog data={data} close={close} />}>
-            <SkillCard votes={data?.votesReferralCurrent} icon="/img/arcana/statusbar/skill_invite.webp" />
-          </Dialog>
+          <SkillCard
+            onClick={() => setInviteDialog(true)}
+            votes={data?.votesReferralCurrent}
+            icon="/img/arcana/statusbar/skill_invite.webp"
+          />
           <Dialog render={({ close }) => <TaskVoteDialog data={data} close={close} />}>
             <SkillCard votes={data?.votesCommunityNftCurrent} icon="/img/arcana/statusbar/skill_task.webp" />
           </Dialog>
@@ -155,6 +163,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               </div>
             </div>
           )}
+        />
+        <Dialog
+          open={inviteDialog}
+          onOpenChange={(op) => setInviteDialog(op)}
+          render={({ close }) => <ReferralVoteDialog data={data} close={close} />}
         />
       </div>
     </div>

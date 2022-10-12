@@ -2,7 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import Message from '../message';
 import { openLink } from '../../utils';
 import { PredictionItemData } from '../../lib/types';
 import { useArcanaUnlock } from '../../hooks/arcana';
@@ -36,16 +38,26 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
   }, [answer]);
 
+  const tips = useMemo(() => {
+    if (!data) return '';
+    if (data.taskRequired === 'invite1') return 'Invite 1 new gamer to unlock';
+    if (data.taskRequired === 'invite3') return 'Invite 3 new gamers to unlock';
+    if (data.taskRequired === 'quest3') return 'Finish Quest3 task to unlock';
+    return '';
+  }, [data]);
+
   const onUnlock = () => {
-    if (isObserver || !address || !item || isLoading || !item.taskUrl) return;
+    if (isObserver || !address || !item || isLoading) return;
     mutateAsync({ walletAddress: address, predictionCode: item.predictionCode }).then((res) => {
       if (res.data) {
         setItem((status) => {
           if (!status) return undefined;
           return { ...status, ifLock: false };
         });
-      } else {
+      } else if (item.taskRequired === 'quest3' && item.taskUrl) {
         openLink(item.taskUrl);
+      } else {
+        toast.error(<Message message="You haven't finished the task, try again." title="Ah shit, here we go again" />);
       }
     });
   };
@@ -81,10 +93,7 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
       {isTimeLock && (
         <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-lg">
           <p className="text-xl text-p12-gold">Prize of this Tip</p>
-          <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
-            <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-            {item?.maxPrice}
-          </p>
+          <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">${item?.maxPrice}</p>
           <div className="text-xl text-p12-success"> {durationTime} to Unlock</div>
         </div>
       )}
@@ -110,14 +119,16 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
               <div className="flex flex-1 flex-col items-center justify-center">
                 <p className="text-xl text-p12-gold">Prize of this Tip</p>
                 <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
-                  <img className="mr-2 w-8" src="/img/arcana/usdc.svg" alt="usdc" />
-                  {item?.maxPrice}
+                  ${item?.maxPrice}
                 </p>
               </div>
-              <div>Finish task on Quest3 to Unlock</div>
+              <div>{tips}</div>
               <div className="mt-4 w-full px-7">
                 <button
-                  className={classNames('dota__button w-full py-3 text-xl', !data?.taskUrl && 'dota__button--disable')}
+                  className={classNames(
+                    'dota__button w-full py-3 text-xl',
+                    data?.taskRequired === 'quest3' && !data?.taskUrl && 'dota__button--disable',
+                  )}
                   onClick={onUnlock}
                 >
                   <div className="dota__gold h-[28px]">
@@ -147,9 +158,10 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
                 </div>
               </>
             ) : (
-              <p className="flex h-full w-full items-center justify-center bg-black/60 text-[82px] font-medium hover:bg-white/10">
-                ?
-              </p>
+              <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
+                <p className="text-[82px] leading-[82px]">?</p>
+                <p className="text-sm">Click to Answer</p>
+              </div>
             )}
           </div>
           <div className="mt-3 flex h-[40px] flex-col items-center justify-around">
@@ -168,15 +180,13 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
               <div className="text-center">
                 <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
                 <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
-                  <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
-                  {item?.currentPrice || 0}
+                  ${item?.currentPrice || 0}
                 </p>
               </div>
               <div className="text-center">
                 <h3 className="text-sm font-medium text-p12-gold">Upto</h3>
                 <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
-                  <img className="mr-1 w-6" src="/img/arcana/usdc.svg" alt="usdc" />
-                  {item?.maxPrice || 0}
+                  ${item?.maxPrice || 0}
                 </p>
               </div>
             </div>

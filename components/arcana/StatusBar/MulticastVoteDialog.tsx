@@ -22,37 +22,53 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
   }, [referralCode]);
 
   return (
-    <div className="w-[720px]">
+    <div className="w-[730px]">
       <div className="flex items-center justify-start">
         <div className="ml-3 mt-3">
           {voteCount >= 15 ? <GoldMulticastSVG votes={voteCount} /> : <SilverMulticastSVG votes={voteCount} />}
         </div>
-        <div className="ml-12 flex-1">
-          <h4 className="mt-4 text-xl font-medium">1. Genesis NFT Holder</h4>
-          <div className="mt-3 grid grid-cols-5 overflow-hidden rounded-lg">
-            <div className="bg-[#F36E22]/20 py-1.5">
-              <p className="text-center text-xs text-p12-orange">Legendary</p>
-              <p className="text-center font-ddin text-2xl font-bold text-p12-orange">60</p>
+        <div className="ml-8 flex-1">
+          <h4 className="mt-5 text-center text-xl font-medium">What is Multicast Votes?</h4>
+          <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 items-end">
+            <div>
+              <div className="flex items-center justify-center pb-4">
+                <img width={136} src="/img/arcana/statusbar/votes_01.webp" alt="votes_01" />
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="mr-2 font-semibold text-p12-success">01</p>
+                <p className="text-xs">The prize pool for one prediction is $10000</p>
+              </div>
             </div>
-            <div className="bg-[#C859FF]/30 py-1.5">
-              <p className="text-center text-xs text-p12-purple">Epic</p>
-              <p className="text-center font-ddin text-2xl font-bold text-p12-purple">36</p>
+            <div>
+              <div className="flex items-center justify-center pb-4">
+                <img width={167} src="/img/arcana/statusbar/votes_02.webp" alt="votes_02" />
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="mr-2 font-semibold text-p12-success">02</p>
+                <p className="text-xs">10 people answered correctly, with total of 200 votes</p>
+              </div>
             </div>
-            <div className="bg-p12-tips/30 py-1.5">
-              <p className="text-center text-xs text-p12-link">Rare</p>
-              <p className="text-center font-ddin text-2xl font-bold text-p12-link">12</p>
+            <div>
+              <div className="flex items-center justify-center pb-4">
+                <img width={173} src="/img/arcana/statusbar/votes_03.webp" alt="votes_03" />
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="mr-2 font-semibold text-p12-success">03</p>
+                <p className="text-xs">You are one of them. You have 40 Votes, accounting 20%</p>
+              </div>
             </div>
-            <div className="bg-[#62F82D]/20 py-1.5">
-              <p className="text-center text-xs text-p12-uncommon">Uncommon</p>
-              <p className="text-center font-ddin text-2xl font-bold text-p12-uncommon">4</p>
-            </div>
-            <div className="bg-[#99A7C3]/20 py-1.5">
-              <p className="text-center text-xs text-p12-common">Common</p>
-              <p className="text-center font-ddin text-2xl font-bold text-p12-common">1</p>
+            <div>
+              <div className="flex items-center justify-center pb-4">
+                <img width={137} src="/img/arcana/statusbar/votes_04.webp" alt="votes_04" />
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="mr-2 font-semibold text-p12-success">04</p>
+                <p className="text-xs">You will get 20% of the prize pool, which is $2000!</p>
+              </div>
             </div>
           </div>
-          <h4 className="mt-[48px] text-xl font-medium">2. Invite friends</h4>
-          <div className="mt-3 flex items-center justify-between">
+          <h4 className="mt-[48px] text-center text-xl font-medium">Get Votes by Referral</h4>
+          <div className="mt-6 flex items-center justify-between">
             <div className="flex flex-1 items-center justify-between rounded-full bg-[#494E69]/40 p-1.5">
               <p className="ml-3 w-[220px] truncate text-sm">{referralLink.replace(/https?:\/\//g, '')}</p>
               <Button
@@ -66,18 +82,6 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 copy
               </Button>
             </div>
-            <p className="ml-3 text-2xl font-medium text-p12-success">x 1 - 12</p>
-          </div>
-          <h4 className="mt-[48px] text-xl font-medium">3. Plus by other NFTs</h4>
-          <div className="mt-3 flex items-center justify-start">
-            <img width={48} src="/img/arcana/community_badge.webp" alt="community_badge" />
-            <p className="ml-3 text-2xl font-medium text-p12-success">X 1 - 30</p>
-            <p className="mx-2 text-xs">Get More</p>
-            <a href="https://discord.gg/p12" target="_blank">
-              <img className="inline h-5 w-5" src="/img/discord.png" width={20} height={20} alt="discord" />
-            </a>
-            <img className="ml-12" src="/img/arcana/statusbar/bab.webp" width={48} alt="bab" />
-            <p className="ml-3 text-2xl font-medium text-p12-success">X 4</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 .p12-theme-01 {
+    --omg-color: #C859FF80;
     --logo: url('/img/theme/01/logo.svg');
     --select: url('/img/theme/01/select.svg');
     --profile-info: url('/img/theme/01/profile_info.webp');
@@ -12,6 +13,7 @@
 }
 
 .p12-theme-02 {
+    --omg-color: #1EDB8C80;
     --logo: url('/img/theme/02/logo.svg');
     --select: url('/img/theme/02/select.svg');
     --profile-info: url('/img/theme/02/profile_info.webp');
@@ -25,6 +27,7 @@
 }
 
 .p12-theme-03 {
+    --omg-color: #FFAA2C80;
     --logo: url('/img/theme/03/logo.svg');
     --select: url('/img/theme/03/select.svg');
     --profile-info: url('/img/theme/03/profile_info.webp');
@@ -38,6 +41,7 @@
 }
 
 .p12-theme-04 {
+    --omg-color: #43BBFF80;
     --logo: url('/img/theme/04/logo.svg');
     --select: url('/img/theme/04/select.svg');
     --profile-info: url('/img/theme/04/profile_info.webp');

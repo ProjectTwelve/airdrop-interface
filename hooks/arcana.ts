@@ -13,11 +13,13 @@ import {
 import {
   fetchArcanaAgent,
   fetchArcanaAnswer,
+  fetchArcanaAnswerOMG,
   fetchArcanaDistinctAddressCount,
   fetchArcanaInviteesVotes,
   fetchArcanaMemeEvaluate,
   fetchArcanaPredictions,
   fetchArcanaPredictionsAnswerCount,
+  fetchArcanaPredictionsOMG,
   fetchArcanaUnlock,
   fetchArcanaVotes,
 } from '../lib/api';
@@ -77,6 +79,14 @@ export const useArcanaPredictions = (walletAddress?: string) => {
   });
 };
 
+export const useArcanaPredictionsOMG = (walletAddress?: string) => {
+  return useQuery(['arcana_predictions_omg', walletAddress], () => fetchArcanaPredictionsOMG({ walletAddress }), {
+    enabled: !!walletAddress,
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
 export const useArcanaPredictionsAnswerCount = (walletAddress?: string) => {
   return useQuery(['arcana_predictions_votes_count', walletAddress], () => fetchArcanaPredictionsAnswerCount(), {
     select: (data) => {
@@ -107,4 +117,11 @@ export const useArcanaAgent = () => {
   return useMutation<any, any, { signature: string; walletAddress: string }, Response<boolean>>((params) =>
     fetchArcanaAgent(params),
   );
+};
+
+export const useArcanaAnswerOMG = () => {
+  return useQuery(['arcana_answer_omg'], () => fetchArcanaAnswerOMG(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
 };
