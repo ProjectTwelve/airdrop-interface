@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import OMGPrediction from './OMGPrediction';
@@ -13,7 +14,6 @@ import {
   arcanaPredictionOMGAnswerAtom,
   arcanaPredictionOMGSubmitAtom,
 } from '../../../store/arcana/state';
-import dayjs from 'dayjs';
 
 export default function OMG() {
   const { address } = useAccount();
@@ -47,7 +47,10 @@ export default function OMG() {
   if (!showOMG) return null;
 
   return (
-    <div className="rounded-xl border border-white/20 bg-black/30 p-7 backdrop-blur-lg">
+    <div
+      className="rounded-xl bg-black/30 py-8 px-14 backdrop-blur-lg xs:p-4"
+      style={{ border: '2px solid var(--omg-color)', boxShadow: 'inset 0 0 60px var(--omg-color)' }}
+    >
       <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-start">
         <div>
           <h2 className="text-[40px] font-medium">OMG</h2>
@@ -61,8 +64,10 @@ export default function OMG() {
         {isSubmit ? (
           <div>
             <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">Correct Answer!</p>
-            <p className="mt-3 text-center text-xl font-medium leading-[22px]">You have the chance to win the following rewards.</p>
-            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col md:items-center">
+            <p className="mt-3 text-center text-xl font-medium leading-[22px]">
+              You have the chance to win the following rewards.
+            </p>
+            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col md:items-center md:px-0">
               <OMGPrediction
                 answer={predictionAnswer[0]}
                 item={predictionItem}

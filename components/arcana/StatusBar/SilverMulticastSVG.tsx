@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function GoldMulticastSVG({ votes, width, height }: { votes?: number; width?: number; height?: number }) {
+export default function SilverMulticastSVG({ votes, width, height }: { votes?: number; width?: number; height?: number }) {
   return (
     <svg viewBox="0 0 900 1280" width={width ?? 248} height={height ?? 354} fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect
@@ -66,7 +66,7 @@ export default function GoldMulticastSVG({ votes, width, height }: { votes?: num
         textAnchor="middle"
         fontFamily="Poppins"
         fontWeight="700"
-        fontSize="240"
+        fontSize="200"
         fill="url(#prefix__paint9_linear_5023_1331)"
       >
         {votes || 0}

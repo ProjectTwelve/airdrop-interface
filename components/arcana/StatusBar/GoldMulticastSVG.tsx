@@ -55,7 +55,7 @@ export default function GoldMulticastSVG({ votes, width, height }: { votes?: num
         textAnchor="middle"
         fontFamily="Poppins"
         fontWeight="700"
-        fontSize="240"
+        fontSize="200"
         fill="url(#prefix__paint9_linear_5023_1319)"
       >
         {votes || 0}

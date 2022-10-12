@@ -81,7 +81,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
               background: 'radial-gradient(50% 50% at 50% 50%, #FFFF91 0%, #FFFF98 29.14%, #D18C53 71.76%, #714E37 100%)',
             }}
           >
-            <span className="h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text text-[36px] font-bold leading-[32px] text-transparent xs:text-[7.2vw]">
+            <span className="h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text text-[32px] font-bold leading-[32px] text-transparent xs:text-[7.2vw]">
               {data?.votesTotalCurrent || 0}
             </span>
           </div>
