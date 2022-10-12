@@ -54,7 +54,7 @@ export default function OMG() {
       <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-start">
         <div>
           <h2 className="text-[40px] font-medium">OMG</h2>
-          <p className="text-sm">Simple predictions, independent jackpots, early draws!</p>
+          <p className="text-sm">Simple predictions, independent jackpots, bounty rune!</p>
         </div>
         <div className="text-xl font-medium">
           Drop Time <span className="font-ddin text-[30px] font-bold text-p12-gold">{relativeTime}</span>
