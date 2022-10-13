@@ -53,8 +53,16 @@ export default function OMG() {
     >
       <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-start">
         <div>
-          <h2 className="text-[40px] font-medium">OMG</h2>
-          <p className="text-sm">Simple predictions, independent jackpots, bounty rune!</p>
+          <div className="flex items-center justify-between">
+            <h2 className="text-[48px] font-medium leading-[48px]">OMG</h2>
+            <p
+              className="bg-clip-text text-[42px] font-bold leading-[48px] text-transparent"
+              style={{ backgroundImage: 'linear-gradient(180deg, #FFFFDA 0%, #FFE7B6 50.34%, #A87945 100%)' }}
+            >
+              $5,000
+            </p>
+          </div>
+          <p className="text-[22px] font-medium tracking-[1px]">At the tip of your finger!</p>
         </div>
         <div className="text-xl font-medium">
           Drop Time <span className="font-ddin text-[30px] font-bold text-p12-gold">{relativeTime}</span>
