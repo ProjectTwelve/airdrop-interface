@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import Head from 'next/head';
-import { useAccount } from 'wagmi';
+import { useAccount, useNetwork } from 'wagmi';
 import { useRouter } from 'next/router';
 import { useIntersection } from 'react-use';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { openLink } from '../../utils';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useArcanaVotes } from '../../hooks/arcana';
@@ -15,13 +15,17 @@ import Participant from '../../components/arcana/Participant';
 import ArcanaProgress from '../../components/arcana/ArcanaProgress';
 import Prediction from '../../components/arcana/Prediction';
 import OMG from '../../components/arcana/OMG';
+import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
+import ArcanaSwitchNetwork from '../../components/arcana/ArcanaSwitchNetwork';
 
 export default function Arcana() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
   const { query } = useRouter();
+  const { chain } = useNetwork();
+  const isObserver = useRecoilValue(arcanaObserverAtom);
   const [originAddress, setOriginAddress] = useRecoilState(arcanaOriginAddressAtom);
   const setObserver = useSetRecoilState(arcanaObserverAtom);
   const intersectionRef = useRef(null);
@@ -91,6 +95,7 @@ export default function Arcana() {
                 )}
               </div>
             )}
+            {data && !isObserver && chain?.id !== ARCANA_CHAIN_ID && <ArcanaSwitchNetwork />}
             <StatusBar data={data} />
           </div>
         </div>

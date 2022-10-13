@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useNetwork } from 'wagmi';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { useCopyToClipboard } from 'react-use';
@@ -14,7 +15,7 @@ import ReferralVoteDialog from './ReferralVoteDialog';
 import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '../../../store/invite/state';
 import { ArcanaUserInfo, ArcanaUserVotes } from '../../../lib/types';
-import { GAMER_NFT_LEVEL, GAMER_BADGES } from '../../../constants';
+import { GAMER_NFT_LEVEL, GAMER_BADGES, ARCANA_CHAIN_ID } from '../../../constants';
 import {
   arcanaInviteDialogAtom,
   arcanaMulticastVideoAtom,
@@ -29,6 +30,7 @@ type MainCardProps = {
 };
 
 export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
+  const { chain } = useNetwork();
   const referralCode = useRecoilValue(referralCodeAtom);
   const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
   const predictionCount = useRecoilValue(arcanaPredictionCountAtom);
@@ -51,7 +53,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
 
   return (
     <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
-      {data && (
+      {data && chain?.id === ARCANA_CHAIN_ID && (
         <Dialog render={({ close }) => <MulticastVoteDialog close={close} />}>
           <div className="absolute -top-8 left-[28px] z-20 h-8 w-16 xs:left-6 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
             <div className="group relative cursor-pointer overflow-hidden">
