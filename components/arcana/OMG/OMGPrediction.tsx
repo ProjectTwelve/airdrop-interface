@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -42,14 +42,20 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
   const isGenesisNFTHolder = useRecoilValue(arcanaGenesisNFTHolderAtom);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const { switchNetworkAsync } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
+  const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const answerSelect = useMemo(() => {
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
   }, [answer]);
 
-  const onSignAnswer = useCallback(async () => {
-    if (!address || !answerSelect) return;
+  const onSignAnswer = async () => {
+    if (!address || !chain) return;
+    if (chain.id !== ARCANA_CHAIN_ID) {
+      switchNetwork?.();
+      return;
+    }
+    if (!answerSelect) return;
     try {
+      setIsLoading(true);
       const answers: PredictionAnswer[] = [];
       omgAnswer.forEach((item) => {
         if (item.answer && item.answer.length > 0) {
@@ -87,26 +93,7 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
     } catch (e: any) {
       if (e.code === 4001) setIsLoading(false);
     }
-  }, [
-    address,
-    answerSelect,
-    arcanaContract.populateTransaction,
-    forwarderContract,
-    mutateAsync,
-    omgAnswer,
-    predictionAnswer,
-    setIsSubmit,
-    signTypedDataAsync,
-  ]);
-
-  useEffect(() => {
-    if (!chain || !isLoading) return;
-    if (chain.id !== ARCANA_CHAIN_ID) {
-      switchNetworkAsync?.().catch((e) => e.code === 4001 && setIsLoading(false));
-      return;
-    }
-    onSignAnswer().then();
-  }, [chain, isLoading, onSignAnswer, switchNetworkAsync]);
+  };
 
   return (
     <div
@@ -170,13 +157,19 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
           </div>
           <div className="mt-[60px] w-full">
             <div
-              onClick={() => setIsLoading(true)}
+              onClick={onSignAnswer}
               className={classNames(
                 'dota__button dota__gold flex h-[50px] items-center justify-center text-xl',
-                answerSelect ? null : 'dota__button--disable',
+                chain?.id === ARCANA_CHAIN_ID && !answerSelect ? 'dota__button--disable' : null,
               )}
             >
-              {isLoading ? <img className="w-8 animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
+              {isSwitchNetworkLoading || isLoading ? (
+                <img className="w-8 animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+              ) : chain?.id === ARCANA_CHAIN_ID ? (
+                'Submit'
+              ) : (
+                'Switch Network'
+              )}
             </div>
           </div>
         </div>

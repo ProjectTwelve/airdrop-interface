@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { BigNumber } from '@ethersproject/bignumber';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -31,7 +31,7 @@ export default function StatusBar({ data }: StatusBarProps) {
   const [level, setLevel] = useState<number>(30);
   const { address } = useAccount();
   const { chain } = useNetwork();
-  const { switchNetworkAsync } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
+  const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isObserver = useRecoilValue(arcanaObserverAtom);
   const arcanaContract = useArcanaContract();
@@ -60,9 +60,14 @@ export default function StatusBar({ data }: StatusBarProps) {
     setEasterEggShow(true);
   };
 
-  const onSignAnswer = useCallback(async () => {
-    if (!address) return;
+  const onSignAnswer = async () => {
+    if (!address || !chain) return;
+    if (chain.id !== ARCANA_CHAIN_ID) {
+      switchNetwork?.();
+      return;
+    }
     try {
+      setIsLoading(true);
       const answers: PredictionAnswer[] = [];
       omgAnswer.forEach((item) => {
         if (item.answer && item.answer.length > 0) {
@@ -101,16 +106,7 @@ export default function StatusBar({ data }: StatusBarProps) {
     } catch (e: any) {
       if (e.code === 4001) setIsLoading(false);
     }
-  }, [
-    address,
-    arcanaContract.populateTransaction,
-    forwarderContract,
-    mutateAsync,
-    omgAnswer,
-    predictionAnswer,
-    setUnSubmit,
-    signTypedDataAsync,
-  ]);
+  };
 
   useEffect(() => {
     const random = Math.random();
@@ -118,15 +114,6 @@ export default function StatusBar({ data }: StatusBarProps) {
     if (random < 0.6) return setLevel(25);
     setLevel(30);
   }, []);
-
-  useEffect(() => {
-    if (!chain || !isLoading) return;
-    if (chain.id !== ARCANA_CHAIN_ID) {
-      switchNetworkAsync?.().catch((e) => e.code === 4001 && setIsLoading(false));
-      return;
-    }
-    onSignAnswer().then();
-  }, [chain, isLoading, onSignAnswer, switchNetworkAsync]);
 
   return (
     <>
@@ -141,12 +128,18 @@ export default function StatusBar({ data }: StatusBarProps) {
         </div>
       )}
       {unSubmit && (
-        <div className="absolute -top-16 z-20 mx-auto flex text-sm md:fixed md:bottom-4 md:top-auto">
+        <div className="absolute -top-16 z-30 mx-auto flex text-sm md:fixed md:bottom-4 md:top-auto">
           <div className="dota__box px-4 py-3 xs:px-2 xs:py-1.5">
             You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
           </div>
-          <button className="dota__button dota__gold px-4 xs:px-2" onClick={() => setIsLoading(true)}>
-            {isLoading ? <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" /> : 'Submit'}
+          <button className="dota__button dota__gold px-4 xs:px-2" onClick={onSignAnswer}>
+            {isLoading || isSwitchNetworkLoading ? (
+              <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+            ) : chain?.id === ARCANA_CHAIN_ID ? (
+              'Submit'
+            ) : (
+              'Switch Network'
+            )}
           </button>
         </div>
       )}
