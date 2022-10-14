@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import { useArcanaVotesRank } from '../../hooks/arcana';
 import { VoteRankItem } from '../../lib/types';
+import { openLink } from '../../utils';
 
 const variants = {
   enter: (direction: number) => {
@@ -36,9 +37,17 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
     return '/img/arcana/divine.webp';
   }, [index]);
 
+  const onOpenPage = () => {
+    const url = window.location.origin + window.location.pathname + `?address=${data?.walletAddress}`;
+    openLink(url);
+  };
+
   return (
-    <div className="omg__box h-[120px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg">
-      <div className="flex items-center p-4 xs:justify-center">
+    <div
+      className="omg__box h-[120px] min-w-[195px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg"
+      onClick={onOpenPage}
+    >
+      <div className="flex items-center p-4 md:justify-center">
         <div className="relative ml-1 flex h-[46px] w-[46px] items-center justify-center">
           <img className="absolute top-0 left-0" width={46} src={rankImage} alt="" />
           <p className="z-10">{index && index > 3 ? index : null}</p>

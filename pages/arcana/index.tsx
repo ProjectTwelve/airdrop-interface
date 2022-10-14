@@ -18,10 +18,10 @@ import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
 import ArcanaSwitchNetwork from '../../components/arcana/ArcanaSwitchNetwork';
+import SwiperInviteVote from '../../components/arcana/SwiperInviteVote';
 
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import SwiperInviteVote from '../../components/arcana/SwiperInviteVote';
 
 export default function Arcana() {
   const { address } = useAccount();
@@ -66,7 +66,7 @@ export default function Arcana() {
           </div>
         </div>
         <div className="mt-6 flex justify-between md:flex-col">
-          <div className="flex flex-col justify-between md:ml-2 gap-4">
+          <div className="flex flex-col justify-between gap-4 md:ml-2">
             <div>
               <h1 className="mt-4 font-['Henny_Penny'] text-[36px]">P12 Arcana @ TI11</h1>
               <div className="mt-3 flex">
@@ -93,7 +93,7 @@ export default function Arcana() {
             <img className="py-6" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo_2.webp" alt="sponsor" />
           </div>
         </div>
-        <div className="mt-16 flex gap-[30px] md:mt-8 md:flex-col">
+        <div className="mt-16 flex gap-4 md:mt-8 md:flex-col 2xl:gap-[30px]">
           <Participant />
           <VoteRank />
         </div>

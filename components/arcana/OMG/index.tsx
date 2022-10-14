@@ -51,7 +51,7 @@ export default function OMG() {
       className="rounded-xl bg-black/30 py-8 px-14 backdrop-blur-lg xs:p-4"
       style={{ border: '2px solid var(--omg-color)', boxShadow: 'inset 0 0 60px var(--omg-color)' }}
     >
-      <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-start">
+      <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-center">
         <div>
           <div className="flex items-center justify-between">
             <h2 className="text-[48px] font-medium leading-[48px]">OMG</h2>

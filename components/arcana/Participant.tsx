@@ -29,7 +29,7 @@ export default function Participant() {
   }, [count]);
 
   return (
-    <div className="max-w-[600px] overflow-x-scroll">
+    <div className="overflow-x-scroll lg:max-w-[40%] xl:max-w-[45%] 2xl:max-w-[600px]">
       <div className="relative flex w-[600px] bg-black/30">
         <div className="z-10 h-[120px] w-[289px] bg-[url('/img/arcana/participant_now.svg')]">
           <div className="mt-5 ml-5">
