@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+import ReactGA from 'react-ga4';
 import { wrap } from 'popmotion';
+import { isMobile } from 'react-device-detect';
 import { AnimatePresence, motion } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import { useArcanaVotesRank } from '../../hooks/arcana';
@@ -38,6 +39,7 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
   }, [index]);
 
   const onOpenPage = () => {
+    ReactGA.event({ category: 'Arcana-Rank', action: 'Click', label: index?.toString() });
     const url = window.location.origin + window.location.pathname + `?address=${data?.walletAddress}`;
     openLink(url);
   };

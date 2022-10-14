@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import PredictionItem from './PredictionItem';
@@ -10,7 +12,6 @@ import {
 } from '../../store/arcana/state';
 import { useArcanaPredictions, useArcanaPredictionsAnswerCount } from '../../hooks/arcana';
 import { ZERO_ADDRESS } from '../../constants/addresses';
-import { useEffect } from 'react';
 
 export default function Prediction() {
   const isObserver = useRecoilValue(arcanaObserverAtom);
@@ -31,6 +32,7 @@ export default function Prediction() {
 
   const onShareTwitter = () => {
     if (!address || !referralCode) return;
+    ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Share' });
     const referralLink = window.location.origin + window.location.pathname + `?address=${address}&code=${referralCode}`;
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(

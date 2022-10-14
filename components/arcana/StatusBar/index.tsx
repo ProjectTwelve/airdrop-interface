@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { toast } from 'react-toastify';
 import { BigNumber } from '@ethersproject/bignumber';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -56,6 +57,7 @@ export default function StatusBar({ data }: StatusBarProps) {
   }, [unSubmit]);
 
   const onLevelClick = () => {
+    ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Easter-Egg' });
     if (level === 30) return;
     setEasterEggShow(true);
   };
