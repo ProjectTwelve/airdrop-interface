@@ -1,278 +1,61 @@
 import { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { useArcanaDistinctAddressCount } from '../../hooks/arcana';
 
-enum PART_PROGRESS {
-  PART1,
-  PART2,
-  PART3,
-  PART4,
-  PART5,
-}
-
-enum PARTICIPANT_STATUS {
-  UPCOMING,
-  ONGOING,
-  COMPLETED,
-}
-
-const poolTextStyle = {
-  [PARTICIPANT_STATUS.UPCOMING]: 'text-p12-darkgray',
-  [PARTICIPANT_STATUS.ONGOING]: 'dota__gold',
-  [PARTICIPANT_STATUS.COMPLETED]: 'text-p12-orange',
-};
-
-const participantTextStyle = {
-  [PARTICIPANT_STATUS.UPCOMING]: 'text-p12-darkgray text-xl',
-  [PARTICIPANT_STATUS.ONGOING]: 'dota__gold text-[30px]',
-  [PARTICIPANT_STATUS.COMPLETED]: 'text-p12-success text-[30px]',
-};
+const participantProgress = [
+  { prize: '20,000', participants: 30000, nextUnlock: '30K to Unlock' },
+  { prize: '30,000', participants: 60000, nextUnlock: '60K to Unlock' },
+  { prize: '55,000', participants: 150000, nextUnlock: '150K to Unlock' },
+  { prize: '70,000', participants: 300000, nextUnlock: '300K to Unlock' },
+  { prize: '100,000', participants: Infinity, nextUnlock: '' },
+];
 
 export default function Participant() {
   const { data: count } = useArcanaDistinctAddressCount();
   const [numberFormat] = useState(new Intl.NumberFormat());
-  const [partStatus, setPartStatus] = useState({
-    [PART_PROGRESS.PART1]: {
-      prize: '20,000',
-      participants: 30000,
-      status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '0 to Unlock',
-      [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: 'BASIC',
-    },
-    [PART_PROGRESS.PART2]: {
-      prize: '30,000',
-      participants: 60000,
-      status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '30K to Unlock',
-      [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '30K',
-    },
-    [PART_PROGRESS.PART3]: {
-      prize: '55,000',
-      participants: 150000,
-      status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '60K to Unlock',
-      [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '60K',
-    },
-    [PART_PROGRESS.PART4]: {
-      prize: '70,000',
-      participants: 300000,
-      status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '150K to Unlock',
-      [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '150K',
-    },
-    [PART_PROGRESS.PART5]: {
-      prize: '100,000',
-      participants: Infinity,
-      status: PARTICIPANT_STATUS.UPCOMING,
-      [PARTICIPANT_STATUS.UPCOMING]: '300K to Unlock',
-      [PARTICIPANT_STATUS.ONGOING]: 0,
-      [PARTICIPANT_STATUS.COMPLETED]: '300K',
-    },
-  });
+  const [current, setCurrent] = useState({ prize: '20,000', participants: 30000, nextUnlock: '30K to Unlock' });
 
   useEffect(() => {
-    setPartStatus((status) => {
+    setCurrent((status) => {
       if (count === undefined) return status;
-      const currentStatus = { ...status };
-      currentStatus[PART_PROGRESS.PART1].status = PARTICIPANT_STATUS.ONGOING;
-      if (count >= currentStatus[PART_PROGRESS.PART1].participants) {
-        currentStatus[PART_PROGRESS.PART1].status = PARTICIPANT_STATUS.COMPLETED;
-        currentStatus[PART_PROGRESS.PART2].status = PARTICIPANT_STATUS.ONGOING;
+      let item: any = status;
+      for (let i = 0; i < participantProgress.length; i++) {
+        if (count < participantProgress[i].participants) {
+          item = participantProgress[i];
+          break;
+        }
       }
-      if (count >= currentStatus[PART_PROGRESS.PART2].participants) {
-        currentStatus[PART_PROGRESS.PART2].status = PARTICIPANT_STATUS.COMPLETED;
-        currentStatus[PART_PROGRESS.PART3].status = PARTICIPANT_STATUS.ONGOING;
-      }
-      if (count >= currentStatus[PART_PROGRESS.PART3].participants) {
-        currentStatus[PART_PROGRESS.PART3].status = PARTICIPANT_STATUS.COMPLETED;
-        currentStatus[PART_PROGRESS.PART4].status = PARTICIPANT_STATUS.ONGOING;
-      }
-      if (count >= currentStatus[PART_PROGRESS.PART4].participants) {
-        currentStatus[PART_PROGRESS.PART4].status = PARTICIPANT_STATUS.COMPLETED;
-        currentStatus[PART_PROGRESS.PART5].status = PARTICIPANT_STATUS.ONGOING;
-      }
-      return currentStatus;
+      return item;
     });
   }, [count]);
 
   return (
-    <div className="w-full overflow-x-scroll">
-      <div className="flex h-[120px] w-[1360px] bg-black/30 backdrop-blur-lg">
-        {/* PART I */}
-        <div className="relative h-full w-[319px]">
-          <img className="absolute top-0" src="/img/arcana/participant_left.svg" alt="participant" />
-          {partStatus[PART_PROGRESS.PART1].status === PARTICIPANT_STATUS.ONGOING && (
-            <img className="absolute top-0" src="/img/arcana/participant_left_ongoing.svg" alt="participant" />
-          )}
-          <div className="relative z-10">
-            <div className="mt-4 ml-6">
-              <div className="flex items-center">
-                <p className="font-medium text-p12-gold">Participants</p>
-                <p
-                  className={classNames(
-                    'flex-1 text-center font-ddin font-bold leading-[30px] text-p12-success',
-                    participantTextStyle[partStatus[PART_PROGRESS.PART1].status],
-                  )}
-                >
-                  {partStatus[PART_PROGRESS.PART1].status === PARTICIPANT_STATUS.ONGOING
-                    ? numberFormat.format(count ?? 0)
-                    : partStatus[PART_PROGRESS.PART1][partStatus[PART_PROGRESS.PART1].status]}
-                </p>
-              </div>
-              <div className="mt-3 flex items-center">
-                <p className="flex-none font-medium text-p12-gold">Prize Pool</p>
-                <div
-                  className={classNames(
-                    'flex flex-1 items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
-                    poolTextStyle[partStatus[PART_PROGRESS.PART1].status],
-                  )}
-                >
-                  {partStatus[PART_PROGRESS.PART1].status === PARTICIPANT_STATUS.UPCOMING ? (
-                    '?,???'
-                  ) : (
-                    <>${partStatus[PART_PROGRESS.PART1].prize}</>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* PART II */}
-        <div className="relative -ml-[26px] w-[288px]">
-          <img className="absolute top-0" src="/img/arcana/participant_middle.svg" alt="participant" />
-          {partStatus[PART_PROGRESS.PART2].status === PARTICIPANT_STATUS.ONGOING && (
-            <img className="absolute top-0" src="/img/arcana/participant_middle_ongoing.svg" alt="participant" />
-          )}
-          <div className="relative z-10">
-            <div className="mt-4 h-[30px]">
-              <p
-                className={classNames(
-                  'text-center font-ddin font-bold leading-[30px]',
-                  participantTextStyle[partStatus[PART_PROGRESS.PART2].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART2].status === PARTICIPANT_STATUS.ONGOING
-                  ? numberFormat.format(count ?? 0)
-                  : partStatus[PART_PROGRESS.PART2][partStatus[PART_PROGRESS.PART2].status]}
+    <div className="max-w-[600px] overflow-x-scroll">
+      <div className="relative flex w-[600px] bg-black/30">
+        <div className="z-10 h-[120px] w-[289px] bg-[url('/img/arcana/participant_now.svg')]">
+          <div className="mt-5 ml-5">
+            <div className="flex items-center">
+              <p className="font-medium text-p12-gold">Participants</p>
+              <p className="dota__gold flex-1 text-center font-ddin text-[30px] font-bold leading-[30px] text-p12-success">
+                {numberFormat.format(count ?? 0)}
               </p>
-              <div
-                className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
-                  poolTextStyle[partStatus[PART_PROGRESS.PART2].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART2].status === PARTICIPANT_STATUS.UPCOMING ? (
-                  '?,???'
-                ) : (
-                  <>${partStatus[PART_PROGRESS.PART2].prize}</>
-                )}
+            </div>
+            <div className="mt-3 flex items-center">
+              <p className="flex-none font-medium text-p12-gold">Prize Pool</p>
+              <div className="dota__gold flex flex-1 items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]">
+                ${current.prize}
               </div>
             </div>
           </div>
         </div>
-        {/* PART III */}
-        <div className="relative -ml-[26px] w-[288px]">
-          <img className="absolute top-0" src="/img/arcana/participant_middle.svg" alt="participant" />
-          {partStatus[PART_PROGRESS.PART3].status === PARTICIPANT_STATUS.ONGOING && (
-            <img className="absolute top-0" src="/img/arcana/participant_middle_ongoing.svg" alt="participant" />
-          )}
-          <div className="relative z-10">
-            <div className="mt-4 h-[30px]">
-              <p
-                className={classNames(
-                  'text-center font-ddin font-bold leading-[30px]',
-                  participantTextStyle[partStatus[PART_PROGRESS.PART3].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART3].status === PARTICIPANT_STATUS.ONGOING
-                  ? numberFormat.format(count ?? 0)
-                  : partStatus[PART_PROGRESS.PART3][partStatus[PART_PROGRESS.PART3].status]}
-              </p>
-              <div
-                className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
-                  poolTextStyle[partStatus[PART_PROGRESS.PART3].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART3].status === PARTICIPANT_STATUS.UPCOMING ? (
-                  '?,???'
-                ) : (
-                  <>${partStatus[PART_PROGRESS.PART3].prize}</>
-                )}
-              </div>
-            </div>
+        <div className="-ml-[26px] h-[120px] w-[268px] bg-participant-1 bg-cover backdrop-blur">
+          <p className="mt-5 text-center font-ddin text-xl font-bold leading-[30px] text-p12-darkgray">{current.nextUnlock}</p>
+          <div className="mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px] text-p12-darkgray">
+            ?,???
           </div>
         </div>
-        {/* PART IV */}
-        <div className="relative -ml-[26px] w-[288px]">
-          <img className="absolute top-0" src="/img/arcana/participant_middle.svg" alt="participant" />
-          {partStatus[PART_PROGRESS.PART4].status === PARTICIPANT_STATUS.ONGOING && (
-            <img className="absolute top-0" src="/img/arcana/participant_middle_ongoing.svg" alt="participant" />
-          )}
-          <div className="relative z-10">
-            <div className="mt-4 h-[30px]">
-              <p
-                className={classNames(
-                  'text-center font-ddin font-bold leading-[30px]',
-                  participantTextStyle[partStatus[PART_PROGRESS.PART4].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART4].status === PARTICIPANT_STATUS.ONGOING
-                  ? numberFormat.format(count ?? 0)
-                  : partStatus[PART_PROGRESS.PART4][partStatus[PART_PROGRESS.PART4].status]}
-              </p>
-              <div
-                className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
-                  poolTextStyle[partStatus[PART_PROGRESS.PART4].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART4].status === PARTICIPANT_STATUS.UPCOMING ? (
-                  '?,???'
-                ) : (
-                  <>${partStatus[PART_PROGRESS.PART4].prize}</>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* PART V */}
-        <div className="relative -ml-[26px] w-[281px]">
-          <img className="absolute top-0" src="/img/arcana/participant_right.svg" alt="participant" />
-          {partStatus[PART_PROGRESS.PART5].status === PARTICIPANT_STATUS.ONGOING && (
-            <img className="absolute top-0" src="/img/arcana/participant_right_ongoing.svg" alt="participant" />
-          )}
-          <div className="relative z-10">
-            <div className="mt-4 h-[30px]">
-              <p
-                className={classNames(
-                  'text-center font-ddin font-bold leading-[30px]',
-                  participantTextStyle[partStatus[PART_PROGRESS.PART5].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART5].status === PARTICIPANT_STATUS.ONGOING
-                  ? numberFormat.format(count ?? 0)
-                  : partStatus[PART_PROGRESS.PART5][partStatus[PART_PROGRESS.PART5].status]}
-              </p>
-              <div
-                className={classNames(
-                  'mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]',
-                  poolTextStyle[partStatus[PART_PROGRESS.PART5].status],
-                )}
-              >
-                {partStatus[PART_PROGRESS.PART5].status === PARTICIPANT_STATUS.UPCOMING ? (
-                  '?,???'
-                ) : (
-                  <>${partStatus[PART_PROGRESS.PART5].prize}</>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
+        <div className="absolute right-0 top-0 z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
+        <div className="absolute right-0 top-0 z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
       </div>
     </div>
   );

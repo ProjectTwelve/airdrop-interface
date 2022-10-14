@@ -444,3 +444,21 @@ export type PredictionAnswerOMGItem = {
   votesTotalCurrent: string;
   walletAddress: string;
 };
+
+export type VoteRankItem = {
+  walletAddress: string;
+  votesTotalCurrent: number;
+  referralCount: number;
+  avatarFull: string;
+  personName: string;
+};
+
+export type RecentInvitationItem = {
+  invitorAddress: string;
+  invitorName: string;
+  invitorAvatar: string;
+  inviteeAddress: string;
+  inviteeName: string;
+  inviteeAvatar: string;
+  votes: number;
+};
