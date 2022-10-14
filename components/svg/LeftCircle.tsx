@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export function LeftCircle({ className }: { className?: string }) {
+export function LeftCircle({ className, color }: { className?: string; color?: string }) {
   return (
     <svg
       className={classNames('group cursor-pointer', className)}
@@ -11,7 +11,7 @@ export function LeftCircle({ className }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="18" cy="18" r="17" fill="#24273B" stroke="#555367" strokeWidth="1" />
+      <circle cx="18" cy="18" r="17" fill={color ?? '#24273B'} stroke="#555367" strokeWidth="1" />
       <path
         className="fill-p12-bg group-hover:fill-white"
         fillRule="evenodd"

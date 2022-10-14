@@ -20,8 +20,10 @@ import {
   fetchArcanaPredictions,
   fetchArcanaPredictionsAnswerCount,
   fetchArcanaPredictionsOMG,
+  fetchArcanaRecentInvitation,
   fetchArcanaUnlock,
   fetchArcanaVotes,
+  fetchArcanaVotesRank,
 } from '../lib/api';
 
 export const useArcanaVotes = (walletAddress?: string) => {
@@ -121,6 +123,20 @@ export const useArcanaAgent = () => {
 
 export const useArcanaAnswerOMG = () => {
   return useQuery(['arcana_answer_omg'], () => fetchArcanaAnswerOMG(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaVotesRank = () => {
+  return useQuery(['arcana_votes_rank'], () => fetchArcanaVotesRank(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaRecentInvitation = () => {
+  return useQuery(['arcana_recent_invitation'], () => fetchArcanaRecentInvitation(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
     refetchOnWindowFocus: false,
   });

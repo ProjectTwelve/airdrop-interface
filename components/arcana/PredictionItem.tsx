@@ -41,6 +41,7 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
   const tips = useMemo(() => {
     if (!data) return '';
     if (data.taskRequired === 'invite1') return 'Invite 1 new gamer to unlock';
+    if (data.taskRequired === 'invite2') return 'Invite 2 new gamers to unlock';
     if (data.taskRequired === 'invite3') return 'Invite 3 new gamers to unlock';
     if (data.taskRequired === 'quest3') return 'Finish Quest3 task to unlock';
     return '';

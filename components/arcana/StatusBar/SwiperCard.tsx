@@ -1,16 +1,13 @@
 import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Autoplay } from 'swiper';
 import { useAccount } from 'wagmi';
+import { useRecoilValue } from 'recoil';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Dialog from '../../dialog';
 import InfoDialog from './InfoDialog';
 import { openLink } from '../../../utils';
 import { MemeEvaluateItem } from '../../../lib/types';
 import { useArcanaMemeEvaluate } from '../../../hooks/arcana';
-
-import 'swiper/css';
-import 'swiper/css/autoplay';
-import { useRecoilValue } from 'recoil';
 import { arcanaObserverAtom } from '../../../store/arcana/state';
 
 export enum AudioStatus {
@@ -24,7 +21,7 @@ export enum MEME_ICON {
   CRY,
 }
 
-function Card({ data }: { data: MemeEvaluateItem }) {
+function  Card({ data }: { data: MemeEvaluateItem }) {
   const assetRef = useRef<HTMLAudioElement>(null);
   const [audioStatus, setAudioStatus] = useState<AudioStatus>(AudioStatus.PLAY);
   const audioStatusIcon = useMemo<Record<AudioStatus, ReactNode>>(

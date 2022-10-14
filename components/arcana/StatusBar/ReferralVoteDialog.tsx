@@ -66,7 +66,7 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
       accessor: 'votes',
       Cell: ({ value }: any) => (
         <div className="flex h-full items-center font-ddin text-2xl font-semibold">
-          <span className="mr-2">{value}</span> Votes
+          <span className="mr-2">{value}</span> {value > 1 ? 'Votes' : 'Vote'}
         </div>
       ),
     },

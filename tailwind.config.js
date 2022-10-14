@@ -56,6 +56,8 @@ module.exports = {
         'round-one': 'var(--round-one)',
         'round-two': 'url(https://cdn1.p12.games/airdrop/img/first_half_none.png)',
         'gradient-transparent': 'var(--gradient-transparent)',
+        'participant-1': 'var(--participant-1)',
+        'participant-2': 'var(--participant-2)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',
       },
