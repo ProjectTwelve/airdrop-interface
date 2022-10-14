@@ -44,8 +44,8 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
           <p className="z-10">{index && index > 3 ? index : null}</p>
         </div>
         <div className="ml-3 flex items-center justify-center">
-          <div className="h-[36px] w-[36px] overflow-hidden rounded bg-gray-300">
-            <img width={36} height={36} src={data?.avatarFull} alt="avatar" />
+          <div className="h-[36px] w-[36px] overflow-hidden rounded bg-black/50">
+            {data && <img width={36} height={36} src={data.avatarFull} alt="avatar" />}
           </div>
           <p className="ml-2 max-w-[90px] truncate font-medium xs:max-w-[120px]">{data?.personName}</p>
         </div>

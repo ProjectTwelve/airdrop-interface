@@ -14,12 +14,12 @@ function SwiperInviteVoteItem({ data }: { data: RecentInvitationItem }) {
       <div className="h-[30px] w-[30px] overflow-hidden rounded bg-gray-300">
         <img width={30} height={30} src={data.inviteeAvatar} alt="avatar" />
       </div>
-      <p className="ml-2 max-w-[120px] truncate font-medium">{data.inviteeName}</p>
-      <p className="ml-3">
+      <p className="ml-2 max-w-[120px] truncate font-medium">{data.inviteeName}</p>&nbsp;,
+      <p className="ml-2">
         get
-        <span className="font-medium text-p12-gold">
+        <span className="dota__gold text-lg font-medium">
           &nbsp;{data.votes}&nbsp;
-          {data.votes > 1 ? 'votes' : 'vote'}
+          {data.votes > 1 ? 'Votes' : 'Vote'}.
         </span>
       </p>
     </div>
