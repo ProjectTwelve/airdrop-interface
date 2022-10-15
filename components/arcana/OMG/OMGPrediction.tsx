@@ -22,12 +22,13 @@ import { useArcanaContract, useForwarderContract } from '../../../hooks/useContr
 import { useArcanaAnswer } from '../../../hooks/arcana';
 
 type OMGPredictionProps = {
+  isEnd?: boolean;
   item?: PredictionItemData;
   answer?: PredictionAnswer;
   votes?: number;
 };
 
-export default function OMGPrediction({ item, votes, answer }: OMGPredictionProps) {
+export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredictionProps) {
   const [isSubmit, setIsSubmit] = useRecoilState(arcanaPredictionOMGSubmitAtom);
   const GAS_LIMIT = 200000;
   const { chain } = useNetwork();
@@ -45,7 +46,8 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
   const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const answerSelect = useMemo(() => {
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
-  }, [answer]);
+    if (isEnd) return item?.optionList.filter((item) => item.id === 1)[0];
+  }, [answer, isEnd, item?.optionList]);
 
   const onSignAnswer = async () => {
     if (!address || !chain) return;
@@ -97,7 +99,7 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
 
   return (
     <div className="relative w-full max-w-[430px] rounded-lg">
-      <div className="rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
+      <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
         {isSubmit ? (
           <div className="w-full">
             <div className="rounded-t-lg bg-gradient-prediction px-5 py-4">
@@ -132,7 +134,7 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
             <div
               className="relative mt-5 h-[200px] w-[200px] cursor-pointer overflow-hidden rounded-lg"
               onClick={() => {
-                if (isObserver || !address || !isGenesisNFTHolder) return;
+                if (isObserver || !address || !isGenesisNFTHolder || isEnd) return;
                 setOpenDialog(true);
               }}
             >
@@ -167,7 +169,7 @@ export default function OMGPrediction({ item, votes, answer }: OMGPredictionProp
           </div>
         )}
       </div>
-      {!isSubmit && (
+      {!isSubmit && !isEnd && (
         <div className="mt-5">
           <div
             onClick={onSignAnswer}

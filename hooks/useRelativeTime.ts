@@ -15,10 +15,12 @@ function getTimeState(time?: Dayjs): string {
 export const useRelativeTime = (timestamp?: number) => {
   const [time, setTime] = useState<Dayjs>();
   const [state, setState] = useState<string>();
+
   useEffect(() => {
     if (!timestamp) return;
     setTime(dayjs.unix(timestamp));
   }, [timestamp]);
+
   useInterval(() => setState(getTimeState(time)), timestamp ? 1000 : null);
   return useMemo(() => state ?? getTimeState(time), [state, time]);
 };

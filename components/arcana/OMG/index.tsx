@@ -6,6 +6,7 @@ import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
 import OMGLuckyDraw from './OMGLuckyDraw';
 import { PredictionItemData } from '../../../lib/types';
+import { useIsMounted } from '../../../hooks/useIsMounted';
 import { ZERO_ADDRESS } from '../../../constants/addresses';
 import { useRelativeTime } from '../../../hooks/useRelativeTime';
 import { useArcanaPredictionsAnswerCount, useArcanaPredictionsOMG } from '../../../hooks/arcana';
@@ -14,10 +15,12 @@ import {
   arcanaPredictionOMGAnswerAtom,
   arcanaPredictionOMGSubmitAtom,
 } from '../../../store/arcana/state';
+import { openLink } from '../../../utils';
 
 export default function OMG() {
   const { address } = useAccount();
-  const [showOMG, setShowOMG] = useState<boolean>(false);
+  const isMounted = useIsMounted();
+  const [isOMGEnd, setIsOMGEnd] = useState<boolean>(false);
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
   const [isSubmit, setIsSubmit] = useRecoilState(arcanaPredictionOMGSubmitAtom);
   const { data: AnswerCount } = useArcanaPredictionsAnswerCount();
@@ -36,15 +39,15 @@ export default function OMG() {
     if (!predictionItem) return;
     const endDate = dayjs.unix(predictionItem.endDate);
     const currentDate = dayjs();
-    if (currentDate < endDate) {
-      setShowOMG(true);
+    if (currentDate > endDate) {
+      setIsOMGEnd(true);
     }
     if (predictionItem.answer && predictionItem.answer.length > 0) {
       setIsSubmit(true);
     }
   }, [predictionItem, setIsSubmit]);
 
-  if (!showOMG) return null;
+  if (!isMounted) return null;
 
   return (
     <div
@@ -64,19 +67,34 @@ export default function OMG() {
           </div>
           <p className="text-[22px] font-medium tracking-[1px]">At the tip of your finger!</p>
         </div>
-        <div className="text-xl font-medium">
-          Drop Time <span className="font-ddin text-[30px] font-bold text-p12-gold">{relativeTime}</span>
-        </div>
+        {!isOMGEnd && (
+          <div className="text-xl font-medium">
+            Drop Time <span className="font-ddin text-[30px] font-bold text-p12-gold">{relativeTime}</span>
+          </div>
+        )}
       </div>
       <div className="mt-12 mb-10">
-        {isSubmit ? (
+        {isSubmit || isOMGEnd ? (
           <div>
-            <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">Correct Answer!</p>
+            <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">
+              {isOMGEnd ? 'Congratulations to the Winners!' : 'Correct Answer!'}
+            </p>
             <p className="mt-3 text-center text-xl font-medium leading-[22px]">
-              You have the chance to win the following rewards.
+              {isOMGEnd ? (
+                <>
+                  Please claim your reward through our&nbsp;
+                  <span onClick={() => openLink('https://discord.gg/p12')} className="cursor-pointer text-p12-link">
+                    Discord
+                  </span>
+                  &nbsp;!
+                </>
+              ) : (
+                'You have the chance to win the following rewards.'
+              )}
             </p>
             <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col md:items-center md:px-0">
               <OMGPrediction
+                isEnd={isOMGEnd}
                 answer={predictionAnswer[0]}
                 item={predictionItem}
                 votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
@@ -88,6 +106,7 @@ export default function OMG() {
         ) : (
           <div className="flex items-center justify-center">
             <OMGPrediction
+              isEnd={isOMGEnd}
               item={predictionItem}
               answer={predictionAnswer[0]}
               votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
