@@ -77,7 +77,7 @@ export default function OMG() {
         {isSubmit || isOMGEnd ? (
           <div>
             <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">
-              {isOMGEnd ? 'Congratulations to the following Winners!' : 'Correct Answer!'}
+              {isOMGEnd ? 'Congratulations to the following Winners' : 'Correct Answer'}
             </p>
             <p className="mt-3 text-center text-xl font-medium leading-[22px]">
               {isOMGEnd ? (
@@ -86,7 +86,6 @@ export default function OMG() {
                   <span onClick={() => openLink('https://discord.gg/p12')} className="cursor-pointer text-p12-link">
                     Discord
                   </span>
-                  &nbsp;!
                 </>
               ) : (
                 'You have the chance to win the following rewards.'
