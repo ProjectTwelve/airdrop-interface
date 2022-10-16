@@ -441,7 +441,7 @@ export type PredictionAnswerOMGItem = {
   avatarFull: string;
   personName: string;
   predictionCode: string;
-  votesTotalCurrent: string;
+  votesTotalCurrent: number;
   walletAddress: string;
 };
 

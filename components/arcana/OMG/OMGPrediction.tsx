@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { BigNumber } from '@ethersproject/bignumber';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useAccount, useNetwork, useSignTypedData, useSwitchNetwork } from 'wagmi';
-import OMGPredictionDialog from './OMGPredictionDialog';
-import { PredictionAnswerParams, PredictionItemData } from '../../../lib/types';
+import Message from '../../message';
 import { objectSortByKey } from '../../../utils';
 import { ARCANA_CHAIN_ID } from '../../../constants';
+import { useArcanaAnswer } from '../../../hooks/arcana';
+import OMGPredictionDialog from './OMGPredictionDialog';
 import {
   arcanaGenesisNFTHolderAtom,
   arcanaObserverAtom,
@@ -17,9 +18,8 @@ import {
   PredictionAnswer,
 } from '../../../store/arcana/state';
 import { getArcanaSignTypeData, getIpfsAnswer } from '../../../utils/arcana';
-import Message from '../../message';
+import { PredictionAnswerParams, PredictionItemData } from '../../../lib/types';
 import { useArcanaContract, useForwarderContract } from '../../../hooks/useContract';
-import { useArcanaAnswer } from '../../../hooks/arcana';
 
 type OMGPredictionProps = {
   isEnd?: boolean;
@@ -98,7 +98,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   };
 
   return (
-    <div className="relative w-full max-w-[430px] rounded-lg">
+    <div className="relative w-full max-w-[430px] rounded-lg md:order-1">
       <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
         {isSubmit ? (
           <div className="w-full">

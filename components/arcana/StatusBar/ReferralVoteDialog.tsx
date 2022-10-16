@@ -99,7 +99,7 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
           <span className="text-red-600">*</span> A valid invitee is required to claim P12 Genesis NFT after Sep 10th.
         </p>
       </div>
-      <div className="h-[300px]">
+      <div className="min-h-[300px] max-h-[400px]">
         <Table
           loading={isLoading}
           className="mt-3 max-w-[95vw] overflow-x-auto"

@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { useArcanaAnswerOMG } from '../../../hooks/arcana';
+import React from 'react';
 import { PredictionAnswerOMGItem } from '../../../lib/types';
+// import { useArcanaAnswerOMG } from '../../../hooks/arcana';
 
 type Reward = {
   index: string;
@@ -19,7 +19,7 @@ function TopVoteItem({ reward, data }: { reward: Reward; data: PredictionAnswerO
           <div className="h-[44px] w-[44px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
             <img loading="lazy" className="h-full w-full object-cover" src={data.avatarFull} alt="avatar" />
           </div>
-          <p className="ml-2 max-w-[120px] truncate text-sm xs:max-w-[60px] xs:text-xs">{data.personName}</p>
+          <p className="ml-2 max-w-[120px] truncate text-sm xs:max-w-[80px] xs:text-xs">{data.personName}</p>
         </div>
       </div>
       <div className="font-ddin text-2xl font-bold xs:text-base">{data.votesTotalCurrent} Votes</div>
@@ -27,9 +27,32 @@ function TopVoteItem({ reward, data }: { reward: Reward; data: PredictionAnswerO
   );
 }
 
-export default function OMGTopVotes({ code }: { code?: string }) {
-  const { data } = useArcanaAnswerOMG();
-  const voteUserList = useMemo(() => (data && code ? data[code] : undefined), [code, data]);
+export default function OMGTopVotes({}: { code?: string }) {
+  // const { data } = useArcanaAnswerOMG();
+  // const voteUserList = useMemo(() => (data && code ? data[code] : undefined), [code, data]);
+  const voteUserList: PredictionAnswerOMGItem[] = [
+    {
+      walletAddress: '0x51208b42aAb220175ED2Cbfb37B94FdA48776A49',
+      predictionCode: 'XgwpwGu1yYerVY2L',
+      personName: 'unknown',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/80adc4b39b1a9db2bd92b7f96ab146653001275b_full.jpg',
+      votesTotalCurrent: 970,
+    },
+    {
+      walletAddress: '0xF3894D78b7b667663b0AEEd7E0bc468b2278eEC3',
+      predictionCode: 'XgwpwGu1yYerVY2L',
+      personName: 'Mr.BallsJohnson',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/919ac3b08da2dfd88492dcf3fec1e4a96a1c8e67_full.jpg',
+      votesTotalCurrent: 920,
+    },
+    {
+      walletAddress: '0x9A29967dB9bB57bC4D16271B4B4884c2BEcEfCeD',
+      predictionCode: 'XgwpwGu1yYerVY2L',
+      personName: 'EnjoyMaloy / Паштет',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/3f1a1ca7804d794ac65e4bf5bc2ea94aadace96c_full.jpg',
+      votesTotalCurrent: 650,
+    },
+  ];
   const prices: Reward[] = [
     { index: '1st', price: 1200 },
     { index: '2nd', price: 800 },
@@ -49,8 +72,8 @@ export default function OMGTopVotes({ code }: { code?: string }) {
         </p>
         <p className="dota__gold mt-3 text-center font-ddin text-[42px] leading-[42px]">$2600</p>
       </div>
-      <div className="flex flex-1 flex-col gap-3 rounded-b-lg px-5 py-12 xs:py-4">
-        <p className="text-center text-sm leading-6">Current Winner</p>
+      <div className="flex flex-1 flex-col justify-between gap-3 rounded-b-lg px-5 py-12 xs:py-4">
+        <p className="text-center text-sm leading-6">Winners</p>
         {voteUserList &&
           voteUserList.map((item, index) => <TopVoteItem reward={prices[index]} data={item} key={item.walletAddress} />)}
       </div>
