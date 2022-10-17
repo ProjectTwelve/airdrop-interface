@@ -40,7 +40,7 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
 
   const onOpenPage = () => {
     ReactGA.event({ category: 'Arcana-Rank', action: 'Click', label: index?.toString() });
-    const url = window.location.origin + window.location.pathname + `?address=${data?.walletAddress}`;
+    const url = window.location.origin + `/arcana/${data?.walletAddress}`;
     openLink(url);
   };
 

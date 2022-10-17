@@ -1,22 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import Image from 'next/image';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/router';
-import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
-import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
-import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
-import Poster from '../../components/poster';
-import PosterCanvas from '../../components/poster/PosterCanvas';
-import { shortenSteamId } from '../../utils';
-import SteamProfileInfo from '../../components/gamer/SteamProfileInfo';
-import { useQuery } from '@tanstack/react-query';
-import { fetchGamerGames, fetchGamerInfo } from '../../lib/api';
-import Loading from '../../components/loading';
-import SteamGamesInfo from '../../components/gamer/SteamGamesInfo';
-import GamerGameItem from '../../components/gamer/GamerGameItem';
-import Empty from '../../components/empty';
+import Image from 'next/image';
 import Pagination from 'rc-pagination';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import Empty from '../../components/empty';
+import Poster from '../../components/poster';
+import { shortenSteamId } from '../../utils';
+import Loading from '../../components/loading';
+import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import SteamValue from '../../components/gamer/SteamValue';
+import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
+import { fetchGamerGames, fetchGamerInfo } from '../../lib/api';
+import PosterCanvas from '../../components/poster/PosterCanvas';
+import GamerGameItem from '../../components/gamer/GamerGameItem';
+import SteamGamesInfo from '../../components/gamer/SteamGamesInfo';
+import SteamProfileInfo from '../../components/gamer/SteamProfileInfo';
+import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 
 export default function GamerProfile() {
   const pageSize = 6;
@@ -54,7 +54,7 @@ export default function GamerProfile() {
           {isGamerInfoLoading && <Loading size={58} className="my-4 opacity-50" />}
           {gamerInfo && (
             <div className="flex items-center md:flex-col md:items-start">
-              <div className="mr-5 max-w-full flex md:mb-4">
+              <div className="mr-5 flex max-w-full md:mb-4">
                 <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
                 <div className="flex flex-col justify-around overflow-hidden">
                   <p className="truncate text-[26px] font-medium">{gamerInfo.person_name}</p>

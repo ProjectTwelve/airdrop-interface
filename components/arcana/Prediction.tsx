@@ -3,6 +3,7 @@ import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import PredictionItem from './PredictionItem';
+import { ZERO_ADDRESS } from '../../constants/addresses';
 import { referralCodeAtom } from '../../store/invite/state';
 import {
   arcanaObserverAtom,
@@ -11,7 +12,6 @@ import {
   arcanaPredictionCountAtom,
 } from '../../store/arcana/state';
 import { useArcanaPredictions, useArcanaPredictionsAnswerCount } from '../../hooks/arcana';
-import { ZERO_ADDRESS } from '../../constants/addresses';
 
 export default function Prediction() {
   const isObserver = useRecoilValue(arcanaObserverAtom);
@@ -33,7 +33,7 @@ export default function Prediction() {
   const onShareTwitter = () => {
     if (!address || !referralCode) return;
     ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Share' });
-    const referralLink = window.location.origin + window.location.pathname + `?address=${address}&code=${referralCode}`;
+    const referralLink = window.location.origin + `/arcana/${address}?code=${referralCode}`;
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(
       'Join P12 Arcana @ TI11 tune into the Great Web3 Gaming Event Featuring #Dota2\n' +

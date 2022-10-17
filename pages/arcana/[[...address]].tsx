@@ -45,8 +45,13 @@ export default function Arcana() {
   }, [intersection]);
 
   useEffect(() => {
-    if (query.address) {
-      setOriginAddress(query.address as string);
+    const { address } = query;
+    if (typeof address === 'string') {
+      setOriginAddress(address);
+      setObserver(true);
+    }
+    if (typeof address === 'object') {
+      setOriginAddress(address[0]);
       setObserver(true);
     }
   }, [query, setObserver, setOriginAddress]);
