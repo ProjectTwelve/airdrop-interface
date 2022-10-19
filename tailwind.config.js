@@ -29,12 +29,15 @@ module.exports = {
         'p12-line': '#4E556D',
         'p12-bg': '#74788B',
         'p12-dialog': '#0C0C0C99',
+        'p12-from': 'var(--from)',
+        'p12-to': 'var(--to)',
       },
       fontFamily: {
         ddin: ['D-DIN'],
       },
       animation: {
         backdrop: 'backdrop 2s linear forwards',
+        omg: 'omg 1s linear infinite alternate',
       },
       keyframes: {
         backdrop: {
@@ -42,12 +45,16 @@ module.exports = {
           '50%': { backdropFilter: 'none' },
           '100%': { backdropFilter: 'blur(16px)', background: '#0C0C0C99' },
         },
+        omg: {
+          '0%': { boxShadow: 'inset 0 0 60px var(--omg-start)' },
+          '100%': { boxShadow: 'inset 0 0 60px var(--omg-end)' },
+        },
       },
       backgroundImage: {
         'profile-info': 'var(--profile-info)',
         'collab-info': 'var(--collab-info)',
-        'p12-gradient': 'var(--gradient)',
         'p12-logo': 'var(--logo)',
+        'p12-gradient': 'var(--gradient)',
         'p12-gradient-30': 'var(--gradient-30)',
         'p12-gradient-45': 'var(--gradient-45)',
         'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',
@@ -58,6 +65,8 @@ module.exports = {
         'gradient-transparent': 'var(--gradient-transparent)',
         'participant-1': 'var(--participant-1)',
         'participant-2': 'var(--participant-2)',
+        'omg-mask': 'var(--omg-mask)',
+        'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',
       },

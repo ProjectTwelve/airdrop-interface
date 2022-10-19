@@ -1,5 +1,8 @@
 .p12-theme-01 {
-    --omg-color: #C859FF80;
+    --omg-start: rgba(200, 89, 255, 0.25);
+    --omg-end: rgba(200, 89, 255, 0.85);
+    --omg-mask: linear-gradient(to bottom, rgba(200, 89, 255, 0.4) 0%, rgba(200, 89, 255, 0) 100%);
+    --omg-count: url('/img/theme/01/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_purple_1.webp');
     --participant-2: url('/img/arcana/participant_purple_2.webp');
     --logo: url('/img/theme/01/logo.svg');
@@ -9,13 +12,18 @@
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_purple.png');
     --gradient: repeating-linear-gradient(to right, #A011FF, #FF9E76);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A011FF, #FF9E76);
+    --from: #A011FF;
+    --to: #FF9E76;
     --gradient-30: repeating-linear-gradient(to right, #A011FF4D, #FF9E764D);
     --gradient-45: repeating-linear-gradient(to right, #A011FF73, #FF9E7673);
     --gradient-transparent: linear-gradient(to bottom, #A011FFA5, #00000000 80%);
 }
 
 .p12-theme-02 {
-    --omg-color: #1EDB8C80;
+    --omg-start: rgba(30, 219, 140, 0.25);
+    --omg-end: rgba(30, 219, 140, 0.85);
+    --omg-mask: linear-gradient(to bottom, rgba(30, 219, 140, 0.4) 0%, rgba(30, 219, 140, 0) 100%);
+    --omg-count: url('/img/theme/01/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_green_1.webp');
     --participant-2: url('/img/arcana/participant_green_2.webp');
     --logo: url('/img/theme/02/logo.svg');
@@ -25,13 +33,18 @@
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_green.png');
     --gradient: repeating-linear-gradient(to right, #09BDA0, #A3D365);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #09BDA0, #A3D365);
+    --from: #09BDA0;
+    --to: #A3D365;
     --gradient-30: repeating-linear-gradient(to right, #09BDA04D, #A3D3654D);
     --gradient-45: repeating-linear-gradient(to right, #09BDA073, #A3D36573);
     --gradient-transparent: linear-gradient(to bottom, #09BDA0A5, #00000000 80%);
 }
 
 .p12-theme-03 {
-    --omg-color: #FFAA2C80;
+    --omg-start: rgba(255, 170, 44, 0.25);
+    --omg-end: rgba(255, 170, 44, 0.85);
+    --omg-mask: linear-gradient(to bottom, rgba(255, 170, 44, 0.4) 0%, rgba(255, 170, 44, 0) 100%);
+    --omg-count: url('/img/theme/01/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_orange_1.webp');
     --participant-2: url('/img/arcana/participant_orange_2.webp');
     --logo: url('/img/theme/03/logo.svg');
@@ -41,13 +54,18 @@
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_orange.png');
     --gradient: repeating-linear-gradient(to right, #D9214D, #FFB876);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #D9214D, #FFB876);
+    --from: #D9214D;
+    --to: #FFB876;
     --gradient-30: repeating-linear-gradient(to right, #D9214D4D, #FFB8764D);
     --gradient-45: repeating-linear-gradient(to right, #D9214D73, #FFB87673);
     --gradient-transparent: linear-gradient(to bottom, #D9214DA5, #00000000 80%);
 }
 
 .p12-theme-04 {
-    --omg-color: #43BBFF80;
+    --omg-start: rgba(67, 187, 255, 0.25);
+    --omg-end: rgba(67, 187, 255, 0.85);
+    --omg-mask: linear-gradient(to bottom, rgba(67, 187, 255, 0.4) 0%, rgba(67, 187, 255, 0) 100%);
+    --omg-count: url('/img/theme/01/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_blue_1.webp');
     --participant-2: url('/img/arcana/participant_blue_2.webp');
     --logo: url('/img/theme/04/logo.svg');
@@ -57,6 +75,8 @@
     --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_blue.png');
     --gradient: repeating-linear-gradient(to right, #A072FF, #3592FF);
     --card: linear-gradient(to right, #000000, #000000), linear-gradient(to right, #A072FF, #3592FF);
+    --from: #A072FF;
+    --to: #3592FF;
     --gradient-30: repeating-linear-gradient(to right, #A072FF4D, #3592FF4D);
     --gradient-45: repeating-linear-gradient(to right, #A072FF73, #3592FF73);
     --gradient-transparent: linear-gradient(to bottom, #A072FFA5, #00000000 80%);

@@ -1,81 +1,70 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PredictionAnswerOMGItem } from '../../../lib/types';
-// import { useArcanaAnswerOMG } from '../../../hooks/arcana';
+import { useArcanaAnswerOMG } from '../../../hooks/arcana';
+import Empty from '../../empty';
 
 type Reward = {
   index: string;
   price: number;
 };
 
-function TopVoteItem({ reward, data }: { reward: Reward; data: PredictionAnswerOMGItem }) {
+function TopVoteItem({ reward, data }: { reward: Reward | number; data: PredictionAnswerOMGItem }) {
   return (
-    <div className="flex items-center justify-between rounded border border-[#6F7784]/50 bg-gradient-prediction p-3.5 xs:p-2">
+    <div className="flex items-center justify-between">
       <div className="flex items-center justify-center">
-        <div className="w-[80px] 2xl:w-[105px] xs:w-[65px]">
-          <p className="text-xs">{reward.index}</p>
-          <p className="font-ddin text-2xl font-bold leading-6 text-p12-gold xs:text-base">${reward.price}</p>
+        <div className="flex h-[30px] w-[70px] flex-col justify-center xs:w-[65px]">
+          <p className="text-[10px] leading-[10px]">{typeof reward === 'number' ? reward + 'th' : reward.index}</p>
+          {typeof reward === 'number' ? null : (
+            <p className="mt-1 font-ddin text-xl font-bold leading-4 text-p12-gold">${reward.price}</p>
+          )}
         </div>
         <div className="flex items-center justify-center">
-          <div className="h-[44px] w-[44px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
+          <div className="h-[30px] w-[30px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
             <img loading="lazy" className="h-full w-full object-cover" src={data.avatarFull} alt="avatar" />
           </div>
-          <p className="ml-2 max-w-[120px] truncate text-sm xs:max-w-[80px] xs:text-xs">{data.personName}</p>
+          <p className="ml-2 w-[110px] truncate text-sm font-medium xs:w-[75px] xs:text-xs">{data.personName}</p>
         </div>
       </div>
-      <div className="font-ddin text-2xl font-bold xs:text-base">{data.votesTotalCurrent} Votes</div>
+      <div className="font-ddin font-bold">{data.votesTotalCurrent} Invites</div>
+      <div className="font-ddin font-bold">{data.votesTotalCurrent} Votes</div>
     </div>
   );
 }
 
-export default function OMGTopVotes({}: { code?: string }) {
-  // const { data } = useArcanaAnswerOMG();
-  // const voteUserList = useMemo(() => (data && code ? data[code] : undefined), [code, data]);
-  const voteUserList: PredictionAnswerOMGItem[] = [
-    {
-      walletAddress: '0x51208b42aAb220175ED2Cbfb37B94FdA48776A49',
-      predictionCode: 'XgwpwGu1yYerVY2L',
-      personName: 'unknown',
-      avatarFull: 'https://avatars.akamai.steamstatic.com/80adc4b39b1a9db2bd92b7f96ab146653001275b_full.jpg',
-      votesTotalCurrent: 970,
-    },
-    {
-      walletAddress: '0xF3894D78b7b667663b0AEEd7E0bc468b2278eEC3',
-      predictionCode: 'XgwpwGu1yYerVY2L',
-      personName: 'Mr.BallsJohnson',
-      avatarFull: 'https://avatars.akamai.steamstatic.com/919ac3b08da2dfd88492dcf3fec1e4a96a1c8e67_full.jpg',
-      votesTotalCurrent: 920,
-    },
-    {
-      walletAddress: '0x9A29967dB9bB57bC4D16271B4B4884c2BEcEfCeD',
-      predictionCode: 'XgwpwGu1yYerVY2L',
-      personName: 'EnjoyMaloy / Паштет',
-      avatarFull: 'https://avatars.akamai.steamstatic.com/3f1a1ca7804d794ac65e4bf5bc2ea94aadace96c_full.jpg',
-      votesTotalCurrent: 650,
-    },
-  ];
+export default function OMGTopVotes({ code }: { code?: string }) {
+  const { data } = useArcanaAnswerOMG();
+  const voteUserList = useMemo(() => (data && code ? data[code] : undefined), [code, data]);
   const prices: Reward[] = [
-    { index: '1st', price: 1200 },
-    { index: '2nd', price: 800 },
-    { index: '3rd', price: 600 },
+    { index: '1st', price: 3000 },
+    { index: '2nd', price: 1600 },
+    { index: '3rd', price: 1200 },
+    { index: '4th', price: 800 },
+    { index: '5th', price: 400 },
   ];
   return (
     <div
-      className="flex w-full max-w-[450px] flex-col rounded-lg"
+      className="flex w-full max-w-[412px] flex-col rounded-lg backdrop-blur-lg"
       style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
     >
       <div
-        className="w-full rounded-t-lg border border-[#EB6A55] py-[30px]"
+        className="flex w-full items-center justify-between rounded-t-lg border border-[#EB6A55] py-5 px-4"
         style={{ background: 'linear-gradient(to top, #98322D 0%, #C84435 51.95%, #C94435 51.96%, #E85136 100%)' }}
       >
-        <p className="text-center text-xl font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
+        <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Top Votes Reward
         </p>
-        <p className="dota__gold mt-3 text-center font-ddin text-[42px] leading-[42px]">$2600</p>
+        <p className="dota__gold text-center font-ddin text-[26px]">$7000</p>
       </div>
-      <div className="flex flex-1 flex-col justify-between gap-3 rounded-b-lg px-5 py-12 xs:py-4">
-        <p className="text-center text-sm leading-6">Winners</p>
-        {voteUserList &&
-          voteUserList.map((item, index) => <TopVoteItem reward={prices[index]} data={item} key={item.walletAddress} />)}
+      <div className="p-4 pb-[14px]">
+        <div className="vertical-scroll -mr-2 flex max-h-[150px] flex-col gap-[10px] overflow-y-auto rounded-b-lg pr-2">
+          {voteUserList ? (
+            voteUserList.map((item, index) => (
+              <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />
+            ))
+          ) : (
+            <Empty color="#474C55" />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
 import Participant from '../../components/arcana/Participant';
 import Prediction from '../../components/arcana/Prediction';
 import OMG from '../../components/arcana/OMG';
+import OMGv1 from '../../components/arcana/OMG/OMGv1';
 import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
@@ -127,9 +128,12 @@ export default function Arcana() {
         <div className="mt-12 md:mt-8">
           <Prediction />
         </div>
-        <div className="relative mt-12 flex w-full items-end justify-center xs:mt-8">
-          <h3 className="absolute top-[60px] text-[30px] font-medium">Engage in community</h3>
-          <div className="-ml-8 max-w-[340px] cursor-pointer">
+        <div className="mt-12 md:mt-8">
+          <OMGv1 />
+        </div>
+        <div className="relative flex w-full items-end justify-center xs:mt-8">
+          <h3 className="absolute top-12 text-[26px] font-medium">Engage in community</h3>
+          <div className="-ml-8 max-w-[291px] cursor-pointer">
             <video
               muted
               poster="https://cdn1.p12.games/airdrop/arcana/abaddon.png"
@@ -141,24 +145,24 @@ export default function Arcana() {
           </div>
           <div className="mb-8">
             <div
-              className="mb-5 flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
               onClick={() => openLink('https://discord.gg/p12')}
             >
-              <img className="mr-2" src="/img/discord.png" width={24} height={24} alt="" />
+              <img className="mr-2" src="/img/discord.png" width={20} height={20} alt="" />
               Discord
             </div>
             <div
-              className="mb-5 flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
               onClick={() => openLink('https://twitter.com/_p12_')}
             >
-              <img className="mr-2" src="/img/twitter.png" width={24} height={24} alt="" />
+              <img className="mr-2" src="/img/twitter.png" width={20} height={20} alt="" />
               Twitter
             </div>
             <div
-              className="flex w-[126px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 backdrop-blur hover:bg-p12-black"
+              className="flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
               onClick={() => openLink('https://mirror.xyz/p12.eth')}
             >
-              <img className="mr-2" src="/img/mirror.png" width={24} height={24} alt="" />
+              <img className="mr-2" src="/img/mirror.png" width={20} height={20} alt="" />
               Mirror
             </div>
           </div>
