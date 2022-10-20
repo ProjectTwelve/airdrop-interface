@@ -111,7 +111,7 @@ export default function OMGv1() {
           <div className="rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
             <div className="w-full">
               <div className="rounded-t-lg bg-gradient-prediction p-4">
-                <p className="text-xl font-medium leading-5">Venue</p>
+                <p className="font-medium leading-5">Venue</p>
                 <p className="text-xs leading-3">Where is the TI11 Main Event held?</p>
               </div>
               <div className="h-0.5 bg-p12-gradient"></div>
@@ -125,7 +125,7 @@ export default function OMGv1() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col justify-between text-center">
-                  <div className="text-xl font-medium leading-5">Singapore</div>
+                  <div className="font-medium leading-5">Singapore</div>
                   <div className="flex items-center justify-center">
                     <div className="flex flex-1 flex-col items-center justify-center">
                       <h3 className="text-xs font-medium">Total Tipsters</h3>
