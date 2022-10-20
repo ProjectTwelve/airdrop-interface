@@ -29,6 +29,11 @@ export default function OMG() {
   const predictionItem = useMemo<PredictionItemData | undefined>(() => (data ? data[0] : undefined), [data]);
   const relativeTime = useRelativeTime(predictionItem?.endDate);
 
+  const onAnchorClick = () => {
+    const omgV1 = document.querySelector('#omg_v1');
+    omgV1?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+
   useEffect(() => {
     if (!data) return;
     const answers = data.map((item) => ({ predictionCode: item.predictionCode, answer: item.answer }));
@@ -77,16 +82,17 @@ export default function OMG() {
               <span className="text-right font-ddin text-[24px] font-bold text-p12-gold">{relativeTime}</span>
             </div>
           )}
-          <p className="mt-1.5 text-right text-sm xs:text-center">
-            <a className=" font-medium text-p12-link" href="#omg_v1">
-              Back to Round 1&nbsp;
-              <svg width="16" className="inline" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M9.38367 8.0166L5.09174 12.3085L6.22311 13.4399L11.6464 8.0166L6.22311 2.5933L5.09174 3.72467L9.38367 8.0166Z"
-                  fill="#43BBFF"
-                />
-              </svg>
-            </a>
+          <p
+            className="mt-1.5 cursor-pointer text-right text-sm font-medium text-p12-link xs:text-center"
+            onClick={onAnchorClick}
+          >
+            Back to Round 1&nbsp;
+            <svg width="16" className="inline" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.38367 8.0166L5.09174 12.3085L6.22311 13.4399L11.6464 8.0166L6.22311 2.5933L5.09174 3.72467L9.38367 8.0166Z"
+                fill="#43BBFF"
+              />
+            </svg>
           </p>
         </div>
       </div>
