@@ -29,33 +29,33 @@ export default function Participant() {
   }, [count]);
 
   return (
-    <div className="overflow-x-scroll lg:max-w-[40%] xl:max-w-[45%] 2xl:max-w-[600px]">
-      <div className="relative flex w-[600px] bg-black/30">
-        <div className="z-10 h-[120px] w-[289px] bg-[url('/img/arcana/participant_now.svg')]">
+    <div className="overflow-x-scroll lg:max-w-[30%] xl:max-w-[40%] 2xl:max-w-[514px]">
+      <div className="relative flex w-[514px] bg-black/30">
+        <div className="z-10 h-[102px] w-[248px] bg-[url('/img/arcana/participant_now.svg')]">
           <div className="mt-5 ml-5">
             <div className="flex items-center">
-              <p className="font-medium text-p12-gold">Participants</p>
-              <p className="dota__gold flex-1 text-center font-ddin text-[30px] font-bold leading-[30px] text-p12-success">
+              <p className="dota__gold text-sm font-medium">Participants</p>
+              <p className="dota__gold flex-1 text-center font-ddin text-2xl font-bold leading-6 text-p12-success">
                 {numberFormat.format(count ?? 0)}
               </p>
             </div>
             <div className="mt-3 flex items-center">
-              <p className="flex-none font-medium text-p12-gold">Prize Pool</p>
-              <div className="dota__gold flex flex-1 items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px]">
+              <p className="dota__gold flex-none text-sm font-medium">Prize Pool</p>
+              <div className="dota__gold flex flex-1 items-center justify-center text-center font-ddin text-[30px] font-bold leading-[30px]">
                 ${current.prize}
               </div>
             </div>
           </div>
         </div>
-        <div className="-ml-[26px] h-[120px] w-[268px] bg-participant-1 bg-cover backdrop-blur">
+        <div className="-ml-[22px] h-[102px] w-[228px] bg-participant-1 bg-cover bg-cover backdrop-blur">
           <p className="mt-5 text-center font-ddin text-xl font-bold leading-[30px] text-p12-darkgray">{current.nextUnlock}</p>
           <div className="mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px] text-p12-darkgray">
             ?,???
           </div>
         </div>
-        <div className="z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
-        <div className="absolute right-0 top-0 z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
-        <div className="absolute right-0 top-0 z-20 -ml-[26px] h-[120px] w-[95px] bg-participant-2 bg-cover" />
+        <div className="z-20 -ml-[22px] h-[102px] w-[82px] bg-participant-2 bg-cover" />
+        <div className="absolute right-0 top-0 z-20 -ml-[22px] h-[102px] w-[82px] bg-participant-2 bg-cover" />
+        <div className="absolute right-0 top-0 z-20 -ml-[22px] h-[102px] w-[82px] bg-participant-2 bg-cover" />
       </div>
     </div>
   );

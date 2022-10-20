@@ -111,8 +111,8 @@ export default function OMGv1() {
           <div className="rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
             <div className="w-full">
               <div className="rounded-t-lg bg-gradient-prediction p-4">
-                <p className="text-xl font-medium leading-6">Venue</p>
-                <p className="text-sm">Where is the TI11 Main Event held?</p>
+                <p className="text-xl font-medium leading-5">Venue</p>
+                <p className="text-xs leading-3">Where is the TI11 Main Event held?</p>
               </div>
               <div className="h-0.5 bg-p12-gradient"></div>
               <div className="flex p-5 pr-0">
@@ -153,7 +153,7 @@ export default function OMGv1() {
             <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
               Top Votes Reward
             </p>
-            <p className="dota__gold text-center font-ddin text-[26px]">$2600</p>
+            <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$2600</p>
           </div>
           <div className="flex flex-1 flex-col gap-2 rounded-b-lg px-4 py-5">
             <p className="mb-[10px] text-center text-xs text-[#A5A6AB]">Winners</p>
@@ -173,7 +173,7 @@ export default function OMGv1() {
             <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
               Lucky Draw
             </p>
-            <p className="dota__gold text-center font-ddin text-[26px]">$800 x 3</p>
+            <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$800 x 3</p>
           </div>
           <div className="flex flex-1 flex-col gap-2 rounded-b-lg px-4 py-5">
             <p className="mb-[10px] text-center text-xs text-[#A5A6AB]">Winners</p>

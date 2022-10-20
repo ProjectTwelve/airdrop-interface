@@ -113,12 +113,12 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
         <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000080 0%, #25293080 100%)' }}>
           <div className="grid grid-cols-2 gap-4">
             <div className="h-[136px] bg-omg-count bg-cover">
-              <p className="mt-6 text-center text-sm font-medium">My OMG Invitees</p>
-              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
+              <p className="mt-[28px] text-center text-sm font-medium">My OMG Invitees</p>
+              <p className="mt-[22px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
             <div className="h-[136px] bg-omg-count bg-cover">
-              <p className="mt-6 text-center text-sm font-medium">Votes from invitees</p>
-              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
+              <p className="mt-[28px] text-center text-sm font-medium">Votes from invitees</p>
+              <p className="mt-[22px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
           <div className="mt-5 text-center text-sm text-p12-gold">Increase probability of winning by</div>

@@ -52,7 +52,7 @@ export default function OMGTopVotes() {
         <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Top Votes Reward
         </p>
-        <p className="dota__gold text-center font-ddin text-[26px]">$7000</p>
+        <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$7000</p>
       </div>
       <div className="p-4 pb-[14px]">
         <div className="vertical-scroll -mr-2 flex h-[150px] flex-col gap-[10px] overflow-y-auto rounded-b-lg pr-2">

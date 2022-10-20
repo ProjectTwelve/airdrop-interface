@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import classNames from 'classnames';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
 import OMGLuckyDraw from './OMGLuckyDraw';
@@ -21,7 +22,7 @@ export default function OMG() {
   const isMounted = useIsMounted();
   const [isOMGEnd, setIsOMGEnd] = useState<boolean>(false);
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
-  const setIsSubmit = useSetRecoilState(arcanaPredictionOMGSubmitAtom);
+  const [isSubmit, setIsSubmit] = useRecoilState(arcanaPredictionOMGSubmitAtom);
   const { data: AnswerCount } = useArcanaPredictionsAnswerCount();
   const { data } = useArcanaPredictionsOMG(originAddress ?? address ?? ZERO_ADDRESS);
   const [predictionAnswer, setPredictionAnswer] = useRecoilState(arcanaPredictionOMGAnswerAtom);
@@ -49,8 +50,13 @@ export default function OMG() {
   if (!isMounted) return null;
 
   return (
-    <div>
-      <div className="flex items-center justify-between gap-2 rounded-xl bg-omg-mask px-[30px] py-2.5 pt-6 backdrop-blur-lg xs:flex-col xs:items-center">
+    <div className="overflow-hidden rounded-lg pb-6 backdrop-blur-lg">
+      <div
+        className={classNames(
+          'flex items-center justify-between gap-2 px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center',
+          isSubmit ? 'bg-omg-mask' : null,
+        )}
+      >
         <div>
           <div className="flex items-center xs:justify-center">
             <h2 className="text-[26px] font-medium leading-[30px]">OMG</h2>
@@ -73,7 +79,7 @@ export default function OMG() {
           )}
           <p className="mt-1.5 text-right text-sm xs:text-center">
             <a className=" font-medium text-p12-link" href="#omg_v1">
-              Back to First round&nbsp;
+              Back to Round 1&nbsp;
               <svg width="16" className="inline" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M9.38367 8.0166L5.09174 12.3085L6.22311 13.4399L11.6464 8.0166L6.22311 2.5933L5.09174 3.72467L9.38367 8.0166Z"

@@ -13,18 +13,15 @@ export default function OMGLuckyDraw() {
         <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Lucky Draw
         </p>
-        <p className="dota__gold text-center font-ddin text-[26px]">$600 x 5</p>
+        <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$600 x 5</p>
       </div>
       <div className="flex flex-col items-center rounded-b-lg pt-4 pb-3">
         <p className="max-w-[325px] text-center text-sm font-medium text-p12-gold">
           5 Lucky winners will be selected randomly to walk away with $600.
         </p>
-        <div className="relative mt-3 w-full">
-          <div className="absolute top-[22px] w-full bg-white/10 py-2 backdrop-blur-2xl">
-            <p className="text-center text-sm font-semibold">More Referral</p>
-            <p className="text-center text-sm font-semibold">Higher Winning Rate</p>
-          </div>
-          <img src="/img/arcana/present.webp" className="mx-auto" width={240} alt="present" />
+        <div className="relative mt-3 flex h-[94px] w-full flex-col justify-center bg-[url('/img/arcana/present.webp')] bg-cover bg-center">
+          <p className="text-center text-sm font-semibold">More Referral</p>
+          <p className="mb-1 text-center text-sm font-semibold">Higher Winning Rate</p>
         </div>
       </div>
     </div>
