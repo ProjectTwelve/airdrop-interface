@@ -13,6 +13,7 @@ import {
   arcanaGenesisNFTHolderAtom,
   arcanaInviteDialogAtom,
   arcanaObserverAtom,
+  arcanaOmgInviteCountAtom,
   arcanaPredictionAnswerAtom,
   arcanaPredictionOMGAnswerAtom,
   arcanaPredictionOMGSubmitAtom,
@@ -40,6 +41,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   const { signTypedDataAsync } = useSignTypedData();
   const isObserver = useRecoilValue(arcanaObserverAtom);
   const omgAnswer = useRecoilValue(arcanaPredictionOMGAnswerAtom);
+  const omgCount = useRecoilValue(arcanaOmgInviteCountAtom);
   const setInviteDialog = useSetRecoilState(arcanaInviteDialogAtom);
   const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
   const isGenesisNFTHolder = useRecoilValue(arcanaGenesisNFTHolderAtom);
@@ -96,6 +98,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
           toast.error(<Message message={msg} title="Ah shit, here we go again" />);
           return;
         }
+        toast.success(<Message message="Congratulations! Invite friends for more bounties!" title="Mission Complete" />);
         setIsSubmit(true);
       });
       setIsLoading(false);
@@ -106,16 +109,16 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
 
   return (
     <div className="relative w-full max-w-[412px] backdrop-blur-lg">
-      {!isSubmit ? (
+      {isSubmit ? (
         <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000080 0%, #25293080 100%)' }}>
           <div className="grid grid-cols-2 gap-4">
             <div className="h-[136px] bg-omg-count bg-cover">
               <p className="mt-6 text-center text-sm font-medium">My OMG Invitees</p>
-              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">224</p>
+              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
             <div className="h-[136px] bg-omg-count bg-cover">
               <p className="mt-6 text-center text-sm font-medium">Votes from invitees</p>
-              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">224</p>
+              <p className="mt-6 text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
           <div className="mt-5 text-center text-sm text-p12-gold">Increase probability of winning by</div>

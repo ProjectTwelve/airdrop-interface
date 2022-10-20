@@ -1,14 +1,14 @@
-import React, { useMemo } from 'react';
-import { PredictionAnswerOMGItem } from '../../../lib/types';
-import { useArcanaAnswerOMG } from '../../../hooks/arcana';
+import React from 'react';
 import Empty from '../../empty';
+import { useArcanaAnswerOMG2 } from '../../../hooks/arcana';
+import { PredictionAnswerOMG2Item } from '../../../lib/types';
 
 type Reward = {
   index: string;
   price: number;
 };
 
-function TopVoteItem({ reward, data }: { reward: Reward | number; data: PredictionAnswerOMGItem }) {
+function TopVoteItem({ reward, data }: { reward: Reward | number; data: PredictionAnswerOMG2Item }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center justify-center">
@@ -25,15 +25,14 @@ function TopVoteItem({ reward, data }: { reward: Reward | number; data: Predicti
           <p className="ml-2 w-[110px] truncate text-sm font-medium xs:w-[75px] xs:text-xs">{data.personName}</p>
         </div>
       </div>
-      <div className="font-ddin font-bold">{data.votesTotalCurrent} Invites</div>
-      <div className="font-ddin font-bold">{data.votesTotalCurrent} Votes</div>
+      <div className="font-ddin font-bold">{data.omgInviteCount} Invites</div>
+      <div className="font-ddin font-bold">{data.omgInviteVotes} Votes</div>
     </div>
   );
 }
 
-export default function OMGTopVotes({ code }: { code?: string }) {
-  const { data } = useArcanaAnswerOMG();
-  const voteUserList = useMemo(() => (data && code ? data[code] : undefined), [code, data]);
+export default function OMGTopVotes() {
+  const { data } = useArcanaAnswerOMG2();
   const prices: Reward[] = [
     { index: '1st', price: 3000 },
     { index: '2nd', price: 1600 },
@@ -56,11 +55,9 @@ export default function OMGTopVotes({ code }: { code?: string }) {
         <p className="dota__gold text-center font-ddin text-[26px]">$7000</p>
       </div>
       <div className="p-4 pb-[14px]">
-        <div className="vertical-scroll -mr-2 flex max-h-[150px] flex-col gap-[10px] overflow-y-auto rounded-b-lg pr-2">
-          {voteUserList ? (
-            voteUserList.map((item, index) => (
-              <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />
-            ))
+        <div className="vertical-scroll -mr-2 flex h-[150px] flex-col gap-[10px] overflow-y-auto rounded-b-lg pr-2">
+          {data ? (
+            data.map((item, index) => <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />)
           ) : (
             <Empty color="#474C55" />
           )}

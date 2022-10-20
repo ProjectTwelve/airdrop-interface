@@ -353,6 +353,8 @@ export type P12CommunityNft = {
 
 export type ArcanaUserVotes = {
   createdAt: number;
+  omgInviteCount?: number;
+  omgInviteVotes?: number;
   updatedAt: number;
   votesBabCurrent: number;
   votesBabLast: number;
@@ -443,6 +445,15 @@ export type PredictionAnswerOMGItem = {
   predictionCode: string;
   votesTotalCurrent: number;
   walletAddress: string;
+};
+
+export type PredictionAnswerOMG2Item = {
+  walletAddress: string;
+  predictionCode: string;
+  personName: string;
+  avatarFull: string;
+  omgInviteVotes: number;
+  omgInviteCount: number;
 };
 
 export type VoteRankItem = {

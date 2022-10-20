@@ -35,6 +35,7 @@ import {
   PredictionAnswerOMGItem,
   VoteRankItem,
   RecentInvitationItem,
+  PredictionAnswerOMG2Item,
 } from './types';
 
 /**
@@ -211,6 +212,9 @@ export const fetchArcanaAgent = (data: { signature: string; walletAddress: strin
 
 export const fetchArcanaAnswerOMG = () =>
   request.post<any, Response<Record<string, PredictionAnswerOMGItem[]>>>('/v2/ti/answer/omg', { size: 3 });
+
+export const fetchArcanaAnswerOMG2 = () =>
+  request.post<any, Response<PredictionAnswerOMG2Item[]>>('/v2/ti/omg2Rank', { size: 20 });
 
 export const fetchArcanaVotesRank = () => request.post<any, Response<VoteRankItem[]>>('/v2/ti/votesRank', { size: 42 });
 

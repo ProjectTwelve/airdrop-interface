@@ -23,7 +23,7 @@
     --omg-start: rgba(30, 219, 140, 0.25);
     --omg-end: rgba(30, 219, 140, 0.85);
     --omg-mask: linear-gradient(to bottom, rgba(30, 219, 140, 0.4) 0%, rgba(30, 219, 140, 0) 100%);
-    --omg-count: url('/img/theme/01/omg_count_bg.webp');
+    --omg-count: url('/img/theme/02/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_green_1.webp');
     --participant-2: url('/img/arcana/participant_green_2.webp');
     --logo: url('/img/theme/02/logo.svg');
@@ -44,7 +44,7 @@
     --omg-start: rgba(255, 170, 44, 0.25);
     --omg-end: rgba(255, 170, 44, 0.85);
     --omg-mask: linear-gradient(to bottom, rgba(255, 170, 44, 0.4) 0%, rgba(255, 170, 44, 0) 100%);
-    --omg-count: url('/img/theme/01/omg_count_bg.webp');
+    --omg-count: url('/img/theme/03/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_orange_1.webp');
     --participant-2: url('/img/arcana/participant_orange_2.webp');
     --logo: url('/img/theme/03/logo.svg');
@@ -65,7 +65,7 @@
     --omg-start: rgba(67, 187, 255, 0.25);
     --omg-end: rgba(67, 187, 255, 0.85);
     --omg-mask: linear-gradient(to bottom, rgba(67, 187, 255, 0.4) 0%, rgba(67, 187, 255, 0) 100%);
-    --omg-count: url('/img/theme/01/omg_count_bg.webp');
+    --omg-count: url('/img/theme/04/omg_count_bg.webp');
     --participant-1: url('/img/arcana/participant_blue_1.webp');
     --participant-2: url('/img/arcana/participant_blue_2.webp');
     --logo: url('/img/theme/04/logo.svg');

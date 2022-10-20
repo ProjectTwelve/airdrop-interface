@@ -70,3 +70,11 @@ export const arcanaPredictionOMGSubmitAtom = atom<boolean>({
   key: 'arcana_prediction_omg_submit_atom',
   default: false,
 });
+
+export const arcanaOmgInviteCountAtom = atom<{ inviteCount: number; inviteVotes: number }>({
+  key: 'arcana_omg_invite_count_atom',
+  default: {
+    inviteCount: 0,
+    inviteVotes: 0,
+  },
+});

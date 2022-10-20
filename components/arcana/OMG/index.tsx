@@ -91,7 +91,7 @@ export default function OMG() {
           item={predictionItem}
           votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
         />
-        <OMGTopVotes code={predictionItem?.predictionCode} />
+        <OMGTopVotes />
         <OMGLuckyDraw />
       </div>
     </div>
