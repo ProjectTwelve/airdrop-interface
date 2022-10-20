@@ -67,7 +67,7 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
         <p className="flex-1 text-center text-sm text-p12-gold">
           {data?.referralCount} {data && data.referralCount > 1 ? 'Invites' : 'Invite'}
         </p>
-        <p className="h-[16px] w-[2px] bg-[#6F7784]/50"></p>
+        <p className="h-[16px] w-[1px] bg-[#6F7784]/50"></p>
         <p className="flex-1 text-center text-sm text-p12-gold">
           {data?.votesTotalCurrent} {data && data.votesTotalCurrent > 1 ? 'Votes' : 'Vote'}
         </p>

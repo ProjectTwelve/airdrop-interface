@@ -118,8 +118,8 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
           {!isTimeLock && item?.ifLock && (
             <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-lg bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat py-[30px]">
               <div className="flex flex-1 flex-col items-center justify-center">
-                <p className="text-xl text-p12-gold">Prize of this Tip</p>
-                <p className="flex items-center justify-center font-ddin text-[42px] font-bold text-p12-gold">
+                <p className="text-p12-gold">Prize of this Tip</p>
+                <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
                   ${item?.maxPrice}
                 </p>
               </div>
@@ -172,21 +172,21 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
           <div className="mt-8 flex w-full items-center">
             <div className="flex items-center justify-center">
               <div className="px-6 text-center">
-                <h3 className="text-sm font-medium">Total Tipsters</h3>
-                <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
+                <h3 className="text-xs font-medium">Total Tipsters</h3>
+                <p className="font-ddin text-[26px] font-bold">{votes ?? 0}</p>
               </div>
               <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
             </div>
             <div className="flex flex-1 items-center justify-around px-3">
               <div className="text-center">
-                <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
-                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                <h3 className="text-xs font-medium text-p12-gold">Prize</h3>
+                <p className="flex items-center justify-center font-ddin text-[26px] font-bold text-p12-gold">
                   ${item?.currentPrice || 0}
                 </p>
               </div>
               <div className="text-center">
-                <h3 className="text-sm font-medium text-p12-gold">Upto</h3>
-                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">
+                <h3 className="text-xs font-medium text-p12-gold">Upto</h3>
+                <p className="flex items-center justify-center font-ddin text-[26px] font-bold text-p12-gold">
                   ${item?.maxPrice || 0}
                 </p>
               </div>

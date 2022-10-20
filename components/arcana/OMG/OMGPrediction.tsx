@@ -108,24 +108,24 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   };
 
   return (
-    <div className="relative w-full max-w-[412px] backdrop-blur-lg">
+    <div className="relative w-full max-w-[412px]">
       {isSubmit ? (
-        <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000080 0%, #25293080 100%)' }}>
+        <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000000 0%, #25293080 100%)' }}>
           <div className="grid grid-cols-2 gap-4">
             <div className="h-[136px] bg-omg-count bg-cover">
               <p className="mt-[28px] text-center text-sm font-medium">My OMG Invitees</p>
-              <p className="mt-[22px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
+              <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
             <div className="h-[136px] bg-omg-count bg-cover">
               <p className="mt-[28px] text-center text-sm font-medium">Votes from invitees</p>
-              <p className="mt-[22px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
+              <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
           <div className="mt-5 text-center text-sm text-p12-gold">Increase probability of winning by</div>
           <div className="px-4 pt-3 xs:p-3">
             <div
               onClick={() => setInviteDialog(true)}
-              className="dota__button dota__gold flex h-[50px] items-center justify-center text-xl"
+              className="dota__button dota__gold flex h-[44px] items-center justify-center "
             >
               + OMG Invites
             </div>

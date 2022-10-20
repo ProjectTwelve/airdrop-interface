@@ -48,8 +48,8 @@ export default function Participant() {
           </div>
         </div>
         <div className="-ml-[22px] h-[102px] w-[228px] bg-participant-1 bg-cover bg-cover backdrop-blur">
-          <p className="mt-5 text-center font-ddin text-xl font-bold leading-[30px] text-p12-darkgray">{current.nextUnlock}</p>
-          <div className="mt-3 flex items-center justify-center text-center font-ddin text-[36px] font-bold leading-[36px] text-p12-darkgray">
+          <p className="mt-5 text-center font-ddin font-bold leading-6 text-p12-darkgray">{current.nextUnlock}</p>
+          <div className="mt-3 flex items-center justify-center text-center font-ddin text-[30px] font-bold leading-[30px] text-p12-darkgray">
             ?,???
           </div>
         </div>

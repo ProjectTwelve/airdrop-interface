@@ -3,7 +3,7 @@ import React from 'react';
 export default function OMGLuckyDraw() {
   return (
     <div
-      className="flex w-full max-w-[412px] flex-col rounded-lg backdrop-blur-lg"
+      className="flex w-full max-w-[412px] flex-col rounded-lg"
       style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
     >
       <div

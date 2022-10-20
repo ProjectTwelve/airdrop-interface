@@ -77,13 +77,13 @@ export default function Arcana() {
               <h1 className="mt-4 font-['Henny_Penny'] text-[30px] leading-[40px]">P12 Arcana @ TI11</h1>
               <div className="mt-3 flex">
                 <p
-                  className="h-[22px] bg-[#7A3E1A] px-1.5 text-center text-xs leading-6"
+                  className="h-[22px] bg-[#7A3E1A] px-1.5 text-center text-xs leading-5"
                   style={{ boxShadow: 'inset 0 0 12px #220F04' }}
                 >
                   In Progress
                 </p>
                 <p
-                  className="h-[22px] bg-[#952E2F] px-4 text-center font-ddin text-xs font-bold leading-6"
+                  className="h-[22px] bg-[#952E2F] px-4 text-center font-ddin text-xs font-bold leading-5"
                   style={{ textShadow: '0 0 4px rgba(0, 0, 0, 0.5)' }}
                 >
                   10/1 - 10/28
@@ -94,9 +94,9 @@ export default function Arcana() {
               <SwiperInviteVote />
             </div>
           </div>
-          <div className="flex max-w-[435px] flex-col items-center justify-items-start rounded-lg border-2 border-white/10 bg-[#474747]/20 py-2 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
-            <h3 className="dota__gold text-xl leading-[44px]">Epic Prize Pool Sponsored by</h3>
-            <img className="py-6" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo_2.webp" alt="sponsor" />
+          <div className="flex max-w-[435px] flex-col items-center justify-items-start rounded-lg border-2 border-white/10 bg-[#474747]/20 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
+            <h3 className="dota__gold mt-5 text-xl leading-[44px]">Epic Prize Pool Sponsored by</h3>
+            <img className="py-8 pt-5" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo_2.webp" alt="sponsor" />
           </div>
         </div>
         <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
