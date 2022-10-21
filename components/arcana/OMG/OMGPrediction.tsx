@@ -50,8 +50,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const answerSelect = useMemo(() => {
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
-    if (isEnd) return item?.optionList.filter((item) => item.id === 1)[0];
-  }, [answer, isEnd, item?.optionList]);
+  }, [answer]);
 
   const onDialogClick = () => {
     if (isObserver || !address || !isGenesisNFTHolder || isEnd) return;
@@ -109,7 +108,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
 
   return (
     <div className="relative w-full max-w-[412px]">
-      {isSubmit ? (
+      {isSubmit || isEnd ? (
         <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000000 0%, #25293080 100%)' }}>
           <div className="grid grid-cols-2 gap-4">
             <div className="h-[136px] bg-omg-count bg-cover">
