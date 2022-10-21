@@ -146,7 +146,7 @@ export default function StatusBar({ data }: StatusBarProps) {
         </div>
       )}
       <EasterEgg level={level} show={easterEggShow} onMaskClick={() => setEasterEggShow(false)} />
-      <div className="flex w-[1000px] md:hidden">
+      <div className="flex w-[750px] md:hidden">
         <InfoCard onLevelClick={onLevelClick} level={level} data={data?.userInfo} />
         <MainCard data={data?.userVotes} userInfo={data?.userInfo} nftLevel={data?.userInfo.nftLevel} />
         <SwiperCard data={data?.memeEvaluate} />

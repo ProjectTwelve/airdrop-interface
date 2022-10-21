@@ -106,7 +106,7 @@ export default function Arcana() {
         <div className="mt-6">
           <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">
             {!data && (
-              <div className="absolute z-30 flex h-full w-[1000px] items-center justify-center bg-black/50 backdrop-blur md:w-full">
+              <div className="absolute z-30 flex h-full w-[750px] items-center justify-center bg-black/50 backdrop-blur md:w-full">
                 {isMounted && address ? (
                   isLoading ? (
                     <img className="animate-spin" src="/svg/loading.svg" width={48} height={48} alt="loading" />

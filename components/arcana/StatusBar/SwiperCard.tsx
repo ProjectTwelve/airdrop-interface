@@ -21,7 +21,7 @@ export enum MEME_ICON {
   CRY,
 }
 
-function  Card({ data }: { data: MemeEvaluateItem }) {
+function Card({ data }: { data: MemeEvaluateItem }) {
   const assetRef = useRef<HTMLAudioElement>(null);
   const [audioStatus, setAudioStatus] = useState<AudioStatus>(AudioStatus.PLAY);
   const audioStatusIcon = useMemo<Record<AudioStatus, ReactNode>>(
@@ -114,8 +114,8 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
 
   return (
     <div className="flex">
-      <div className="h-[160px] w-[224px] bg-[url('/img/arcana/statusbar/swiper_card_bg.webp')] bg-cover bg-no-repeat p-2 xs:h-[29.87vw] xs:w-[41.87vw] xs:p-[1.6vw]">
-        <div className="h-[100px] w-[210px] xs:h-[18.67vw] xs:w-[39.2vw]">
+      <div className="h-[120px] w-[168px] bg-[url('/img/arcana/statusbar/swiper_card_bg.webp')] bg-cover bg-no-repeat px-[5px] pt-[7px] pb-1.5 xs:h-[29.87vw] xs:w-[41.87vw] xs:p-[1.6vw]">
+        <div className="h-[75px] w-[158px] xs:h-[18.67vw] xs:w-[39.2vw]">
           <Swiper
             className="h-full w-full"
             loop
@@ -133,15 +133,15 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
             ))}
           </Swiper>
         </div>
-        <div className="mt-2 grid grid-cols-3 gap-2 xs:mt-[1.6vw] xs:gap-[1.6vw]">
+        <div className="mt-[4px] grid grid-cols-3 gap-2 xs:mt-[1.6vw] xs:gap-[1.6vw]">
           {activities.map((item) => (
             <div
               key={item.type}
-              className="activity flex items-center justify-center py-1.5 xs:py-[1vw]"
+              className="activity flex items-center justify-center py-1 xs:py-[1vw]"
               onClick={() => onMemeClick(item.type, swiperItem)}
             >
               <img
-                className="w-6 xs:w-[4.53vw]"
+                className="w-[18px] xs:w-[4.53vw]"
                 src={swiperItem?.evaluate === item.type ? item.checked : item.unchecked}
                 alt="activity"
               />
@@ -149,17 +149,17 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
           ))}
         </div>
       </div>
-      <div className="relative w-[84px] bg-[url('/img/arcana/statusbar/right.webp')] bg-cover bg-no-repeat xs:w-[15.73vw]">
+      <div className="relative w-[63px] bg-[url('/img/arcana/statusbar/right.webp')] bg-cover bg-no-repeat xs:w-[15.73vw]">
         <Dialog render={({ close }) => <InfoDialog close={close} />}>
           <img
-            className="activity absolute bottom-[80px] left-[15px] w-[27px] xs:left-[2.67vw] xs:bottom-[15vw] xs:w-[5.33vw]"
+            className="activity absolute bottom-[61px] left-3 w-[20px] xs:left-[2.67vw] xs:bottom-[15vw] xs:w-[5.33vw]"
             src="/img/arcana/statusbar/info.webp"
             alt="info"
           />
         </Dialog>
         <img
           onClick={() => openLink('https://discord.gg/p12')}
-          className="activity absolute bottom-5 left-[15px] w-[27px] xs:left-[2.67vw] xs:bottom-[4vw] xs:w-[5.33vw]"
+          className="activity absolute bottom-4 left-3 w-[20px] xs:left-[2.67vw] xs:bottom-[4vw] xs:w-[5.33vw]"
           src="/img/arcana/statusbar/discord.webp"
           alt="discord"
         />
