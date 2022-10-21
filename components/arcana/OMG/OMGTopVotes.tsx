@@ -36,9 +36,9 @@ export default function OMGTopVotes() {
   const prices: Reward[] = [
     { index: '1st', price: 3000 },
     { index: '2nd', price: 1600 },
-    { index: '3rd', price: 1200 },
+    { index: '3rd', price: 1000 },
     { index: '4th', price: 800 },
-    { index: '5th', price: 400 },
+    { index: '5th', price: 600 },
   ];
   return (
     <div
