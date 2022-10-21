@@ -22,7 +22,7 @@ export default function InfoCard({ data, level, onLevelClick }: InfoCardProps) {
           {level}
         </p>
       </div>
-      <div className="relative ml-[40px] h-[120px] w-[132px] overflow-hidden bg-gray-800 xs:ml-[9.87vw] xs:h-[29.87vw] xs:w-[32.5vw]">
+      <div className="relative ml-[39px] h-[120px] w-[132px] overflow-hidden bg-gray-800 xs:ml-[9.87vw] xs:h-[29.87vw] xs:w-[32.5vw]">
         <img className="absolute top-0 left-0 z-10 h-full w-full" src="/img/arcana/statusbar/mask.webp" alt="mask" />
         {data?.avatarFull && <img className="absolute top-0 left-0" src={data.avatarFull} alt="avatar" />}
         <p className="relative z-20 truncate px-2 pt-2 text-center text-xs text-p12-gold">{data?.personName || '--'}</p>
