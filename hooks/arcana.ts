@@ -7,6 +7,7 @@ import {
   arcanaMulticastCardAtom,
   arcanaMulticastVideoAtom,
   arcanaObserverAtom,
+  arcanaOmgInviteCountAtom,
   arcanaSignBindAtom,
   arcanaVoteCountAtom,
 } from '../store/arcana/state';
@@ -14,6 +15,7 @@ import {
   fetchArcanaAgent,
   fetchArcanaAnswer,
   fetchArcanaAnswerOMG,
+  fetchArcanaAnswerOMG2,
   fetchArcanaDistinctAddressCount,
   fetchArcanaInviteesVotes,
   fetchArcanaMemeEvaluate,
@@ -29,6 +31,7 @@ import {
 export const useArcanaVotes = (walletAddress?: string) => {
   const setGenesisNFTHolder = useSetRecoilState(arcanaGenesisNFTHolderAtom);
   const setVoteCount = useSetRecoilState(arcanaVoteCountAtom);
+  const setOmgInviteCount = useSetRecoilState(arcanaOmgInviteCountAtom);
   const setSignBind = useSetRecoilState(arcanaSignBindAtom);
   const setMulticastVideo = useSetRecoilState(arcanaMulticastVideoAtom);
   const setMulticastCard = useSetRecoilState(arcanaMulticastCardAtom);
@@ -42,6 +45,10 @@ export const useArcanaVotes = (walletAddress?: string) => {
       if (!data) return;
       setSignBind(data.bound);
       setVoteCount(data.userVotes.votesTotalCurrent);
+      setOmgInviteCount({
+        inviteCount: data.userVotes.omgInviteCount ?? 0,
+        inviteVotes: data.userVotes.omgInviteVotes ?? 0,
+      });
       if (!data.bound && !isObserver) {
         if (isMobile && isIOS) {
           setMulticastCard(true);
@@ -123,6 +130,13 @@ export const useArcanaAgent = () => {
 
 export const useArcanaAnswerOMG = () => {
   return useQuery(['arcana_answer_omg'], () => fetchArcanaAnswerOMG(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaAnswerOMG2 = () => {
+  return useQuery(['arcana_answer_omg2'], () => fetchArcanaAnswerOMG2(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
     refetchOnWindowFocus: false,
   });

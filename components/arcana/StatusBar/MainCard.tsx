@@ -52,10 +52,10 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   };
 
   return (
-    <div className="relative w-[462px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-4 py-2.5 md:w-full xs:px-3 xs:py-2">
+    <div className="relative w-[347px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-3 pt-2 py-1.5 md:w-full">
       {data && chain?.id === ARCANA_CHAIN_ID && (
         <Dialog render={({ close }) => <MulticastVoteDialog close={close} />}>
-          <div className="absolute -top-8 left-[28px] z-20 h-8 w-16 xs:left-6 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
+          <div className="absolute -top-[26px] left-[20px] z-20 h-[26px] w-[56px] xs:left-6 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
             <div className="group relative cursor-pointer overflow-hidden">
               <div className="absolute inset-0 z-10 hidden bg-white/10 group-hover:block"></div>
               <img className="relative" src="/img/arcana/statusbar/skill_add.webp" alt="add" />
@@ -63,37 +63,37 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           </div>
         </Dialog>
       )}
-      <div className="flex h-16 justify-between xs:h-[12.8vw]">
+      <div className="flex h-12 justify-between xs:h-[12.8vw]">
         <div className="flex">
-          <div className="mx-3 xs:mx-[2.15vw]">
-            <p className="h-[24px] text-sm font-medium text-p12-gold xs:h-[4.8vw] xs:text-xs">My Votes</p>
+          <div className="mx-2 xs:mx-[2.15vw]">
+            <p className="h-[18px] text-xs font-medium text-p12-gold xs:h-[4.8vw]">My Votes</p>
             <img
               src="/img/arcana/statusbar/multicast.webp"
               onClick={() => {
                 if (isMobile && isIOS) return;
                 setMulticastVideo(true);
               }}
-              className="activity mt-1.5 w-[60px] xs:w-[12vw]"
+              className="activity mt-1 w-[50px] xs:w-[12vw]"
               alt="multicast"
             />
           </div>
           <div
-            className="flex h-16 w-16 items-center justify-center rounded-full xs:h-[12.8vw] xs:w-[12.8vw]"
+            className="flex h-12 w-12 items-center justify-center rounded-full xs:h-[12.8vw] xs:w-[12.8vw]"
             style={{
               background: 'radial-gradient(50% 50% at 50% 50%, #FFFF91 0%, #FFFF98 29.14%, #D18C53 71.76%, #714E37 100%)',
             }}
           >
             <span
               className={classNames(
-                'h-[30px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text font-bold leading-[32px] text-transparent xs:text-[7.2vw]',
-                data && data.votesTotalCurrent > 1000 ? 'text-[24px]' : 'text-[32px]',
+                'h-[24px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text font-bold leading-[28px] text-transparent xs:text-[7.2vw]',
+                data && data.votesTotalCurrent > 1000 ? 'text-[20px]' : 'text-[28px]',
               )}
             >
               {data?.votesTotalCurrent || 0}
             </span>
           </div>
         </div>
-        <div className="mr-3 grid grid-cols-3 gap-[22px] xs:mr-[2.15vw]">
+        <div className="mr-2 grid grid-cols-3 gap-3 xs:mr-[2.15vw]">
           <Dialog
             render={({ close }) => (
               <GenesisVoteDialog
@@ -120,15 +120,15 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           </Dialog>
         </div>
       </div>
-      <div className="mt-3 xs:mt-2">
-        <div className="flex h-[30px] items-center justify-between rounded bg-[url('/img/arcana/statusbar/health.webp')] bg-cover bg-no-repeat px-3 xs:px-1.5">
-          <p className="flex-none text-sm text-p12-link xs:text-[10px]" style={{ textShadow: '0 0 6px #000000' }}>
+      <div className="mt-2">
+        <div className="flex h-[24px] items-center justify-between rounded bg-[url('/img/arcana/statusbar/health.webp')] bg-cover bg-no-repeat px-3 xs:px-1.5">
+          <p className="flex-none text-[10px] leading-3 text-p12-link" style={{ textShadow: '0 0 6px #000000' }}>
             My Referral Link
           </p>
-          <div className="dota__gold relative ml-2 h-[24px] truncate pr-12">
-            <span className="dota__gold text-[10px]">{referralLink.replace(/https?:\/\//g, '')}</span>
+          <div className="dota__gold relative ml-2 truncate pr-10">
+            <span className="dota__gold text-[10px] leading-3">{referralLink.replace(/https?:\/\//g, '')}</span>
             <button
-              className="copy__btn absolute top-0.5 right-0 h-[20px] w-[44px] text-white"
+              className="copy__btn absolute top-[3px] right-0 h-[18px] w-[36px] text-white"
               onClick={() => {
                 copyToClipboard(referralLink);
                 toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
@@ -138,7 +138,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
             </button>
           </div>
         </div>
-        <div className="relative mt-1 flex h-[30px] items-center justify-center overflow-hidden rounded bg-[url('/img/arcana/statusbar/mana_bg.webp')] bg-cover bg-no-repeat">
+        <div className="relative mt-0.5 flex h-[24px] items-center justify-center overflow-hidden rounded bg-[url('/img/arcana/statusbar/mana_bg.webp')] bg-cover bg-no-repeat">
           <img
             src="/img/arcana/statusbar/mana.webp"
             alt="mana"
@@ -147,7 +147,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           />
           <p
             className={classNames(
-              'relative z-10 select-none text-sm xs:text-[10px]',
+              'relative z-10 select-none text-[10px]',
               predictionAnswerCount === predictionCount && 'dota__gold cursor-pointer',
             )}
             style={{ textShadow: '0 0 6px #000000' }}

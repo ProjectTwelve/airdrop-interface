@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { useAccount } from 'wagmi';
+import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
@@ -15,7 +16,6 @@ import {
   arcanaPredictionOMGAnswerAtom,
   arcanaPredictionOMGSubmitAtom,
 } from '../../../store/arcana/state';
-import { openLink } from '../../../utils';
 
 export default function OMG() {
   const { address } = useAccount();
@@ -28,6 +28,11 @@ export default function OMG() {
   const [predictionAnswer, setPredictionAnswer] = useRecoilState(arcanaPredictionOMGAnswerAtom);
   const predictionItem = useMemo<PredictionItemData | undefined>(() => (data ? data[0] : undefined), [data]);
   const relativeTime = useRelativeTime(predictionItem?.endDate);
+
+  const onAnchorClick = () => {
+    const omgV1 = document.querySelector('#omg_v1');
+    omgV1?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
 
   useEffect(() => {
     if (!data) return;
@@ -50,68 +55,56 @@ export default function OMG() {
   if (!isMounted) return null;
 
   return (
-    <div
-      className="rounded-xl bg-black/30 py-8 px-14 backdrop-blur-lg xs:p-4"
-      style={{ border: '2px solid var(--omg-color)', boxShadow: 'inset 0 0 60px var(--omg-color)' }}
-    >
-      <div className="flex items-center justify-between gap-2 xs:flex-col xs:items-center">
+    <div className="overflow-hidden rounded-lg pb-6 backdrop-blur-lg">
+      <div
+        className={classNames(
+          'flex items-center justify-between gap-2 px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center',
+          isSubmit ? 'bg-omg-mask' : null,
+        )}
+      >
         <div>
-          <div className="flex items-center justify-between">
-            <h2 className="text-[48px] font-medium leading-[48px]">OMG</h2>
+          <div className="flex items-center xs:justify-center">
+            <h2 className="text-[26px] font-medium leading-[30px]">OMG</h2>
             <p
-              className="bg-clip-text text-[42px] font-bold leading-[48px] text-transparent"
+              className="ml-3 bg-clip-text text-[26px] font-bold leading-[30px] text-transparent"
               style={{ backgroundImage: 'linear-gradient(180deg, #FFFFDA 0%, #FFE7B6 50.34%, #A87945 100%)' }}
             >
-              $5,000
+              $10,000
             </p>
+            <p className="ml-3 text-sm text-[#A5A6AB]">Round 2</p>
           </div>
-          <p className="text-[22px] font-medium tracking-[1px]">At the tip of your finger!</p>
+          <p className="text-xs leading-5 xs:text-center">Only invitees after 2022/10/21 are counted in OMG sepcial round.</p>
         </div>
-        {!isOMGEnd && (
-          <div className="text-xl font-medium">
-            Drop Time <span className="font-ddin text-[30px] font-bold text-p12-gold">{relativeTime}</span>
-          </div>
-        )}
-      </div>
-      <div className="mt-12 mb-10">
-        {isSubmit || isOMGEnd ? (
-          <div>
-            <p className="text-center text-[30px] font-medium leading-[36px] text-p12-success">
-              {isOMGEnd ? 'Congratulations to the following Winners' : 'Correct Answer'}
-            </p>
-            <p className="mt-3 text-center text-xl font-medium leading-[22px]">
-              {isOMGEnd ? (
-                <>
-                  Please claim your reward through our&nbsp;
-                  <span onClick={() => openLink('https://discord.gg/p12')} className="cursor-pointer text-p12-link">
-                    Discord
-                  </span>
-                </>
-              ) : (
-                'You have the chance to win the following rewards.'
-              )}
-            </p>
-            <div className="mt-8 flex items-stretch justify-between gap-4 md:flex-col md:items-center md:px-0">
-              <OMGPrediction
-                isEnd={isOMGEnd}
-                answer={predictionAnswer[0]}
-                item={predictionItem}
-                votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
-              />
-              <OMGTopVotes code={predictionItem?.predictionCode} />
-              <OMGLuckyDraw />
+        <div>
+          {!isOMGEnd && (
+            <div className="flex items-center justify-center text-sm font-medium leading-6">
+              <span className="mr-3">Drop Time</span>
+              <span className="text-right font-ddin text-[24px] font-bold text-p12-gold">{relativeTime}</span>
             </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-center">
-            <OMGPrediction
-              isEnd={isOMGEnd}
-              item={predictionItem}
-              answer={predictionAnswer[0]}
-              votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
-            />
-          </div>
-        )}
+          )}
+          <p
+            className="mt-1.5 cursor-pointer text-right text-sm font-medium text-p12-link xs:text-center"
+            onClick={onAnchorClick}
+          >
+            Back to Round 1&nbsp;
+            <svg width="16" className="inline" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.38367 8.0166L5.09174 12.3085L6.22311 13.4399L11.6464 8.0166L6.22311 2.5933L5.09174 3.72467L9.38367 8.0166Z"
+                fill="#43BBFF"
+              />
+            </svg>
+          </p>
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between gap-4 px-[30px] md:flex-col md:items-center md:px-4">
+        <OMGPrediction
+          isEnd={isOMGEnd}
+          answer={predictionAnswer[0]}
+          item={predictionItem}
+          votes={AnswerCount && predictionItem ? AnswerCount[predictionItem.predictionCode] : 0}
+        />
+        <OMGTopVotes />
+        <OMGLuckyDraw />
       </div>
     </div>
   );

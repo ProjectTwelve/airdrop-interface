@@ -46,26 +46,28 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
 
   return (
     <div
-      className="omg__box h-[120px] min-w-[195px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg"
+      className="omg__box h-[102px] min-w-[195px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg"
       onClick={onOpenPage}
     >
-      <div className="flex items-center p-4 md:justify-center">
-        <div className="relative ml-1 flex h-[46px] w-[46px] items-center justify-center">
-          <img className="absolute top-0 left-0" width={46} src={rankImage} alt="" />
-          <p className="z-10">{index && index > 3 ? index : null}</p>
+      <div className="flex items-center pl-6 pt-3 pb-4 md:justify-center">
+        <div className="relative flex h-[40px] w-[40px] items-center justify-center">
+          <img className="absolute top-0 left-0" width={40} src={rankImage} alt="" />
+          <p className="z-10 text-sm">{index && index > 3 ? index : null}</p>
         </div>
-        <div className="ml-3 flex items-center justify-center">
-          <div className="h-[36px] w-[36px] overflow-hidden rounded bg-black/50">
-            {data && <img width={36} height={36} src={data.avatarFull} alt="avatar" />}
+        <div className="ml-4 flex items-center justify-center">
+          <div className="h-[30px] w-[30px] overflow-hidden rounded bg-black/50">
+            {data && <img width={30} height={30} src={data.avatarFull} alt="avatar" />}
           </div>
-          <p className="ml-2 max-w-[90px] truncate font-medium xs:max-w-[120px]">{data?.personName}</p>
+          <p className="ml-2 max-w-[90px] truncate text-sm font-medium 2xl:max-w-[120px] xs:max-w-[120px]">
+            {data?.personName}
+          </p>
         </div>
       </div>
       <div className="flex items-center justify-center">
         <p className="flex-1 text-center text-sm text-p12-gold">
           {data?.referralCount} {data && data.referralCount > 1 ? 'Invites' : 'Invite'}
         </p>
-        <p className="h-[16px] w-[2px] bg-[#6F7784]/50"></p>
+        <p className="h-[16px] w-[1px] bg-[#6F7784]/50"></p>
         <p className="flex-1 text-center text-sm text-p12-gold">
           {data?.votesTotalCurrent} {data && data.votesTotalCurrent > 1 ? 'Votes' : 'Vote'}
         </p>
@@ -88,17 +90,17 @@ export default function VoteRank() {
     <div className="relative flex-1">
       <div
         onClick={() => paginate(-1)}
-        className="absolute -left-[18px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:left-0"
+        className="absolute -left-[15px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:left-0"
       >
-        <LeftCircle color="#00000000" />
+        <LeftCircle size={30} color="#00000000" />
       </div>
       <div
         onClick={() => paginate(1)}
-        className="absolute -right-[18px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:right-0"
+        className="absolute -right-[15px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:right-0"
       >
-        <LeftCircle className="rotate-180" color="#00000000" />
+        <LeftCircle size={30} className="rotate-180" color="#00000000" />
       </div>
-      <div className="relative h-[120px] overflow-hidden">
+      <div className="relative h-[102px] overflow-hidden">
         <AnimatePresence initial={false} custom={swipeDirection}>
           <motion.div
             key={swipePage}

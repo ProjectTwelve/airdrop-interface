@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export function LeftCircle({ className, color }: { className?: string; color?: string }) {
+export function LeftCircle({ className, size, color }: { className?: string; size?: number; color?: string }) {
   return (
     <svg
       className={classNames('group cursor-pointer', className)}
-      width="36"
-      height="36"
+      width={size ?? 36}
+      height={size ?? 36}
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

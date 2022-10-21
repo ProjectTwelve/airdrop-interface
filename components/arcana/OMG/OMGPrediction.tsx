@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import { BigNumber } from '@ethersproject/bignumber';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useAccount, useNetwork, useSignTypedData, useSwitchNetwork } from 'wagmi';
 import Message from '../../message';
 import { objectSortByKey } from '../../../utils';
@@ -11,7 +11,9 @@ import { useArcanaAnswer } from '../../../hooks/arcana';
 import OMGPredictionDialog from './OMGPredictionDialog';
 import {
   arcanaGenesisNFTHolderAtom,
+  arcanaInviteDialogAtom,
   arcanaObserverAtom,
+  arcanaOmgInviteCountAtom,
   arcanaPredictionAnswerAtom,
   arcanaPredictionOMGAnswerAtom,
   arcanaPredictionOMGSubmitAtom,
@@ -39,6 +41,8 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   const { signTypedDataAsync } = useSignTypedData();
   const isObserver = useRecoilValue(arcanaObserverAtom);
   const omgAnswer = useRecoilValue(arcanaPredictionOMGAnswerAtom);
+  const omgCount = useRecoilValue(arcanaOmgInviteCountAtom);
+  const setInviteDialog = useSetRecoilState(arcanaInviteDialogAtom);
   const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
   const isGenesisNFTHolder = useRecoilValue(arcanaGenesisNFTHolderAtom);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,8 +50,12 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const answerSelect = useMemo(() => {
     if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
-    if (isEnd) return item?.optionList.filter((item) => item.id === 1)[0];
-  }, [answer, isEnd, item?.optionList]);
+  }, [answer]);
+
+  const onDialogClick = () => {
+    if (isObserver || !address || !isGenesisNFTHolder || isEnd) return;
+    setOpenDialog(true);
+  };
 
   const onSignAnswer = async () => {
     if (!address || !chain) return;
@@ -89,6 +97,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
           toast.error(<Message message={msg} title="Ah shit, here we go again" />);
           return;
         }
+        toast.success(<Message message="Congratulations! Invite friends for more bounties!" title="Mission Complete" />);
         setIsSubmit(true);
       });
       setIsLoading(false);
@@ -98,93 +107,84 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
   };
 
   return (
-    <div className="relative w-full max-w-[430px] rounded-lg md:order-1">
-      <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
-        {isSubmit ? (
-          <div className="w-full">
-            <div className="rounded-t-lg bg-gradient-prediction px-5 py-4">
-              <p className="text-xl font-medium leading-6">{item?.predictionTitle}</p>
-              <p className="text-sm">{item?.predictionFull}</p>
+    <div className="relative w-full max-w-[412px]">
+      {isSubmit || isEnd ? (
+        <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #00000000 0%, #25293080 100%)' }}>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="h-[136px] bg-omg-count bg-cover">
+              <p className="mt-[28px] text-center text-sm font-medium">My OMG Invitees</p>
+              <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
-            <div className="h-0.5 bg-p12-gradient"></div>
-            <div className="mt-[60px] flex flex-col items-center justify-start">
-              <div className="h-[200px] w-[200px] overflow-hidden rounded-lg">
-                <img loading="lazy" className="h-full w-full object-cover" src={answerSelect?.img2} alt="select" />
-              </div>
-            </div>
-            <div className="mt-3 flex h-[20px] flex-col items-center justify-around">
-              <div className="text-lg font-medium leading-5">{answerSelect?.name}</div>
-            </div>
-            <div className="flex items-center justify-center pt-[60px] pb-[30px]">
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <h3 className="text-sm font-medium">Total Tipsters</h3>
-                <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
-              </div>
-              <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
-                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">$5000</p>
-              </div>
+            <div className="h-[136px] bg-omg-count bg-cover">
+              <p className="mt-[28px] text-center text-sm font-medium">Votes from invitees</p>
+              <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
-        ) : (
-          <div className="flex w-full flex-col items-center px-7 py-[30px] pt-12">
-            <p className="text-xl font-medium">{item?.predictionTitle}</p>
-            <p className="text-sm">{item?.predictionFull}</p>
+          <div className="mt-5 text-center text-sm text-p12-gold">Increase probability of winning by</div>
+          <div className="px-4 pt-3 xs:p-3">
             <div
-              className="relative mt-5 h-[200px] w-[200px] cursor-pointer overflow-hidden rounded-lg"
-              onClick={() => {
-                if (isObserver || !address || !isGenesisNFTHolder || isEnd) return;
-                setOpenDialog(true);
-              }}
+              onClick={() => setInviteDialog(true)}
+              className="dota__button dota__gold flex h-[44px] items-center justify-center "
             >
+              + OMG Invites
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="h-full rounded-lg" style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}>
+          <div className="flex pl-4 pt-6 xs:pl-3 xs:pt-3">
+            <div className="relative h-[140px] w-[140px] cursor-pointer overflow-hidden rounded-lg" onClick={onDialogClick}>
               {answerSelect ? (
                 <>
-                  <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10" />
+                  <div className="absolute inset-0 left-0 top-0 z-20 hover:bg-[#FFFFFF]/10"></div>
+                  <div className="absolute bottom-0 z-10 flex h-[34px] w-full items-end bg-gradient-to-b from-black/0 to-black">
+                    <p className="mb-2.5 w-full text-center text-xs font-medium">{answerSelect.name}</p>
+                  </div>
                   <div className="flex h-full w-full items-center justify-center text-[82px] font-medium hover:bg-white/10">
                     <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
                   </div>
                 </>
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
-                  <p className="text-[82px] leading-[82px]">?</p>
-                  <p className="text-sm">Click to Answer</p>
+                <div className="flex h-full w-full animate-omg flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
+                  <p className="text-[70px] leading-[72px]">?</p>
+                  <p className="text-xs">Click to Answer</p>
                 </div>
               )}
             </div>
-            <div className="mt-3 flex h-[20px] flex-col items-center justify-around">
-              <div className="text-lg font-medium leading-5">{answerSelect?.name}</div>
-            </div>
-            <div className="flex w-full items-center justify-center pt-[60px]">
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <h3 className="text-sm font-medium">Total Tipsters</h3>
-                <p className="font-ddin text-[30px] font-bold">{votes ?? 0}</p>
+            <div className="flex flex-1 flex-col justify-between">
+              <div>
+                <div className="text-center font-medium">{item?.predictionTitle}</div>
+                <div className="text-center text-xs leading-4">{item?.predictionFull}</div>
               </div>
-              <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <h3 className="text-sm font-medium text-p12-gold">Prize</h3>
-                <p className="flex items-center justify-center font-ddin text-[30px] font-bold text-p12-gold">$5000</p>
+              <div className="flex w-full items-center justify-center">
+                <div className="flex flex-1 flex-col items-center justify-center">
+                  <h3 className="text-xs font-medium">Total Tipsters</h3>
+                  <p className="font-ddin text-[26px] font-bold">{votes ?? 0}</p>
+                </div>
+                <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
+                <div className="flex flex-1 flex-col items-center justify-center">
+                  <h3 className="text-xs font-medium text-p12-gold">Prize</h3>
+                  <p className="flex items-center justify-center font-ddin text-[26px] font-bold text-p12-gold">$10000</p>
+                </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
-      {!isSubmit && !isEnd && (
-        <div className="mt-5">
-          <div
-            onClick={onSignAnswer}
-            className={classNames(
-              'dota__button dota__gold flex h-[50px] items-center justify-center text-xl',
-              chain?.id === ARCANA_CHAIN_ID && !answerSelect ? 'dota__button--disable' : null,
-            )}
-          >
-            {isSwitchNetworkLoading || isLoading ? (
-              <img className="w-8 animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
-            ) : chain?.id === ARCANA_CHAIN_ID ? (
-              'Submit'
-            ) : (
-              'Switch Network'
-            )}
+          <div className="px-4 pt-6 xs:p-3">
+            <div
+              onClick={onSignAnswer}
+              className={classNames(
+                'dota__button dota__gold flex h-[50px] items-center justify-center text-xl',
+                chain?.id === ARCANA_CHAIN_ID && !answerSelect ? 'dota__button--disable' : null,
+              )}
+            >
+              {isSwitchNetworkLoading || isLoading ? (
+                <img className="w-8 animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+              ) : chain?.id === ARCANA_CHAIN_ID ? (
+                'Submit'
+              ) : (
+                'Switch Network'
+              )}
+            </div>
           </div>
         </div>
       )}

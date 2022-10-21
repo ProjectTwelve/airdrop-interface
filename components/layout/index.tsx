@@ -21,7 +21,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <WagmiConfig client={client}>
       <RecoilRoot>
-        <div className="mx-auto min-h-screen pt-14 md:pt-6 2xl:container">
+        <div className="mx-auto min-h-screen pt-4 2xl:container">
           <LayoutHeader />
           <main>{children}</main>
           <LayoutFooter />
