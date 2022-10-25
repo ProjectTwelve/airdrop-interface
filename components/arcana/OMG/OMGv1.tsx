@@ -1,5 +1,4 @@
 import React from 'react';
-import { openLink } from '../../../utils';
 import { PredictionAnswerOMGItem } from '../../../lib/types';
 
 type Reward = {
@@ -96,14 +95,8 @@ export default function OMGv1() {
   return (
     <div id="omg_v1" className="px-[30px] xs:px-4">
       <div className="mt-4">
-        <p className="text-center text-[26px] font-medium leading-[30px] text-p12-success">
-          Congratulations to the following Winners
-        </p>
-        <p className="text-center text-xs font-medium leading-5">
-          Please claim your reward through our&nbsp;
-          <span onClick={() => openLink('https://discord.gg/p12')} className="cursor-pointer text-p12-link">
-            Discord
-          </span>
+        <p className="text-center text-[26px] font-medium leading-[30px]">
+          Congratulations to the Winners
         </p>
       </div>
       <div className="mt-6 flex items-stretch justify-between gap-4 md:flex-col md:items-center">

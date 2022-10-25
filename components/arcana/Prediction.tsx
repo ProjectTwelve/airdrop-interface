@@ -46,7 +46,7 @@ export default function Prediction() {
     <div className="px-[30px] xs:px-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-[26px] font-medium leading-[30px]">Tips & Predictions</h2>
+          <h2 className="text-[26px] font-medium leading-[30px]">Tips & Predictions Closed on 2022/10/28</h2>
           <p className="text-xs leading-5">More Votes, More Bounties!</p>
         </div>
         {!isObserver && (

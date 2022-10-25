@@ -64,7 +64,13 @@ export default function PredictionItem({ data, votes, answer }: PredictionItemPr
   };
 
   const onSelect = () => {
-    if (isObserver || !address || !item || isEnd || !isGenesisNFTHolder) return;
+    if (isEnd) {
+      toast.error(
+        <Message message="Your picks are locked. Stay tuned for the final results." title="Ah shit, here we go again" />,
+      );
+      return;
+    }
+    if (isObserver || !address || !item || !isGenesisNFTHolder) return;
     setOpenDialog(true);
   };
 
