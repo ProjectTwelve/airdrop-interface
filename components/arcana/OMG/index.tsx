@@ -73,7 +73,7 @@ export default function OMG() {
             </p>
             <p className="ml-3 text-sm text-[#A5A6AB]">Round 2</p>
           </div>
-          <p className="text-xs leading-5 xs:text-center">Only invitees after 2022/10/21 are counted in OMG sepcial round.</p>
+          <p className="text-xs leading-5 xs:text-center">Only invitees after 2022/10/21 are counted in OMG special round.</p>
         </div>
         <div>
           {!isOMGEnd && (
