@@ -55,9 +55,11 @@ export default function OMGTopVotes() {
         <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$7000</p>
       </div>
       <div className="p-4 pb-[14px]">
-        <div className="vertical-scroll -mr-2 flex h-[150px] flex-col gap-[10px] overflow-y-auto rounded-b-lg pr-2">
+        <div className="vertical-scroll flex flex-col gap-[10px] rounded-b-lg">
           {data ? (
-            data.map((item, index) => <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />)
+            data
+              .slice(0, 5)
+              .map((item, index) => <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />)
           ) : (
             <Empty color="#474C55" />
           )}
