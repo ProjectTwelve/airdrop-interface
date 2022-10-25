@@ -13,6 +13,8 @@ import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import Prediction from '../../components/arcana/Prediction';
 import Participant from '../../components/arcana/Participant';
 import OMG from '../../components/arcana/OMG';
+import Claim from '../../components/arcana/Claim';
+import ArcanaRank from '../../components/arcana/ArcanaRank';
 import OMGv1 from '../../components/arcana/OMG/OMGv1';
 import OMGv2 from '../../components/arcana/OMG/OMGv2';
 import { ARCANA_CHAIN_ID } from '../../constants';
@@ -108,6 +110,10 @@ export default function Arcana() {
         <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
           <Participant />
           <VoteRank />
+        </div>
+        <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
+          <Claim />
+          <ArcanaRank />
         </div>
         <div className="mt-6">
           {isMounted && (

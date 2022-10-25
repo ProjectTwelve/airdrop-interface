@@ -38,6 +38,7 @@ module.exports = {
       animation: {
         backdrop: 'backdrop 2s linear forwards',
         omg: 'omg 1s linear infinite alternate',
+        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
       },
       keyframes: {
         backdrop: {
