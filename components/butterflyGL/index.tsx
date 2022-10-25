@@ -104,7 +104,7 @@ export default function ButterflyGL() {
     <>
       <Script
         id="butterfly"
-        src="https://cdn1.p12.games/js/butterfly@1.0.1.min.js"
+        src="https://cdn1.p12.games/js/butterfly@1.0.2.min.js"
         strategy="lazyOnload"
         onLoad={() => setIsLoaded(true)}
       />
