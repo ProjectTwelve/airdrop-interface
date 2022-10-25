@@ -116,7 +116,7 @@ export default function OMGPrediction({ item, isEnd, votes, answer }: OMGPredict
               <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
             <div className="h-[136px] bg-omg-count bg-cover">
-              <p className="mt-[28px] text-center text-sm font-medium">Votes from invitees</p>
+              <p className="mt-[28px] text-center text-sm font-medium">Votes from Invitees</p>
               <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
