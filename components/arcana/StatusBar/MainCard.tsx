@@ -52,7 +52,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
   };
 
   return (
-    <div className="relative w-[347px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-3 pt-2 py-1.5 md:w-full">
+    <div className="relative w-[347px] bg-[url('/img/arcana/statusbar/center.webp')] bg-cover bg-no-repeat px-3 py-1.5 pt-2 md:w-full">
       {data && chain?.id === ARCANA_CHAIN_ID && (
         <Dialog render={({ close }) => <MulticastVoteDialog close={close} />}>
           <div className="absolute -top-[26px] left-[20px] z-20 h-[26px] w-[56px] xs:left-6 xs:-top-[6.4vw] xs:h-[6.4vw] xs:w-[12.8vw]">
@@ -86,10 +86,10 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
             <span
               className={classNames(
                 'h-[24px] bg-gradient-to-b from-[#541718] to-[#AD7442] bg-clip-text font-bold leading-[28px] text-transparent xs:text-[7.2vw]',
-                data && data.votesTotalCurrent > 1000 ? 'text-[20px]' : 'text-[28px]',
+                data && data.votesTotalCurrent > 1000 ? 'text-[20px]' : 'text-[26px]',
               )}
             >
-              {data?.votesTotalCurrent || 0}
+              {Math.floor(data?.votesTotalCurrent || 0)}
             </span>
           </div>
         </div>
