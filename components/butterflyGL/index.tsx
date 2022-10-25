@@ -80,10 +80,13 @@ export default function ButterflyGL() {
     const butterfly = butterflyRef.current;
     if (visibility && butterfly) {
       butterfly.reset();
+      let diffTime = 0.02;
       const loop = () => {
         const currentTime = +new Date() / 1000;
-        butterfly.render(currentTime - timeRef.current);
-        timeRef.current = currentTime;
+        if (currentTime - timeRef.current >= diffTime) {
+          butterfly.render(currentTime - timeRef.current);
+          timeRef.current = currentTime;
+        }
         animationIdRef.current = requestAnimationFrame(loop);
       };
       loop();
@@ -101,7 +104,7 @@ export default function ButterflyGL() {
     <>
       <Script
         id="butterfly"
-        src="https://cdn1.p12.games/js/butterfly.min.js"
+        src="https://cdn1.p12.games/js/butterfly@1.0.1.min.js"
         strategy="lazyOnload"
         onLoad={() => setIsLoaded(true)}
       />
