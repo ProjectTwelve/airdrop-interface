@@ -95,9 +95,7 @@ export default function OMGv1() {
   return (
     <div id="omg_v1" className="px-[30px] xs:px-4">
       <div className="mt-4">
-        <p className="text-center text-[26px] font-medium leading-[30px]">
-          Congratulations to the Winners
-        </p>
+        <p className="text-center text-[26px] font-medium leading-[30px]">Check Winners of OMG Round 1</p>
       </div>
       <div className="mt-6 flex items-stretch justify-between gap-4 md:flex-col md:items-center">
         <div className="relative w-full max-w-[412px] rounded-lg backdrop-blur-lg md:order-1">

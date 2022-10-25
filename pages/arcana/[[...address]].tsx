@@ -14,6 +14,7 @@ import Prediction from '../../components/arcana/Prediction';
 import Participant from '../../components/arcana/Participant';
 import OMG from '../../components/arcana/OMG';
 import OMGv1 from '../../components/arcana/OMG/OMGv1';
+import OMGv2 from '../../components/arcana/OMG/OMGv2';
 import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
 import MulticastMask from '../../components/arcana/MulticastMask';
@@ -135,6 +136,9 @@ export default function Arcana() {
         </div>
         <div className="mt-12 md:mt-8">
           <OMGv1 />
+        </div>
+        <div className="mt-12 md:mt-8">
+          <OMGv2 />
         </div>
         <div className="relative flex w-full items-end justify-center xs:mt-8">
           <h3 className="absolute top-12 text-[26px] font-medium">Engage in community</h3>

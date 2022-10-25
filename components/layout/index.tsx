@@ -30,7 +30,6 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
         <RoadmapDialog />
         <ToastContainer theme="dark" toastClassName="toast-container" icon={<ToastIcon />} autoClose={3000} hideProgressBar />
         {process.env.NODE_ENV === 'production' && <ButterflyGL />}
-        <ButterflyGL />
       </RecoilRoot>
     </WagmiConfig>
   );
