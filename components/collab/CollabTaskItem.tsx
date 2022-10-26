@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import ReactGA from 'react-ga4';
 
 export type CollabTaskItemProps = {
@@ -10,6 +11,7 @@ export type CollabTaskItemProps = {
   hrefLabel?: string; // success
   errorLabel?: string | JSX.Element; // error
   gaKey?: string;
+  className?: string;
 };
 
 export default function CollabTaskItem({
@@ -22,6 +24,7 @@ export default function CollabTaskItem({
   gaKey,
   target,
   children,
+  className,
 }: React.PropsWithChildren<CollabTaskItemProps>) {
   const generateLabel = () => {
     if (errorLabel) {
@@ -55,7 +58,7 @@ export default function CollabTaskItem({
     );
   };
   return (
-    <div className="flex flex-col justify-between gap-5 rounded-2xl bg-p12-black/80 p-7">
+    <div className={classNames('flex flex-col justify-between gap-5 rounded-2xl bg-p12-black/80 p-7', className)}>
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3">
           {icon && <div>{icon}</div>}

@@ -77,6 +77,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
       icon: <div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>,
       content: 'Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT.',
       gaKey: 'airdrop',
+      className: 'flex-grow w-full',
     };
     const normal = 'To P12 Genesis Airdrop';
     const noConnect = 'Please connect your wallet first.';
@@ -107,7 +108,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
       if (isJoined && isNFTholder !== COLLAB_NFT_STATUS.IS_HOLDER)
         return <CollabTaskItem {...taskProps} errorLabel={noNFTinJoined} />;
     }
-    return <CollabTaskItem {...taskProps} href="/" hrefLabel={normal} />;
+    return <CollabTaskItem {...taskProps} href="/gamer" hrefLabel={normal} />;
   }, [timeStatus, isJoined, isNFTholder]);
 
   if (!isMounted) return null;
@@ -116,34 +117,40 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     <div className="mt-9 flex flex-col gap-1" id="collabTasks">
       {taskTweetContent ? (
         <>
-          <h1 className="text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
+          <h1 className="text-3xl font-semibold leading-9">How To Get Bounties</h1>
           <p className="text-sm leading-7 text-[#9A9DAA]">
-            Click the above Join Button and finish the following the steps to finish verification.
+            Click the above Join Button and finish the following steps to participate the giveaway.
           </p>
         </>
       ) : null}
-      <div className="mt-4 grid grid-cols-3 gap-7 md:grid-cols-1">
+      <div className="mt-4 flex flex-nowrap gap-7 md:flex-wrap">
         {taskTweetContent ? null : (
-          <div className="flex flex-col gap-5">
-            <h1 className="mt-7 text-3xl font-semibold leading-9">How To Redeem Airdrop</h1>
+          <div className="flex w-full flex-col gap-5">
+            <h1 className="mt-7 text-3xl font-semibold leading-9">How To Get Bounties</h1>
             <p className="text-sm leading-7 text-[#9A9DAA]">
-              Click the above Join Button and finish the following the steps to finish verification.
+              Click the above Join Button and finish the following steps to participate the giveaway.
             </p>
           </div>
         )}
         {generateAirdropTask()}
-        <CollabTaskItem
-          key="gleam"
-          gaKey="gleam"
-          title="Gleam"
-          icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
-          content="Complete all required tasks on Gleam is a must step."
-          href={taskGleam}
-          target="_blank"
-          hrefLabel="To Gleam"
-        />
+
+        {taskGleam ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="gleam"
+            gaKey="gleam"
+            title="Gleam"
+            icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
+            content="Complete all required tasks on Gleam is a must step."
+            href={taskGleam}
+            target="_blank"
+            hrefLabel="To Gleam"
+          />
+        ) : null}
+
         {taskTweetContent ? (
           <CollabTaskItem
+            className="w-full flex-grow"
             key="share"
             title="Share"
             icon={<img className="aspect-square h-8" src="/img/collab/share.png" alt="Share icon" />}
