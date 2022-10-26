@@ -117,7 +117,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     <div className="mt-9 flex flex-col gap-1" id="collabTasks">
       {taskTweetContent ? (
         <>
-          <h1 className="text-3xl font-semibold leading-9">How To get bounties</h1>
+          <h1 className="text-3xl font-semibold leading-9">How To Get Bounties</h1>
           <p className="text-sm leading-7 text-[#9A9DAA]">
             Click the above Join Button and finish the following steps to participate the giveaway.
           </p>
@@ -126,7 +126,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
       <div className="mt-4 flex flex-nowrap gap-7 md:flex-wrap">
         {taskTweetContent ? null : (
           <div className="flex w-full flex-col gap-5">
-            <h1 className="mt-7 text-3xl font-semibold leading-9">How To get bounties</h1>
+            <h1 className="mt-7 text-3xl font-semibold leading-9">How To Get Bounties</h1>
             <p className="text-sm leading-7 text-[#9A9DAA]">
               Click the above Join Button and finish the following steps to participate the giveaway.
             </p>
