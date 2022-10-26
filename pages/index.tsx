@@ -58,7 +58,7 @@ export default function Home() {
             <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
               <LeaderboardTabs />
             </RankingHomeCard>
-            <CollabHomeCard title="Perks" />
+            <CollabHomeCard title="Campaigns" />
           </>
         ) : (
           <>
