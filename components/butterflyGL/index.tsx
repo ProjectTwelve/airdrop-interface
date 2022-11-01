@@ -108,7 +108,7 @@ export default function ButterflyGL() {
         strategy="lazyOnload"
         onLoad={() => setIsLoaded(true)}
       />
-      <div ref={containerRef} className="butterfly-gl fixed top-0 left-0 right-0 bottom-0 -z-20 opacity-70">
+      <div ref={containerRef} className="butterfly-gl fixed top-0 left-0 right-0 bottom-0 -z-20 opacity-60">
         <canvas ref={canvasRef} className="butterfly-canvas absolute h-full w-full"></canvas>
       </div>
     </>

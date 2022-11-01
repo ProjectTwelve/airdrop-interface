@@ -10,9 +10,8 @@ import { useArcanaVotes } from '../../hooks/arcana';
 import VoteRank from '../../components/arcana/VoteRank';
 import StatusBar from '../../components/arcana/StatusBar';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
-import ArcanaNotNFTHolder from '../../components/arcana/ArcanaNotNFTHolder';
-import Participant from '../../components/arcana/Participant';
 import Prediction from '../../components/arcana/Prediction';
+import Participant from '../../components/arcana/Participant';
 import OMG from '../../components/arcana/OMG';
 import OMGv1 from '../../components/arcana/OMG/OMGv1';
 import { ARCANA_CHAIN_ID } from '../../constants';
@@ -34,7 +33,7 @@ export default function Arcana() {
   const setObserver = useSetRecoilState(arcanaObserverAtom);
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, { threshold: 0.8 });
-  const { data, isLoading } = useArcanaVotes(originAddress ?? address);
+  const { data } = useArcanaVotes(originAddress ?? address);
 
   useEffect(() => {
     if (!intersection) return;
@@ -66,8 +65,14 @@ export default function Arcana() {
         <div className="absolute left-0 top-0 -z-10 flex h-[368px] w-full flex-col items-center justify-end overflow-hidden">
           <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
           <div className="h-[368px] w-[1920px]">
-            <video className="mx-auto h-[368px]" autoPlay muted loop poster="https://cdn1.p12.games/airdrop/arcana/banner.png">
-              <source src="https://cdn1.p12.games/airdrop/arcana/banner_3.webm" type="video/webm" />
+            <video
+              className="mx-auto h-[368px]"
+              autoPlay
+              muted
+              loop
+              poster="https://cdn1.p12.games/airdrop/arcana/banner_poster_4.webp"
+            >
+              <source src="https://cdn1.p12.games/airdrop/arcana/banner_4.webm" type="video/webm" />
             </video>
           </div>
         </div>
@@ -104,23 +109,23 @@ export default function Arcana() {
           <VoteRank />
         </div>
         <div className="mt-6">
-          <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">
-            {!data && (
-              <div className="absolute z-30 flex h-full w-[750px] items-center justify-center bg-black/50 backdrop-blur md:w-full">
-                {isMounted && address ? (
-                  isLoading ? (
-                    <img className="animate-spin" src="/svg/loading.svg" width={48} height={48} alt="loading" />
-                  ) : (
-                    <ArcanaNotNFTHolder />
-                  )
-                ) : (
-                  <ArcanaNotConnect />
-                )}
-              </div>
-            )}
-            {data && !isObserver && chain?.id !== ARCANA_CHAIN_ID && <ArcanaSwitchNetwork />}
-            <StatusBar data={data} />
-          </div>
+          {isMounted && (
+            <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:relative">
+              {address ? (
+                <>
+                  {data && !isObserver && chain?.id !== ARCANA_CHAIN_ID && <ArcanaSwitchNetwork />}
+                  {data && <StatusBar data={data} />}
+                </>
+              ) : (
+                <>
+                  <div className="absolute z-30 flex h-full w-[750px] items-center justify-center bg-black/50 backdrop-blur md:w-full">
+                    <ArcanaNotConnect />
+                  </div>
+                  <StatusBar />
+                </>
+              )}
+            </div>
+          )}
         </div>
         <div className="mt-6">
           <OMG />

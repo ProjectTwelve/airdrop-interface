@@ -1,6 +1,4 @@
 import React from 'react';
-import Empty from '../../empty';
-import { useArcanaAnswerOMG2 } from '../../../hooks/arcana';
 import { PredictionAnswerOMG2Item } from '../../../lib/types';
 
 function LuckyDrawItem({ data }: { data: PredictionAnswerOMG2Item }) {
@@ -24,7 +22,48 @@ function LuckyDrawItem({ data }: { data: PredictionAnswerOMG2Item }) {
 }
 
 export default function OMGLuckyDraw() {
-  const { data } = useArcanaAnswerOMG2();
+  const luckyUserList: PredictionAnswerOMG2Item[] = [
+    {
+      walletAddress: '0x90BE737242A0a9bA618080A84717c1D8Eb9eD843',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'Panda Boy',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/bf2c65bd752b663d6dd809f38cbe144bbe9e6078_full.jpg',
+      omgInviteVotes: 107.0,
+      omgInviteCount: 92,
+    },
+    {
+      walletAddress: '0x24430ae18740eEA33f2c605Fac08847e787CB21a',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'megabars1k',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/f9dfe97633894249960f078772761ea3c2a68864_full.jpg',
+      omgInviteVotes: 911.7,
+      omgInviteCount: 873,
+    },
+    {
+      walletAddress: '0xCB4Bab321EEab59926091a21C096fAE99f33baDC',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: '<3 Amoramor',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/82a3660485b2f5e12eecefcf59f09d94dd505427_full.jpg',
+      omgInviteVotes: 480.1,
+      omgInviteCount: 670,
+    },
+    {
+      walletAddress: '0x9f7b105D999799f1cb2bde45371F99e37Ec53710',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'Tokyo -_-',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/04735bc833728284cbce58fb8cb9400e9aac742c_full.jpg',
+      omgInviteVotes: 137.5,
+      omgInviteCount: 125,
+    },
+    {
+      walletAddress: '0x3988dFf5d29499038c5d5124a770C6557C2C146a',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'Clown',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/79a8119bd2a027755f93872d0d09b959909a0405_full.jpg',
+      omgInviteVotes: 159.6,
+      omgInviteCount: 191,
+    },
+  ];
   return (
     <div
       className="flex w-full max-w-[412px] flex-col rounded-lg"
@@ -41,11 +80,9 @@ export default function OMGLuckyDraw() {
       </div>
       <div className="p-4 pb-[14px]">
         <div className="vertical-scroll flex flex-col gap-[10px] rounded-b-lg">
-          {data ? (
-            data.slice(0, 5).map((item) => <LuckyDrawItem data={item} key={item.walletAddress} />)
-          ) : (
-            <Empty color="#474C55" />
-          )}
+          {luckyUserList.map((item) => (
+            <LuckyDrawItem data={item} key={item.walletAddress} />
+          ))}
         </div>
       </div>
     </div>

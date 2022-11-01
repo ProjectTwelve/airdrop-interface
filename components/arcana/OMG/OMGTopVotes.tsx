@@ -1,6 +1,4 @@
 import React from 'react';
-import Empty from '../../empty';
-import { useArcanaAnswerOMG2 } from '../../../hooks/arcana';
 import { PredictionAnswerOMG2Item } from '../../../lib/types';
 
 type Reward = {
@@ -32,7 +30,6 @@ function TopVoteItem({ reward, data }: { reward: Reward | number; data: Predicti
 }
 
 export default function OMGTopVotes() {
-  const { data } = useArcanaAnswerOMG2();
   const prices: Reward[] = [
     { index: '1st', price: 3000 },
     { index: '2nd', price: 1600 },
@@ -40,6 +37,49 @@ export default function OMGTopVotes() {
     { index: '4th', price: 800 },
     { index: '5th', price: 600 },
   ];
+  const voteUserList: PredictionAnswerOMG2Item[] = [
+    {
+      walletAddress: '0x51208b42aAb220175ED2Cbfb37B94FdA48776A49',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'unknown',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/80adc4b39b1a9db2bd92b7f96ab146653001275b_full.jpg',
+      omgInviteVotes: 1596,
+      omgInviteCount: 1902,
+    },
+    {
+      walletAddress: '0xF1626f3F7AfB766b3fe626ECdf388e969efB4F19',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: '♔ S a w w a ₁₃₃₇',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/4dbb32d42d73c1d0b9f7374886769378aac5d871_full.jpg',
+      omgInviteVotes: 1544,
+      omgInviteCount: 1847,
+    },
+    {
+      walletAddress: '0xad7B89753a9e23aE68eF0f5ac01a04c383a6815f',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'Hikari',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/12b11a0a9f50b2783a1d7e61a8a927d89d9057d2_full.jpg',
+      omgInviteVotes: 1514,
+      omgInviteCount: 1663,
+    },
+    {
+      walletAddress: '0x9A29967dB9bB57bC4D16271B4B4884c2BEcEfCeD',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'EnjoyMaloy / Паштет',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/3f1a1ca7804d794ac65e4bf5bc2ea94aadace96c_full.jpg',
+      omgInviteVotes: 1512,
+      omgInviteCount: 964,
+    },
+    {
+      walletAddress: '0x2d23d93d7C81069ef6cBf9A28F9377aF6BfeE0c8',
+      predictionCode: 'qcE8GZ1U0xBwg3Wd',
+      personName: 'Smipi',
+      avatarFull: 'https://avatars.akamai.steamstatic.com/8dfe278c7493b6984540e57ecd57b791df13841e_full.jpg',
+      omgInviteVotes: 1226,
+      omgInviteCount: 1830,
+    },
+  ];
+
   return (
     <div
       className="flex w-full max-w-[412px] flex-col rounded-lg"
@@ -56,13 +96,9 @@ export default function OMGTopVotes() {
       </div>
       <div className="p-4 pb-[14px]">
         <div className="vertical-scroll flex flex-col gap-[10px] rounded-b-lg">
-          {data ? (
-            data
-              .slice(0, 5)
-              .map((item, index) => <TopVoteItem reward={prices[index] || index + 1} data={item} key={item.walletAddress} />)
-          ) : (
-            <Empty color="#474C55" />
-          )}
+          {voteUserList.map((item, index) => (
+            <TopVoteItem reward={prices[index]} data={item} key={item.walletAddress} />
+          ))}
         </div>
       </div>
     </div>

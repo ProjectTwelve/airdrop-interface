@@ -112,9 +112,8 @@
     }
 
     .tooltip__container {
-        background: repeating-linear-gradient(to bottom, #4E5372, #4E5372), repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.6), #4E5372);
-        background-clip: content-box, padding-box;
-        padding: 0.1rem;
+        background: #44465FF2;
+        border: 1px solid #E4E4E426;
     }
 
     .round-box {
