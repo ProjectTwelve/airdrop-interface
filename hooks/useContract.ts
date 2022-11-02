@@ -10,10 +10,10 @@ export function useBABTBalanceOf({ address }: { address?: string }) {
   const babtAddress = chain ? BABT_ADDRESSES[chain.id] : undefined;
 
   return useContractRead({
-    addressOrName: babtAddress || ZERO_ADDRESS,
-    contractInterface: BABT_ABI,
+    address: babtAddress || ZERO_ADDRESS,
+    abi: BABT_ABI,
     functionName: 'balanceOf',
-    args: address ?? _address,
+    args: [address ?? _address],
   });
 }
 
@@ -22,8 +22,8 @@ export function useArcanaContract() {
   const { data: signer } = useSigner();
 
   return useContract({
-    addressOrName: ARCANA_ADDRESS,
-    contractInterface: ARCANA_ABI,
+    address: ARCANA_ADDRESS,
+    abi: ARCANA_ABI,
     signerOrProvider: signer ?? provider,
   });
 }
@@ -33,8 +33,8 @@ export function useForwarderContract() {
   const { data: signer } = useSigner();
 
   return useContract({
-    addressOrName: FORWARDER_ADDRESS,
-    contractInterface: FORWARDER_ABI,
+    address: FORWARDER_ADDRESS,
+    abi: FORWARDER_ABI,
     signerOrProvider: signer ?? provider,
   });
 }

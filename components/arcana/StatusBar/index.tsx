@@ -63,7 +63,7 @@ export default function StatusBar({ data }: StatusBarProps) {
   };
 
   const onSignAnswer = async () => {
-    if (!address || !chain) return;
+    if (!address || !chain || !arcanaContract || !forwarderContract) return;
     if (chain.id !== ARCANA_CHAIN_ID) {
       switchNetwork?.();
       return;
@@ -85,7 +85,7 @@ export default function StatusBar({ data }: StatusBarProps) {
       const ipfsURL = 'ipfs://' + hash;
       const tx = await arcanaContract.populateTransaction.updateAnswerUri(BigNumber.from(address), ipfsURL);
       const nonce = await forwarderContract.getNonce(address);
-      tx.gasLimit = tx.gasLimit || GAS_LIMIT;
+      tx.gasLimit = tx.gasLimit || (GAS_LIMIT as any);
       const signature = await signTypedDataAsync(getArcanaSignTypeData(forwarderContract, tx, nonce));
       const params: PredictionAnswerParams = {
         walletAddress: address,
