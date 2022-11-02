@@ -1,4 +1,14 @@
+import { useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
+import { arcanaPredictionAnswerAtom } from '../../store/arcana/state';
+
 export default function Claim() {
+  const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
+  const predictionAnswerCount = useMemo(
+    () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
+    [predictionAnswers],
+  );
+
   const onAnchorClick = () => {
     const omgV1 = document.querySelector('#omg_v1');
     omgV1?.scrollIntoView({ block: 'start', behavior: 'smooth' });
@@ -6,7 +16,7 @@ export default function Claim() {
 
   return (
     <div
-      className="w-full max-w-[442px] overflow-hidden rounded-lg backdrop-blur-lg"
+      className="w-full max-w-[442px] overflow-hidden rounded-lg backdrop-blur-lg md:max-w-full"
       style={{ background: 'linear-gradient(to bottom, #25293000 0%, #25293080 100%)' }}
     >
       <div className="w-full bg-omg-mask">
@@ -18,7 +28,9 @@ export default function Claim() {
       </div>
       <div className="mt-2 px-[30px]">
         <div className="flex">
-          <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">222</div>
+          <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">
+            {predictionAnswerCount}
+          </div>
           <div className="h-[28px] w-[1px] bg-[#6F7784]/50" />
           <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">222</div>
         </div>

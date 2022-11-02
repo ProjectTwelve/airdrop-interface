@@ -12,7 +12,6 @@ import StatusBar from '../../components/arcana/StatusBar';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import Prediction from '../../components/arcana/Prediction';
 import Participant from '../../components/arcana/Participant';
-import OMG from '../../components/arcana/OMG';
 import Claim from '../../components/arcana/Claim';
 import ArcanaRank from '../../components/arcana/ArcanaRank';
 import OMGv1 from '../../components/arcana/OMG/OMGv1';
@@ -133,9 +132,6 @@ export default function Arcana() {
               )}
             </div>
           )}
-        </div>
-        <div className="mt-6">
-          <OMG />
         </div>
         <div className="mt-6">
           <Prediction />
