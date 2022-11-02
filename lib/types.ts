@@ -433,9 +433,9 @@ export type PredictionAnswerParams = {
   walletAddress: string;
   ipfsUrl: string;
   nonce: number;
-  txData: string;
+  txData?: string;
   signature: string;
-  gasLimit: number;
+  gasLimit: any;
   answers: PredictionAnswer[];
 };
 

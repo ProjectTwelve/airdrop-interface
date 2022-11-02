@@ -17,7 +17,7 @@ function Web3StatusInner() {
   const { SIDName } = useSIDName({ address });
   const { data: balance } = useBABTBalanceOf({ address });
   const setIsBABTHolder = useSetRecoilState(isBABTHolderAtom);
-  const isBABTHolder = useMemo(() => (balance && balance.toString() !== '0') || false, [balance]);
+  const isBABTHolder = useMemo(() => !!(balance && balance.toString() !== '0'), [balance]);
 
   useEffect(() => {
     if (!address) return;
