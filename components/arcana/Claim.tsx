@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
+import { ArcanaVotes } from '../../lib/types';
 import { arcanaPredictionAnswerAtom } from '../../store/arcana/state';
 
-export default function Claim() {
+export default function Claim({ data }: { data?: ArcanaVotes }) {
   const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
   const predictionAnswerCount = useMemo(
     () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
@@ -32,7 +33,9 @@ export default function Claim() {
             {predictionAnswerCount}
           </div>
           <div className="h-[28px] w-[1px] bg-[#6F7784]/50" />
-          <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">222</div>
+          <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">
+            ${data?.userVotes.totalReward || 0}
+          </div>
         </div>
         <div className="mt-8">
           <button className="dota__button dota__gold w-full py-3 leading-5">Claim</button>

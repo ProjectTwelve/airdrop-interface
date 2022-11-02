@@ -23,6 +23,7 @@ import {
   fetchArcanaPredictionsAnswerCount,
   fetchArcanaPredictionsOMG,
   fetchArcanaRecentInvitation,
+  fetchArcanaRewardRank,
   fetchArcanaUnlock,
   fetchArcanaVotes,
   fetchArcanaVotesRank,
@@ -137,6 +138,13 @@ export const useArcanaAnswerOMG = () => {
 
 export const useArcanaAnswerOMG2 = () => {
   return useQuery(['arcana_answer_omg2'], () => fetchArcanaAnswerOMG2(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaRewardRank = () => {
+  return useQuery(['arcana_reward_rank'], () => fetchArcanaRewardRank(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
     refetchOnWindowFocus: false,
   });

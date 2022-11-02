@@ -1,5 +1,5 @@
 import { PredictionAnswer } from '../store/arcana/state';
-import { PREDICTION_TYPE } from '../components/arcana/PredictionItem';
+import { PREDICTION_TYPE } from '../components/arcana/PredictionItemDialog';
 import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
 import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
 
@@ -358,6 +358,7 @@ export type ArcanaUserVotes = {
   updatedAt: number;
   votesBabCurrent: number;
   votesBabLast: number;
+  totalReward: number;
   votesCommunityNftCurrent: number;
   votesCommunityNftLast: number;
   votesGenesisNftCurrent: number;
@@ -416,12 +417,16 @@ export type PredictionItemData = {
   endDate: number;
   optionType: PREDICTION_TYPE;
   answer?: PredictionOption[];
+  correctAnswer: PredictionOption[];
   predictionTitle: string;
   predictionFull: string;
   sponsorName: string;
   sponsorLogo: string;
   meme: string;
   currentPrice: number;
+  totalWinnerVotes: number;
+  reward?: number;
+  votesShare?: number;
   maxPrice: number;
   taskRequired: string;
   taskUrl: string;
@@ -472,4 +477,13 @@ export type RecentInvitationItem = {
   inviteeName: string;
   inviteeAvatar: string;
   votes: number;
+};
+
+export type RewardRankItem = {
+  avatarFull: string;
+  personName: string;
+  solvedPredictions: number;
+  totalReward: number;
+  votesTotalCurrent: number;
+  walletAddress: string;
 };

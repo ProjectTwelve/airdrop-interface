@@ -78,3 +78,8 @@ export const arcanaOmgInviteCountAtom = atom<{ inviteCount: number; inviteVotes:
     inviteVotes: 0,
   },
 });
+
+export const arcanaEarnRewardAtom = atom<number>({
+  key: 'arcana_earn_reward_atom',
+  default: 0,
+});

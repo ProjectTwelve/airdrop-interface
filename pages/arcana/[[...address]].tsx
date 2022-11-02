@@ -111,7 +111,7 @@ export default function Arcana() {
           <VoteRank />
         </div>
         <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
-          <Claim />
+          <Claim data={data} />
           <ArcanaRank />
         </div>
         <div className="mt-6">

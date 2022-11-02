@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import PredictionItem from './PredictionItem';
 import { ZERO_ADDRESS } from '../../constants/addresses';
 import { referralCodeAtom } from '../../store/invite/state';
@@ -11,7 +11,7 @@ import {
   arcanaPredictionAnswerAtom,
   arcanaPredictionCountAtom,
 } from '../../store/arcana/state';
-import { useArcanaPredictions, useArcanaPredictionsAnswerCount } from '../../hooks/arcana';
+import { useArcanaPredictions } from '../../hooks/arcana';
 
 export default function Prediction() {
   const isObserver = useRecoilValue(arcanaObserverAtom);
@@ -19,9 +19,8 @@ export default function Prediction() {
   const referralCode = useRecoilValue(referralCodeAtom);
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
   const setPredictionCount = useSetRecoilState(arcanaPredictionCountAtom);
-  const [predictionAnswer, setPredictionAnswer] = useRecoilState(arcanaPredictionAnswerAtom);
+  const setPredictionAnswer = useSetRecoilState(arcanaPredictionAnswerAtom);
   const { data } = useArcanaPredictions(originAddress ?? address ?? ZERO_ADDRESS);
-  const { data: AnswerCount } = useArcanaPredictionsAnswerCount();
 
   useEffect(() => {
     if (!data) return;
@@ -46,7 +45,7 @@ export default function Prediction() {
     <div className="px-[30px] xs:px-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-[26px] font-medium leading-[30px]">Tips & Predictions Closed on 2022/10/28</h2>
+          <h2 className="text-[26px] font-medium leading-[30px]">Tips & Predictions</h2>
           <p className="text-xs leading-5">More Votes, More Bounties!</p>
         </div>
         {!isObserver && (
@@ -61,14 +60,7 @@ export default function Prediction() {
       </div>
       <div className="mt-6 grid grid-cols-2 gap-4 xl:grid-cols-3 xl:gap-6 2xl:grid-cols-3 2xl:gap-8 xs:grid-cols-1">
         {data
-          ? data.map((item, index) => (
-              <PredictionItem
-                key={item.predictionCode}
-                answer={predictionAnswer[index]}
-                data={item}
-                votes={AnswerCount ? AnswerCount[item.predictionCode] : 0}
-              />
-            ))
+          ? data.map((item) => <PredictionItem key={item.predictionCode} data={item} />)
           : Array(6)
               .fill(undefined)
               .map((item, index) => <PredictionItem key={index} data={item} />)}
