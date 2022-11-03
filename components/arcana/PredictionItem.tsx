@@ -102,7 +102,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
             <div className="flex flex-1 flex-col items-center justify-center">
               <h3 className="text-xs font-medium leading-3">Your Vote Share</h3>
               <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px]">
-                {data?.votesShare ? data.votesShare * 100 : 0}%
+                {data?.votesShare ? (data.votesShare < 0.001 ? '< 0.001' : data.votesShare) : 0}%
               </p>
               <h3 className="mt-4 text-xs font-medium leading-3 text-p12-gold">Your Reward</h3>
               <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px] text-p12-gold">${data?.reward || 0}</p>

@@ -218,7 +218,7 @@ export const fetchArcanaAnswerOMG2 = () =>
   request.post<any, Response<PredictionAnswerOMG2Item[]>>('/v2/ti/omg2Rank', { rankSize: 20 });
 
 export const fetchArcanaRewardRank = () =>
-  request.post<any, Response<RewardRankItem[]>>('/v2/ti/rewardRank', { rankSize: 100 });
+  request.post<any, Response<RewardRankItem[]>>('/v2/ti/rewardRank', { rankSize: 50 });
 
 export const fetchArcanaVotesRank = () => request.post<any, Response<VoteRankItem[]>>('/v2/ti/votesRank', { size: 42 });
 
