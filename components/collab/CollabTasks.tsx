@@ -21,7 +21,8 @@ export type CollabTasksProps = {
 };
 
 export default function CollabTasks({ data }: CollabTasksProps) {
-  const { taskGleam, taskTweetContent, timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
+  const { taskGleam, taskGalxe, taskTweetContent, timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } =
+    data;
   const [isJoinDisable, setIsJoinDisable] = useState<boolean>(false);
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
@@ -140,11 +141,25 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             key="gleam"
             gaKey="gleam"
             title="Gleam"
-            icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
+            icon={<img className="h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
             content="Complete all required tasks on Gleam is a must step."
             href={taskGleam}
             target="_blank"
             hrefLabel="To Gleam"
+          />
+        ) : null}
+
+        {taskGalxe ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="galxe"
+            gaKey="galxe"
+            title=""
+            icon={<img className="h-8" src="/img/collab/galxe.svg" alt="gleam icon" />}
+            content="Directly claim your reward on Galxe after finishing tasks."
+            href={taskGalxe}
+            target="_blank"
+            hrefLabel="To Galxe"
           />
         ) : null}
 
