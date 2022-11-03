@@ -1,18 +1,86 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import classNames from 'classnames';
+import MerkleTree from 'merkletreejs';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
+import { parseEther } from '@ethersproject/units';
+import { BigNumber } from '@ethersproject/bignumber';
+import { keccak256 } from '@ethersproject/keccak256';
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import { keccak256 as solidityKeccak256 } from '@ethersproject/solidity';
+import Message from '../message';
 import { ArcanaVotes } from '../../lib/types';
+import { getEtherscanLink } from '../../utils';
+import { ARCANA_CHAIN_ID } from '../../constants';
+import leaves from '../../data/arcana_reward_mt.json';
+import { useIsMounted } from '../../hooks/useIsMounted';
+import { useArcanaRewardContract } from '../../hooks/useContract';
 import { arcanaPredictionAnswerAtom } from '../../store/arcana/state';
 
 export default function Claim({ data }: { data?: ArcanaVotes }) {
+  const arcanaRewardContract = useArcanaRewardContract();
+  const { chain } = useNetwork();
+  const { address } = useAccount();
+  const isMounted = useIsMounted();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isClaimed, setIsClaimed] = useState<boolean>(false);
   const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
+  const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
   const predictionAnswerCount = useMemo(
     () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
     [predictionAnswers],
   );
 
+  useEffect(() => {
+    if (!arcanaRewardContract || !address) return;
+    arcanaRewardContract.isClaimed(BigNumber.from(address).toString()).then((res: boolean) => {
+      res && setIsClaimed(res);
+    });
+  }, [address, arcanaRewardContract]);
+
   const onAnchorClick = () => {
     const omgV1 = document.querySelector('#omg_v1');
     omgV1?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+
+  const onClaim = async () => {
+    if (!arcanaRewardContract || !chain || !data || !address) return;
+    if (chain.id !== ARCANA_CHAIN_ID) {
+      switchNetwork?.();
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const tree = new MerkleTree(leaves, keccak256, { sort: true });
+      const totalReward = data.userVotes.totalReward;
+      const reward = parseEther(totalReward.toString()).toString();
+      const leaf = solidityKeccak256(['address', 'uint256'], [address, reward]);
+      const proof = tree.getProof(leaf).map((v) => '0x' + v.data.toString('hex'));
+      const { wait } = await arcanaRewardContract.claimTokens(reward, proof);
+      const { transactionHash } = await wait();
+      toast.success(
+        <Message
+          title="Mission Complete"
+          message={
+            <div>
+              <p>Successfully claimed {totalReward} USDT</p>
+              <p>
+                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                  View on Etherscan
+                </a>
+              </p>
+            </div>
+          }
+        />,
+      );
+      setIsLoading(false);
+      setIsClaimed(true);
+    } catch (e: any) {
+      if (e.reason) {
+        toast.error(<Message title="Ah shit, here we go again" message={e.reason} />);
+      }
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -37,8 +105,21 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
             ${data?.userVotes.totalReward || 0}
           </div>
         </div>
-        <div className="mt-8">
-          <button className="dota__button dota__gold w-full py-3 leading-5">Claim</button>
+        <div className="mt-8 h-[46px]">
+          {isMounted && (
+            <button
+              className={classNames('dota__gold w-full py-3 leading-5', isClaimed ? 'dota__button--disable' : 'dota__button')}
+              onClick={() => !isClaimed && onClaim()}
+            >
+              {isLoading || isSwitchNetworkLoading ? (
+                <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+              ) : chain?.id === ARCANA_CHAIN_ID ? (
+                'Claim'
+              ) : (
+                'Switch Network'
+              )}
+            </button>
+          )}
         </div>
         <div className="relative mt-3 mb-3.5">
           <p onClick={onAnchorClick} className="cursor-pointer text-center text-xs font-medium leading-5 text-p12-link">
@@ -50,7 +131,7 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
               />
             </svg>
           </p>
-          <div className="absolute top-2 h-[4px] w-full animate-ping-slow bg-p12-link blur-sm" />
+          <div className="absolute left-0 right-0 top-2 -z-10 mx-auto h-[4px] w-[60%] w-full animate-ping-slow bg-p12-link blur-sm" />
         </div>
       </div>
     </div>

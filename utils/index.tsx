@@ -1,5 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { getNetwork } from '@wagmi/core';
 import { isMobile } from 'react-device-detect';
 import { getAddress } from '@ethersproject/address';
 import Message from '../components/message';
@@ -103,3 +104,21 @@ export const objectSortByKey = (obj: any): any => {
   });
   return newObj;
 };
+
+export function getEtherscanLink(data: string, type: 'transaction' | 'token' | 'address'): string {
+  const { chain } = getNetwork();
+  const prefix = chain?.blockExplorers?.default.url || '';
+
+  switch (type) {
+    case 'transaction': {
+      return `${prefix}/tx/${data}`;
+    }
+    case 'token': {
+      return `${prefix}/token/${data}`;
+    }
+    case 'address':
+    default: {
+      return `${prefix}/address/${data}`;
+    }
+  }
+}

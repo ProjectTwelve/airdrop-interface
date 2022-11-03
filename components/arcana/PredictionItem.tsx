@@ -36,7 +36,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
           <h2 className="font-medium">{data?.predictionTitle}</h2>
           <p className="px-2 text-xs">{data?.predictionFull}</p>
           <div className="mt-4">
-            <div className="flex gap-8">
+            <div className="flex gap-4 2xl:gap-8">
               <div>
                 <div
                   className={classNames(
@@ -46,7 +46,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
                 >
                   {isHit ? 'Hit' : 'Pity'}
                 </div>
-                <div className="relative mt-2 h-[158px] w-[158px] overflow-hidden rounded-lg">
+                <div className="relative mt-2 h-[140px] w-[140px] overflow-hidden rounded-lg 2xl:h-[158px] 2xl:w-[158px]">
                   {isHit ? (
                     <img className="absolute top-1.5 left-1.5 z-20" src="/svg/arcana_hit.svg" alt="arcana_hit" />
                   ) : (
@@ -73,7 +73,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
               </div>
               <div>
                 <div className="h-4 text-center text-sm font-medium leading-4 text-[#FF2358]" />
-                <div className="mt-2 h-[158px] w-[158px] overflow-hidden rounded-lg">
+                <div className="mt-2 h-[140px] w-[140px] overflow-hidden rounded-lg 2xl:h-[158px] 2xl:w-[158px]">
                   <div className="flex h-full w-full items-center justify-center text-[82px] font-medium">
                     {correctAnswer ? (
                       <img loading="lazy" className="h-full w-full object-cover" src={correctAnswer.img2} alt="select" />

@@ -153,18 +153,18 @@ export default function OMGv1() {
       <div className="mt-6 flex items-stretch justify-between gap-4 md:flex-col md:items-center">
         <div className="relative w-full max-w-[412px]">
           <div className="grid grid-cols-1 gap-4">
-            <div className="h-[136px] rounded-lg bg-omg-count bg-cover">
+            <div className="h-[136px] rounded-lg bg-omg-count bg-cover backdrop-blur-lg">
               <p className="mt-[28px] text-center text-sm font-medium">My OMG Invitees</p>
               <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteCount}</p>
             </div>
-            <div className="h-[136px] rounded-lg bg-omg-count bg-cover">
+            <div className="h-[136px] rounded-lg bg-omg-count bg-cover backdrop-blur-lg">
               <p className="mt-[28px] text-center text-sm font-medium">Votes from Invitees</p>
               <p className="mt-[20px] text-center font-ddin text-[36px] font-semibold text-p12-gold">{omgCount.inviteVotes}</p>
             </div>
           </div>
         </div>
         <div
-          className="flex w-full max-w-[412px] flex-col rounded-lg"
+          className="flex w-full max-w-[412px] flex-col rounded-lg backdrop-blur-lg"
           style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
         >
           <div
@@ -185,7 +185,7 @@ export default function OMGv1() {
           </div>
         </div>
         <div
-          className="flex w-full max-w-[412px] flex-col rounded-lg"
+          className="flex w-full max-w-[412px] flex-col rounded-lg backdrop-blur-lg"
           style={{ background: 'linear-gradient(to bottom, #47505980 0%, #25293080 100%)' }}
         >
           <div

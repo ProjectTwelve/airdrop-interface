@@ -87,13 +87,13 @@ export default function Arcana() {
                   className="h-[22px] bg-[#7A3E1A] px-1.5 text-center text-xs leading-5"
                   style={{ boxShadow: 'inset 0 0 12px #220F04' }}
                 >
-                  In Progress
+                  Reward Claim
                 </p>
                 <p
                   className="h-[22px] bg-[#952E2F] px-4 text-center font-ddin text-xs font-bold leading-5"
                   style={{ textShadow: '0 0 4px rgba(0, 0, 0, 0.5)' }}
                 >
-                  10/1 - 10/28
+                  11/4 - 11/30
                 </p>
               </div>
             </div>
