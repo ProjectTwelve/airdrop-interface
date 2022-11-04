@@ -18,7 +18,6 @@ import OMGv1 from '../../components/arcana/OMG/OMGv1';
 import OMGv2 from '../../components/arcana/OMG/OMGv2';
 import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
-import MulticastMask from '../../components/arcana/MulticastMask';
 import ArcanaSwitchNetwork from '../../components/arcana/ArcanaSwitchNetwork';
 import SwiperInviteVote from '../../components/arcana/SwiperInviteVote';
 
@@ -178,7 +177,6 @@ export default function Arcana() {
             </div>
           </div>
         </div>
-        <MulticastMask />
       </div>
     </>
   );
