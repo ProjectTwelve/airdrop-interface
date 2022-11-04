@@ -289,8 +289,10 @@ export type CollabInfoType = {
   nftImage?: string;
   nftClaimLink?: string;
 
-  taskGleam: string;
-  taskTweetContent: string;
+  taskGleam?: string;
+  taskGalxe?: string;
+  taskQuest3?: string;
+  taskTweetContent?: string;
 
   claimNote: string;
 } & CollabTimes;

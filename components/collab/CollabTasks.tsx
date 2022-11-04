@@ -21,7 +21,18 @@ export type CollabTasksProps = {
 };
 
 export default function CollabTasks({ data }: CollabTasksProps) {
-  const { taskGleam, taskTweetContent, timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } = data;
+  const {
+    taskGleam,
+    taskGalxe,
+    taskQuest3,
+    taskTweetContent,
+    timeComingSoon,
+    timeJoin,
+    timeAllocation,
+    timeClaim,
+    timeClose,
+    collabCode,
+  } = data;
   const [isJoinDisable, setIsJoinDisable] = useState<boolean>(false);
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
@@ -48,7 +59,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'twitter' });
     const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
     const url = encodeURIComponent(referralLink);
-    const text = encodeURIComponent(taskTweetContent);
+    const text = encodeURIComponent(taskTweetContent || '');
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
   }, [taskTweetContent, referralCode]);
 
@@ -140,11 +151,39 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             key="gleam"
             gaKey="gleam"
             title="Gleam"
-            icon={<img className="aspect-square h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
+            icon={<img className="h-8" src="/img/collab/gleam.png" alt="gleam icon" />}
             content="Complete all required tasks on Gleam is a must step."
             href={taskGleam}
             target="_blank"
             hrefLabel="To Gleam"
+          />
+        ) : null}
+
+        {taskQuest3 ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="quest3"
+            gaKey="quest3"
+            title=""
+            icon={<img className="h-8" src="/img/collab/quest3.webp" alt="gleam icon" />}
+            content="Complete all tasks on Quest3 is a must step."
+            href={taskQuest3}
+            target="_blank"
+            hrefLabel="To Quest3"
+          />
+        ) : null}
+
+        {taskGalxe ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="galxe"
+            gaKey="galxe"
+            title=""
+            icon={<img className="h-8" src="/img/collab/galxe.svg" alt="gleam icon" />}
+            content="Directly claim your reward on Galxe after finishing tasks."
+            href={taskGalxe}
+            target="_blank"
+            hrefLabel="To Galxe"
           />
         ) : null}
 
