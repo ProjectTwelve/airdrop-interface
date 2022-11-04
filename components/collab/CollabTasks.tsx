@@ -21,8 +21,18 @@ export type CollabTasksProps = {
 };
 
 export default function CollabTasks({ data }: CollabTasksProps) {
-  const { taskGleam, taskGalxe, taskTweetContent, timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose, collabCode } =
-    data;
+  const {
+    taskGleam,
+    taskGalxe,
+    taskQuest3,
+    taskTweetContent,
+    timeComingSoon,
+    timeJoin,
+    timeAllocation,
+    timeClaim,
+    timeClose,
+    collabCode,
+  } = data;
   const [isJoinDisable, setIsJoinDisable] = useState<boolean>(false);
   const referralCode = useRecoilValue(referralCodeAtom);
   const { address } = useAccount();
@@ -49,7 +59,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'twitter' });
     const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
     const url = encodeURIComponent(referralLink);
-    const text = encodeURIComponent(taskTweetContent);
+    const text = encodeURIComponent(taskTweetContent || '');
     window.open('https://twitter.com/intent/tweet?text=' + text + '&url=' + url, '_blank');
   }, [taskTweetContent, referralCode]);
 
@@ -146,6 +156,20 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             href={taskGleam}
             target="_blank"
             hrefLabel="To Gleam"
+          />
+        ) : null}
+
+        {taskQuest3 ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="quest3"
+            gaKey="quest3"
+            title=""
+            icon={<img className="h-8" src="/img/collab/quest3.webp" alt="gleam icon" />}
+            content="Complete all tasks on Quest3 is a must step."
+            href={taskQuest3}
+            target="_blank"
+            hrefLabel="To Quest3"
           />
         ) : null}
 
