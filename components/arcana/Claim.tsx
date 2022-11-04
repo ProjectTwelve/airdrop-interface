@@ -32,11 +32,14 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
   );
 
   useEffect(() => {
-    if (!arcanaRewardContract || !address) return;
+    if (!arcanaRewardContract || !address || chain?.id !== ARCANA_CHAIN_ID) {
+      setIsClaimed(false);
+      return;
+    }
     arcanaRewardContract.isClaimed(BigNumber.from(address).toString()).then((res: boolean) => {
-      res && setIsClaimed(res);
+      setIsClaimed(res);
     });
-  }, [address, arcanaRewardContract]);
+  }, [address, arcanaRewardContract, chain?.id]);
 
   const onAnchorClick = () => {
     const omgV1 = document.querySelector('#omg_v1');
@@ -63,7 +66,7 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
           title="Mission Complete"
           message={
             <div>
-              <p>Successfully claimed {totalReward} USDT</p>
+              <p>Successfully claimed {totalReward} BUSD</p>
               <p>
                 <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
@@ -108,15 +111,26 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
         <div className="mt-8 h-[46px]">
           {isMounted && (
             <button
-              className={classNames('dota__gold w-full py-3 leading-5', isClaimed ? 'dota__button--disable' : 'dota__button')}
+              className={classNames(
+                'dota__gold w-full py-3 leading-5',
+                address && !isClaimed && data ? 'dota__button' : 'dota__button--disable',
+              )}
               onClick={() => !isClaimed && onClaim()}
             >
-              {isLoading || isSwitchNetworkLoading ? (
-                <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
-              ) : chain?.id === ARCANA_CHAIN_ID ? (
-                'Claim'
+              {address ? (
+                isLoading || isSwitchNetworkLoading ? (
+                  <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+                ) : chain?.id === ARCANA_CHAIN_ID ? (
+                  isClaimed ? (
+                    'Claimed'
+                  ) : (
+                    'Claim'
+                  )
+                ) : (
+                  'Switch Network'
+                )
               ) : (
-                'Switch Network'
+                'Claim'
               )}
             </button>
           )}
