@@ -359,6 +359,7 @@ export type ArcanaUserVotes = {
   votesBabCurrent: number;
   votesBabLast: number;
   totalReward: number;
+  solvedPredictions: number;
   votesCommunityNftCurrent: number;
   votesCommunityNftLast: number;
   votesGenesisNftCurrent: number;

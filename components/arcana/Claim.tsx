@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import MerkleTree from 'merkletreejs';
 import { toast } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
 import { parseEther } from '@ethersproject/units';
 import { BigNumber } from '@ethersproject/bignumber';
 import { keccak256 } from '@ethersproject/keccak256';
@@ -15,7 +14,6 @@ import { ARCANA_CHAIN_ID } from '../../constants';
 import leaves from '../../data/arcana_reward_mt.json';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useArcanaRewardContract } from '../../hooks/useContract';
-import { arcanaPredictionAnswerAtom } from '../../store/arcana/state';
 
 export default function Claim({ data }: { data?: ArcanaVotes }) {
   const arcanaRewardContract = useArcanaRewardContract();
@@ -24,12 +22,7 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
   const isMounted = useIsMounted();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isClaimed, setIsClaimed] = useState<boolean>(false);
-  const predictionAnswers = useRecoilValue(arcanaPredictionAnswerAtom);
   const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
-  const predictionAnswerCount = useMemo(
-    () => predictionAnswers.filter((item) => !!item.answer?.length).length || 0,
-    [predictionAnswers],
-  );
 
   useEffect(() => {
     if (!arcanaRewardContract || !address || chain?.id !== ARCANA_CHAIN_ID) {
@@ -94,14 +87,14 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
       <div className="w-full bg-omg-mask">
         <h3 className="pt-4 text-center font-medium leading-4 text-p12-gold">Glory</h3>
         <div className="mt-4 grid grid-cols-2 px-[30px]">
-          <p className="text-center font-medium leading-4">You solved</p>
-          <p className="text-center font-medium leading-4">You earned</p>
+          <p className="text-center font-medium leading-4">Hit</p>
+          <p className="text-center font-medium leading-4">Earned</p>
         </div>
       </div>
       <div className="mt-2 px-[30px]">
         <div className="flex">
           <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">
-            {predictionAnswerCount}
+            {data?.userVotes.solvedPredictions || 0}
           </div>
           <div className="h-[28px] w-[1px] bg-[#6F7784]/50" />
           <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-p12-gold">
