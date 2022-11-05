@@ -1,7 +1,7 @@
 import { isIOS, isMobile } from 'react-device-detect';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { ArcanaMemeEvaluateParams, ArcanaVotes, PredictionAnswerParams, Response } from '../lib/types';
+import { ArcanaMemeEvaluateParams, ArcanaVotes, PredictionAnswerParams, PredictionItemData, Response } from '../lib/types';
 import {
   arcanaGenesisNFTHolderAtom,
   arcanaMulticastCardAtom,
@@ -23,6 +23,7 @@ import {
   fetchArcanaPredictionsAnswerCount,
   fetchArcanaPredictionsOMG,
   fetchArcanaRecentInvitation,
+  fetchArcanaRewardRank,
   fetchArcanaUnlock,
   fetchArcanaVotes,
   fetchArcanaVotesRank,
@@ -83,7 +84,23 @@ export const useArcanaDistinctAddressCount = () => {
 export const useArcanaPredictions = (walletAddress?: string) => {
   return useQuery(['arcana_predictions', walletAddress], () => fetchArcanaPredictions({ walletAddress }), {
     enabled: !!walletAddress,
-    select: (data) => (data.code === 200 ? data.data : undefined),
+    select: (data) => {
+      if (data.code === 200) {
+        const correctList: PredictionItemData[] = [];
+        const otherList: PredictionItemData[] = [];
+        data.data.map((item) => {
+          const answer = item.answer?.[0];
+          const correctAnswer = item.correctAnswer;
+          if (answer && correctAnswer.some((i) => i.id === answer.id)) {
+            correctList.push(item);
+          } else {
+            otherList.push(item);
+          }
+        });
+        return [...correctList, ...otherList];
+      }
+      return undefined;
+    },
     refetchOnWindowFocus: false,
   });
 };
@@ -137,6 +154,13 @@ export const useArcanaAnswerOMG = () => {
 
 export const useArcanaAnswerOMG2 = () => {
   return useQuery(['arcana_answer_omg2'], () => fetchArcanaAnswerOMG2(), {
+    select: (data) => (data.code === 200 ? data.data : undefined),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useArcanaRewardRank = () => {
+  return useQuery(['arcana_reward_rank'], () => fetchArcanaRewardRank(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
     refetchOnWindowFocus: false,
   });

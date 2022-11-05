@@ -1,15 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import dayjs from 'dayjs';
-import { useAccount } from 'wagmi';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import { toast } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
-import Message from '../message';
-import { openLink } from '../../utils';
 import { PredictionItemData } from '../../lib/types';
-import { useArcanaUnlock } from '../../hooks/arcana';
-import PredictionItemDialog from './PredictionItemDialog';
-import { arcanaGenesisNFTHolderAtom, arcanaObserverAtom, PredictionAnswer } from '../../store/arcana/state';
+import { PredictionAnswer } from '../../store/arcana/state';
 
 type PredictionItemProps = {
   data?: PredictionItemData;
@@ -17,198 +9,107 @@ type PredictionItemProps = {
   votes?: number;
 };
 
-export enum PREDICTION_TYPE {
-  TEAM = 'team',
-  PLAYER = 'player',
-  HERO = 'hero',
-  CARD = 'card',
-}
-
-export default function PredictionItem({ data, votes, answer }: PredictionItemProps) {
-  const isObserver = useRecoilValue(arcanaObserverAtom);
-  const isGenesisNFTHolder = useRecoilValue(arcanaGenesisNFTHolderAtom);
-  const { address } = useAccount();
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [isTimeLock, setIsTimeLock] = useState<boolean>(false);
-  const [isEnd, setIsEnd] = useState<boolean>(false);
-  const [durationTime, setDurationTime] = useState<string>('');
-  const [item, setItem] = useState<PredictionItemData | undefined>(data);
-  const { mutateAsync, isLoading } = useArcanaUnlock();
-  const answerSelect = useMemo(() => {
-    if (answer && answer.answer && answer.answer[0]) return answer.answer[0];
-  }, [answer]);
-
-  const tips = useMemo(() => {
-    if (!data) return '';
-    if (data.taskRequired === 'invite1') return 'Invite 1 new gamer to unlock';
-    if (data.taskRequired === 'invite2') return 'Invite 2 new gamers to unlock';
-    if (data.taskRequired === 'invite3') return 'Invite 3 new gamers to unlock';
-    if (data.taskRequired === 'quest3') return 'Finish Quest3 task to unlock';
-    return '';
-  }, [data]);
-
-  const onUnlock = () => {
-    if (isObserver || !address || !item || isLoading) return;
-    mutateAsync({ walletAddress: address, predictionCode: item.predictionCode }).then((res) => {
-      if (res.data) {
-        setItem((status) => {
-          if (!status) return undefined;
-          return { ...status, ifLock: false };
-        });
-      } else if (item.taskRequired === 'quest3' && item.taskUrl) {
-        openLink(item.taskUrl);
-      } else {
-        toast.error(<Message message="You haven't finished the task, try again." title="Ah shit, here we go again" />);
-      }
-    });
-  };
-
-  const onSelect = () => {
-    if (isEnd) {
-      toast.error(
-        <Message message="Your picks are locked. Stay tuned for the final results." title="Ah shit, here we go again" />,
-      );
-      return;
-    }
-    if (isObserver || !address || !item || !isGenesisNFTHolder) return;
-    setOpenDialog(true);
-  };
-
-  useEffect(() => {
-    if (!item?.releaseDate) return;
-    const releaseDate = dayjs.unix(item.releaseDate);
-    const endDate = dayjs.unix(item.endDate);
-    const currentDate = dayjs();
-    if (currentDate < releaseDate) {
-      setIsTimeLock(true);
-      const diffHours = releaseDate.diff(currentDate, 'hour');
-      if (diffHours > 48) return setDurationTime(`${Math.floor(diffHours / 60)} Days`);
-      if (diffHours > 24) return setDurationTime(`1 Day`);
-      if (diffHours > 1) return setDurationTime(`${diffHours} Hrs`);
-      return setDurationTime(`<1 Hour`);
-    }
-    if (currentDate > endDate) {
-      setIsEnd(true);
-    }
-  }, [item?.endDate, item?.releaseDate]);
+export default function PredictionItem({ data }: PredictionItemProps) {
+  const correctAnswer = useMemo(() => data && data.correctAnswer[0], [data]);
+  const answer = useMemo(() => data && data.answer?.[0], [data]);
+  const isHit = useMemo(() => answer && data && data.correctAnswer.some((item) => item.id === answer.id), [data, answer]);
 
   return (
     <div className="relative">
-      {!item && (
-        <div className="absolute inset-0 top-0 left-0 z-10 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-lg" />
-      )}
-      {isTimeLock && (
-        <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-lg bg-black/40 backdrop-blur-lg">
-          <p className="text-p12-gold">Prize of this Tip</p>
-          <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">${item?.maxPrice}</p>
-          <div className="text-xl text-p12-success"> {durationTime} to Unlock</div>
-        </div>
-      )}
       <div
         className="flex h-full flex-col rounded-lg backdrop-blur-lg"
         style={{ background: 'linear-gradient(to bottom, #3D444B80 0%, #23262C80 100%)' }}
       >
         <div className="border-b-none flex items-center justify-items-start rounded-t-lg border-2 border-b-0 border-[#6F778480] bg-gradient-prediction p-4 backdrop-blur-lg">
           <div className="h-[36px] w-[36px] flex-none rounded-full">
-            <img src={item?.sponsorLogo} className="h-full w-full object-cover" alt="p12" />
+            {data && <img src={data.sponsorLogo} className="h-full w-full object-cover" alt="p12" />}
           </div>
           <div className="ml-2">
             <p className="text-xs">
-              <span className="font-medium text-p12-link">{item?.sponsorName}</span>&nbsp; sponsored this prediction:
+              <span className="font-medium text-p12-link">{data?.sponsorName}</span>&nbsp; sponsored this prediction:
             </p>
-            <p className="text-xs text-p12-orange">&quot;{item?.meme}&quot;</p>
+            <p className="text-xs text-p12-orange">&quot;{data?.meme}&quot;</p>
           </div>
         </div>
         <div className="h-0.5 bg-p12-gradient"></div>
         <div className="relative grid flex-1 grid-cols-1 justify-items-center pt-6 pb-5">
-          {!isTimeLock && item?.ifLock && (
-            <div className="absolute inset-0 top-0 left-0 z-20 flex flex-col items-center justify-center rounded-b-lg bg-[url('/img/arcana/lock_mask.webp')] bg-cover bg-no-repeat py-[30px]">
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <p className="text-p12-gold">Prize of this Tip</p>
-                <p className="flex items-center justify-center font-ddin text-[36px] font-bold text-p12-gold">
-                  ${item?.maxPrice}
-                </p>
-              </div>
-              <div className="text-xs">{tips}</div>
-              <div className="mt-3 w-full px-7">
-                <button
+          <h2 className="font-medium">{data?.predictionTitle}</h2>
+          <p className="px-2 text-xs">{data?.predictionFull}</p>
+          <div className="mt-4">
+            <div className="flex gap-4 2xl:gap-8">
+              <div>
+                <div
                   className={classNames(
-                    'dota__button w-full py-[7px] text-xl',
-                    data?.taskRequired === 'quest3' && !data?.taskUrl && 'dota__button--disable',
+                    'text-center text-sm font-medium leading-4',
+                    isHit ? 'text-[#1EDB8C]' : 'text-[#FF2358]',
                   )}
-                  onClick={onUnlock}
                 >
-                  <div className="dota__gold h-[28px] text-base leading-[28px]">
-                    {isLoading ? (
-                      <img className="mx-auto h-full animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
+                  {isHit ? 'Hit' : 'Pity'}
+                </div>
+                <div className="relative mt-2 h-[140px] w-[140px] overflow-hidden rounded-lg 2xl:h-[158px] 2xl:w-[158px]">
+                  {isHit ? (
+                    <img className="absolute top-1.5 left-1.5 z-20" src="/svg/arcana_hit.svg" alt="arcana_hit" />
+                  ) : (
+                    <img className="absolute top-1.5 left-1.5 z-20" src="/svg/arcana_pity.svg" alt="arcana_pity" />
+                  )}
+                  <div
+                    className={classNames('absolute top-0 left-0 z-10 h-full w-full', isHit ? 'arcana__hit' : 'arcana__pity')}
+                  />
+                  {answer ? (
+                    <div className="flex h-full w-full items-center justify-center text-[82px] font-medium">
+                      <img loading="lazy" className="h-full w-full object-cover" src={answer.img2} alt="select" />
+                    </div>
+                  ) : (
+                    <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium">
+                      <p className="text-[82px] leading-[82px]">?</p>
+                      <p className="text-sm">Missed Reward</p>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-3 flex h-[32px] flex-col items-center">
+                  <div className="font-medium leading-4">{answer?.team}</div>
+                  <div className="font-medium leading-4">{answer?.name}</div>
+                </div>
+              </div>
+              <div>
+                <div className="h-4 text-center text-sm font-medium leading-4 text-[#FF2358]" />
+                <div className="mt-2 h-[140px] w-[140px] overflow-hidden rounded-lg 2xl:h-[158px] 2xl:w-[158px]">
+                  <div className="flex h-full w-full items-center justify-center text-[82px] font-medium">
+                    {correctAnswer ? (
+                      <img loading="lazy" className="h-full w-full object-cover" src={correctAnswer.img2} alt="select" />
                     ) : (
-                      'Unlock'
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium">
+                        <p className="text-[82px] leading-[82px]">?</p>
+                      </div>
                     )}
                   </div>
-                </button>
-              </div>
-              <p className="mt-3 text-center text-xs text-p12-darkgray">
-                Notes: Synchronization will take some time, stay tuned.
-              </p>
-            </div>
-          )}
-          <h2 className="font-medium">{item?.predictionTitle}</h2>
-          <p className="px-2 text-xs">{item?.predictionFull}</p>
-          <div className="relative mt-5 h-[168px] w-[168px] cursor-pointer overflow-hidden rounded-lg" onClick={onSelect}>
-            {answerSelect ? (
-              <>
-                {data?.optionType === PREDICTION_TYPE.CARD && (
-                  <div className="absolute top-0 left-0 z-10 h-full w-full hover:bg-white/10" />
-                )}
-                <div className="flex h-full w-full items-center justify-center text-[82px] font-medium hover:bg-white/10">
-                  <img loading="lazy" className="h-full w-full object-cover" src={answerSelect.img2} alt="select" />
                 </div>
-              </>
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
-                <p className="text-[82px] leading-[82px]">?</p>
-                <p className="text-sm">Click to Answer</p>
+                <div className="mt-3 flex h-[32px] flex-col items-center">
+                  <div className="font-medium leading-4">{correctAnswer?.team}</div>
+                  <div className="font-medium leading-4">{correctAnswer?.name}</div>
+                </div>
               </div>
-            )}
-          </div>
-          <div className="mt-3 flex h-[40px] flex-col items-center justify-around">
-            <div className="font-medium leading-4">{answerSelect?.team}</div>
-            <div className="font-medium leading-4">{answerSelect?.name}</div>
+            </div>
           </div>
           <div className="mt-8 flex w-full items-center">
-            <div className="flex items-center justify-center">
-              <div className="px-6 text-center">
-                <h3 className="text-xs font-medium">Total Tipsters</h3>
-                <p className="font-ddin text-[26px] font-bold">{votes ?? 0}</p>
-              </div>
-              <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <h3 className="text-xs font-medium leading-3">Total Winner Votes</h3>
+              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px]">{data?.totalWinnerVotes ?? 0}</p>
+              <h3 className="mt-4 text-xs font-medium leading-3">Total Prize</h3>
+              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px]">${data?.currentPrice || 0}</p>
             </div>
-            <div className="flex flex-1 items-center justify-around px-3">
-              <div className="text-center">
-                <h3 className="text-xs font-medium text-p12-gold">Prize</h3>
-                <p className="flex items-center justify-center font-ddin text-[26px] font-bold text-p12-gold">
-                  ${item?.currentPrice || 0}
-                </p>
-              </div>
-              <div className="text-center">
-                <h3 className="text-xs font-medium text-p12-gold">Upto</h3>
-                <p className="flex items-center justify-center font-ddin text-[26px] font-bold text-p12-gold">
-                  ${item?.maxPrice || 0}
-                </p>
-              </div>
+            <div className="h-[48px] w-[2px] bg-[#474C55]/50"></div>
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <h3 className="text-xs font-medium leading-3">Your Vote Share</h3>
+              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px]">
+                {data?.votesShare ? (data.votesShare < 0.001 ? '< 0.001' : data.votesShare) : 0}%
+              </p>
+              <h3 className="mt-4 text-xs font-medium leading-3 text-p12-gold">Your Reward</h3>
+              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px] text-p12-gold">${data?.reward || 0}</p>
             </div>
           </div>
         </div>
       </div>
-      <PredictionItemDialog
-        open={openDialog}
-        code={data?.predictionCode}
-        type={data?.optionType}
-        options={data?.optionList}
-        title={data?.predictionTitle}
-        subTitle={data?.predictionFull}
-        onOpenChange={(op) => setOpenDialog(op)}
-      />
     </div>
   );
 }

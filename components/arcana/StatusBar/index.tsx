@@ -1,113 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { toast } from 'react-toastify';
-import { BigNumber } from '@ethersproject/bignumber';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useAccount, useNetwork, useSignTypedData, useSwitchNetwork } from 'wagmi';
+import { useRecoilValue } from 'recoil';
 import InfoCard from './InfoCard';
 import MainCard from './MainCard';
 import EasterEgg from './EasterEgg';
-import Message from '../../message';
 import SwiperCard from './SwiperCard';
-import { ARCANA_CHAIN_ID } from '../../../constants';
-import { useArcanaAnswer } from '../../../hooks/arcana';
-import { objectSortByKey, openLink } from '../../../utils';
-import { ArcanaVotes, PredictionAnswerParams } from '../../../lib/types';
-import { useArcanaContract, useForwarderContract } from '../../../hooks/useContract';
-import { getArcanaSignTypeData, getIpfsAnswer } from '../../../utils/arcana';
-import {
-  arcanaObserverAtom,
-  arcanaPredictionAnswerAtom,
-  arcanaPredictionOMGAnswerAtom,
-  arcanaUnSubmitAtom,
-  PredictionAnswer,
-} from '../../../store/arcana/state';
+import { openLink } from '../../../utils';
+import { ArcanaVotes } from '../../../lib/types';
+import { arcanaObserverAtom } from '../../../store/arcana/state';
 
-type StatusBarProps = {
-  data?: ArcanaVotes;
-};
-
-export default function StatusBar({ data }: StatusBarProps) {
-  const GAS_LIMIT = 200000;
+export default function StatusBar({ data }: { data?: ArcanaVotes }) {
   const [level, setLevel] = useState<number>(30);
-  const { address } = useAccount();
-  const { chain } = useNetwork();
-  const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const isObserver = useRecoilValue(arcanaObserverAtom);
-  const arcanaContract = useArcanaContract();
-  const forwarderContract = useForwarderContract();
-  const { signTypedDataAsync } = useSignTypedData();
-  const omgAnswer = useRecoilValue(arcanaPredictionOMGAnswerAtom);
-  const predictionAnswer = useRecoilValue(arcanaPredictionAnswerAtom);
-  const [unSubmit, setUnSubmit] = useRecoilState(arcanaUnSubmitAtom);
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
-  const { mutateAsync } = useArcanaAnswer();
-
-  useEffect(() => {
-    if (unSubmit) {
-      window.onbeforeunload = (event) => {
-        event.preventDefault();
-        event.returnValue = 'Do you really want to leave?';
-        return 'Do you really want to leave?';
-      };
-    } else {
-      window.onbeforeunload = null;
-    }
-  }, [unSubmit]);
 
   const onLevelClick = () => {
     ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Easter-Egg' });
     if (level === 30) return;
     setEasterEggShow(true);
-  };
-
-  const onSignAnswer = async () => {
-    if (!address || !chain || !arcanaContract || !forwarderContract) return;
-    if (chain.id !== ARCANA_CHAIN_ID) {
-      switchNetwork?.();
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const answers: PredictionAnswer[] = [];
-      omgAnswer.forEach((item) => {
-        if (item.answer && item.answer.length > 0) {
-          answers.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
-        }
-      });
-      predictionAnswer.forEach((item) => {
-        if (item.answer && item.answer.length > 0) {
-          answers.push({ predictionCode: item.predictionCode, answer: [objectSortByKey(item.answer[0])] });
-        }
-      });
-      const hash = await getIpfsAnswer({ answers });
-      const ipfsURL = 'ipfs://' + hash;
-      const tx = await arcanaContract.populateTransaction.updateAnswerUri(BigNumber.from(address), ipfsURL);
-      const nonce = await forwarderContract.getNonce(address);
-      tx.gasLimit = tx.gasLimit || (GAS_LIMIT as any);
-      const signature = await signTypedDataAsync(getArcanaSignTypeData(forwarderContract, tx, nonce));
-      const params: PredictionAnswerParams = {
-        walletAddress: address,
-        ipfsUrl: ipfsURL,
-        nonce: nonce.toString(),
-        signature,
-        txData: tx.data,
-        gasLimit: tx.gasLimit,
-        answers,
-      };
-      mutateAsync(params).then(({ code, msg }) => {
-        if (code !== 200) {
-          toast.error(<Message message={msg} title="Ah shit, here we go again" />);
-          return;
-        }
-        setUnSubmit(false);
-        toast.success(<Message message="Submitted" title="Mission Complete" />);
-      });
-      setIsLoading(false);
-    } catch (e: any) {
-      if (e.code === 4001) setIsLoading(false);
-    }
   };
 
   useEffect(() => {
@@ -126,22 +36,6 @@ export default function StatusBar({ data }: StatusBarProps) {
           </div>
           <button className="dota__button dota__gold px-4 xs:px-2" onClick={() => openLink(window.location.origin + '/arcana')}>
             Back to my Votes
-          </button>
-        </div>
-      )}
-      {unSubmit && (
-        <div className="absolute -top-16 z-30 mx-auto flex text-sm md:fixed md:bottom-4 md:top-auto">
-          <div className="dota__box px-4 py-3 xs:px-2 xs:py-1.5">
-            You have <span className="font-medium text-p12-gold">unsubmitted</span> Votes
-          </div>
-          <button className="dota__button dota__gold px-4 xs:px-2" onClick={onSignAnswer}>
-            {isLoading || isSwitchNetworkLoading ? (
-              <img className="mx-auto animate-spin" src="/img/arcana/loading_gold.svg" alt="loading" />
-            ) : chain?.id === ARCANA_CHAIN_ID ? (
-              'Submit'
-            ) : (
-              'Switch Network'
-            )}
           </button>
         </div>
       )}

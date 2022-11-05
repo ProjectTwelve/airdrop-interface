@@ -159,6 +159,16 @@
     .copy__btn:hover {
         background: linear-gradient(180deg, #90EC58 5%, #3E7725 46.81%, #6FBD40 100%);
     }
+
+    .arcana__pity {
+        background: rgba(255, 35, 88, 0.05);
+        box-shadow: inset 0 0 40px rgba(255, 35, 88, 0.6);
+    }
+
+    .arcana__hit {
+        background: rgba(30, 219, 140, 0.05);
+        box-shadow: inset 0 0 40px rgba(30, 219, 140, 0.6);
+    }
 }
 
 @layer utilities {

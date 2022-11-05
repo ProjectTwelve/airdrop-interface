@@ -2,9 +2,15 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Image from 'next/image';
 import Dialog from '../dialog';
-import { PREDICTION_TYPE } from './PredictionItem';
 import { HERO_ATTRIBUTE, PredictionOption } from '../../lib/types';
 import { arcanaPredictionAnswerAtom, arcanaUnSubmitAtom } from '../../store/arcana/state';
+
+export enum PREDICTION_TYPE {
+  TEAM = 'team',
+  PLAYER = 'player',
+  HERO = 'hero',
+  CARD = 'card',
+}
 
 type PredictionItemDialogProps = {
   open: boolean;

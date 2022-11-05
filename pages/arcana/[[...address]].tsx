@@ -12,11 +12,12 @@ import StatusBar from '../../components/arcana/StatusBar';
 import ArcanaNotConnect from '../../components/arcana/ArcanaNotConnect';
 import Prediction from '../../components/arcana/Prediction';
 import Participant from '../../components/arcana/Participant';
-import OMG from '../../components/arcana/OMG';
+import Claim from '../../components/arcana/Claim';
+import ArcanaRank from '../../components/arcana/ArcanaRank';
 import OMGv1 from '../../components/arcana/OMG/OMGv1';
+import OMGv2 from '../../components/arcana/OMG/OMGv2';
 import { ARCANA_CHAIN_ID } from '../../constants';
 import { arcanaObserverAtom, arcanaOriginAddressAtom } from '../../store/arcana/state';
-import MulticastMask from '../../components/arcana/MulticastMask';
 import ArcanaSwitchNetwork from '../../components/arcana/ArcanaSwitchNetwork';
 import SwiperInviteVote from '../../components/arcana/SwiperInviteVote';
 
@@ -85,13 +86,13 @@ export default function Arcana() {
                   className="h-[22px] bg-[#7A3E1A] px-1.5 text-center text-xs leading-5"
                   style={{ boxShadow: 'inset 0 0 12px #220F04' }}
                 >
-                  In Progress
+                  Reward Claim
                 </p>
                 <p
                   className="h-[22px] bg-[#952E2F] px-4 text-center font-ddin text-xs font-bold leading-5"
                   style={{ textShadow: '0 0 4px rgba(0, 0, 0, 0.5)' }}
                 >
-                  10/1 - 10/28
+                  11/4 - 11/30
                 </p>
               </div>
             </div>
@@ -107,6 +108,10 @@ export default function Arcana() {
         <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
           <Participant />
           <VoteRank />
+        </div>
+        <div className="mt-5 flex gap-4 md:flex-col 2xl:gap-[30px]">
+          <Claim data={data} />
+          <ArcanaRank />
         </div>
         <div className="mt-6">
           {isMounted && (
@@ -128,13 +133,13 @@ export default function Arcana() {
           )}
         </div>
         <div className="mt-6">
-          <OMG />
-        </div>
-        <div className="mt-6">
           <Prediction />
         </div>
         <div className="mt-12 md:mt-8">
           <OMGv1 />
+        </div>
+        <div className="mt-12 md:mt-8">
+          <OMGv2 />
         </div>
         <div className="relative flex w-full items-end justify-center xs:mt-8">
           <h3 className="absolute top-12 text-[26px] font-medium">Engage in community</h3>
@@ -172,7 +177,6 @@ export default function Arcana() {
             </div>
           </div>
         </div>
-        <MulticastMask />
       </div>
     </>
   );
