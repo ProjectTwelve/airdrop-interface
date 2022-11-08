@@ -27,7 +27,6 @@ export default function GamerProfile() {
     () => fetchGamerInfo({ addr: address }),
     {
       enabled: !!address,
-      refetchOnWindowFocus: false,
     },
   );
   const { data: gamerGamesData, isLoading: isGamerGamesLoading } = useQuery(
@@ -35,7 +34,6 @@ export default function GamerProfile() {
     () => fetchGamerGames({ wallet_address: address }),
     {
       enabled: !!address,
-      refetchOnWindowFocus: false,
     },
   );
   const gamerInfo = gamerInfoData?.data;

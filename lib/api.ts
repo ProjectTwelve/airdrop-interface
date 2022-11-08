@@ -37,6 +37,7 @@ import {
   RecentInvitationItem,
   PredictionAnswerOMG2Item,
   RewardRankItem,
+  GamerEmailInfo,
 } from './types';
 
 /**
@@ -217,10 +218,15 @@ export const fetchArcanaAnswerOMG = () =>
 export const fetchArcanaAnswerOMG2 = () =>
   request.post<any, Response<PredictionAnswerOMG2Item[]>>('/v2/ti/omg2Rank', { rankSize: 20 });
 
-export const fetchArcanaRewardRank = () =>
-  request.post<any, Response<RewardRankItem[]>>('/v2/ti/rewardRank', { rankSize: 50 });
+export const fetchArcanaRewardRank = () => request.post<any, Response<RewardRankItem[]>>('/v2/ti/rewardRank', { rankSize: 50 });
 
 export const fetchArcanaVotesRank = () => request.post<any, Response<VoteRankItem[]>>('/v2/ti/votesRank', { size: 42 });
 
 export const fetchArcanaRecentInvitation = () =>
   request.post<any, Response<RecentInvitationItem[]>>('/v2/ti/recentInvitation', { rankSize: 20 });
+
+export const fetchGamerEmailInfo = (wallet_address?: string) =>
+  request.post<any, Response<GamerEmailInfo>>('/api/gamer/emailInfo', { wallet_address });
+
+export const fetchGamerVerifyEmailCode = (params: { wallet_address?: string; email_verify_code: string }) =>
+  request.post<any, Response<any>>('/api/gamer/verifyEmailCode', params);

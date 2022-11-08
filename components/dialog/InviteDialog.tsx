@@ -30,7 +30,6 @@ function InviteDialog() {
 
   useQuery(['invite', address], () => fetchReferralCode({ wallet_address: address }), {
     enabled: !!address,
-    refetchOnWindowFocus: false,
     onSuccess: (data) => data.data.referral_code && setReferralCode(data.data.referral_code),
   });
 

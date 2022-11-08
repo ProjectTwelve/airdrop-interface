@@ -23,7 +23,7 @@ type AppPropsWithLayout = AppProps & {
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
-  const queryClient = useMemo(() => new QueryClient(), []);
+  const queryClient = useMemo(() => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } }), []);
   const isCollab = useMemo(
     () => router.pathname.indexOf('/collab') !== -1 || router.pathname.indexOf('/arcana') !== -1,
     [router],
