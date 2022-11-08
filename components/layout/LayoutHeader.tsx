@@ -36,7 +36,7 @@ function LayoutHeader() {
           is_email_verified: data.is_email_verified,
           is_new_user: false,
         });
-        setGamerEmailDialogTypeAtom('type2');
+        setGamerEmailDialogTypeAtom(data.email ? 'type2' : 'type1');
       } else {
         setGamerEmailInfo({
           wallet_address: undefined,

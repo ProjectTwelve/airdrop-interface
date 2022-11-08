@@ -81,8 +81,7 @@ export default function GamerEmailDialog() {
     <Dialog
       open={open}
       onOpenChange={(op) => {
-        console.log('op: ', op);
-        if (!op) setType('type2');
+        if (!op) setType(gamerEmailInfo.email ? 'type2' : 'type1');
         setOpen(op);
       }}
       render={() => (
