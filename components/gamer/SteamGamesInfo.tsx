@@ -16,7 +16,7 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
         label: (
           <div className="relative flex items-center justify-center">
             SS games&nbsp;
-            <Tooltip label="Super Saiyan Game: game playtime ≥ 1000 hours">
+            <Tooltip label={<p className="w-[260px]">Super Saiyan Game: game playtime ≥ 1000 hours</p>}>
               <img src="/svg/question.svg" className="cursor-pointer" width={14} height={14} alt="question" />
             </Tooltip>
           </div>

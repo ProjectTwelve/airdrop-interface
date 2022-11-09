@@ -16,6 +16,26 @@ export const gamerEmailShowAtom = atom<boolean>({
   default: false,
 });
 
+export const gamerEmailDialogTypeAtom = atom<'type1' | 'type2'>({
+  key: 'gamer_email_dialog_type',
+  default: 'type1',
+});
+
+export const gamerEmailInfoAtom = atom<{
+  wallet_address?: string;
+  email?: string;
+  is_email_verified: boolean;
+  is_new_user: boolean;
+}>({
+  key: 'gamer_email_info',
+  default: {
+    wallet_address: undefined,
+    email: undefined,
+    is_email_verified: false,
+    is_new_user: true,
+  },
+});
+
 export const gamerInfoCodeAtom = atom<number>({
   key: 'gamer_info_code',
   default: 0,
@@ -30,4 +50,3 @@ export const gamerPermissionSettingAtom = atom<boolean>({
   key: 'gamer_permission_setting',
   default: false,
 });
-

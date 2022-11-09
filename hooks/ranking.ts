@@ -20,7 +20,6 @@ type Options = Pick<UseQueryOptions, 'staleTime' | 'enabled'>;
 export const useDeveloperVerifiedCount = () => {
   return useQuery(['dev_verified_count'], () => fetchDeveloperVerifiedCount(), {
     select: (data) => data.data,
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -28,7 +27,6 @@ export const useDeveloperRank = (addr?: string) => {
   return useQuery(['dev_rank', addr], () => fetchDeveloperRank({ addr }), {
     enabled: !!addr,
     select: (data) => data.data,
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -41,7 +39,6 @@ export const useDeveloperTimeRank = ({ page, size }: Pagination) => {
       status: 'success',
       data: { rankLength: 10, size: 10, page: 1, rankList: new Array(10).fill({}) },
     },
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -54,7 +51,6 @@ export const useDeveloperTokenRank = ({ page, size }: Pagination, options?: Opti
       status: 'success',
       data: { rankLength: 10, size: 10, page: 1, rankList: new Array(10).fill({}) },
     },
-    refetchOnWindowFocus: false,
     ...options,
   });
 };
@@ -62,7 +58,6 @@ export const useDeveloperTokenRank = ({ page, size }: Pagination, options?: Opti
 export const useGamerVerifiedCount = () => {
   return useQuery(['gamer_verified_count'], () => fetchGamerVerifiedCount(), {
     select: (data) => data.data,
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -70,7 +65,6 @@ export const useGamerRank = (addr?: string) => {
   return useQuery(['gamer_rank', addr], () => fetchGamerRank({ addr }), {
     enabled: !!addr,
     select: (data) => data.data,
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -83,7 +77,6 @@ export const useGamerTimeRank = ({ page, size }: Pagination) => {
       status: 'success',
       data: { rankLength: 10, size: 10, page: 1, rankList: new Array(10).fill({}) },
     },
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -96,7 +89,6 @@ export const useGamerTokenRank = ({ page, size }: Pagination, options?: Options)
       status: 'success',
       data: { rankLength: 10, size: 10, page: 1, rankList: new Array(10).fill({}) },
     },
-    refetchOnWindowFocus: false,
     ...options,
   });
 };

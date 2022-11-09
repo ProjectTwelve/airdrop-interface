@@ -2,21 +2,23 @@ import React, { useEffect, useMemo } from 'react';
 import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
-import { shortenAddress } from '../../utils';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import { Tooltip } from '../tooltip';
-import { gamerInfoAtom } from '../../store/gamer/state';
+import { shortenAddress } from '../../utils';
 import { useSIDName } from '../../hooks/useSIDName';
-import { useBABTBalanceOf } from '../../hooks/useContract';
 import { isBABTHolderAtom } from '../../store/web3/state';
+import { useBABTBalanceOf } from '../../hooks/useContract';
+import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '../../store/gamer/state';
 
 function Web3StatusInner() {
   const { address } = useAccount();
-  const gamerInfo = useRecoilValue(gamerInfoAtom);
   const { SIDName } = useSIDName({ address });
   const { data: balance } = useBABTBalanceOf({ address });
+  const gamerEmailInfo = useRecoilValue(gamerEmailInfoAtom);
   const setIsBABTHolder = useSetRecoilState(isBABTHolderAtom);
+  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
+  const setGamerEmailDialogType = useSetRecoilState(gamerEmailDialogTypeAtom);
   const isBABTHolder = useMemo(() => !!(balance && balance.toString() !== '0'), [balance]);
 
   useEffect(() => {
@@ -35,8 +37,25 @@ function Web3StatusInner() {
           isBABTHolder && 'overflow-hidden rounded-full bg-gradient-babt',
         )}
       >
-        {gamerInfo?.email ? (
-          <Tooltip placement="bottom" label={gamerInfo?.email}>
+        {gamerEmailInfo?.email ? (
+          <Tooltip
+            placement="bottom"
+            label={
+              gamerEmailInfo.is_email_verified ? (
+                <p>{gamerEmailInfo.email}</p>
+              ) : (
+                <p
+                  className="cursor-pointer text-[#FF2358]"
+                  onClick={() => {
+                    setGamerEmailShow(true);
+                    setGamerEmailDialogType('type2');
+                  }}
+                >
+                  {gamerEmailInfo.email}
+                </p>
+              )
+            }
+          >
             <p className={classNames('cursor-pointer', isBABTHolder && 'font-medium text-black')}>
               {SIDName ?? shortenAddress(address)}
             </p>

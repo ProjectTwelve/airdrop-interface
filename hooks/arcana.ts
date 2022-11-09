@@ -58,7 +58,6 @@ export const useArcanaVotes = (walletAddress?: string) => {
         setMulticastVideo(true);
       }
     },
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -70,14 +69,12 @@ export const useArcanaInviteesVotes = (walletAddress?: string) => {
   return useQuery(['invitees_votes', walletAddress], () => fetchArcanaInviteesVotes({ walletAddress }), {
     enabled: !!walletAddress,
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
 export const useArcanaDistinctAddressCount = () => {
   return useQuery(['distinct_address_count'], () => fetchArcanaDistinctAddressCount(), {
     select: (data) => (data.code === 200 ? data.data + 6951 : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -101,7 +98,6 @@ export const useArcanaPredictions = (walletAddress?: string) => {
       }
       return undefined;
     },
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -109,7 +105,6 @@ export const useArcanaPredictionsOMG = (walletAddress?: string) => {
   return useQuery(['arcana_predictions_omg', walletAddress], () => fetchArcanaPredictionsOMG({ walletAddress }), {
     enabled: !!walletAddress,
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -125,7 +120,6 @@ export const useArcanaPredictionsAnswerCount = (walletAddress?: string) => {
       }
       return undefined;
     },
-    refetchOnWindowFocus: false,
   });
 };
 
@@ -148,34 +142,29 @@ export const useArcanaAgent = () => {
 export const useArcanaAnswerOMG = () => {
   return useQuery(['arcana_answer_omg'], () => fetchArcanaAnswerOMG(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
 export const useArcanaAnswerOMG2 = () => {
   return useQuery(['arcana_answer_omg2'], () => fetchArcanaAnswerOMG2(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
 export const useArcanaRewardRank = () => {
   return useQuery(['arcana_reward_rank'], () => fetchArcanaRewardRank(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
 export const useArcanaVotesRank = () => {
   return useQuery(['arcana_votes_rank'], () => fetchArcanaVotesRank(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };
 
 export const useArcanaRecentInvitation = () => {
   return useQuery(['arcana_recent_invitation'], () => fetchArcanaRecentInvitation(), {
     select: (data) => (data.code === 200 ? data.data : undefined),
-    refetchOnWindowFocus: false,
   });
 };

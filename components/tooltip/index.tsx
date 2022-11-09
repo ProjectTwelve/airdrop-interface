@@ -1,4 +1,4 @@
-import { cloneElement, useState } from 'react';
+import React, { cloneElement, useState } from 'react';
 import {
   offset,
   flip,
@@ -15,7 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Placement } from '@floating-ui/react-dom-interactions';
 
 type TooltipProps = {
-  label: string;
+  label: React.ReactNode;
   placement?: Placement;
   children: JSX.Element;
 };
@@ -69,7 +69,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             {...getFloatingProps({
               ref: floating,
-              className: 'tooltip__container absolute z-40 w-[300px] rounded-lg',
+              className: 'tooltip__container absolute z-40 max-w-[300px] rounded-lg',
               style: {
                 position: strategy,
                 top: y ?? 0,

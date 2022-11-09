@@ -200,8 +200,8 @@ export type GamerGamesData = {
 
 export type GamerEmailParams = {
   wallet_address?: string;
-  email: string;
-  signature: string;
+  email?: string;
+  signature?: string;
 };
 
 export type GamerRankList = {
@@ -489,4 +489,10 @@ export type RewardRankItem = {
   totalReward: number;
   votesTotalCurrent: number;
   walletAddress: string;
+};
+
+export type GamerEmailInfo = {
+  wallet_address: string;
+  is_email_verified: boolean;
+  email: string;
 };
