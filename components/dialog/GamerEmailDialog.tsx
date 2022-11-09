@@ -18,7 +18,7 @@ import { useGamerVerifyEmailCode } from '../../hooks/gamer';
 
 export default function GamerEmailDialog() {
   const { address } = useAccount();
-  const { signMessageAsync, isLoading: isVerifyLoading } = useSignMessage();
+  const { signMessageAsync, isLoading } = useSignMessage();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
   const [open, setOpen] = useRecoilState(gamerEmailShowAtom);
@@ -27,7 +27,7 @@ export default function GamerEmailDialog() {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [verifyCode, setVerifyCode] = useState<string>('');
-  const { mutateAsync, isLoading } = useGamerVerifyEmailCode();
+  const { mutateAsync, isLoading: isVerifyLoading } = useGamerVerifyEmailCode();
   const mutation = useMutation<Response<any>, any, GamerEmailParams, any>((data) => fetchGamerEmail(data), {
     onSuccess: ({ code, msg }, variables) => {
       if (code === 0) {
