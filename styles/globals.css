@@ -67,6 +67,37 @@
 }
 
 @layer components {
+    .qatar__button {
+        background: linear-gradient(180deg, #1E6744 5%, #388657 50%, #499467 100%);
+        border: 1px solid #64AB85;
+        text-align: center;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        line-height: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .qatar__button:hover {
+        background: linear-gradient(180deg, #1F764C 5%, #419763 50%, #4FA170 100%);
+    }
+
+    .qatar__box {
+        border: 1px solid #6F77847F;
+        background: linear-gradient(180deg, #3D444B7F 0%, #23262C7F 100%);
+        backdrop-filter: blur(16px);
+        border-radius: 8px;
+    }
+
+    .qatar__box--inner::after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        box-shadow: inset 0 0 40px #000000;
+        inset: -1px;
+        pointer-events: none;
+    }
+
     .omg__box {
         position: relative;
         background: linear-gradient(180deg, rgba(85, 96, 104, 0.5) 0%, rgba(37, 39, 44, 0.5) 14.68%, rgba(35, 38, 44, 0.5) 100%);
@@ -265,4 +296,12 @@
     .activity {
         @apply select-none cursor-pointer transition hover:scale-110 active:scale-90;
     }
+}
+
+.e-embed-frame {
+    margin-bottom: 0 !important;
+}
+
+.e-widget-wrapper {
+    position: relative;
 }
