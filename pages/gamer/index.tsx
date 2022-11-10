@@ -11,13 +11,7 @@ import GamerP12 from '../../components/gamer/GamerP12';
 import Dialog from '../../components/dialog';
 import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
 import { useGamerInfo } from '../../hooks/gamer';
-import {
-  gamerEmailDialogTypeAtom,
-  gamerEmailInfoAtom,
-  gamerEmailShowAtom,
-  gamerGamesAtom,
-  gamerInfoAtom,
-} from '../../store/gamer/state';
+import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
 import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
 import { GALXE_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
 import { openLink } from '../../utils';
@@ -34,22 +28,14 @@ export default function Gamer() {
   const { address } = useAccount();
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
-  const gamerEmailInfo = useRecoilValue(gamerEmailInfoAtom);
   const gamerGames = useRecoilValue(gamerGamesAtom);
-  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
-  const setGamerEmailDialogType = useSetRecoilState(gamerEmailDialogTypeAtom);
   const [, invitation] = useRecoilValue(invitationCountAtom);
   useGamerInfo(address);
 
   const badge = useGamerBadgeLoad(gamerInfo);
 
   const handleClaim = () => {
-    if (gamerEmailInfo.is_new_user && !gamerEmailInfo.is_email_verified) {
-      setGamerEmailDialogType('type1');
-      setGamerEmailShow(true);
-    } else {
-      openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
-    }
+    openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
   };
 
   const handleClaimedRoadmap = () => {
@@ -57,6 +43,7 @@ export default function Gamer() {
       setOpen(true);
     }
   };
+
   return (
     <div className="mt-8">
       <Back onClick={() => router.push({ pathname: '/', query: router.query })} />

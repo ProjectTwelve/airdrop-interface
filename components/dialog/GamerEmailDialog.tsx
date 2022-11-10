@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useInterval } from 'react-use';
 import { useAccount, useSignMessage } from 'wagmi';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Dialog from './index';
 import Button from '../button';
@@ -18,11 +18,12 @@ import { useGamerVerifyEmailCode } from '../../hooks/gamer';
 
 export default function GamerEmailDialog() {
   const { address } = useAccount();
-  const { signMessageAsync, isLoading } = useSignMessage();
+  const queryClient = useQueryClient();
   const gamerInfo = useRecoilValue(gamerInfoAtom);
-  const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
+  const { signMessageAsync, isLoading } = useSignMessage();
   const [open, setOpen] = useRecoilState(gamerEmailShowAtom);
   const [type, setType] = useRecoilState(gamerEmailDialogTypeAtom);
+  const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
   const [count, setCount] = useState<number>(0);
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -33,7 +34,12 @@ export default function GamerEmailDialog() {
       if (code === 0) {
         setCount(60);
         setType('type2');
-        setGamerEmailInfo((status) => ({ ...status, wallet_address: variables.wallet_address, email: variables.email }));
+        setGamerEmailInfo({
+          is_new_user: false,
+          is_email_verified: false,
+          email: variables.email,
+          wallet_address: variables.wallet_address,
+        });
       } else {
         toast.error(<Message title="Ah shit, here we go again" message={msg} />);
       }
@@ -69,6 +75,7 @@ export default function GamerEmailDialog() {
         gamerEmailInfo.is_new_user && openLink(GAMER_BADGES[gamerInfo?.nft_level!].claim);
         setGamerEmailInfo((status) => ({ ...status, is_email_verified: true }));
         setOpen(false);
+        queryClient.refetchQueries(['gamer_info', address]).then();
       } else {
         toast.error(<Message title="Ah shit, here we go again" message={msg} />);
       }

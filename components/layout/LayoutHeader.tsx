@@ -34,7 +34,7 @@ function LayoutHeader() {
           wallet_address: data.wallet_address,
           email: data.email,
           is_email_verified: data.is_email_verified,
-          is_new_user: false,
+          is_new_user: !data.email,
         });
         setGamerEmailDialogTypeAtom(data.email ? 'type2' : 'type1');
       } else {

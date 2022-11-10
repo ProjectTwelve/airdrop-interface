@@ -1,13 +1,19 @@
-import {useAccount} from 'wagmi';
-import {toast} from 'react-toastify';
-import {useRouter} from 'next/router';
-import {useRecoilState, useSetRecoilState} from 'recoil';
-import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import {STORAGE_KEY} from '../constants';
+import { useAccount } from 'wagmi';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { STORAGE_KEY } from '../constants';
 import Message from '../components/message';
-import {getLocalStorage} from '../utils/storage';
-import {BinSteamParams, Response} from '../lib/types';
-import {gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom} from '../store/gamer/state';
+import { getLocalStorage } from '../utils/storage';
+import { BinSteamParams, Response } from '../lib/types';
+import {
+  gamerEmailShowAtom,
+  gamerGamesAtom,
+  gamerInfoAtom,
+  gamerInfoCodeAtom,
+  gamerPermissionSettingAtom,
+} from '../store/gamer/state';
 import {
   fetchBindSteam,
   fetchGamerGames,
@@ -19,21 +25,25 @@ import {
 
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
+  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const setGamerInfoCode = useSetRecoilState(gamerInfoCodeAtom);
   const [gamerGames, setGamerGames] = useRecoilState(gamerGamesAtom);
-  const {refetch} = useGamerGames(addr);
+  const { refetch } = useGamerGames(addr);
 
-  return useQuery(['gamer_info', addr], () => fetchGamerInfo({addr}), {
+  return useQuery(['gamer_info', addr], () => fetchGamerInfo({ addr }), {
     enabled: !!addr,
     refetchOnWindowFocus: true,
     onSuccess: (data) => {
       setGamerInfoCode(data.code);
       if (data.code === 0 && data.data) {
+        if (!data.data.email && gamerGames) {
+          setGamerEmailShow(true);
+        }
         if (data.data.steam_id && gamerGames?.wallet_address !== addr) {
           setGamerGames(undefined);
           refetch().then();
         }
-        setGamerInfo({...data.data});
+        setGamerInfo({ ...data.data });
       } else {
         setGamerInfo(undefined);
       }
@@ -42,7 +52,7 @@ export const useGamerInfo = (addr?: string) => {
 };
 
 export const useBindSteamAccount = () => {
-  const {address} = useAccount();
+  const { address } = useAccount();
   const queryClient = useQueryClient();
 
   return useMutation<Response<any>, any, BinSteamParams, any>((data) => fetchBindSteam(data), {
@@ -50,7 +60,7 @@ export const useBindSteamAccount = () => {
       if (data.code === 0) {
         queryClient.refetchQueries(['gamer_info', address]).then();
       } else {
-        toast.error(<Message title="Ah shit, here we go again" message={data.msg}/>);
+        toast.error(<Message title="Ah shit, here we go again" message={data.msg} />);
       }
     },
   });
@@ -58,11 +68,13 @@ export const useBindSteamAccount = () => {
 
 export const useGamerGames = (wallet_address?: string) => {
   const router = useRouter();
+  const { code } = router.query;
+  const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerGames = useSetRecoilState(gamerGamesAtom);
-  const {code} = router.query;
+  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
 
   return useQuery(
-    ['gamer_games', {wallet_address}],
+    ['gamer_games', { wallet_address }],
     () => {
       const localCode = getLocalStorage(STORAGE_KEY.INVITE_CODE);
       return fetchGamerGames({
@@ -73,14 +85,17 @@ export const useGamerGames = (wallet_address?: string) => {
     {
       enabled: false,
       onSuccess: (data) => {
-        setGamerGames(data.code === 0 ? {...data.data, wallet_address} : undefined);
+        if (data.data && !gamerInfo?.email) {
+          setGamerEmailShow(true);
+        }
+        setGamerGames(data.code === 0 ? { ...data.data, wallet_address } : undefined);
       },
     },
   );
 };
 
 export const useGamerInvitation = (addr?: string) => {
-  return useQuery(['gamer_invitation', addr], () => fetchGamerInvitation({addr}), {
+  return useQuery(['gamer_invitation', addr], () => fetchGamerInvitation({ addr }), {
     enabled: !!addr,
     select: (data) => {
       if (data.code !== 0) return [];
@@ -90,7 +105,7 @@ export const useGamerInvitation = (addr?: string) => {
 };
 
 export const useFetchReload = () => {
-  const {address} = useAccount();
+  const { address } = useAccount();
   const queryClient = useQueryClient();
   const setOpen = useSetRecoilState(gamerPermissionSettingAtom);
 
@@ -100,7 +115,7 @@ export const useFetchReload = () => {
         queryClient.refetchQueries(['gamer_info', address]).then();
         setOpen(false);
       } else {
-        toast.error(<Message title="Ah shit, here we go again" message={data.msg}/>);
+        toast.error(<Message title="Ah shit, here we go again" message={data.msg} />);
       }
     },
   });
