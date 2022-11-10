@@ -65,18 +65,6 @@ export default function Qatar2022() {
           <Prediction />
         </div>
         <div className="mt-12">
-          <div className="mx-auto flex max-w-[840px] items-center justify-between md:flex-col md:items-start">
-            <h2 className="text-xl font-medium leading-6">Reward</h2>
-            <div className="flex items-center justify-center">
-              <p className="text-sm font-medium leading-[14px]">Ready to Claim</p>
-              <p
-                className="ml-3 bg-clip-text font-ddin text-2xl font-bold leading-6 text-transparent"
-                style={{ backgroundImage: 'linear-gradient(180deg, #FFFDD6 0%, #C8A16F 100%)' }}
-              >
-                5d 2h
-              </p>
-            </div>
-          </div>
           <Reward />
         </div>
       </div>

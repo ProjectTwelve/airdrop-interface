@@ -30,6 +30,7 @@
     "ipfs-only-hash": "^4.0.0",
     "merkletreejs": "^0.3.0",
     "next": "12.2.0",
+    "pretty-ms": "^8.0.0",
     "qrcode": "^1.5.1",
     "rc-pagination": "^3.1.16",
     "react": "18.2.0",

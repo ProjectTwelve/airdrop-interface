@@ -82,6 +82,15 @@
         background: linear-gradient(180deg, #1F764C 5%, #419763 50%, #4FA170 100%);
     }
 
+    .qatar__button--disable {
+        @apply qatar__button grayscale;
+        cursor: not-allowed !important;
+    }
+
+    .qatar__button--disable:hover {
+        background: linear-gradient(180deg, #1E6744 5%, #388657 50%, #499467 100%);
+    }
+
     .qatar__box {
         border: 1px solid #6F77847F;
         background: linear-gradient(180deg, #3D444B7F 0%, #23262C7F 100%);
