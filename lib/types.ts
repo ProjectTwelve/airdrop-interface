@@ -497,3 +497,16 @@ export type GamerEmailInfo = {
   is_email_verified: boolean;
   email: string;
 };
+
+export type WorldCapInfo = {
+  id: number;
+  collabCode: string;
+  createdAt: number;
+  updatedAt: number;
+  walletAddress: string;
+  genesisNftHolder: number;
+  genesisNftLevel?: GAMER_NFT_LEVEL;
+  answerSignature?: string;
+  deadline: number;
+  ownedNft?: any[];
+};

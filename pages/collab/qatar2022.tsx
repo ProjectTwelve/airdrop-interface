@@ -1,11 +1,20 @@
 import ReactGA from 'react-ga4';
+import Script from 'next/script';
+import { useAccount } from 'wagmi';
+import { useQuery } from '@tanstack/react-query';
 import { openLink } from '../../utils';
+import Reward from '../../components/qatar/Reward';
+import { fetchWorldCupUserInfo } from '../../lib/api';
 import HolderItem from '../../components/qatar/HolderItem';
 import Prediction from '../../components/qatar/Prediction';
-import Reward from '../../components/qatar/Reward';
-import Script from 'next/script';
+import { GAMER_BADGES } from '../../constants';
 
 export default function Qatar2022() {
+  const { address } = useAccount();
+  const { data } = useQuery(['invitation_count', address], () => fetchWorldCupUserInfo(address), {
+    enabled: !!address,
+    select: (data) => (data.code === 200 ? data.data : undefined),
+  });
   const onMoreClick = () => {
     ReactGA.event({ category: 'qatar', action: 'Click', label: 'more' });
     openLink('https://p12.network');
@@ -44,8 +53,22 @@ export default function Qatar2022() {
         <div className="mt-8">
           <h2 className="text-xl font-medium leading-6">How to Participate</h2>
           <div className="mt-4 grid grid-cols-2 gap-8 md:grid-cols-1">
-            <HolderItem />
-            <HolderItem />
+            <HolderItem
+              link="https://galxe.com/bnbchain/campaign/GCCQTUwhHq"
+              asset="https://cdn1.p12.games/airdrop/collab/glory_pass.webp"
+              type="glory-pass"
+              title="BNB Chain Glory Pass Holder"
+              subtitle="Pre-Requisite I"
+              isHolder={data?.ownedNft && data.ownedNft.length > 0}
+            />
+            <HolderItem
+              link="https://airdrop.p12.games/gamer"
+              asset={data ? GAMER_BADGES[data?.genesisNftLevel || 0].imgBig : undefined}
+              type="genesis"
+              title="P12 Genesis NFT Holder"
+              subtitle="Pre-Requisite II"
+              isHolder={!!data?.genesisNftHolder}
+            />
           </div>
         </div>
         <div className="mt-12">
@@ -62,7 +85,7 @@ export default function Qatar2022() {
         </div>
         <div className="mt-12">
           <h2 className="mx-auto max-w-[840px] text-xl font-medium leading-6">Step II: Quick Quiz</h2>
-          <Prediction />
+          <Prediction signature={data?.answerSignature} deadline={data?.deadline} />
         </div>
         <div className="mt-12">
           <Reward />

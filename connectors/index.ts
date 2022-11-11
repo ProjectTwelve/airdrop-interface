@@ -31,7 +31,7 @@ export const BNBSmartChainTestnet: Chain = {
     decimals: 18,
   },
   rpcUrls: {
-    default: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+    default: 'https://bsc-testnet.nodereal.io/v1/d0a35580e8ce4c7ab2b2ac75588174d3',
   },
   blockExplorers: {
     default: { name: 'tBscScan', url: 'https://testnet.bscscan.com/' },
@@ -45,7 +45,7 @@ export const { chains, provider } = configureChains(
 );
 
 export const metamaskConnector = new MetaMaskConnector({
-  chains: chains,
+  chains,
   options: {
     shimChainChangedDisconnect: false,
   },
