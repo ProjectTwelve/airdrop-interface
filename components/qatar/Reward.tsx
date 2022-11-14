@@ -55,7 +55,7 @@ export default function Reward() {
             BNB Chain x P12 Football Fiesta Badge
           </h2>
           <p className="mt-5 text-xs leading-5">
-            Must finish all above two steps to get entry of the reward.11The reward will be ready after the activity ends. Stay
+            Must finish all above two steps to get entry of the reward.The reward will be ready after the activity ends. Stay
             tuned.
           </p>
           <p className="mt-5 text-xs leading-5">
