@@ -80,8 +80,9 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
 
   useEffect(() => {
     if (!collabContract) return;
-    try {
-      collabContract.readStamp(address, 'qatar2022').then((res: string | undefined) => {
+    collabContract
+      .readStamp(address, 'qatar2022')
+      .then((res: string | undefined) => {
         if (res) {
           const key = res.split('ipfs://')[1];
           const item = predictions[key];
@@ -94,13 +95,14 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
           setAnswer(undefined);
           setIsSubmitted(false);
         }
+      })
+      .catch((error: any) => {
+        console.log(error);
+        const keys = Object.keys(predictions);
+        setPrediction(predictions[keys[Math.floor(Math.random() * 4)]]);
+        setAnswer(undefined);
+        setIsSubmitted(false);
       });
-    } catch (e) {
-      const keys = Object.keys(predictions);
-      setPrediction(predictions[keys[Math.floor(Math.random() * 4)]]);
-      setAnswer(undefined);
-      setIsSubmitted(false);
-    }
   }, [collabContract, address]);
 
   if (!isMounted) return null;
