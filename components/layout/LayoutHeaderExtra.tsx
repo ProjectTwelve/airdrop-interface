@@ -17,7 +17,7 @@ function LayoutHeaderExtra() {
   const invitationCount = useRecoilValue(invitationCountSelector);
   const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
-  const hideRoute = ['/', '/arcana/[[...address]]'];
+  const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022'];
 
   useEffect(() => {
     const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_TIPS_CLICK);

@@ -26,7 +26,7 @@ export default function Qatar2022() {
       <div className="md:px-2">
         <div className="absolute left-0 top-0 -z-10 flex h-[420px] w-full flex-col items-center justify-center overflow-hidden">
           <div className="h-[420px] w-[1920px]">
-            <img width={1440} className="mx-auto" src="https://cdn1.p12.games/airdrop/collab/qatar_banner.webp" alt="banner" />
+            <img width={1440} className="mx-auto" src="https://cdn1.p12.games/airdrop/collab/qatar_banner3.webp" alt="banner" />
           </div>
         </div>
         <div>
@@ -55,7 +55,7 @@ export default function Qatar2022() {
           <div className="mt-4 grid grid-cols-2 gap-8 md:grid-cols-1">
             <HolderItem
               link="https://galxe.com/bnbchain/campaign/GCCQTUwhHq"
-              asset="https://cdn1.p12.games/airdrop/collab/glory_pass.webp"
+              asset="https://cdn1.p12.games/airdrop/collab/glory_pass2.png"
               type="glory-pass"
               title="BNB Chain Glory Pass Holder"
               subtitle="Pre-Requisite I"
