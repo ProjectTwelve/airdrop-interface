@@ -36,7 +36,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
   };
 
   const onSubmit = async () => {
-    if (!prediction || !chain || !address || !signature || !collabContract || isLoading) return;
+    if (!prediction || !chain || !address || !signature || !collabContract || isLoading || isSubmitted) return;
     try {
       if (chain?.id !== ARCANA_CHAIN_ID) {
         switchNetwork?.();
