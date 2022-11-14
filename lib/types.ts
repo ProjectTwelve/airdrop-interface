@@ -292,6 +292,7 @@ export type CollabInfoType = {
   taskGleam?: string;
   taskGalxe?: string;
   taskQuest3?: string;
+  taskPort3?: string;
   taskTweetContent?: string;
 
   claimNote: string;

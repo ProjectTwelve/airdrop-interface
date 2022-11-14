@@ -25,6 +25,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     taskGleam,
     taskGalxe,
     taskQuest3,
+    taskPort3,
     taskTweetContent,
     timeComingSoon,
     timeJoin,
@@ -170,6 +171,20 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             href={taskQuest3}
             target="_blank"
             hrefLabel="To Quest3"
+          />
+        ) : null}
+
+        {taskPort3 ? (
+          <CollabTaskItem
+            className="w-full flex-grow"
+            key="port3"
+            gaKey="port3"
+            title=""
+            icon={<img className="h-8" src="/img/collab/port3.svg" alt="port3 icon" />}
+            content="Finish tasks on Port3 to join the giveaway raffle"
+            href={taskPort3}
+            target="_blank"
+            hrefLabel="To Port3"
           />
         ) : null}
 
