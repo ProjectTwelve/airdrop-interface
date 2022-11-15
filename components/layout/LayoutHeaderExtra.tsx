@@ -17,6 +17,7 @@ function LayoutHeaderExtra() {
   const invitationCount = useRecoilValue(invitationCountSelector);
   const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
+  const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022'];
 
   useEffect(() => {
     const currentStatus = getLocalStorage(STORAGE_KEY.INVITE_TIPS_CLICK);
@@ -25,7 +26,7 @@ function LayoutHeaderExtra() {
 
   return (
     <AnimatePresence>
-      {router.pathname !== '/' && router.pathname !== '/arcana/[[...address]]' && (
+      {!hideRoute.includes(router.pathname) && (
         <motion.div className="relative">
           <motion.div
             initial={{ opacity: 0.45 }}

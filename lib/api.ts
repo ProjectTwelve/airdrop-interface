@@ -38,6 +38,7 @@ import {
   PredictionAnswerOMG2Item,
   RewardRankItem,
   GamerEmailInfo,
+  WorldCapInfo,
 } from './types';
 
 /**
@@ -230,3 +231,6 @@ export const fetchGamerEmailInfo = (wallet_address?: string) =>
 
 export const fetchGamerVerifyEmailCode = (params: { wallet_address?: string; email_verify_code: string }) =>
   request.post<any, Response<any>>('/api/gamer/verifyEmailCode', params);
+
+export const fetchWorldCupUserInfo = (walletAddress?: string) =>
+  request.post<any, Response<WorldCapInfo>>('/v2/worldCup/userInfo', { walletAddress, collabCode: 'qatar2022' });

@@ -58,7 +58,13 @@ export default function Collab({ data }: { data: CollabInfoType }) {
 
 export async function getStaticPaths() {
   const { data } = await fetchCollabList();
-  return { paths: data.map((collab: CollabShortInfo) => ({ params: { id: collab.collabCode } })), fallback: 'blocking' };
+  const excludeCodes = ['qatar2022'];
+  return {
+    paths: data
+      .filter((item: CollabShortInfo) => !excludeCodes.includes(item.collabCode))
+      .map((item: CollabShortInfo) => ({ params: { id: item.collabCode } })),
+    fallback: 'blocking',
+  };
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {

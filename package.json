@@ -30,6 +30,7 @@
     "ipfs-only-hash": "^4.0.0",
     "merkletreejs": "^0.3.0",
     "next": "12.2.0",
+    "pretty-ms": "^8.0.0",
     "qrcode": "^1.5.1",
     "rc-pagination": "^3.1.16",
     "react": "18.2.0",
@@ -43,7 +44,7 @@
     "react-use": "^17.4.0",
     "recoil": "^0.7.6",
     "swiper": "^8.4.0",
-    "wagmi": "^0.7.9"
+    "wagmi": "^0.7.14"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
