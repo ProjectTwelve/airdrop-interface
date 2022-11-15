@@ -38,10 +38,6 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
   const onSubmit = async () => {
     if (!prediction || !chain || !address || !signature || !collabContract || isLoading || isSubmitted) return;
     try {
-      if (chain?.id !== ARCANA_CHAIN_ID) {
-        switchNetwork?.();
-        return;
-      }
       setIsLoading(true);
       ReactGA.event({ category: 'qatar', action: 'Click', label: 'quizsub' });
       const { wait } = await collabContract['saveStamp(string,string,uint256,bytes)'](
@@ -131,29 +127,34 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
         <h3 className="text-center text-2xl leading-7">{prediction?.title}</h3>
         <p className="mt-2 text-center text-xs leading-4">{prediction?.subTitle}</p>
         {submitStatus ? (
-          <button
-            className={classNames(
-              'absolute bottom-0 w-full py-3 md:relative md:mt-6',
-              address && !isSubmitted && answer ? 'qatar__button' : 'qatar__button--disable',
-            )}
-            onClick={onSubmit}
-          >
-            {address ? (
-              isLoading || isSwitchNetworkLoading ? (
+          chain?.id !== ARCANA_CHAIN_ID ? (
+            <button
+              className="qatar__button absolute bottom-0 w-full py-3 md:relative md:mt-6"
+              onClick={() => switchNetwork?.()}
+            >
+              {isSwitchNetworkLoading ? (
                 <img className="mx-auto animate-spin" src="/svg/loading.svg" alt="loading" />
-              ) : chain?.id === ARCANA_CHAIN_ID ? (
-                isSubmitted ? (
-                  'Submitted'
-                ) : (
-                  'Submit'
-                )
               ) : (
                 'Switch Network'
-              )
-            ) : (
-              'Submit'
-            )}
-          </button>
+              )}
+            </button>
+          ) : (
+            <button
+              className={classNames(
+                'absolute bottom-0 w-full py-3 md:relative md:mt-6',
+                !isSubmitted && answer ? 'qatar__button' : 'qatar__button--disable',
+              )}
+              onClick={onSubmit}
+            >
+              {isLoading ? (
+                <img className="mx-auto animate-spin" src="/svg/loading.svg" alt="loading" />
+              ) : isSubmitted ? (
+                'Submitted'
+              ) : (
+                'Submit'
+              )}
+            </button>
+          )
         ) : (
           <button className="qatar__button--disable absolute bottom-0 w-full py-3 md:relative md:mt-6">Submit</button>
         )}
