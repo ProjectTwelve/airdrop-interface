@@ -21,7 +21,7 @@ export default function Qatar2022() {
   });
   const onMoreClick = () => {
     ReactGA.event({ category: 'qatar', action: 'Click', label: 'more' });
-    openLink('https://p12.network');
+    openLink('https://dappbay.bnbchain.org/campaign/football-fiesta');
   };
 
   return (
@@ -58,7 +58,7 @@ export default function Qatar2022() {
           <h2 className="text-xl font-medium leading-6">How to Participate</h2>
           <div className="mt-4 grid grid-cols-2 gap-8 md:grid-cols-1">
             <HolderItem
-              link="https://galxe.com/bnbchain/campaign/GCCQTUwhHq"
+              link="https://dappbay.bnbchain.org/topic/23-glory-pass-rewards-you-cant-miss"
               asset={<img src="https://cdn1.p12.games/airdrop/collab/glory_pass2.png" alt="glory_pass" />}
               type="glory-pass"
               title="BNB Chain Glory Pass Holder"

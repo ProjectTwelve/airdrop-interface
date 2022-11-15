@@ -23,7 +23,7 @@ export default function Reward() {
   const onClaim = () => {
     if (isRunning) return;
     ReactGA.event({ category: 'qatar', action: 'Click', label: 'claim' });
-    openLink('https://p12.network');
+    openLink('https://galxe.com/P12/campaign/GCLG1UwRhx');
   };
 
   useInterval(() => formatTimestamp(), isRunning ? 1000 : null);
