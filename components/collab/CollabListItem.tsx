@@ -24,7 +24,13 @@ export default function CollabListItem({ data }: CollabItemProps) {
     timeClose,
     projectWebsite,
   } = data;
-  const { startTime, endTime, timeStatus } = useCollabTimes({ timeComingSoon, timeJoin, timeAllocation, timeClaim, timeClose });
+  const { startTime, endTime, timeStatus } = useCollabTimes({
+    timeComingSoon,
+    timeJoin,
+    timeAllocation,
+    timeClaim,
+    timeClose,
+  });
 
   const generateStatusLabel = useCallback(() => {
     if (timeStatus === COLLAB_TIME_STATUS.CLOSED)
@@ -45,7 +51,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
     <div
       onClick={() => {
         ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
-        router.push({ pathname: '/collab/[id]', query: { id: collabCode } });
+        router.push({ pathname: `/collab/${collabCode}` }).then();
       }}
       className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
     >

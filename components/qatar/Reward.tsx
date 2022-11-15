@@ -35,8 +35,8 @@ export default function Reward() {
       <div className="mx-auto flex max-w-[840px] items-center justify-between md:flex-col md:items-start">
         <h2 className="text-xl font-medium leading-6">Reward</h2>
         {isRunning && (
-          <div className="flex items-center justify-center">
-            <p className="text-sm font-medium leading-[14px]">Ready to Claim</p>
+          <div className="flex items-end justify-center">
+            <p className="text-sm font-medium leading-[14px] mb-[3px]">Ready to Claim</p>
             <p
               className="ml-3 bg-clip-text font-ddin text-2xl font-bold leading-6 text-transparent"
               style={{ backgroundImage: 'linear-gradient(180deg, #FFFDD6 0%, #C8A16F 100%)' }}
@@ -48,7 +48,7 @@ export default function Reward() {
       </div>
       <div className="qatar__box mx-auto mt-4 flex max-w-[840px] md:flex-col">
         <div className="flex h-[276px] w-[276px] items-center justify-center bg-[url('/img/collab/reward_bg.webp')] bg-cover bg-no-repeat md:w-full">
-          <img className="h-[198px] w-[198px]" src="/img/collab/revoland.webp" alt="revoland" />
+          <img className="h-[198px] w-[198px]" src="https://cdn1.p12.games/airdrop/collab/qatar_oat.webp" alt="revoland" />
         </div>
         <div className="flex-1 px-6 md:px-3">
           <h2 className="mt-[30px] text-2xl font-medium leading-7 md:mt-4 md:text-base">

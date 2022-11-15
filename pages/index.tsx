@@ -3,12 +3,9 @@ import ReactGA from 'react-ga4';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { inviteModalAtom } from '../store/invite/state';
-import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-import DeveloperTabs from '../components/ranking/DeveloperTabs';
-import GamerTabs from '../components/ranking/GamerTabs';
-import { COLLAB_OPEN } from '../constants';
-import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import CollabHomeCard from '../components/collab/CollabHomeCard';
+import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
+import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 
 export default function Home() {
   const router = useRouter();
@@ -53,23 +50,10 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-[30px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        {COLLAB_OPEN ? (
-          <>
-            <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
-              <LeaderboardTabs />
-            </RankingHomeCard>
-            <CollabHomeCard title="Campaigns" />
-          </>
-        ) : (
-          <>
-            <RankingHomeCard routerId="gamer" title="Gamer" layoutId="ranking_gamer">
-              <GamerTabs />
-            </RankingHomeCard>
-            <RankingHomeCard routerId="developer" title="Developer" layoutId="ranking_developer">
-              <DeveloperTabs />
-            </RankingHomeCard>
-          </>
-        )}
+        <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
+          <LeaderboardTabs />
+        </RankingHomeCard>
+        <CollabHomeCard title="Campaigns" />
       </div>
     </div>
   );
