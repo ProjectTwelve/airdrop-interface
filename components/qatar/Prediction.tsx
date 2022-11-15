@@ -93,7 +93,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
         }
       })
       .catch((error: any) => {
-        console.log(error);
+        console.error(error);
         const keys = Object.keys(predictions);
         setPrediction(predictions[keys[Math.floor(Math.random() * 4)]]);
         setAnswer(undefined);

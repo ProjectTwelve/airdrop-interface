@@ -1,28 +1,34 @@
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
+import ReactGA from 'react-ga4';
+import { toast } from 'react-toastify';
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import isBetween from 'dayjs/plugin/isBetween';
-import { useCallback, useEffect, useMemo } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { useAccount } from 'wagmi';
-import { useCollabIsJoined, useCollabIsClaim, useFetchCollabUserInfo } from '../../hooks/collab';
+import Button from '../button';
+import Message from '../message';
+import { getEtherscanLink } from '../../utils';
+import { useIsMounted } from '../../hooks/useIsMounted';
+import { useCollabContract } from '../../hooks/useContract';
+import { isConnectPopoverOpen } from '../../store/web3/state';
+import { ARCANA_CHAIN_ID, COLLAB_CHAIN_ID } from '../../constants';
 import { fetchCollabJoin, fetchCollabUserInfo } from '../../lib/api';
 import { collabClaimModalAtom, collabUserInfoAtom } from '../../store/collab/state';
-import { isConnectPopoverOpen } from '../../store/web3/state';
-import Button from '../button';
-import { toast } from 'react-toastify';
-import Message from '../message';
-import { useIsMounted } from '../../hooks/useIsMounted';
-import ReactGA from 'react-ga4';
+import { useCollabIsJoined, useCollabIsClaim, useFetchCollabUserInfo } from '../../hooks/collab';
 import type { CollabInfoType, CollabUserInfo, CollabUserParams, Response } from '../../lib/types';
 
 dayjs.extend(isBetween);
+
+const className = 'min-w-fit max-w-[300px] flex-grow';
 
 export type CollabInfoButtonProps = {
   data: CollabInfoType;
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
-  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose } = data;
+  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, onChain, ipfs } = data;
   const nowDate = dayjs();
+  const { chain } = useNetwork();
   const joinDate = dayjs.unix(timeJoin);
   const comingSoonText = joinDate.format('MMM D, YYYY h:mm A');
   const allocDate = dayjs.unix(timeAllocation);
@@ -32,12 +38,16 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   const setUserInfo = useSetRecoilState(collabUserInfoAtom);
   const [isConnectOpen, setConnectOpen] = useRecoilState(isConnectPopoverOpen);
   const isJoined = useCollabIsJoined();
+  const [isWriteLoading, setIsWriteLoading] = useState<boolean>(false);
+  const [isChainJoined, setIsChainJoined] = useState<boolean>(false);
   const isConnected = useMemo(() => !!address, [address]);
   const isClaim = useCollabIsClaim(timeClaim);
   const isMounted = useIsMounted();
-  const className = 'min-w-fit max-w-[300px] flex-grow';
   const { isLoading } = useFetchCollabUserInfo(collabCode);
   const setClaimModal = useSetRecoilState(collabClaimModalAtom);
+  const isCorrectNetwork = useMemo(() => chain?.id === COLLAB_CHAIN_ID, [chain?.id]);
+  const { switchNetwork, isLoading: isSwitchNetworkLoading } = useSwitchNetwork({ chainId: ARCANA_CHAIN_ID });
+  const collabContract = useCollabContract();
 
   const mutationJoin = useMutation<Response<CollabUserInfo>, any, CollabUserParams, any>((data) => fetchCollabJoin(data), {
     onSuccess: (data) => {
@@ -77,8 +87,58 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     mutationJoin.mutate({ collabCode, walletAddress: address });
   }, [collabCode, address, mutationJoin, setConnectOpen, isJoined]);
 
+  const handleChainJoin = useCallback(async () => {
+    if (isChainJoined || !collabContract) return;
+    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-join' });
+    if (!address) {
+      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-connect' });
+      setConnectOpen(true);
+      return;
+    }
+    if (!isCorrectNetwork) {
+      switchNetwork?.();
+      return;
+    }
+    try {
+      setIsWriteLoading(true);
+      const { wait } = await collabContract['saveStamp(string,string)'](collabCode, ipfs);
+      const { transactionHash } = await wait();
+      toast.success(
+        <Message
+          title="Mission Complete"
+          message={
+            <div>
+              <p>Submitted</p>
+              <p>
+                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                  View on Etherscan
+                </a>
+              </p>
+            </div>
+          }
+        />,
+      );
+      setIsWriteLoading(false);
+      setIsChainJoined(true);
+    } catch (error: any) {
+      if (error.error && error.error.data) {
+        const sigHash = error.error.data.data;
+        const name = collabContract.interface.getError(sigHash).name;
+        toast.error(<Message title="Ah shit, here we go again" message={name} />);
+      }
+      setIsWriteLoading(false);
+    }
+  }, [isChainJoined, collabContract, address, isCorrectNetwork, setConnectOpen, switchNetwork, collabCode]);
+
   useEffect(() => {
-    if (isConnectOpen && isConnected && address && !isJoined && nowDate.isBetween(joinDate, allocDate, null, '[)')) {
+    if (
+      isConnectOpen &&
+      isConnected &&
+      address &&
+      !onChain &&
+      !isJoined &&
+      nowDate.isBetween(joinDate, allocDate, null, '[)')
+    ) {
       mutationUserInfo.mutate({ collabCode, walletAddress: address });
       setConnectOpen(false);
     }
@@ -93,7 +153,21 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     nowDate,
     joinDate,
     allocDate,
+    onChain,
   ]);
+
+  useEffect(() => {
+    if (!collabContract) return;
+    collabContract
+      .readStamp(address, collabCode)
+      .then((res: string | undefined) => {
+        setIsChainJoined(!!res);
+      })
+      .catch((error: any) => {
+        console.error(error);
+        setIsChainJoined(false);
+      });
+  }, [address, collabCode, collabContract]);
 
   const handleClaim = useCallback(() => {
     ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
@@ -101,7 +175,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   }, [setClaimModal]);
 
   const generateDisableButton = useCallback(
-    (className: string, label: string) => (
+    (label: string) => (
       <Button size="large" className={className} disabled={true}>
         {label}
       </Button>
@@ -110,9 +184,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   );
 
   const generateJoinButton = useCallback(
-    (className: string) =>
+    () =>
       isJoined ? (
-        generateDisableButton(className, 'Join Successfully')
+        generateDisableButton('Join Successfully')
       ) : (
         <Button size="large" type="gradient" className={className} onClick={handleJoin} loading={isLoading}>
           Join
@@ -121,24 +195,42 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     [isJoined, handleJoin, generateDisableButton, isLoading],
   );
 
+  const generateChainJoinButton = useCallback(
+    () =>
+      isChainJoined ? (
+        generateDisableButton('Join Successfully')
+      ) : (
+        <Button
+          size="large"
+          type="gradient"
+          className={className}
+          onClick={handleChainJoin}
+          loading={isWriteLoading || isSwitchNetworkLoading}
+        >
+          {address && !isCorrectNetwork ? 'Switch Network' : 'Join'}
+        </Button>
+      ),
+    [isChainJoined, generateDisableButton, handleChainJoin, isWriteLoading, isSwitchNetworkLoading, address, isCorrectNetwork],
+  );
+
   const generateClaimButton = useCallback(
-    (className: string) =>
+    () =>
       isClaim ? (
         <Button size="large" type="gradient" className={className} onClick={handleClaim} loading={isLoading}>
           Claim
         </Button>
       ) : (
-        generateDisableButton(className, 'Unlucky')
+        generateDisableButton('Unlucky')
       ),
     [isClaim, handleClaim, generateDisableButton, isLoading],
   );
 
   if (!isMounted) return null;
-  if (nowDate.isBefore(joinDate)) return generateDisableButton(className, comingSoonText);
-  if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return generateJoinButton(className);
-  if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton(className, 'Allocating');
+  if (nowDate.isBefore(joinDate)) return generateDisableButton(comingSoonText);
+  if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return onChain ? generateChainJoinButton() : generateJoinButton();
+  if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton('Allocating');
   if (nowDate.isBetween(claimDate, closeDate, null, '[]'))
-    return address ? generateClaimButton(className) : generateDisableButton(className, 'Connect Wallet');
-  if (nowDate.isAfter(closeDate)) return generateDisableButton(className, 'Closed');
+    return address ? generateClaimButton() : generateDisableButton('Connect Wallet');
+  if (nowDate.isAfter(closeDate)) return generateDisableButton('Closed');
   return null;
 }
