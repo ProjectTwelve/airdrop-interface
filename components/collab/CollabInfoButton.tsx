@@ -56,7 +56,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
         return;
       }
       setUserInfo(data.data);
-      toast.success(<Message message="Join successfully!" />);
+      if (!ifOnChain) {
+        toast.success(<Message message="Join successfully" />);
+      }
       document.getElementById('collabTasks')?.scrollIntoView();
     },
   });
@@ -101,6 +103,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     }
     try {
       setIsWriteLoading(true);
+      mutationJoin.mutate({ collabCode, walletAddress: address });
       const { wait } = await collabContract['saveStamp(string,string)'](collabCode, onChainIpfs);
       const { transactionHash } = await wait();
       toast.success(
@@ -108,7 +111,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
           title="Mission Complete"
           message={
             <div>
-              <p>Submitted</p>
+              <p>Join successfully</p>
               <p>
                 <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
