@@ -26,7 +26,7 @@ export type CollabInfoButtonProps = {
   data: CollabInfoType;
 };
 export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
-  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, onChain, ipfs } = data;
+  const { collabCode, timeJoin, timeAllocation, timeClaim, timeClose, ifOnChain, onChainIpfs } = data;
   const nowDate = dayjs();
   const { chain } = useNetwork();
   const joinDate = dayjs.unix(timeJoin);
@@ -101,7 +101,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     }
     try {
       setIsWriteLoading(true);
-      const { wait } = await collabContract['saveStamp(string,string)'](collabCode, ipfs);
+      const { wait } = await collabContract['saveStamp(string,string)'](collabCode, onChainIpfs);
       const { transactionHash } = await wait();
       toast.success(
         <Message
@@ -128,14 +128,14 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
       }
       setIsWriteLoading(false);
     }
-  }, [isChainJoined, collabContract, address, isCorrectNetwork, setConnectOpen, switchNetwork, collabCode]);
+  }, [isChainJoined, collabContract, address, isCorrectNetwork, setConnectOpen, switchNetwork, collabCode, onChainIpfs]);
 
   useEffect(() => {
     if (
       isConnectOpen &&
       isConnected &&
       address &&
-      !onChain &&
+      !ifOnChain &&
       !isJoined &&
       nowDate.isBetween(joinDate, allocDate, null, '[)')
     ) {
@@ -153,7 +153,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     nowDate,
     joinDate,
     allocDate,
-    onChain,
+    ifOnChain,
   ]);
 
   useEffect(() => {
@@ -227,7 +227,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   if (!isMounted) return null;
   if (nowDate.isBefore(joinDate)) return generateDisableButton(comingSoonText);
-  if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return onChain ? generateChainJoinButton() : generateJoinButton();
+  if (nowDate.isBetween(joinDate, allocDate, null, '[)')) return ifOnChain ? generateChainJoinButton() : generateJoinButton();
   if (nowDate.isBetween(allocDate, claimDate, null, '[)')) return generateDisableButton('Allocating');
   if (nowDate.isBetween(claimDate, closeDate, null, '[]'))
     return address ? generateClaimButton() : generateDisableButton('Connect Wallet');

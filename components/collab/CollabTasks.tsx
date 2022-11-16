@@ -181,7 +181,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             gaKey="port3"
             title=""
             icon={<img className="h-8" src="/img/collab/port3.svg" alt="port3 icon" />}
-            content="Finish tasks on Port3 to join the giveaway raffle"
+            content="Finish tasks on Port3 to join the giveaway raffle."
             href={taskPort3}
             target="_blank"
             hrefLabel="To Port3"
