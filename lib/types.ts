@@ -265,6 +265,8 @@ export type CollabInfoType = {
   collabStatus?: number;
   collabName?: string;
   collabPoster?: string;
+  ifOnChain?: boolean;
+  onChainIpfs?: string;
 
   projectName?: string;
   projectLogo?: string;
