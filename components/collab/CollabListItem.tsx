@@ -4,10 +4,13 @@ import { CollabShortInfo } from '../../lib/types';
 import ReactGA from 'react-ga4';
 import { COLLAB_TIME_STATUS } from '../../constants';
 import { useCallback } from 'react';
+import { openLink } from '../../utils';
 
 type CollabItemProps = {
   data: CollabShortInfo;
 };
+
+const openLinkCollabCode = ['oathofpeakea'];
 
 export default function CollabListItem({ data }: CollabItemProps) {
   const router = useRouter();
@@ -51,7 +54,11 @@ export default function CollabListItem({ data }: CollabItemProps) {
     <div
       onClick={() => {
         ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
-        router.push({ pathname: `/collab/${collabCode}` }).then();
+        if (openLinkCollabCode.includes(collabCode)) {
+          openLink(projectWebsite ?? '');
+        } else {
+          router.push({ pathname: `/collab/${collabCode}` }).then();
+        }
       }}
       className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
     >
