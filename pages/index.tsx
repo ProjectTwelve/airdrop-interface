@@ -6,6 +6,7 @@ import { inviteModalAtom } from '../store/invite/state';
 import CollabHomeCard from '../components/collab/CollabHomeCard';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
+import { openLink } from '../utils';
 
 export default function Home() {
   const router = useRouter();
@@ -15,12 +16,12 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
       <div
         className="cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
-        onClick={() => router.push({ pathname: '/arcana', query: router.query })}
+        onClick={() => openLink('https://galxe.com/Xterio/campaign/GCLirU4tXU')}
       >
         <img
           className="h-[240px] object-cover object-left md:h-[128px]"
-          src="https://cdn1.p12.games/airdrop/arcana/banner_join_2.webp"
-          alt="arcana_banner"
+          src="https://cdn1.p12.games/airdrop/img/titan_banner.webp"
+          alt="titan_banner"
         />
       </div>
       <div className="mt-6 grid w-full grid-cols-3 gap-7 md:grid-cols-1 md:gap-4">
