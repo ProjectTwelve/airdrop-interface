@@ -16,7 +16,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
       <div
         className="cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
-        onClick={() => openLink('https://galxe.com/Xterio/campaign/GCLirU4tXU')}
+        onClick={() => openLink('https://lot.xter.io/?teamid=180&inviter=0x304EEBFB493E034DBC28B082fAdC1161f5Df1bE3')}
       >
         <img
           className="h-[240px] object-cover object-left md:h-[128px]"
