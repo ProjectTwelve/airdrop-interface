@@ -166,11 +166,11 @@ export default function CollabTasks({ data }: CollabTasksProps) {
             key="quest3"
             gaKey="quest3"
             title=""
-            icon={<img className="h-8" src="/img/collab/quest3.webp" alt="gleam icon" />}
-            content="Complete all tasks on Quest3 is a must step."
+            icon={<img className="h-8" src="/img/collab/questn.webp" alt="gleam icon" />}
+            content="Complete all tasks on QuestN is a must step."
             href={taskQuest3}
             target="_blank"
-            hrefLabel="To Quest3"
+            hrefLabel="To QuestN"
           />
         ) : null}
 
