@@ -6,7 +6,7 @@ import { inviteModalAtom } from '../store/invite/state';
 import CollabHomeCard from '../components/collab/CollabHomeCard';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-// import { openLink } from '../utils';
+import { openLink } from '../utils';
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
       <div
         className="cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
-        // onClick={() => openLink('https://lot.xter.io/?teamid=180&inviter=0x304EEBFB493E034DBC28B082fAdC1161f5Df1bE3')}
+        onClick={() => openLink('https://degenreborn.xyz')}
       >
         <img
           className="h-[240px] object-cover object-left md:h-[128px]"
