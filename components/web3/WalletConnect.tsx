@@ -14,7 +14,18 @@ type WalletConnectProps = {
 
 function WalletConnect({ setWalletType }: WalletConnectProps) {
   const router = useRouter();
-  const { connect, connectors } = useConnect();
+  const { connect, connectors } = useConnect({
+    onError: (error, { connector }) => {
+      if (error.name === 'ConnectorNotFoundError' && connector.name === 'MetaMask') {
+        window.open('https://metamask.io');
+        return;
+      }
+      if (error.name === 'ConnectorNotFoundError' && connector.name === 'BitKeep') {
+        window.open('https://bitkeep.com/en/download?type=2');
+        return;
+      }
+    },
+  });
   const [downloadClick, setDownloadClick] = useRecoilState(downloadClickAtom);
 
   /**
