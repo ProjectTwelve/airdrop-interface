@@ -34,10 +34,10 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
   return (
     <div className="flex flex-col items-center justify-center py-6">
       <h4 className="text-xl font-medium">Connect wallet</h4>
-      <div className="mt-6 grid grid-cols-2 gap-3 px-4 md:grid-cols-1">
+      <div className="mt-6 grid grid-cols-1 gap-3 px-4 md:grid-cols-1">
         <Button
           type="bordered"
-          className="flex w-full min-w-[170px] items-center justify-center"
+          className="flex w-full min-w-[210px] items-center justify-center"
           onClick={() => connectWallet(connectors[0])}
         >
           <img className="mr-2 h-[30px] w-[30px]" src="/img/metamask@2x.png" alt="meta_mask" />
@@ -45,14 +45,22 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
         </Button>
         <Button
           type="bordered"
-          className="flex w-full min-w-[170px] items-center justify-center"
+          className="flex w-full min-w-[210px] items-center justify-center"
           onClick={() => connectWallet(connectors[1])}
+        >
+          <img className="mr-2 h-[30px] w-[30px]" src="/svg/bitkeep.svg" alt="bitkeep" />
+          <span className="text-sm">BitKeep</span>
+        </Button>
+        <Button
+          type="bordered"
+          className="flex w-full min-w-[210px] items-center justify-center"
+          onClick={() => connectWallet(connectors[2])}
         >
           <img className="mr-2 h-[30px] w-[30px]" src="/img/walletconnet@2x.png" alt="wallet_connet" />
           <span className="text-sm">WalletConnect</span>
         </Button>
       </div>
-      <div className="mt-[50px] px-4 text-xs text-p12-sub">
+      <div className="mt-4 px-4 text-xs text-p12-sub">
         {downloadClick ? 'Please refresh page after installation. Re-install ' : "Don't have one? "}
         <span
           className="cursor-pointer text-p12-link"

@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useAccount, useNetwork, useSwitchNetwork, chainId, useConnect } from 'wagmi';
+import { useAccount, useNetwork, useSwitchNetwork, useConnect } from 'wagmi';
+import { mainnet } from 'wagmi/chains';
 import Button from '../button';
 import Web3StatusInner from './Web3StatusInner';
 import Popover from '../popover';
@@ -21,7 +22,7 @@ function Web3Status() {
   const { connect, connectors } = useConnect();
   const connectRef = useRef<boolean>(false);
   const { address, connector, isConnected } = useAccount();
-  const { switchNetwork } = useSwitchNetwork({ chainId: chainId.mainnet });
+  const { switchNetwork } = useSwitchNetwork({ chainId: mainnet.id });
 
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
   const posterCapture = useRecoilValue(posterCaptureAtom);

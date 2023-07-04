@@ -9,13 +9,12 @@ import ToastIcon from '../svg/ToastIcon';
 import InviteDialog from '../dialog/InviteDialog';
 import RoadmapDialog from '../dialog/RoadmapDialog';
 import GamerEmailDialog from '../dialog/GamerEmailDialog';
-import { metamaskConnector, walletConnect, provider } from '../../connectors';
+import { bitKeepConnector, metaMaskConnector, provider, walletConnectConnector } from '../../connectors';
 
 const client = createClient({
   autoConnect: true,
-  connectors: [metamaskConnector, walletConnect],
+  connectors: [metaMaskConnector, bitKeepConnector, walletConnectConnector],
   provider,
-  persister: null,
 });
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {

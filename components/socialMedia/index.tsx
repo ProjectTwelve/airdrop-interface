@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import Image from 'next/image';
 import classNames from 'classnames';
 import { useSetRecoilState } from 'recoil';
 import { socialMediaClickAtom, SocialMediaType } from '../../store/invite/state';
@@ -39,9 +38,8 @@ function SocialMedia({ size = 'small' }: SocialMediaProps) {
   return (
     <div className={classNames('grid grid-cols-3', sizes[size])}>
       {socialMedia.map((item) => (
-        <Image
+        <img
           key={item.name}
-          layout="fixed"
           className="cursor-pointer"
           onClick={() => {
             onSocialMediaClick(item.name);
