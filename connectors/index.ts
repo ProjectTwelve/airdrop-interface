@@ -1,59 +1,28 @@
-import { Chain, configureChains, defaultChains } from 'wagmi';
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { configureChains } from 'wagmi';
+import { bsc, bscTestnet, mainnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
+import { InjectedConnector } from 'wagmi/connectors/injected';
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-export const BNBSmartChain: Chain = {
-  id: 56,
-  name: 'BNB Smart Chain',
-  network: 'bsc',
-  nativeCurrency: {
-    name: 'BNB',
-    symbol: 'BNB',
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: 'https://bsc-dataseed1.binance.org/',
-  },
-  blockExplorers: {
-    default: { name: 'BscScan', url: 'https://bscscan.com/' },
-  },
-  testnet: false,
-};
+export const { chains, provider } = configureChains([mainnet, bsc, bscTestnet], [publicProvider()]);
 
-export const BNBSmartChainTestnet: Chain = {
-  id: 97,
-  name: 'BNB Smart Chain Testnet',
-  network: 'bsc_testnet',
-  nativeCurrency: {
-    name: 'tBNB',
-    symbol: 'tBNB',
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: 'https://bsc-testnet.nodereal.io/v1/d0a35580e8ce4c7ab2b2ac75588174d3',
-  },
-  blockExplorers: {
-    default: { name: 'tBscScan', url: 'https://testnet.bscscan.com/' },
-  },
-  testnet: true,
-};
+export const metaMaskConnector = new MetaMaskConnector({ chains });
 
-export const { chains, provider } = configureChains(
-  [...defaultChains, BNBSmartChain, BNBSmartChainTestnet],
-  [publicProvider()],
-);
-
-export const metamaskConnector = new MetaMaskConnector({
+export const walletConnectConnector = new WalletConnectConnector({
   chains,
-  options: {
-    shimChainChangedDisconnect: false,
-  },
+  options: { projectId: 'af716327386d5071687fc3727a00e321' },
 });
 
-export const walletConnect = new WalletConnectConnector({
+export const bitKeepConnector = new InjectedConnector({
   chains,
   options: {
-    qrcode: true,
+    name: 'BitKeep',
+    getProvider: () => {
+      if (typeof window !== 'undefined') {
+        return window.bitkeep?.ethereum;
+      }
+    },
+    shimDisconnect: true,
   },
 });
