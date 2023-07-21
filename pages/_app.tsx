@@ -8,6 +8,7 @@ import Layout from '../components/layout';
 import { STORAGE_KEY } from '../constants';
 import { setLocalStorage } from '../utils/storage';
 import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
@@ -58,6 +59,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           <Component {...pageProps} />
         </Layout>
       </QueryClientProvider>
+      <Analytics />
     </>
   );
 }
