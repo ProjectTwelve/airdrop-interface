@@ -5,7 +5,6 @@ import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
 import OMGLuckyDraw from './OMGLuckyDraw';
 import { useIsMounted } from '../../../hooks/useIsMounted';
-import { ZERO_ADDRESS } from '../../../constants/addresses';
 import { useArcanaPredictionsOMG } from '../../../hooks/arcana';
 import { arcanaOriginAddressAtom, arcanaPredictionOMGAnswerAtom } from '../../../store/arcana/state';
 
@@ -13,7 +12,7 @@ export default function OMG() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
-  const { data } = useArcanaPredictionsOMG(originAddress ?? address ?? ZERO_ADDRESS);
+  const { data } = useArcanaPredictionsOMG(originAddress ?? address);
   const setPredictionAnswer = useSetRecoilState(arcanaPredictionOMGAnswerAtom);
 
   const onAnchorClick = () => {

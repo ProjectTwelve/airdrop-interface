@@ -2,6 +2,7 @@ import { PredictionAnswer } from '../store/arcana/state';
 import { PREDICTION_TYPE } from '../components/arcana/PredictionItemDialog';
 import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
 import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
+import { Hash } from "viem";
 
 export type Response<T> = {
   status: string;
@@ -508,7 +509,7 @@ export type WorldCapInfo = {
   walletAddress: string;
   genesisNftHolder: number;
   genesisNftLevel?: GAMER_NFT_LEVEL;
-  answerSignature?: string;
+  answerSignature?: Hash;
   deadline: number;
   ownedNft?: any[];
 };

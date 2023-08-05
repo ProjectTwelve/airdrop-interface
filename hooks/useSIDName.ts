@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNetwork } from 'wagmi';
 import { useRouter } from 'next/router';
-import { useNetwork, useProvider } from 'wagmi';
-// @ts-ignore
+import { useEthersProvider } from '../utils/ethers';
+// @ts-ignorez
 import SID, { getSidAddress } from '@siddomains/sidjs';
 
 export const useSIDName = ({ address }: { address?: string }) => {
   const router = useRouter();
   const [SIDName, setSIDName] = useState<string | null>(null);
-  const provider = useProvider();
+  const provider = useEthersProvider();
   const { chain } = useNetwork();
   const isAuthPage = useMemo(() => router.pathname === '/auth/steam', [router.pathname]);
 

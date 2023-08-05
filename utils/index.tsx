@@ -1,8 +1,8 @@
 import React from 'react';
+import { getAddress } from 'viem';
 import { toast } from 'react-toastify';
 import { getNetwork } from '@wagmi/core';
 import { isMobile } from 'react-device-detect';
-import { getAddress } from '@ethersproject/address';
 import Message from '../components/message';
 
 export function isAddress(value: any): string | false {

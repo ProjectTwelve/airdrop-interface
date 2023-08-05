@@ -126,9 +126,6 @@ export const GAMER_BADGES = {
   },
 };
 
-// Collab
-export const COLLAB_OPEN = process.env.NEXT_PUBLIC_COLLAB === 'OPEN';
-
 export enum COLLAB_TIME_STATUS {
   UPCOMING = 'Upcoming',
   JOIN = 'Join',

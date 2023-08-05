@@ -3,7 +3,7 @@ import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import PredictionItem from './PredictionItem';
-import { ZERO_ADDRESS } from '../../constants/addresses';
+import { zeroAddress } from 'viem';
 import { referralCodeAtom } from '../../store/invite/state';
 import {
   arcanaObserverAtom,
@@ -20,7 +20,7 @@ export default function Prediction() {
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
   const setPredictionCount = useSetRecoilState(arcanaPredictionCountAtom);
   const setPredictionAnswer = useSetRecoilState(arcanaPredictionAnswerAtom);
-  const { data } = useArcanaPredictions(originAddress ?? address ?? ZERO_ADDRESS);
+  const { data } = useArcanaPredictions(originAddress ?? address ?? zeroAddress);
 
   useEffect(() => {
     if (!data) return;

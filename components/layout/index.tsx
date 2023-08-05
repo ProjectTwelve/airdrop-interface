@@ -1,25 +1,25 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import { ToastContainer } from 'react-toastify';
-import { createClient, WagmiConfig } from 'wagmi';
 import ButterflyGL from '../butterflyGL';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import ToastIcon from '../svg/ToastIcon';
+import { ToastContainer } from 'react-toastify';
 import InviteDialog from '../dialog/InviteDialog';
+import { createConfig, WagmiConfig } from 'wagmi';
 import RoadmapDialog from '../dialog/RoadmapDialog';
 import GamerEmailDialog from '../dialog/GamerEmailDialog';
-import { bitKeepConnector, metaMaskConnector, provider, walletConnectConnector } from '../../connectors';
+import { bitKeepConnector, metaMaskConnector, publicClient, walletConnectConnector } from '../../connectors';
 
-const client = createClient({
+const config = createConfig({
   autoConnect: true,
   connectors: [metaMaskConnector, bitKeepConnector, walletConnectConnector],
-  provider,
+  publicClient,
 });
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
-    <WagmiConfig client={client}>
+    <WagmiConfig config={config}>
       <RecoilRoot>
         <div className="mx-auto min-h-screen pt-4 2xl:container">
           <LayoutHeader />

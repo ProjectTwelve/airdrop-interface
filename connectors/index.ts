@@ -5,7 +5,7 @@ import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-export const { chains, provider } = configureChains([mainnet, bsc, bscTestnet], [publicProvider()]);
+export const { chains, publicClient } = configureChains([mainnet, bsc, bscTestnet], [publicProvider()]);
 
 export const metaMaskConnector = new MetaMaskConnector({ chains });
 
