@@ -7,7 +7,7 @@ import {
   FloatingPortal,
   FloatingOverlay,
   FloatingFocusManager,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
@@ -35,7 +35,10 @@ function Dialog({
     onOpenChange?.(value);
   };
 
-  const { reference, floating, context } = useFloating({
+  const {
+    refs: { setReference, setFloating },
+    context,
+  } = useFloating({
     open,
     onOpenChange: onClose,
   });
@@ -49,7 +52,7 @@ function Dialog({
 
   return (
     <>
-      {children && cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
+      {children && cloneElement(children, getReferenceProps({ ref: setReference, ...children.props }))}
       <FloatingPortal>
         <AnimatePresence onExitComplete={onExitComplete}>
           {open && (
@@ -61,7 +64,7 @@ function Dialog({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.85 }}
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                  {...getFloatingProps({ ref: floating })}
+                  {...getFloatingProps({ ref: setFloating })}
                 >
                   <div className="relative p-7 md:p-2">
                     {showCloseButton && (

@@ -11,7 +11,7 @@ import {
   useDismiss,
   useClick,
   FloatingFocusManager,
-} from '@floating-ui/react-dom-interactions';
+} from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type PopoverProps = {
@@ -25,7 +25,13 @@ type PopoverProps = {
 function Popover({ children, render, placement, open: passedOpen, onOpenChange }: React.PropsWithChildren<PopoverProps>) {
   const [open, setOpen] = useState(false);
 
-  const { x, y, reference, floating, strategy, context } = useFloating({
+  const {
+    x,
+    y,
+    refs: { setFloating, setReference },
+    strategy,
+    context,
+  } = useFloating({
     open,
     onOpenChange: (op) => {
       setOpen(op);
@@ -45,7 +51,7 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
 
   return (
     <>
-      {cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
+      {cloneElement(children, getReferenceProps({ ref: setReference, ...children.props }))}
       <AnimatePresence>
         {open && (
           <FloatingFocusManager context={context}>
@@ -55,7 +61,7 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ type: 'spring', damping: 20, stiffness: 300 }}
               {...getFloatingProps({
-                ref: floating,
+                ref: setFloating,
                 style: {
                   position: strategy,
                   top: y ?? '',

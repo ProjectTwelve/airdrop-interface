@@ -10,9 +10,9 @@ import {
   useFocus,
   useRole,
   useDismiss,
-} from '@floating-ui/react-dom-interactions';
+  Placement,
+} from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Placement } from '@floating-ui/react-dom-interactions';
 
 type TooltipProps = {
   label: React.ReactNode;
@@ -37,8 +37,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
   const {
     x,
     y,
-    reference,
-    floating,
+    refs: { setReference, setFloating },
     strategy,
     context,
     placement: _placement,
@@ -59,7 +58,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
 
   return (
     <>
-      {cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
+      {cloneElement(children, getReferenceProps({ ref: setReference, ...children.props }))}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -68,7 +67,7 @@ export const Tooltip = ({ children, label, placement = 'top' }: TooltipProps) =>
             exit={{ opacity: 0, scale: 0.85 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             {...getFloatingProps({
-              ref: floating,
+              ref: setFloating,
               className: 'tooltip__container absolute z-40 max-w-[300px] rounded-lg',
               style: {
                 position: strategy,

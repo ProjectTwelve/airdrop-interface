@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { wrap } from 'popmotion';
 import { isMobile } from 'react-device-detect';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import { useArcanaVotesRank } from '../../hooks/arcana';
 import { VoteRankItem } from '../../lib/types';

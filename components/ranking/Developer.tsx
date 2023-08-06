@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { wrap } from 'popmotion';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import Pagination from 'rc-pagination';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import DevTimeRankingItem, { DevTimeRankingHeader } from './DevTimeRankingItem';
 import DevTokenRankingItem, { DevTokenRankingHeader } from './DevTokenRankingItem';

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
+import { FloatingPortal, FloatingOverlay } from '@floating-ui/react';
 import { gamerClaimedPosterAtom } from '../../store/gamer/state';
 import Button from '../button';
 import { downloadImage } from '../../utils';
