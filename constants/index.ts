@@ -42,41 +42,29 @@ export const NFT_CLAIM_TYPE = {
   [NFT_CLAIM.CLAIMED]: 'Obtained',
 };
 
-const DEV_BADGE_ORANGE = process.env.NEXT_PUBLIC_DEV_BADGE_ORANGE || 'https://galxe.com/P12/campaign/GCt9JUUJCJ';
-const DEV_BADGE_PURPLE = process.env.NEXT_PUBLIC_DEV_BADGE_PURPLE || 'https://galxe.com/P12/campaign/GCteJUUM7z';
-const DEV_BADGE_BLUE = process.env.NEXT_PUBLIC_DEV_BADGE_BLUE || 'https://galxe.com/P12/campaign/GCi9CUUrni';
-const DEV_BADGE_GREEN = process.env.NEXT_PUBLIC_DEV_BADGE_GREEN || 'https://galxe.com/P12/campaign/GCV4JUU7eR';
-
-const GAMER_BADGE_ORANGE = process.env.NEXT_PUBLIC_GAMER_BADGE_ORANGE || 'https://galxe.com/P12/campaign/GCZ74Utyqp';
-const GAMER_BADGE_PURPLE = process.env.NEXT_PUBLIC_GAMER_BADGE_PURPLE || 'https://galxe.com/P12/campaign/GCZm4UtEeE';
-const GAMER_BADGE_BLUE = process.env.NEXT_PUBLIC_GAMER_BADGE_BLUE || 'https://galxe.com/P12/campaign/GCuBwUtL6P';
-const GAMER_BADGE_GREEN = process.env.NEXT_PUBLIC_GAMER_BADGE_GREEN || 'https://galxe.com/P12/campaign/GCrkwUtqiz';
-const GAMER_BADGE_WHITE = process.env.NEXT_PUBLIC_GAMER_BADGE_WHITE || 'https://galxe.com/P12/campaign/GCirwUtCCS';
-const GAMER_BADGE_REKT = process.env.NEXT_PUBLIC_GAMER_BADGE_REKT || 'https://galxe.com/P12/campaign/GCuagUtMfG';
-
 export const DEV_BADGES = {
   [DEV_NFT_LEVEL.ORANGE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653656759076802901.gif',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_orange.png',
-    claim: DEV_BADGE_ORANGE,
+    claim: 'https://galxe.com/P12/campaign/GCt9JUUJCJ',
     title: 'P12 Genesis Badge [Orange Rarity]',
   },
   [DEV_NFT_LEVEL.PURPLE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653654265642526889.gif',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_purple.png',
-    claim: DEV_BADGE_PURPLE,
+    claim: 'https://galxe.com/P12/campaign/GCteJUUM7z',
     title: 'P12 Genesis Badge [Purple Rarity]',
   },
   [DEV_NFT_LEVEL.BLUE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653761673395155.gif',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_blue.png',
-    claim: DEV_BADGE_BLUE,
+    claim: 'https://galxe.com/P12/campaign/GCi9CUUrni',
     title: 'P12 Genesis Badge [Blue Rarity]',
   },
   [DEV_NFT_LEVEL.GREEN]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
-    claim: DEV_BADGE_GREEN,
+    claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
     title: 'P12 Genesis Badge [Green Rarity]',
   },
 };
@@ -86,42 +74,42 @@ export const GAMER_BADGES = {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_orange.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange_2.png',
-    claim: GAMER_BADGE_ORANGE,
+    claim: 'https://galxe.com/P12/campaign/GCZ74Utyqp',
     title: 'P12 XII-PLORER Badge [Orange Rarity]',
   },
   [GAMER_NFT_LEVEL.PURPLE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_purple.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple_2.png',
-    claim: GAMER_BADGE_PURPLE,
+    claim: 'https://galxe.com/P12/campaign/GCZm4UtEeE',
     title: 'P12 XII-PLORER Badge [Purple Rarity]',
   },
   [GAMER_NFT_LEVEL.BLUE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_blue.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue_2.png',
-    claim: GAMER_BADGE_BLUE,
+    claim: 'https://galxe.com/P12/campaign/GCuBwUtL6P',
     title: 'P12 XII-PLORER Badge [Blue Rarity]',
   },
   [GAMER_NFT_LEVEL.GREEN]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_green.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green_2.png',
-    claim: GAMER_BADGE_GREEN,
+    claim: 'https://galxe.com/P12/campaign/GCrkwUtqiz',
     title: 'P12 XII-PLORER Badge [Green Rarity]',
   },
   [GAMER_NFT_LEVEL.WHITE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_white.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common_2.webp',
-    claim: GAMER_BADGE_WHITE,
+    claim: 'https://galxe.com/P12/campaign/GCirwUtCCS',
     title: 'P12 XII-PLORER Badge [WHITE Rarity]',
   },
   [GAMER_NFT_LEVEL.REKT]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_rekt.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt_2.webp',
-    claim: GAMER_BADGE_REKT,
+    claim: 'https://galxe.com/P12/campaign/GCuagUtMfG',
     title: 'P12 XII-PLORER Badge [REKT Rarity]',
   },
 };
@@ -146,5 +134,5 @@ export enum CHAIN_ID {
   BSC_TESTNET = 97,
 }
 
-export const ARCANA_CHAIN_ID: CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_ARCANA_CHAIN_ID || '56');
+export const ARCANA_CHAIN_ID: CHAIN_ID = 56;
 export const COLLAB_CHAIN_ID: CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_COLLAB_CHAIN_ID || '56');
