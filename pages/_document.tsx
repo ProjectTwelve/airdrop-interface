@@ -1,3 +1,5 @@
+import React from 'react';
+import Script from 'next/script';
 import { Html, Head, Main, NextScript } from 'next/document';
 
 /**
@@ -15,6 +17,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <Script src="/js/theme.min.js" strategy="beforeInteractive" />
       </body>
     </Html>
   );
