@@ -56,6 +56,7 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
         {open && (
           <FloatingFocusManager context={context}>
             <motion.div
+              className="backdrop-box rounded-2xl"
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1, originY: 0 }}
               exit={{ opacity: 0, scale: 0.85 }}
