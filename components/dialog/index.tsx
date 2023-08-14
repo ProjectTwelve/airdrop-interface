@@ -56,7 +56,7 @@ function Dialog({
       <FloatingPortal>
         <AnimatePresence onExitComplete={onExitComplete}>
           {open && (
-            <FloatingOverlay lockScroll className="z-[100] grid place-items-center bg-p12-dialog backdrop-blur-lg">
+            <FloatingOverlay lockScroll className="z-[100] grid place-items-center bg-gray-900/60 backdrop-blur-lg">
               <FloatingFocusManager context={context}>
                 <motion.div
                   className="backdrop-box rounded-2xl"

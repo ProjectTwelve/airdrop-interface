@@ -103,7 +103,7 @@ export default function GamerRanking() {
       </div>
       <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Latest</h2>
           <GamerTimeRankingHeader />
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
@@ -122,7 +122,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Leaderboard</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Leaderboard</h2>
           <GamerTokenRankingHeader />
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (

@@ -58,7 +58,7 @@ function LayoutHeaderExtra() {
                 <div className="flex items-center justify-center text-sm">
                   <img src="/svg/invite.svg" width={24} height={24} alt="invite" />
                   &nbsp;My referral link
-                  <p className="ml-3 border-l-2 border-p12-line pl-3 font-ddin text-xl font-bold text-p12-success lg:hidden">
+                  <p className="ml-3 border-l-2 border-gray-600 pl-3 font-ddin text-xl font-bold text-green lg:hidden">
                     {invitationCount}
                   </p>
                 </div>
@@ -77,7 +77,7 @@ function LayoutHeaderExtra() {
                     Share invite address get rewards, It&apos;s dangerous to go alone, take this
                     <div className="flex justify-end">
                       <div
-                        className="cursor-pointer text-p12-link"
+                        className="cursor-pointer text-blue"
                         onClick={() => {
                           setTipsClick(true);
                           setLocalStorage(STORAGE_KEY.INVITE_TIPS_CLICK, true);

@@ -26,9 +26,9 @@ export default function PredictionItem({ data }: PredictionItemProps) {
           </div>
           <div className="ml-2">
             <p className="text-xs">
-              <span className="font-medium text-p12-link">{data?.sponsorName}</span>&nbsp; sponsored this prediction:
+              <span className="font-medium text-blue">{data?.sponsorName}</span>&nbsp; sponsored this prediction:
             </p>
-            <p className="text-xs text-p12-orange">&quot;{data?.meme}&quot;</p>
+            <p className="text-xs text-orange">&quot;{data?.meme}&quot;</p>
           </div>
         </div>
         <div className="h-0.5 bg-p12-gradient"></div>
@@ -104,8 +104,8 @@ export default function PredictionItem({ data }: PredictionItemProps) {
               <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px]">
                 {data?.votesShare ? (data.votesShare < 0.001 ? '< 0.001' : data.votesShare) : 0}%
               </p>
-              <h3 className="mt-4 text-xs font-medium leading-3 text-p12-gold">Your Reward</h3>
-              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px] text-p12-gold">${data?.reward || 0}</p>
+              <h3 className="mt-4 text-xs font-medium leading-3 text-yellow">Your Reward</h3>
+              <p className="mt-1.5 font-ddin text-[26px] font-bold leading-[26px] text-yellow">${data?.reward || 0}</p>
             </div>
           </div>
         </div>

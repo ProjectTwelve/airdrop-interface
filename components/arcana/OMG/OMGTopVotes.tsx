@@ -13,7 +13,7 @@ function TopVoteItem({ reward, data }: { reward: Reward | number; data: Predicti
         <div className="flex h-[30px] w-[70px] flex-col justify-center xs:w-[65px]">
           <p className="text-[10px] leading-[10px]">{typeof reward === 'number' ? reward + 'th' : reward.index}</p>
           {typeof reward === 'number' ? null : (
-            <p className="mt-1 font-ddin text-xl font-bold leading-4 text-p12-gold">${reward.price}</p>
+            <p className="mt-1 font-ddin text-xl font-bold leading-4 text-yellow">${reward.price}</p>
           )}
         </div>
         <div className="flex items-center justify-center">
@@ -92,7 +92,7 @@ export default function OMGTopVotes() {
         <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Top Votes Reward
         </p>
-        <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$7000</p>
+        <p className="dota__yellow text-center font-ddin text-[26px] leading-[28px]">$7000</p>
       </div>
       <div className="p-4 pb-[14px]">
         <div className="vertical-scroll flex flex-col gap-[10px] rounded-b-lg">

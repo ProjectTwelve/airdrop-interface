@@ -53,7 +53,7 @@ export default function Prediction() {
             onClick={onShareTwitter}
             className="dota__button flex items-center justify-center py-[11px] px-8 md:py-1.5 md:px-3"
           >
-            <span className="dota__gold mr-1 pl-1 leading-5">Share</span>
+            <span className="dota__yellow mr-1 pl-1 leading-5">Share</span>
             <img width={20} src="/img/arcana/twitter_gold.svg" alt="twitter" />
           </button>
         )}

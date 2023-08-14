@@ -18,7 +18,7 @@ import styles from './tokens.module.css';
 
 const claimComponents: Record<NFT_CLAIM, JSX.Element> = {
   [NFT_CLAIM.UNCLAIMED]: <Tag size="small" type="red" value="Unclaimed" />,
-  [NFT_CLAIM.PENDING]: <p className="text-xs text-p12-bg">Update in few minutes</p>,
+  [NFT_CLAIM.PENDING]: <p className="text-xs text-gray-500">Update in few minutes</p>,
   [NFT_CLAIM.CLAIMED]: <Tag size="small" type="green" value="Obtained" />,
 };
 
@@ -65,7 +65,7 @@ export default function TokenTabs() {
               <div
                 key={game.appid}
                 className={classNames(
-                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-p12-black/80 p-2.5',
+                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-800/80 p-2.5',
                   selectedGame.appid === game.appid ? 'opacity-100' : 'opacity-60',
                   'cursor-pointer last:mr-0 hover:opacity-100',
                 )}
@@ -76,7 +76,7 @@ export default function TokenTabs() {
                     {game.header_image ? (
                       <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                     ) : (
-                      <p className="text-center text-xs leading-[72px] text-p12-bg">No Game</p>
+                      <p className="text-center text-xs leading-[72px] text-gray-500">No Game</p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -98,7 +98,7 @@ export default function TokenTabs() {
           </div>
         </div>
       </div>
-      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
+      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
         <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
           <div className="absolute top-0 left-0 h-full w-full blur-3xl">
             {selectedGame.nft_claim === NFT_CLAIM.CLAIMED && (
@@ -134,7 +134,7 @@ export default function TokenTabs() {
                     </>
                   ) : (
                     <>
-                      <h4 className="text-center text-xl font-medium text-p12-success">
+                      <h4 className="text-center text-xl font-medium text-green">
                         {selectedGame.nft_claim === NFT_CLAIM.PENDING
                           ? 'Pending: update in a few minutes'
                           : 'Congrats! P12 Genesis NFT to be claimed'}
@@ -151,7 +151,7 @@ export default function TokenTabs() {
                 </div>
               ) : (
                 <div>
-                  <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
+                  <h4 className="text-center text-xl font-medium text-red">AYBABTU</h4>
                   <Button type="bordered" className="mt-9 w-[260px]" onClick={() => setSelectedTab(0)}>
                     Verify my game
                   </Button>
@@ -159,14 +159,14 @@ export default function TokenTabs() {
               )}
             </div>
           </div>
-          <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
+          <p className="absolute bottom-8 z-10 w-full text-center text-sm text-gray sm:static sm:py-2">
             The airdrop is in collaboration with and powered by&nbsp;
-            <a className="text-p12-link" href={GALXE_P12_SPACE} target="_blank">
+            <a className="text-blue" href={GALXE_P12_SPACE} target="_blank">
               Galxe
             </a>
           </p>
           {selectedGame.credential > 10 && (
-            <p className="absolute bottom-8 w-full text-center text-sm text-p12-sub">
+            <p className="absolute bottom-8 w-full text-center text-sm text-gray">
               You&apos;ve got 10 identical NFTs which reached our limit
             </p>
           )}
@@ -176,7 +176,7 @@ export default function TokenTabs() {
             {selectedGame.appid ? DEV_BADGES[selectedGame.nft_level].title : 'P12 | Project Twelve | Genesis'}
           </h2>
           <h3 className="mt-9 text-xl font-medium md:mt-4">Genesis Soul-Bound NFT</h3>
-          <p className="mt-2 text-sm text-p12-sub">
+          <p className="mt-2 text-sm text-gray">
             Birthday:&nbsp;
             {selectedGame.updatedAt && selectedGame.credential <= 10
               ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD')
@@ -194,7 +194,7 @@ export default function TokenTabs() {
               <Image src="/img/p12.png" width={48} height={48} alt="p12" />
             </div>
           </div>
-          <div className="mt-9 flex rounded-2xl border border-p12-line py-[30px] md:flex-col md:py-0">
+          <div className="mt-9 flex rounded-2xl border border-gray-600 py-[30px] md:flex-col md:py-0">
             {[
               { label: 'ID', value: selectedGame.nft_id || '--' },
               {
@@ -210,12 +210,12 @@ export default function TokenTabs() {
               <div
                 key={item.label}
                 className={classNames(
-                  'flex flex-1 flex-col items-center justify-center border-r border-p12-line',
+                  'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
                   'md:flex-row md:border-r-0 md:border-b md:py-2',
                   'last:border-none',
                 )}
               >
-                <p className="text-sm text-p12-sub md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
+                <p className="text-sm text-gray md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
                 <p className="font-medium lg:text-sm">{item.value}</p>
               </div>
             ))}

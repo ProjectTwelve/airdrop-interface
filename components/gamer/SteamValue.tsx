@@ -29,7 +29,7 @@ export default function SteamValue({ data }: SteamValueProps) {
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
-        <div className="mt-3 rounded-lg border border-p12-orange bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-p12-orange">
+        <div className="mt-3 rounded-lg border border-orange bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-orange">
           {Math.floor(data.value || 0)}
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function SteamValue({ data }: SteamValueProps) {
                   <img width={112} height={72} src={item.img} className="rounded-lg object-cover lg:hidden" alt="game" />
                   <div className="ml-2 2xl:ml-4">
                     <p className="font-medium">{item.name}</p>
-                    <div className="mt-1.5 font-ddin text-[42px] font-bold leading-[42px] text-p12-success lg:text-2xl xl:text-2xl">
+                    <div className="mt-1.5 font-ddin text-[42px] font-bold leading-[42px] text-green lg:text-2xl xl:text-2xl">
                       {Math.floor(item.value)}
                     </div>
                   </div>
@@ -57,7 +57,7 @@ export default function SteamValue({ data }: SteamValueProps) {
             )}
           </div>
         ) : (
-          <div className="mt-3 h-[98px] w-full rounded-2xl bg-p12-black/80 text-center text-xs leading-[98px] text-p12-bg">
+          <div className="mt-3 h-[98px] w-full rounded-2xl bg-gray-800/80 text-center text-xs leading-[98px] text-gray-500">
             No data
           </div>
         )}

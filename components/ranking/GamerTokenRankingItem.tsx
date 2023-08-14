@@ -32,7 +32,7 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-p12-black/80 px-3 py-[10px] hover:bg-[#7980AF]/20 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-gray-800/80 px-3 py-[10px] hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="mr-2 w-[30px] flex-none text-center text-xs font-medium leading-[44px] 2xl:mr-4 2xl:w-[40px]">
         {getCountMemo(data.index)}
@@ -41,15 +41,15 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
         <div className="float-left mr-2 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="float-right ml-2 flex-none rounded bg-p12-tips/20 py-1 px-2 lg:hidden xs:hidden">
-          <p className="border-b border-p12-tips/30 pb-[3px] text-center text-xs leading-[14px] text-p12-link">SS Games</p>
-          <p className="text-p12-lin mt-1 text-center text-xs leading-[14px] text-p12-link">
+        <div className="float-right ml-2 flex-none rounded bg-blue-550/20 py-1 px-2 lg:hidden xs:hidden">
+          <p className="border-b border-blue-550/30 pb-[3px] text-center text-xs leading-[14px] text-blue">SS Games</p>
+          <p className="text-p12-lin mt-1 text-center text-xs leading-[14px] text-blue">
             {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
-        <div className="float-right ml-2 rounded bg-p12-tips/20 py-1 px-2">
-          <p className="border-b border-p12-tips/30 pb-[3px] text-center text-xs leading-[14px] text-p12-link">Steam year</p>
-          <p className="mt-1 text-center text-xs leading-[14px] text-p12-link">
+        <div className="float-right ml-2 rounded bg-blue-550/20 py-1 px-2">
+          <p className="border-b border-blue-550/30 pb-[3px] text-center text-xs leading-[14px] text-blue">Steam year</p>
+          <p className="mt-1 text-center text-xs leading-[14px] text-blue">
             {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}
           </p>
         </div>
@@ -70,9 +70,9 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
         {data.nft_level !== undefined && <img src={GAMER_BADGES[data.nft_level].img} className="w-full" alt="badge" />}
       </div>
       <div className="group float-right flex items-center justify-between" onClick={handleToGamerProfile}>
-        <span className="hidden text-xs text-p12-sub group-hover:text-white 2xl:block">Details</span>
+        <span className="hidden text-xs text-gray group-hover:text-white 2xl:block">Details</span>
         <svg
-          className="ml-0.5 stroke-p12-sub group-hover:stroke-white"
+          className="ml-0.5 stroke-gray group-hover:stroke-white"
           width="16"
           height="16"
           viewBox="0 0 24 24"

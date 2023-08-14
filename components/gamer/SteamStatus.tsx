@@ -75,7 +75,7 @@ export default function SteamStatus() {
                         ))}
                       </div>
                     ) : (
-                      <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
+                      <div className="h-[248px] rounded-2xl bg-gray-800/80 p-6">
                         <Empty />
                       </div>
                     )}
@@ -98,12 +98,12 @@ export default function SteamStatus() {
                 <SteamValue data={gamerInfo} />
               </>
             ) : (
-              <div className="rounded-2xl bg-p12-black/80 p-6 md:p-3">
+              <div className="rounded-2xl bg-gray-800/80 p-6 md:p-3">
                 {isFetching ? (
                   <Loading size={58} className="my-[72px] opacity-50" />
                 ) : (
                   <>
-                    <div className="rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error sm:p-2">
+                    <div className="rounded-lg bg-red/20 px-4 py-2 text-sm text-red sm:p-2">
                       We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
                       including secondary options. You can turn off after the airdrop!
                     </div>
@@ -153,7 +153,7 @@ export default function SteamStatus() {
               Please connect wallet
             </Button>
           )}
-          <p className="mt-5 text-sm text-p12-sub">
+          <p className="mt-5 text-sm text-gray">
             {isMounted && address && 'We cannot access your profile. Please log in to your Steam account.'}
           </p>
         </div>

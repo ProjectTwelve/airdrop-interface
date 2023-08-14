@@ -50,7 +50,7 @@ function Card({ data }: { data: MemeEvaluateItem }) {
   if (data.memeType === 'audio') {
     return (
       <div className="flex h-full w-full select-none flex-col items-center justify-center">
-        <p className="dota__gold text-sm xs:text-xs">{data.memeTitle}</p>
+        <p className="dota__yellow text-sm xs:text-xs">{data.memeTitle}</p>
         <div className="activity mt-2 h-[40px] w-[40px] w-[32px] xs:h-[32px]" onClick={onAudioClick}>
           {audioStatusIcon[audioStatus]}
           <audio ref={assetRef} onEnded={() => setAudioStatus(AudioStatus.PLAY)} src={data.memeUrl}></audio>

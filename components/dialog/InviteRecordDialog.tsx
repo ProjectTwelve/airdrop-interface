@@ -172,7 +172,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         </TabPanel>
       </Tabs>
-      <div className="flex justify-end border-t border-p12-line pt-7">
+      <div className="flex justify-end border-t border-gray-600 pt-7">
         <Button type="bordered" onClick={close}>
           Confirm
         </Button>

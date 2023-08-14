@@ -12,7 +12,7 @@ function TopVoteItem({ reward, data }: { reward: Reward; data: PredictionAnswerO
       <div className="flex items-center justify-center">
         <div className="w-[80px] 2xl:w-[105px] xs:w-[65px]">
           <p className="text-[10px] leading-[10px]">{reward.index}</p>
-          <p className="mt-1 font-ddin text-xl font-bold leading-4 text-p12-gold">${reward.price}</p>
+          <p className="mt-1 font-ddin text-xl font-bold leading-4 text-yellow">${reward.price}</p>
         </div>
         <div className="flex items-center justify-center">
           <div className="h-[30px] w-[30px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
@@ -124,8 +124,8 @@ export default function OMGv1() {
                     </div>
                     <div className="h-[46px] w-[2px] bg-[#474C55]/50"></div>
                     <div className="flex flex-1 flex-col items-center justify-center">
-                      <h3 className="text-xs font-medium text-p12-gold">Prize</h3>
-                      <p className="font-ddin text-[26px] font-bold text-p12-gold">$5000</p>
+                      <h3 className="text-xs font-medium text-yellow">Prize</h3>
+                      <p className="font-ddin text-[26px] font-bold text-yellow">$5000</p>
                     </div>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export default function OMGv1() {
             <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
               Top Votes Reward
             </p>
-            <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$2600</p>
+            <p className="dota__yellow text-center font-ddin text-[26px] leading-[28px]">$2600</p>
           </div>
           <div className="flex flex-1 flex-col gap-2 rounded-b-lg px-4 py-5">
             <p className="mb-[10px] text-center text-xs text-[#A5A6AB]">Winners</p>
@@ -164,7 +164,7 @@ export default function OMGv1() {
             <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
               Lucky Draw
             </p>
-            <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$800 x 3</p>
+            <p className="dota__yellow text-center font-ddin text-[26px] leading-[28px]">$800 x 3</p>
           </div>
           <div className="flex flex-1 flex-col gap-2 rounded-b-lg px-4 py-5">
             <p className="mb-[10px] text-center text-xs text-[#A5A6AB]">Winners</p>

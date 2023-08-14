@@ -60,19 +60,19 @@ function InviteDialog() {
               <Image src="/img/invite_step_04.png" alt="invite_01" width={100} height={100} />
             </div>
             <div className="flex items-center justify-center">
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 1
               </div>
-              <div className="h-[2px] w-[155px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[2px] w-[155px] bg-green"></div>
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 2
               </div>
-              <div className="h-[2px] w-[155px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[2px] w-[155px] bg-green"></div>
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 3
               </div>
-              <div className="h-[2px] w-[155px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[2px] w-[155px] bg-green"></div>
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 4
               </div>
             </div>
@@ -103,7 +103,7 @@ function InviteDialog() {
               </div>
             </div>
           </div>
-          <div className="my-4 h-[1px] bg-p12-line"></div>
+          <div className="my-4 h-[1px] bg-gray-600"></div>
           <div className="py-4">
             <p className="text-center text-xs leading-5">
               The proportion of reward token is based on the rarity of P12 badge you hold. →P12 Badge updates in &nbsp;
@@ -153,14 +153,14 @@ function InviteDialog() {
               <div className="mr-2">&gt;</div>
               <div>
                 <div className="flex h-6 flex-none items-center justify-center text-xs">
-                  <span className="text-xs text-p12-sub">No Badge</span>
+                  <span className="text-xs text-gray">No Badge</span>
                 </div>
                 <div className="mt-2.5 text-center text-sm font-bold">8%</div>
               </div>
             </div>
           </div>
           {isMounted && address && (
-            <div className="relative mt-6 flex items-center justify-between rounded-lg bg-p12-black/80 p-5 text-sm">
+            <div className="relative mt-6 flex items-center justify-between rounded-lg bg-gray-800/80 p-5 text-sm">
               {referralLink}
               <Button
                 size="small"
@@ -181,7 +181,7 @@ function InviteDialog() {
                   <p className="text-[18px] font-medium">My Referrals</p>
                   <p className="ml-3 text-xl font-medium">{invitationCount}</p>
                   <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
-                    <p className="ml-3 cursor-pointer text-sm text-p12-link">
+                    <p className="ml-3 cursor-pointer text-sm text-blue">
                       More
                       <img width={16} height={16} className="inline-block" src="/svg/more.svg" alt="more" />
                     </p>

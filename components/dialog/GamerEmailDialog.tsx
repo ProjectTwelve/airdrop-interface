@@ -94,7 +94,7 @@ export default function GamerEmailDialog() {
       render={() => (
         <div>
           <div className="flex h-[28px] items-center justify-center text-xl">Email Verification</div>
-          <div className="my-7 h-[1px] bg-p12-line"></div>
+          <div className="my-7 h-[1px] bg-gray-600"></div>
           <div className="w-[384px]">
             {type === 'type2' ? (
               <>
@@ -103,7 +103,7 @@ export default function GamerEmailDialog() {
                 </p>
                 <div className="mt-10 flex justify-between text-sm">
                   <p>{gamerEmailInfo.email}</p>
-                  <p className="cursor-pointer font-medium text-p12-link" onClick={() => setType('type1')}>
+                  <p className="cursor-pointer font-medium text-blue" onClick={() => setType('type1')}>
                     Change email
                   </p>
                 </div>
@@ -115,7 +115,7 @@ export default function GamerEmailDialog() {
                     placeholder="4-digit code"
                   />
                   <p className="text-sm font-medium" onClick={() => !count && onSend()}>
-                    {count ? count + ' s' : <span className="cursor-pointer text-p12-link">Send</span>}
+                    {count ? count + ' s' : <span className="cursor-pointer text-blue">Send</span>}
                   </p>
                 </div>
                 <div className="mt-8 flex items-center justify-end">
@@ -144,7 +144,7 @@ export default function GamerEmailDialog() {
                     placeholder="Please enter email address"
                   />
                 </div>
-                <div className="h-8 pt-1 pl-4 text-xs text-p12-error">{error}</div>
+                <div className="h-8 pt-1 pl-4 text-xs text-red">{error}</div>
                 <div className="mt-[65px] px-[30px]">
                   <Button
                     disabled={!value || isLoading}

@@ -12,25 +12,25 @@ function EasterItemLevel25() {
   };
   return (
     <div>
-      <h3 className="dota__gold text-sm font-semibold">BEST Chat Wheel ?</h3>
+      <h3 className="dota__yellow text-sm font-semibold">BEST Chat Wheel ?</h3>
       <div
         className="mt-2 grid w-full grid-cols-4 gap-3 xs:grid-cols-2 xs:gap-1.5"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="dota__easter w-[168px] py-2 text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold">A</p>
+          <p className="dota__yellow">A</p>
           <p className="text-xs">Lakad Matataaag! Normalin, Normalin.</p>
         </div>
         <div className="dota__easter w-[168px] text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold mt-2">B</p>
+          <p className="dota__yellow mt-2">B</p>
           <p className="mt-2 text-xs">你气不气?</p>
         </div>
         <div className="dota__easter w-[168px] text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold mt-2">C</p>
+          <p className="dota__yellow mt-2">C</p>
           <p className="mt-2 text-xs">Это ГГ</p>
         </div>
         <div className="dota__easter w-[168px] py-2 text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold">D</p>
+          <p className="dota__yellow">D</p>
           <p className="text-xs">Ding Ding Ding Mother******</p>
         </div>
       </div>
@@ -44,18 +44,18 @@ function EasterItemLevel1() {
   };
   return (
     <div>
-      <h3 className="dota__gold text-sm font-semibold">Select your favourite hero</h3>
+      <h3 className="dota__yellow text-sm font-semibold">Select your favourite hero</h3>
       <div className="mt-2 grid w-full grid-cols-3 gap-3" onClick={(event) => event.stopPropagation()}>
         <div className="dota__easter h-[76px] w-[168px] px-4 text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold mt-2">A</p>
+          <p className="dota__yellow mt-2">A</p>
           <p className="mt-2 text-sm">Marci</p>
         </div>
         <div className="dota__easter h-[76px] w-[168px] px-4 text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold mt-2">B</p>
+          <p className="dota__yellow mt-2">B</p>
           <p className="mt-2 text-sm">玛西</p>
         </div>
         <div className="dota__easter h-[76px] w-[168px] px-4 text-center xs:w-auto" onClick={onClick}>
-          <p className="dota__gold mt-2">C</p>
+          <p className="dota__yellow mt-2">C</p>
           <p className="flex items-center justify-center">
             <img width={68} src="/img/arcana/statusbar/marci.webp" alt="marci" />
           </p>

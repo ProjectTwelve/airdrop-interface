@@ -27,14 +27,14 @@ export default function ArcanaRank() {
       className="relative w-full max-w-[886px] overflow-hidden rounded-lg px-4 pt-4 pb-3.5 backdrop-blur-lg"
       style={{ background: 'linear-gradient(to bottom, #25293000 0%, #25293080 100%)' }}
     >
-      <div className="absolute top-0 left-0 -z-10 h-[64px] w-full bg-omg-mask"></div>
+      <div className="absolute top-0 left-0 -z-10 h-[64px] w-full bg-card-mask"></div>
       <div className="mb-4 flex justify-center">
-        <div className="min-w-[193px] basis-1/4 text-xs font-medium leading-[14px] text-p12-gold 2xl:min-w-[300px]">
+        <div className="min-w-[193px] basis-1/4 text-xs font-medium leading-[14px] text-yellow 2xl:min-w-[300px]">
           DOTO Master
         </div>
-        <div className="basis-1/4 text-xs font-medium leading-[14px] text-p12-gold">Hit</div>
-        <div className="basis-1/4 text-xs font-medium leading-[14px] text-p12-gold">Votes</div>
-        <div className="basis-1/4 text-xs font-medium leading-[14px] text-p12-gold">Rewards</div>
+        <div className="basis-1/4 text-xs font-medium leading-[14px] text-yellow">Hit</div>
+        <div className="basis-1/4 text-xs font-medium leading-[14px] text-yellow">Votes</div>
+        <div className="basis-1/4 text-xs font-medium leading-[14px] text-yellow">Rewards</div>
       </div>
       <div className="vertical-scroll h-[190px] overflow-y-scroll">
         {isLoading && <Loading className="mt-4" size={36} />}

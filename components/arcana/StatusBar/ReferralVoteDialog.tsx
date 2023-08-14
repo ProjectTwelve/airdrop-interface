@@ -74,8 +74,8 @@ export default function ReferralVoteDialog({ close, data }: ReferralVoteDialogPr
   return (
     <div className="max-w-[720px]">
       <h2 className="text-center font-medium">Get VOTES by Referral</h2>
-      <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
-        <span className="mr-2 text-[45px] text-p12-success">X</span> {data?.votesReferralCurrent || 0}
+      <p className="flex items-center justify-center text-[60px] font-medium text-green">
+        <span className="mr-2 text-[45px] text-green">X</span> {data?.votesReferralCurrent || 0}
       </p>
       <div className="mt-[30px]">
         <p className="text-sm font-medium">Invite friends with Referral Link</p>

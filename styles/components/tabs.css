@@ -41,7 +41,7 @@
     margin: 0 auto;
     height: 3px;
     width: 60px;
-    background-image: var(--gradient);
+    background-image: linear-gradient(to right, var(--from), var(--to));
 }
 
 .react-tabs__tab-panel {

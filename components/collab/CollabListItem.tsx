@@ -37,7 +37,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
 
   const generateStatusLabel = useCallback(() => {
     if (timeStatus === COLLAB_TIME_STATUS.CLOSED)
-      return <div className="flex items-center text-xs leading-5 text-p12-sub">{COLLAB_TIME_STATUS.CLOSED}</div>;
+      return <div className="flex items-center text-xs leading-5 text-gray">{COLLAB_TIME_STATUS.CLOSED}</div>;
     if (timeStatus === COLLAB_TIME_STATUS.UPCOMING)
       return (
         <div className="flex items-center rounded bg-[#C859FF]/20 px-2 text-xs leading-5 text-[#FC59FF]">
@@ -60,9 +60,9 @@ export default function CollabListItem({ data }: CollabItemProps) {
           router.push({ pathname: `/collab/${collabCode}` }).then();
         }
       }}
-      className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
+      className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-gray-800/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
     >
-      <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
+      <div className="flex w-full items-center gap-3 border-b border-gray-600 pb-4">
         <img className="aspect-square h-[66px] rounded-2xl" src={projectLogo} alt="icon" />
         <div className="flex w-14 flex-grow flex-col gap-[.375rem]">
           <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
         </div>
       </div>
       <div className="flex w-full items-center justify-between pt-1">
-        <div className="flex items-center text-xs leading-5 text-p12-sub">
+        <div className="flex items-center text-xs leading-5 text-gray">
           {startTime} ~ {endTime}
         </div>
         {generateStatusLabel()}

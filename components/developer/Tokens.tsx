@@ -24,19 +24,19 @@ function Tokens() {
         <div className="mt-8">
           <DevP12 />
         </div>
-        <div className="flex border-b border-p12-line py-4">
-          <div className="mr-4 rounded-lg bg-p12-black/80 p-3">
+        <div className="flex border-b border-gray-600 py-4">
+          <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
                 {claimGames ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
-            <p className="mt-2 text-xs text-p12-sub">
-              From <span className="text-p12-success"> {claimGames} </span> verified {claimGames > 1 ? 'games' : 'game'}
+            <p className="mt-2 text-xs text-gray">
+              From <span className="text-green"> {claimGames} </span> verified {claimGames > 1 ? 'games' : 'game'}
             </p>
           </div>
-          <div className="rounded-lg bg-p12-black/80 p-3">
+          <div className="rounded-lg bg-gray-800/80 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                 {invitation ? '?,???' : '-,---'}
@@ -44,15 +44,15 @@ function Tokens() {
               <Image src="/img/p12.png" width={30} height={30} alt="p12" />
             </div>
             <Dialog render={({ close }) => <InviteRecordDialog close={close} tab="developer" />}>
-              <p className="mt-2 cursor-pointer text-xs text-p12-link">
-                My referral list <span className="pl-11 text-p12-link md:pl-1">&gt;</span>
+              <p className="mt-2 cursor-pointer text-xs text-blue">
+                My referral list <span className="pl-11 text-blue md:pl-1">&gt;</span>
               </p>
             </Dialog>
           </div>
         </div>
         <div className="flex items-center justify-between py-8 md:flex-col">
           <div className="flex items-center justify-start">
-            <p className="mr-3 text-p12-sub">
+            <p className="mr-3 text-gray">
               {claimGames} {claimGames > 1 ? 'NFTs' : 'NFT'}
             </p>
             <p className="mr-4 text-lg font-medium">Total:</p>

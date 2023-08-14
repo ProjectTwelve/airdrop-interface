@@ -13,7 +13,7 @@ export function LeftCircle({ className, size, color }: { className?: string; siz
     >
       <circle cx="18" cy="18" r="17" fill={color ?? '#24273B'} stroke="#555367" strokeWidth="1" />
       <path
-        className="fill-p12-bg group-hover:fill-white"
+        className="fill-gray-500 group-hover:fill-white"
         fillRule="evenodd"
         clipRule="evenodd"
         d="M16.6163 18.0164L20.9083 22.3083L19.7769 23.4397L14.3536 18.0164L19.7769 12.5931L20.9083 13.7245L16.6163 18.0164Z"

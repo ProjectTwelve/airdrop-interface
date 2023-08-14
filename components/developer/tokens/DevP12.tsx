@@ -20,22 +20,22 @@ export function DevP12() {
   return (
     <div>
       <h3 className="text-xl font-medium">My P12 tokens</h3>
-      <div className="mt-3 mb-8 flex rounded-2xl border border-p12-line py-[30px] md:flex-col md:py-0">
-        <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
+      <div className="mt-3 mb-8 flex rounded-2xl border border-gray-600 py-[30px] md:flex-col md:py-0">
+        <div className="flex flex-1 flex-col items-center justify-center border-r border-gray-600 md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
             <img src={iconStatus.get(leastOneGame) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
             <p className="ml-2 font-medium lg:text-sm">Verified at least</p>
           </div>
           <p className="font-medium lg:text-sm">one game as developer</p>
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
+        <div className="flex flex-1 flex-col items-center justify-center border-r border-gray-600  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
             <img src={iconStatus.get(leastOneGame && isAllClaimed) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
             <p className="ml-2 font-medium lg:text-sm">{leastOneGame ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
           {leastOneGame && !isAllClaimed && <p className="font-medium lg:text-sm">you have unclaimed NFT</p>}
         </div>
-        <div className="flex flex-1 items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2 lg:flex-col lg:gap-2">
+        <div className="flex flex-1 items-center justify-center border-r border-gray-600 md:border-r-0 md:border-b md:py-2 lg:flex-col lg:gap-2">
           <div className="flex">
             <img src={iconStatus.get(isClicked) || ''} className="w-5 2xl:w-[26px]" alt="icon" />
             <p className="mx-2 font-medium lg:text-sm">Join us on</p>

@@ -57,7 +57,7 @@ export default function GamerClaimSuccess() {
         render={({ close }) => (
           <div>
             <div className="flex h-[28px] items-center justify-center text-xl">Winner Winner, Chicken Dinner</div>
-            <div className="my-[28px] h-[1px] bg-p12-line"></div>
+            <div className="my-[28px] h-[1px] bg-gray-600"></div>
             <div className="max-w-[580px]">
               <ol className="flex list-decimal flex-col pl-5 text-sm">
                 <li className="mb-1">Your NFT has been claimed and will take a few seconds to sync.</li>
@@ -65,7 +65,7 @@ export default function GamerClaimSuccess() {
                 <li>One address can only be bound to one Steam account and thus only one NFT.</li>
               </ol>
             </div>
-            <div className="mt-8 mb-6 text-center text-2xl font-semibold text-p12-success">
+            <div className="mt-8 mb-6 text-center text-2xl font-semibold text-green">
               Your exclusive poster has been generated !
             </div>
             <motion.div

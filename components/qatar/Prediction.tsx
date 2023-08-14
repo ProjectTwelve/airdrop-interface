@@ -50,7 +50,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
             <div>
               <p>Submitted</p>
               <p>
-                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                <a className="text-blue" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
                 </a>
               </p>
@@ -111,7 +111,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
             <p className="mt-7 text-center text-lg font-medium leading-5">{answer?.name}</p>
           </div>
         ) : (
-          <div className="flex h-full w-full animate-omg flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
+          <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
             <p className="text-[70px] leading-[84px]">?</p>
             <p className="text-sm">Click to Answer</p>
           </div>

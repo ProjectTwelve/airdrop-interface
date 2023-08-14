@@ -32,7 +32,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       <Back onClick={() => setWalletType?.(WalletType.CONNECT)} />
       <h4 className="text-center text-xl font-medium">Download & Setup</h4>
       <div
-        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-p12-sub py-2 px-4"
+        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-gray py-2 px-4"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-center">
@@ -52,7 +52,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       </div>
       <div className="h-[80px]">
         <motion.div
-          className="overflow-hidden border-b border-p12-sub"
+          className="overflow-hidden border-b border-gray"
           initial="close"
           animate={isOpen ? 'open' : 'close'}
           variants={{
@@ -71,7 +71,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
                 }}
               >
                 <Image src={item.icon} width={20} height={20} alt="icon" />
-                <span className="pl-1 text-xs text-p12-link">{item.name}</span>
+                <span className="pl-1 text-xs text-blue">{item.name}</span>
               </div>
             ))}
           </div>
@@ -79,8 +79,8 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       </div>
       <div>
         <p className="text-sm">What is a wallet for?</p>
-        <p className="text-sm leading-6 text-p12-sub">· Storing digital assets such as P12 NFTs, P12 tokens, ETH and more.</p>
-        <p className="text-sm leading-6 text-p12-sub">· Sending Blockchain transactions.</p>
+        <p className="text-sm leading-6 text-gray">· Storing digital assets such as P12 NFTs, P12 tokens, ETH and more.</p>
+        <p className="text-sm leading-6 text-gray">· Sending Blockchain transactions.</p>
       </div>
     </div>
   );

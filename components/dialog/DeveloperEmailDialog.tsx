@@ -61,14 +61,14 @@ export default function DeveloperEmailDialog() {
       render={() => (
         <div>
           <div className="flex h-[28px] items-center justify-center text-xl">Winner Winner, Chicken Dinner</div>
-          <div className="my-[28px] h-[1px] bg-p12-line"></div>
+          <div className="my-[28px] h-[1px] bg-gray-600"></div>
           <div className="max-w-[420px]">
             <p className="text-sm">
               P12 is a GameFi ecosystem with sustainable economylies. We will launch our own editor soon.
             </p>
             <p className="mt-[30px] text-sm">Enter your email address and tune in for more give aways for game developers! </p>
           </div>
-          <div className="mt-3 rounded-2xl bg-p12-black/60 px-5 py-6">
+          <div className="mt-3 rounded-2xl bg-gray-800/60 px-5 py-6">
             <input
               value={value}
               onChange={(e) => {
@@ -79,7 +79,7 @@ export default function DeveloperEmailDialog() {
               placeholder="Please enter email address"
             />
           </div>
-          <div className="h-8 pt-1 pl-4 text-xs text-p12-error">{error}</div>
+          <div className="h-8 pt-1 pl-4 text-xs text-red">{error}</div>
           <div className="flex justify-end">
             <Button
               disabled={!value}

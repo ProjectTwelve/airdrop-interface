@@ -127,28 +127,28 @@ export default function MulticastMask() {
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.5 } }}
-                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                  className="text-xl leading-[36px] text-yellow xs:text-base"
                 >
                   01. This is your Multicast Votes need Activate.
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1 } }}
-                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                  className="text-xl leading-[36px] text-yellow xs:text-base"
                 >
                   02. Invite friends to get more Votes!
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 1.5 } }}
-                  className="text-xl leading-[36px] text-p12-gold xs:text-base"
+                  className="text-xl leading-[36px] text-yellow xs:text-base"
                 >
                   03. More Votes, more bounties.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: 2 } }}
-                  className="dota__button dota__gold mt-12 h-[50px] w-[320px] text-center text-xl leading-[50px] md:mt-4 xs:mx-auto"
+                  className="dota__button dota__yellow mt-12 h-[50px] w-[320px] text-center text-xl leading-[50px] md:mt-4 xs:mx-auto"
                   onClick={onSignBindClick}
                 >
                   Click to Activate

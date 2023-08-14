@@ -28,7 +28,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
   return (
     <FloatingPortal>
       {open && (
-        <FloatingOverlay lockScroll className="z-30 grid place-items-center bg-p12-dialog backdrop-blur-lg">
+        <FloatingOverlay lockScroll className="z-30 grid place-items-center bg-gray-900/60 backdrop-blur-lg">
           <div className="relative">
             <motion.div
               ref={ref}

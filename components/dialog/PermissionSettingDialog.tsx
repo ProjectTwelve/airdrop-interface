@@ -30,7 +30,7 @@ export default function PermissionSettingDialog() {
         <div className="w-full max-w-[760px]">
           <div className="flex h-[28px] items-center justify-center text-xl">Permission Setting</div>
           <div className="mt-8 sm:mt-4">
-            <div className="rounded-lg bg-p12-error/20 px-4 py-2 text-sm text-p12-error sm:p-2">
+            <div className="rounded-lg bg-red/20 px-4 py-2 text-sm text-red sm:p-2">
               We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
               including secondary options. You can turn off after the airdrop!
             </div>

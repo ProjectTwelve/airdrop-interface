@@ -105,7 +105,7 @@ function Verify() {
 
   return (
     <div className="px-8 pt-12 md:px-4 md:pt-6">
-      <div className="grid grid-cols-2 gap-[60px] border-b border-p12-line pb-12 md:grid-cols-1">
+      <div className="grid grid-cols-2 gap-[60px] border-b border-gray-600 pb-12 md:grid-cols-1">
         <div className="w-full">
           <h2 className="text-[30px] font-medium">Step One: Add Steam games</h2>
           <p className="">you can add 3 games at once</p>
@@ -149,7 +149,7 @@ function Verify() {
             <h3 className="text-xl font-medium">
               YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-p12-black/80 p-6 pb-16">
+            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-gray-800/80 p-6 pb-16">
               {isMounted && address ? signature : 'Please connect your wallet first.'}
               <div className="absolute right-5 bottom-5">
                 {isMounted && address ? (
@@ -177,7 +177,7 @@ function Verify() {
       </div>
       <div className="flex items-center justify-between py-8 md:flex-col">
         <div className="text-[18px] md:mb-4">
-          Selected <span className="text-p12-success">{submittedSteamApps.length}</span>{' '}
+          Selected <span className="text-green">{submittedSteamApps.length}</span>{' '}
           {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify
         </div>
         <Button

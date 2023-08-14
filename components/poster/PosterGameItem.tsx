@@ -27,7 +27,7 @@ export default function PosterGameItem({ data }: { data?: GamerGameInfo }) {
             </div>
             <div className="mt-3 flex h-[32px] w-[400px] flex-wrap overflow-hidden">
               {data.genres?.map((genre, index) => (
-                <span key={index} className="mr-4 h-full h-[32px] rounded bg-p12-link/20 px-2 leading-4 text-p12-link">
+                <span key={index} className="mr-4 h-full h-[32px] rounded bg-blue/20 px-2 leading-4 text-blue">
                   {genre}
                 </span>
               ))}

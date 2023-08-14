@@ -48,7 +48,7 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
           </div>
         ))}
       </div>
-      <p className="mt-4 w-full text-center text-xs leading-6 text-p12-sub md:hidden">I&apos;ve covered wars, you know</p>
+      <p className="mt-4 w-full text-center text-xs leading-6 text-gray md:hidden">I&apos;ve covered wars, you know</p>
     </div>
   );
 }

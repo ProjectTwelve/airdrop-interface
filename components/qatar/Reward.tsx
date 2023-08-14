@@ -60,7 +60,7 @@ export default function Reward() {
           </p>
           <p className="mt-5 text-xs leading-5">
             Join Discord for more information: &nbsp;
-            <span onClick={onDiscordClick} className="cursor-pointer text-p12-link">
+            <span onClick={onDiscordClick} className="cursor-pointer text-blue">
               https://discord.gg/p12
             </span>
           </p>

@@ -71,10 +71,10 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
           <span className="text-sm">WalletConnect</span>
         </Button>
       </div>
-      <div className="mt-4 px-4 text-xs text-p12-sub">
+      <div className="mt-4 px-4 text-xs text-gray">
         {downloadClick ? 'Please refresh page after installation. Re-install ' : "Don't have one? "}
         <span
-          className="cursor-pointer text-p12-link"
+          className="cursor-pointer text-blue"
           onClick={() => {
             setDownloadClick(true);
             setWalletType?.(WalletType.DOWNLOAD);

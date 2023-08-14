@@ -30,10 +30,10 @@ export default function OMG() {
 
   return (
     <div className="overflow-hidden rounded-lg pb-6 backdrop-blur-lg">
-      <div className="flex items-center justify-between gap-2 bg-omg-mask px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center">
+      <div className="flex items-center justify-between gap-2 bg-card-mask px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center">
         <h2 className="text-[26px] font-medium leading-[30px]">Check Winners of OMG Round 2</h2>
         <p
-          className="mt-1.5 cursor-pointer text-right text-sm font-medium text-p12-link xs:text-center"
+          className="mt-1.5 cursor-pointer text-right text-sm font-medium text-blue xs:text-center"
           onClick={onAnchorClick}
         >
           Back to Round 1&nbsp;

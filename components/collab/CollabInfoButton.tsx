@@ -113,7 +113,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
             <div>
               <p>Join successfully</p>
               <p>
-                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                <a className="text-blue" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
                 </a>
               </p>

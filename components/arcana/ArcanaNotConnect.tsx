@@ -6,7 +6,7 @@ export default function ArcanaNotConnect() {
 
   return (
     <div>
-      <button className="dota__button dota__gold h-[44px] w-[250px]" onClick={() => setConnectOpen(true)}>
+      <button className="dota__button dota__yellow h-[44px] w-[250px]" onClick={() => setConnectOpen(true)}>
         Please connect wallet
       </button>
     </div>

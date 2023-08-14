@@ -22,7 +22,7 @@ export function CollabClaimDialog({ data }: CollabClaimDialogProps) {
             <img src={'/svg/check_success.svg'} className="inline-block" alt="check_success.svg" />
             <span className="ml-2 align-middle text-xl leading-6">Congratulates</span>!
           </h2>
-          <div className="border-t border-p12-line py-9">
+          <div className="border-t border-gray-600 py-9">
             <p className="text-center text-xl font-semibold leading-6 text-[#1EDB8C]">
               Congratulate on becoming our lucky draw winner!
             </p>
