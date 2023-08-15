@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import Back from '../../components/back';
-import { CollabInfoType, CollabShortInfo } from '../../lib/types';
-import CollabInfo from '../../components/collab/CollabInfo';
-import { CollabTimeLime } from '../../components/collab/CollabTimeLime';
-import CollabTasks from '../../components/collab/CollabTasks';
-import { fetchCollabItem, fetchCollabList } from '../../lib/api';
-import CollabReward from '../../components/collab/CollabReward';
-import { useCollabIsClaim, useCollabIsFirstClaim, useCollabTimes } from '../../hooks/collab';
-import { useSetRecoilState } from 'recoil';
-import { collabClaimModalAtom } from '../../store/collab/state';
-import classNames from 'classnames';
-import { CollabClaimDialog } from '../../components/dialog/CollabClaimDialog';
 import Head from 'next/head';
+import classNames from 'classnames';
+import Back from '@/components/back';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import CollabInfo from '@/components/collab/CollabInfo';
+import CollabTasks from '@/components/collab/CollabTasks';
+import CollabReward from '@/components/collab/CollabReward';
+import { collabClaimModalAtom } from '@/store/collab/state';
+import { fetchCollabItem, fetchCollabList } from '@/lib/api';
+import { CollabInfoType, CollabShortInfo } from '@/lib/types';
+import { CollabTimeLime } from '@/components/collab/CollabTimeLime';
+import { CollabClaimDialog } from '@/components/dialog/CollabClaimDialog';
+import { useCollabIsClaim, useCollabIsFirstClaim, useCollabTimes } from '@/hooks/collab';
 
 export default function Collab({ data }: { data: CollabInfoType }) {
   const router = useRouter();
@@ -57,12 +57,12 @@ export default function Collab({ data }: { data: CollabInfoType }) {
 }
 
 export async function getStaticPaths() {
+  if (process.env.NODE_ENV === 'development') {
+    return { paths: [], fallback: 'blocking' };
+  }
   const { data } = await fetchCollabList();
-  const excludeCodes = ['qatar2022'];
   return {
-    paths: data
-      .filter((item: CollabShortInfo) => !excludeCodes.includes(item.collabCode))
-      .map((item: CollabShortInfo) => ({ params: { id: item.collabCode } })),
+    paths: data.slice(0, 4).map((item: CollabShortInfo) => ({ params: { id: item.collabCode } })),
     fallback: 'blocking',
   };
 }

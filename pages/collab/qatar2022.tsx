@@ -20,7 +20,7 @@ export default function Qatar2022() {
     select: (data) => (data.code === 200 ? data.data : undefined),
   });
   const onMoreClick = () => {
-    ReactGA.event({ category: 'qatar', action: 'Click', label: 'more' });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: 'more' });
     openLink('https://dappbay.bnbchain.org/campaign/football-fiesta');
   };
 

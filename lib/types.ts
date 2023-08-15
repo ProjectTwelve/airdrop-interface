@@ -53,7 +53,8 @@ export type DevInvitationInfo = {
   wallet_address: string;
   createdAt: string;
   header_image: string;
-  release_date?: { data: string };
+  name: string;
+  release_date?: { date: string };
   nft_level: DEV_NFT_LEVEL;
 };
 export type GamerInvitationInfo = {
@@ -396,7 +397,7 @@ export type ArcanaInviteesVote = {
   createdAt: number;
   steamId: string;
   walletAddress: string;
-  nftLevel: number;
+  nftLevel: GAMER_NFT_LEVEL;
   nftClaim: number;
   personName: string;
   avatar: string;

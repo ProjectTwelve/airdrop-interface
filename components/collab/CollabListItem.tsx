@@ -53,7 +53,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
   return (
     <div
       onClick={() => {
-        ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
+        ReactGA.event({ action: 'Collab-List', category: 'Click', label: collabCode });
         if (openLinkCollabCode.includes(collabCode)) {
           openLink(projectWebsite ?? '');
         } else {

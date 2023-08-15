@@ -1,4 +1,4 @@
-import { Autoplay } from 'swiper';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useArcanaRecentInvitation } from '../../hooks/arcana';
 import { RecentInvitationItem } from '../../lib/types';

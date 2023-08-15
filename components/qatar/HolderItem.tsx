@@ -13,7 +13,7 @@ type HolderItemProps = {
 
 export default function HolderItem({ title, asset, subtitle, link, isHolder, type }: HolderItemProps) {
   const onClaim = () => {
-    ReactGA.event({ category: 'qatar', action: 'Click', label: type });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: type });
     openLink(link);
   };
 

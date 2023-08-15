@@ -80,9 +80,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const handleJoin = useCallback(() => {
     if (isJoined) return;
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'join' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'join' });
     if (!address) {
-      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'connect' });
+      ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'connect' });
       setConnectOpen(true);
       return;
     }
@@ -91,9 +91,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const handleChainJoin = useCallback(async () => {
     if (isChainJoined || !collabContract) return;
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-join' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'chain-join' });
     if (!address) {
-      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-connect' });
+      ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'chain-connect' });
       setConnectOpen(true);
       return;
     }
@@ -169,7 +169,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   }, [address, collabCode, collabContract]);
 
   const handleClaim = useCallback(() => {
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'claim' });
     setClaimModal(true);
   }, [setClaimModal]);
 

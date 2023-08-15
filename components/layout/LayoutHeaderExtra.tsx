@@ -51,7 +51,7 @@ function LayoutHeaderExtra() {
               <Button
                 type="bordered"
                 onClick={() => {
-                  ReactGA.event({ category: 'Invite', action: 'Click', label: 'Header' });
+                  ReactGA.event({ action: 'Invite', category: 'Click', label: 'Header' });
                   setInviteOpen(true);
                 }}
               >

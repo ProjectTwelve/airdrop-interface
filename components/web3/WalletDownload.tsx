@@ -66,7 +66,7 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
                 className="flex cursor-pointer items-center justify-center"
                 key={item.name}
                 onClick={() => {
-                  ReactGA.event({ category: 'Download', action: 'Click', label: item.name });
+                  ReactGA.event({ action: 'Download', category: 'Click', label: item.name });
                   openLink(item.url);
                 }}
               >

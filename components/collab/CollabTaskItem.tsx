@@ -44,8 +44,8 @@ export default function CollabTaskItem({
           onClick={() =>
             gaKey
               ? ReactGA.event({
-                  category: 'Collab-Item',
-                  action: 'Click',
+                  action: 'Collab-Item',
+                  category: 'Click',
                   label: gaKey,
                 })
               : null

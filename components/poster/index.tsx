@@ -21,7 +21,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
 
   useEffect(() => {
     if (open) {
-      ReactGA.event({ category: 'Poster', action: 'Click', label: 'show' });
+      ReactGA.event({ action: 'Poster', category: 'Click', label: 'show' });
     }
   }, [open]);
 
@@ -59,7 +59,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
                   type="gradient"
                   style={{ width: 278 }}
                   onClick={() => {
-                    ReactGA.event({ category: 'Poster', action: 'Click', label: 'save' });
+                    ReactGA.event({ action: 'Poster', category: 'Click', label: 'save' });
                     downloadImage(posterCapture);
                   }}
                 >

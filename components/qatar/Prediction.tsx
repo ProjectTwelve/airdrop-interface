@@ -40,7 +40,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
     if (!prediction || !chain || !address || !signature || !collabContract || isLoading || isSubmitted || !deadline) return;
     try {
       setIsLoading(true);
-      ReactGA.event({ category: 'qatar', action: 'Click', label: 'quizsub' });
+      ReactGA.event({ action: 'qatar', category: 'Click', label: 'quizsub' });
       // @ts-ignore
       const transactionHash = await collabContract.write.saveStamp(['qatar2022', prediction.ipfs, deadline, signature]);
       toast.success(

@@ -28,7 +28,7 @@ export default function Home() {
         <div
           className="home__card bg-white/10 py-7 hover:bg-[#FFFFFF26] xs:py-4"
           onClick={() => {
-            ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
+            ReactGA.event({ action: 'Invite', category: 'Click', label: 'Home' });
             setOpen(true);
           }}
         >

@@ -15,7 +15,7 @@ export default function StatusBar({ data }: { data?: ArcanaVotes }) {
   const [easterEggShow, setEasterEggShow] = useState<boolean>(false);
 
   const onLevelClick = () => {
-    ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Easter-Egg' });
+    ReactGA.event({ action: 'Arcana-Info', category: 'Click', label: 'Easter-Egg' });
     if (level === 30) return;
     setEasterEggShow(true);
   };

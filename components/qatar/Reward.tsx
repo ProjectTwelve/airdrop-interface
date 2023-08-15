@@ -10,7 +10,7 @@ export default function Reward() {
   const [isRunning, setIsRunning] = useState(false);
   const [diffTime, setDiffTime] = useState<string>('');
   const onDiscordClick = () => {
-    ReactGA.event({ category: 'qatar', action: 'Click', label: 'dcinvite' });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: 'dcinvite' });
     openLink('https://discord.gg/p12');
   };
 
@@ -22,7 +22,7 @@ export default function Reward() {
 
   const onClaim = () => {
     if (isRunning) return;
-    ReactGA.event({ category: 'qatar', action: 'Click', label: 'claim' });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: 'claim' });
     openLink('https://galxe.com/P12/campaign/GCLG1UwRhx');
   };
 

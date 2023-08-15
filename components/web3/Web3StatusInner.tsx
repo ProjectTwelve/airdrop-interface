@@ -6,14 +6,12 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 import { Tooltip } from '../tooltip';
 import { shortenAddress } from '../../utils';
-import { useSIDName } from '../../hooks/useSIDName';
 import { isBABTHolderAtom } from '../../store/web3/state';
 import { useBABTBalanceOf } from '../../hooks/useContract';
 import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '../../store/gamer/state';
 
 function Web3StatusInner() {
   const { address } = useAccount();
-  const { SIDName } = useSIDName({ address });
   const { data: balance } = useBABTBalanceOf({ address });
   const gamerEmailInfo = useRecoilValue(gamerEmailInfoAtom);
   const setIsBABTHolder = useSetRecoilState(isBABTHolderAtom);
@@ -24,7 +22,7 @@ function Web3StatusInner() {
   useEffect(() => {
     if (!address) return;
     if (isBABTHolder) {
-      ReactGA.event({ category: 'BABT', action: 'Show', label: address });
+      ReactGA.event({ action: 'BABT', category: 'Show', label: address });
     }
     setIsBABTHolder(isBABTHolder);
   }, [isBABTHolder, setIsBABTHolder, address]);
@@ -56,14 +54,10 @@ function Web3StatusInner() {
               )
             }
           >
-            <p className={classNames('cursor-pointer', isBABTHolder && 'font-medium text-black')}>
-              {SIDName ?? shortenAddress(address)}
-            </p>
+            <p className={classNames('cursor-pointer', isBABTHolder && 'font-medium text-black')}>{shortenAddress(address)}</p>
           </Tooltip>
         ) : (
-          <p className={classNames('cursor-pointer', isBABTHolder && 'font-medium text-black')}>
-            {SIDName ?? shortenAddress(address)}
-          </p>
+          <p className={classNames('cursor-pointer', isBABTHolder && 'font-medium text-black')}>{shortenAddress(address)}</p>
         )}
         <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient sm:hidden">
           {isBABTHolder ? (
