@@ -8,13 +8,10 @@
     --to-45: #FF9E7673;
     --mask-40: #C859FF66;
     --omg-count: url('/img/theme/01/omg_count_bg.webp');
-    --participant-1: url('/img/arcana/participant_purple_1.webp');
-    --participant-2: url('/img/arcana/participant_purple_2.webp');
     --logo: url('/img/theme/01/logo.svg');
     --select: url('/img/theme/01/select.svg');
     --profile-info: url('/img/theme/01/profile_info.webp');
     --collab-info: url('/img/theme/01/collab_info.webp');
-    --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_purple.png');
 }
 
 .p12-theme-02 {
@@ -27,13 +24,10 @@
     --to-45: #A3D36573;
     --mask-40: #1EDB8C66;
     --omg-count: url('/img/theme/02/omg_count_bg.webp');
-    --participant-1: url('/img/arcana/participant_green_1.webp');
-    --participant-2: url('/img/arcana/participant_green_2.webp');
     --logo: url('/img/theme/02/logo.svg');
     --select: url('/img/theme/02/select.svg');
     --profile-info: url('/img/theme/02/profile_info.webp');
     --collab-info: url('/img/theme/02/collab_info.webp');
-    --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_green.png');
 }
 
 .p12-theme-03 {
@@ -46,13 +40,10 @@
     --to-45: #FFB87673;
     --mask-40: #FFAA2C66;
     --omg-count: url('/img/theme/03/omg_count_bg.webp');
-    --participant-1: url('/img/arcana/participant_orange_1.webp');
-    --participant-2: url('/img/arcana/participant_orange_2.webp');
     --logo: url('/img/theme/03/logo.svg');
     --select: url('/img/theme/03/select.svg');
     --profile-info: url('/img/theme/03/profile_info.webp');
     --collab-info: url('/img/theme/03/collab_info.webp');
-    --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_orange.png');
 }
 
 .p12-theme-04 {
@@ -65,11 +56,8 @@
     --to-45: #3592FF73;
     --mask-40: #43BBFF66;
     --omg-count: url('/img/theme/04/omg_count_bg.webp');
-    --participant-1: url('/img/arcana/participant_blue_1.webp');
-    --participant-2: url('/img/arcana/participant_blue_2.webp');
     --logo: url('/img/theme/04/logo.svg');
     --select: url('/img/theme/04/select.svg');
     --profile-info: url('/img/theme/04/profile_info.webp');
     --collab-info: url('/img/theme/04/collab_info.webp');
-    --round-one: url('https://cdn1.p12.games/airdrop/img/first_half_blue.png');
 }

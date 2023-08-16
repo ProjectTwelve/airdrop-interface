@@ -3,7 +3,7 @@ import Back from '../back';
 import Image from 'next/image';
 import { WalletType } from './WalletPopover';
 import { motion } from 'framer-motion';
-import { openLink } from '../../utils';
+import { openLink } from '@/utils';
 import ReactGA from 'react-ga4';
 
 type WalletDownloadProps = {
@@ -32,11 +32,11 @@ function WalletDownload({ setWalletType }: WalletDownloadProps) {
       <Back onClick={() => setWalletType?.(WalletType.CONNECT)} />
       <h4 className="text-center text-xl font-medium">Download & Setup</h4>
       <div
-        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-gray py-2 px-4"
+        className="mt-6 flex cursor-pointer select-none items-center justify-between border-y border-gray px-4 py-2"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center justify-center">
-          <img className="mr-2 h-[30px] w-[30px] md:hidden" src="/img/metamask@2x.png" alt="metamask" />
+          <img className="mr-2 h-7.5 w-7.5 md:hidden" src="/img/metamask@2x.png" alt="metamask" />
           <span className="text-sm">METAMASK</span>
         </div>
         <div className="flex items-center justify-center">

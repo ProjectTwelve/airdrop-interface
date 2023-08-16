@@ -20,7 +20,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
         className="flex h-full flex-col rounded-lg backdrop-blur-lg"
         style={{ background: 'linear-gradient(to bottom, #3D444B80 0%, #23262C80 100%)' }}
       >
-        <div className="border-b-none flex items-center justify-items-start rounded-t-lg border-2 border-b-0 border-[#6F778480] bg-gradient-prediction p-4 backdrop-blur-lg">
+        <div className="border-b-none flex items-center justify-items-start rounded-t-lg border-2 border-b-0 border-gray-550/50 bg-gradient-prediction p-4 backdrop-blur-lg">
           <div className="h-[36px] w-[36px] flex-none rounded-full">
             {data && <img src={data.sponsorLogo} className="h-full w-full object-cover" alt="p12" />}
           </div>
@@ -32,7 +32,7 @@ export default function PredictionItem({ data }: PredictionItemProps) {
           </div>
         </div>
         <div className="h-0.5 bg-p12-gradient"></div>
-        <div className="relative grid flex-1 grid-cols-1 justify-items-center pt-6 pb-5">
+        <div className="relative grid flex-1 grid-cols-1 justify-items-center pb-5 pt-6">
           <h2 className="font-medium">{data?.predictionTitle}</h2>
           <p className="px-2 text-xs">{data?.predictionFull}</p>
           <div className="mt-4">
@@ -48,12 +48,12 @@ export default function PredictionItem({ data }: PredictionItemProps) {
                 </div>
                 <div className="relative mt-2 h-[140px] w-[140px] overflow-hidden rounded-lg 2xl:h-[158px] 2xl:w-[158px]">
                   {isHit ? (
-                    <img className="absolute top-1.5 left-1.5 z-20" src="/svg/arcana_hit.svg" alt="arcana_hit" />
+                    <img className="absolute left-1.5 top-1.5 z-20" src="/svg/arcana_hit.svg" alt="arcana_hit" />
                   ) : (
-                    <img className="absolute top-1.5 left-1.5 z-20" src="/svg/arcana_pity.svg" alt="arcana_pity" />
+                    <img className="absolute left-1.5 top-1.5 z-20" src="/svg/arcana_pity.svg" alt="arcana_pity" />
                   )}
                   <div
-                    className={classNames('absolute top-0 left-0 z-10 h-full w-full', isHit ? 'arcana__hit' : 'arcana__pity')}
+                    className={classNames('absolute left-0 top-0 z-10 h-full w-full', isHit ? 'arcana__hit' : 'arcana__pity')}
                   />
                   {answer ? (
                     <div className="flex h-full w-full items-center justify-center text-[82px] font-medium">

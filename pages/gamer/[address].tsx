@@ -143,7 +143,7 @@ export default function GamerProfile() {
                 </p>
               </div>
               <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
-                <h2 className="mt-8 text-[30px] font-medium md:mt-2">
+                <h2 className="mt-8 text-3xl font-medium md:mt-2">
                   {gamerInfo?.credential ? GAMER_BADGES[gamerInfo.nft_level!].title : 'P12 | Project Twelve | Genesis'}
                 </h2>
                 <h3 className="mt-9 text-xl font-medium md:mt-4">Genesis Soul-Bound NFT</h3>

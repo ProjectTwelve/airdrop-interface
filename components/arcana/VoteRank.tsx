@@ -45,7 +45,7 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
 
   return (
     <div
-      className="omg__box h-[102px] min-w-[195px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg"
+      className="omg__box h-[102px] min-w-[195px] cursor-pointer rounded-xl border border-gray-550/50 backdrop-blur-lg"
       onClick={onOpenPage}
     >
       <div className="flex items-center pl-6 pt-3 pb-4 md:justify-center">
@@ -66,7 +66,7 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
         <p className="flex-1 text-center text-sm text-yellow">
           {data?.referralCount} {data && data.referralCount > 1 ? 'Invites' : 'Invite'}
         </p>
-        <p className="h-[16px] w-[1px] bg-[#6F7784]/50"></p>
+        <p className="h-[16px] w-[1px] bg-gray-550/50"></p>
         <p className="flex-1 text-center text-sm text-yellow">
           {data?.votesTotalCurrent} {data && data.votesTotalCurrent > 1 ? 'Votes' : 'Vote'}
         </p>

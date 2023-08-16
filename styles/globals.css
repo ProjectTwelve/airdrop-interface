@@ -23,7 +23,6 @@
 
     body {
         background: #000;
-        font-family: 'Poppins', sans-serif;
         min-height: 100vh;
     }
 
@@ -156,21 +155,6 @@
         border: 1px solid #E4E4E426;
     }
 
-    .round-box {
-        @apply h-[146px] w-full max-w-[701px] bg-cover bg-no-repeat p-8 md:h-auto;
-        @apply md:p-4 md:border md:border-[#616985] md:rounded-2xl md:backdrop-blur md:bg-gradient-to-b md:from-fuchsia-700 sm:px-2;
-    }
-
-    .round-box__one {
-        @apply relative top-0 left-0 bg-round-one;
-        @apply md:bg-gradient-transparent;
-    }
-
-    .round-box__two {
-        @apply absolute top-0 right-0 bg-round-two;
-        @apply md:bg-none md:relative md:mt-4;
-    }
-
     .poster__button {
         position: relative;
         background: linear-gradient(to right, #000000, #000000), linear-gradient(to right, var(--from), var(--to));
@@ -178,11 +162,6 @@
         padding: 2px;
         border-radius: 9999px;
         overflow: hidden;
-    }
-
-    .home__card {
-        @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
-        @apply flex flex-col items-center justify-center;
     }
 
     .copy__btn {
@@ -212,6 +191,26 @@
 }
 
 @layer utilities {
+    .text-link {
+        @apply text-blue cursor-pointer hover:underline;
+    }
+
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
+
+    .flex-center-x {
+        @apply flex justify-center items-center flex-row;
+    }
+
+    .flex-center-y {
+        @apply flex justify-center items-center flex-col;
+    }
+
+    .text-gradient-yellow {
+        @apply bg-gradient-yellow bg-clip-text text-transparent;
+    }
+
     .bg-gradient-item {
         background: linear-gradient(to bottom, #4E56917F 0%, #3B41677F 10%, #3C41647F 16%, #3C41647F 100%);
         backdrop-filter: blur(16px);
@@ -305,12 +304,4 @@
     .activity {
         @apply select-none cursor-pointer transition hover:scale-110 active:scale-90;
     }
-}
-
-.e-embed-frame {
-    margin-bottom: 0 !important;
-}
-
-.e-widget-wrapper {
-    position: relative;
 }

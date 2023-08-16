@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
+import { openLink } from '@/utils';
 import { useRouter } from 'next/router';
+import Button from '@/components/button';
+import { STORAGE_KEY } from '@/constants';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import Button from '../button';
-import { openLink } from '../../utils';
-import { invitationCountSelector, inviteModalAtom } from '../../store/invite/state';
-import { roadmapModalAtom } from '../../store/roadmap/state';
-import { getLocalStorage, setLocalStorage } from '../../utils/storage';
-import { STORAGE_KEY } from '../../constants';
+import { getLocalStorage, setLocalStorage } from '@/utils/storage';
+import { invitationCountSelector, inviteModalAtom } from '@/store/invite/state';
 
 function LayoutHeaderExtra() {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const setRoadmapOpen = useSetRecoilState(roadmapModalAtom);
   const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
   const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022'];
 
@@ -39,12 +37,6 @@ function LayoutHeaderExtra() {
               <div className="flex items-center justify-center text-sm">
                 <img src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
                 &nbsp;Readme
-              </div>
-            </Button>
-            <Button type="bordered" className="mr-3 lg:hidden" onClick={() => setRoadmapOpen(true)}>
-              <div className="flex items-center justify-center text-sm">
-                <img src="/svg/roadmap.svg" width={24} height={24} alt="roadmap" />
-                &nbsp;Airdrop roadmap
               </div>
             </Button>
             {router.pathname !== '/gamer/[address]' && (

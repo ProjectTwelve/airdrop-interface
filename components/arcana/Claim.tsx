@@ -23,7 +23,7 @@ export default function Claim({ data }: { data?: ArcanaVotes }) {
           <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-yellow">
             {data?.userVotes.solvedPredictions || 0}
           </div>
-          <div className="h-[28px] w-[1px] bg-[#6F7784]/50" />
+          <div className="h-[28px] w-[1px] bg-gray-550/50" />
           <div className="mt-5 flex-1 text-center text-[36px] font-semibold leading-[36px] text-yellow">
             ${data?.userVotes.totalReward || 0}
           </div>

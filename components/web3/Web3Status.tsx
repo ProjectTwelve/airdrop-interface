@@ -1,25 +1,49 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import React, { useRef } from 'react';
 import { mainnet } from 'wagmi/chains';
-import Button from '../button';
-import Web3StatusInner from './Web3StatusInner';
-import Popover from '../popover';
-import WalletPopover from './WalletPopover';
-import DeveloperStatus from './DeveloperStatus';
 import GamerStatus from './GamerStatus';
-import { isConnectPopoverOpen } from '../../store/web3/state';
-import PosterButton from '../poster/PosterButton';
-import { posterCaptureAtom } from '../../store/poster/state';
-import { useIsMounted } from '../../hooks/useIsMounted';
+import { Platform } from '@/constants';
+import { useRouter } from 'next/router';
+import Button from '@/components/button';
+import Popover from '@/components/popover';
+import { watchAccount } from '@wagmi/core';
+import WalletPopover from './WalletPopover';
+import { AnimatePresence } from 'framer-motion';
+import DeveloperStatus from './DeveloperStatus';
+import Web3StatusInner from './Web3StatusInner';
+import { useMutationLogin } from '@/hooks/user';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { getAccessToken } from '@/utils/authorization';
+import { posterCaptureAtom } from '@/store/poster/state';
+import { isConnectPopoverOpen } from '@/store/web3/state';
+import PosterButton from '@/components/poster/PosterButton';
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import { useSignInWithEthereum } from '@/hooks/useSignInWithEthereum';
 
 function Web3Status() {
   const router = useRouter();
   const { chain } = useNetwork();
   const isMounted = useIsMounted();
-  const { address } = useAccount();
+  const { mutate } = useMutationLogin();
+  const unwatchAccount = useRef<() => void>();
+  const { signInWithEthereum } = useSignInWithEthereum({
+    onSuccess: (args) => mutate({ ...args, platform: Platform.USER }),
+  });
+  const { isConnected } = useAccount({
+    onConnect({ address, isReconnected }) {
+      unwatchAccount.current = watchAccount(({ isConnected, address }) => {
+        const accessToken = getAccessToken({ address });
+        if (address && isConnected && !accessToken) {
+          signInWithEthereum(address).then();
+        }
+      });
+      if (isReconnected || !address) return;
+      signInWithEthereum(address).then();
+    },
+    onDisconnect() {
+      unwatchAccount.current?.();
+    },
+  });
   const { switchNetwork } = useSwitchNetwork({ chainId: mainnet.id });
 
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
@@ -31,7 +55,7 @@ function Web3Status() {
     return posterCapture ? <PosterButton /> : null;
   }
 
-  if (address) {
+  if (isConnected) {
     if (chain?.unsupported) {
       return (
         <Button type="error" onClick={() => switchNetwork?.()}>

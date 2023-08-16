@@ -2,10 +2,10 @@ import React from 'react';
 import { useConnect } from 'wagmi';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
-import { isMobile } from 'react-device-detect';
-import Button from '../button';
+import Button from '@/components/button';
 import { WalletType } from './WalletPopover';
-import { downloadClickAtom } from '../../store/web3/state';
+import { isMobile } from 'react-device-detect';
+import { downloadClickAtom } from '@/store/web3/state';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 
 type WalletConnectProps = {

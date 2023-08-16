@@ -2,11 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import Pagination from 'rc-pagination';
-import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '../../hooks/ranking';
+import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
-import { getCountMemo } from '../../utils';
-import { GAMER_NFT_LEVEL } from '../../constants';
+import { getCountMemo } from '@/utils';
+import { GAMER_NFT_LEVEL } from '@/constants';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -43,7 +43,7 @@ export default function GamerRanking() {
       <div className="grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-2">
         <div>
           <h3 className="text-sm font-medium leading-5">Verified Gamers</h3>
-          <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] py-2 leading-[90px] 2xl:flex 2xl:items-center">
+          <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] leading-[90px] 2xl:flex 2xl:items-center">
             <div className="h-[40px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
               <p className="h-[14px] text-center text-xs">Total</p>
               <p className="mt-1 text-center font-ddin text-xl leading-5">
@@ -67,7 +67,7 @@ export default function GamerRanking() {
         <div>
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
           <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
-            <div className="flex h-full w-full flex-wrap py-2 px-4 px-2">
+            <div className="flex h-full w-full flex-wrap px-2 px-4 py-2">
               <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
                 {gamerRankData?.avatar_full && (
                   <div className="mr-3 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">

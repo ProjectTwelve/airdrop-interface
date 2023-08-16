@@ -1,8 +1,8 @@
-import { PredictionAnswer } from '../store/arcana/state';
-import { PREDICTION_TYPE } from '../components/arcana/PredictionItemDialog';
-import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
-import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
-import { Hash } from "viem";
+import { Hash } from 'viem';
+import { PredictionAnswer } from '@/store/arcana/state';
+import { MEME_ICON } from '@/components/arcana/StatusBar/SwiperCard';
+import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '@/constants';
+import { PREDICTION_TYPE } from '@/components/arcana/PredictionItemDialog';
 
 export type Response<T> = {
   status: string;
