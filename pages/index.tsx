@@ -2,7 +2,7 @@ import React from 'react';
 import { openLink } from '@/utils';
 import GamerRanking from '@/components/ranking/Gamer';
 import CollabSwiper from '@/components/collab/CollabSwiper';
-import PowerLevelBanner from '@/components/powerLevel/PowerLevelBanner';
+import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 
 export default function Home() {
   return (

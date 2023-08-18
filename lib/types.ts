@@ -43,7 +43,7 @@ export type AccountInfo = {
   header_image: string;
   release_date?: ReleaseDate;
   nft_claim: NFT_CLAIM;
-  nft_id: number | null;
+  nft_id: string | null;
   appid: number;
   nft_level: DEV_NFT_LEVEL;
   credential: number;
@@ -170,7 +170,7 @@ export type GamerInfoData = {
   value?: number;
   nft_claim?: NFT_CLAIM;
   nft_level?: GAMER_NFT_LEVEL;
-  nft_id?: number;
+  nft_id?: string;
   level?: number;
   tokens?: number;
   friends_count?: number;
