@@ -9,7 +9,7 @@ export const initialGame = {
   total_reviews: 0,
   header_image: '',
   nft_claim: 0,
-  nft_id: null,
+  nft_id: undefined,
   appid: 0,
   nft_level: 0,
   credential: 0,
