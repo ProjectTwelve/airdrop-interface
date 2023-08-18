@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Tag from '../tag';
 import { useQuery } from '@tanstack/react-query';
-import { fetchDeveloperInfo } from '../../lib/api';
+import { fetchDeveloperInfo } from '@/lib/api';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import { claimGroupSelector, developerGameAtom } from '../../store/developer/state';
-import { roadmapModalAtom } from '../../store/roadmap/state';
+import { claimGroupSelector, developerGameAtom } from '@/store/developer/state';
+import { roadmapModalAtom } from '@/store/roadmap/state';
 import { useAccount } from 'wagmi';
-import { NFT_CLAIM } from '../../constants';
+import { NFT_CLAIM } from '@/constants';
 
 function DeveloperStatus() {
   const { address } = useAccount();

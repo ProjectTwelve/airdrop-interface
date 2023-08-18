@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 type TagProps = {
   value?: string;
-  type: 'red' | 'orange' | 'purple' | 'blue' | 'green' | 'greenLight' | 'white';
+  type: 'red' | 'orange' | 'purple' | 'blue' | 'green' | 'greenLight' | 'white' | string;
   size?: 'small' | 'medium' | 'large';
 };
 

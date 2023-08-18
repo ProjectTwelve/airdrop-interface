@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Dispatch, useEffect, useState } from 'react';
-import { AccountInfo } from '../lib/types';
+import { AccountInfo } from '@/lib/types';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { developerGameAtom, verifiedSteamAppAtom } from '../store/developer/state';
+import { developerGameAtom, verifiedSteamAppAtom } from '@/store/developer/state';
 
-const initialGame = {
+export const initialGame = {
   name: '',
   total_reviews: 0,
   header_image: '',
