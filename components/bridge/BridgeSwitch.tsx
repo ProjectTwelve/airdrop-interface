@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { BadgeInfo, P12_AMA_OAT_BADGE, P12_COMMUNITY_BADGE } from '../../constants';
 import Button from '../button';
@@ -8,9 +8,14 @@ import { useSetRecoilState } from 'recoil';
 import { polygon } from 'wagmi/chains';
 import classNames from 'classnames';
 import { Tooltip } from '../tooltip';
+import Table from '../table';
+import { createColumnHelper } from '@tanstack/react-table';
+import dayjs from 'dayjs';
 // import { formatEther, parseEther } from 'ethers/lib/utils.js';
 // import { BigNumberish } from '@ethersproject/bignumber';
 // todo change proxy address
+
+const historyColumnHelper = createColumnHelper<any>();
 
 export default function BridgeSwitch() {
   const [selectedBadge, setSelectedBadge] = useState<BadgeInfo | null>(null);
@@ -145,6 +150,39 @@ export default function BridgeSwitch() {
     setBridgeCount(Number(e.target.value));
   };
 
+  const gamerColumns = useMemo(
+    () => [
+      historyColumnHelper.accessor('wallet_address', {
+        header: 'History No.',
+        size: 120,
+        cell: ({ getValue }) => <p className="flex h-full items-center">{getValue()}</p>,
+      }),
+      historyColumnHelper.accessor('createdAt', {
+        header: 'Time',
+        size: 100,
+        cell: ({ getValue }) => <p className="flex h-full items-center">{dayjs(getValue()).format('YYYY/MM/DD')}</p>,
+      }),
+      historyColumnHelper.display({
+        id: 'steam_account',
+        header: 'Bridged',
+        size: 200,
+        cell: ({}) => <div className="flex items-center"></div>,
+      }),
+      historyColumnHelper.display({
+        id: 'amount',
+        header: 'Amount',
+        size: 120,
+        cell: ({ getValue }) => <div className="flex h-full items-center">{getValue()}</div>,
+      }),
+      historyColumnHelper.accessor('tx', {
+        header: 'Bridge tx',
+        size: 100,
+        cell: ({ getValue }) => <div className="flex h-full items-center">{getValue()}</div>,
+      }),
+    ],
+    [],
+  );
+
   return (
     <div className="p-9">
       <div className="flex gap-9">
@@ -200,7 +238,7 @@ export default function BridgeSwitch() {
                         <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                       <img
-                        className="absolute top-[6px] left-[6px] w-[20px]"
+                        className="absolute left-[6px] top-[6px] w-[20px]"
                         src="/img/bridge/p12_chain.svg"
                         alt="chain icon"
                       />
@@ -277,7 +315,7 @@ export default function BridgeSwitch() {
               <div className="mt-12">
                 <div className="flex items-center justify-between">
                   <div className="nft-backdrop-box relative flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
-                    <img className="absolute top-[10px] left-[10px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
+                    <img className="absolute left-[10px] top-[10px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
                     <div className="relative h-[148px] w-[148px]">
                       <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
                     </div>
@@ -287,7 +325,7 @@ export default function BridgeSwitch() {
                     <p>Bridge to</p>
                   </div>
                   <div className="nft-backdrop-box flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-                    <img className="absolute top-[10px] left-[10px] w-6" src="/img/bridge/bnb_chain.svg" alt="bnb chain icon" />
+                    <img className="absolute left-[10px] top-[10px] w-6" src="/img/bridge/bnb_chain.svg" alt="bnb chain icon" />
                     <div className="relative h-[148px] w-[148px]">
                       <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
                     </div>
@@ -352,6 +390,10 @@ export default function BridgeSwitch() {
           )}
         </div>
       </div>
+
+      <div className="mt-[96px] border-b border-gray-600"></div>
+      <div className="mt-6 text-lg font-semibold">Bridge History</div>
+      <Table loading={false} className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={[]} columns={gamerColumns} />
     </div>
   );
 }
