@@ -26,6 +26,8 @@
     "dayjs": "^1.11.9",
     "ethers": "^5.7.2",
     "framer-motion": "^10.15.0",
+    "graphql": "^16.8.0",
+    "graphql-request": "^6.1.0",
     "next": "13.4.12",
     "pretty-ms": "^8.0.0",
     "qrcode": "^1.5.3",

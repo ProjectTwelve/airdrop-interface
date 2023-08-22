@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { BadgeInfo, P12_AMA_OAT_BADGE, P12_COMMUNITY_BADGE } from '../../constants';
+import { BadgeInfo, P12_COMMUNITY_BADGE } from '../../constants';
 import Button from '../button';
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import { isConnectPopoverOpen } from '../../store/web3/state';
@@ -11,6 +11,7 @@ import { Tooltip } from '../tooltip';
 import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
+import { useBadgeNFT } from '@/hooks/bridge';
 // import { formatEther, parseEther } from 'ethers/lib/utils.js';
 // import { BigNumberish } from '@ethersproject/bignumber';
 // todo change proxy address
@@ -22,7 +23,7 @@ export default function BridgeSwitch() {
   const [isApprovedForAll] = useState<boolean>(false); //setIsApprovedForAll
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
-  const [gasEthAmount] = useState<string>('0'); //setGasEthAmount
+  // const [gasEthAmount] = useState<string>('0'); //setGasEthAmount
   const [approveLoading] = useState<boolean>(false); //setApproveLoading
   const [confirmLoading] = useState<boolean>(false); //setConfirmLoading
   const [bridgeCount, setBridgeCount] = useState<number>(1);
@@ -33,6 +34,9 @@ export default function BridgeSwitch() {
   // const bridgeProxyContract = useBridgeProxyTestContract();
   const { chain } = useNetwork();
   const { address } = useAccount();
+
+  const { data } = useBadgeNFT(address);
+  console.log(data);
 
   // useEffect(() => {
   //   if (!NFTContract || !address || chain?.id !== polygon.id) return;
@@ -192,7 +196,7 @@ export default function BridgeSwitch() {
             Inventory
           </div>
           <div className="mt-8">
-            <p className="text-sm font-semibold">Community Badges</p>
+            <p className="text-sm font-semibold leading-[30px]">Community Badges</p>
             <div className="mt-3 flex flex-wrap gap-3">
               {Object.entries(P12_COMMUNITY_BADGE).map(([key, value]) => {
                 return (
@@ -230,7 +234,7 @@ export default function BridgeSwitch() {
                       className={classNames(
                         'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
                         {
-                          'border-[#A5A6AB]': selectedBadge && selectedBadge.rarity === value.rarity,
+                          'border-[#A5A6AB]': selectedBadge && selectedBadge.campaign === value.campaign,
                         },
                       )}
                     >
@@ -249,7 +253,11 @@ export default function BridgeSwitch() {
               })}
             </div>
             <p className="mt-8 text-sm font-semibold">AMA OATs</p>
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="nft-backdrop-box mt-3 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+              <div className="text-xs text-gray-400">To collect more badges & level your game up at</div>
+              <div className="cursor-pointer text-sm font-semibold text-blue"> P12 Discord</div>
+            </div>
+            {/* <div className="mt-6 flex flex-wrap gap-2">
               {Object.entries(P12_AMA_OAT_BADGE).map(([key, value]) => {
                 return (
                   <Tooltip
@@ -285,7 +293,7 @@ export default function BridgeSwitch() {
                       }}
                       className="nft-backdrop-box flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded"
                     >
-                      {selectedBadge && selectedBadge.rarity === value.rarity && (
+                      {selectedBadge && selectedBadge.campaign === value.campaign && (
                         <div className="absolute left-0 top-0 flex h-[108px] w-[108px] items-center justify-center blur-xl">
                           <div className="h-[80px] w-[80px]">
                             <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
@@ -299,7 +307,7 @@ export default function BridgeSwitch() {
                   </Tooltip>
                 );
               })}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="w-2/5">
@@ -309,36 +317,53 @@ export default function BridgeSwitch() {
           </div>
           {selectedBadge ? (
             <div className="mt-8">
-              <div className="text-sm font-semibold">
+              {/* <div className="text-sm font-semibold">
                 {!isApprovedForAll ? 'Approve P12 Bridge contract ' : 'Bridge from Polygon to BNBChain'}
-              </div>
-              <div className="mt-12">
+              </div> */}
+              <div>
                 <div className="flex items-center justify-between">
-                  <div className="nft-backdrop-box relative flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
-                    <img className="absolute left-[10px] top-[10px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
-                    <div className="relative h-[148px] w-[148px]">
-                      <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      From:
+                      <img className="w-[30px]" src="/img/bridge/polygon.svg" alt="polygon icon" />
+                      Polygon
                     </div>
+                    <div className="nft-backdrop-box relative mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
+                      <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
+                      <div className="relative h-[148px] w-[148px]">
+                        <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                      </div>
+                    </div>
+                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.polygonName}</div>
                   </div>
                   <div>
                     <img width={84} src="/img/bridge/bridge_arrow.webp" alt="bridge_arrow" />
                     <p>Bridge to</p>
                   </div>
-                  <div className="nft-backdrop-box flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-                    <img className="absolute left-[10px] top-[10px] w-6" src="/img/bridge/bnb_chain.svg" alt="bnb chain icon" />
-                    <div className="relative h-[148px] w-[148px]">
-                      <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      To:
+                      <img className="w-[30px]" src="/img/bridge/p12_chain.svg" alt="chain icon" />
+                      P12 Chain
                     </div>
+                    <div className="nft-backdrop-box mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+                      <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/p12_chain.svg" alt="p12 chain icon" />
+                      <div className="relative h-[148px] w-[148px]">
+                        <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                      </div>
+                    </div>
+                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.polygonName}</div>
                   </div>
                 </div>
               </div>
-              {isApprovedForAll && (
+              {/* isApprovedForAll */}
+              {true && (
                 <div className="mt-8">
-                  <p className="text-sm font-semibold">Bridge to BNBChain amount</p>
+                  {/* <p className="text-sm font-semibold">Bridge to BNBChain amount</p> */}
                   <div className="flex items-end gap-4">
                     <div className="mt-3 flex h-[52px] w-[176px] rounded-xl bg-[#494E69]/60 py-1">
                       <div
-                        className="flex basis-[52px] cursor-pointer items-center justify-center text-3xl font-medium"
+                        className="flex basis-[52px] cursor-pointer select-none items-center justify-center text-3xl font-medium"
                         onClick={minus}
                       >
                         -
@@ -352,16 +377,19 @@ export default function BridgeSwitch() {
                         />
                       </div>
                       <div
-                        className="flex flex-none basis-[52px] cursor-pointer items-center justify-center text-3xl font-medium"
+                        className="flex flex-none basis-[52px] cursor-pointer select-none items-center justify-center text-3xl font-medium"
                         onClick={plus}
                       >
                         +
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="text-gradient-yellow mt-3.5 text-[20px]/[34px] font-bold">
+                      Get <span className="text-[34px] text-inherit">2,024,25</span> Power Level
+                    </div>
+                    {/* <div className="flex items-center gap-2">
                       <span className="text-sm font-normal">est. {(Number(gasEthAmount) * bridgeCount).toFixed(2)}</span>
                       <img src="/img/bridge/polygon_circle.svg" alt="" width={20} />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
@@ -369,23 +397,28 @@ export default function BridgeSwitch() {
               {renderButtons()}
             </div>
           ) : (
-            <div className="nft-backdrop-box mt-[62px] flex h-[306px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-              <svg
-                className="mx-auto mb-2"
-                width="48"
-                height="37"
-                viewBox="0 0 48 37"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M39.153 2.31251C38.0162 0.853264 36.2698 0 34.4199 0H13.5802C11.7304 0 9.98394 0.853266 8.84707 2.31251L0.515845 13.0061C0.174662 13.4441 0.051278 13.9489 0.100098 14.4274V34C0.100098 35.6568 1.44324 37 3.1001 37H44.9C46.5569 37 47.9 35.6568 47.9 34V14.4275C47.9489 13.949 47.8255 13.4441 47.4843 13.0061L39.153 2.31251ZM13.5802 2H34.4199C35.6531 2 36.8174 2.56884 37.5753 3.54167L45.9066 14.2353H34.8379C33.181 14.2353 31.8379 15.5784 31.8379 17.2353V19.8824H16.1622V17.2353C16.1622 15.5784 14.8191 14.2353 13.1622 14.2353H2.09355L10.4248 3.54167C11.1827 2.56884 12.347 2 13.5802 2ZM45.9 16.2353H34.8379C34.2856 16.2353 33.8379 16.683 33.8379 17.2353V19.8824C33.8379 20.9869 32.9425 21.8824 31.8379 21.8824H16.1622C15.0577 21.8824 14.1622 20.9869 14.1622 19.8824V17.2353C14.1622 16.683 13.7145 16.2353 13.1622 16.2353H2.1001V34C2.1001 34.5523 2.54781 35 3.1001 35H44.9C45.4523 35 45.9 34.5523 45.9 34V16.2353Z"
-                  fill={'#74788B'}
-                />
-              </svg>
-              <p className="text-p12-bg w-[200px] text-center text-sm leading-5">Choose badge you want to bridge on left</p>
+            <div className="mt-8">
+              <div className="flex items-center gap-2 text-sm font-semibold ">
+                TO: <img className="w-[30px]" src="/img/bridge/p12_chain.svg" alt="chain icon" /> P12 Chain
+              </div>
+              <div className="nft-backdrop-box mt-3 flex h-[306px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+                <svg
+                  className="mx-auto mb-2"
+                  width="48"
+                  height="37"
+                  viewBox="0 0 48 37"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M39.153 2.31251C38.0162 0.853264 36.2698 0 34.4199 0H13.5802C11.7304 0 9.98394 0.853266 8.84707 2.31251L0.515845 13.0061C0.174662 13.4441 0.051278 13.9489 0.100098 14.4274V34C0.100098 35.6568 1.44324 37 3.1001 37H44.9C46.5569 37 47.9 35.6568 47.9 34V14.4275C47.9489 13.949 47.8255 13.4441 47.4843 13.0061L39.153 2.31251ZM13.5802 2H34.4199C35.6531 2 36.8174 2.56884 37.5753 3.54167L45.9066 14.2353H34.8379C33.181 14.2353 31.8379 15.5784 31.8379 17.2353V19.8824H16.1622V17.2353C16.1622 15.5784 14.8191 14.2353 13.1622 14.2353H2.09355L10.4248 3.54167C11.1827 2.56884 12.347 2 13.5802 2ZM45.9 16.2353H34.8379C34.2856 16.2353 33.8379 16.683 33.8379 17.2353V19.8824C33.8379 20.9869 32.9425 21.8824 31.8379 21.8824H16.1622C15.0577 21.8824 14.1622 20.9869 14.1622 19.8824V17.2353C14.1622 16.683 13.7145 16.2353 13.1622 16.2353H2.1001V34C2.1001 34.5523 2.54781 35 3.1001 35H44.9C45.4523 35 45.9 34.5523 45.9 34V16.2353Z"
+                    fill={'#74788B'}
+                  />
+                </svg>
+                <p className="text-p12-bg w-[200px] text-center text-sm leading-5">Choose badge you want to bridge on left</p>
+              </div>
             </div>
           )}
         </div>
