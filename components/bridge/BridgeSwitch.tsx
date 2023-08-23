@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Button from '../button';
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
+import { useAccount, useNetwork, useSwitchNetwork, useWaitForTransaction } from 'wagmi';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import { useSetRecoilState } from 'recoil';
 import { polygon, bsc } from 'wagmi/chains';
@@ -10,9 +10,10 @@ import { Tooltip } from '../tooltip';
 import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
-import { useBadgeNFT } from '@/hooks/bridge';
+import { useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
 import { BadgeInfo, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
 import { groupBy } from 'lodash-es';
+import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
 // import { formatEther, parseEther } from 'ethers/lib/utils.js';
 // import { BigNumberish } from '@ethersproject/bignumber';
 // todo change proxy address
@@ -21,45 +22,72 @@ const historyColumnHelper = createColumnHelper<any>();
 
 export default function BridgeSwitch() {
   const [selectedBadge, setSelectedBadge] = useState<GalxeBadge | null>(null);
-  const [isApprovedForAll] = useState<boolean>(false); //setIsApprovedForAll
+  const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
   // const [gasEthAmount] = useState<string>('0'); //setGasEthAmount
-  const [approveLoading] = useState<boolean>(false); //setApproveLoading
-  const [confirmLoading] = useState<boolean>(false); //setConfirmLoading
+  // const [approveLoading, setApproveLoading] = useState<boolean>(false);
+  // const [confirmLoading] = useState<boolean>(false); //setConfirmLoading
   const [bridgeCount, setBridgeCount] = useState<number>(1);
   // Todo change nft contract
-  // const NFTContract = useNFTContract();
-  // const NFTContract = useNFTTestContract();
-  // const bridgeProxyContract = useBridgeProxyContract();
-  // const bridgeProxyContract = useBridgeProxyTestContract();
+  const NFTContract = useNFTContract({ token: selectedBadge?.contractAddress, chainId: selectedBadge?.chainId });
+  const bridgeContract = useBridgeContract({ chainId: selectedBadge?.chainId });
   const { chain } = useNetwork();
   const { address } = useAccount();
 
-  const { data } = useBadgeNFT(address);
+  const { data, refetch } = useBadgeNFT(address);
   const [nftOwned, setNFTOwned] = useState<GalxeBadge[][]>([]);
   const [restBadge, setRestBadge] = useState<BadgeInfo[]>([]);
   const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
+  const [approveHash, setApproveHash] = useState<undefined | `0x${string}`>(undefined);
+  const [confirmHash, setConfirmHash] = useState<undefined | `0x${string}`>(undefined);
 
-  // useEffect(() => {
-  //   if (!NFTContract || !address || chain?.id !== polygon.id) return;
-  //   NFTContract.isApprovedForAll(address, BRIDGE_PROXY_ADDRESS).then((isApproved: boolean) => {
-  //     setIsApprovedForAll(isApproved);
-  //   });
-  // }, [NFTContract, chain?.id, address]);
+  const { isLoading: approveLoading } = useWaitForTransaction({
+    chainId: selectedBadge?.chainId,
+    hash: approveHash,
+    onSuccess() {
+      if (!NFTContract || !address) return;
+      NFTContract.read
+        .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
+        .then((isApproved) => {
+          setIsApprovedForAll(isApproved as boolean);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  });
+
+  const { isLoading: confirmLoading } = useWaitForTransaction({
+    chainId: selectedBadge?.chainId,
+    hash: confirmHash,
+    onSuccess() {
+      // todo bridge success toast
+      refetch();
+    },
+  });
 
   useEffect(() => {
-    console.log(data);
-    const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
+    if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge.chainId) return;
+    NFTContract.read
+      .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
+      .then((isApproved) => {
+        console.log(isApproved, 'isApproved');
+        setIsApprovedForAll(isApproved as boolean);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [selectedBadge, chain?.id, address]);
 
+  useEffect(() => {
+    const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
     if (galxeBadges?.length > 0) {
       const communityBadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'Community');
       const communityBadgeCampaign = communityBadge.map((item) => item.galxeCampaign?.stringId);
       const AMABadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'AMA');
       const groupCommunityBadge = groupBy(communityBadge, (o) => o.chainId);
       const groupAMABadge = groupBy(AMABadge, (o) => o.chainId);
-      console.log(groupCommunityBadge, 'groupCommunityBadge');
-      console.log(groupAMABadge, 'groupAMABadge');
       const communityBadgeEntries = Object.entries(groupCommunityBadge);
       const AMABadgeEntries = Object.entries(groupAMABadge);
 
@@ -79,6 +107,8 @@ export default function BridgeSwitch() {
         for (const [, value] of communityBadgeByIdEntries) {
           const newItem = value[0];
           newItem.count = value.length;
+          const ids = value.map((item) => item.tokenId);
+          newItem.tokenIds = ids;
           byIdItem.push(newItem);
         }
         chainCommunityBadge[i] = byIdItem;
@@ -91,12 +121,13 @@ export default function BridgeSwitch() {
         for (const [, value] of AMABadgeByIdEntries) {
           const newItem = value[0];
           newItem.count = value.length;
+          const ids = value.map((item) => item.tokenId);
+          newItem.tokenIds = ids;
           byIdItem.push(newItem);
         }
         chainAMABadge[i] = byIdItem;
       }
-      console.log(chainCommunityBadge, 'chainCommunityBadge');
-      console.log(chainAMABadge, 'chainAMABadge');
+
       setNFTOwned(chainCommunityBadge);
       setAMABadge(chainAMABadge);
       // filter rest badge
@@ -113,38 +144,33 @@ export default function BridgeSwitch() {
   };
 
   const approveAll = async () => {
-    // if (!NFTContract || !address || chain?.id !== polygon.id) return;
-    // setApproveLoading(true);
-    // try {
-    //   const res = await NFTContract.setApprovalForAll(BRIDGE_PROXY_ADDRESS, true);
-    //   await res.wait();
-    //   const isApproved = await NFTContract.isApprovedForAll(address, BRIDGE_PROXY_ADDRESS);
-    //   setIsApprovedForAll(isApproved);
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   setApproveLoading(false);
-    // }
+    if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
+    try {
+      const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true]);
+      console.log(transactionHash, 'transactionHash');
+      setApproveHash(transactionHash);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const bridgeMultiple = async () => {
-    // todo wait for contract
-    // todo if success refresh balance and clear select?
-    // single, only for test
-    // if (!bridgeProxyContract || !address || chain?.id !== polygon.id) return;
-    // setConfirmLoading(true);
-    // try {
-    //   const tokenIds = [24, 25];
-    //   const res = await bridgeProxyContract.reLocateBatch(tokenIds, address, {
-    //     value: parseEther((Number(gasEthAmount) * tokenIds.length).toFixed(2)),
-    //   });
-    //   await res.wait();
-    //   // refresh token balance api
-    //   // clear amount
-    // } catch (error) {
-    // } finally {
-    //   setConfirmLoading(false);
-    // }
+    if (!bridgeContract || !address || chain?.id !== selectedBadge?.chainId) return;
+    try {
+      const slicedTokenIds = selectedBadge?.tokenIds?.slice(0, bridgeCount);
+      const transactionHash = await bridgeContract.write.sendBatchNFT([
+        selectedBadge?.contractAddress,
+        20736,
+        slicedTokenIds,
+        address,
+        address,
+      ]);
+      setConfirmHash(transactionHash);
+      // refresh token balance api
+      // clear amount
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculateGasAmount = async () => {
@@ -161,59 +187,23 @@ export default function BridgeSwitch() {
     }
   }, [isApprovedForAll]);
 
-  const renderButtons = () => {
-    if (isApprovedForAll) {
-      return (
-        <div className="mt-10 flex gap-5">
-          <Button type="bordered" className="flex-1" onClick={() => setSelectedBadge(null)}>
-            Cancel
-          </Button>
-          <Button
-            type="gradient"
-            onClick={bridgeMultiple}
-            className="flex-1"
-            disabled={!selectedBadge}
-            loading={confirmLoading}
-          >
-            Confirm
-          </Button>
-        </div>
-      );
-    } else {
-      return (
-        <div className="mt-[118px]">
-          {address ? (
-            chain?.id !== polygon.id ? (
-              <Button type="error" className="w-full" onClick={() => switchNetwork?.()}>
-                Wrong Network
-              </Button>
-            ) : (
-              <Button type="gradient" onClick={approveAll} className="w-full" loading={approveLoading}>
-                Approve
-              </Button>
-            )
-          ) : (
-            <Button type="gradient" onClick={() => setConnectOpen(true)} className="w-full">
-              Connect wallet
-            </Button>
-          )}
-        </div>
-      );
-    }
-  };
-
   const minus = () => {
     if (bridgeCount === 1) return;
     setBridgeCount(bridgeCount - 1);
   };
 
   const plus = () => {
-    // todo: can't bigger than balance
+    if (bridgeCount + 1 > (selectedBadge?.count || 0)) {
+      return;
+    }
     setBridgeCount(bridgeCount + 1);
   };
 
   const countChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // todo: can't bigger than balance
+    if (Number(e.target.value) > (selectedBadge?.count || 0)) {
+      setBridgeCount(selectedBadge?.count || 0);
+      return;
+    }
     setBridgeCount(Number(e.target.value));
   };
 
@@ -277,7 +267,7 @@ export default function BridgeSwitch() {
   return (
     <div className="p-9">
       <div className="flex gap-9">
-        <div className="w-3/5">
+        <div className="flex-1">
           <div className="border-b border-gray-600 pb-6 font-semibold">
             <img className="mr-2 inline w-[30px]" src="/img/bridge/inventory.svg" alt="inventory icon" />
             Inventory
@@ -306,7 +296,7 @@ export default function BridgeSwitch() {
                           </div>
                           <div className="mt-1 flex w-full items-center justify-between text-xs">
                             <span className="text-inherit">Rarity:</span>
-                            <span className="text-inherit">Epic</span>
+                            <span className="text-inherit">{item.galxeCampaign?.rarity}</span>
                           </div>
                           <div className="mt-1 flex w-full items-center justify-between text-xs">
                             <span className="text-inherit">Amount:</span>
@@ -350,14 +340,14 @@ export default function BridgeSwitch() {
                         <div className="mt-6 w-full text-center text-sm font-medium">{item.polygonName}</div>
                         <div className="mt-6 flex w-full items-center justify-between text-xs">
                           <span className="text-inherit">Rarity:</span>
-                          <span className="text-inherit">Epic</span>
+                          <span className="text-inherit">{item.rarity}</span>
                         </div>
                       </div>
                     }
                   >
                     <div
                       className={classNames(
-                        'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
+                        'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded opacity-25',
                       )}
                     >
                       <div className="relative h-[80px] w-[80px]">
@@ -393,7 +383,7 @@ export default function BridgeSwitch() {
                             </div>
                             <div className="mt-1 flex w-full items-center justify-between text-xs">
                               <span className="text-inherit">Rarity:</span>
-                              <span className="text-inherit">Epic</span>
+                              <span className="text-inherit">{item.galxeCampaign?.rarity}</span>
                             </div>
                             <div className="mt-1 flex w-full items-center justify-between text-xs">
                               <span className="text-inherit">Amount:</span>
@@ -434,7 +424,7 @@ export default function BridgeSwitch() {
             )}
           </div>
         </div>
-        <div className="w-2/5">
+        <div className="basis-[540px]">
           <div className="border-b border-gray-600 pb-6 font-semibold">
             <img className="mr-2 inline w-[30px]" src="/img/bridge/bridge.svg" alt="bridge icon" />
             Bridge
@@ -458,7 +448,7 @@ export default function BridgeSwitch() {
                         <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                     </div>
-                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
+                    <div className="mt-4 w-[200px] text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
                   </div>
                   <div>
                     <img width={84} src="/img/bridge/bridge_arrow.webp" alt="bridge_arrow" />
@@ -476,7 +466,7 @@ export default function BridgeSwitch() {
                         <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                     </div>
-                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
+                    <div className="mt-4 w-[200px] text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
                   </div>
                 </div>
               </div>
@@ -518,7 +508,44 @@ export default function BridgeSwitch() {
                 </div>
               )}
 
-              {renderButtons()}
+              <div className="mt-[94px]">
+                {address ? (
+                  chain?.id !== selectedBadge?.chainId ? (
+                    <Button
+                      type="error"
+                      className="w-full"
+                      onClick={() => {
+                        switchNetwork?.(selectedBadge?.chainId);
+                      }}
+                    >
+                      Wrong Network
+                    </Button>
+                  ) : isApprovedForAll ? (
+                    <div className="flex gap-5">
+                      <Button type="bordered" className="flex-1" onClick={() => setSelectedBadge(null)}>
+                        Cancel
+                      </Button>
+                      <Button
+                        type="gradient"
+                        onClick={bridgeMultiple}
+                        className="flex-1"
+                        disabled={!selectedBadge}
+                        loading={confirmLoading}
+                      >
+                        Bridge
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button type="gradient" onClick={approveAll} className="w-full" loading={approveLoading}>
+                      Approve
+                    </Button>
+                  )
+                ) : (
+                  <Button type="gradient" onClick={() => setConnectOpen(true)} className="w-full">
+                    Connect wallet
+                  </Button>
+                )}
+              </div>
             </div>
           ) : (
             <div className="mt-8">

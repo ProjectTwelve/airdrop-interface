@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { Address, useWalletClient } from 'wagmi';
-import { getContract } from 'wagmi/actions';
+import { Address } from 'wagmi';
 import { GraphQLClient } from 'graphql-request';
-import { BADGE_BRIDGE_ADDRESS } from '@/constants/addresses';
-import { bridgeABI } from '@/abis';
+import { useContract } from './useContract';
+import { badgeABI, bridgeABI } from '@/abis';
+import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
+import { polygon } from 'wagmi/chains';
 
 const nftQuery = `
     query($address: String!) {   
@@ -39,14 +40,12 @@ export const useBadgeNFT = (address?: Address) => {
   });
 };
 
-export function useNFTContract() {
-  const { data: walletClient } = useWalletClient();
+export function useNFTContract({ token, chainId }: { token?: Address; chainId?: number }) {
+  return useContract(token, badgeABI, chainId);
+}
 
-  if (!walletClient) return null;
-
-  return getContract({
-    address: BADGE_BRIDGE_ADDRESS,
-    abi: bridgeABI,
-    walletClient: walletClient,
-  });
+export function useBridgeContract({ chainId }: { chainId?: number }) {
+  // todo bsc chain address
+  const address = chainId === polygon.id ? BADGE_BRIDGE_TEST_ADDRESS : BADGE_BRIDGE_TEST_ADDRESS;
+  return useContract(address, bridgeABI, chainId);
 }

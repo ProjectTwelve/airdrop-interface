@@ -1,4 +1,5 @@
 import { AMA_NFT_CAMPAIGN_ID, COMMUNITY_NFT_CAMPAIGN_ID, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '@/constants/enum';
+import { Address } from 'wagmi';
 
 export const DEV_BADGES = {
   [DEV_NFT_LEVEL.ORANGE]: {
@@ -102,9 +103,10 @@ export interface GalxeBadge {
   chainId: number;
   image: string;
   galxeCampaign?: GalxeCampaign;
-  contractAddress: string;
+  contractAddress: Address;
   tokenId: number;
   count?: number;
+  tokenIds?: number[];
 }
 
 export interface GalxeCampaign {

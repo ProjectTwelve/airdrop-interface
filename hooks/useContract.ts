@@ -5,8 +5,8 @@ import { babtABI, collabABI } from '../abis';
 import { Address, useContractRead, useNetwork, usePublicClient, useWalletClient } from 'wagmi';
 import { BABT_ADDRESSES, COLLAB_ADDRESS } from '../constants/addresses';
 
-export function useContract<TAbi extends Abi>(address?: Address, abi?: TAbi) {
-  const publicClient = usePublicClient();
+export function useContract<TAbi extends Abi>(address?: Address, abi?: TAbi, chainId?: number) {
+  const publicClient = usePublicClient({ chainId });
   const { data: walletClient } = useWalletClient();
 
   return useMemo(() => {

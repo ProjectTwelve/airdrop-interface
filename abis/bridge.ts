@@ -3,17 +3,17 @@ export const bridgeABI = [
     inputs: [
       {
         internalType: 'address',
-        name: 'badge_',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
         name: 'owner_',
         type: 'address',
       },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
+  },
+  {
+    inputs: [],
+    name: 'DstChainIdIsNotAllowed',
+    type: 'error',
   },
   {
     inputs: [],
@@ -34,6 +34,25 @@ export const bridgeABI = [
     inputs: [],
     name: 'Unauthorized',
     type: 'error',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'chainId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'valid',
+        type: 'bool',
+      },
+    ],
+    name: 'DstValidSet',
+    type: 'event',
   },
   {
     anonymous: false,
@@ -123,6 +142,12 @@ export const bridgeABI = [
       {
         indexed: false,
         internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'address',
         name: 'from',
         type: 'address',
       },
@@ -156,23 +181,29 @@ export const bridgeABI = [
     type: 'event',
   },
   {
-    inputs: [],
-    name: 'cancelOwnershipHandover',
-    outputs: [],
-    stateMutability: 'payable',
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'allowedDst',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
-    name: 'communityBadge',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
+    name: 'cancelOwnershipHandover',
+    outputs: [],
+    stateMutability: 'payable',
     type: 'function',
   },
   {
@@ -258,6 +289,11 @@ export const bridgeABI = [
     inputs: [
       {
         internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
+        internalType: 'address',
         name: 'user',
         type: 'address',
       },
@@ -289,6 +325,11 @@ export const bridgeABI = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
         internalType: 'uint256',
         name: 'dstChainId',
         type: 'uint256',
@@ -316,6 +357,11 @@ export const bridgeABI = [
   },
   {
     inputs: [
+      {
+        internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
       {
         internalType: 'uint256',
         name: 'dstChainId',
@@ -377,6 +423,24 @@ export const bridgeABI = [
   {
     inputs: [
       {
+        internalType: 'uint256',
+        name: 'dstChainId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bool',
+        name: 'valid',
+        type: 'bool',
+      },
+    ],
+    name: 'updateDstValidity',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: 'signer',
         type: 'address',
@@ -392,4 +456,4 @@ export const bridgeABI = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+] as const;
