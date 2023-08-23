@@ -1,17 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import { BadgeInfo, P12_COMMUNITY_BADGE } from '../../constants';
 import Button from '../button';
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import { useSetRecoilState } from 'recoil';
-import { polygon } from 'wagmi/chains';
+import { polygon, bsc } from 'wagmi/chains';
 import classNames from 'classnames';
 import { Tooltip } from '../tooltip';
 import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 import { useBadgeNFT } from '@/hooks/bridge';
+import { BadgeInfo, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
+import { groupBy } from 'lodash-es';
 // import { formatEther, parseEther } from 'ethers/lib/utils.js';
 // import { BigNumberish } from '@ethersproject/bignumber';
 // todo change proxy address
@@ -19,7 +20,7 @@ import { useBadgeNFT } from '@/hooks/bridge';
 const historyColumnHelper = createColumnHelper<any>();
 
 export default function BridgeSwitch() {
-  const [selectedBadge, setSelectedBadge] = useState<BadgeInfo | null>(null);
+  const [selectedBadge, setSelectedBadge] = useState<GalxeBadge | null>(null);
   const [isApprovedForAll] = useState<boolean>(false); //setIsApprovedForAll
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
@@ -36,7 +37,9 @@ export default function BridgeSwitch() {
   const { address } = useAccount();
 
   const { data } = useBadgeNFT(address);
-  console.log(data);
+  const [nftOwned, setNFTOwned] = useState<GalxeBadge[][]>([]);
+  const [restBadge, setRestBadge] = useState<BadgeInfo[]>([]);
+  const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
 
   // useEffect(() => {
   //   if (!NFTContract || !address || chain?.id !== polygon.id) return;
@@ -45,7 +48,67 @@ export default function BridgeSwitch() {
   //   });
   // }, [NFTContract, chain?.id, address]);
 
-  const addSelectedBadge = (badge: BadgeInfo) => {
+  useEffect(() => {
+    console.log(data);
+    const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
+
+    if (galxeBadges?.length > 0) {
+      const communityBadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'Community');
+      const communityBadgeCampaign = communityBadge.map((item) => item.galxeCampaign?.stringId);
+      const AMABadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'AMA');
+      const groupCommunityBadge = groupBy(communityBadge, (o) => o.chainId);
+      const groupAMABadge = groupBy(AMABadge, (o) => o.chainId);
+      console.log(groupCommunityBadge, 'groupCommunityBadge');
+      console.log(groupAMABadge, 'groupAMABadge');
+      const communityBadgeEntries = Object.entries(groupCommunityBadge);
+      const AMABadgeEntries = Object.entries(groupAMABadge);
+
+      const chainCommunityBadge: GalxeBadge[][] = [];
+      const chainAMABadge: GalxeBadge[][] = [];
+      for (const [, value] of communityBadgeEntries) {
+        chainCommunityBadge.push(value);
+      }
+      for (const [, value] of AMABadgeEntries) {
+        chainAMABadge.push(value);
+      }
+      for (let i = 0; i < chainCommunityBadge.length; i++) {
+        const chainItem = chainCommunityBadge[i];
+        const groupCommunityBadgeById = groupBy(chainItem, (o) => o.galxeCampaign?.stringId);
+        const communityBadgeByIdEntries = Object.entries(groupCommunityBadgeById);
+        const byIdItem: GalxeBadge[] = [];
+        for (const [, value] of communityBadgeByIdEntries) {
+          const newItem = value[0];
+          newItem.count = value.length;
+          byIdItem.push(newItem);
+        }
+        chainCommunityBadge[i] = byIdItem;
+      }
+      for (let i = 0; i < chainAMABadge.length; i++) {
+        const chainItem = chainAMABadge[i];
+        const groupAMABadgeById = groupBy(chainItem, (o) => o.galxeCampaign?.stringId);
+        const AMABadgeByIdEntries = Object.entries(groupAMABadgeById);
+        const byIdItem: GalxeBadge[] = [];
+        for (const [, value] of AMABadgeByIdEntries) {
+          const newItem = value[0];
+          newItem.count = value.length;
+          byIdItem.push(newItem);
+        }
+        chainAMABadge[i] = byIdItem;
+      }
+      console.log(chainCommunityBadge, 'chainCommunityBadge');
+      console.log(chainAMABadge, 'chainAMABadge');
+      setNFTOwned(chainCommunityBadge);
+      setAMABadge(chainAMABadge);
+      // filter rest badge
+      const allCommunityBadge = Object.entries(P12_COMMUNITY_BADGE);
+      const restBadge = allCommunityBadge
+        .filter(([, value]) => !communityBadgeCampaign.includes(value.campaign))
+        .map(([, value]) => value);
+      setRestBadge(restBadge);
+    }
+  }, [data]);
+
+  const addSelectedBadge = (badge: GalxeBadge) => {
     setSelectedBadge(badge);
   };
 
@@ -187,6 +250,30 @@ export default function BridgeSwitch() {
     [],
   );
 
+  const renderChainIcon = (chainId: number) => {
+    if (chainId === polygon.id) {
+      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/polygon.svg" alt="chain icon" />;
+    } else if (chainId === bsc.id) {
+      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/bnb_chain.svg" alt="chain icon" />;
+    } else if (chainId === 20736) {
+      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/p12_chain.svg" alt="chain icon" />;
+    } else {
+      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/p12_chain.svg" alt="chain icon" />;
+    }
+  };
+
+  const renderChainName = (chainId: number) => {
+    if (chainId === polygon.id) {
+      return polygon.name;
+    } else if (chainId === bsc.id) {
+      return bsc.name;
+    } else if (chainId === 20736) {
+      return 'P12 Chain';
+    } else {
+      return 'Unknown';
+    }
+  };
+
   return (
     <div className="p-9">
       <div className="flex gap-9">
@@ -198,116 +285,153 @@ export default function BridgeSwitch() {
           <div className="mt-8">
             <p className="text-sm font-semibold leading-[30px]">Community Badges</p>
             <div className="mt-3 flex flex-wrap gap-3">
-              {Object.entries(P12_COMMUNITY_BADGE).map(([key, value]) => {
+              {nftOwned.map((chainItem) => {
+                return chainItem.map((item) => {
+                  return (
+                    <Tooltip
+                      key={item.galxeCampaign?.stringId}
+                      placement="bottom"
+                      label={
+                        <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
+                          <div className="relative h-[180px] w-[180px]">
+                            <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
+                          </div>
+                          <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
+                          <div className="mt-4 flex w-full items-center justify-between text-xs">
+                            <span className="text-inherit">Chain:</span>
+                            <span className="flex gap-1">
+                              <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
+                              <span className="text-inherit">{renderChainName(item.chainId)}</span>
+                            </span>
+                          </div>
+                          <div className="mt-1 flex w-full items-center justify-between text-xs">
+                            <span className="text-inherit">Rarity:</span>
+                            <span className="text-inherit">Epic</span>
+                          </div>
+                          <div className="mt-1 flex w-full items-center justify-between text-xs">
+                            <span className="text-inherit">Amount:</span>
+                            <span className="text-inherit">{item.count || 0}</span>
+                          </div>
+                        </div>
+                      }
+                    >
+                      <div
+                        onClick={() => {
+                          addSelectedBadge(item);
+                        }}
+                        className={classNames(
+                          'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
+                          {
+                            'border-[#A5A6AB]':
+                              selectedBadge && selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId,
+                          },
+                        )}
+                      >
+                        <div className="relative h-[80px] w-[80px]">
+                          <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
+                        </div>
+                        {renderChainIcon(item.chainId)}
+                        <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
+                      </div>
+                    </Tooltip>
+                  );
+                });
+              })}
+              {restBadge.map((item) => {
                 return (
                   <Tooltip
-                    key={key}
+                    key={item.campaign}
                     placement="bottom"
                     label={
                       <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
                         <div className="relative h-[180px] w-[180px]">
-                          <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                          <Image src={item.polygonImage} alt="badge" objectFit="contain" layout="fill" />
                         </div>
-                        <div className="mt-6 w-full text-center text-sm font-medium">{value.polygonName}</div>
-                        <div className="mt-4 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Chain:</span>
-                          <span className="flex gap-1">
-                            <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
-                            <span className="text-inherit">Polygon</span>
-                          </span>
-                        </div>
-                        <div className="mt-1 flex w-full items-center justify-between text-xs">
+                        <div className="mt-6 w-full text-center text-sm font-medium">{item.polygonName}</div>
+                        <div className="mt-6 flex w-full items-center justify-between text-xs">
                           <span className="text-inherit">Rarity:</span>
                           <span className="text-inherit">Epic</span>
-                        </div>
-                        <div className="mt-1 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Amount:</span>
-                          <span className="text-inherit">3</span>
                         </div>
                       </div>
                     }
                   >
                     <div
-                      onClick={() => {
-                        addSelectedBadge(value);
-                      }}
                       className={classNames(
                         'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
-                        {
-                          'border-[#A5A6AB]': selectedBadge && selectedBadge.campaign === value.campaign,
-                        },
                       )}
                     >
                       <div className="relative h-[80px] w-[80px]">
-                        <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                        <Image src={item.polygonImage} alt="badge" objectFit="contain" layout="fill" />
                       </div>
-                      <img
-                        className="absolute left-[6px] top-[6px] w-[20px]"
-                        src="/img/bridge/p12_chain.svg"
-                        alt="chain icon"
-                      />
-                      <div className="absolute bottom-[6px] right-[6px] text-xs text-green">123</div>
+                      <div className="absolute bottom-[6px] right-[6px] text-xs text-white/25">0</div>
                     </div>
                   </Tooltip>
                 );
               })}
             </div>
             <p className="mt-8 text-sm font-semibold">AMA OATs</p>
-            <div className="nft-backdrop-box mt-3 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-              <div className="text-xs text-gray-400">To collect more badges & level your game up at</div>
-              <div className="cursor-pointer text-sm font-semibold text-blue"> P12 Discord</div>
-            </div>
-            {/* <div className="mt-6 flex flex-wrap gap-2">
-              {Object.entries(P12_AMA_OAT_BADGE).map(([key, value]) => {
-                return (
-                  <Tooltip
-                    key={key}
-                    placement="bottom"
-                    label={
-                      <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
-                        <div className="relative h-[180px] w-[180px]">
-                          <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
-                        </div>
-                        <div className="mt-6 w-full text-center text-sm font-medium">{value.polygonName}</div>
-                        <div className="mt-4 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Chain:</span>
-                          <span className="flex gap-1">
-                            <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
-                            <span className="text-inherit">Polygon</span>
-                          </span>
-                        </div>
-                        <div className="mt-1 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Rarity:</span>
-                          <span className="text-inherit">Epic</span>
-                        </div>
-                        <div className="mt-1 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Amount:</span>
-                          <span className="text-inherit">3</span>
-                        </div>
-                      </div>
-                    }
-                  >
-                    <div
-                      onClick={() => {
-                        addSelectedBadge(value);
-                      }}
-                      className="nft-backdrop-box flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded"
-                    >
-                      {selectedBadge && selectedBadge.campaign === value.campaign && (
-                        <div className="absolute left-0 top-0 flex h-[108px] w-[108px] items-center justify-center blur-xl">
-                          <div className="h-[80px] w-[80px]">
-                            <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+            {AMABadge.length > 0 ? (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {AMABadge.map((chainItem) => {
+                  return chainItem.map((item) => {
+                    return (
+                      <Tooltip
+                        key={item.galxeCampaign?.stringId}
+                        placement="bottom"
+                        label={
+                          <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
+                            <div className="relative h-[180px] w-[180px]">
+                              <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
+                            </div>
+                            <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
+                            <div className="mt-4 flex w-full items-center justify-between text-xs">
+                              <span className="text-inherit">Chain:</span>
+                              <span className="flex gap-1">
+                                <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
+                                <span className="text-inherit">{renderChainName(item.chainId)}</span>
+                              </span>
+                            </div>
+                            <div className="mt-1 flex w-full items-center justify-between text-xs">
+                              <span className="text-inherit">Rarity:</span>
+                              <span className="text-inherit">Epic</span>
+                            </div>
+                            <div className="mt-1 flex w-full items-center justify-between text-xs">
+                              <span className="text-inherit">Amount:</span>
+                              <span className="text-inherit">{item.count || 0}</span>
+                            </div>
                           </div>
+                        }
+                      >
+                        <div
+                          onClick={() => {
+                            addSelectedBadge(item);
+                          }}
+                          className="nft-backdrop-box flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded"
+                        >
+                          {selectedBadge && selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId && (
+                            <div className="absolute left-0 top-0 flex h-[108px] w-[108px] items-center justify-center blur-xl">
+                              <div className="h-[80px] w-[80px]">
+                                <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
+                              </div>
+                            </div>
+                          )}
+                          <div className="relative h-[86px] w-[86px]">
+                            <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
+                          </div>
+                          {renderChainIcon(item.chainId)}
+                          <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
                         </div>
-                      )}
-                      <div className="relative h-[86px] w-[86px]">
-                        <Image src={value.polygonImage} alt="badge" objectFit="contain" layout="fill" />
-                      </div>
-                    </div>
-                  </Tooltip>
-                );
-              })}
-            </div> */}
+                      </Tooltip>
+                    );
+                  });
+                })}
+              </div>
+            ) : (
+              <div className="nft-backdrop-box mt-3 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+                <div className="text-xs text-gray-400">To collect more badges & level your game up at</div>
+                <div className="cursor-pointer text-sm font-semibold text-blue"> P12 Discord</div>
+              </div>
+            )}
           </div>
         </div>
         <div className="w-2/5">
@@ -331,10 +455,10 @@ export default function BridgeSwitch() {
                     <div className="nft-backdrop-box relative mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
                       <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
                       <div className="relative h-[148px] w-[148px]">
-                        <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                        <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                     </div>
-                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.polygonName}</div>
+                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
                   </div>
                   <div>
                     <img width={84} src="/img/bridge/bridge_arrow.webp" alt="bridge_arrow" />
@@ -349,10 +473,10 @@ export default function BridgeSwitch() {
                     <div className="nft-backdrop-box mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
                       <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/p12_chain.svg" alt="p12 chain icon" />
                       <div className="relative h-[148px] w-[148px]">
-                        <Image src={selectedBadge.polygonImage} alt="badge" objectFit="contain" layout="fill" />
+                        <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                     </div>
-                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.polygonName}</div>
+                    <div className="mt-4 text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
                   </div>
                 </div>
               </div>

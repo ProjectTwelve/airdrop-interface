@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Address, usePublicClient, useWalletClient } from 'wagmi';
+import { Address, useWalletClient } from 'wagmi';
 import { getContract } from 'wagmi/actions';
 import { GraphQLClient } from 'graphql-request';
 import { BADGE_BRIDGE_ADDRESS } from '@/constants/addresses';
@@ -10,16 +10,17 @@ const nftQuery = `
         user(addr: $address) {
           address
           galxeBadges{
-            chainId    
-            image     
-            cid     
-            contractAddress 
-            tokenId    
-          }
-          communityBadges {
-            chainId      
-            tokenId     
+            chainId   
             image      
+            galxeCampaign {
+              cid           
+              stringId      
+              name          
+              rarity        
+              campaignType  
+            }
+            contractAddress  
+            tokenId    
           }
         }
       }
