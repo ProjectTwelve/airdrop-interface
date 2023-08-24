@@ -17,6 +17,7 @@ import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
 import Message from '../message';
 import { toast } from 'react-toastify';
 import { shortenHash } from '@/utils';
+import ChainIcon from './ChainIcon';
 
 const historyColumnHelper = createColumnHelper<BridgeTxs>();
 
@@ -242,18 +243,6 @@ export default function BridgeSwitch() {
     [],
   );
 
-  const renderChainIcon = (chainId: number) => {
-    if (chainId === polygon.id) {
-      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/polygon.svg" alt="chain icon" />;
-    } else if (chainId === bsc.id) {
-      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/bnb_chain.svg" alt="chain icon" />;
-    } else if (chainId === 20736) {
-      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/p12_chain.svg" alt="chain icon" />;
-    } else {
-      return <img className="absolute left-[6px] top-[6px] w-[20px]" src="/img/bridge/p12_chain.svg" alt="chain icon" />;
-    }
-  };
-
   const renderChainName = (chainId: number) => {
     if (chainId === polygon.id) {
       return polygon.name;
@@ -291,8 +280,8 @@ export default function BridgeSwitch() {
                           <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
                           <div className="mt-4 flex w-full items-center justify-between text-xs">
                             <span className="text-inherit">Chain:</span>
-                            <span className="flex gap-1">
-                              <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
+                            <span className="flex items-center gap-1">
+                              <ChainIcon chainId={item.chainId} className="w-4" />
                               <span className="text-inherit">{renderChainName(item.chainId)}</span>
                             </span>
                           </div>
@@ -326,7 +315,7 @@ export default function BridgeSwitch() {
                         <div className="relative h-[80px] w-[80px]">
                           <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
                         </div>
-                        {renderChainIcon(item.chainId)}
+                        <ChainIcon chainId={item.chainId} className="absolute left-[6px] top-[6px] w-[20px]" />
                         <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
                       </div>
                     </Tooltip>
@@ -382,8 +371,8 @@ export default function BridgeSwitch() {
                             <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
                             <div className="mt-4 flex w-full items-center justify-between text-xs">
                               <span className="text-inherit">Chain:</span>
-                              <span className="flex gap-1">
-                                <img className="w-4" src="/img/bridge/polygon.svg" alt="polygon" />
+                              <span className="flex items-center gap-1">
+                                <ChainIcon chainId={item.chainId} className="w-4" />
                                 <span className="text-inherit">{renderChainName(item.chainId)}</span>
                               </span>
                             </div>
@@ -415,7 +404,7 @@ export default function BridgeSwitch() {
                           <div className="relative h-[86px] w-[86px]">
                             <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
                           </div>
-                          {renderChainIcon(item.chainId)}
+                          <ChainIcon chainId={item.chainId} className="absolute left-[6px] top-[6px] w-[20px]" />
                           <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
                         </div>
                       </Tooltip>
