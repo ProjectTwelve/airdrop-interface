@@ -16,3 +16,5 @@ export const COLLAB_CHAIN_ID: CHAIN_ID = parseInt(process.env.NEXT_PUBLIC_COLLAB
 export * from './enum';
 export * from './bages';
 export * from './storage';
+
+export const inputRegex = /^\d*(?:\\[.])?\d*$/;

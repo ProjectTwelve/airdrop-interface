@@ -44,3 +44,27 @@ export enum Platform {
   USER,
   DEVELOPER,
 }
+
+export enum COMMUNITY_NFT_CAMPAIGN_ID {
+  GC6YGUUpaT = 'GC6YGUUpaT',
+  GCj44UtwmA = 'GCj44UtwmA',
+  GCWbWUtGMv = 'GCWbWUtGMv',
+  GC8tsUUnhC = 'GC8tsUUnhC',
+  GCBmbUUvgc = 'GCBmbUUvgc',
+  GCB7bUUkWH = 'GCB7bUUkWH',
+  GC1pbUUMCi = 'GC1pbUUMCi',
+  GCypPUUFQR = 'GCypPUUFQR',
+  GCXBcUUM56 = 'GCXBcUUM56',
+  GCdRtUtc3W = 'GCdRtUtc3W',
+  GCbVwUt9SD = 'GCbVwUt9SD',
+  GC8NPUUqJC = 'GC8NPUUqJC',
+  GC1abUUnxU = 'GC1abUUnxU',
+}
+
+export enum AMA_NFT_CAMPAIGN_ID {
+  GC9ErUtrZN = 'GC9ErUtrZN',
+  GCPkMUt6uC = 'GCPkMUt6uC',
+  GCdFZUtN2T = 'GCdFZUtN2T',
+  GCmP7UtXdx = 'GCmP7UtXdx',
+  GCsJQUt6Xc = 'GCsJQUt6Xc',
+}
