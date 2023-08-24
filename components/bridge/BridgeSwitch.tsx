@@ -10,24 +10,21 @@ import { Tooltip } from '../tooltip';
 import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
-import { useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
+import { BridgeTxs, HistoryResult, useBadgeHistory, useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
 import { BadgeInfo, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
 import { groupBy } from 'lodash-es';
 import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
-// import { formatEther, parseEther } from 'ethers/lib/utils.js';
-// import { BigNumberish } from '@ethersproject/bignumber';
-// todo change proxy address
+import Message from '../message';
+import { toast } from 'react-toastify';
+import { shortenHash } from '@/utils';
 
-const historyColumnHelper = createColumnHelper<any>();
+const historyColumnHelper = createColumnHelper<BridgeTxs>();
 
 export default function BridgeSwitch() {
   const [selectedBadge, setSelectedBadge] = useState<GalxeBadge | null>(null);
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
-  // const [gasEthAmount] = useState<string>('0'); //setGasEthAmount
-  // const [approveLoading, setApproveLoading] = useState<boolean>(false);
-  // const [confirmLoading] = useState<boolean>(false); //setConfirmLoading
   const [bridgeCount, setBridgeCount] = useState<number>(1);
   // Todo change nft contract
   const NFTContract = useNFTContract({ token: selectedBadge?.contractAddress, chainId: selectedBadge?.chainId });
@@ -36,6 +33,8 @@ export default function BridgeSwitch() {
   const { address } = useAccount();
 
   const { data, refetch } = useBadgeNFT(address);
+  const { data: historyData, isLoading } = useBadgeHistory<HistoryResult>(address);
+
   const [nftOwned, setNFTOwned] = useState<GalxeBadge[][]>([]);
   const [restBadge, setRestBadge] = useState<BadgeInfo[]>([]);
   const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
@@ -46,6 +45,7 @@ export default function BridgeSwitch() {
     chainId: selectedBadge?.chainId,
     hash: approveHash,
     onSuccess() {
+      setApproveHash(undefined);
       if (!NFTContract || !address) return;
       NFTContract.read
         .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
@@ -62,7 +62,8 @@ export default function BridgeSwitch() {
     chainId: selectedBadge?.chainId,
     hash: confirmHash,
     onSuccess() {
-      // todo bridge success toast
+      toast.success(<Message title="Bridge Successfully" />);
+      setConfirmHash(undefined);
       refetch();
     },
   });
@@ -146,8 +147,9 @@ export default function BridgeSwitch() {
   const approveAll = async () => {
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
     try {
-      const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true]);
-      console.log(transactionHash, 'transactionHash');
+      const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true], {
+        account: NFTContract.account,
+      });
       setApproveHash(transactionHash);
     } catch (error) {
       console.log(error);
@@ -155,16 +157,20 @@ export default function BridgeSwitch() {
   };
 
   const bridgeMultiple = async () => {
-    if (!bridgeContract || !address || chain?.id !== selectedBadge?.chainId) return;
+    if (
+      !bridgeContract ||
+      !selectedBadge?.contractAddress ||
+      !selectedBadge.tokenIds ||
+      !address ||
+      chain?.id !== selectedBadge?.chainId
+    )
+      return;
     try {
-      const slicedTokenIds = selectedBadge?.tokenIds?.slice(0, bridgeCount);
-      const transactionHash = await bridgeContract.write.sendBatchNFT([
-        selectedBadge?.contractAddress,
-        20736,
-        slicedTokenIds,
-        address,
-        address,
-      ]);
+      const slicedTokenIds: bigint[] = selectedBadge.tokenIds.slice(0, bridgeCount).map((item) => BigInt(item));
+      const transactionHash = await bridgeContract.write.sendBatchNFT(
+        [selectedBadge?.contractAddress, BigInt(20736), slicedTokenIds, address, address],
+        { account: bridgeContract.account },
+      );
       setConfirmHash(transactionHash);
       // refresh token balance api
       // clear amount
@@ -172,20 +178,6 @@ export default function BridgeSwitch() {
       console.log(error);
     }
   };
-
-  const calculateGasAmount = async () => {
-    // if (!bridgeProxyContract || !address || chain?.id !== polygon.id) return;
-    // const gasAmount: BigNumberish = await bridgeProxyContract.calculateGasTokenAmount();
-    // const etherAmount = (Number(formatEther(gasAmount)) * 1.1).toFixed(2);
-    // // todo change the way to etherAmount
-    // setGasEthAmount(etherAmount);
-  };
-
-  useEffect(() => {
-    if (isApprovedForAll) {
-      calculateGasAmount();
-    }
-  }, [isApprovedForAll]);
 
   const minus = () => {
     if (bridgeCount === 1) return;
@@ -209,32 +201,41 @@ export default function BridgeSwitch() {
 
   const gamerColumns = useMemo(
     () => [
-      historyColumnHelper.accessor('wallet_address', {
-        header: 'History No.',
-        size: 120,
-        cell: ({ getValue }) => <p className="flex h-full items-center">{getValue()}</p>,
-      }),
-      historyColumnHelper.accessor('createdAt', {
+      historyColumnHelper.accessor('timestamp', {
         header: 'Time',
         size: 100,
-        cell: ({ getValue }) => <p className="flex h-full items-center">{dayjs(getValue()).format('YYYY/MM/DD')}</p>,
+        cell: ({ getValue }) => (
+          <p className="flex h-full items-center">{dayjs.unix(getValue()).format('YYYY/MM/DD HH:mm:ss')}</p>
+        ),
       }),
       historyColumnHelper.display({
-        id: 'steam_account',
+        id: 'galxeBadges',
         header: 'Bridged',
         size: 200,
-        cell: ({}) => <div className="flex items-center"></div>,
+        cell: ({ row: { original } }) => {
+          const badges = original.galxeBadges;
+          return (
+            <div className="flex items-center gap-2">
+              {badges[0]?.galxeCampaign?.name ?? 'unknown'}
+              <div className="relative h-[20px] w-[20px]">
+                <Image src={badges[0]?.image} alt="badge" objectFit="contain" layout="fill" />
+              </div>
+            </div>
+          );
+        },
       }),
       historyColumnHelper.display({
-        id: 'amount',
+        id: 'contractAddress',
         header: 'Amount',
         size: 120,
-        cell: ({ getValue }) => <div className="flex h-full items-center">{getValue()}</div>,
+        cell: ({ row: { original } }) => <div className="flex h-full items-center">{original.galxeBadges.length}</div>,
       }),
-      historyColumnHelper.accessor('tx', {
+      historyColumnHelper.accessor('hash', {
         header: 'Bridge tx',
         size: 100,
-        cell: ({ getValue }) => <div className="flex h-full items-center">{getValue()}</div>,
+        cell: ({ getValue }) => (
+          <div className="flex h-full cursor-pointer items-center text-blue">{shortenHash(getValue())}</div>
+        ),
       }),
     ],
     [],
@@ -307,13 +308,17 @@ export default function BridgeSwitch() {
                     >
                       <div
                         onClick={() => {
-                          addSelectedBadge(item);
+                          if (item.chainId !== 20736) {
+                            addSelectedBadge(item);
+                          }
                         }}
                         className={classNames(
                           'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
                           {
                             'border-[#A5A6AB]':
-                              selectedBadge && selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId,
+                              selectedBadge &&
+                              selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId &&
+                              selectedBadge.chainId === item.chainId,
                           },
                         )}
                       >
@@ -347,7 +352,7 @@ export default function BridgeSwitch() {
                   >
                     <div
                       className={classNames(
-                        'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded opacity-25',
+                        'nft-backdrop-box relative flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded opacity-25',
                       )}
                     >
                       <div className="relative h-[80px] w-[80px]">
@@ -396,15 +401,16 @@ export default function BridgeSwitch() {
                           onClick={() => {
                             addSelectedBadge(item);
                           }}
-                          className="nft-backdrop-box flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded"
-                        >
-                          {selectedBadge && selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId && (
-                            <div className="absolute left-0 top-0 flex h-[108px] w-[108px] items-center justify-center blur-xl">
-                              <div className="h-[80px] w-[80px]">
-                                <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
-                              </div>
-                            </div>
+                          className={classNames(
+                            'nft-backdrop-box flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
+                            {
+                              'border-[#A5A6AB]':
+                                selectedBadge &&
+                                selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId &&
+                                selectedBadge.chainId === item.chainId,
+                            },
                           )}
+                        >
                           <div className="relative h-[86px] w-[86px]">
                             <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
                           </div>
@@ -431,9 +437,6 @@ export default function BridgeSwitch() {
           </div>
           {selectedBadge ? (
             <div className="mt-8">
-              {/* <div className="text-sm font-semibold">
-                {!isApprovedForAll ? 'Approve P12 Bridge contract ' : 'Bridge from Polygon to BNBChain'}
-              </div> */}
               <div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -470,10 +473,8 @@ export default function BridgeSwitch() {
                   </div>
                 </div>
               </div>
-              {/* isApprovedForAll */}
-              {true && (
+              {isApprovedForAll && (
                 <div className="mt-8">
-                  {/* <p className="text-sm font-semibold">Bridge to BNBChain amount</p> */}
                   <div className="flex items-end gap-4">
                     <div className="mt-3 flex h-[52px] w-[176px] rounded-xl bg-[#494E69]/60 py-1">
                       <div
@@ -500,10 +501,6 @@ export default function BridgeSwitch() {
                     <div className="text-gradient-yellow mt-3.5 text-[20px]/[34px] font-bold">
                       Get <span className="text-[34px] text-inherit">2,024,25</span> Power Level
                     </div>
-                    {/* <div className="flex items-center gap-2">
-                      <span className="text-sm font-normal">est. {(Number(gasEthAmount) * bridgeCount).toFixed(2)}</span>
-                      <img src="/img/bridge/polygon_circle.svg" alt="" width={20} />
-                    </div> */}
                   </div>
                 </div>
               )}
@@ -577,7 +574,12 @@ export default function BridgeSwitch() {
 
       <div className="mt-[96px] border-b border-gray-600"></div>
       <div className="mt-6 text-lg font-semibold">Bridge History</div>
-      <Table loading={false} className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={[]} columns={gamerColumns} />
+      <Table
+        loading={isLoading}
+        className="mt-6 max-w-[95vw] overflow-x-auto"
+        dataSource={historyData?.user?.bridgeTxs || []}
+        columns={gamerColumns}
+      />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { useContract } from './useContract';
 import { badgeABI, bridgeABI } from '@/abis';
 import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
 import { polygon } from 'wagmi/chains';
+import { GalxeBadge } from '@/constants';
 
 const nftQuery = `
     query($address: String!) {   
@@ -27,6 +28,40 @@ const nftQuery = `
       }
     `;
 
+const historyQuery = `
+    query($address: String!) {   
+        user(addr: $address) {
+          bridgeTxs {
+            hash   
+            chainId  
+            timestamp   
+            galxeBadges{   
+              tokenId   
+              image  
+              galxeCampaign {
+                cid
+                name
+                stringId
+              }
+            }
+          }
+        }
+      }
+    `;
+
+export type BridgeTxs = {
+  chainId: string;
+  hash: string;
+  timestamp: number;
+  galxeBadges: GalxeBadge[];
+};
+
+export type HistoryResult = {
+  user: {
+    bridgeTxs: BridgeTxs[];
+  };
+};
+
 const client = new GraphQLClient('https://badge-api-test.p12.games/graphql');
 
 export const useBadgeNFT = (address?: Address) => {
@@ -37,6 +72,17 @@ export const useBadgeNFT = (address?: Address) => {
     };
     const data = await client.request(nftQuery, variables);
     return data;
+  });
+};
+
+export const useBadgeHistory = <T>(address?: Address) => {
+  return useQuery(['fetch_badge_history', address], async () => {
+    if (!address) return {} as T;
+    const variables = {
+      address: address,
+    };
+    const data = await client.request(historyQuery, variables);
+    return data as T;
   });
 };
 
