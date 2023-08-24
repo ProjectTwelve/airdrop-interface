@@ -148,7 +148,8 @@ export default function BridgeSwitch() {
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
     try {
       const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true], {
-        account: NFTContract.account,
+        account: NFTContract.account ?? address,
+        chain: undefined,
       });
       setApproveHash(transactionHash);
     } catch (error) {
@@ -169,7 +170,7 @@ export default function BridgeSwitch() {
       const slicedTokenIds: bigint[] = selectedBadge.tokenIds.slice(0, bridgeCount).map((item) => BigInt(item));
       const transactionHash = await bridgeContract.write.sendBatchNFT(
         [selectedBadge?.contractAddress, BigInt(20736), slicedTokenIds, address, address],
-        { account: bridgeContract.account },
+        { account: bridgeContract.account ?? address, chain: undefined },
       );
       setConfirmHash(transactionHash);
       // refresh token balance api
