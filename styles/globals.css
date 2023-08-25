@@ -165,6 +165,11 @@
         overflow: hidden;
     }
 
+    .home__card {
+        @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
+        @apply flex flex-col items-center justify-center;
+    }
+    
     .copy__btn {
         background: linear-gradient(180deg, #7CD645 5%, #2E5F19 46.81%, #5EAA30 100%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
