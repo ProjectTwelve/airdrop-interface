@@ -84,6 +84,7 @@ export default function BridgeSwitch() {
 
   useEffect(() => {
     const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
+    const allCommunityBadge = Object.entries(P12_COMMUNITY_BADGE);
     if (galxeBadges?.length > 0) {
       const communityBadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'Community');
       const communityBadgeCampaign = communityBadge.map((item) => item.galxeCampaign?.stringId);
@@ -133,10 +134,12 @@ export default function BridgeSwitch() {
       setNFTOwned(chainCommunityBadge);
       setAMABadge(chainAMABadge);
       // filter rest badge
-      const allCommunityBadge = Object.entries(P12_COMMUNITY_BADGE);
       const restBadge = allCommunityBadge
         .filter(([, value]) => !communityBadgeCampaign.includes(value.campaign))
         .map(([, value]) => value);
+      setRestBadge(restBadge);
+    } else {
+      const restBadge = allCommunityBadge.map(([, value]) => value);
       setRestBadge(restBadge);
     }
   }, [data]);
