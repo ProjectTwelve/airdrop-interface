@@ -43,9 +43,9 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-6">
+    <div className="flex-center-y p-6">
       <h4 className="text-xl font-medium">Connect wallet</h4>
-      <div className="mt-6 grid grid-cols-1 gap-3 px-4 md:grid-cols-1">
+      {/* <div className="mt-6 grid grid-cols-1 gap-3 px-4 md:grid-cols-1">
         <Button
           type="bordered"
           className="flex w-full min-w-[210px] items-center justify-center"
@@ -68,6 +68,28 @@ function WalletConnect({ setWalletType }: WalletConnectProps) {
           onClick={() => connectWallet(connectors[2])}
         >
           <img className="mr-2 h-[30px] w-[30px]" src="/img/walletconnet@2x.png" alt="wallet_connet" />
+          <span className="text-sm">WalletConnect</span>
+        </Button>
+      </div> */}
+      <div className="mt-6 grid grid-cols-2 gap-3 px-4">
+        <Button type="bordered" className="flex-center col-span-2 gap-2" onClick={() => connectWallet(connectors[0])}>
+          <img className="h-7.5 w-7.5" src="/img/metamask@2x.png" alt="meta_mask" />
+          <span className="text-sm">MetaMask</span>
+        </Button>
+        <Button type="bordered" className="flex-center gap-2" onClick={() => connectWallet(connectors[1])}>
+          <img className="h-7.5 w-7.5" src="/img/tokenPocket.png" alt="TokenPocket" />
+          <span className="text-sm">TokenPocket</span>
+        </Button>
+        <Button type="bordered" className="flex-center gap-2" onClick={() => connectWallet(connectors[2])}>
+          <img className="h-7.5 w-7.5" src="/img/bitgetWallet.png" alt="BitgetWallet" />
+          <span className="text-sm">Bitget Wallet</span>
+        </Button>
+        <Button type="bordered" className="flex-center gap-2 px-6" onClick={() => connectWallet(connectors[3])}>
+          <img className="h-7.5 w-7.5" src="/img/particleNetwork.png" alt="ParticleNetwork" />
+          <span className="whitespace-nowrap text-sm">Particle Network</span>
+        </Button>
+        <Button type="bordered" className="flex-center gap-2" onClick={() => connectWallet(connectors[4])}>
+          <img className="h-7.5 w-7.5" src="/img/walletconnet.png" alt="wallet_connet" />
           <span className="text-sm">WalletConnect</span>
         </Button>
       </div>

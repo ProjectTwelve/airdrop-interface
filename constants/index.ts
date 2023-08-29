@@ -18,3 +18,9 @@ export * from './bages';
 export * from './storage';
 
 export const inputRegex = /^\d*(?:\\[.])?\d*$/;
+
+// Particle Network config
+export const PARTICLE_PROJECT_ID = process.env.NEXT_PUBLIC_PARTICLE_PROJECT_ID ?? '';
+export const PARTICLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PARTICLE_CLIENT_KEY ?? '';
+export const PARTICLE_SERVER_KEY = process.env.NEXT_PUBLIC_PARTICLE_SERVER_KEY ?? '';
+export const PARTICLE_APP_ID = process.env.NEXT_PUBLIC_PARTICLE_APP_ID ?? '';

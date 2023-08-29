@@ -4,6 +4,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { ParticleAuthConnector } from './particalAuth';
+import { PARTICLE_APP_ID, PARTICLE_CLIENT_KEY, PARTICLE_PROJECT_ID } from '@/constants';
 
 const polygon: Chain = {
   id: 137,
@@ -24,7 +26,10 @@ const polygon: Chain = {
   },
 };
 
-export const { chains, publicClient } = configureChains([mainnet, bsc, bscTestnet, polygon], [publicProvider()]);
+export const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet, bsc, bscTestnet, polygon],
+  [publicProvider()],
+);
 
 export const metaMaskConnector = new MetaMaskConnector({ chains });
 
@@ -40,6 +45,27 @@ export const bitKeepConnector = new InjectedConnector({
     getProvider: () => {
       if (typeof window !== 'undefined') {
         return window.bitkeep?.ethereum;
+      }
+    },
+    shimDisconnect: true,
+  },
+});
+
+export const particleAuthConnector = new ParticleAuthConnector({
+  options: {
+    projectId: PARTICLE_PROJECT_ID,
+    clientKey: PARTICLE_CLIENT_KEY,
+    appId: PARTICLE_APP_ID,
+  },
+});
+
+export const tokenPocketConnector = new InjectedConnector({
+  chains,
+  options: {
+    name: 'TokenPocket',
+    getProvider: () => {
+      if (typeof window !== 'undefined' && window.ethereum?.isTokenPocket) {
+        return window.ethereum;
       }
     },
     shimDisconnect: true,

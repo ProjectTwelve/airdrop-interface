@@ -10,15 +10,24 @@ import InviteDialog from '../dialog/InviteDialog';
 import { createConfig, WagmiConfig } from 'wagmi';
 import RoadmapDialog from '../dialog/RoadmapDialog';
 import GamerEmailDialog from '../dialog/GamerEmailDialog';
-import { bitKeepConnector, metaMaskConnector, publicClient, walletConnectConnector } from '@/connectors';
+import {
+  bitKeepConnector,
+  metaMaskConnector,
+  particleAuthConnector,
+  publicClient,
+  tokenPocketConnector,
+  walletConnectConnector,
+  webSocketPublicClient,
+} from '@/connectors';
 import classNames from 'classnames';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
 const config = createConfig({
   autoConnect: true,
-  connectors: [metaMaskConnector, bitKeepConnector, walletConnectConnector],
+  connectors: [metaMaskConnector, tokenPocketConnector, bitKeepConnector, particleAuthConnector, walletConnectConnector],
   publicClient,
+  webSocketPublicClient,
 });
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
