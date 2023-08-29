@@ -258,6 +258,45 @@ export default function BridgeSwitch() {
     }
   };
 
+  const targetByRarity = (rarity?: string, type?: 'AMA' | 'Community') => {
+    if (type === 'AMA') {
+      return;
+    }
+    if (rarity === 'White') {
+      return {
+        url: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653364450325322173.gif',
+        name: 'P12 Best Supporter [COMMON]',
+      };
+    } else if (rarity === 'Green') {
+      return {
+        url: 'https://cdn.galxe.com/galaxy/p12/3c4afc9b-57a6-4b83-ae3a-397b5f24c085.gif',
+        name: 'P12 Best Supporter [UNCOMMON]',
+      };
+    } else if (rarity === 'Blue') {
+      return {
+        url: 'https://cdn.galxe.com/galaxy/p12/3e3c7025-336a-48f9-aabb-d3253d3c8b8b.gif',
+        name: 'P12 Best Supporter [RARE]',
+      };
+    } else if (rarity === 'Purple') {
+      return {
+        url: 'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650619688807604651.gif',
+        name: 'P12 Best Supporter [EPIC]',
+      };
+    }
+  };
+
+  const transferRarity = (rarity?: string) => {
+    if (rarity === 'White') {
+      return 'Common';
+    } else if (rarity === 'Green') {
+      return 'Uncommon';
+    } else if (rarity === 'Blue') {
+      return 'Rare';
+    } else if (rarity === 'Purple') {
+      return 'Epic';
+    }
+  };
+
   return (
     <div className="p-9">
       <div className="flex gap-9">
@@ -290,7 +329,9 @@ export default function BridgeSwitch() {
                           </div>
                           <div className="mt-1 flex w-full items-center justify-between text-xs">
                             <span className="text-inherit">Rarity:</span>
-                            <span className="text-inherit">{item.galxeCampaign?.rarity}</span>
+                            <span className="text-inherit">
+                              {transferRarity(item.galxeCampaign?.rarity) ?? item.galxeCampaign?.rarity}
+                            </span>
                           </div>
                           <div className="mt-1 flex w-full items-center justify-between text-xs">
                             <span className="text-inherit">Amount:</span>
@@ -303,6 +344,7 @@ export default function BridgeSwitch() {
                         onClick={() => {
                           if (item.chainId !== 20736) {
                             addSelectedBadge(item);
+                            setBridgeCount(item.count ?? 1);
                           }
                         }}
                         className={classNames(
@@ -381,7 +423,9 @@ export default function BridgeSwitch() {
                             </div>
                             <div className="mt-1 flex w-full items-center justify-between text-xs">
                               <span className="text-inherit">Rarity:</span>
-                              <span className="text-inherit">{item.galxeCampaign?.rarity}</span>
+                              <span className="text-inherit">
+                                {transferRarity(item.galxeCampaign?.rarity) ?? item.galxeCampaign?.rarity}
+                              </span>
                             </div>
                             <div className="mt-1 flex w-full items-center justify-between text-xs">
                               <span className="text-inherit">Amount:</span>
@@ -392,7 +436,10 @@ export default function BridgeSwitch() {
                       >
                         <div
                           onClick={() => {
-                            addSelectedBadge(item);
+                            if (item.chainId !== 20736) {
+                              addSelectedBadge(item);
+                              setBridgeCount(item.count ?? 1);
+                            }
                           }}
                           className={classNames(
                             'nft-backdrop-box flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
@@ -439,12 +486,14 @@ export default function BridgeSwitch() {
                       Polygon
                     </div>
                     <div className="nft-backdrop-box relative mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
-                      <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" />
+                      {/* <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" /> */}
                       <div className="relative h-[148px] w-[148px]">
                         <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
                     </div>
-                    <div className="mt-4 w-[200px] text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
+                    <div className="mt-4 h-12 w-[200px] text-center text-sm font-medium">
+                      {selectedBadge.galxeCampaign?.name}
+                    </div>
                   </div>
                   <div>
                     <img width={84} src="/img/bridge/bridge_arrow.webp" alt="bridge_arrow" />
@@ -457,12 +506,24 @@ export default function BridgeSwitch() {
                       P12 Chain
                     </div>
                     <div className="nft-backdrop-box mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-                      <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/p12_chain.svg" alt="p12 chain icon" />
+                      {/* <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/p12_chain.svg" alt="p12 chain icon" /> */}
                       <div className="relative h-[148px] w-[148px]">
-                        <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
+                        <Image
+                          src={
+                            targetByRarity(selectedBadge.galxeCampaign?.rarity, selectedBadge.galxeCampaign?.campaignType)
+                              ?.url ?? selectedBadge.image
+                          }
+                          alt="badge"
+                          objectFit="contain"
+                          layout="fill"
+                          loading="lazy"
+                        />
                       </div>
                     </div>
-                    <div className="mt-4 w-[200px] text-center text-sm font-medium">{selectedBadge.galxeCampaign?.name}</div>
+                    <div className="mt-4 h-12 w-[200px] text-center text-sm font-medium">
+                      {targetByRarity(selectedBadge.galxeCampaign?.rarity, selectedBadge.galxeCampaign?.campaignType)?.name ??
+                        selectedBadge.galxeCampaign?.name}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -18,7 +18,7 @@ function WalletPopover({}: WalletPopoverProps) {
     [WalletType.DOWNLOAD]: <WalletDownload setWalletType={(type) => setType(type)} />,
   };
 
-  return <div style={{ width: 'min(400px,80vw)' }}>{walletComponent[type]}</div>;
+  return <div style={{ width: 'min(460px,80vw)' }}>{walletComponent[type]}</div>;
 }
 
 export default WalletPopover;
