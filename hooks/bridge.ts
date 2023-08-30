@@ -3,7 +3,7 @@ import { Address } from 'wagmi';
 import { GraphQLClient } from 'graphql-request';
 import { useContract } from './useContract';
 import { badgeABI, bridgeABI } from '@/abis';
-import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
+import { BADGE_BRIDGE_TEST_ADDRESS, BADGE_BRIDGE_TEST_ADDRESS_BSC } from '@/constants/addresses';
 import { polygon } from 'wagmi/chains';
 import { GalxeBadge } from '@/constants';
 
@@ -49,6 +49,14 @@ const historyQuery = `
       }
     `;
 
+const PowerLevelQuery = `
+    query($address: String!) {   
+        user(addr: $address) {
+          badgePL
+        }
+      }
+    `;
+
 export type BridgeTxs = {
   chainId: string;
   hash: string;
@@ -62,7 +70,7 @@ export type HistoryResult = {
   };
 };
 
-const client = new GraphQLClient('https://badge-api-test.p12.games/graphql');
+const client = new GraphQLClient('https://badge-api.p12.games/graphql');
 
 export const useBadgeNFT = (address?: Address) => {
   return useQuery(['fetch_badge_nft', address], async () => {
@@ -86,12 +94,23 @@ export const useBadgeHistory = <T>(address?: Address) => {
   });
 };
 
+export const usePowerLevel = <T>(address?: Address) => {
+  return useQuery(['fetch_power_level', address], async () => {
+    if (!address) return {} as T;
+    const variables = {
+      address: address,
+    };
+    const data = await client.request(PowerLevelQuery, variables);
+    return data as T;
+  });
+};
+
 export function useNFTContract({ token, chainId }: { token?: Address; chainId?: number }) {
   return useContract(token, badgeABI, chainId);
 }
 
 export function useBridgeContract({ chainId }: { chainId?: number }) {
   // todo bsc chain address
-  const address = chainId === polygon.id ? BADGE_BRIDGE_TEST_ADDRESS : BADGE_BRIDGE_TEST_ADDRESS;
+  const address = chainId === polygon.id ? BADGE_BRIDGE_TEST_ADDRESS : BADGE_BRIDGE_TEST_ADDRESS_BSC;
   return useContract(address, bridgeABI, chainId);
 }

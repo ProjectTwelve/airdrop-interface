@@ -18,6 +18,7 @@ import Message from '../message';
 import { toast } from 'react-toastify';
 import { shortenHash } from '@/utils';
 import ChainIcon from './ChainIcon';
+import ReactGA from 'react-ga4';
 
 const historyColumnHelper = createColumnHelper<BridgeTxs>();
 
@@ -27,7 +28,6 @@ export default function BridgeSwitch() {
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
   const [bridgeCount, setBridgeCount] = useState<number>(1);
-  // Todo change nft contract
   const NFTContract = useNFTContract({ token: selectedBadge?.contractAddress, chainId: selectedBadge?.chainId });
   const bridgeContract = useBridgeContract({ chainId: selectedBadge?.chainId });
   const { chain } = useNetwork();
@@ -63,9 +63,21 @@ export default function BridgeSwitch() {
     chainId: selectedBadge?.chainId,
     hash: confirmHash,
     onSuccess() {
+      ReactGA.event({
+        action: 'bridge_result',
+        label: 'true',
+        category: 'bridge',
+      });
       toast.success(<Message title="Bridge Successfully" />);
       setConfirmHash(undefined);
       refetch();
+    },
+    onError() {
+      ReactGA.event({
+        action: 'bridge_result',
+        label: 'false',
+        category: 'bridge',
+      });
     },
   });
 
@@ -74,7 +86,6 @@ export default function BridgeSwitch() {
     NFTContract.read
       .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
       .then((isApproved) => {
-        console.log(isApproved, 'isApproved');
         setIsApprovedForAll(isApproved as boolean);
       })
       .catch((error) => {
@@ -149,11 +160,12 @@ export default function BridgeSwitch() {
   };
 
   const approveAll = async () => {
+    ReactGA.event({ action: 'badge_approve', label: selectedBadge?.galxeCampaign?.stringId, category: 'bridge' });
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
     try {
       const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true], {
         account: NFTContract.account ?? address,
-        chain: undefined,
+        chain: selectedBadge.chainId === polygon.id ? polygon : bsc,
       });
       setApproveHash(transactionHash);
     } catch (error) {
@@ -162,6 +174,11 @@ export default function BridgeSwitch() {
   };
 
   const bridgeMultiple = async () => {
+    ReactGA.event({
+      action: 'bridge_confirm',
+      label: `${selectedBadge?.galxeCampaign?.stringId}_${bridgeCount}`,
+      category: 'bridge',
+    });
     if (
       !bridgeContract ||
       !selectedBadge?.contractAddress ||
@@ -174,7 +191,7 @@ export default function BridgeSwitch() {
       const slicedTokenIds: bigint[] = selectedBadge.tokenIds.slice(0, bridgeCount).map((item) => BigInt(item));
       const transactionHash = await bridgeContract.write.sendBatchNFT(
         [selectedBadge?.contractAddress, BigInt(20736), slicedTokenIds, address, address],
-        { account: bridgeContract.account ?? address, chain: undefined },
+        { account: bridgeContract.account ?? address, chain: selectedBadge.chainId === polygon.id ? polygon : bsc },
       );
       setConfirmHash(transactionHash);
       // refresh token balance api
@@ -185,11 +202,13 @@ export default function BridgeSwitch() {
   };
 
   const minus = () => {
+    ReactGA.event({ action: 'badge_amount_reduce', label: selectedBadge?.galxeCampaign?.stringId, category: 'bridge' });
     if (bridgeCount === 1) return;
     setBridgeCount(bridgeCount - 1);
   };
 
   const plus = () => {
+    ReactGA.event({ action: 'badge_amount_add', label: selectedBadge?.galxeCampaign?.stringId, category: 'bridge' });
     if (bridgeCount + 1 > (selectedBadge?.count || 0)) {
       return;
     }
@@ -238,8 +257,24 @@ export default function BridgeSwitch() {
       historyColumnHelper.accessor('hash', {
         header: 'Bridge tx',
         size: 100,
-        cell: ({ getValue }) => (
-          <div className="flex h-full cursor-pointer items-center text-blue">{shortenHash(getValue())}</div>
+        cell: ({ getValue, row: { original } }) => (
+          <div
+            className="flex h-full cursor-pointer items-center text-blue"
+            onClick={() => {
+              ReactGA.event({
+                action: 'view_history',
+                label: `${original.chainId}_${getValue()}`,
+                category: 'bridge',
+              });
+              if (Number(original.chainId) === polygon.id) {
+                window.open(`https://polygonscan.com/tx/${getValue()}`, '__blank');
+              } else if (Number(original.chainId) === bsc.id) {
+                window.open(`https://bscscan.com/tx/${getValue()}`, '__blank');
+              }
+            }}
+          >
+            {shortenHash(getValue())}
+          </div>
         ),
       }),
     ],
@@ -297,6 +332,21 @@ export default function BridgeSwitch() {
     }
   };
 
+  const calculatePLByRarity = (rarity?: string) => {
+    switch (rarity) {
+      case 'White':
+        return 12;
+      case 'Green':
+        return 120;
+      case 'Blue':
+        return 240;
+      case 'Purple':
+        return 600;
+      default:
+        return 0;
+    }
+  };
+
   return (
     <div className="p-9">
       <div className="flex gap-9">
@@ -343,6 +393,7 @@ export default function BridgeSwitch() {
                       <div
                         onClick={() => {
                           if (item.chainId !== 20736) {
+                            ReactGA.event({ action: 'select_badge', label: item.galxeCampaign?.stringId, category: 'bridge' });
                             addSelectedBadge(item);
                             setBridgeCount(item.count ?? 1);
                           }
@@ -437,6 +488,11 @@ export default function BridgeSwitch() {
                         <div
                           onClick={() => {
                             if (item.chainId !== 20736) {
+                              ReactGA.event({
+                                action: 'select_badge',
+                                label: item.galxeCampaign?.stringId,
+                                category: 'bridge',
+                              });
                               addSelectedBadge(item);
                               setBridgeCount(item.count ?? 1);
                             }
@@ -553,7 +609,11 @@ export default function BridgeSwitch() {
                       </div>
                     </div>
                     <div className="text-gradient-yellow mt-3.5 text-[20px]/[34px] font-bold">
-                      Get <span className="text-[34px] text-inherit">2,024,25</span> Power Level
+                      Get
+                      <span className="text-[34px] text-inherit">
+                        {bridgeCount * calculatePLByRarity(selectedBadge?.galxeCampaign?.rarity)}
+                      </span>
+                      Power Level
                     </div>
                   </div>
                 </div>
