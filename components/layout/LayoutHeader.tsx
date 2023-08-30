@@ -8,6 +8,7 @@ import LayoutHeaderExtra from './LayoutHeaderExtra';
 import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '../../store/gamer/state';
 import { invitationCountAtom } from '../../store/invite/state';
 import { fetchGamerEmailInfo, fetchInvitationCount } from '../../lib/api';
+import ReactGA from 'react-ga4';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -16,6 +17,13 @@ function LayoutHeader() {
   const setInvitationCount = useSetRecoilState(invitationCountAtom);
   const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
+
+  useEffect(() => {
+    // set GA ID
+    if (!address) return;
+    ReactGA.set({ userId: address });
+    ReactGA.set({ wallet_address: address.substring(2) });
+  }, [address]);
 
   useQuery(['invitation_count', { addr: address }], () => fetchInvitationCount(address), {
     enabled: !!address,
