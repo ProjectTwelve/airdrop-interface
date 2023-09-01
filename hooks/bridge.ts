@@ -6,6 +6,7 @@ import { badgeABI, bridgeABI } from '@/abis';
 import { BADGE_BRIDGE_TEST_ADDRESS, BADGE_BRIDGE_TEST_ADDRESS_BSC } from '@/constants/addresses';
 import { polygon } from 'wagmi/chains';
 import { GalxeBadge } from '@/constants';
+import { fetchPowerLevel } from '@/lib/api-nest';
 
 const nftQuery = `
     query($address: String!) {   
@@ -114,3 +115,10 @@ export function useBridgeContract({ chainId }: { chainId?: number }) {
   const address = chainId === polygon.id ? BADGE_BRIDGE_TEST_ADDRESS : BADGE_BRIDGE_TEST_ADDRESS_BSC;
   return useContract(address, bridgeABI, chainId);
 }
+
+export const useFetchPowerLevel = (address?: Address) => {
+  return useQuery(['fetch_power_level_2', address], () => fetchPowerLevel(address), {
+    select: (data) => data.data,
+    enabled: !!address,
+  });
+};

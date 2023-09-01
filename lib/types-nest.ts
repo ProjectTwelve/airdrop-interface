@@ -13,3 +13,12 @@ export type UserInfo = {
   address: Address;
   accessToken: string;
 };
+
+export type PowerLevelResult = {
+  walletAddress: string;
+  participant: boolean;
+  power: number;
+  votes: number;
+  invite: number;
+  beVotedVote: number;
+};

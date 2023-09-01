@@ -2,12 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import BridgeSwitch from '../../components/bridge/BridgeSwitch';
 import { useAccount } from 'wagmi';
-import { usePowerLevel } from '@/hooks/bridge';
 import ReactGA from 'react-ga4';
+import { useFetchPowerLevel } from '@/hooks/bridge';
 
 export default function Bridge() {
   const { address } = useAccount();
-  const { data: plData } = usePowerLevel<any>(address);
+  const { data: powerLevel } = useFetchPowerLevel(address);
+
   return (
     <div className="mt-8">
       <div className="flex-center relative mt-5 gap-6 rounded-2xl bg-gradient-to-b from-gray-550/50 py-8 backdrop-blur-lg">
@@ -15,7 +16,7 @@ export default function Bridge() {
         <img width={104} src="/img/pl/power_level.png" alt="power_level" />
         <div>
           <p className="text-xl/5.5">Arcana - Linea Editorium </p>
-          <div className="text-gradient-yellow mt-3.5 text-[68px]/[68px] font-bold">{plData?.user?.badgePL ?? 0}</div>
+          <div className="text-gradient-yellow mt-3.5 text-[68px]/[68px] font-bold">{powerLevel?.power ?? 0}</div>
         </div>
       </div>
       <div className="mt-7 h-9 rounded-lg bg-[#4383FF4D] px-4 text-sm font-medium leading-9 backdrop-blur-lg">
