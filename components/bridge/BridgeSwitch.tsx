@@ -141,6 +141,11 @@ export default function BridgeSwitch() {
         }
         chainAMABadge[i] = byIdItem;
       }
+      chainCommunityBadge.sort((arr1, arr2) => {
+        const chainId1 = arr1[0]?.chainId || 0;
+        const chainId2 = arr2[0]?.chainId || 0;
+        return chainId2 - chainId1;
+      });
 
       setNFTOwned(chainCommunityBadge);
       setAMABadge(chainAMABadge);
@@ -610,7 +615,7 @@ export default function BridgeSwitch() {
                     </div>
                     <div className="text-gradient-yellow mt-3.5 text-[20px]/[34px] font-bold">
                       Get
-                      <span className="text-[34px] text-inherit">
+                      <span className="mx-1 text-[34px] text-inherit">
                         {bridgeCount * calculatePLByRarity(selectedBadge?.galxeCampaign?.rarity)}
                       </span>
                       Power Level
