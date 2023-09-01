@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { mainnet } from 'wagmi/chains';
+import { polygon } from 'wagmi/chains';
 import { Platform } from '@/constants';
 import { useRouter } from 'next/router';
 import Button from '@/components/button';
@@ -41,7 +41,7 @@ function Web3Status() {
       unwatchAccount.current?.();
     },
   });
-  const { switchNetwork } = useSwitchNetwork({ chainId: mainnet.id });
+  const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
 
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
   const posterCapture = useRecoilValue(posterCaptureAtom);

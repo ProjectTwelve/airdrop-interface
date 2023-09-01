@@ -133,66 +133,56 @@ export const P12_COMMUNITY_BADGE: Record<COMMUNITY_NFT_CAMPAIGN_ID, BadgeInfo> =
     rarity: 'Common',
     polygonName: 'P12 Discord Game',
     BNBChainName: 'P12 Discord Game',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1651069585718037346.png',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GC6YGUUpaT.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCj44UtwmA]: {
     campaign: 'GCj44UtwmA',
     rarity: 'Common',
     polygonName: 'Landing Site',
     BNBChainName: 'Landing Site',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653364450325322173.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCj44UtwmA.png',
   },
-  // [COMMUNITY_NFT_CAMPAIGN_ID.GCWbWUtGMv]: {
-  //   campaign: 'GCWbWUtGMv',
-  //   rarity: 'Common',
-  //   polygonName: 'P12 Best Supporter [White Rarity]',
-  //   BNBChainName: 'P12 Best Supporter [White Rarity]',
-  //   polygonImage: 'https://cdn-2.galxe.com/galaxy/images/p12/1661915813729798311.png?optimizer=image&width=800&quality=100',
-  // },
   [COMMUNITY_NFT_CAMPAIGN_ID.GC8tsUUnhC]: {
     campaign: 'GC8tsUUnhC',
     rarity: 'Common',
     polygonName: 'P12 Best Supporter [White Rarity]',
     BNBChainName: 'P12 Best Supporter [White Rarity]',
-    polygonImage:
-      'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650617344202809443.png?optimizer=image&width=800&quality=100',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GC8tsUUnhC.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCBmbUUvgc]: {
     campaign: 'GCBmbUUvgc',
     rarity: 'Common',
     polygonName: 'P12 Best Supporter [White Rarity]',
     BNBChainName: 'P12 Best Supporter [White Rarity]',
-    polygonImage:
-      'https://cdn.galxe.com/galaxy/assets/projecttwelve/1651069585718037346.png?optimizer=image&width=800&quality=100',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCBmbUUvgc.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCB7bUUkWH]: {
     campaign: 'GCB7bUUkWH',
     rarity: 'Common',
     polygonName: 'P12 Best Supporter [White Rarity]',
     BNBChainName: 'P12 Best Supporter [White Rarity]',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653364450325322173.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCB7bUUkWH.png',
   },
-  // [COMMUNITY_NFT_CAMPAIGN_ID.GC1pbUUMCi]: {
-  //   campaign: 'GC1pbUUMCi',
-  //   rarity: 'Uncommon',
-  //   polygonName: 'P12 Best Supporter [Green Rarity]',
-  //   BNBChainName: 'P12 Best Supporter [Green Rarity]',
-  //   polygonImage: 'https://cdn.galxe.com/galaxy/p12/3c4afc9b-57a6-4b83-ae3a-397b5f24c085.gif',
-  // },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCypPUUFQR]: {
     campaign: 'GCypPUUFQR',
     rarity: 'Uncommon',
     polygonName: 'P12 Best Supporter [Green Rarity]',
     BNBChainName: 'P12 Best Supporter [Green Rarity]',
-    polygonImage:
-      'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650618474676411164.png?optimizer=image&width=800&quality=100',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCypPUUFQR.png',
+  },
+  [COMMUNITY_NFT_CAMPAIGN_ID.GCALHUUGt5]: {
+    campaign: 'GCALHUUGt5',
+    rarity: 'Uncommon',
+    polygonName: 'P12 Giveaway Badge',
+    BNBChainName: 'P12 Giveaway Badge',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCALHUUGt5.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCDqcUUudB]: {
     campaign: 'GCDqcUUudB',
     rarity: 'Uncommon',
     polygonName: 'P12 Nebula',
     BNBChainName: 'P12 Nebula',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1652598353719493542.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCDqcUUudB.png',
   },
 
   [COMMUNITY_NFT_CAMPAIGN_ID.GCXBcUUM56]: {
@@ -200,52 +190,29 @@ export const P12_COMMUNITY_BADGE: Record<COMMUNITY_NFT_CAMPAIGN_ID, BadgeInfo> =
     rarity: 'Rare',
     polygonName: 'P12 Dream Weaver',
     BNBChainName: 'P12 Dream Weaver',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1652598796917895727.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCXBcUUM56.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCdRtUtc3W]: {
     campaign: 'GCdRtUtc3W',
     rarity: 'Rare',
     polygonName: 'P12 Best Supporter [Blue Rarity]',
     BNBChainName: 'P12 Best Supporter [Blue Rarity]',
-    polygonImage:
-      'https://cdn.galxe.com/galaxy/assets/projecttwelve/1654670997542549058.png?optimizer=image&width=800&quality=100',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCdRtUtc3W.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCbVwUt9SD]: {
     campaign: 'GCbVwUt9SD',
     rarity: 'Epic',
     polygonName: 'P12 StarMaker',
     BNBChainName: 'P12 StarMaker',
-    polygonImage: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1655003642820587877.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCbVwUt9SD.png',
   },
   [COMMUNITY_NFT_CAMPAIGN_ID.GC8NPUUqJC]: {
     campaign: 'GC8NPUUqJC',
     rarity: 'Epic',
     polygonName: 'P12 Best Supporter [Purple Rarity]',
     BNBChainName: 'P12 Best Supporter [Purple Rarity]',
-    polygonImage: 'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650619688807604651.gif',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GC8NPUUqJC.png',
   },
-  // [COMMUNITY_NFT_CAMPAIGN_ID.GC1abUUnxU]: {
-  //   campaign: 'GC1abUUnxU',
-  //   rarity: 'Epic',
-  //   polygonName: 'P12 Best Supporter [Purple Rarity]',
-  //   BNBChainName: 'P12 Best Supporter [Purple Rarity]',
-  //   polygonImage: 'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650619688807604651.gif',
-  // },
-  // GCu9bUUxXo: {
-  //   campaign: 'GCu9bUUxXo',
-  //   rarity: 'Epic',
-  //   polygonName: 'P12 First Gleam Event [Purple Rarity]',
-  //   BNBChainName: 'P12 First Gleam Event [Purple Rarity]',
-  //   polygonImage: 'https://cdn-2.galxe.com/galaxy/images/p12/1649574994798648575.jpg?optimizer=image&width=800&quality=100',
-  // },
-  // test
-  // GC7QrU4ijW: {
-  //   campaign: 'GC7QrU4ijW',
-  //   rarity: 'Common',
-  //   polygonName: 'Bridge test',
-  //   BNBChainName: 'Bridge test',
-  //   polygonImage: 'https://cdn.galxe.com/galaxy/p12/72697b78-0512-454e-b5b1-7c25cf099356.png',
-  // },
 };
 
 export const P12_AMA_OAT_BADGE: Record<AMA_NFT_CAMPAIGN_ID, BadgeInfo> = {
