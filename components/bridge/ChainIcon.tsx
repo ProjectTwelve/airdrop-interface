@@ -10,7 +10,7 @@ const ChainIcon: React.FunctionComponent<ChainIconProps> = ({ chainId, className
   if (chainId === polygon.id) {
     return <img className={className} src="/img/bridge/polygon.svg" alt="chain icon" />;
   } else if (chainId === bsc.id) {
-    return <img className={className} src="/img/bridge/bnb_chain.svg" alt="chain icon" />;
+    return <img className={className} src="/img/bridge/bsc.svg" alt="chain icon" />;
   } else if (chainId === 20736) {
     return <img className={className} src="/img/bridge/p12_chain.svg" alt="chain icon" />;
   } else {

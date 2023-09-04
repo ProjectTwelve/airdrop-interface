@@ -559,8 +559,17 @@ export default function BridgeSwitch() {
                   <div>
                     <div className="flex items-center gap-2">
                       From:
-                      <img className="w-[30px]" src="/img/bridge/polygon.svg" alt="polygon icon" />
-                      Polygon
+                      {selectedBadge.chainId === polygon.id ? (
+                        <span className="flex items-center gap-2">
+                          <img className="w-[30px]" src="/img/bridge/polygon.svg" alt="polygon icon" />
+                          Polygon
+                        </span>
+                      ) : selectedBadge.chainId === bsc.id ? (
+                        <span className="flex items-center gap-2">
+                          <img className="w-[30px]" src="/img/bridge/bsc.svg" alt="polygon icon" />
+                          BSC
+                        </span>
+                      ) : null}
                     </div>
                     <div className="nft-backdrop-box relative mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
                       {/* <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" /> */}
