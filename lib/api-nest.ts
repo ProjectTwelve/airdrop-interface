@@ -5,4 +5,4 @@ import { Address } from 'wagmi';
 export const fetchLogin = (data: LoginParams) => request.post<any, Response<UserInfo>>('/auth/login', data);
 
 export const fetchPowerLevel = (address?: Address) =>
-  request.post<any, Response<PowerLevelResult>>(`/arcana/power-vote/${address}`);
+  request.get<any, Response<PowerLevelResult>>(`/arcana/power-vote/${address}`);
