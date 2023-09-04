@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import { BridgeTxs, HistoryResult, useBadgeHistory, useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
 import { BadgeInfo, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
 import { groupBy } from 'lodash-es';
-import { BADGE_BRIDGE_TEST_ADDRESS } from '@/constants/addresses';
+import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC } from '@/constants/addresses';
 import Message from '../message';
 import { toast } from 'react-toastify';
 import { shortenHash } from '@/utils';
@@ -50,7 +50,7 @@ export default function BridgeSwitch() {
       setApproveHash(undefined);
       if (!NFTContract || !address) return;
       NFTContract.read
-        .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
+        .isApprovedForAll([address, BADGE_BRIDGE_ADDRESS])
         .then((isApproved) => {
           setIsApprovedForAll(isApproved as boolean);
         })
@@ -92,8 +92,9 @@ export default function BridgeSwitch() {
 
   useEffect(() => {
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge.chainId) return;
+    const bridgeAddress = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS : BADGE_BRIDGE_ADDRESS_BSC;
     NFTContract.read
-      .isApprovedForAll([address, BADGE_BRIDGE_TEST_ADDRESS])
+      .isApprovedForAll([address, bridgeAddress])
       .then((isApproved) => {
         setIsApprovedForAll(isApproved as boolean);
       })
@@ -177,7 +178,8 @@ export default function BridgeSwitch() {
     ReactGA.event({ action: 'badge_approve', label: selectedBadge?.galxeCampaign?.stringId, category: 'bridge' });
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
     try {
-      const transactionHash = await NFTContract.write.setApprovalForAll([BADGE_BRIDGE_TEST_ADDRESS, true], {
+      const bridgeAddress = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS : BADGE_BRIDGE_ADDRESS_BSC;
+      const transactionHash = await NFTContract.write.setApprovalForAll([bridgeAddress, true], {
         account: NFTContract.account ?? address,
         chain: selectedBadge.chainId === polygon.id ? polygon : bsc,
       });
