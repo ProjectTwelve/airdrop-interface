@@ -526,7 +526,14 @@ export default function BridgeSwitch() {
             ) : (
               <div className="nft-backdrop-box mt-3 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
                 <div className="text-xs text-gray-400">To collect more badges & level your game up at</div>
-                <div className="cursor-pointer text-sm font-semibold text-blue"> P12 Discord</div>
+                <div
+                  className="cursor-pointer text-sm font-semibold text-blue"
+                  onClick={() => {
+                    window.open('https://discord.com/invite/EMrbsZPbxs', '__blank');
+                  }}
+                >
+                  P12 Discord
+                </div>
               </div>
             )}
           </div>
