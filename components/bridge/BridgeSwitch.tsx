@@ -48,9 +48,10 @@ export default function BridgeSwitch() {
     hash: approveHash,
     onSuccess() {
       setApproveHash(undefined);
-      if (!NFTContract || !address) return;
+      if (!NFTContract || !address || !selectedBadge) return;
+      const bridgeAddress = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS : BADGE_BRIDGE_ADDRESS_BSC;
       NFTContract.read
-        .isApprovedForAll([address, BADGE_BRIDGE_ADDRESS])
+        .isApprovedForAll([address, bridgeAddress])
         .then((isApproved) => {
           setIsApprovedForAll(isApproved as boolean);
         })
@@ -408,6 +409,9 @@ export default function BridgeSwitch() {
                     >
                       <div
                         onClick={() => {
+                          if (approveLoading) {
+                            return;
+                          }
                           if (item.chainId !== 20736) {
                             ReactGA.event({ action: 'select_badge', label: item.galxeCampaign?.stringId, category: 'bridge' });
                             addSelectedBadge(item);
@@ -503,6 +507,9 @@ export default function BridgeSwitch() {
                       >
                         <div
                           onClick={() => {
+                            if (approveLoading) {
+                              return;
+                            }
                             if (item.chainId !== 20736) {
                               ReactGA.event({
                                 action: 'select_badge',
