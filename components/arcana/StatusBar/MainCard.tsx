@@ -66,7 +66,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
       <div className="flex h-12 justify-between xs:h-[12.8vw]">
         <div className="flex">
           <div className="mx-2 xs:mx-[2.15vw]">
-            <p className="h-[18px] text-xs font-medium text-p12-gold xs:h-[4.8vw]">My Votes</p>
+            <p className="h-[18px] text-xs font-medium text-yellow xs:h-[4.8vw]">My Votes</p>
             <img
               src="/img/arcana/statusbar/multicast.webp"
               onClick={() => {
@@ -122,11 +122,11 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
       </div>
       <div className="mt-2">
         <div className="flex h-[24px] items-center justify-between rounded bg-[url('/img/arcana/statusbar/health.webp')] bg-cover bg-no-repeat px-3 xs:px-1.5">
-          <p className="flex-none text-[10px] leading-3 text-p12-link" style={{ textShadow: '0 0 6px #000000' }}>
+          <p className="flex-none text-[10px] leading-3 text-blue" style={{ textShadow: '0 0 6px #000000' }}>
             My Referral Link
           </p>
-          <div className="dota__gold relative ml-2 truncate pr-10">
-            <span className="dota__gold text-[10px] leading-3">{referralLink.replace(/https?:\/\//g, '')}</span>
+          <div className="dota__yellow relative ml-2 truncate pr-10">
+            <span className="dota__yellow text-[10px] leading-3">{referralLink.replace(/https?:\/\//g, '')}</span>
             <button
               className="copy__btn absolute top-[3px] right-0 h-[18px] w-[36px] text-white"
               onClick={() => {
@@ -148,7 +148,7 @@ export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {
           <p
             className={classNames(
               'relative z-10 select-none text-[10px]',
-              predictionAnswerCount === predictionCount && 'dota__gold cursor-pointer',
+              predictionAnswerCount === predictionCount && 'dota__yellow cursor-pointer',
             )}
             style={{ textShadow: '0 0 6px #000000' }}
             onClick={onManaClick}

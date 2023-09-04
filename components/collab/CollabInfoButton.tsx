@@ -80,9 +80,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const handleJoin = useCallback(() => {
     if (isJoined) return;
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'join' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'join' });
     if (!address) {
-      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'connect' });
+      ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'connect' });
       setConnectOpen(true);
       return;
     }
@@ -91,9 +91,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
 
   const handleChainJoin = useCallback(async () => {
     if (isChainJoined || !collabContract) return;
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-join' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'chain-join' });
     if (!address) {
-      ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'chain-connect' });
+      ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'chain-connect' });
       setConnectOpen(true);
       return;
     }
@@ -104,8 +104,8 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
     try {
       setIsWriteLoading(true);
       mutationJoin.mutate({ collabCode, walletAddress: address });
-      const { wait } = await collabContract['saveStamp(string,string)'](collabCode, onChainIpfs);
-      const { transactionHash } = await wait();
+      // @ts-ignore
+      const transactionHash = await collabContract.write.saveStamp([collabCode, onChainIpfs]);
       toast.success(
         <Message
           title="Mission Complete"
@@ -113,7 +113,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
             <div>
               <p>Join successfully</p>
               <p>
-                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                <a className="text-blue" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
                 </a>
               </p>
@@ -124,11 +124,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
       setIsWriteLoading(false);
       setIsChainJoined(true);
     } catch (error: any) {
-      if (error.error && error.error.data) {
-        const sigHash = error.error.data.data;
-        const name = collabContract.interface.getError(sigHash).name;
-        toast.error(<Message title="Ah shit, here we go again" message={name} />);
-      }
+      toast.error(<Message title="Ah shit, here we go again" message="save error" />);
       setIsWriteLoading(false);
     }
   }, [isChainJoined, collabContract, address, isCorrectNetwork, setConnectOpen, switchNetwork, collabCode, onChainIpfs]);
@@ -160,9 +156,9 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   ]);
 
   useEffect(() => {
-    if (!collabContract) return;
-    collabContract
-      .readStamp(address, collabCode)
+    if (!collabContract || !address) return;
+    collabContract.read
+      .readStamp([address, collabCode])
       .then((res: string | undefined) => {
         setIsChainJoined(!!res);
       })
@@ -173,7 +169,7 @@ export default function CollabInfoButton({ data }: CollabInfoButtonProps) {
   }, [address, collabCode, collabContract]);
 
   const handleClaim = useCallback(() => {
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'claim' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'claim' });
     setClaimModal(true);
   }, [setClaimModal]);
 

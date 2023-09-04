@@ -57,7 +57,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   );
 
   const handleTwitterShareClick = useCallback(() => {
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'twitter' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'twitter' });
     const referralLink = window.location.origin + window.location.pathname + (referralCode ? `?code=${referralCode}` : '');
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(taskTweetContent || '');
@@ -65,7 +65,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
   }, [taskTweetContent, referralCode]);
 
   const handleVerify = useCallback(() => {
-    ReactGA.event({ category: 'Collab-Item', action: 'Click', label: 'verify' });
+    ReactGA.event({ action: 'Collab-Item', category: 'Click', label: 'verify' });
     if (!address) {
       toast.error(<Message message="Please connect your wallet first." title="Oops" />);
       return;
@@ -102,8 +102,8 @@ export default function CollabTasks({ data }: CollabTasksProps) {
           target="_blank"
           onClick={() =>
             ReactGA.event({
-              category: 'Collab-Item',
-              action: 'Click',
+              action: 'Collab-Item',
+              category: 'Click',
               label: 'airdrop-none-nft',
             })
           }

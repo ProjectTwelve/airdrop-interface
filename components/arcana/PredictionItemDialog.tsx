@@ -173,7 +173,7 @@ export default function PredictionItemDialog({
       render={() => (
         <div className="w-[720px]">
           <p className="text-center text-xl font-medium">{title}</p>
-          <p className="mt-2 text-center text-sm text-p12-orange">{subTitle}</p>
+          <p className="mt-2 text-center text-sm text-orange">{subTitle}</p>
           <div className="vertical-scroll mt-8 -mr-4 max-h-[510px] overflow-y-auto overflow-x-hidden pr-4">
             {type === PREDICTION_TYPE.HERO ? (
               <HeroOptionList onSelect={onSelect} options={options} />
@@ -184,7 +184,7 @@ export default function PredictionItemDialog({
             )}
           </div>
           <p className="mt-5 text-center text-xs">
-            * Your pick shall subject to the&nbsp;<span className="font-medium text-p12-success">Main Event (10/20-10/30)</span>
+            * Your pick shall subject to the&nbsp;<span className="font-medium text-green">Main Event (10/20-10/30)</span>
             &nbsp; results.
           </p>
         </div>

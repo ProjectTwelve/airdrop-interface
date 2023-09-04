@@ -5,7 +5,6 @@ import OMGPrediction from './OMGPrediction';
 import OMGTopVotes from './OMGTopVotes';
 import OMGLuckyDraw from './OMGLuckyDraw';
 import { useIsMounted } from '../../../hooks/useIsMounted';
-import { ZERO_ADDRESS } from '../../../constants/addresses';
 import { useArcanaPredictionsOMG } from '../../../hooks/arcana';
 import { arcanaOriginAddressAtom, arcanaPredictionOMGAnswerAtom } from '../../../store/arcana/state';
 
@@ -13,7 +12,7 @@ export default function OMG() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
-  const { data } = useArcanaPredictionsOMG(originAddress ?? address ?? ZERO_ADDRESS);
+  const { data } = useArcanaPredictionsOMG(originAddress ?? address);
   const setPredictionAnswer = useSetRecoilState(arcanaPredictionOMGAnswerAtom);
 
   const onAnchorClick = () => {
@@ -31,10 +30,10 @@ export default function OMG() {
 
   return (
     <div className="overflow-hidden rounded-lg pb-6 backdrop-blur-lg">
-      <div className="flex items-center justify-between gap-2 bg-omg-mask px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center">
+      <div className="flex items-center justify-between gap-2 bg-card-mask px-[30px] py-2.5 pt-6 xs:flex-col xs:items-center">
         <h2 className="text-[26px] font-medium leading-[30px]">Check Winners of OMG Round 2</h2>
         <p
-          className="mt-1.5 cursor-pointer text-right text-sm font-medium text-p12-link xs:text-center"
+          className="mt-1.5 cursor-pointer text-right text-sm font-medium text-blue xs:text-center"
           onClick={onAnchorClick}
         >
           Back to Round 1&nbsp;

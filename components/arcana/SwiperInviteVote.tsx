@@ -1,4 +1,4 @@
-import { Autoplay } from 'swiper';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useArcanaRecentInvitation } from '../../hooks/arcana';
 import { RecentInvitationItem } from '../../lib/types';
@@ -17,7 +17,7 @@ function SwiperInviteVoteItem({ data }: { data: RecentInvitationItem }) {
       <p className="ml-2 max-w-[120px] truncate text-sm font-medium">{data.inviteeName}</p>&nbsp;,
       <p className="ml-2 text-sm">
         get
-        <span className="dota__gold font-medium">
+        <span className="dota__yellow font-medium">
           &nbsp;{data.votes}&nbsp;
           {data.votes > 1 ? 'Votes' : 'Vote'}.
         </span>

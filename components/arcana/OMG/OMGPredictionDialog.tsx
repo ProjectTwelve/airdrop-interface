@@ -40,7 +40,7 @@ export default function OMGPredictionDialog({ open, code, onOpenChange, title, s
       render={() => (
         <div className="w-[540px]">
           <p className="text-center text-xl font-medium">{title}</p>
-          <p className="mt-2 text-center text-sm text-p12-orange">{subTitle}</p>
+          <p className="mt-2 text-center text-sm text-orange">{subTitle}</p>
           <div className="mt-8 grid grid-cols-2 gap-[30px]">
             {options &&
               options.map((item) => (

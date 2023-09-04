@@ -17,22 +17,22 @@ export default function GamerP12() {
   return (
     <div>
       <h3 className="text-xl font-medium">My P12 tokens</h3>
-      <div className="mt-3 mb-8 flex rounded-2xl border border-p12-line py-[30px] md:flex-col md:py-0">
-        <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
+      <div className="mt-3 mb-8 flex rounded-2xl border border-gray-600 py-[30px] md:flex-col md:py-0">
+        <div className="flex flex-1 flex-col items-center justify-center border-r border-gray-600 md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
             <Image src={iconStatus.get(!!gamerInfo?.steam_id) || ''} width={26} height={26} alt="icon" />
             <p className="ml-2 font-medium">Sign in with Steam</p>
           </div>
           <p className="font-medium">account and sync profile</p>
         </div>
-        <div className="flex flex-1 flex-col items-center justify-center border-r border-p12-line  md:border-r-0 md:border-b md:py-2">
+        <div className="flex flex-1 flex-col items-center justify-center border-r border-gray-600  md:border-r-0 md:border-b md:py-2">
           <div className="flex items-center justify-center">
             <Image src={iconStatus.get(gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) || ''} width={26} height={26} alt="icon" />
             <p className="ml-2 font-medium">{gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? 'Airdrop NFT' : 'NO NFT YET'}</p>
           </div>
           {gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED && <p className="font-medium">Hesitation is defeat</p>}
         </div>
-        <div className="flex flex-1 items-center justify-center border-r border-p12-line md:border-r-0 md:border-b md:py-2">
+        <div className="flex flex-1 items-center justify-center border-r border-gray-600 md:border-r-0 md:border-b md:py-2">
           <Image src={iconStatus.get(isClicked) || ''} width={26} height={26} alt="icon" />
           <p className="mx-2 font-medium">Join us on</p>
           <SocialMedia />

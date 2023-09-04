@@ -17,13 +17,13 @@ export default function GenesisVoteDialog({ nftLevel, close, votes, createdAt, n
   return (
     <div className="flex w-[calc(100vw-20px)] max-w-[540px] flex-col items-center justify-center">
       <h2 className="text-center font-medium">Get VOTES by Genesis NFT</h2>
-      <p className="flex items-center justify-center text-[60px] font-medium text-p12-success">
-        <span className="mr-2 text-[45px] text-p12-success">X</span> {votes || 0}
+      <p className="flex items-center justify-center text-[60px] font-medium text-green">
+        <span className="mr-2 text-[45px] text-green">X</span> {votes || 0}
       </p>
       {nftLevel !== undefined ? <img className="h-[220px] w-[220px]" src={GAMER_BADGES[nftLevel].imgBig} alt="asset" /> : null}
       <p className="mt-4 text-xl font-medium">P12 Airdrop Genesis NFT</p>
-      <p className="mt-1.5 text-xs text-p12-sub">Birthday: {createdAt ? dayjs(createdAt).format('YYYY/MM/DD') : '--'}</p>
-      <div className="mt-6 flex w-full rounded-xl border border-p12-line py-4 md:flex-col md:py-0">
+      <p className="mt-1.5 text-xs text-gray">Birthday: {createdAt ? dayjs(createdAt).format('YYYY/MM/DD') : '--'}</p>
+      <div className="mt-6 flex w-full rounded-xl border border-gray-600 py-4 md:flex-col md:py-0">
         {[
           { label: 'ID', value: nftId ?? '--' },
           { label: 'Contract address', value: shortenAddress(BADGE_CONTRACT_ADDRESS) },
@@ -33,12 +33,12 @@ export default function GenesisVoteDialog({ nftLevel, close, votes, createdAt, n
           <div
             key={item.label}
             className={classNames(
-              'flex flex-1 flex-col items-center justify-center border-r border-p12-line',
+              'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
               'md:flex-row md:border-r-0 md:border-b md:py-2',
               'last:border-none',
             )}
           >
-            <p className="h-5 text-xs leading-5 text-p12-sub md:mr-2">{item.label}</p>
+            <p className="h-5 text-xs leading-5 text-gray md:mr-2">{item.label}</p>
             <p className="h-5 text-sm font-medium leading-5">{item.value}</p>
           </div>
         ))}

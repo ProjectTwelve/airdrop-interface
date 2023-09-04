@@ -3,5 +3,3 @@ declare interface Window {
   bitkeep?: Ethereum;
   hpgButterfly?: any;
 }
-
-declare module 'ipfs-only-hash';

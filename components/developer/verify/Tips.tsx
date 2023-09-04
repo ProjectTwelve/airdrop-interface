@@ -8,7 +8,7 @@ export function AddGameTips() {
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
   return (
-    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 sm:p-3">
+    <div className="rounded-xl border-2 border-blue-550 bg-blue-550/20 p-6 sm:p-3">
       <div>
         1. &nbsp;Can&apos;t find your game? Please double check your app ID, or join our Discord &nbsp;
         <a href="https://discord.gg/p12" target="_blank">
@@ -18,7 +18,7 @@ export function AddGameTips() {
       </div>
       <div className="mt-2">
         2. &nbsp;Why is my amount of tokens displayed with a question mark - &apos;?&apos; -
-        <span className="cursor-pointer text-p12-link" onClick={() => setOpen(true)}>
+        <span className="cursor-pointer text-blue" onClick={() => setOpen(true)}>
           &nbsp;click here&nbsp;
         </span>
         to know more.
@@ -29,7 +29,7 @@ export function AddGameTips() {
 
 export function OwnershipTips() {
   return (
-    <div className="rounded-xl border-2 border-p12-tips bg-p12-tips/20 p-6 sm:p-3">
+    <div className="rounded-xl border-2 border-blue-550 bg-blue-550/20 p-6 sm:p-3">
       <div className="">
         You need to <span className="font-medium">add the signature on your game description</span> to prove you are the creator
         of the game.
@@ -42,7 +42,7 @@ export function OwnershipTips() {
       <div className=" mt-2">
         2. &nbsp;How to add the signature?
         <Dialog render={({ close }) => <MessageCodeDialog close={close} />}>
-          <span className="cursor-pointer text-p12-link"> click here </span>
+          <span className="cursor-pointer text-blue"> click here </span>
         </Dialog>
         to see a step-by-step guide.
       </div>

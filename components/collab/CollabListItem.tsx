@@ -1,18 +1,20 @@
-import { useRouter } from 'next/router';
-import { useCollabTimes } from '../../hooks/collab';
-import { CollabShortInfo } from '../../lib/types';
-import ReactGA from 'react-ga4';
-import { COLLAB_TIME_STATUS } from '../../constants';
 import { useCallback } from 'react';
-import { openLink } from '../../utils';
+import ReactGA from 'react-ga4';
+import { openLink } from '@/utils';
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
+import { CollabShortInfo } from '@/lib/types';
+import { useCollabTimes } from '@/hooks/collab';
+import { COLLAB_TIME_STATUS } from '@/constants';
 
 type CollabItemProps = {
-  data: CollabShortInfo;
+  data?: CollabShortInfo;
+  loading?: boolean;
 };
 
 const openLinkCollabCode = ['oathofpeakea'];
 
-export default function CollabListItem({ data }: CollabItemProps) {
+export default function CollabListItem({ data, loading }: CollabItemProps) {
   const router = useRouter();
   const {
     collabCode,
@@ -26,7 +28,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
     timeClaim,
     timeClose,
     projectWebsite,
-  } = data;
+  } = data ?? {};
   const { startTime, endTime, timeStatus } = useCollabTimes({
     timeComingSoon,
     timeJoin,
@@ -37,7 +39,7 @@ export default function CollabListItem({ data }: CollabItemProps) {
 
   const generateStatusLabel = useCallback(() => {
     if (timeStatus === COLLAB_TIME_STATUS.CLOSED)
-      return <div className="flex items-center text-xs leading-5 text-p12-sub">{COLLAB_TIME_STATUS.CLOSED}</div>;
+      return <div className="flex items-center text-xs leading-5 text-gray">{COLLAB_TIME_STATUS.CLOSED}</div>;
     if (timeStatus === COLLAB_TIME_STATUS.UPCOMING)
       return (
         <div className="flex items-center rounded bg-[#C859FF]/20 px-2 text-xs leading-5 text-[#FC59FF]">
@@ -53,17 +55,22 @@ export default function CollabListItem({ data }: CollabItemProps) {
   return (
     <div
       onClick={() => {
-        ReactGA.event({ category: 'Collab-List', action: 'Click', label: collabCode });
-        if (openLinkCollabCode.includes(collabCode)) {
+        ReactGA.event({ action: 'Collab-List', category: 'Click', label: collabCode });
+        if (collabCode && openLinkCollabCode.includes(collabCode)) {
           openLink(projectWebsite ?? '');
         } else {
           router.push({ pathname: `/collab/${collabCode}` }).then();
         }
       }}
-      className="flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-p12-black/80 p-4 pb-3 hover:bg-[#7980AF]/20 sm:px-2"
+      className={classNames(
+        'flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-gray-800/80 p-4 pb-3 backdrop-blur-lg hover:bg-[#7980AF]/20 sm:px-2',
+        loading ? 'animate-pulse' : null,
+      )}
     >
-      <div className="flex w-full items-center gap-3 border-b border-p12-line pb-4">
-        <img className="aspect-square h-[66px] rounded-2xl" src={projectLogo} alt="icon" />
+      <div className="flex w-full items-center gap-3 border-b border-gray-600 pb-4">
+        <div className="h-[66px] w-[66px]">
+          {projectLogo ? <img className="h-full w-full rounded-2xl" src={projectLogo} alt="icon" /> : null}
+        </div>
         <div className="flex w-14 flex-grow flex-col gap-[.375rem]">
           <div className="flex items-center gap-2">
             <h1 className="flex-shrink truncate text-base font-semibold leading-5">{projectName}</h1>
@@ -73,14 +80,14 @@ export default function CollabListItem({ data }: CollabItemProps) {
               </a>
             )}
           </div>
-          <p className="overflow-ellipsis text-xs leading-5 line-clamp-2">{projectInfoBrief || projectInfo}</p>
+          <p className="line-clamp-2 overflow-ellipsis text-xs leading-5">{projectInfoBrief || projectInfo}</p>
         </div>
       </div>
       <div className="flex w-full items-center justify-between pt-1">
-        <div className="flex items-center text-xs leading-5 text-p12-sub">
+        <div className="flex items-center text-xs leading-5 text-gray">
           {startTime} ~ {endTime}
         </div>
-        {generateStatusLabel()}
+        {collabCode ? generateStatusLabel() : null}
       </div>
     </div>
   );

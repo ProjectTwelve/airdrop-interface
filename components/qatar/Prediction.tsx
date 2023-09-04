@@ -10,10 +10,11 @@ import PredictionDialog from './PredictionDialog';
 import { useIsMounted } from '../../hooks/useIsMounted';
 import { useCollabContract } from '../../hooks/useContract';
 import { PredictionItem, PredictionOption, predictions } from './predictions';
+import { Hash } from "viem";
 
 type PredictionProps = {
   deadline?: number;
-  signature?: string;
+  signature?: Hash;
 };
 export default function Prediction({ signature, deadline }: PredictionProps) {
   const { chain } = useNetwork();
@@ -36,17 +37,12 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
   };
 
   const onSubmit = async () => {
-    if (!prediction || !chain || !address || !signature || !collabContract || isLoading || isSubmitted) return;
+    if (!prediction || !chain || !address || !signature || !collabContract || isLoading || isSubmitted || !deadline) return;
     try {
       setIsLoading(true);
-      ReactGA.event({ category: 'qatar', action: 'Click', label: 'quizsub' });
-      const { wait } = await collabContract['saveStamp(string,string,uint256,bytes)'](
-        'qatar2022',
-        prediction.ipfs,
-        deadline,
-        signature,
-      );
-      const { transactionHash } = await wait();
+      ReactGA.event({ action: 'qatar', category: 'Click', label: 'quizsub' });
+      // @ts-ignore
+      const transactionHash = await collabContract.write.saveStamp(['qatar2022', prediction.ipfs, deadline, signature]);
       toast.success(
         <Message
           title="Mission Complete"
@@ -54,7 +50,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
             <div>
               <p>Submitted</p>
               <p>
-                <a className="text-p12-link" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
+                <a className="text-blue" target="_blank" href={getEtherscanLink(transactionHash, 'transaction')}>
                   View on Etherscan
                 </a>
               </p>
@@ -66,18 +62,16 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
       setIsSubmitted(true);
     } catch (error: any) {
       if (error.error && error.error.data) {
-        const sigHash = error.error.data.data;
-        const name = collabContract.interface.getError(sigHash).name;
-        toast.error(<Message title="Ah shit, here we go again" message={name} />);
+        toast.error(<Message title="Ah shit, here we go again" message="save error" />);
       }
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    if (!collabContract) return;
-    collabContract
-      .readStamp(address, 'qatar2022')
+    if (!collabContract || !address) return;
+    collabContract.read
+      .readStamp([address, 'qatar2022'])
       .then((res: string | undefined) => {
         if (res) {
           const key = res.split('ipfs://')[1];
@@ -117,7 +111,7 @@ export default function Prediction({ signature, deadline }: PredictionProps) {
             <p className="mt-7 text-center text-lg font-medium leading-5">{answer?.name}</p>
           </div>
         ) : (
-          <div className="flex h-full w-full animate-omg flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
+          <div className="flex h-full w-full flex-col items-center justify-center bg-black/60 font-medium hover:bg-white/10">
             <p className="text-[70px] leading-[84px]">?</p>
             <p className="text-sm">Click to Answer</p>
           </div>

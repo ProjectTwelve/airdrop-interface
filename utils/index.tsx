@@ -1,8 +1,8 @@
 import React from 'react';
+import { getAddress } from 'viem';
 import { toast } from 'react-toastify';
 import { getNetwork } from '@wagmi/core';
 import { isMobile } from 'react-device-detect';
-import { getAddress } from '@ethersproject/address';
 import Message from '../components/message';
 
 export function isAddress(value: any): string | false {
@@ -23,6 +23,10 @@ export function shortenAddress(address: string, chars = 4): string {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
   return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`;
+}
+
+export function shortenHash(hash?: string): string {
+  return hash ? hash.substring(0, 6) + '...' + hash.substring(hash.length - 4) : '';
 }
 
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);

@@ -1,71 +1,43 @@
-import { useAccount, useContract, useContractRead, useNetwork, useProvider, useSigner } from 'wagmi';
-import {
-  ARCANA_ADDRESS,
-  ARCANA_REWARD_ADDRESS,
-  BABT_ADDRESSES,
-  COLLAB_ADDRESS,
-  FORWARDER_ADDRESS,
-  ZERO_ADDRESS,
-} from '../constants/addresses';
-import BABT_ABI from '../abis/BABT.json';
-import ARCANA_ABI from '../abis/ARCANA.json';
-import FORWARDER_ABI from '../abis/FORWARDER.json';
-import ARCANA_REWARD_ABI from '../abis/ARCANA_REWARD.json';
-import COLLAB_ABI from '../abis/COLLAB.json';
+import { useMemo } from 'react';
+import { Abi, WalletClient } from 'viem';
+import { getContract } from '../utils/getContract';
+import { babtABI, collabABI } from '../abis';
+import { Address, useContractRead, useNetwork, usePublicClient, useWalletClient } from 'wagmi';
+import { BABT_ADDRESSES, COLLAB_ADDRESS } from '../constants/addresses';
 
-export function useBABTBalanceOf({ address }: { address?: string }) {
-  const { address: _address } = useAccount();
+export function useContract<TAbi extends Abi>(address?: Address, abi?: TAbi, chainId?: number) {
+  const publicClient = usePublicClient({ chainId });
+  const { data: walletClient } = useWalletClient();
+
+  return useMemo(() => {
+    if (!address || !abi) return null;
+    try {
+      return getContract({
+        abi,
+        address,
+        publicClient: publicClient,
+        walletClient: walletClient as WalletClient,
+      });
+    } catch (error) {
+      console.error('Failed to get contract', error);
+      return null;
+    }
+  }, [abi, address, publicClient, walletClient]);
+}
+
+export function useBABTBalanceOf({ address }: { address?: Address }) {
   const { chain } = useNetwork();
   const babtAddress = chain ? BABT_ADDRESSES[chain.id] : undefined;
 
   return useContractRead({
-    address: babtAddress || ZERO_ADDRESS,
-    abi: BABT_ABI,
+    address: babtAddress,
+    abi: babtABI,
     functionName: 'balanceOf',
-    args: [address ?? _address],
-  });
-}
-
-export function useArcanaContract() {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
-
-  return useContract({
-    address: ARCANA_ADDRESS,
-    abi: ARCANA_ABI,
-    signerOrProvider: signer ?? provider,
-  });
-}
-
-export function useForwarderContract() {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
-
-  return useContract({
-    address: FORWARDER_ADDRESS,
-    abi: FORWARDER_ABI,
-    signerOrProvider: signer ?? provider,
-  });
-}
-
-export function useArcanaRewardContract() {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
-
-  return useContract({
-    address: ARCANA_REWARD_ADDRESS,
-    abi: ARCANA_REWARD_ABI,
-    signerOrProvider: signer ?? provider,
+    args: address ? [address] : undefined,
+    enabled: !!address,
   });
 }
 
 export function useCollabContract() {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
-
-  return useContract({
-    address: COLLAB_ADDRESS,
-    abi: COLLAB_ABI,
-    signerOrProvider: signer ?? provider,
-  });
+  return useContract(COLLAB_ADDRESS, collabABI);
 }

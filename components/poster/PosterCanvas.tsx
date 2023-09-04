@@ -94,9 +94,9 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
           </div>
         </div>
         {gamerInfo?.invitedBy && (
-          <div className="absolute right-0 mt-4 flex rounded-l-[18px] border border-r-0 border-p12-success bg-[#005A34]/20 p-4">
+          <div className="absolute right-0 mt-4 flex rounded-l-[18px] border border-r-0 border-green bg-[#005A34]/20 p-4">
             <div className="-mt-2 mr-4 text-right text-[24px] font-medium">
-              <p className="text-p12-success">Invited by</p>
+              <p className="text-green">Invited by</p>
               <p>{gamerInfo.invitedBy.name}</p>
             </div>
             <img width={78} height={78} className="rounded-lg" src={gamerInfo.invitedBy.avatar_full} alt="invite_avatar" />
@@ -121,7 +121,7 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
         <PosterGameItem data={gamerGames?.games?.[2]} />
       </div>
       <div className="my-[86px] mt-[130px] grid grid-cols-2 gap-[30px] pt-[54px]">
-        <div className="flex h-[110px] items-center justify-center rounded-lg border border-p12-orange bg-[#F36E22]/20 py-6 text-center">
+        <div className="flex h-[110px] items-center justify-center rounded-lg border border-orange bg-[#F36E22]/20 py-6 text-center">
           <div className="-mt-[25px] w-[170px] text-center text-xl font-medium text-[#FFAA2C]">
             <p className="text-[#FFAA2C]">Account</p>
             <p className="text-[#FFAA2C]">Value</p>
@@ -137,21 +137,21 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
               <img src={item.img} alt="game" className="h-full w-[237px] object-cover" />
               <div className="ml-4 mt-1.5">
                 <p className="text-xl">{item.name}</p>
-                <p className="font-ddin text-[42px] font-bold leading-[42px] text-p12-success">{Math.floor(item.value)}</p>
+                <p className="font-ddin text-[42px] font-bold leading-[42px] text-green">{Math.floor(item.value)}</p>
               </div>
             </div>
           ) : null,
         )}
       </div>
       <div className="relative h-[1093px]">
-        <p className="absolute bottom-[625px] left-[542px] text-xl text-p12-sub">
+        <p className="absolute bottom-[625px] left-[542px] text-xl text-gray">
           Birthday: {gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : ''}
         </p>
         <p className="absolute bottom-[373px] left-0 w-[242px] text-center text-[24px] font-medium">{gamerInfo?.nft_id}</p>
         <div className="absolute right-0 bottom-[10px] flex flex-col items-end">
           <img width={200} height={200} className="rounded-xl" src={qrCode} alt="qrcode" />
           <p className="mt-2 text-[22px]">My exclusive referral link</p>
-          <p className="text-[22px] text-p12-success">{link}</p>
+          <p className="text-[22px] text-green">{link}</p>
         </div>
       </div>
     </div>

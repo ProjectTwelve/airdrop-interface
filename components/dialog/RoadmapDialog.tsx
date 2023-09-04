@@ -17,21 +17,21 @@ export default function RoadmapDialog() {
           <h2 className="text-center text-xl">Stay a while, and listen!</h2>
           <div className="flex">
             <div className="mr-5 flex flex-col items-center justify-start">
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 1
               </div>
-              <div className="h-[194px] w-[2px] bg-p12-success"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-success text-center text-xs font-medium leading-[22px]">
+              <div className="h-[194px] w-[2px] bg-green"></div>
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-green text-center text-xs font-medium leading-[22px]">
                 2
               </div>
-              <div className="h-[74px] w-[2px] bg-p12-sub"></div>
-              <div className="h-[26px] w-[26px] rounded-full border-2 border-p12-sub text-center text-xs font-medium leading-[22px]">
+              <div className="h-[74px] w-[2px] bg-gray"></div>
+              <div className="h-[26px] w-[26px] rounded-full border-2 border-gray text-center text-xs font-medium leading-[22px]">
                 3
               </div>
             </div>
             <div className="flex-1">
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-1.5 text-sm font-medium leading-[26px]">Stage 1</h3>
+                <h3 className="border-b border-gray-600 pb-1.5 text-sm font-medium leading-[26px]">Stage 1</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
@@ -45,7 +45,7 @@ export default function RoadmapDialog() {
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
                     Rarities: Legendary, Epic, Rare, Uncommon, Common.
                   </p>
-                  <p className="flex justify-start leading-5 text-p12-success">
+                  <p className="flex justify-start leading-5 text-green">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
                     Amount of token granted is shown as &apos;?&apos;.
                   </p>
@@ -63,7 +63,7 @@ export default function RoadmapDialog() {
                 </div>
               </div>
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 2 (LIVE)</h3>
+                <h3 className="border-b border-gray-600 pb-2 text-sm font-medium">Stage 2 (LIVE)</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
@@ -73,7 +73,7 @@ export default function RoadmapDialog() {
                 </div>
               </div>
               <div className="mb-[10px]">
-                <h3 className="border-b border-p12-line pb-2 text-sm font-medium">Stage 3</h3>
+                <h3 className="border-b border-gray-600 pb-2 text-sm font-medium">Stage 3</h3>
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <span className="mr-1.5 h-4 w-4 text-center text-sm">·</span>

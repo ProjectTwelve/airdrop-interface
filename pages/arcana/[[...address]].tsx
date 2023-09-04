@@ -101,7 +101,7 @@ export default function Arcana() {
             </div>
           </div>
           <div className="flex max-w-[435px] flex-col items-center justify-items-start rounded-lg border-2 border-white/10 bg-[#474747]/20 px-8 backdrop-blur-2xl md:mt-12 xs:p-2">
-            <h3 className="dota__gold mt-5 text-xl leading-[44px]">Epic Prize Pool Sponsored by</h3>
+            <h3 className="dota__yellow mt-5 text-xl leading-[44px]">Epic Prize Pool Sponsored by</h3>
             <img className="py-8 pt-5" src="https://cdn1.p12.games/airdrop/arcana/sponsor_logo_2.webp" alt="sponsor" />
           </div>
         </div>
@@ -155,21 +155,21 @@ export default function Arcana() {
           </div>
           <div className="mb-8">
             <div
-              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://discord.gg/p12')}
             >
               <img className="mr-2" src="/img/discord.png" width={20} height={20} alt="" />
               Discord
             </div>
             <div
-              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://twitter.com/_p12_')}
             >
               <img className="mr-2" src="/img/twitter.png" width={20} height={20} alt="" />
               Twitter
             </div>
             <div
-              className="flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-p12-black/80 py-4 text-sm backdrop-blur hover:bg-p12-black"
+              className="flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://mirror.xyz/p12.eth')}
             >
               <img className="mr-2" src="/img/mirror.png" width={20} height={20} alt="" />

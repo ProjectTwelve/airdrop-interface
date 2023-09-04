@@ -23,12 +23,11 @@
 
     body {
         background: #000;
-        font-family: 'Poppins', sans-serif;
         min-height: 100vh;
     }
 
     .backdrop-box {
-        background: rgba(68, 70, 95, 0.6);
+        background: rgba(68, 70, 95, 0.5);
         border: 2px solid rgb(70, 75, 90);
         backdrop-filter: blur(16px);
     }
@@ -124,7 +123,7 @@
         top: 10%;
         width: 100%;
         height: 80%;
-        background: var(--gradient);
+        background: linear-gradient(to right, var(--from), var(--to));
         filter: blur(16px);
         opacity: 0.15;
     }
@@ -146,34 +145,20 @@
         top: 10%;
         width: 100%;
         height: 80%;
-        background: var(--gradient);
+        background: linear-gradient(to right, var(--from), var(--to));
         filter: blur(16px);
         opacity: 0.15;
     }
 
     .tooltip__container {
-        background: #44465FF2;
-        border: 1px solid #E4E4E426;
-    }
-
-    .round-box {
-        @apply h-[146px] w-full max-w-[701px] bg-cover bg-no-repeat p-8 md:h-auto;
-        @apply md:p-4 md:border md:border-[#616985] md:rounded-2xl md:backdrop-blur md:bg-gradient-to-b md:from-fuchsia-700 sm:px-2;
-    }
-
-    .round-box__one {
-        @apply relative top-0 left-0 bg-round-one;
-        @apply md:bg-gradient-transparent;
-    }
-
-    .round-box__two {
-        @apply absolute top-0 right-0 bg-round-two;
-        @apply md:bg-none md:relative md:mt-4;
+        background: #23262C80;
+        border: 1px solid #6F778480;
+        backdrop-filter: blur(50px);
     }
 
     .poster__button {
         position: relative;
-        background: var(--card);
+        background: linear-gradient(to right, #000000, #000000), linear-gradient(to right, var(--from), var(--to));
         background-clip: content-box, padding-box;
         padding: 2px;
         border-radius: 9999px;
@@ -184,7 +169,7 @@
         @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
         @apply flex flex-col items-center justify-center;
     }
-
+    
     .copy__btn {
         background: linear-gradient(180deg, #7CD645 5%, #2E5F19 46.81%, #5EAA30 100%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
@@ -209,9 +194,36 @@
         background: rgba(30, 219, 140, 0.05);
         box-shadow: inset 0 0 40px rgba(30, 219, 140, 0.6);
     }
+
+    .nft-backdrop-box {
+        background: rgba(35, 38, 44, 0.50);
+        border: 1px solid #4E4E50;
+        backdrop-filter: blur(25px);
+    }
+    
 }
 
 @layer utilities {
+    .text-link {
+        @apply text-blue cursor-pointer hover:underline;
+    }
+
+    .flex-center {
+        @apply flex justify-center items-center;
+    }
+
+    .flex-center-x {
+        @apply flex justify-center items-center flex-row;
+    }
+
+    .flex-center-y {
+        @apply flex justify-center items-center flex-col;
+    }
+
+    .text-gradient-yellow {
+        @apply bg-gradient-yellow bg-clip-text text-transparent;
+    }
+
     .bg-gradient-item {
         background: linear-gradient(to bottom, #4E56917F 0%, #3B41677F 10%, #3C41647F 16%, #3C41647F 100%);
         backdrop-filter: blur(16px);
@@ -280,8 +292,8 @@
         background: linear-gradient(to bottom, #525671 0%, #616683 49.48%, #626783 100%);
     }
 
-    .dota__gold {
-        @apply font-semibold text-p12-gold;
+    .dota__yellow {
+        @apply font-semibold text-yellow;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     }
 
@@ -305,12 +317,4 @@
     .activity {
         @apply select-none cursor-pointer transition hover:scale-110 active:scale-90;
     }
-}
-
-.e-embed-frame {
-    margin-bottom: 0 !important;
-}
-
-.e-widget-wrapper {
-    position: relative;
 }

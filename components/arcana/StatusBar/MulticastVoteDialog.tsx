@@ -35,7 +35,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 <img width={136} src="/img/arcana/statusbar/votes_01.webp" alt="votes_01" />
               </div>
               <div className="flex items-center justify-center">
-                <p className="mr-2 font-semibold text-p12-success">01</p>
+                <p className="mr-2 font-semibold text-green">01</p>
                 <p className="text-xs">The prize pool for one prediction is $10000</p>
               </div>
             </div>
@@ -44,7 +44,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 <img width={167} src="/img/arcana/statusbar/votes_02.webp" alt="votes_02" />
               </div>
               <div className="flex items-center justify-center">
-                <p className="mr-2 font-semibold text-p12-success">02</p>
+                <p className="mr-2 font-semibold text-green">02</p>
                 <p className="text-xs">10 people answered correctly, with total of 200 votes</p>
               </div>
             </div>
@@ -53,7 +53,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 <img width={173} src="/img/arcana/statusbar/votes_03.webp" alt="votes_03" />
               </div>
               <div className="flex items-center justify-center">
-                <p className="mr-2 font-semibold text-p12-success">03</p>
+                <p className="mr-2 font-semibold text-green">03</p>
                 <p className="text-xs">You are one of them. You have 40 Votes, accounting 20%</p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function MulticastVoteDialog({ close }: MulticastVoteDialogProps)
                 <img width={137} src="/img/arcana/statusbar/votes_04.webp" alt="votes_04" />
               </div>
               <div className="flex items-center justify-center">
-                <p className="mr-2 font-semibold text-p12-success">04</p>
+                <p className="mr-2 font-semibold text-green">04</p>
                 <p className="text-xs">You will get 20% of the prize pool, which is $2000!</p>
               </div>
             </div>

@@ -6,7 +6,7 @@ function LuckyDrawItem({ data }: { data: PredictionAnswerOMG2Item }) {
     <div className="flex items-center justify-between">
       <div className="flex items-center justify-center">
         <div className="flex h-[30px] w-[70px] flex-col justify-center xs:w-[65px]">
-          <p className="mt-1 font-ddin text-xl font-bold leading-4 text-p12-gold">$600</p>
+          <p className="mt-1 font-ddin text-xl font-bold leading-4 text-yellow">$600</p>
         </div>
         <div className="flex items-center justify-center">
           <div className="h-[30px] w-[30px] overflow-hidden rounded-lg bg-black xs:h-10 xs:w-10">
@@ -76,7 +76,7 @@ export default function OMGLuckyDraw() {
         <p className="text-center font-semibold" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}>
           Lucky Draw
         </p>
-        <p className="dota__gold text-center font-ddin text-[26px] leading-[28px]">$600 x 5</p>
+        <p className="dota__yellow text-center font-ddin text-[26px] leading-[28px]">$600 x 5</p>
       </div>
       <div className="p-4 pb-[14px]">
         <div className="vertical-scroll flex flex-col gap-[10px] rounded-b-lg">

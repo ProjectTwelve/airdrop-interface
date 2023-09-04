@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { useAccount } from 'wagmi';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Button from '../button';
-import Table from '../table';
-import { shortenAddress, shortenSteamId } from '../../utils';
+import Table from '@/components/table';
 import { motion } from 'framer-motion';
-import { useDevInvitation } from '../../hooks/developer';
-import { useGamerInvitation } from '../../hooks/gamer';
-import { DEV_BADGES, DEV_NFT_LEVEL, GAMER_BADGES, GAMER_NFT_LEVEL } from '../../constants';
+import Button from '@/components/button';
+import { useGamerInvitation } from '@/hooks/gamer';
+import { useDevInvitation } from '@/hooks/developer';
+import { DEV_BADGES, GAMER_BADGES } from '@/constants';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { shortenAddress, shortenSteamId } from '@/utils';
+import { createColumnHelper } from '@tanstack/react-table';
+import { DevInvitationInfo, GamerInvitationInfo } from '@/lib/types';
 
 type InviteRecordDialogProps = {
   close?: () => void;
   tab?: 'gamer' | 'developer';
 };
+
+const gamerColumnHelper = createColumnHelper<GamerInvitationInfo>();
+const devColumnHelper = createColumnHelper<DevInvitationInfo>();
 
 export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
   const { address } = useAccount();
@@ -22,120 +27,126 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
   const { data: devInvitation, isLoading: isDevLoading } = useDevInvitation(address);
   const { data: gamerInvitation, isLoading: isGamerLoading } = useGamerInvitation(address);
 
-  const DevColumns = [
-    {
-      width: 120,
-      Header: 'Dev address',
-      accessor: 'wallet_address',
-      Cell: ({ value }: any) => <p className="flex h-full items-center">{shortenAddress(value)}</p>,
-    },
-    {
-      width: 100,
-      Header: 'Verify time',
-      accessor: 'createdAt',
-      Cell: ({ value }: any) => <p className="flex h-full items-center">{dayjs(value).format('YYYY/MM/DD')}</p>,
-    },
-    {
-      width: 200,
-      Header: 'Game data',
-      accessor: (row: any) => (
-        <div className="flex items-center">
-          <img className="mr-2 h-[52px] w-[80px] rounded-2xl" src={row.header_image} alt="avatar" />
-          <div className="flex flex-col justify-around truncate">
-            <p className="truncate font-semibold">{row.name}</p>
-            <p>{row.release_date?.date}</p>
+  const devColumns = useMemo(
+    () => [
+      devColumnHelper.accessor('wallet_address', {
+        size: 120,
+        header: 'Dev address',
+        cell: ({ getValue }) => <p className="flex h-full items-center">{shortenAddress(getValue())}</p>,
+      }),
+      devColumnHelper.accessor('createdAt', {
+        size: 100,
+        header: 'Verify time',
+        cell: ({ getValue }) => <p className="flex h-full items-center">{dayjs(getValue()).format('YYYY/MM/DD')}</p>,
+      }),
+      devColumnHelper.display({
+        id: 'game',
+        header: 'Game data',
+        size: 200,
+        cell: ({ row: { original } }) => (
+          <div className="flex items-center">
+            <img className="mr-2 h-[52px] w-[80px] rounded-2xl" src={original.header_image} alt="avatar" />
+            <div className="flex flex-col justify-around truncate">
+              <p className="truncate font-semibold">{original.name}</p>
+              <p>{original.release_date?.date}</p>
+            </div>
           </div>
-        </div>
-      ),
-    },
-    {
-      width: 120,
-      Header: 'Reward',
-      accessor: () => (
-        <div className="flex h-full items-center">
-          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-          <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-        </div>
-      ),
-    },
-    {
-      width: 60,
-      Header: 'Badge',
-      accessor: 'nft_level',
-      Cell: ({ value }: { value: DEV_NFT_LEVEL }) => (
-        <div className="flex h-full items-center">
-          <img src={DEV_BADGES[value].img} alt="nft" width={36} height={36} />
-        </div>
-      ),
-    },
-    {
-      width: 120,
-      Header: 'Will get',
-      accessor: () => (
-        <div className="flex h-full items-center">
-          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-          <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-        </div>
-      ),
-    },
-  ];
-  const GamerColumns = [
-    {
-      width: 120,
-      Header: 'Gamer address',
-      accessor: 'wallet_address',
-      Cell: ({ value }: any) => <p className="flex h-full items-center">{shortenAddress(value)}</p>,
-    },
-    {
-      width: 100,
-      Header: 'Verify time',
-      accessor: 'createdAt',
-      Cell: ({ value }: any) => <p className="flex h-full items-center">{dayjs(value).format('YYYY/MM/DD')}</p>,
-    },
-    {
-      width: 200,
-      Header: 'Steam account data',
-      accessor: (row: any) => (
-        <div className="flex items-center">
-          <img width={52} height={52} className="mr-2 rounded" src={row.avatar} alt="avatar" />
-          <div className="flex flex-col justify-around truncate">
-            <p className="truncate font-semibold">{row.person_name}</p>
-            <p className="text-xs">Steam ID: {shortenSteamId(row.steam_id)}</p>
+        ),
+      }),
+      devColumnHelper.display({
+        id: 'reward',
+        header: 'Reward',
+        size: 120,
+        cell: () => (
+          <div className="flex h-full items-center">
+            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
           </div>
-        </div>
-      ),
-    },
-    {
-      width: 120,
-      Header: 'Reward',
-      accessor: () => (
-        <div className="flex h-full items-center">
-          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-          <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-        </div>
-      ),
-    },
-    {
-      width: 60,
-      Header: 'Badge',
-      accessor: 'nft_level',
-      Cell: ({ value }: { value: GAMER_NFT_LEVEL }) => (
-        <div className="flex h-full items-center">
-          <img src={GAMER_BADGES[value].img} alt="nft" width={36} height={36} />
-        </div>
-      ),
-    },
-    {
-      width: 120,
-      Header: 'Will get',
-      accessor: () => (
-        <div className="flex h-full items-center">
-          <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-          <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-        </div>
-      ),
-    },
-  ];
+        ),
+      }),
+      devColumnHelper.accessor('nft_level', {
+        size: 60,
+        header: 'badge',
+        cell: ({ getValue }) => (
+          <div className="flex h-full items-center">
+            <img src={DEV_BADGES[getValue()].img} alt="nft" width={36} height={36} />
+          </div>
+        ),
+      }),
+      devColumnHelper.display({
+        id: 'get',
+        header: 'Will get',
+        size: 120,
+        cell: () => (
+          <div className="flex h-full items-center">
+            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+          </div>
+        ),
+      }),
+    ],
+    [],
+  );
+  const gamerColumns = useMemo(
+    () => [
+      gamerColumnHelper.accessor('wallet_address', {
+        header: 'Gamer address',
+        size: 120,
+        cell: ({ getValue }) => <p className="flex h-full items-center">{shortenAddress(getValue())}</p>,
+      }),
+      gamerColumnHelper.accessor('createdAt', {
+        header: 'Verify time',
+        size: 100,
+        cell: ({ getValue }) => <p className="flex h-full items-center">{dayjs(getValue()).format('YYYY/MM/DD')}</p>,
+      }),
+      gamerColumnHelper.display({
+        id: 'steam_account',
+        header: 'Steam account data',
+        size: 200,
+        cell: ({ row: { original } }) => (
+          <div className="flex items-center">
+            <img width={52} height={52} className="mr-2 rounded" src={original.avatar} alt="avatar" />
+            <div className="flex flex-col justify-around truncate">
+              <p className="truncate font-semibold">{original.person_name}</p>
+              <p className="text-xs">Steam ID: {shortenSteamId(original.steam_id)}</p>
+            </div>
+          </div>
+        ),
+      }),
+      gamerColumnHelper.display({
+        id: 'reward',
+        header: 'Reward',
+        size: 120,
+        cell: () => (
+          <div className="flex h-full items-center">
+            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
+          </div>
+        ),
+      }),
+      gamerColumnHelper.accessor('nft_level', {
+        header: 'Badge',
+        size: 100,
+        cell: ({ getValue }) => (
+          <div className="flex h-full items-center">
+            <img src={GAMER_BADGES[getValue()].img} alt="nft" width={36} height={36} />
+          </div>
+        ),
+      }),
+      gamerColumnHelper.display({
+        id: 'get',
+        header: 'Will get',
+        size: 120,
+        cell: () => (
+          <div className="flex h-full items-center">
+            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+          </div>
+        ),
+      }),
+    ],
+    [],
+  );
 
   return (
     <div>
@@ -157,7 +168,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
               loading={isDevLoading}
               className="mt-6 max-w-[95vw] overflow-x-auto"
               dataSource={devInvitation || []}
-              columns={DevColumns}
+              columns={devColumns}
             />
           </div>
         </TabPanel>
@@ -167,12 +178,12 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
               loading={isGamerLoading}
               className="mt-6 max-w-[95vw] overflow-x-auto"
               dataSource={gamerInvitation || []}
-              columns={GamerColumns}
+              columns={gamerColumns}
             />
           </div>
         </TabPanel>
       </Tabs>
-      <div className="flex justify-end border-t border-p12-line pt-7">
+      <div className="flex justify-end border-t border-gray-600 pt-7">
         <Button type="bordered" onClick={close}>
           Confirm
         </Button>

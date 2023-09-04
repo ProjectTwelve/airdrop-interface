@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { wrap } from 'popmotion';
 import { isMobile } from 'react-device-detect';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import { useArcanaVotesRank } from '../../hooks/arcana';
 import { VoteRankItem } from '../../lib/types';
@@ -39,14 +38,14 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
   }, [index]);
 
   const onOpenPage = () => {
-    ReactGA.event({ category: 'Arcana-Rank', action: 'Click', label: index?.toString() });
+    ReactGA.event({ action: 'Arcana-Rank', category: 'Click', label: index?.toString() });
     const url = window.location.origin + `/arcana/${data?.walletAddress}`;
     openLink(url);
   };
 
   return (
     <div
-      className="omg__box h-[102px] min-w-[195px] cursor-pointer rounded-xl border border-[#6F7784]/50 backdrop-blur-lg"
+      className="omg__box h-[102px] min-w-[195px] cursor-pointer rounded-xl border border-gray-550/50 backdrop-blur-lg"
       onClick={onOpenPage}
     >
       <div className="flex items-center pl-6 pt-3 pb-4 md:justify-center">
@@ -64,11 +63,11 @@ function VoteRankItem({ index, data }: { index?: number; data?: VoteRankItem }) 
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <p className="flex-1 text-center text-sm text-p12-gold">
+        <p className="flex-1 text-center text-sm text-yellow">
           {data?.referralCount} {data && data.referralCount > 1 ? 'Invites' : 'Invite'}
         </p>
-        <p className="h-[16px] w-[1px] bg-[#6F7784]/50"></p>
-        <p className="flex-1 text-center text-sm text-p12-gold">
+        <p className="h-[16px] w-[1px] bg-gray-550/50"></p>
+        <p className="flex-1 text-center text-sm text-yellow">
           {data?.votesTotalCurrent} {data && data.votesTotalCurrent > 1 ? 'Votes' : 'Vote'}
         </p>
       </div>

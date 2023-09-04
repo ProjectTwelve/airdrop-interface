@@ -6,12 +6,12 @@ export default function Participant() {
     >
       <div className="mt-5 ml-5">
         <div className="flex items-center">
-          <p className="dota__gold text-sm font-medium">Participants</p>
-          <p className="dota__gold flex-1 text-center font-ddin text-2xl font-bold leading-6 text-p12-success">36,639</p>
+          <p className="dota__yellow text-sm font-medium">Participants</p>
+          <p className="dota__yellow flex-1 text-center font-ddin text-2xl font-bold leading-6 text-green">36,639</p>
         </div>
         <div className="mt-3 flex items-center">
-          <p className="dota__gold flex-none text-sm font-medium">Prize Pool</p>
-          <div className="dota__gold flex flex-1 items-center justify-center text-center font-ddin text-[30px] font-bold leading-[30px]">
+          <p className="dota__yellow flex-none text-sm font-medium">Prize Pool</p>
+          <div className="dota__yellow flex flex-1 items-center justify-center text-center font-ddin text-[30px] font-bold leading-[30px]">
             $30,000
           </div>
         </div>

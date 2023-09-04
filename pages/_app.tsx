@@ -1,12 +1,12 @@
 import React, { ReactElement, ReactNode, useEffect, useMemo } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
 import { NextPage } from 'next';
-import Script from 'next/script';
 import { useRouter } from 'next/router';
 import Layout from '../components/layout';
 import { STORAGE_KEY } from '../constants';
 import { setLocalStorage } from '../utils/storage';
+import { Analytics } from '@vercel/analytics/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -52,12 +52,12 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta content="light" name="twitter:widgets:theme" />
       </Head>
-      <Script id="theme" src="/js/theme.min.js" strategy="beforeInteractive" />
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
       </QueryClientProvider>
+      <Analytics />
     </>
   );
 }

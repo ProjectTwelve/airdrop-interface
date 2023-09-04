@@ -1,27 +1,27 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { useAccount } from 'wagmi';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAccount } from 'wagmi';
+import { openLink } from '@/utils';
+import { useRouter } from 'next/router';
 import Back from '../../components/back';
-import SteamStatus from '../../components/gamer/SteamStatus';
+import Poster from '@/components/poster';
 import Button from '../../components/button';
-import GamerP12 from '../../components/gamer/GamerP12';
+import { useGamerInfo } from '@/hooks/gamer';
 import Dialog from '../../components/dialog';
-import { InviteRecordDialog } from '../../components/dialog/InviteRecordDialog';
-import { useGamerInfo } from '../../hooks/gamer';
-import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
-import GamerTokenStatus from '../../components/gamer/GamerTokenStatus';
-import { GALXE_LIST, GAMER_BADGES, NFT_CLAIM } from '../../constants';
-import { openLink } from '../../utils';
-import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
-import GamerClaimSuccess from '../../components/dialog/GamerClaimSuccess';
-import { roadmapModalAtom } from '../../store/roadmap/state';
-import Poster from '../../components/poster';
-import PosterCanvas from '../../components/poster/PosterCanvas';
-import PermissionSettingDialog from '../../components/dialog/PermissionSettingDialog';
-import { invitationCountAtom } from '../../store/invite/state';
+import GamerP12 from '../../components/gamer/GamerP12';
+import { roadmapModalAtom } from '@/store/roadmap/state';
+import { useGamerBadgeLoad } from '@/hooks/useBadgeLoad';
+import { invitationCountAtom } from '@/store/invite/state';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import PosterCanvas from '@/components/poster/PosterCanvas';
+import SteamStatus from '../../components/gamer/SteamStatus';
+import { GALXE_LIST, GAMER_BADGES, NFT_CLAIM } from '@/constants';
+import GamerTokenStatus from '@/components/gamer/GamerTokenStatus';
+import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
+import GamerClaimSuccess from '@/components/dialog/GamerClaimSuccess';
+import { InviteRecordDialog } from '@/components/dialog/InviteRecordDialog';
+import PermissionSettingDialog from '@/components/dialog/PermissionSettingDialog';
 
 export default function Gamer() {
   const router = useRouter();
@@ -52,9 +52,9 @@ export default function Gamer() {
           <SteamStatus />
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
-            <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
+            <div className="flex overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
-                <div className="absolute top-0 left-0 h-full w-full blur-3xl">
+                <div className="absolute left-0 top-0 h-full w-full blur-3xl">
                   {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
                     <div
                       className="h-full w-full bg-cover"
@@ -64,12 +64,12 @@ export default function Gamer() {
                 </div>
                 <div className="relative z-10">
                   <div className="w-full pb-[100%]"></div>
-                  <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+                  <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
                     {gamerInfo?.credential ? (
                       <div className="flex w-full flex-col items-center justify-center sm:w-auto">
                         {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
                           <>
-                            <h4 className="text-center text-xl font-medium text-p12-success">
+                            <h4 className="text-center text-xl font-medium text-green">
                               Congrats! P12 Genesis NFT to be claimed
                             </h4>
                             <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
@@ -79,9 +79,7 @@ export default function Gamer() {
                         )}
                         {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
                           <>
-                            <h4 className="text-center text-xl font-medium text-p12-success">
-                              Pending: update in a few minutes
-                            </h4>
+                            <h4 className="text-center text-xl font-medium text-green">Pending: update in a few minutes</h4>
                             <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
                               Check on Galxe
                             </Button>
@@ -91,7 +89,7 @@ export default function Gamer() {
                           <>
                             <div className="relative aspect-square w-full max-w-[420px]">
                               {badge.isLoading && (
-                                <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                                <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
                                   <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                                 </div>
                               )}
@@ -107,13 +105,13 @@ export default function Gamer() {
                         )}
                       </div>
                     ) : (
-                      <h4 className="text-center text-xl font-medium text-p12-error">AYBABTU</h4>
+                      <h4 className="text-center text-xl font-medium text-red">AYBABTU</h4>
                     )}
                   </div>
                 </div>
-                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
+                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-gray sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
-                  <a className="text-p12-link" href="https://galxe.com/P12" target="_blank">
+                  <a className="text-blue" href="https://galxe.com/P12" target="_blank">
                     Galxe
                   </a>
                 </p>
@@ -123,10 +121,10 @@ export default function Gamer() {
                   {gamerInfo?.credential ? GAMER_BADGES[gamerInfo.nft_level!].title : 'P12 | Project Twelve | Genesis'}
                 </h2>
                 <h3 className="mt-9 text-xl font-medium md:mt-4">Genesis Soul-Bound NFT</h3>
-                <p className="mt-2 text-sm text-p12-sub">
+                <p className="mt-2 text-sm text-gray">
                   Birthday:&nbsp;{gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : '--'}
                 </p>
-                <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
+                <div className="gradient__box mt-9 px-[30px] py-6 md:mt-4">
                   <p>Amount of tokens from this Steam account</p>
                   <div className="mt-5 flex items-center justify-between">
                     <p onClick={handleClaimedRoadmap} className="cursor-pointer font-ddin text-[48px] font-bold">
@@ -141,17 +139,17 @@ export default function Gamer() {
             <div className="mt-8">
               <GamerP12 />
             </div>
-            <div className="flex border-b border-p12-line py-4">
-              <div className="mr-4 rounded-lg bg-p12-black/80 p-3">
+            <div className="flex border-b border-gray-600 py-4">
+              <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
                 <div className="flex items-center justify-between">
                   <p onClick={handleClaimedRoadmap} className="cursor-pointer font-ddin text-xl font-bold">
                     {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
                   </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
                 </div>
-                <p className="mt-2 mr-4 text-xs text-p12-sub">From your account</p>
+                <p className="mr-4 mt-2 text-xs text-gray">From your account</p>
               </div>
-              <div className="rounded-lg bg-p12-black/80 p-3">
+              <div className="rounded-lg bg-gray-800/80 p-3">
                 <div className="flex items-center justify-between">
                   <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                     {invitation ? '?,???' : '-,---'}
@@ -159,8 +157,8 @@ export default function Gamer() {
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
                 </div>
                 <Dialog render={({ close }) => <InviteRecordDialog close={close} tab="gamer" />}>
-                  <p className="mt-2 cursor-pointer text-xs text-p12-link">
-                    My referral list <span className="pl-11 text-p12-link md:pl-1">&gt;</span>
+                  <p className="mt-2 cursor-pointer text-xs text-blue">
+                    My referral list <span className="pl-11 text-blue md:pl-1">&gt;</span>
                   </p>
                 </Dialog>
               </div>

@@ -29,14 +29,14 @@ export default function CollabTaskItem({
   const generateLabel = () => {
     if (errorLabel) {
       return (
-        <div className="w-full border-t border-p12-line pt-4">
+        <div className="w-full border-t border-gray-600 pt-4">
           <div className="rounded-lg bg-[#FF3768]/20 px-4 py-2 text-sm font-medium leading-5 text-[#F13361]">{errorLabel}</div>
         </div>
       );
     }
     if (!href || !hrefLabel) return null;
     return (
-      <div className="flex cursor-pointer items-center gap-2 border-t border-p12-line pt-6">
+      <div className="flex cursor-pointer items-center gap-2 border-t border-gray-600 pt-6">
         <a
           className="font-semibold leading-5 text-[#43BBFF]"
           href={href}
@@ -44,8 +44,8 @@ export default function CollabTaskItem({
           onClick={() =>
             gaKey
               ? ReactGA.event({
-                  category: 'Collab-Item',
-                  action: 'Click',
+                  action: 'Collab-Item',
+                  category: 'Click',
                   label: gaKey,
                 })
               : null
@@ -58,7 +58,7 @@ export default function CollabTaskItem({
     );
   };
   return (
-    <div className={classNames('flex flex-col justify-between gap-5 rounded-2xl bg-p12-black/80 p-7', className)}>
+    <div className={classNames('flex flex-col justify-between gap-5 rounded-2xl bg-gray-800/80 p-7', className)}>
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3">
           {icon && <div>{icon}</div>}

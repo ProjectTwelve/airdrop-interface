@@ -8,7 +8,7 @@ export type CollabRewardItemProps = {
 
 export default function CollabRewardItem({ logo, amount, icon, title, desc }: CollabRewardItemProps) {
   return (
-    <div className="flex w-full items-center justify-between rounded-2xl bg-p12-black/80 px-12 py-3 md:flex-wrap md:justify-center md:gap-3">
+    <div className="flex w-full items-center justify-between rounded-2xl bg-gray-800/80 px-12 py-3 md:flex-wrap md:justify-center md:gap-3">
       <div className="flex flex-grow items-center gap-4 md:justify-center">
         <img className="aspect-square h-[80px] rounded-2xl" src={logo} alt="projectLogo" />
         <div className="flex flex-col justify-center gap-2">

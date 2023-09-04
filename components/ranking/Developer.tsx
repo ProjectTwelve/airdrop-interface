@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { wrap } from 'popmotion';
 import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import Pagination from 'rc-pagination';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, wrap } from 'framer-motion';
 import { LeftCircle } from '../svg/LeftCircle';
 import DevTimeRankingItem, { DevTimeRankingHeader } from './DevTimeRankingItem';
 import DevTokenRankingItem, { DevTokenRankingHeader } from './DevTokenRankingItem';
@@ -103,7 +102,7 @@ function DeveloperRanking() {
                             src={item.header_image}
                           />
                         ) : (
-                          <p className="text-center text-xs leading-[60px] text-p12-bg">No Game</p>
+                          <p className="text-center text-xs leading-[60px] text-gray-500">No Game</p>
                         )}
                       </div>
                       <div className="truncate">
@@ -146,7 +145,7 @@ function DeveloperRanking() {
       </div>
       <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1">
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Latest</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
@@ -165,7 +164,7 @@ function DeveloperRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-p12-line pb-3 text-center text-xl font-medium">Leaderboard</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Leaderboard</h2>
           <DevTokenRankingHeader />
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (

@@ -3,7 +3,7 @@ import ReactGA from 'react-ga4';
 import { useAccount } from 'wagmi';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import PredictionItem from './PredictionItem';
-import { ZERO_ADDRESS } from '../../constants/addresses';
+import { zeroAddress } from 'viem';
 import { referralCodeAtom } from '../../store/invite/state';
 import {
   arcanaObserverAtom,
@@ -20,7 +20,7 @@ export default function Prediction() {
   const originAddress = useRecoilValue(arcanaOriginAddressAtom);
   const setPredictionCount = useSetRecoilState(arcanaPredictionCountAtom);
   const setPredictionAnswer = useSetRecoilState(arcanaPredictionAnswerAtom);
-  const { data } = useArcanaPredictions(originAddress ?? address ?? ZERO_ADDRESS);
+  const { data } = useArcanaPredictions(originAddress ?? address ?? zeroAddress);
 
   useEffect(() => {
     if (!data) return;
@@ -31,7 +31,7 @@ export default function Prediction() {
 
   const onShareTwitter = () => {
     if (!address || !referralCode) return;
-    ReactGA.event({ category: 'Arcana-Info', action: 'Click', label: 'Share' });
+    ReactGA.event({ action: 'Arcana-Info', category: 'Click', label: 'Share' });
     const referralLink = window.location.origin + `/arcana/${address}?code=${referralCode}`;
     const url = encodeURIComponent(referralLink);
     const text = encodeURIComponent(
@@ -51,9 +51,9 @@ export default function Prediction() {
         {!isObserver && (
           <button
             onClick={onShareTwitter}
-            className="dota__button flex items-center justify-center py-[11px] px-8 md:py-1.5 md:px-3"
+            className="dota__button flex items-center justify-center px-8 py-[11px] md:px-3 md:py-1.5"
           >
-            <span className="dota__gold mr-1 pl-1 leading-5">Share</span>
+            <span className="dota__yellow mr-1 pl-1 leading-5">Share</span>
             <img width={20} src="/img/arcana/twitter_gold.svg" alt="twitter" />
           </button>
         )}

@@ -10,7 +10,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
   return (
     <div
       className={classNames(
-        'relative overflow-hidden rounded-2xl bg-p12-black/80 bg-right bg-no-repeat',
+        'relative overflow-hidden rounded-2xl bg-gray-800/80 bg-right bg-no-repeat',
         isSSGame && 'bg-ss-game',
       )}
     >
@@ -19,7 +19,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
           className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover lg:mr-2"
           style={{ maxWidth: 'min(45%, 168px)' }}
         >
-          <p className="absolute -z-10 w-full text-center text-center text-xs leading-[72px] text-p12-bg">Damedane</p>
+          <p className="absolute -z-10 w-full text-center text-center text-xs leading-[72px] text-gray-500">Damedane</p>
           <img
             src={gameIcon}
             onError={(error) => ((error.target as any).style = 'display: none')}
@@ -47,7 +47,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
             {data.genres?.map((genre, index) => (
               <span
                 key={index}
-                className="mr-1.5 mb-0.5 h-full rounded bg-p12-link/20 px-2 py-[1.5px] text-xs text-p12-link lg:px-1"
+                className="mr-1.5 mb-0.5 h-full rounded bg-blue/20 px-2 py-[1.5px] text-xs text-blue lg:px-1"
               >
                 {genre}
               </span>

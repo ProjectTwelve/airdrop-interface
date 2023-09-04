@@ -20,7 +20,7 @@ export default function Qatar2022() {
     select: (data) => (data.code === 200 ? data.data : undefined),
   });
   const onMoreClick = () => {
-    ReactGA.event({ category: 'qatar', action: 'Click', label: 'more' });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: 'more' });
     openLink('https://dappbay.bnbchain.org/campaign/football-fiesta');
   };
 
@@ -43,12 +43,12 @@ export default function Qatar2022() {
             P12 x BNB Chain Football Fiesta Campaign is a pop-up quiz event featuring footballs and tournaments! Participates by
             taking part in interesting but yet simple quizzes and earn exclusive rewards sponsored by P12!
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <p className="inline cursor-pointer text-p12-link" onClick={onMoreClick}>
+            <p className="inline cursor-pointer text-blue" onClick={onMoreClick}>
               More <img className="mb-[1px] inline" width={12} height={12} src="/svg/more.svg" alt="more" />
             </p>
           </div>
           <div className="flex items-center justify-between pt-10 pb-14 md:flex-col md:items-start md:py-6">
-            <div className="font-semibold leading-9 text-p12-success md:text-sm">
+            <div className="font-semibold leading-9 text-green md:text-sm">
               Reward: &nbsp;&nbsp;P12 x BNB Chain Football Fiesta OAT
             </div>
             <div className="text-sm leading-5 text-[#A5A6AB] md:text-xs">Time：2022.11.15 - 2022.12.20</div>

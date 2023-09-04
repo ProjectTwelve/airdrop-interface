@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import Image from 'next/image';
 import Tag from '../tag';
 import { useQuery } from '@tanstack/react-query';
-import { fetchDeveloperInfo } from '../../lib/api';
+import { fetchDeveloperInfo } from '@/lib/api';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
-import { claimGroupSelector, developerGameAtom } from '../../store/developer/state';
-import { roadmapModalAtom } from '../../store/roadmap/state';
+import { claimGroupSelector, developerGameAtom } from '@/store/developer/state';
+import { roadmapModalAtom } from '@/store/roadmap/state';
 import { useAccount } from 'wagmi';
-import { NFT_CLAIM } from '../../constants';
+import { NFT_CLAIM } from '@/constants';
 
 function DeveloperStatus() {
   const { address } = useAccount();
@@ -36,18 +36,18 @@ function DeveloperStatus() {
       exit={{ opacity: 0, width: 0 }}
       className="flex overflow-hidden"
     >
-      <div className="flex items-center justify-center border-r border-p12-line px-3 text-xl">
+      <div className="flex items-center justify-center border-r border-gray-600 px-3 text-xl">
         {games.length ? (
           <Tag type={tagType} size="large" value={`${claimGroup[NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}
       </div>
-      <div className="flex items-center justify-center border-r border-p12-line px-3 font-ddin text-xl font-bold">
-        <span className="mr-2 text-p12-success">{games.length}</span>
+      <div className="flex items-center justify-center border-r border-gray-600 px-3 font-ddin text-xl font-bold">
+        <span className="mr-2 text-green">{games.length}</span>
         {games.length > 1 ? 'Games' : 'Game'}
       </div>
-      <div className="flex items-center justify-center border-r border-p12-line px-3 text-xl">
+      <div className="flex items-center justify-center border-r border-gray-600 px-3 text-xl">
         <p className="mr-3 cursor-pointer font-ddin font-bold" onClick={() => setOpen(true)}>
           ?,???
         </p>

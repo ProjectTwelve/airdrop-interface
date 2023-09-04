@@ -13,7 +13,7 @@ type HolderItemProps = {
 
 export default function HolderItem({ title, asset, subtitle, link, isHolder, type }: HolderItemProps) {
   const onClaim = () => {
-    ReactGA.event({ category: 'qatar', action: 'Click', label: type });
+    ReactGA.event({ action: 'qatar', category: 'Click', label: type });
     openLink(link);
   };
 
@@ -24,11 +24,11 @@ export default function HolderItem({ title, asset, subtitle, link, isHolder, typ
         <h3 className="text-xl leading-6 md:text-sm">{subtitle}</h3>
         <h3 className="mt-5 text-xl leading-6 md:mt-2 md:text-sm">{title}</h3>
         {isHolder ? (
-          <div className="absolute bottom-0 text-sm leading-6 text-p12-success">You are eligible</div>
+          <div className="absolute bottom-0 text-sm leading-6 text-green">You are eligible</div>
         ) : (
           <div className="absolute bottom-0 text-sm leading-6 text-[#FF2358]">
             You are ineligible &nbsp;&nbsp;&nbsp;&nbsp;
-            <p className="inline cursor-pointer text-p12-link md:block" onClick={onClaim}>
+            <p className="inline cursor-pointer text-blue md:block" onClick={onClaim}>
               Go to Claim <img className="mb-[1px] inline" width={14} height={14} src="/svg/more.svg" alt="more" />
             </p>
           </div>

@@ -1,5 +1,5 @@
 import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Autoplay } from 'swiper';
+import { Autoplay } from 'swiper/modules';
 import { useAccount } from 'wagmi';
 import { useRecoilValue } from 'recoil';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -50,8 +50,8 @@ function Card({ data }: { data: MemeEvaluateItem }) {
   if (data.memeType === 'audio') {
     return (
       <div className="flex h-full w-full select-none flex-col items-center justify-center">
-        <p className="dota__gold text-sm xs:text-xs">{data.memeTitle}</p>
-        <div className="activity mt-2 h-[40px] w-[40px] w-[32px] xs:h-[32px]" onClick={onAudioClick}>
+        <p className="dota__yellow text-sm xs:text-xs">{data.memeTitle}</p>
+        <div className="activity mt-2 h-[40px] w-[32px] w-[40px] xs:h-[32px]" onClick={onAudioClick}>
           {audioStatusIcon[audioStatus]}
           <audio ref={assetRef} onEnded={() => setAudioStatus(AudioStatus.PLAY)} src={data.memeUrl}></audio>
         </div>
@@ -114,7 +114,7 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
 
   return (
     <div className="flex">
-      <div className="h-[120px] w-[168px] bg-[url('/img/arcana/statusbar/swiper_card_bg.webp')] bg-cover bg-no-repeat px-[5px] pt-[7px] pb-1.5 xs:h-[29.87vw] xs:w-[41.87vw] xs:p-[1.6vw]">
+      <div className="h-[120px] w-[168px] bg-[url('/img/arcana/statusbar/swiper_card_bg.webp')] bg-cover bg-no-repeat px-[5px] pb-1.5 pt-[7px] xs:h-[29.87vw] xs:w-[41.87vw] xs:p-[1.6vw]">
         <div className="h-[75px] w-[158px] xs:h-[18.67vw] xs:w-[39.2vw]">
           <Swiper
             className="h-full w-full"
@@ -152,14 +152,14 @@ export default function SwiperCard({ data }: { data?: MemeEvaluateItem[] }) {
       <div className="relative w-[63px] bg-[url('/img/arcana/statusbar/right.webp')] bg-cover bg-no-repeat xs:w-[15.73vw]">
         <Dialog render={({ close }) => <InfoDialog close={close} />}>
           <img
-            className="activity absolute bottom-[61px] left-3 w-[20px] xs:left-[2.67vw] xs:bottom-[15vw] xs:w-[5.33vw]"
+            className="activity absolute bottom-[61px] left-3 w-[20px] xs:bottom-[15vw] xs:left-[2.67vw] xs:w-[5.33vw]"
             src="/img/arcana/statusbar/info.webp"
             alt="info"
           />
         </Dialog>
         <img
           onClick={() => openLink('https://discord.gg/p12')}
-          className="activity absolute bottom-4 left-3 w-[20px] xs:left-[2.67vw] xs:bottom-[4vw] xs:w-[5.33vw]"
+          className="activity absolute bottom-4 left-3 w-[20px] xs:bottom-[4vw] xs:left-[2.67vw] xs:w-[5.33vw]"
           src="/img/arcana/statusbar/discord.webp"
           alt="discord"
         />

@@ -1,7 +1,8 @@
-import { PredictionAnswer } from '../store/arcana/state';
-import { PREDICTION_TYPE } from '../components/arcana/PredictionItemDialog';
-import { MEME_ICON } from '../components/arcana/StatusBar/SwiperCard';
-import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '../constants';
+import { Hash } from 'viem';
+import { PredictionAnswer } from '@/store/arcana/state';
+import { MEME_ICON } from '@/components/arcana/StatusBar/SwiperCard';
+import { NFT_CLAIM, DEV_NFT_LEVEL, GAMER_NFT_LEVEL } from '@/constants';
+import { PREDICTION_TYPE } from '@/components/arcana/PredictionItemDialog';
 
 export type Response<T> = {
   status: string;
@@ -42,7 +43,7 @@ export type AccountInfo = {
   header_image: string;
   release_date?: ReleaseDate;
   nft_claim: NFT_CLAIM;
-  nft_id: number | null;
+  nft_id?: string;
   appid: number;
   nft_level: DEV_NFT_LEVEL;
   credential: number;
@@ -52,7 +53,8 @@ export type DevInvitationInfo = {
   wallet_address: string;
   createdAt: string;
   header_image: string;
-  release_date?: { data: string };
+  name: string;
+  release_date?: { date: string };
   nft_level: DEV_NFT_LEVEL;
 };
 export type GamerInvitationInfo = {
@@ -168,7 +170,7 @@ export type GamerInfoData = {
   value?: number;
   nft_claim?: NFT_CLAIM;
   nft_level?: GAMER_NFT_LEVEL;
-  nft_id?: number;
+  nft_id?: string;
   level?: number;
   tokens?: number;
   friends_count?: number;
@@ -395,7 +397,7 @@ export type ArcanaInviteesVote = {
   createdAt: number;
   steamId: string;
   walletAddress: string;
-  nftLevel: number;
+  nftLevel: GAMER_NFT_LEVEL;
   nftClaim: number;
   personName: string;
   avatar: string;
@@ -508,7 +510,7 @@ export type WorldCapInfo = {
   walletAddress: string;
   genesisNftHolder: number;
   genesisNftLevel?: GAMER_NFT_LEVEL;
-  answerSignature?: string;
+  answerSignature?: Hash;
   deadline: number;
   ownedNft?: any[];
 };

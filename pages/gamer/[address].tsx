@@ -65,7 +65,7 @@ export default function GamerProfile() {
           <div className="py-8">
             <h3 className="mb-3 text-xl font-semibold">Games</h3>
             {isGamerGamesLoading && (
-              <div className="rounded-2xl bg-p12-black/80 p-6 md:p-3">
+              <div className="rounded-2xl bg-gray-800/80 p-6 md:p-3">
                 <Loading size={58} className="my-[72px] opacity-50" />
               </div>
             )}
@@ -83,7 +83,7 @@ export default function GamerProfile() {
                         ))}
                       </div>
                     ) : (
-                      <div className="h-[248px] rounded-2xl bg-p12-black/80 p-6">
+                      <div className="h-[248px] rounded-2xl bg-gray-800/80 p-6">
                         <Empty />
                       </div>
                     )}
@@ -109,7 +109,7 @@ export default function GamerProfile() {
           </div>
           <div>
             <h3 className="my-3 text-xl font-semibold">Airdrop NFT</h3>
-            <div className="flex overflow-hidden rounded-b-2xl bg-p12-black/80 md:flex-col">
+            <div className="flex overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute top-0 left-0 h-full w-full blur-3xl">
                   {gamerInfo && (
@@ -135,19 +135,19 @@ export default function GamerProfile() {
                     </div>
                   </div>
                 </div>
-                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-p12-sub sm:static sm:py-2">
+                <p className="absolute bottom-8 z-10 w-full text-center text-sm text-gray sm:static sm:py-2">
                   The airdrop is in collaboration with and powered by&nbsp;
-                  <a className="text-p12-link" href="https://galxe.com/P12" target="_blank">
+                  <a className="text-blue" href="https://galxe.com/P12" target="_blank">
                     Galxe
                   </a>
                 </p>
               </div>
               <div className="basis-1/2 p-4 md:basis-auto 2xl:p-8">
-                <h2 className="mt-8 text-[30px] font-medium md:mt-2">
+                <h2 className="mt-8 text-3xl font-medium md:mt-2">
                   {gamerInfo?.credential ? GAMER_BADGES[gamerInfo.nft_level!].title : 'P12 | Project Twelve | Genesis'}
                 </h2>
                 <h3 className="mt-9 text-xl font-medium md:mt-4">Genesis Soul-Bound NFT</h3>
-                <p className="mt-2 text-sm text-p12-sub">
+                <p className="mt-2 text-sm text-gray">
                   Birthday:&nbsp;{gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : '--'}
                 </p>
                 <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">

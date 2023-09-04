@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
-import { STORAGE_KEY } from '../../constants';
-import { getLocalStorage } from '../../utils/storage';
+import { STORAGE_KEY } from '@/constants';
+import { getLocalStorage } from '@/utils/storage';
 
 export default function SteamAuth() {
   const router = useRouter();

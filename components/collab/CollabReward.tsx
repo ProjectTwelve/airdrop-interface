@@ -15,7 +15,7 @@ export default function CollabReward({ data }: CollabRewardProps) {
   const nftAmount = useMemo(() => (userInfo?.nftResult == undefined ? null : userInfo.nftResult), [userInfo]);
 
   return (
-    <div className="mt-8 flex flex-col gap-5 border-t border-p12-line py-7">
+    <div className="mt-8 flex flex-col gap-5 border-t border-gray-600 py-7">
       {tokenAmount != null ? (
         <CollabRewardItem
           key={tokenIcon}

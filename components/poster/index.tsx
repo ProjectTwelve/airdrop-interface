@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { FloatingPortal, FloatingOverlay } from '@floating-ui/react-dom-interactions';
+import { FloatingPortal, FloatingOverlay } from '@floating-ui/react';
 import { gamerClaimedPosterAtom } from '../../store/gamer/state';
 import Button from '../button';
 import { downloadImage } from '../../utils';
@@ -21,14 +21,14 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
 
   useEffect(() => {
     if (open) {
-      ReactGA.event({ category: 'Poster', action: 'Click', label: 'show' });
+      ReactGA.event({ action: 'Poster', category: 'Click', label: 'show' });
     }
   }, [open]);
 
   return (
     <FloatingPortal>
       {open && (
-        <FloatingOverlay lockScroll className="z-30 grid place-items-center bg-p12-dialog backdrop-blur-lg">
+        <FloatingOverlay lockScroll className="z-30 grid place-items-center bg-gray-900/60 backdrop-blur-lg">
           <div className="relative">
             <motion.div
               ref={ref}
@@ -59,7 +59,7 @@ export default function Poster({ gamerInfo }: { gamerInfo?: GamerInfoData }) {
                   type="gradient"
                   style={{ width: 278 }}
                   onClick={() => {
-                    ReactGA.event({ category: 'Poster', action: 'Click', label: 'save' });
+                    ReactGA.event({ action: 'Poster', category: 'Click', label: 'save' });
                     downloadImage(posterCapture);
                   }}
                 >

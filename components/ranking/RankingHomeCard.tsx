@@ -18,7 +18,7 @@ export function RankingHomeCard({ title, layoutId, children, routerId }: React.P
 
   const handleGoToRanking = () => {
     setLayoutId(layoutId);
-    ReactGA.event({ category: 'Ranking', action: 'Click', label: routerId });
+    ReactGA.event({ action: 'Ranking', category: 'Click', label: routerId });
     router.push('/ranking/' + routerId).then();
   };
   return (
@@ -31,7 +31,7 @@ export function RankingHomeCard({ title, layoutId, children, routerId }: React.P
       <div className="backdrop-box rounded-2xl px-6 py-4 sm:px-3">
         <h2 className="flex items-center justify-between pb-1.5 font-medium">
           <p className="text-[22px]">{title}</p>
-          <p onClick={handleGoToRanking} className="cursor-pointer text-xl text-p12-link">
+          <p onClick={handleGoToRanking} className="cursor-pointer text-xl text-blue">
             More
             <img className="inline-block" src="/svg/more.svg" alt="more" />
           </p>

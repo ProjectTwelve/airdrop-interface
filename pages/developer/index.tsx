@@ -31,7 +31,7 @@ export default function Developer() {
               <Tab>
                 My P12 tokens
                 {allUnclaimed.length ? (
-                  <div className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-p12-error px-2 text-sm leading-5 md:hidden">
+                  <div className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-red px-2 text-sm leading-5 md:hidden">
                     {allUnclaimed.length} NFT
                   </div>
                 ) : null}
