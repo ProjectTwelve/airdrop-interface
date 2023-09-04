@@ -35,6 +35,7 @@ export default function BridgeSwitch() {
 
   const { data, refetch } = useBadgeNFT(address);
   const { data: historyData, isLoading } = useBadgeHistory<HistoryResult>(address);
+  const [orderData, setOrderData] = useState<BridgeTxs[]>([]);
 
   const [nftOwned, setNFTOwned] = useState<GalxeBadge[][]>([]);
   const [restBadge, setRestBadge] = useState<BadgeInfo[]>([]);
@@ -80,6 +81,14 @@ export default function BridgeSwitch() {
       });
     },
   });
+
+  useEffect(() => {
+    const data: BridgeTxs[] = historyData?.user.bridgeTxs ?? [];
+    if (data.length > 0) {
+      data.sort((a, b) => b.timestamp - a.timestamp);
+      setOrderData(data);
+    }
+  }, [historyData]);
 
   useEffect(() => {
     if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge.chainId) return;
@@ -700,12 +709,7 @@ export default function BridgeSwitch() {
 
       <div className="mt-[96px] border-b border-gray-600"></div>
       <div className="mt-6 text-lg font-semibold">Bridge History</div>
-      <Table
-        loading={isLoading}
-        className="mt-6 max-w-[95vw] overflow-x-auto"
-        dataSource={historyData?.user?.bridgeTxs || []}
-        columns={gamerColumns}
-      />
+      <Table loading={isLoading} className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={orderData} columns={gamerColumns} />
     </div>
   );
 }
