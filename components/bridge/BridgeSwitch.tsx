@@ -304,22 +304,22 @@ export default function BridgeSwitch() {
     }
     if (rarity === 'White') {
       return {
-        url: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653364450325322173.gif',
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_bs_common.gif',
         name: 'P12 Best Supporter [COMMON]',
       };
     } else if (rarity === 'Green') {
       return {
-        url: 'https://cdn.galxe.com/galaxy/p12/3c4afc9b-57a6-4b83-ae3a-397b5f24c085.gif',
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_bs_uncommon.gif',
         name: 'P12 Best Supporter [UNCOMMON]',
       };
     } else if (rarity === 'Blue') {
       return {
-        url: 'https://cdn.galxe.com/galaxy/p12/3e3c7025-336a-48f9-aabb-d3253d3c8b8b.gif',
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_bs_rare.gif',
         name: 'P12 Best Supporter [RARE]',
       };
     } else if (rarity === 'Purple') {
       return {
-        url: 'https://cdn-2.galxe.com/galaxy/images/projecttwelve/1650619688807604651.gif',
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_bs_epic.gif',
         name: 'P12 Best Supporter [EPIC]',
       };
     }
