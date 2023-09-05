@@ -84,7 +84,7 @@ export default function BridgeSwitch() {
   });
 
   useEffect(() => {
-    const data: BridgeTxs[] = historyData?.user.bridgeTxs ?? [];
+    const data: BridgeTxs[] = historyData?.user?.bridgeTxs ?? [];
     if (data.length > 0) {
       data.sort((a, b) => b.timestamp - a.timestamp);
       setOrderData(data);
