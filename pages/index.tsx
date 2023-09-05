@@ -20,7 +20,7 @@ export default function Home() {
       >
         <img
           className="h-[260px] object-cover object-left md:h-[148px]"
-          src="https://cdn1.p12.games/arcana/banner.png"
+          src="https://cdn1.p12.games/arcana/banner.webp"
           alt="p12Arcana"
         />
       </div>
