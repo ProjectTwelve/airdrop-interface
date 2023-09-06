@@ -7,22 +7,23 @@ import CollabHomeCard from '../components/collab/CollabHomeCard';
 import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
 import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
 import { openLink } from '../utils';
+import { useThemeAsset } from '@/hooks/theme';
 
 export default function Home() {
   const router = useRouter();
   const setOpen = useSetRecoilState(inviteModalAtom);
-
+  const src = useThemeAsset('arcana-banner.webp');
   return (
     <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
       <div
-        className="cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
+        className="w-full cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
         onClick={() => openLink('https://arcana.p12.games/referral?code=Mkq4zW')}
       >
-        <img
-          className="h-[260px] object-cover object-left md:h-[148px]"
-          src="https://cdn1.p12.games/arcana/banner.webp"
-          alt="p12Arcana"
-        />
+        {src ? (
+          <img className="h-[260px] object-cover object-left md:h-[148px]" src={src} alt="p12Arcana" />
+        ) : (
+          <div className="h-[260px] w-full animate-pulse bg-white/10" />
+        )}
       </div>
       <div className="mt-6 grid w-full grid-cols-3 gap-7 md:grid-cols-1 md:gap-4">
         <div
