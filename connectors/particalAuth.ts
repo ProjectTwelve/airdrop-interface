@@ -1,8 +1,6 @@
-import { Connector } from '@wagmi/core';
-import type { Chain } from '@wagmi/core/chains';
 import type { ParticleNetwork, Config } from '@particle-network/auth';
 import type { ParticleProvider } from '@particle-network/provider';
-import { Address, ConnectorData } from 'wagmi';
+import { Address, ConnectorData, Connector, Chain } from 'wagmi';
 import { UserRejectedRequestError, createWalletClient, custom, getAddress } from 'viem';
 
 type Options = Config;
@@ -91,7 +89,7 @@ export class ParticleAuthConnector extends Connector<ParticleProvider, Options> 
 
   async getWalletClient({ chainId }: { chainId?: number } = {}) {
     const [provider, account] = await Promise.all([this.getProvider(), this.getAccount()]);
-    const chain = this.chains.find((x) => x.id === chainId);
+    const chain = this.chains.find((x) => x.id === chainId)!;
     if (!provider) throw new Error('provider is required.');
     return createWalletClient({
       account,

@@ -7,26 +7,6 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 import { ParticleAuthConnector } from './particalAuth';
 import { PARTICLE_APP_ID, PARTICLE_CLIENT_KEY, PARTICLE_PROJECT_ID } from '@/constants';
 
-// custom polygon
-// const polygon: Chain = {
-//   id: 137,
-//   name: 'Polygon',
-//   network: 'matic',
-//   nativeCurrency: {
-//     name: 'MATIC',
-//     symbol: 'MATIC',
-//     decimals: 18,
-//   },
-//   rpcUrls: {
-//     default: {
-//       http: ['https://rpc.tenderly.co/fork/10575d78-56a4-476c-8669-33b74397cc8f'],
-//     },
-//     public: {
-//       http: [' https://rpc.tenderly.co/fork/10575d78-56a4-476c-8669-33b74397cc8f'],
-//     },
-//   },
-// };
-
 export const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet, bsc, bscTestnet, polygon],
   [publicProvider()],

@@ -6,3 +6,5 @@ export const fetchLogin = (data: LoginParams) => request.post<any, Response<User
 
 export const fetchPowerLevel = (address?: Address) =>
   request.get<any, Response<PowerLevelResult>>(`/arcana/power-vote/${address}`);
+
+export const fetchUserInfo = () => request.get<any, Response<UserInfo>>('/app/profile');

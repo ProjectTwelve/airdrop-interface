@@ -29,7 +29,7 @@ export default function SteamDeveloperSBT() {
         </div>
         <div className="flex-1">
           <div className="flex gap-3 text-xl/5.5">
-            P12 XII-PLORER Badge
+            P12 Genesis Badge
             {gameInfo && (
               <Tag size="small" value={DEV_BADGES[gameInfo.nft_level!].rarity} type={DEV_BADGES[gameInfo.nft_level!].color} />
             )}

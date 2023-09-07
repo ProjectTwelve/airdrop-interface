@@ -10,7 +10,8 @@ export type LoginParams = {
 };
 
 export type UserInfo = {
-  address: Address;
+  walletAddress: Address;
+  showName?: string;
   accessToken: string;
 };
 
