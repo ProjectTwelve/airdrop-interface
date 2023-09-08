@@ -7,8 +7,8 @@ import Button from '../../button';
 import Message from '../../message';
 import { SteamApp } from '../Verify';
 import { CloseCircle } from '../../svg/CloseCircle';
-import { fetchDeveloperGame } from '../../../lib/api';
-import { roadmapModalAtom } from '../../../store/roadmap/state';
+import { fetchDeveloperGame } from '@/lib/api';
+import { roadmapModalAtom } from '@/store/roadmap/state';
 
 type SteamGameItemProps = {
   app: SteamApp;
@@ -31,21 +31,21 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   });
 
   return (
-    <div className="h-[72px] overflow-hidden rounded-2xl bg-gray-800/80">
+    <div className="h-[72px] overflow-hidden rounded-2xl bg-gray-700/30">
       {app.steam_appid ? (
-        <div className="relative h-[72px] overflow-hidden rounded-2xl bg-gray-800/80 pr-4">
+        <div className="relative h-[72px] overflow-hidden rounded-2xl pr-4">
           <div
             className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover"
             style={{ maxWidth: 'min(33%, 168px)' }}
           >
             <img src={app.header_image} className="h-auto w-full object-cover" alt="header_image" />
             <div className="absolute bottom-0 left-0 h-[42px] w-[42px] md:hidden">
-              <span className="absolute top-5 left-1 z-10 text-sm font-medium">0{index}</span>
+              <span className="absolute left-1 top-5 z-10 text-sm font-medium">0{index}</span>
               <img src="/svg/index.svg" width={42} height={42} alt="index" />
             </div>
           </div>
           <div className="sm:flex sm:flex-col-reverse">
-            <div className="float-right mt-6 sm:float-none sm:mt-0">
+            <div className="float-right mt-6 flex sm:float-none sm:mt-0">
               <span className="mr-2 cursor-pointer align-top font-ddin text-2xl font-bold" onClick={() => setOpen(true)}>
                 ?,???
               </span>
@@ -60,7 +60,7 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
             </div>
           </div>
           <div className="clear-both"></div>
-          <div className="absolute top-1.5 right-1.5" onClick={onRemove}>
+          <div className="absolute right-1.5 top-1.5" onClick={onRemove}>
             <CloseCircle />
           </div>
         </div>

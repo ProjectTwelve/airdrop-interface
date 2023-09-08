@@ -5,18 +5,18 @@ import { useSetRecoilState } from 'recoil';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useSignMessage } from 'wagmi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Button from '../button';
-import Message from '../message';
-import { STORAGE_KEY } from '../../constants';
-import { getVerifySignData } from '../../utils';
+import Button from '@/components/button';
+import Message from '@/components/message';
+import { STORAGE_KEY } from '@/constants';
+import { getVerifySignData } from '@/utils';
 import SteamAppItem from './verify/SteamAppItem';
-import { fetchDeveloperVerify } from '../../lib/api';
-import { getLocalStorage } from '../../utils/storage';
-import { getErrorToast } from '../../utils/developer';
+import { fetchDeveloperVerify } from '@/lib/api';
+import { getLocalStorage } from '@/utils/storage';
+import { getErrorToast } from '@/utils/developer';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
-import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
-import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
-import { useIsMounted } from '../../hooks/useIsMounted';
+import { tabSelectAtom, verifiedSteamAppAtom } from '@/store/developer/state';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '@/lib/types';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 export type SteamApp = Partial<DevGameInfo> & { index: number };
 
@@ -149,9 +149,9 @@ function Verify() {
             <h3 className="text-xl font-medium">
               YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-gray-800/80 p-6 pb-16">
+            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-gray-700/30 p-6 pb-16">
               {isMounted && address ? signature : 'Please connect your wallet first.'}
-              <div className="absolute right-5 bottom-5">
+              <div className="absolute bottom-5 right-5">
                 {isMounted && address ? (
                   isSig ? (
                     <Button

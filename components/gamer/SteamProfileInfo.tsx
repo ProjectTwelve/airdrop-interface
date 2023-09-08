@@ -1,5 +1,5 @@
 import React from 'react';
-import { GamerInfoData } from '../../lib/types';
+import { GamerInfoData } from '@/lib/types';
 import dayjs from 'dayjs';
 
 export default function SteamProfileInfo({ data }: { data?: GamerInfoData }) {

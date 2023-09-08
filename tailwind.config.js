@@ -14,6 +14,7 @@ module.exports = {
         '2xl': '1366px',
       },
       spacing: {
+        4.5: '1.125rem',
         5.5: '1.375rem',
         7.5: '1.875rem',
         13: '3.25rem',
@@ -32,6 +33,7 @@ module.exports = {
         gray: {
           400: '#A5A6AB',
           DEFAULT: '#9A9DAA',
+          450: '#78797D',
           500: '#74788B',
           550: '#6F7784',
           600: '#4E556D',
