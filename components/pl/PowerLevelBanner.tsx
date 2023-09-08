@@ -14,7 +14,7 @@ export default function PowerLevelBanner() {
       className="flex-center relative cursor-pointer gap-6 rounded-2xl py-19 duration-200 hover:-translate-y-1"
       onClick={onClick}
     >
-      <div className="absolute inset-0 left-0 top-0 -z-10 overflow-hidden opacity-50">
+      <div className="absolute inset-0 left-0 top-0 -z-10 overflow-hidden">
         {banner && <video autoPlay loop muted className="w-full" src={banner} />}
       </div>
       <div className="absolute left-0 top-0 -z-10 h-[138px] w-full rounded-t-2xl bg-card-mask" />

@@ -2,7 +2,7 @@
     position: relative;
     border-radius: 12px;
     background: rgb(40, 42, 51, 50);
-    border: 2px solid rgba(111, 119, 132, 0.5);
+    border: 1px solid rgba(111, 119, 132, 0.5);
     backdrop-filter: blur(8px);
     font-size: 14px;
 }

@@ -27,8 +27,8 @@
     }
 
     .backdrop-box {
-        background: rgba(68, 70, 95, 0.5);
-        border: 2px solid rgb(70, 75, 90);
+        background: rgba(61, 68, 75, 0.5);
+        border: 1px solid rgb(70, 75, 90);
         backdrop-filter: blur(16px);
     }
 
@@ -169,7 +169,7 @@
         @apply relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur;
         @apply flex flex-col items-center justify-center;
     }
-    
+
     .copy__btn {
         background: linear-gradient(180deg, #7CD645 5%, #2E5F19 46.81%, #5EAA30 100%);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
@@ -200,7 +200,7 @@
         border: 1px solid #4E4E50;
         backdrop-filter: blur(25px);
     }
-    
+
 }
 
 @layer utilities {
@@ -225,9 +225,20 @@
     }
 
     .bg-gradient-item {
-        background: linear-gradient(to bottom, #4E56917F 0%, #3B41677F 10%, #3C41647F 16%, #3C41647F 100%);
+        background: linear-gradient(to bottom, #5D646C7F, #393F467F 15%, #23262C7F);
         backdrop-filter: blur(16px);
-        border: 1px solid #616985;
+        border: 1px solid #6F77847F;
+    }
+
+    .bg-gradient-collab {
+        cursor: pointer;
+        background: linear-gradient(to bottom, #3D444B66, #23262C66);
+        backdrop-filter: blur(16px);
+        border: 1px solid #6F77847F;
+    }
+
+    .bg-gradient-collab:hover {
+        background: linear-gradient(to bottom, #3D444BAD, #23262CAD);
     }
 
     .bg-p12-poster-0 {
