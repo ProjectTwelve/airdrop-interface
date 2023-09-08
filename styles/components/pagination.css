@@ -121,7 +121,6 @@
     min-width: 28px;
     height: 28px;
     color: rgba(0, 0, 0, 0.85);
-    font-family: Arial;
     line-height: 28px;
     text-align: center;
     vertical-align: middle;
@@ -241,7 +240,7 @@
 .rc-pagination-simple .rc-pagination-prev .rc-pagination-item-link,
 .rc-pagination-simple .rc-pagination-next .rc-pagination-item-link {
     height: 24px;
-    background-color: #4E5573;
+    background-color: #3D444B;
     border: 1px solid #6B7787;
     border-radius: 4px;
 }

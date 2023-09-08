@@ -43,10 +43,10 @@ export default function GameList() {
           {list.map((game) => (
             <div
               key={game.appid}
-              className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-800 p-2.5 last:mr-0')}
+              className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl p-2.5 last:mr-0')}
             >
               <div className="flex">
-                <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
+                <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-2xl bg-gray-700/30">
                   {game.header_image ? (
                     <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                   ) : (

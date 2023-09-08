@@ -66,7 +66,7 @@ export default function CollabSwiper() {
               x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="absolute grid h-full w-full grid-cols-2 gap-5 md:grid-cols-1"
+            className="absolute grid h-full w-full grid-cols-2 gap-4.5 md:grid-cols-1"
           >
             {isLoading ? (
               <>

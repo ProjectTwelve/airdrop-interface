@@ -63,7 +63,7 @@ export default function CollabListItem({ data, loading }: CollabItemProps) {
         }
       }}
       className={classNames(
-        'flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-gray-800/80 p-4 pb-3 backdrop-blur-lg hover:bg-[#7980AF]/20 sm:px-2',
+        'bg-gradient-collab flex flex-col items-center gap-2 rounded-2xl p-4 pb-3 sm:px-2',
         loading ? 'animate-pulse' : null,
       )}
     >
