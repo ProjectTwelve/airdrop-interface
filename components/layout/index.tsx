@@ -34,7 +34,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
     <WagmiConfig config={config}>
       <RecoilRoot>
-        <div className={classNames('mx-auto min-h-screen pt-4 2xl:container', poppins.className)}>
+        <div className={classNames('mx-auto min-h-screen pt-6 2xl:container', poppins.className)}>
           <LayoutHeader />
           <main>{children}</main>
           <LayoutFooter />

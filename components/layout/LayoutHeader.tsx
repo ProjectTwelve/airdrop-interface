@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import { useAccount } from 'wagmi';
-import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import Web3Status from '../web3/Web3Status';
-import LayoutHeaderExtra from './LayoutHeaderExtra';
-import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '../../store/gamer/state';
-import { invitationCountAtom } from '../../store/invite/state';
-import { fetchGamerEmailInfo, fetchInvitationCount } from '../../lib/api';
 import ReactGA from 'react-ga4';
+import { useAccount } from 'wagmi';
+import { useRouter } from 'next/router';
+import Web3Status from '../web3/Web3Status';
+import { useQuery } from '@tanstack/react-query';
+import LayoutHeaderExtra from './LayoutHeaderExtra';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { invitationCountAtom } from '@/store/invite/state';
+import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
+import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '@/store/gamer/state';
+import { useFetchUserInfo } from '@/hooks/user';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -18,6 +19,7 @@ function LayoutHeader() {
   const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
 
+  useFetchUserInfo();
   useEffect(() => {
     // set GA ID
     if (!address) return;
