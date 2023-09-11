@@ -1,7 +1,7 @@
 import React from 'react';
 import { openLink } from '@/utils';
 import { useThemeAsset } from '@/hooks/theme';
-import GamerRanking from '@/components/ranking/Gamer';
+import HomepageRank from '@/components/homepage/rank';
 import CollabSwiper from '@/components/collab/CollabSwiper';
 import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 
@@ -26,8 +26,8 @@ export default function Home() {
       <div className="mt-8 w-full">
         <PowerLevelBanner />
       </div>
-      <div className="backdrop-box mt-7.5 rounded-2xl">
-        <GamerRanking />
+      <div className="backdrop-box mt-7.5 w-full rounded-2xl">
+        <HomepageRank />
       </div>
     </div>
   );

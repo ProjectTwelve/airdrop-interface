@@ -49,7 +49,6 @@ export default function Dashboard() {
             title="Genesis Steam Developer"
             score="24,000"
           />
-          <ActivityTab onClick={() => setSelectedTab(3)} active={selectedTab === 3} title="P12 Operations" score="24,000" />
         </div>
       </div>
       <div>{selectedTab === 0 && <Arcana />}</div>

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { disconnect } from '@wagmi/core';
 import { getAccessToken } from '@/utils/authorization';
 
 export type Response<T> = {
@@ -29,9 +28,6 @@ instance.interceptors.response.use(
   (error) => {
     const { response } = error;
     const { data } = response ?? {};
-    if (data?.code === 401) {
-      disconnect?.();
-    }
     return Promise.reject(data);
   },
 );

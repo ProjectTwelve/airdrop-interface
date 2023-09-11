@@ -22,15 +22,20 @@ module.exports = {
         19: '4.75rem',
       },
       lineHeight: {
+        3.5: '0.875rem',
         4.5: '1.125rem',
         5.5: '1.375rem',
         6.5: '1.625rem',
         7.5: '1.875rem',
         10: '2.5rem',
+        11: '2.75rem',
         12: '3rem',
       },
       colors: {
         gray: {
+          200: '#CEDCFF',
+          300: '#BDC9E3',
+          350: '#B1B1B1',
           400: '#A5A6AB',
           DEFAULT: '#9A9DAA',
           450: '#78797D',
@@ -45,6 +50,10 @@ module.exports = {
         red: {
           DEFAULT: '#F13361',
         },
+        purple: {
+          DEFAULT: '#FC59FF',
+          500: '#C859FF',
+        },
         orange: {
           DEFAULT: '#FFAA2C',
         },
@@ -52,6 +61,7 @@ module.exports = {
           DEFAULT: '#FFE7AB',
         },
         green: {
+          300: '#6EEB7A',
           DEFAULT: '#1EDB8C',
         },
         blue: {
