@@ -16,6 +16,9 @@ import { isConnectPopoverOpen } from '@/store/web3/state';
 import PosterButton from '@/components/poster/PosterButton';
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import { useSignInWithEthereum } from '@/hooks/useSignInWithEthereum';
+import { AnimatePresence } from 'framer-motion';
+import DeveloperStatus from '@/components/web3/DeveloperStatus';
+import GamerStatus from '@/components/web3/GamerStatus';
 
 function Web3Status() {
   const router = useRouter();
@@ -64,6 +67,10 @@ function Web3Status() {
       <div className="flex items-center">
         {router.pathname === '/gamer' && posterCapture && <PosterButton />}
         <div className="flex rounded-full bg-[#44465F]/60 text-sm backdrop-blur">
+          <div className="py-2 md:hidden">
+            <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
+            <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
+          </div>
           <Web3StatusInner />
         </div>
       </div>
