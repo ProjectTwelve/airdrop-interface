@@ -53,7 +53,7 @@ export default function CollabSwiper() {
       >
         <LeftCircle size={54} className="rotate-180" color="#00000000" />
       </div>
-      <div className="relative h-[308px] overflow-hidden">
+      <div className="relative h-[300px] overflow-hidden">
         <AnimatePresence initial={false} custom={swipeDirection}>
           <motion.div
             key={swipePage}
@@ -66,7 +66,7 @@ export default function CollabSwiper() {
               x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="absolute grid h-full w-full grid-cols-2 gap-4.5 md:grid-cols-1"
+            className="absolute grid h-full w-full grid-cols-2 gap-4 md:grid-cols-1"
           >
             {isLoading ? (
               <>

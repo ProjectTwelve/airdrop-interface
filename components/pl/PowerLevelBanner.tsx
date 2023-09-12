@@ -11,7 +11,7 @@ export default function PowerLevelBanner() {
 
   return (
     <div
-      className="flex-center relative cursor-pointer gap-6 rounded-2xl py-19 duration-200 hover:-translate-y-1"
+      className="flex-center relative cursor-pointer gap-6 rounded-2xl py-12 duration-200 hover:-translate-y-1"
       onClick={onClick}
     >
       <div className="absolute inset-0 left-0 top-0 -z-10 overflow-hidden">
