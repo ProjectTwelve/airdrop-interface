@@ -9,7 +9,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { invitationCountAtom } from '@/store/invite/state';
 import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
 import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '@/store/gamer/state';
-import { useFetchUserInfo } from '@/hooks/user';
+import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -18,8 +18,15 @@ function LayoutHeader() {
   const setInvitationCount = useSetRecoilState(invitationCountAtom);
   const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
+  const fetchGlobalData = useFetchGlobalData();
+  const isLogged = useIsLogged();
 
-  useFetchUserInfo();
+  useEffect(() => {
+    if (isLogged) {
+      fetchGlobalData();
+    }
+  }, [fetchGlobalData, isLogged, address]); // 切钱包 refetch
+
   useEffect(() => {
     // set GA ID
     if (!address) return;

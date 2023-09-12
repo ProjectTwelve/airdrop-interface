@@ -30,6 +30,21 @@ export function shortenHash(hash?: string): string {
   return hash ? hash.substring(0, 6) + '...' + hash.substring(hash.length - 4) : '';
 }
 
+export function shortenArcanaStr(
+  str?: string,
+  option?: {
+    startTruncateLength?: number; // 开始省略的长度
+    pre?: number;
+    post?: number;
+  },
+): string {
+  const { pre = 3, post = 5, startTruncateLength = 20 } = option ?? {};
+  const len = str?.length;
+  if (!len) return '';
+  if (len < startTruncateLength) return str;
+  return `${str.substring(0, pre)}...${str.substring(len - post)}`;
+}
+
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 export const openLink = (url: string) => {
