@@ -19,12 +19,11 @@ export type SocialMedia = {
   sourceId?: string;
 };
 
-export type UserInfo = {
-  walletAddress: string;
-  showName?: string;
+export type UserInfo = Partial<{
   accessToken: string;
-
   editorium?: boolean;
+  walletAddress: string;
+  showName: string | null;
   nickname: string | null;
   p12Name: string | null;
   ensName: string | null;
@@ -38,7 +37,7 @@ export type UserInfo = {
   bio: string | null;
   mwAccountInfo: any[]; // TODO: 补全类型
   socialMedias: SocialMedia[]; // TODO: 补全类型
-};
+}>;
 
 export type PowerLevelResult = {
   walletAddress: string;

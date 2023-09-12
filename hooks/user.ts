@@ -16,7 +16,7 @@ export const useMutationLogin = () => {
     mutationFn: (params: LoginParams) => fetchLogin(params),
     onSuccess: ({ code, data }) => {
       if (code === 200) {
-        setAccessToken(data.accessToken);
+        setAccessToken(data?.accessToken ?? '');
         instance.defaults.headers.common['Authorization'] = 'Bearer ' + data.accessToken;
         setUserInfo(data);
         setAccessTokenAtom(data.accessToken);
