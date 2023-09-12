@@ -163,6 +163,13 @@ export const P12_COMMUNITY_BADGE: Record<COMMUNITY_NFT_CAMPAIGN_ID, BadgeInfo> =
     BNBChainName: 'P12 Best Supporter [White Rarity]',
     polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCB7bUUkWH.png',
   },
+  [COMMUNITY_NFT_CAMPAIGN_ID.GCohBUjYYY]: {
+    campaign: 'GCohBUjYYY',
+    rarity: 'Uncommon',
+    polygonName: 'P12 Best Supporter [Green Rarity]',
+    BNBChainName: 'P12 Best Supporter [Green Rarity]',
+    polygonImage: 'https://cdn1.p12.games/airdrop/badge/cbadges/GCohBUjYYY.png',
+  },
   [COMMUNITY_NFT_CAMPAIGN_ID.GCypPUUFQR]: {
     campaign: 'GCypPUUFQR',
     rarity: 'Uncommon',
