@@ -33,6 +33,7 @@ module.exports = {
         5.5: '1.375rem',
         6.5: '1.625rem',
         7.5: '1.875rem',
+        8.5: '2.125rem',
         10: '2.5rem',
         11: '2.75rem',
         12: '3rem',
@@ -111,6 +112,8 @@ module.exports = {
         'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
         'steam-info': 'url(/img/poster/steam_info.webp)',
         'card-mask': 'linear-gradient(to bottom, var(--mask-40), #00000000)',
+        'arcana-card-mask':
+          'linear-gradient(180deg, rgba(var(--arcana-mask), 0.30) 0%, rgba(var(--arcana-mask), 0) 60%), var(--p12-card-bg)',
         'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',

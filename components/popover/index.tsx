@@ -13,6 +13,7 @@ import {
   FloatingFocusManager,
 } from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { twMerge } from 'tailwind-merge';
 
 type PopoverProps = {
   open?: boolean;
@@ -20,9 +21,19 @@ type PopoverProps = {
   render: (data: { close: () => void }) => React.ReactNode;
   placement?: Placement;
   children: JSX.Element;
+  className?: string;
+  offset?: number;
 };
 
-function Popover({ children, render, placement, open: passedOpen, onOpenChange }: React.PropsWithChildren<PopoverProps>) {
+function Popover({
+  children,
+  render,
+  placement,
+  open: passedOpen,
+  onOpenChange,
+  className,
+  offset: offsetNum,
+}: React.PropsWithChildren<PopoverProps>) {
   const [open, setOpen] = useState(false);
 
   const {
@@ -37,7 +48,7 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
       setOpen(op);
       onOpenChange?.(op);
     },
-    middleware: [offset(10), flip(), shift()],
+    middleware: [offset(offsetNum ?? 10), flip(), shift()],
     placement,
     whileElementsMounted: autoUpdate,
   });
@@ -56,7 +67,7 @@ function Popover({ children, render, placement, open: passedOpen, onOpenChange }
         {open && (
           <FloatingFocusManager context={context}>
             <motion.div
-              className="backdrop-box rounded-2xl"
+              className={twMerge('backdrop-box rounded-2xl', className)}
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1, originY: 0 }}
               exit={{ opacity: 0, scale: 0.85 }}

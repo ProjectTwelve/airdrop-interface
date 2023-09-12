@@ -6,7 +6,7 @@ import { setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 export const useMutationLogin = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);
@@ -76,4 +76,15 @@ export const useRemoveGlobalState = () => {
   return useCallback(() => {
     setUserInfo(undefined);
   }, [setUserInfo]);
+};
+
+export const useLogoutCallback = () => {
+  const removeUserInfo = useRemoveGlobalState();
+  const { disconnect } = useDisconnect();
+
+  return useCallback(() => {
+    // TODO: reset user info
+    removeUserInfo();
+    disconnect?.();
+  }, [disconnect, removeUserInfo]);
 };

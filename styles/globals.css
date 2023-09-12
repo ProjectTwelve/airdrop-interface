@@ -338,6 +338,10 @@
     background: linear-gradient(180deg, #242327 2.63%, #282c2e 50.48%, #363f44 97.37%);
   }
 
+  .arcana__p12-card {
+    @apply rounded-lg border border-gray-400/50 bg-arcana-card-mask backdrop-blur-lg;
+  }
+
   .activity {
     @apply cursor-pointer select-none transition hover:scale-110 active:scale-90;
   }
