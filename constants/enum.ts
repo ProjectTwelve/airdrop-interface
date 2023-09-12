@@ -61,6 +61,7 @@ export enum COMMUNITY_NFT_CAMPAIGN_ID {
   // GC1abUUnxU = 'GC1abUUnxU',
   GCDqcUUudB = 'GCDqcUUudB',
   GCALHUUGt5 = 'GCALHUUGt5',
+  GCohBUjYYY = 'GCohBUjYYY',
 }
 
 export enum AMA_NFT_CAMPAIGN_ID {
