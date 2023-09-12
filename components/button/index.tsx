@@ -9,6 +9,7 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  htmlType?: 'button' | 'submit' | 'reset';
 };
 
 function Loading() {
@@ -20,7 +21,7 @@ function Loading() {
 }
 
 const Button = React.forwardRef(function ButtonInner(
-  { className, loading, type, size, onClick, disabled, children, style }: React.PropsWithChildren<ButtonProps>,
+  { className, loading, type, size, onClick, disabled, children, style, htmlType }: React.PropsWithChildren<ButtonProps>,
   ref: LegacyRef<HTMLButtonElement>,
 ) {
   const bg = {
@@ -37,6 +38,7 @@ const Button = React.forwardRef(function ButtonInner(
 
   return (
     <button
+      type={htmlType}
       ref={ref}
       onClick={loading ? undefined : onClick}
       className={classNames(

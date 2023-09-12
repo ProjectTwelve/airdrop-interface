@@ -42,3 +42,18 @@ export const useArcanaThemeAsset = (file: string) => {
 
   return useMemo(() => src, [src]);
 };
+
+export const useThemeColors = () => {
+  const [gradientFrom, setGradientFrom] = useState<string>('');
+  const [gradientTo, setGradientTo] = useState<string>('');
+
+  useEffect(() => {
+    const themeStyles = window.getComputedStyle(document.documentElement);
+    setGradientFrom(themeStyles.getPropertyValue(`--from`).trim());
+    setGradientTo(themeStyles.getPropertyValue(`--to`).trim());
+  }, []);
+  return {
+    gradientFrom,
+    gradientTo,
+  };
+};
