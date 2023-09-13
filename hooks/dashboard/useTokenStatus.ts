@@ -1,6 +1,6 @@
+import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { AccountInfo, GamerInfoData } from '@/lib/types';
-import { BADGE_CONTRACT_ADDRESS } from '@/constants';
 import { TokenStatusData } from '@/components/dashboard/TokenStatus';
 
 export function useGamerTokenStatus(data?: GamerInfoData) {
@@ -9,9 +9,9 @@ export function useGamerTokenStatus(data?: GamerInfoData) {
       data
         ? {
             id: data.nft_id,
-            claim: data.nft_claim,
+            rarity: data.nft_level,
             role: data.credential ? 'Gamer' : undefined,
-            contract: data.credential ? BADGE_CONTRACT_ADDRESS : undefined,
+            birthday: data?.birthday ? dayjs(data.birthday).format('YY/MM/DD') : '--',
           }
         : undefined,
     [data],
@@ -24,9 +24,9 @@ export function useDevTokenStatus(data?: AccountInfo) {
       data
         ? {
             id: data.nft_id,
-            claim: data.nft_claim,
+            rarity: data.nft_level,
             role: data.credential ? 'Developer' : undefined,
-            contract: data.credential ? BADGE_CONTRACT_ADDRESS : undefined,
+            birthday: data?.updatedAt ? dayjs(data.updatedAt).format('YY/MM/DD') : '--',
           }
         : undefined,
     [data],

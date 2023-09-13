@@ -4,14 +4,7 @@ export enum NFT_CLAIM {
   CLAIMED,
 }
 
-export enum DEV_NFT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-}
-
-export enum GAMER_NFT_LEVEL {
+export enum SBT_LEVEL {
   ORANGE = 0,
   PURPLE,
   BLUE,
