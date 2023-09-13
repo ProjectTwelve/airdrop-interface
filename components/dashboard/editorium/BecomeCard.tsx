@@ -6,7 +6,7 @@ import React from 'react';
 export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
   return (
     <div className="arcana__p12-card relative flex-grow p-6">
-      {!isVoter && <div className="mb-3.5 text-2xl/6.5">Become a Voter</div>}
+      {!isVoter && <div className="mb-3.5 text-2xl/6.5 font-bold">Become a Voter</div>}
       <div className="flex items-start gap-14">
         <div className={classNames({ 'mt-5': !isVoter })}>
           <p className={classNames('flex items-center font-semibold', isVoter ? 'gap-2 text-xl/5.5' : 'gap-1.5 text-sm/5.5')}>
