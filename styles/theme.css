@@ -1,3 +1,6 @@
+:root {
+  --p12-card-bg: linear-gradient(180deg, rgba(61, 68, 75, 0.4) 0%, rgba(35, 38, 44, 0.4) 100%);
+}
 .p12-theme-01 {
   --from: #a011ff;
   --from-30: #a011ff4d;
@@ -17,6 +20,7 @@
   --id-card: url('/img/theme/01/editorium/id_card.webp');
   --id-card-verify: url('/img/theme/01/editorium/id_card_verify.webp');
   --id-card-color: #1e0420;
+  --arcana-mask: 200, 89, 255;
 }
 
 .p12-theme-02 {
@@ -38,6 +42,7 @@
   --id-card: url('/img/theme/02/editorium/id_card.webp');
   --id-card-verify: url('/img/theme/02/editorium/id_card_verify.webp');
   --id-card-color: #1e0420;
+  --arcana-mask: 30, 219, 140;
 }
 
 .p12-theme-03 {
@@ -59,6 +64,7 @@
   --id-card: url('/img/theme/03/editorium/id_card.webp');
   --id-card-verify: url('/img/theme/03/editorium/id_card_verify.webp');
   --id-card-color: #1e0420;
+  --arcana-mask: 255, 170, 44;
 }
 
 .p12-theme-04 {
@@ -80,4 +86,5 @@
   --id-card: url('/img/theme/04/editorium/id_card.webp');
   --id-card-verify: url('/img/theme/04/editorium/id_card_verify.webp');
   --id-card-color: #040f20;
+  --arcana-mask: 67, 187, 255;
 }

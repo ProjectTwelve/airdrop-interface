@@ -111,6 +111,8 @@ module.exports = {
         'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
         'steam-info': 'url(/img/poster/steam_info.webp)',
         'card-mask': 'linear-gradient(to bottom, var(--mask-40), #00000000)',
+        'arcana-card-mask':
+          'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 60%), var(--p12-card-bg)',
         'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',

@@ -2,6 +2,7 @@ import {
   ChainNamesResult,
   CheckNameParams,
   CheckResult,
+  GameInfo,
   LoginParams,
   PowerLevelResult,
   ProfileParams,
@@ -22,3 +23,6 @@ export const checkNameAvailable = (data: CheckNameParams) =>
 export const updateChainNames = () => request.post<any, Response<ChainNamesResult>>('/app/profile/chain-names');
 
 export const editProfileData = (data: ProfileParams) => request.post<any, Response<boolean>>('/app/profile', data);
+
+export const fetchUserSubmittedList = () => request.get<any, Response<GameInfo[]>>('/arcana/game/submitted');
+export const fetchUserNotSubmittedList = () => request.get<any, Response<GameInfo[]>>('/arcana/game/not-submitted');

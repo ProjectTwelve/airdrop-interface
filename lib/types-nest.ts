@@ -74,3 +74,16 @@ export type ChainNamesResult = {
   spaceIdArb: string | null;
   spaceIdBnb: string | null;
 };
+
+export type GameInfo = {
+  id: number;
+  rank?: number; // 投票为0不进排行榜
+  gameDescription: string | null;
+  gameName: string;
+  gameVotes: number;
+  mainImage: string | null; // 主图
+  showName: string | null;
+  twitter: string | null; // 前面没有@
+  twitterVerify: boolean;
+  walletAddress: string;
+};

@@ -45,6 +45,15 @@ export function shortenArcanaStr(
   return `${str.substring(0, pre)}...${str.substring(len - post)}`;
 }
 
+export function shortenArcanaShowName(showName?: string, startTruncateLength = 20): string {
+  if (!showName) return '';
+  const parsed = isAddress(showName);
+  // TODO: shorten Rule
+  if (parsed) return shortenAddress(showName);
+  else if (showName.includes('.p12.dev')) return shortenArcanaStr(showName, { post: 3, startTruncateLength });
+  else return shortenArcanaStr(showName, { startTruncateLength });
+}
+
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 export const openLink = (url: string) => {
