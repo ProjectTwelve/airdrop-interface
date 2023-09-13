@@ -78,8 +78,12 @@ module.exports = {
           DEFAULT: '#43BBFF',
           550: '#4383FF',
         },
+        p12: {
+          'id-card': 'var(--id-card-color)',
+        },
       },
       fontFamily: {
+        poppins: 'var(--font-poppins)',
         ddin: ['D-DIN'],
       },
       animation: {
@@ -101,14 +105,21 @@ module.exports = {
         'p12-gradient': 'linear-gradient(to right, var(--from), var(--to))',
         'p12-gradient-30': 'linear-gradient(to right, var(--from-30), var(--to-30))',
         'p12-gradient-45': 'linear-gradient(to right, var(--from-45), var(--to-45))',
+        'p12-id-card-bg': 'var(--id-card)',
+        'p12-id-card-verify': 'var(--id-card-verify)',
         'no-badge': 'url(https://cdn1.p12.games/airdrop/img/no_badge.jpg)',
         'ss-game': 'url(https://cdn1.p12.games/airdrop/img/ss_game.png)',
         'steam-info': 'url(/img/poster/steam_info.webp)',
         'card-mask': 'linear-gradient(to bottom, var(--mask-40), #00000000)',
+        'arcana-card-mask':
+          'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 60%), var(--p12-card-bg)',
         'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',
         'gradient-yellow': 'linear-gradient(to bottom, #FFFFDA 0%, #FFE7B6 50.34%, #CE9658 100%)',
+      },
+      backgroundSize: {
+        fill: '100% 100%',
       },
     },
   },

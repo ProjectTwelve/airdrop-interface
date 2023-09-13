@@ -10,6 +10,9 @@ import {
 } from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { twMerge } from 'tailwind-merge';
+import { fontVariants } from '@/constants/font';
+import classNames from 'classnames';
 
 type DialogProps = {
   open?: boolean;
@@ -18,6 +21,7 @@ type DialogProps = {
   showCloseButton?: boolean;
   render: (props: { close: () => void }) => React.ReactNode;
   children?: JSX.Element;
+  className?: string;
 };
 
 function Dialog({
@@ -27,6 +31,7 @@ function Dialog({
   showCloseButton = true,
   onOpenChange,
   onExitComplete,
+  className,
 }: React.PropsWithChildren<DialogProps>) {
   const [open, setOpen] = useState(false);
 
@@ -59,7 +64,7 @@ function Dialog({
             <FloatingOverlay lockScroll className="z-[100] grid place-items-center bg-gray-900/60 backdrop-blur-lg">
               <FloatingFocusManager context={context}>
                 <motion.div
-                  className="backdrop-box rounded-2xl"
+                  className={twMerge(classNames('backdrop-box rounded-2xl', ...fontVariants), className)}
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.85 }}

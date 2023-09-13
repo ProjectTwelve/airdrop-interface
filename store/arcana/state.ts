@@ -56,11 +56,6 @@ export const arcanaMulticastCardAtom = atom<boolean>({
   default: false,
 });
 
-export const arcanaInviteDialogAtom = atom<boolean>({
-  key: 'arcana_invite_modal_atom',
-  default: false,
-});
-
 export const arcanaPredictionOMGAnswerAtom = atom<PredictionAnswer[]>({
   key: 'arcana_prediction_omg_answer_atom',
   default: [],
@@ -82,4 +77,15 @@ export const arcanaOmgInviteCountAtom = atom<{ inviteCount: number; inviteVotes:
 export const arcanaEarnRewardAtom = atom<number>({
   key: 'arcana_earn_reward_atom',
   default: 0,
+});
+
+// Dialog
+export const arcanaInviteDialogAtom = atom<boolean>({
+  key: 'arcana_invite_modal_atom',
+  default: false,
+});
+
+export const arcanaEditProfileDialogOpenAtom = atom<boolean>({
+  key: 'arcana_edit_profile_dialog_open_atom',
+  default: false,
 });

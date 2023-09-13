@@ -1,63 +1,90 @@
+:root {
+  --p12-card-bg: linear-gradient(180deg, rgba(61, 68, 75, 0.4) 0%, rgba(35, 38, 44, 0.4) 100%);
+}
 .p12-theme-01 {
-    --from: #A011FF;
-    --from-30: #A011FF4D;
-    --from-45: #A011FF73;
-    --from-65: #A011FFA5;
-    --to: #FF9E76;
-    --to-30: #FF9E764D;
-    --to-45: #FF9E7673;
-    --mask-40: #C859FF66;
-    --omg-count: url('/img/theme/01/omg_count_bg.webp');
-    --logo: url('/img/theme/01/logo.svg');
-    --select: url('/img/theme/01/select.svg');
-    --profile-info: url('/img/theme/01/profile_info.webp');
-    --collab-info: url('/img/theme/01/collab_info.webp');
+  --from: #a011ff;
+  --from-30: #a011ff4d;
+  --from-45: #a011ff73;
+  --from-65: #a011ffa5;
+  --to: #ff9e76;
+  --to-30: #ff9e764d;
+  --to-45: #ff9e7673;
+  --mask-40: #c859ff66;
+  --omg-count: url('/img/theme/01/omg_count_bg.webp');
+  --logo: url('/img/theme/01/logo.svg');
+  --select: url('/img/theme/01/select.svg');
+  --profile-info: url('/img/theme/01/profile_info.webp');
+  --collab-info: url('/img/theme/01/collab_info.webp');
+
+  /* editor */
+  --id-card: url('/img/theme/01/editorium/id_card.webp');
+  --id-card-verify: url('/img/theme/01/editorium/id_card_verify.webp');
+  --id-card-color: #1e0420;
+  --arcana-mask: 200, 89, 255;
 }
 
 .p12-theme-02 {
-    --from: #09BDA0;
-    --from-30: #09BDA04D;
-    --from-45: #09BDA073;
-    --from-65: #09BDA0A5;
-    --to: #A3D365;
-    --to-30: #A3D3654D;
-    --to-45: #A3D36573;
-    --mask-40: #1EDB8C66;
-    --omg-count: url('/img/theme/02/omg_count_bg.webp');
-    --logo: url('/img/theme/02/logo.svg');
-    --select: url('/img/theme/02/select.svg');
-    --profile-info: url('/img/theme/02/profile_info.webp');
-    --collab-info: url('/img/theme/02/collab_info.webp');
+  --from: #09bda0;
+  --from-30: #09bda04d;
+  --from-45: #09bda073;
+  --from-65: #09bda0a5;
+  --to: #a3d365;
+  --to-30: #a3d3654d;
+  --to-45: #a3d36573;
+  --mask-40: #1edb8c66;
+  --omg-count: url('/img/theme/02/omg_count_bg.webp');
+  --logo: url('/img/theme/02/logo.svg');
+  --select: url('/img/theme/02/select.svg');
+  --profile-info: url('/img/theme/02/profile_info.webp');
+  --collab-info: url('/img/theme/02/collab_info.webp');
+
+  /* editor */
+  --id-card: url('/img/theme/02/editorium/id_card.webp');
+  --id-card-verify: url('/img/theme/02/editorium/id_card_verify.webp');
+  --id-card-color: #1e0420;
+  --arcana-mask: 30, 219, 140;
 }
 
 .p12-theme-03 {
-    --from: #D9214D;
-    --from-30: #D9214D4D;
-    --from-45: #D9214D73;
-    --from-65: #D9214DA5;
-    --to: #FFB876;
-    --to-30: #FFB8764D;
-    --to-45: #FFB87673;
-    --mask-40: #FFAA2C66;
-    --omg-count: url('/img/theme/03/omg_count_bg.webp');
-    --logo: url('/img/theme/03/logo.svg');
-    --select: url('/img/theme/03/select.svg');
-    --profile-info: url('/img/theme/03/profile_info.webp');
-    --collab-info: url('/img/theme/03/collab_info.webp');
+  --from: #d9214d;
+  --from-30: #d9214d4d;
+  --from-45: #d9214d73;
+  --from-65: #d9214da5;
+  --to: #ffb876;
+  --to-30: #ffb8764d;
+  --to-45: #ffb87673;
+  --mask-40: #ffaa2c66;
+  --omg-count: url('/img/theme/03/omg_count_bg.webp');
+  --logo: url('/img/theme/03/logo.svg');
+  --select: url('/img/theme/03/select.svg');
+  --profile-info: url('/img/theme/03/profile_info.webp');
+  --collab-info: url('/img/theme/03/collab_info.webp');
+
+  /* editor */
+  --id-card: url('/img/theme/03/editorium/id_card.webp');
+  --id-card-verify: url('/img/theme/03/editorium/id_card_verify.webp');
+  --id-card-color: #1e0420;
+  --arcana-mask: 255, 170, 44;
 }
 
 .p12-theme-04 {
-    --from: #A072FF;
-    --from-30: #A072FF4D;
-    --from-45: #A072FF73;
-    --from-65: #A072FFA5;
-    --to: #3592FF;
-    --to-30: #3592FF4D;
-    --to-45: #3592FF73;
-    --mask-40: #43BBFF66;
-    --omg-count: url('/img/theme/04/omg_count_bg.webp');
-    --logo: url('/img/theme/04/logo.svg');
-    --select: url('/img/theme/04/select.svg');
-    --profile-info: url('/img/theme/04/profile_info.webp');
-    --collab-info: url('/img/theme/04/collab_info.webp');
+  --from: #a072ff;
+  --from-30: #a072ff4d;
+  --from-45: #a072ff73;
+  --from-65: #a072ffa5;
+  --to: #3592ff;
+  --to-30: #3592ff4d;
+  --to-45: #3592ff73;
+  --mask-40: #43bbff66;
+  --omg-count: url('/img/theme/04/omg_count_bg.webp');
+  --logo: url('/img/theme/04/logo.svg');
+  --select: url('/img/theme/04/select.svg');
+  --profile-info: url('/img/theme/04/profile_info.webp');
+  --collab-info: url('/img/theme/04/collab_info.webp');
+
+  /* editor */
+  --id-card: url('/img/theme/04/editorium/id_card.webp');
+  --id-card-verify: url('/img/theme/04/editorium/id_card_verify.webp');
+  --id-card-color: #040f20;
+  --arcana-mask: 67, 187, 255;
 }
