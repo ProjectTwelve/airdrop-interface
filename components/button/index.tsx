@@ -25,7 +25,7 @@ const Button = React.forwardRef(function ButtonInner(
   ref: LegacyRef<HTMLButtonElement>,
 ) {
   const bg = {
-    default: 'bg-[#494E69]/40',
+    default: 'bg-white/[0.08]',
     error: 'bg-red-400',
     gradient: 'bg-p12-gradient',
     bordered: 'border',

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { DEV_BADGES, DEV_NFT_LEVEL, GAMER_BADGES, GAMER_NFT_LEVEL, NFT_CLAIM } from '../constants';
-import { AccountInfo, GamerInfoData } from '../lib/types';
+import { DEV_BADGES, SBT_LEVEL, GAMER_BADGES, NFT_CLAIM } from '@/constants';
+import { AccountInfo, GamerInfoData } from '@/lib/types';
 
 export const useDevBadgeLoad = (game: AccountInfo) => {
   const [state, setState] = useState<{ src: string; isLoading: boolean }>({ src: '', isLoading: false });
   const badgesRef = useRef(
-    new Map<DEV_NFT_LEVEL, boolean>([
-      [DEV_NFT_LEVEL.ORANGE, false],
-      [DEV_NFT_LEVEL.PURPLE, false],
-      [DEV_NFT_LEVEL.BLUE, false],
-      [DEV_NFT_LEVEL.GREEN, false],
+    new Map<SBT_LEVEL, boolean>([
+      [SBT_LEVEL.ORANGE, false],
+      [SBT_LEVEL.PURPLE, false],
+      [SBT_LEVEL.BLUE, false],
+      [SBT_LEVEL.GREEN, false],
     ]),
   );
 
@@ -35,13 +35,13 @@ export const useDevBadgeLoad = (game: AccountInfo) => {
 export const useGamerBadgeLoad = (gamer?: GamerInfoData) => {
   const [state, setState] = useState<{ src: string; isLoading: boolean }>({ src: '', isLoading: false });
   const badgesRef = useRef(
-    new Map<GAMER_NFT_LEVEL, boolean>([
-      [GAMER_NFT_LEVEL.ORANGE, false],
-      [GAMER_NFT_LEVEL.PURPLE, false],
-      [GAMER_NFT_LEVEL.BLUE, false],
-      [GAMER_NFT_LEVEL.GREEN, false],
-      [GAMER_NFT_LEVEL.WHITE, false],
-      [GAMER_NFT_LEVEL.REKT, false],
+    new Map<SBT_LEVEL, boolean>([
+      [SBT_LEVEL.ORANGE, false],
+      [SBT_LEVEL.PURPLE, false],
+      [SBT_LEVEL.BLUE, false],
+      [SBT_LEVEL.GREEN, false],
+      [SBT_LEVEL.WHITE, false],
+      [SBT_LEVEL.REKT, false],
     ]),
   );
 

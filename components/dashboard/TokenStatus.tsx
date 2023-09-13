@@ -1,28 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
-import { shortenAddress } from '@/utils';
-import { NFT_CLAIM, NFT_CLAIM_TYPE } from '@/constants';
+import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
 
 export type TokenStatusData = {
   id?: string;
-  contract?: string;
+  birthday?: string;
   role?: string;
-  claim?: NFT_CLAIM;
+  rarity?: number;
 };
 export default function TokenStatus({ data }: { data?: TokenStatusData }) {
+  const rarityConfig = useSBTLevelConfig(data?.rarity);
+
   return (
     <div className="flex rounded-2xl border border-gray-600 py-3">
       {[
         { label: 'ID', value: data?.id || '--' },
-        {
-          label: 'Contract',
-          value: data?.contract ? shortenAddress(data.contract, 3) : '--',
-        },
+        { label: 'Birthday', value: data?.birthday ?? '--' },
         { label: 'Role', value: data?.role ?? '--' },
-        {
-          label: 'Status',
-          value: data?.claim ? NFT_CLAIM_TYPE[data.claim] : '--',
-        },
+        // { label: 'Rarity', value: data?.rarity ?? '--' },
       ].map((item) => (
         <div
           key={item.label}
@@ -36,6 +31,16 @@ export default function TokenStatus({ data }: { data?: TokenStatusData }) {
           <p className="text-sm">{item.value}</p>
         </div>
       ))}
+      <div
+        className={classNames(
+          'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
+          'md:flex-row md:border-b md:border-r-0 md:py-2',
+          'last:border-none',
+        )}
+      >
+        <p className="text-sm text-gray md:mr-2 lg:text-xs xl:text-xs">Rarity</p>
+        <p className={classNames('text-sm', rarityConfig.text)}>{rarityConfig.rarity}</p>
+      </div>
     </div>
   );
 }

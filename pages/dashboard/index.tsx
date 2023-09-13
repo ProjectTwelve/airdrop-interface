@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import Gamer from '@/components/dashboard/Gamer';
 import Arcana from '@/components/dashboard/Arcana';
+import Developer from '@/components/dashboard/Developer';
 import ActivityTab from '@/components/dashboard/ActivityTab';
 import SteamGamerSBT from '@/components/dashboard/SteamGamerSBT';
-import SteamDeveloperSBT from '@/components/dashboard/SteamDeveloperBadge';
-import Gamer from '@/components/dashboard/Gamer';
-import Developer from '@/components/dashboard/Developer';
-import Operation from '@/components/dashboard/Operation';
+import SteamDeveloperSBT from '@/components/dashboard/SteamDeveloperSBT';
 
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
@@ -43,7 +42,6 @@ export default function Dashboard() {
       <div>{selectedTab === 0 && <Arcana />}</div>
       <div>{selectedTab === 1 && <Gamer />}</div>
       <div>{selectedTab === 2 && <Developer />}</div>
-      <div>{selectedTab === 3 && <Operation />}</div>
     </div>
   );
 }
