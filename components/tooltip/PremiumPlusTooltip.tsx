@@ -63,7 +63,7 @@ export default function PremiumPlusTooltip({ children, data, placement = 'top' }
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             {...getFloatingProps({
               ref: setFloating,
-              className: 'bg-[url(/svg/pl/premium_plus_card.svg)] bg-cover w-[600px] h-[160px] text-orange-700',
+              className: 'bg-[url(/svg/pl/premium_plus_card.svg)] z-10 bg-cover w-[600px] h-[160px] text-orange-700',
               style: {
                 position: strategy,
                 top: y ?? 0,
