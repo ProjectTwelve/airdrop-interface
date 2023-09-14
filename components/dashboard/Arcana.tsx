@@ -14,7 +14,7 @@ export default function Arcana() {
   const isMounted = useIsMounted();
   return (
     <div className="mb-32 mt-10 px-16 md:px-4">
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-1">
         <BecomeCard isVoter={editorium} />
         {editorium ? <IDCard className="ml-4" /> : <CreateNowCard />}
       </div>

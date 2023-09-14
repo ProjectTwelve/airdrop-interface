@@ -26,7 +26,7 @@ export default function GalleryItem({ renderFooter, className, data, isRank50 }:
     <div
       className={twMerge(
         classNames(
-          'relative flex cursor-pointer flex-col rounded-lg border border-gray-400/50 backdrop-blur-lg transition hover:-translate-y-2',
+          'relative flex cursor-pointer flex-col rounded-lg border border-gray-400/50 transition hover:-translate-y-2',
           { 'shadow-rank50': isRank50 },
         ),
         className,
@@ -93,20 +93,6 @@ export default function GalleryItem({ renderFooter, className, data, isRank50 }:
         </p>
         {renderFooter?.()}
       </div>
-      {!renderFooter && (
-        <div className="absolute inset-0 -z-[1] overflow-hidden rounded-b-lg">
-          {fileType === 'video' ? (
-            <video className="pointer-events-none h-[10.5rem] w-full scale-125" src={mainImage ?? ''} loop muted />
-          ) : (
-            <img
-              className="pointer-events-none absolute bottom-0 h-[10.5rem] w-full scale-125 rounded-lg rounded-t-lg object-cover"
-              loading="lazy"
-              src={mainImage ?? ''}
-              alt="gallery"
-            />
-          )}
-        </div>
-      )}
     </div>
   );
 }

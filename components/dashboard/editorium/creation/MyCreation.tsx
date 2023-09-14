@@ -3,10 +3,12 @@ import { useFetchCreationData } from '@/hooks/dashboard/creation';
 import { useEffect, useMemo } from 'react';
 import ArcanaWorks from './ArcanaWorks';
 import { useAccount } from 'wagmi';
+import { useIsLogged } from '@/hooks/user';
 
 export default function MyCreation() {
   const { address } = useAccount();
   const { data, refetch, loading } = useFetchCreationData();
+  const isLogged = useIsLogged();
 
   useEffect(() => {
     if (address) refetch();
@@ -23,7 +25,11 @@ export default function MyCreation() {
 
   return (
     <div className="flex flex-col">
-      {loading ? <Loading className="mt-12 self-center" size={48} /> : <ArcanaWorks data={works} className="mt-12" />}
+      {isLogged && loading ? (
+        <Loading className="mt-12 self-center" size={48} />
+      ) : (
+        <ArcanaWorks data={works} className="mt-12" />
+      )}
     </div>
   );
 }
