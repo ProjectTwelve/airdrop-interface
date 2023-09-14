@@ -4,7 +4,9 @@ import { Address } from 'wagmi';
 export const DEV_BADGES = {
   [SBT_LEVEL.ORANGE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653656759076802901.gif',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_orange_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_orange.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_orange.png',
     claim: 'https://galxe.com/P12/campaign/GCt9JUUJCJ',
     title: 'P12 Genesis Badge [Orange Rarity]',
     rarity: 'Legendary',
@@ -12,7 +14,9 @@ export const DEV_BADGES = {
   },
   [SBT_LEVEL.PURPLE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653654265642526889.gif',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_purple_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_purple.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_purple.png',
     claim: 'https://galxe.com/P12/campaign/GCteJUUM7z',
     title: 'P12 Genesis Badge [Purple Rarity]',
     rarity: 'Epic',
@@ -20,7 +24,9 @@ export const DEV_BADGES = {
   },
   [SBT_LEVEL.BLUE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653761673395155.gif',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_blue_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_blue.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_blue.png',
     claim: 'https://galxe.com/P12/campaign/GCi9CUUrni',
     title: 'P12 Genesis Badge [Blue Rarity]',
     rarity: 'Rare',
@@ -28,7 +34,9 @@ export const DEV_BADGES = {
   },
   [SBT_LEVEL.GREEN]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_green_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
     claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
     title: 'P12 Genesis Badge [Green Rarity]',
     rarity: 'Uncommon',
@@ -36,7 +44,9 @@ export const DEV_BADGES = {
   },
   [SBT_LEVEL.WHITE]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
-    img: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_white_256.webp',
+    img: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
     claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
     title: 'P12 Genesis Badge [White Rarity]',
     rarity: 'Common',
@@ -44,7 +54,9 @@ export const DEV_BADGES = {
   },
   [SBT_LEVEL.REKT]: {
     asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
-    img: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/dev_white_256.webp',
+    img: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
+    imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
     claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
     title: 'P12 Genesis Badge [White Rarity]',
     rarity: 'Common',
@@ -55,6 +67,7 @@ export const DEV_BADGES = {
 export const GAMER_BADGES = {
   [SBT_LEVEL.ORANGE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_orange.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_orange_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_orange_2.png',
     claim: 'https://galxe.com/P12/campaign/GCZ74Utyqp',
@@ -64,6 +77,7 @@ export const GAMER_BADGES = {
   },
   [SBT_LEVEL.PURPLE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_purple.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_purple_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_purple_2.png',
     claim: 'https://galxe.com/P12/campaign/GCZm4UtEeE',
@@ -73,6 +87,7 @@ export const GAMER_BADGES = {
   },
   [SBT_LEVEL.BLUE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_blue.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_blue_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_blue_2.png',
     claim: 'https://galxe.com/P12/campaign/GCuBwUtL6P',
@@ -82,6 +97,7 @@ export const GAMER_BADGES = {
   },
   [SBT_LEVEL.GREEN]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_green.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_green_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_green_2.png',
     claim: 'https://galxe.com/P12/campaign/GCrkwUtqiz',
@@ -91,6 +107,7 @@ export const GAMER_BADGES = {
   },
   [SBT_LEVEL.WHITE]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_white.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_white_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_common_2.webp',
     claim: 'https://galxe.com/P12/campaign/GCirwUtCCS',
@@ -100,6 +117,7 @@ export const GAMER_BADGES = {
   },
   [SBT_LEVEL.REKT]: {
     asset: 'https://cdn1.p12.games/airdrop/badge/gamer_rekt.webp',
+    asset256: 'https://cdn1.p12.games/airdrop/badge/gamer_rekt_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/gamer_badge_rekt_2.webp',
     claim: 'https://galxe.com/P12/campaign/GCuagUtMfG',

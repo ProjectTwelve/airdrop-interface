@@ -21,7 +21,7 @@ export default function SteamDeveloperSBT() {
           {gameInfo?.nft_claim === NFT_CLAIM.CLAIMED ? (
             <div
               className="aspect-square bg-cover"
-              style={{ backgroundImage: `url(${DEV_BADGES[gameInfo.nft_level!].asset})` }}
+              style={{ backgroundImage: `url(${DEV_BADGES[gameInfo.nft_level!].asset256})` }}
             />
           ) : (
             <img className="w-full" src="/img/unclaimed.webp" alt="unclaimed" />
@@ -37,7 +37,7 @@ export default function SteamDeveloperSBT() {
           <p className="mt-5 text-sm">Power Level</p>
           <div className="flex gap-1.5">
             <div className="text-4xl/9 font-bold text-gray-400">0</div>
-            <img className="w-7" src="/svg/warning.svg" alt="warning" />
+            <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />
           </div>
           <div className="mt-3">
             <div className="flex cursor-pointer gap-2 rounded-lg border border-gray-550/50 bg-gray-700/30 px-3 py-3.5 text-sm font-medium">
