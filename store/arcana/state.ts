@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { PredictionOption } from '../../lib/types';
-import { PowerVoteResult, TasksStatus } from '@/lib/types-nest';
+import { GameInfo, PowerVoteResult, TasksStatus } from '@/lib/types-nest';
 
 export const arcanaGenesisNFTHolderAtom = atom<boolean>({
   key: 'arcana_genesis_nft_holder_atom',
@@ -89,6 +89,17 @@ export const arcanaPowerVoteAtom = atom<PowerVoteResult | undefined>({
   key: 'arcana_power_vote_atom',
   default: undefined,
 });
+
+export const arcanaSubmittedListAtom = atom<GameInfo[]>({
+  key: 'arcana_submitted_list_atom',
+  default: [],
+});
+
+export const arcanaNotSubmittedListAtom = atom<GameInfo[]>({
+  key: 'arcana_not_submitted_list_atom',
+  default: [],
+});
+
 // Dialog
 export const arcanaInviteDialogAtom = atom<boolean>({
   key: 'arcana_invite_modal_atom',
