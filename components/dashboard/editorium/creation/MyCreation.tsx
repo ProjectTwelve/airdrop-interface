@@ -1,10 +1,17 @@
 import Loading from '@/components/loading';
 import { useFetchCreationData } from '@/hooks/dashboard/creation';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import ArcanaWorks from './ArcanaWorks';
+import { useAccount } from 'wagmi';
 
 export default function MyCreation() {
-  const { data, loading } = useFetchCreationData();
+  const { address } = useAccount();
+  const { data, refetch, loading } = useFetchCreationData();
+
+  useEffect(() => {
+    if (address) refetch();
+  }, [address, refetch]);
+
   const works = useMemo(() => {
     if (loading || !data) return [];
     const { inventoryData, submitData } = data;

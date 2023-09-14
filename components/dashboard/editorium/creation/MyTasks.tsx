@@ -37,7 +37,7 @@ export default function MyTasks() {
       <h1 className="mb-6 text-xl/6 font-semibold">My Arcana Tasks</h1>
       {completedTasks?.length ? (
         <>
-          <div className="grid grid-cols-3 gap-5.5">
+          <div className="grid grid-cols-3 gap-5.5 md:grid-cols-2 xs:grid-cols-1">
             {completedTasks.map(({ title, id, subtitle, desc, PL, inviteCount }) => {
               const isInviteCard = id === TaskCode.Invite;
               return (
