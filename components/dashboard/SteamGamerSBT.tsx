@@ -31,7 +31,7 @@ export default function SteamGamerSBT() {
           {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
             <div
               className="aspect-square bg-cover"
-              style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
+              style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset256})` }}
             />
           )}
         </div>
