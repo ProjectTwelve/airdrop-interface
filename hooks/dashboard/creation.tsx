@@ -1,23 +1,21 @@
 import { fetchUserNotSubmittedList, fetchUserSubmittedList } from '@/lib/api-nest';
-import { accessTokenAtom } from '@/store/user/state';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useIsLogged } from '../user';
 
 export const useFetchUserSubmittedList = () => {
-  const accessToken = useRecoilValue(accessTokenAtom);
-
+  const isLogged = useIsLogged();
   return useQuery(['fetch_user_submitted_list'], () => fetchUserSubmittedList(), {
-    enabled: !!accessToken,
+    enabled: isLogged,
     select: (res) => (res.code === 200 ? res.data : []),
   });
 };
 
 export const useFetchUserNotSubmittedList = () => {
-  const accessToken = useRecoilValue(accessTokenAtom);
+  const isLogged = useIsLogged();
 
   return useQuery(['fetch_user_not_submitted_list'], () => fetchUserNotSubmittedList(), {
-    enabled: !!accessToken,
+    enabled: isLogged,
     select: (res) => (res.code === 200 ? res.data : []),
   });
 };
@@ -40,7 +38,6 @@ export const useFetchCreationData = () => {
     async () => Promise.all([refetchInventory(), submitRefetch()]),
     [submitRefetch, refetchInventory],
   );
-
   return useMemo(
     () => ({ data: { inventoryData, submitData }, loading, refetch, isRefetching }),
     [inventoryData, isRefetching, loading, refetch, submitData],

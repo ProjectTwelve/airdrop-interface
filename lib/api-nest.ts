@@ -3,9 +3,12 @@ import {
   CheckNameParams,
   CheckResult,
   GameInfo,
+  InvitationInfo,
   LoginParams,
   PowerLevelResult,
+  PowerVoteResult,
   ProfileParams,
+  TasksStatus,
   UserInfo,
 } from '@/lib/types-nest';
 import request, { Response } from '@/lib/request-nest';
@@ -15,6 +18,8 @@ export const fetchLogin = (data: LoginParams) => request.post<any, Response<User
 
 export const fetchPowerLevel = (address?: Address) =>
   request.get<any, Response<PowerLevelResult>>(`/arcana/power-vote/${address}`);
+
+export const fetchPowerVote = () => request.get<any, Response<PowerVoteResult>>('/arcana/power-vote');
 
 export const fetchUserInfo = () => request.get<any, Response<UserInfo>>('/app/profile');
 
@@ -26,3 +31,8 @@ export const editProfileData = (data: ProfileParams) => request.post<any, Respon
 
 export const fetchUserSubmittedList = () => request.get<any, Response<GameInfo[]>>('/arcana/game/submitted');
 export const fetchUserNotSubmittedList = () => request.get<any, Response<GameInfo[]>>('/arcana/game/not-submitted');
+
+export const fetchTasksStatus = () => request.get<any, Response<TasksStatus>>('/arcana/task');
+
+export const fetchInviteHistory = (code: string) =>
+  request.get<any, Response<InvitationInfo[]>>('/invitation/history/' + code, { params: { field: 'editorium' } });

@@ -87,3 +87,63 @@ export type GameInfo = {
   twitterVerify: boolean;
   walletAddress: string;
 };
+
+export enum TaskCode {
+  LoginEditor = 'LoginEditor',
+  CreateGame = 'CreateGame',
+  Invite = 'Invite',
+  DoVote = 'Vote',
+  BurnBadge = 'BurnBadge',
+  LinkAspecta = 'LinkAspecta',
+  ParticipateArcana = 'ParticipateArcana',
+  LinkUneMeta = 'UneMeta',
+  AttendedTiArcana = 'AttendedTiArcana',
+  GenesisNFTGamer = 'GenesisNFTGamer',
+  TwitterShareVerify = 'TwitterShareVerify',
+}
+
+export type TasksStatus = {
+  [key in TaskCode]?: boolean;
+};
+
+export type InvitationInfo = {
+  power?: number;
+  showName?: null;
+  walletAddress?: string;
+};
+
+export type PowerVoteResult = {
+  /**
+   * 用户邀请 PL  这里返回的是实际加了分的 PL
+   */
+  invite: number;
+  /**
+   * 是否参加arcana
+   */
+  participant: boolean;
+  /**
+   * 用户 PL 总分
+   */
+  power: number;
+  /**
+   * 用户排名, 没有不显示 rank
+   */
+  rank?: number;
+  /**
+   * 用户可用票数
+   */
+  votes: number;
+  gamerPowerSyncNeeded: boolean;
+  walletAddress: string;
+  gamerNft: {
+    nftLevel?: number;
+    nftClaim?: number;
+    power?: number;
+  };
+  developerNft: {
+    nftLevel?: number;
+    nftClaim?: number;
+    power?: number;
+  };
+  beVotedVote?: number;
+};
