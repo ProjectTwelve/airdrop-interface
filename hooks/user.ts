@@ -7,7 +7,7 @@ import { setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 import { useMutationTasksStatus } from './dashboard/task';
 
 export const useMutationLogin = () => {
@@ -103,4 +103,14 @@ export const useRemoveGlobalState = () => {
     setTasksStatus(undefined);
     setPowerVote(undefined);
   }, [setPowerVote, setTasksStatus, setUserInfo]);
+};
+
+export const useLogoutCallback = () => {
+  const removeGlobalStat = useRemoveGlobalState();
+  const { disconnect } = useDisconnect();
+
+  return useCallback(() => {
+    removeGlobalStat();
+    disconnect?.();
+  }, [disconnect, removeGlobalStat]);
 };
