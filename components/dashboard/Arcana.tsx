@@ -7,6 +7,7 @@ import MyCreation from './editorium/creation/MyCreation';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import IDCard from './IDCard';
 import MyTasks from './editorium/creation/MyTasks';
+import DownloadEditorDialog from '../dialog/DownloadEditorDialog';
 
 export default function Arcana() {
   const profileData = useRecoilValue(userInfoAtom);
@@ -21,6 +22,7 @@ export default function Arcana() {
       {isMounted && <MyCreation />}
       {isMounted && <MyTasks />}
       <EditProfileDialog />
+      <DownloadEditorDialog />
     </div>
   );
 }

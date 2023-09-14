@@ -84,7 +84,7 @@ export default function MyTasks() {
           </div>
           <Button
             type="bordered"
-            className="mt-12 flex w-[438px] justify-center gap-1.5 self-center py-4 xs:w-full"
+            className="mt-12 flex w-[438px] justify-center gap-1.5 self-center border-white py-4 xs:w-full"
             onClick={() => openLink('https://arcana.p12.games/#task')}
           >
             Get More PL <img className="w-6" src="/img/pl/power_level.png" alt="pl-icon" />

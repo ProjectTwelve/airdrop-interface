@@ -1,7 +1,10 @@
 import Button from '@/components/button';
-import { openLink } from '@/utils';
+import { arcanaEditorDownloadDialogOpen } from '@/store/arcana/state';
+import { useSetRecoilState } from 'recoil';
 
 export default function CreateNowCard() {
+  const setEditorDownloadDialogOpen = useSetRecoilState(arcanaEditorDownloadDialogOpen);
+
   return (
     <div className="arcana__p12-card relative w-full flex-grow p-6 pb-0">
       <div className="text-2xl/6.5 font-bold">Registered as P12 developer</div>
@@ -9,7 +12,7 @@ export default function CreateNowCard() {
         <div className="h-[6.75rem] w-[25.1875rem] self-end"></div>
         <Button
           type="bordered"
-          onClick={() => openLink('https://arcana.p12.games/#creation')}
+          onClick={() => setEditorDownloadDialogOpen(true)}
           size="large"
           className="h-[3.375rem] w-[12.5rem] backdrop-blur-lg"
         >

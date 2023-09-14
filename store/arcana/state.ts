@@ -110,3 +110,8 @@ export const arcanaEditProfileDialogOpenAtom = atom<boolean>({
   key: 'arcana_edit_profile_dialog_open_atom',
   default: false,
 });
+
+export const arcanaEditorDownloadDialogOpen = atom<boolean>({
+  key: 'arcana_editor_download_dialog_open',
+  default: false,
+});
