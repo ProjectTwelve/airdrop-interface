@@ -1,12 +1,14 @@
-import { fetchLogin, fetchUserInfo } from '@/lib/api-nest';
+import { fetchLogin, fetchPowerVote, fetchUserInfo } from '@/lib/api-nest';
 import instance from '@/lib/request-nest';
 import { LoginParams } from '@/lib/types-nest';
+import { arcanaPowerVoteAtom, arcanaTasksStatusAtom } from '@/store/arcana/state';
 import { accessTokenAtom, userInfoAtom } from '@/store/user/state';
 import { setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
+import { useMutationTasksStatus } from './dashboard/task';
 
 export const useMutationLogin = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);
@@ -60,20 +62,45 @@ export const useMutationUserInfo = () => {
   });
 };
 
+export const useMutationPowerVoteInfo = () => {
+  const setPowerVoteInfo = useSetRecoilState(arcanaPowerVoteAtom);
+  return useMutation({
+    mutationFn: () => fetchPowerVote(),
+    onSuccess: (res) => {
+      const { code, data } = res ?? {};
+      if (code === 200) {
+        setPowerVoteInfo(data);
+        return data;
+      }
+    },
+    onError: () => {
+      setPowerVoteInfo(undefined);
+    },
+  });
+};
+
 export const useFetchGlobalData = () => {
   const { mutate: fetchProfile } = useMutationUserInfo();
+  const { mutate: fetchTasksStatus } = useMutationTasksStatus();
+  const { mutate: fetchPowerVoteI } = useMutationPowerVoteInfo();
   const accessToken = useRecoilValue(accessTokenAtom);
 
   return useCallback(() => {
     if (!accessToken) return;
     fetchProfile();
-  }, [accessToken, fetchProfile]);
+    fetchTasksStatus();
+    fetchPowerVoteI();
+  }, [accessToken, fetchProfile, fetchTasksStatus, fetchPowerVoteI]);
 };
 
 export const useRemoveGlobalState = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);
+  const setTasksStatus = useSetRecoilState(arcanaTasksStatusAtom);
+  const setPowerVote = useSetRecoilState(arcanaPowerVoteAtom);
 
   return useCallback(() => {
     setUserInfo(undefined);
-  }, [setUserInfo]);
+    setTasksStatus(undefined);
+    setPowerVote(undefined);
+  }, [setPowerVote, setTasksStatus, setUserInfo]);
 };

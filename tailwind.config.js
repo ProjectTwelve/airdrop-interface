@@ -24,6 +24,7 @@ module.exports = {
         7.5: '1.875rem',
         13: '3.25rem',
         15: '3.75rem',
+        17: '4.25rem',
         18: '4.5rem',
         19: '4.75rem',
       },
@@ -113,6 +114,9 @@ module.exports = {
         'card-mask': 'linear-gradient(to bottom, var(--mask-40), #00000000)',
         'arcana-card-mask':
           'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 60%), var(--p12-card-bg)',
+        'arcana-task-mask':
+          'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 30%), var(--p12-card-bg)',
+        'arcana-refer-mask': 'linear-gradient(180deg, rgba(255, 231, 171, 0.40) 0%, rgba(255, 231, 171, 0) 30%)',
         'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',

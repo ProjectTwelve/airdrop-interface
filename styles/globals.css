@@ -205,6 +205,10 @@
     @apply rounded-lg border border-gray-400/50 bg-arcana-card-mask backdrop-blur-lg;
   }
 
+  .arcana__card {
+    @apply rounded-lg border border-gray-400/50 backdrop-blur-lg;
+  }
+
   .nft-backdrop-box {
     background: rgba(35, 38, 44, 0.5);
     border: 1px solid #4e4e50;

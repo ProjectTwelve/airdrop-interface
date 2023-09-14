@@ -14,5 +14,9 @@ export default function MyCreation() {
     return works;
   }, [data, loading]);
 
-  return <div>{loading ? <Loading /> : <ArcanaWorks data={works} className="mt-12" />}</div>;
+  return (
+    <div className="flex flex-col">
+      {loading ? <Loading className="mt-12 self-center" size={48} /> : <ArcanaWorks data={works} className="mt-12" />}
+    </div>
+  );
 }
