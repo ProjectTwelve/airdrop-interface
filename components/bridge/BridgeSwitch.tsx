@@ -11,7 +11,7 @@ import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 import { BridgeTxs, HistoryResult, useBadgeHistory, useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
-import { BadgeInfo, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
+import { BadgeInfo, COMMUNITY_NFT_CAMPAIGN_ID, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
 import { groupBy } from 'lodash-es';
 import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC } from '@/constants/addresses';
 import Message from '../message';
@@ -160,7 +160,6 @@ export default function BridgeSwitch() {
 
       setNFTOwned(chainCommunityBadge);
       setAMABadge(chainAMABadge);
-      // filter rest badge
       const restBadge = allCommunityBadge
         .filter(([, value]) => !communityBadgeCampaign.includes(value.campaign))
         .map(([, value]) => value);
@@ -211,8 +210,6 @@ export default function BridgeSwitch() {
         { account: bridgeContract.account ?? address, chain: selectedBadge.chainId === polygon.id ? polygon : bsc },
       );
       setConfirmHash(transactionHash);
-      // refresh token balance api
-      // clear amount
     } catch (error) {
       console.log(error);
     }
@@ -310,9 +307,19 @@ export default function BridgeSwitch() {
     }
   };
 
-  const targetByRarity = (rarity?: string, type?: 'AMA' | 'Community') => {
+  const targetByRarity = (badge: GalxeBadge) => {
+    const rarity = badge.galxeCampaign?.rarity;
+    const type = badge.galxeCampaign?.campaignType;
+    const stringId = badge.galxeCampaign?.stringId;
+
     if (type === 'AMA') {
       return;
+    }
+    if (stringId === COMMUNITY_NFT_CAMPAIGN_ID.GCXBcUUM56) {
+      return {
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_dw_rare.gif',
+        name: 'P12 Dream Weaver',
+      };
     }
     if (rarity === 'White') {
       return {
@@ -581,7 +588,6 @@ export default function BridgeSwitch() {
                       ) : null}
                     </div>
                     <div className="nft-backdrop-box relative mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl backdrop-blur-0">
-                      {/* <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/polygon.svg" alt="polygon icon" /> */}
                       <div className="relative h-[148px] w-[148px]">
                         <Image src={selectedBadge.image} alt="badge" objectFit="contain" layout="fill" />
                       </div>
@@ -601,13 +607,9 @@ export default function BridgeSwitch() {
                       P12 Chain
                     </div>
                     <div className="nft-backdrop-box mt-3 flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
-                      {/* <img className="absolute left-[6px] top-[6px] w-6" src="/img/bridge/p12_chain.svg" alt="p12 chain icon" /> */}
                       <div className="relative h-[148px] w-[148px]">
                         <Image
-                          src={
-                            targetByRarity(selectedBadge.galxeCampaign?.rarity, selectedBadge.galxeCampaign?.campaignType)
-                              ?.url ?? selectedBadge.image
-                          }
+                          src={targetByRarity(selectedBadge)?.url ?? selectedBadge.image}
                           alt="badge"
                           objectFit="contain"
                           layout="fill"
@@ -616,8 +618,7 @@ export default function BridgeSwitch() {
                       </div>
                     </div>
                     <div className="mt-4 h-12 w-[200px] text-center text-sm font-medium">
-                      {targetByRarity(selectedBadge.galxeCampaign?.rarity, selectedBadge.galxeCampaign?.campaignType)?.name ??
-                        selectedBadge.galxeCampaign?.name}
+                      {targetByRarity(selectedBadge)?.name ?? selectedBadge.galxeCampaign?.name}
                     </div>
                   </div>
                 </div>
