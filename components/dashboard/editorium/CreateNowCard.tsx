@@ -1,5 +1,7 @@
 import Button from '@/components/button';
+import { EventCategory, EventName } from '@/constants/event';
 import { arcanaEditorDownloadDialogOpen } from '@/store/arcana/state';
+import ReactGA from 'react-ga4';
 import { useSetRecoilState } from 'recoil';
 
 export default function CreateNowCard() {
@@ -12,7 +14,13 @@ export default function CreateNowCard() {
         <div className="h-[6.75rem] w-[25.1875rem] self-end"></div>
         <Button
           type="bordered"
-          onClick={() => setEditorDownloadDialogOpen(true)}
+          onClick={() => {
+            ReactGA.event({
+              action: EventName.CreateNow,
+              category: EventCategory.Global,
+            });
+            setEditorDownloadDialogOpen(true);
+          }}
           size="large"
           className="h-[3.375rem] w-[12.5rem] backdrop-blur-lg"
         >

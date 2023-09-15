@@ -1,7 +1,8 @@
 import Button from '@/components/button';
+import { EventCategory, EventName } from '@/constants/event';
 import { openLink } from '@/utils';
 import classNames from 'classnames';
-import React from 'react';
+import ReactGA from 'react-ga4';
 
 export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
   return (
@@ -40,7 +41,13 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
         {!isVoter && (
           <Button
             type="bordered"
-            onClick={() => openLink('https://arcana.p12.games/#gallery')}
+            onClick={() => {
+              ReactGA.event({
+                action: EventName.BecomeVoter,
+                category: EventCategory.Global,
+              });
+              openLink('https://arcana.p12.games/#gallery');
+            }}
             size="large"
             className="h-[3.375rem] w-[12.5rem] backdrop-blur-lg"
           >

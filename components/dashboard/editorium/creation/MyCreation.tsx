@@ -1,8 +1,10 @@
 import Button from '@/components/button';
+import { EventCategory, EventName } from '@/constants/event';
 import { arcanaEditorDownloadDialogOpen, arcanaNotSubmittedListAtom, arcanaSubmittedListAtom } from '@/store/arcana/state';
 import { openLink } from '@/utils';
 import _ from 'lodash-es';
 import { useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import GalleryItem from './GalleryItem';
 
@@ -46,7 +48,10 @@ export default function MyCreation() {
       <Button
         type="bordered"
         className="mt-12 w-[438px] self-center border-white py-4 xs:w-full"
-        onClick={() => openLink('https://arcana.p12.games/#creation')}
+        onClick={() => {
+          ReactGA.event({ category: EventCategory.Global, action: EventName.ViewCreations });
+          openLink('https://arcana.p12.games/#creation');
+        }}
       >
         View all or Edit on{' '}
         <a href="https://arcana.p12.games/#creation" className="cursor-pointer text-blue">

@@ -1,16 +1,19 @@
 import Dialog from '@/components/dialog';
 import { ARCANA_SOCIAL_LINKS } from '@/constants';
 import { arcanaEditorDownloadDialogOpen } from '@/store/arcana/state';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import ReactGA from 'react-ga4';
+import { EventCategory, EventName } from '@/constants/event';
 
 export default function DownloadEditorDialog() {
   const [isOpen, setIsOpen] = useRecoilState(arcanaEditorDownloadDialogOpen);
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     ReactGA.event({ category: EventCategory.Editorium, action: EventName.StartYourCreation });
-  //   }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      ReactGA.event({ category: EventCategory.Global, action: EventName.DownloadPopup });
+    }
+  }, [isOpen]);
 
   return (
     <Dialog
@@ -26,9 +29,9 @@ export default function DownloadEditorDialog() {
                 <h2 className="text-xl font-semibold">Step 1</h2>
                 <p className="mt-3 text-xs/4">Download the editor: Your tool for building worlds.</p>
                 <a
-                  // onClick={() =>
-                  //   ReactGA.event({ category: EventCategory.Editorium, action: EventName.DownloadLink, label: 'editor' })
-                  // }
+                  onClick={() =>
+                    ReactGA.event({ category: EventCategory.Global, action: EventName.DownloadLink, label: 'editor' })
+                  }
                   href="https://cdn1.p12.games/arcana/editor_download/Editor_1.0.3.exe"
                   className="text-xs/4 text-blue hover:underline"
                   target="_blank"
@@ -49,13 +52,13 @@ export default function DownloadEditorDialog() {
                 <p className="mt-3 text-xs/4">Download P12 App to connect your wallet with Editor.</p>
                 <div className="mt-5 grid gap-2 text-xs/4">
                   <a
-                    // onClick={() =>
-                    //   ReactGA.event({
-                    //     category: EventCategory.Editorium,
-                    //     action: EventName.DownloadLink,
-                    //     label: 'app_google_play',
-                    //   })
-                    // }
+                    onClick={() =>
+                      ReactGA.event({
+                        category: EventCategory.Global,
+                        action: EventName.DownloadLink,
+                        label: 'app_google_play',
+                      })
+                    }
                     href="https://play.google.com/store/apps/details?id=network.p12.app"
                     target="_blank"
                     className="text-blue hover:underline"
@@ -63,13 +66,13 @@ export default function DownloadEditorDialog() {
                     P12 App (Google Play)
                   </a>
                   <a
-                    // onClick={() =>
-                    //   ReactGA.event({
-                    //     category: EventCategory.Editorium,
-                    //     action: EventName.DownloadLink,
-                    //     label: 'app_android_apk',
-                    //   })
-                    // }
+                    onClick={() =>
+                      ReactGA.event({
+                        category: EventCategory.Global,
+                        action: EventName.DownloadLink,
+                        label: 'app_android_apk',
+                      })
+                    }
                     href="https://cdn1.p12.games/arcana/editor_download/P12_0.3.31.apk"
                     target="_blank"
                     className="text-blue hover:underline"
@@ -101,11 +104,7 @@ export default function DownloadEditorDialog() {
             <p className="my-4 h-px bg-gray" />
             <p className="mb-7.5 text-center text-xs">
               If you encounter any issues during the process, please join our Discord for assistance.&nbsp;
-              <a
-                // onClick={() => ReactGA.event({ category: EventCategory.Editorium, action: EventName.DiscordLink })}
-                href={ARCANA_SOCIAL_LINKS.discord}
-                target="_blank"
-              >
+              <a href={ARCANA_SOCIAL_LINKS.discord} target="_blank" className="text-blue hover:underline">
                 Discord
               </a>
               &nbsp; for assistance.
