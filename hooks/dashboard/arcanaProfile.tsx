@@ -1,5 +1,7 @@
 import { ProfileFormData } from '@/components/dialog/EditProfileDialog';
+import Message from '@/components/message';
 import { RadioOption } from '@/components/radio/RadioGroup';
+import { EventCategory, EventName } from '@/constants/event';
 import { checkNameAvailable, editProfileData, updateChainNames } from '@/lib/api-nest';
 import { CheckNameParams, CheckResult, ProfileParams } from '@/lib/types-nest';
 import { arcanaEditProfileDialogOpenAtom } from '@/store/arcana/state';
@@ -8,10 +10,10 @@ import { shortenAddress } from '@/utils';
 import { toastStatus } from '@/utils/toast';
 import { useMutation } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { toast } from 'react-toastify';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useThrottle } from './useThrottle';
-import Message from '@/components/message';
 
 export const useMutationCheckName = () => {
   return useMutation({
@@ -135,6 +137,7 @@ export const useProfileSubmit = (selectedRadioKey?: string) => {
   const onSubmit = useCallback(
     async (values: ProfileFormData) => {
       try {
+        ReactGA.event({ category: EventCategory.Global, action: EventName.ProfileSave });
         const { showName, twitter, discord } = profileData ?? {};
         const { twitterHandle, discordHandle, displayName, bio } = values;
         const newProfile: ProfileParams = { bio, showName, twitter, discord };

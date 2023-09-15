@@ -3,18 +3,20 @@ import Dialog from '@/components/dialog';
 import { DiscordSvg } from '@/components/svg/DiscordSvg';
 import { TelegramSvg } from '@/components/svg/TelegramSvg';
 import { TwitterSvg } from '@/components/svg/TwitterSvg';
+import { EventCategory, EventName } from '@/constants/event';
 import { useProfileRadioOptions, useProfileSubmit } from '@/hooks/dashboard/arcanaProfile';
 import { useFormOnError } from '@/hooks/dashboard/useFormOnError';
 import { useMutationUserInfo } from '@/hooks/user';
 import { arcanaEditProfileDialogOpenAtom } from '@/store/arcana/state';
 import { userInfoAtom, userTelegramSelector } from '@/store/user/state';
+import { openLink } from '@/utils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { Controller, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useAccount } from 'wagmi';
 import Loading from '../loading';
 import RadioGroup from '../radio/RadioGroup';
-import { openLink } from '@/utils';
 
 export type ProfileFormData = {
   bio: string;
@@ -141,7 +143,6 @@ export default function EditProfileDialog() {
                   labelClass="min-w-[10.125rem] col-span-3 col-span-1 xs:min-w-0" // 生成col-span-3类
                   {...field}
                   onChange={(value, key) => {
-                    // ReactGA.event({ action: EventName.NameChoose, category: EventCategory.Editorium, label: key });
                     setSelectedRadioKey(key);
                     field.onChange(value, key);
                   }}
@@ -156,6 +157,7 @@ export default function EditProfileDialog() {
                   className="flex flex-wrap items-center gap-1 rounded-lg bg-white/[0.12] px-3 py-2.5 backdrop-blur-lg"
                   onClick={() => {
                     if (!profileData?.twitter) {
+                      ReactGA.event({ category: EventCategory.Global, action: EventName.ConnectTwitter });
                       openLink('https://arcana.p12.games/');
                       return;
                     }
@@ -175,6 +177,7 @@ export default function EditProfileDialog() {
                 className="flex cursor-pointer items-center gap-1 rounded-lg bg-white/[0.12] px-3 py-2.5 backdrop-blur-lg"
                 onClick={() => {
                   if (!tgHandle) {
+                    ReactGA.event({ category: EventCategory.Global, action: EventName.ConnectTelegram });
                     openLink('https://arcana.p12.games/');
                     return;
                   }
@@ -202,6 +205,7 @@ export default function EditProfileDialog() {
               <Button
                 htmlType="button"
                 onClick={() => {
+                  ReactGA.event({ category: EventCategory.Global, action: EventName.ProfileCancel });
                   close();
                 }}
                 className="w-[7.375rem]"

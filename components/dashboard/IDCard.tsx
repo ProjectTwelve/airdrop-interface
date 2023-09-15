@@ -1,18 +1,17 @@
-// import { EventCategory, EventName } from '@/constants/event';
+import { EventCategory, EventName } from '@/constants/event';
 import { clickableMotionProps } from '@/constants/motionAnim';
-// import { editProfileDialogOpen } from '@/store/editorium/state';
+import { arcanaEditProfileDialogOpenAtom } from '@/store/arcana/state';
+import { userInfoAtom, userTelegramSelector } from '@/store/user/state';
 import { openLink, shortenAddress, shortenArcanaStr } from '@/utils';
 import { motion } from 'framer-motion';
 import { useMemo } from 'react';
-// import ReactGA from 'react-ga4';
+import ReactGA from 'react-ga4';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
+import Loading from '../loading';
 import { DiscordSvg } from '../svg/DiscordSvg';
 import { TelegramSvg } from '../svg/TelegramSvg';
 import { TwitterSvg } from '../svg/TwitterSvg';
-import Loading from '../loading';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userInfoAtom, userTelegramSelector } from '@/store/user/state';
-import { arcanaEditProfileDialogOpenAtom } from '@/store/arcana/state';
 
 export default function IDCard({ loading, className }: { loading?: boolean; className?: string }) {
   const profileData = useRecoilValue(userInfoAtom);
@@ -50,7 +49,7 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
     <motion.div
       {...clickableMotionProps()}
       onClick={() => {
-        // ReactGA.event({ category: EventCategory.Editorium, action: EventName.ClickEdit });
+        ReactGA.event({ category: EventCategory.Global, action: EventName.ArcanaProfile });
         setEditProfileDialogOpen(true);
       }}
       className={twMerge(

@@ -1,4 +1,5 @@
 import Button from '@/components/button';
+import { EventCategory, EventName } from '@/constants/event';
 import { useReferralReward } from '@/hooks/dashboard/referral';
 import { useTaskItems } from '@/hooks/dashboard/task';
 import { TaskCode } from '@/lib/types-nest';
@@ -6,6 +7,7 @@ import { arcanaTasksStatusAtom } from '@/store/arcana/state';
 import { openLink } from '@/utils';
 import classNames from 'classnames';
 import { useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilValue } from 'recoil';
 
 export default function MyTasks() {
@@ -85,7 +87,10 @@ export default function MyTasks() {
           <Button
             type="bordered"
             className="mt-12 flex w-[438px] justify-center gap-1.5 self-center border-white py-4 xs:w-full"
-            onClick={() => openLink('https://arcana.p12.games/#task')}
+            onClick={() => {
+              ReactGA.event({ category: EventCategory.Global, action: EventName.GetPl });
+              openLink('https://arcana.p12.games/#task');
+            }}
           >
             Get More PL <img className="w-6" src="/img/pl/power_level.png" alt="pl-icon" />
           </Button>
