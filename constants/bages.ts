@@ -3,7 +3,7 @@ import { Address } from 'wagmi';
 
 export const DEV_BADGES = {
   [SBT_LEVEL.ORANGE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653656759076802901.gif',
+    asset: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653656759076802901.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_orange_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_orange.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_orange.png',
@@ -13,7 +13,7 @@ export const DEV_BADGES = {
     color: 'orange',
   },
   [SBT_LEVEL.PURPLE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653654265642526889.gif',
+    asset: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653654265642526889.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_purple_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_purple.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_purple.png',
@@ -23,7 +23,7 @@ export const DEV_BADGES = {
     color: 'purple',
   },
   [SBT_LEVEL.BLUE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653761673395155.gif',
+    asset: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653653761673395155.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_blue_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_blue.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_blue.png',
@@ -33,7 +33,7 @@ export const DEV_BADGES = {
     color: 'blue',
   },
   [SBT_LEVEL.GREEN]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
+    asset: 'https://cdn.galxe.com/galaxy/assets/projecttwelve/1653653545770629768.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_green_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_green.png',
@@ -43,21 +43,21 @@ export const DEV_BADGES = {
     color: 'green',
   },
   [SBT_LEVEL.WHITE]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
+    asset: 'https://cdn.galxe.com/galaxy/p12/154badfe-3f5d-44b2-883f-457fdd70227a.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_white_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_white.png',
-    claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
+    claim: 'https://galxe.com/P12/campaign/GCeFqU2ci3',
     title: 'P12 Genesis Badge [White Rarity]',
     rarity: 'Common',
     color: 'white',
   },
   [SBT_LEVEL.REKT]: {
-    asset: 'https://cdn.galaxy.eco/galaxy/assets/projecttwelve/1653653545770629768.gif',
+    asset: 'https://cdn.galxe.com/galaxy/p12/3412087f-201d-4acf-b38f-2bbf2986cf51.gif',
     asset256: 'https://cdn1.p12.games/airdrop/badge/dev_rekt_256.webp',
     img: 'https://cdn1.p12.games/airdrop/img/dev_badge_rekt.png',
     imgBig: 'https://cdn1.p12.games/airdrop/img/dev_badge_rekt.png',
-    claim: 'https://galxe.com/P12/campaign/GCV4JUU7eR',
+    claim: 'https://galxe.com/P12/campaign/GCsVGU2XHo',
     title: 'P12 Genesis Badge [Rekt Rarity]',
     rarity: 'Common',
     color: 'white',
