@@ -10,6 +10,7 @@ import { invitationCountAtom } from '@/store/invite/state';
 import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
 import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '@/store/gamer/state';
 import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
+import { useFetchUserPowerLevel } from '@/hooks/dashboard/powerLevel';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -20,6 +21,7 @@ function LayoutHeader() {
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
   const fetchGlobalData = useFetchGlobalData();
   const isLogged = useIsLogged();
+  useFetchUserPowerLevel(address);
 
   useEffect(() => {
     if (isLogged) {

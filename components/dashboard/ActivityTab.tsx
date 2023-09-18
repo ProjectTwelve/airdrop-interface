@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 type ActivityTabProps = {
   title: string;
-  score: string;
+  score: number | string;
   active?: boolean;
   onClick?: () => void;
 };

@@ -147,3 +147,14 @@ export type PowerVoteResult = {
   };
   beVotedVote?: number;
 };
+
+export type UserPowerLevel = {
+  currentPL: number; // Gamer + Developer = Current
+  gamerPL: number; // Arcana Gamer + Steam Gamer  = Gamer
+  developerPL: number; // Arcana Developer + Steam Developer = Developer
+  arcanaPL: number; // Arcana Gamer + Arcana Developer = Arcana
+  arcanaGamerPL: number; // Arcana Gamer
+  arcanaDeveloperPL: number; // Arcana Developer
+  steamGamerPL: number; // Steam Gamer
+  steamDeveloperPL: number; // Steam Developer
+};

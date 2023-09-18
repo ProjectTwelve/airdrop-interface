@@ -10,6 +10,7 @@ import {
   ProfileParams,
   TasksStatus,
   UserInfo,
+  UserPowerLevel,
 } from '@/lib/types-nest';
 import request, { Response } from '@/lib/request-nest';
 import { Address } from 'wagmi';
@@ -36,3 +37,6 @@ export const fetchTasksStatus = () => request.get<any, Response<TasksStatus>>('/
 
 export const fetchInviteHistory = (code: string) =>
   request.get<any, Response<InvitationInfo[]>>('/invitation/history/' + code, { params: { field: 'editorium' } });
+
+export const fetchUserPowerLevel = (address?: string) =>
+  request.get<any, Response<UserPowerLevel>>('/assets/dashboard/pl/' + address);

@@ -1,5 +1,5 @@
-import React, { LegacyRef } from 'react';
 import classNames from 'classnames';
+import React, { LegacyRef } from 'react';
 
 type ButtonProps = {
   className?: string;

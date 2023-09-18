@@ -10,10 +10,13 @@ import TokenStatus from '@/components/dashboard/TokenStatus';
 import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import PremiumPlusTooltip from '@/components/tooltip/PremiumPlusTooltip';
 import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
+import { digitalFormat } from '@/utils/format';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 
 export default function SteamGamerSBT() {
   const { address } = useAccount();
   useGamerInfo(address);
+  const { gamerPL } = useRecoilValue(userPowerLevelAtom);
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const tokenStatus = useGamerTokenStatus(gamerInfo);
   const nextLevel = useMemo(() => (gamerInfo?.nft_level ? gamerInfo?.nft_level - 1 : undefined), [gamerInfo?.nft_level]);
@@ -46,7 +49,7 @@ export default function SteamGamerSBT() {
           </div>
           <p className="mt-5 text-sm">Power Level</p>
           <div className="flex gap-1.5 ">
-            <div className="text-gradient-yellow text-5xl font-bold">1,024,25</div>
+            <div className="text-gradient-yellow text-5xl font-bold">{digitalFormat.integer(gamerPL)}</div>
             <img className="w-7" src="/svg/check_success.svg" alt="check_success" />
           </div>
           <div className="mt-12">

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { digitalFormat } from '@/utils/format';
 import Gamer from '@/components/dashboard/Gamer';
 import Arcana from '@/components/dashboard/Arcana';
 import Developer from '@/components/dashboard/Developer';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 import ActivityTab from '@/components/dashboard/ActivityTab';
 import SteamGamerSBT from '@/components/dashboard/SteamGamerSBT';
 import SteamDeveloperSBT from '@/components/dashboard/SteamDeveloperSBT';
 
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
+  const { arcanaPL, steamGamerPL, steamDeveloperPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
     <div className="mt-7">
@@ -23,19 +27,19 @@ export default function Dashboard() {
             onClick={() => setSelectedTab(0)}
             active={selectedTab === 0}
             title="Arcana - Linea Editorium"
-            score="24,000"
+            score={digitalFormat.integer(arcanaPL)}
           />
           <ActivityTab
             onClick={() => setSelectedTab(1)}
             active={selectedTab === 1}
             title="Genesis Steam Gamer"
-            score="24,000"
+            score={digitalFormat.integer(steamGamerPL)}
           />
           <ActivityTab
             onClick={() => setSelectedTab(2)}
             active={selectedTab === 2}
             title="Genesis Steam Developer"
-            score="24,000"
+            score={digitalFormat.integer(steamDeveloperPL)}
           />
         </div>
       </div>

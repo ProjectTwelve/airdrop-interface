@@ -6,13 +6,15 @@ import { DEV_BADGES, NFT_CLAIM } from '@/constants';
 import { useDeveloperInfo } from '@/hooks/developer';
 import { developerGameAtom } from '@/store/developer/state';
 import Button from '@/components/button';
+import { digitalFormat } from '@/utils/format';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 
 export default function SteamDeveloperSBT() {
   const { address } = useAccount();
   const games = useRecoilValue(developerGameAtom);
   useDeveloperInfo(address);
   const gameInfo = games[0];
-  // const tokenStatus = useDevTokenStatus(gameInfo);
+  const { developerPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
     <div className="relative h-full">
@@ -36,7 +38,7 @@ export default function SteamDeveloperSBT() {
           </div>
           <p className="mt-5 text-sm">Power Level</p>
           <div className="flex gap-1.5">
-            <div className="text-4xl/9 font-bold text-gray-400">0</div>
+            <div className="text-4xl/9 font-bold text-gray-400">{digitalFormat.integer(developerPL)}</div>
             <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />
           </div>
           <div className="mt-3">
