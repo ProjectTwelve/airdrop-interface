@@ -14,3 +14,8 @@ export const userPowerLevelAtom = atom<UserPowerLevel>({
     steamDeveloperPL: 0, // Steam Developer
   },
 });
+
+export const dashboardSelectedTabAtom = atom<number>({
+  key: 'dashboard_selected_tab_atom',
+  default: 0,
+});

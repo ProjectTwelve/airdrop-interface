@@ -1,16 +1,25 @@
 import React from 'react';
+import classNames from 'classnames';
 
 type CredentialTaskProps = {
+  status?: boolean;
   text?: string;
   onClick?: () => void;
 };
-export default function CredentialTask({ onClick, text }: CredentialTaskProps) {
+export default function CredentialTask({ status, onClick, text }: CredentialTaskProps) {
   return (
     <div
       onClick={onClick}
-      className="flex cursor-pointer gap-2 rounded-lg border border-gray-550/50 bg-gray-700/30 px-3 py-3.5 text-sm font-medium"
+      className={classNames(
+        'flex cursor-pointer gap-2 rounded-lg border bg-gray-700/30 px-3 py-3.5 text-sm font-medium',
+        status ? 'border-green text-green' : 'border-gray-550/50',
+      )}
     >
-      <img className="w-5" src="/svg/play.svg" alt="play" />
+      {status ? (
+        <img className="w-5" src="/svg/check.svg" alt="check" />
+      ) : (
+        <img className="w-5" src="/svg/play.svg" alt="play" />
+      )}
       {text}
     </div>
   );
