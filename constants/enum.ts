@@ -63,3 +63,8 @@ export enum AMA_NFT_CAMPAIGN_ID {
   GCmP7UtXdx = 'GCmP7UtXdx',
   GCsJQUt6Xc = 'GCsJQUt6Xc',
 }
+
+export enum GenesisNFTType {
+  Gamer = 'gamer',
+  Developer = 'developer',
+}

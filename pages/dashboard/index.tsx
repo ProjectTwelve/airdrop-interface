@@ -6,8 +6,8 @@ import Arcana from '@/components/dashboard/Arcana';
 import Developer from '@/components/dashboard/Developer';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
 import ActivityTab from '@/components/dashboard/ActivityTab';
-import SteamGamerSBT from '@/components/dashboard/SteamGamerSBT';
-import SteamDeveloperSBT from '@/components/dashboard/SteamDeveloperSBT';
+import SteamGamerSBT from '@/components/dashboard/sbt/SteamGamerSBT';
+import SteamDeveloperSBT from '@/components/dashboard/sbt/SteamDeveloperSBT';
 
 export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState<number>(0);
