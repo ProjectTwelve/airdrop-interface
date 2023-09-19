@@ -88,8 +88,8 @@ function LayoutHeader() {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        {router.pathname === '/dashboard' && activatedPL ? (
-          <div className="relative flex items-center gap-2 px-6 py-1.5 text-sm/5.5 font-semibold">
+        {router.pathname === '/dashboard' ? (
+          <div className="relative flex items-center gap-2 px-6 py-1.5 text-sm/5.5 font-semibold backdrop-blur">
             <GradientBorderSvg type="headerPL" className="absolute inset-0 h-full w-full" />
             Activated PL
             <div className="text-gradient-yellow ml-0.5 text-[2.125rem]/8.5 font-bold">

@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
 import { AccountInfo } from '@/lib/types';
-import { TokenStatusData } from '@/components/dashboard/TokenStatus';
 import { GenesisNFT } from '@/lib/types-nest';
+import { TokenStatusData } from '@/components/dashboard/sbt/TokenStatus';
 
 export function useGamerTokenStatus(data?: GenesisNFT) {
   return useMemo<TokenStatusData | undefined>(

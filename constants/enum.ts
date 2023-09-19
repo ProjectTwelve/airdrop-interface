@@ -68,3 +68,8 @@ export enum GenesisNFTType {
   Gamer = 'gamer',
   Developer = 'developer',
 }
+
+export enum GenesisPayUser {
+  Golden = 'golden',
+  Silvery = 'silvery',
+}

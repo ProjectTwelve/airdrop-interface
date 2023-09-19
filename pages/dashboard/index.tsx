@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import React from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { digitalFormat } from '@/utils/format';
 import Gamer from '@/components/dashboard/Gamer';
 import Arcana from '@/components/dashboard/Arcana';
 import Developer from '@/components/dashboard/Developer';
-import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
 import ActivityTab from '@/components/dashboard/ActivityTab';
 import SteamGamerSBT from '@/components/dashboard/sbt/SteamGamerSBT';
 import SteamDeveloperSBT from '@/components/dashboard/sbt/SteamDeveloperSBT';
 
 export default function Dashboard() {
-  const [selectedTab, setSelectedTab] = useState<number>(0);
+  const [selectedTab, setSelectedTab] = useRecoilState(dashboardSelectedTabAtom);
   const { arcanaPL, steamGamerPL, steamDeveloperPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
