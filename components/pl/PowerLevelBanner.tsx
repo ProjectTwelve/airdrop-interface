@@ -14,7 +14,7 @@ export default function PowerLevelBanner() {
   const isMounted = useIsMounted();
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const banner = useArcanaThemeAsset('banner.webm');
-  const { currentPL } = useRecoilValue(userPowerLevelAtom);
+  const { activatedPL } = useRecoilValue(userPowerLevelAtom);
 
   const onClick = () => {
     if (!address) {
@@ -30,11 +30,11 @@ export default function PowerLevelBanner() {
         {banner && <video autoPlay loop muted className="w-full" src={banner} />}
       </div>
       <div className="absolute left-0 top-0 -z-10 h-[138px] w-full rounded-t-2xl bg-card-mask" />
-      {isMounted && address && currentPL ? (
+      {isMounted && address && activatedPL ? (
         <div className="py-6 pt-11">
           <div className="flex-center gap-9">
             <div className="text-gradient-yellow flex gap-3 text-[68px]/[68px] font-bold">
-              {digitalFormat.integer(currentPL)}
+              {digitalFormat.integer(activatedPL)}
               <img width={68} src="/img/pl/power_level.png" alt="power_level" />
             </div>
             <p className="h-10 w-px bg-gray" />
@@ -52,7 +52,7 @@ export default function PowerLevelBanner() {
             <img className="w-12" src="/img/pl/power_level.png" alt="power_level" />
           </div>
           <div>
-            <Button type="bordered" className="px-24 py-3.5">
+            <Button type="bordered" style={{ padding: '0.875rem 6rem' }}>
               CLAIM NOW
             </Button>
           </div>

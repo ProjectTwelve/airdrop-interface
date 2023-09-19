@@ -4,38 +4,46 @@ import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { useRecoilValue } from 'recoil';
 import { useGamerInfo } from '@/hooks/gamer';
-import { gamerInfoAtom } from '@/store/gamer/state';
-import { GAMER_BADGES, NFT_CLAIM } from '@/constants';
-import TokenStatus from '@/components/dashboard/TokenStatus';
-import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
+// import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
+import { GAMER_BADGES, GenesisNFTType, NFT_CLAIM } from '@/constants';
+// import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import PremiumPlusTooltip from '@/components/tooltip/PremiumPlusTooltip';
 import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
 import { digitalFormat } from '@/utils/format';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
+import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
 
 export default function SteamGamerSBT() {
   const { address } = useAccount();
   useGamerInfo(address);
+  const { data: genesisGamerNFT } = useFetchGenesisNFT({ address, type: GenesisNFTType.Gamer });
   const { gamerPL } = useRecoilValue(userPowerLevelAtom);
-  const gamerInfo = useRecoilValue(gamerInfoAtom);
-  const tokenStatus = useGamerTokenStatus(gamerInfo);
-  const nextLevel = useMemo(() => (gamerInfo?.nft_level ? gamerInfo?.nft_level - 1 : undefined), [gamerInfo?.nft_level]);
+  // const tokenStatus = useGamerTokenStatus(genesisGamerNFT);
+  const nextLevel = useMemo(
+    () => (genesisGamerNFT?.nftLevel ? genesisGamerNFT?.nftLevel - 1 : undefined),
+    [genesisGamerNFT?.nftLevel],
+  );
   const nextLevelConfig = useSBTLevelConfig(nextLevel);
 
   const birthday = useMemo(
-    () => (gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YY/MM/DD') : '--'),
-    [gamerInfo?.birthday],
+    () => (genesisGamerNFT?.createdAt ? dayjs(genesisGamerNFT.createdAt).format('YY/MM/DD') : '--'),
+    [genesisGamerNFT?.createdAt],
   );
+
+  const isClaimed = useMemo(() => genesisGamerNFT?.nftClaim === NFT_CLAIM.CLAIMED, [genesisGamerNFT?.nftClaim]);
 
   return (
     <div className="relative h-full">
       <div className="flex gap-6 pb-20">
         <div className="w-full max-w-[232px]">
-          {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
+          {isClaimed ? (
             <div
               className="aspect-square bg-cover"
-              style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset256})` }}
+              style={{ backgroundImage: `url(${GAMER_BADGES[genesisGamerNFT!.nftLevel].asset256})` }}
             />
+          ) : (
+            <img className="w-full" src="/img/unclaimed.webp" alt="unclaimed" />
           )}
         </div>
         <div className="flex-1">
@@ -49,12 +57,27 @@ export default function SteamGamerSBT() {
           </div>
           <p className="mt-5 text-sm">Power Level</p>
           <div className="flex gap-1.5 ">
-            <div className="text-gradient-yellow text-5xl font-bold">{digitalFormat.integer(gamerPL)}</div>
+            <div className={classNames('font-bold', isClaimed ? 'text-gradient-yellow text-5xl' : 'text-4xl/9 text-gray-400')}>
+              {digitalFormat.integer(gamerPL)}
+            </div>
             <img className="w-7" src="/svg/check_success.svg" alt="check_success" />
           </div>
-          <div className="mt-12">
-            <TokenStatus data={tokenStatus} />
+          <div className="mt-3">
+            <CredentialTask text="Submit your creation in Editor Arcana" />
+            <p className="my-1 text-center text-sm">OR</p>
+            <CredentialTask text="Complete Steam auth process in airdrop" />
           </div>
+          {/*{isClaimed ? (*/}
+          {/*  <div className="mt-12">*/}
+          {/*    <TokenStatus data={tokenStatus} />*/}
+          {/*  </div>*/}
+          {/*) : (*/}
+          {/*  <div className="mt-3">*/}
+          {/*    <CredentialTask text="Submit your creation in Editor Arcana" />*/}
+          {/*    <p className="my-1 text-center text-sm">OR</p>*/}
+          {/*    <CredentialTask text="Complete Steam auth process in airdrop" />*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
       </div>
       <div className="absolute bottom-0 w-full px-5">

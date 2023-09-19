@@ -3,6 +3,7 @@ import {
   CheckNameParams,
   CheckResult,
   GameInfo,
+  GenesisNFT,
   InvitationInfo,
   LoginParams,
   PowerLevelResult,
@@ -14,6 +15,7 @@ import {
 } from '@/lib/types-nest';
 import request, { Response } from '@/lib/request-nest';
 import { Address } from 'wagmi';
+import { GenesisNFTType } from '@/constants';
 
 export const fetchLogin = (data: LoginParams) => request.post<any, Response<UserInfo>>('/auth/login', data);
 
@@ -39,4 +41,7 @@ export const fetchInviteHistory = (code: string) =>
   request.get<any, Response<InvitationInfo[]>>('/invitation/history/' + code, { params: { field: 'editorium' } });
 
 export const fetchUserPowerLevel = (address?: string) =>
-  request.get<any, Response<UserPowerLevel>>('/assets/dashboard/pl/' + address);
+  request.get<any, Response<UserPowerLevel>>('/assets/dashboard/pl', { params: { address } });
+
+export const fetchGenesisNFT = (params?: { address?: string; type?: GenesisNFTType }) =>
+  request.get<any, Response<GenesisNFT>>('/assets/dashboard/sbt', { params });

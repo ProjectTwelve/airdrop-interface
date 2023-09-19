@@ -1,17 +1,18 @@
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
-import { AccountInfo, GamerInfoData } from '@/lib/types';
+import { AccountInfo } from '@/lib/types';
 import { TokenStatusData } from '@/components/dashboard/TokenStatus';
+import { GenesisNFT } from '@/lib/types-nest';
 
-export function useGamerTokenStatus(data?: GamerInfoData) {
+export function useGamerTokenStatus(data?: GenesisNFT) {
   return useMemo<TokenStatusData | undefined>(
     () =>
       data
         ? {
-            id: data.nft_id,
-            rarity: data.nft_level,
+            id: data.nftId,
+            rarity: data.nftLevel,
             role: data.credential ? 'Gamer' : undefined,
-            birthday: data?.birthday ? dayjs(data.birthday).format('YY/MM/DD') : '--',
+            birthday: data?.createdAt ? dayjs(data.createdAt).format('YY/MM/DD') : '--',
           }
         : undefined,
     [data],
