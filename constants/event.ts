@@ -8,7 +8,7 @@ export enum EventName {
   CreateNow = 'create_now',
   DownloadPopup = 'download_popup',
   DownloadLink = 'download_link',
-  // EditorLoginVerify = 'editor_login_verify',
+  EditorLoginVerify = 'editor_login_verify',
   ArcanaProfile = 'arcana_profile',
   ConnectTelegram = 'connect_telegram',
   ConnectTwitter = 'connect_twitter',

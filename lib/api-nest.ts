@@ -12,6 +12,7 @@ import {
   TasksStatus,
   UserInfo,
   UserPowerLevel,
+  VerifyEditorLoginResult,
 } from '@/lib/types-nest';
 import request, { Response } from '@/lib/request-nest';
 import { Address } from 'wagmi';
@@ -45,3 +46,6 @@ export const fetchUserPowerLevel = (address?: string) =>
 
 export const fetchGenesisNFT = (params?: { address?: string; type?: GenesisNFTType }) =>
   request.get<any, Response<GenesisNFT>>('/assets/dashboard/sbt', { params });
+
+// 验证用户有没有登录过编辑器
+export const verifyEditorLogin = () => request.post<any, Response<VerifyEditorLoginResult>>('/arcana/user/editor-login');

@@ -14,7 +14,7 @@ function LayoutHeaderExtra() {
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
+  const bridgeLink = 'https://assets.p12.games/bridge';
   const landingSite = 'https://p12.network';
   const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022', '/bridge'];
 
@@ -41,10 +41,10 @@ function LayoutHeaderExtra() {
               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
               className="relative flex"
             >
-              <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => openLink(readmeLink)}>
+              <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => openLink(bridgeLink)}>
                 <div className="flex items-center justify-center text-sm">
-                  <img src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
-                  &nbsp;Readme
+                  <img src="/img/bridge/bridge.svg" width={24} height={24} alt="bridge" />
+                  &nbsp;Bridge
                 </div>
               </Button>
               {router.pathname !== '/gamer/[address]' && (

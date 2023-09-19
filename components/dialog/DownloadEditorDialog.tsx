@@ -2,12 +2,22 @@ import Dialog from '@/components/dialog';
 import { ARCANA_SOCIAL_LINKS } from '@/constants';
 import { arcanaEditorDownloadDialogOpen } from '@/store/arcana/state';
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import ReactGA from 'react-ga4';
 import { EventCategory, EventName } from '@/constants/event';
+import Button from '../button';
+import { userInfoAtom } from '@/store/user/state';
+import { useMutationVerifyEditorLogin } from '@/hooks/dashboard/useMutationVerifyEditorLogin';
+import { useAccount } from 'wagmi';
+import { isConnectPopoverOpen } from '@/store/web3/state';
 
 export default function DownloadEditorDialog() {
   const [isOpen, setIsOpen] = useRecoilState(arcanaEditorDownloadDialogOpen);
+  const profileData = useRecoilValue(userInfoAtom);
+  const { editorium: isVerify } = profileData ?? {};
+  const { address } = useAccount();
+  const { mutate: verifyEditorLogin, isLoading } = useMutationVerifyEditorLogin();
+  const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
 
   useEffect(() => {
     if (isOpen) {
@@ -20,7 +30,7 @@ export default function DownloadEditorDialog() {
       open={isOpen}
       className="w-[732px]"
       onOpenChange={setIsOpen}
-      render={() => (
+      render={({ close }) => (
         <div className="w-full">
           <h2 className="text-center text-xl font-semibold">Download Editor and P12 App to Create</h2>
           <div className="px-1.5">
@@ -109,6 +119,27 @@ export default function DownloadEditorDialog() {
               </a>
               &nbsp; for assistance.
             </p>
+            {isVerify && <p className="text-center text-xs text-green">I’ve succeeded login editor.</p>}
+            <div className="flex-center mt-3">
+              <Button
+                disabled={isVerify || isLoading}
+                loading={isLoading}
+                className="w-[258px]"
+                type="gradient"
+                onClick={() => {
+                  if (!address) {
+                    close();
+                    setTimeout(() => {
+                      setConnectOpen(true);
+                    }, 800);
+                    return;
+                  }
+                  verifyEditorLogin();
+                }}
+              >
+                {address ? (isVerify ? 'Verified' : 'Verify') : 'Connect to wallet'}
+              </Button>
+            </div>
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { DefaultValue, atom, selector } from 'recoil';
 import { UserInfo } from '@/lib/types-nest';
 
 export const userInfoAtom = atom<UserInfo | undefined>({
@@ -38,5 +38,19 @@ export const aspectaIdSelector = selector({
     if (!socialMedias?.length) return undefined;
     const aspectaData = socialMedias.find(({ source }) => source === 'aspecta');
     if (aspectaData?.sourceId) return aspectaData?.sourceId;
+  },
+});
+
+export const arcanaIsVerifySelector = selector({
+  key: 'is_verify_user_selector',
+  get: ({ get }) => {
+    const userInfo = get(userInfoAtom);
+    const { editorium } = userInfo ?? {};
+    return editorium;
+  },
+  set: ({ get, set }, newValue) => {
+    const userInfo = get(userInfoAtom);
+    if (!userInfo || newValue instanceof DefaultValue) return;
+    set(userInfoAtom, { ...userInfo, editorium: newValue });
   },
 });

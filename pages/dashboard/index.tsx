@@ -26,7 +26,7 @@ export default function Dashboard() {
           <ActivityTab
             onClick={() => setSelectedTab(0)}
             active={selectedTab === 0}
-            title="Arcana - Linea Editorium"
+            title="P12 Arcana: Editorium"
             score={digitalFormat.integer(arcanaPL)}
           />
           <ActivityTab

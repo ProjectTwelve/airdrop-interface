@@ -172,3 +172,9 @@ export type GenesisNFT = {
   updatedAt: number;
   walletAddress: string;
 };
+
+export type VerifyEditorLoginResult = {
+  createTime: number;
+  mwDeveloperId: string;
+  walletAddress: string;
+};
