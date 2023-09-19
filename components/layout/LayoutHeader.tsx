@@ -5,12 +5,15 @@ import { useRouter } from 'next/router';
 import Web3Status from '../web3/Web3Status';
 import { useQuery } from '@tanstack/react-query';
 import LayoutHeaderExtra from './LayoutHeaderExtra';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { invitationCountAtom } from '@/store/invite/state';
 import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
 import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '@/store/gamer/state';
 import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
 import { useFetchUserPowerLevel } from '@/hooks/dashboard/powerLevel';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { digitalFormat } from '@/utils/format';
+import { GradientBorderSvg } from '../svg/GradientBorderSvg';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -21,6 +24,8 @@ function LayoutHeader() {
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
   const fetchGlobalData = useFetchGlobalData();
   const isLogged = useIsLogged();
+  const { gamerPL } = useRecoilValue(userPowerLevelAtom);
+
   useFetchUserPowerLevel(address);
 
   useEffect(() => {
@@ -82,7 +87,17 @@ function LayoutHeader() {
           <LayoutHeaderExtra />
         </div>
       </div>
-      <Web3Status />
+      <div className="flex items-center gap-4">
+        {gamerPL ? (
+          <div className="relative flex items-center gap-2 px-6 py-1.5 text-sm/5.5 font-semibold">
+            <GradientBorderSvg type="headerPL" className="absolute inset-0 h-full w-full" />
+            Activated PL
+            <div className="text-gradient-yellow ml-0.5 text-[2.125rem]/8.5 font-bold">{digitalFormat.integer(gamerPL)}</div>
+            <img src="/img/pl/power_level.png" alt="PL" className="inline-block h-10 w-10" />
+          </div>
+        ) : null}
+        <Web3Status />
+      </div>
     </header>
   );
 }

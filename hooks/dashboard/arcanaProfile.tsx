@@ -4,7 +4,7 @@ import { RadioOption } from '@/components/radio/RadioGroup';
 import { EventCategory, EventName } from '@/constants/event';
 import { checkNameAvailable, editProfileData, updateChainNames } from '@/lib/api-nest';
 import { CheckNameParams, CheckResult, ProfileParams } from '@/lib/types-nest';
-import { arcanaEditProfileDialogOpenAtom } from '@/store/arcana/state';
+import { arcanaEditProfileDialogOpenAtom, arcanaPowerVoteAtom } from '@/store/arcana/state';
 import { aspectaIdSelector, userInfoAtom } from '@/store/user/state';
 import { shortenAddress } from '@/utils';
 import { toastStatus } from '@/utils/toast';
@@ -207,3 +207,8 @@ export const useProfileSubmit = (selectedRadioKey?: string) => {
     [onSubmit, isLoading],
   );
 };
+export function useIsVoter() {
+  const powerVoteInfo = useRecoilValue(arcanaPowerVoteAtom);
+  const { participant } = powerVoteInfo ?? {};
+  return participant;
+}
