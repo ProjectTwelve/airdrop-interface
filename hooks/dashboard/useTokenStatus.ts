@@ -19,15 +19,15 @@ export function useGamerTokenStatus(data?: GenesisNFT) {
   );
 }
 
-export function useDevTokenStatus(data?: AccountInfo) {
+export function useDevTokenStatus(data?: GenesisNFT) {
   return useMemo<TokenStatusData | undefined>(
     () =>
       data
         ? {
-            id: data.nft_id,
-            rarity: data.nft_level,
+            id: data.nftId,
+            rarity: data.nftLevel,
             role: data.credential ? 'Developer' : undefined,
-            birthday: data?.updatedAt ? dayjs(data.updatedAt).format('YY/MM/DD') : '--',
+            birthday: data?.createdAt ? dayjs(data.createdAt).format('YY/MM/DD') : '--',
           }
         : undefined,
     [data],

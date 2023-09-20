@@ -14,7 +14,6 @@ function LayoutHeaderExtra() {
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const bridgeLink = 'https://assets.p12.games/bridge';
   const landingSite = 'https://p12.network';
   const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022', '/bridge'];
 
@@ -41,7 +40,7 @@ function LayoutHeaderExtra() {
               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
               className="relative flex"
             >
-              <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => openLink(bridgeLink)}>
+              <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => router.push('/bridge')}>
                 <div className="flex items-center justify-center text-sm">
                   <img src="/img/bridge/bridge.svg" width={24} height={24} alt="bridge" />
                   &nbsp;Bridge

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchUserPowerLevel } from '@/lib/api-nest';
+import { fetchGenesisNFTUpgrade, fetchUserPowerLevel } from '@/lib/api-nest';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
 
@@ -20,5 +20,11 @@ export function useFetchUserPowerLevel(address?: string) {
     onError: () => {
       resetUserPowerLevel();
     },
+  });
+}
+
+export function useFetchGenesisNFTUpgrade() {
+  return useQuery(['fetch_genesis_nft_upgrade'], () => fetchGenesisNFTUpgrade(), {
+    select: (data) => (data.code === 200 ? data.data : []),
   });
 }

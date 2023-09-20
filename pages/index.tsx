@@ -1,7 +1,7 @@
 import React from 'react';
 import { openLink } from '@/utils';
 import { useThemeAsset } from '@/hooks/theme';
-import HomepageRank from '@/components/homepage/rank';
+import GamerRanking from '@/components/ranking/Gamer';
 import CollabSwiper from '@/components/collab/CollabSwiper';
 import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 
@@ -17,7 +17,11 @@ export default function Home() {
           onClick={() => openLink('https://arcana.p12.games/referral?code=Mkq4zW')}
         >
           {src ? (
-            <img className="-mt-[20px] h-[320px] w-[684px] object-cover rounded-2xl object-center md:h-auto md:w-full" src={src} alt="p12Arcana" />
+            <img
+              className="-mt-[20px] h-[320px] w-[684px] rounded-2xl object-cover object-center md:h-auto md:w-full"
+              src={src}
+              alt="p12Arcana"
+            />
           ) : (
             // <img className="h-[300px] object-cover object-center md:h-[128px]" src={src} alt="p12Arcana" />
             // <div className="h-[300px] w-1/2 animate-pulse bg-white/10" />
@@ -29,8 +33,8 @@ export default function Home() {
       <div className="mt-5 w-full">
         <PowerLevelBanner />
       </div>
-      <div className="backdrop-box mt-5 w-full rounded-2xl">
-        <HomepageRank />
+      <div className="backdrop-box mt-7.5 rounded-2xl">
+        <GamerRanking />
       </div>
     </div>
   );
