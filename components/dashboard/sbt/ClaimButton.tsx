@@ -4,15 +4,19 @@ import { openLink } from '@/utils';
 import Button from '@/components/button';
 import { GenesisNFT } from '@/lib/types-nest';
 import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
-import { DEV_BADGES, GAMER_BADGES, GenesisNFTType, NFT_CLAIM } from '@/constants';
+import { useFetchGenesisNFTUpgrade } from '@/hooks/dashboard/powerLevel';
+import { DEV_BADGES, GAMER_BADGES, GenesisNFTType, NFT_CLAIM, SBT_LEVEL } from '@/constants';
+import { GenesisUpgradeStatus, useGenesisNFTUpgrade } from '@/hooks/dashboard/useGenesisNFTUpgrade';
 
 type ClaimButtonProps = {
   type: GenesisNFTType;
   data?: GenesisNFT;
+  powerLevel: number;
 };
-export default function ClaimButton({ data, type }: ClaimButtonProps) {
-  const nextLevel = useMemo(() => (data?.nftLevel ? data?.nftLevel - 1 : undefined), [data?.nftLevel]);
-  const nextLevelConfig = useSBTLevelConfig(nextLevel);
+export default function ClaimButton({ data, type, powerLevel }: ClaimButtonProps) {
+  const { data: upgradeData } = useFetchGenesisNFTUpgrade();
+  const upgrade = useGenesisNFTUpgrade({ powerLevel, currentLevel: data?.nftLevel, data: upgradeData });
+  const upLevelConfig = useSBTLevelConfig(upgrade.upLevel);
   const nftConfig = useMemo(() => (type === GenesisNFTType.Gamer ? GAMER_BADGES : DEV_BADGES), [type]);
 
   return data?.credential ? (
@@ -20,17 +24,33 @@ export default function ClaimButton({ data, type }: ClaimButtonProps) {
       <Button type="gradient" className="w-full py-4 font-medium" onClick={() => openLink(nftConfig[data.nftLevel].claim)}>
         Claim
       </Button>
+    ) : data.nftLevel === SBT_LEVEL.ORANGE ? (
+      <Button className="w-full py-4 text-gray-450" disabled>
+        The highest level
+      </Button>
     ) : (
-      <div
-        className={classNames(
-          'cursor-pointer rounded-full py-4.5 text-center text-xl/5 font-medium',
-          nextLevelConfig.bg,
-          nextLevelConfig.text,
-          nextLevelConfig.hover,
+      <>
+        {upgrade.status === GenesisUpgradeStatus.CanUpgrade && (
+          <div
+            onClick={() => {
+              // TODO: upgrade
+            }}
+            className={classNames(
+              'cursor-pointer rounded-full py-4.5 text-center text-xl/5 font-medium',
+              upLevelConfig.bg,
+              upLevelConfig.text,
+              upLevelConfig.hover,
+            )}
+          >
+            Upgrade To [{upLevelConfig.rarity}]
+          </div>
         )}
-      >
-        Upgrade To [{nextLevelConfig.rarity}]
-      </div>
+        {upgrade.status === GenesisUpgradeStatus.NotUpgrade && (
+          <Button className="w-full py-4.5 text-lg/5 font-medium" disabled>
+            Need <span className="text-2xl/5 text-yellow">{upgrade.diff} PL</span> to Upgrade
+          </Button>
+        )}
+      </>
     )
   ) : (
     <Button className="w-full py-4 text-gray-450" disabled>

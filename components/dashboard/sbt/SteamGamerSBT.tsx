@@ -19,16 +19,16 @@ export default function SteamGamerSBT() {
   const { address } = useAccount();
   useGamerInfo(address);
   const setSelectedTab = useSetRecoilState(dashboardSelectedTabAtom);
-  const { data: genesisGamerNFT } = useFetchGenesisNFT({ address, type: GenesisNFTType.Gamer });
+  const { data: gamerNFT } = useFetchGenesisNFT({ address, type: GenesisNFTType.Gamer });
   const { gamerPL } = useRecoilValue(userPowerLevelAtom);
-  const tokenStatus = useGamerTokenStatus(genesisGamerNFT);
-  const nftSource = useMemo(() => genesisGamerNFT?.nftSource ?? [], [genesisGamerNFT?.nftSource]);
+  const tokenStatus = useGamerTokenStatus(gamerNFT);
+  const nftSource = useMemo(() => gamerNFT?.nftSource ?? [], [gamerNFT?.nftSource]);
   const birthday = useMemo(
-    () => (genesisGamerNFT?.createdAt ? dayjs(genesisGamerNFT.createdAt).format('YY/MM/DD') : '--'),
-    [genesisGamerNFT?.createdAt],
+    () => (gamerNFT?.createdAt ? dayjs(gamerNFT.createdAt).format('YY/MM/DD') : '--'),
+    [gamerNFT?.createdAt],
   );
 
-  const isClaimed = useMemo(() => genesisGamerNFT?.nftClaim === NFT_CLAIM.CLAIMED, [genesisGamerNFT?.nftClaim]);
+  const isClaimed = useMemo(() => gamerNFT?.nftClaim === NFT_CLAIM.CLAIMED, [gamerNFT?.nftClaim]);
 
   return (
     <div className="relative h-full">
@@ -37,7 +37,7 @@ export default function SteamGamerSBT() {
           {isClaimed ? (
             <div
               className="aspect-square bg-cover"
-              style={{ backgroundImage: `url(${GAMER_BADGES[genesisGamerNFT!.nftLevel].asset256})` }}
+              style={{ backgroundImage: `url(${GAMER_BADGES[gamerNFT!.nftLevel].asset256})` }}
             />
           ) : (
             <img className="w-full" src="/img/unclaimed.webp" alt="unclaimed" />
@@ -46,7 +46,7 @@ export default function SteamGamerSBT() {
         <div className="flex-1">
           <div className="flex gap-3 text-xl/5.5">
             P12 XII-PLORER Badge
-            {genesisGamerNFT?.payUser === GenesisPayUser.Golden && (
+            {gamerNFT?.payUser === GenesisPayUser.Golden && (
               <PremiumPlusTooltip data={birthday} placement="bottom">
                 <div className="w-18 cursor-pointer rounded bg-[url(/svg/pl/premium_plus.svg)] bg-cover py-0.5 text-center text-xs/4.5 font-semibold text-orange-700 shadow-md shadow-orange-500/50">
                   Premium
@@ -89,7 +89,7 @@ export default function SteamGamerSBT() {
         </div>
       </div>
       <div className="absolute bottom-0 w-full px-5">
-        <ClaimButton type={GenesisNFTType.Gamer} data={genesisGamerNFT} />
+        <ClaimButton powerLevel={gamerPL} type={GenesisNFTType.Gamer} data={gamerNFT} />
       </div>
     </div>
   );

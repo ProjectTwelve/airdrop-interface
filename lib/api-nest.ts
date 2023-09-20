@@ -49,3 +49,5 @@ export const fetchGenesisNFT = (params?: { address?: string; type?: GenesisNFTTy
 
 // 验证用户有没有登录过编辑器
 export const verifyEditorLogin = () => request.post<any, Response<VerifyEditorLoginResult>>('/arcana/user/editor-login');
+
+export const fetchGenesisNFTUpgrade = () => request.get<any, Response<number[]>>('/assets/dashboard/sbt/rarity');
