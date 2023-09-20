@@ -3,11 +3,11 @@ import dayjs from 'dayjs';
 import classNames from 'classnames';
 import Button from '../../button';
 import { shortenAddress } from '@/utils';
-import { BADGE_CONTRACT_ADDRESS, GAMER_BADGES, SBT_LEVEL } from '@/constants';
+import { BADGE_CONTRACT_ADDRESS, GAMER_BADGES, GenesisRarity } from '@/constants';
 
 type GenesisVoteDialogProps = {
   close: () => void;
-  nftLevel?: SBT_LEVEL;
+  nftLevel?: GenesisRarity;
   votes?: number;
   createdAt?: number;
   nftId?: number;

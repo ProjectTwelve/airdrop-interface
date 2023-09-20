@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { DEV_BADGES, SBT_LEVEL, GAMER_BADGES, NFT_CLAIM } from '@/constants';
+import { DEV_BADGES, GenesisRarity, GAMER_BADGES, NFT_CLAIM } from '@/constants';
 import { AccountInfo, GamerInfoData } from '@/lib/types';
 
 export const useDevBadgeLoad = (game: AccountInfo) => {
   const [state, setState] = useState<{ src: string; isLoading: boolean }>({ src: '', isLoading: false });
   const badgesRef = useRef(
-    new Map<SBT_LEVEL, boolean>([
-      [SBT_LEVEL.ORANGE, false],
-      [SBT_LEVEL.PURPLE, false],
-      [SBT_LEVEL.BLUE, false],
-      [SBT_LEVEL.GREEN, false],
+    new Map<GenesisRarity, boolean>([
+      [GenesisRarity.Legendary, false],
+      [GenesisRarity.Epic, false],
+      [GenesisRarity.Rekt, false],
+      [GenesisRarity.Uncommon, false],
     ]),
   );
 
@@ -35,13 +35,13 @@ export const useDevBadgeLoad = (game: AccountInfo) => {
 export const useGamerBadgeLoad = (gamer?: GamerInfoData) => {
   const [state, setState] = useState<{ src: string; isLoading: boolean }>({ src: '', isLoading: false });
   const badgesRef = useRef(
-    new Map<SBT_LEVEL, boolean>([
-      [SBT_LEVEL.ORANGE, false],
-      [SBT_LEVEL.PURPLE, false],
-      [SBT_LEVEL.BLUE, false],
-      [SBT_LEVEL.GREEN, false],
-      [SBT_LEVEL.WHITE, false],
-      [SBT_LEVEL.REKT, false],
+    new Map<GenesisRarity, boolean>([
+      [GenesisRarity.Legendary, false],
+      [GenesisRarity.Epic, false],
+      [GenesisRarity.Rare, false],
+      [GenesisRarity.Uncommon, false],
+      [GenesisRarity.Common, false],
+      [GenesisRarity.Rare, false],
     ]),
   );
 

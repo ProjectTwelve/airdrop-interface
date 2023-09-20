@@ -8,12 +8,12 @@ import { digitalFormat } from '@/utils/format';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
+import ClaimButton from '@/components/dashboard/sbt/ClaimButton';
 import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
 import PremiumPlusTooltip from '@/components/tooltip/PremiumPlusTooltip';
-import { GAMER_BADGES, GenesisRole, GenesisPayUser, NFT_CLAIM } from '@/constants';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
-import ClaimButton from '@/components/dashboard/sbt/ClaimButton';
+import { GAMER_BADGES, GenesisRole, GenesisPay, NFT_CLAIM, GenesisSource } from '@/constants';
 
 export default function SteamGamerSBT() {
   const { address } = useAccount();
@@ -46,7 +46,7 @@ export default function SteamGamerSBT() {
         <div className="flex-1">
           <div className="flex gap-3 text-xl/5.5">
             P12 XII-PLORER Badge
-            {gamerNFT?.payUser === GenesisPayUser.Golden && (
+            {gamerNFT?.payUser === GenesisPay.Golden && (
               <PremiumPlusTooltip data={birthday} placement="bottom">
                 <div className="w-18 cursor-pointer rounded bg-[url(/svg/pl/premium_plus.svg)] bg-cover py-0.5 text-center text-xs/4.5 font-semibold text-orange-700 shadow-md shadow-orange-500/50">
                   Premium
@@ -75,13 +75,13 @@ export default function SteamGamerSBT() {
             <div className="mt-3">
               <CredentialTask
                 onClick={() => setSelectedTab(0)}
-                status={nftSource.includes('arcana')}
+                status={nftSource.includes(GenesisSource.Arcana)}
                 text="Become a voter in Arcana Editorium"
               />
               <p className="my-1 text-center text-sm">OR</p>
               <CredentialTask
                 onClick={() => setSelectedTab(1)}
-                status={nftSource.includes('steam')}
+                status={nftSource.includes(GenesisSource.Steam)}
                 text="Complete Steam verify process in airdrop"
               />
             </div>

@@ -4,8 +4,8 @@ import { openLink } from '@/utils';
 import Button from '@/components/button';
 import { GenesisNFT } from '@/lib/types-nest';
 import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
-import { useFetchGenesisNFTUpgrade } from '@/hooks/dashboard/powerLevel';
-import { DEV_BADGES, GAMER_BADGES, GenesisRole, NFT_CLAIM, SBT_LEVEL } from '@/constants';
+import { useFetchGenesisPL } from '@/hooks/dashboard/powerLevel';
+import { DEV_BADGES, GAMER_BADGES, GenesisRole, NFT_CLAIM, GenesisRarity } from '@/constants';
 import { GenesisUpgradeStatus, useGenesisNFTUpgrade } from '@/hooks/dashboard/useGenesisNFTUpgrade';
 
 type ClaimButtonProps = {
@@ -14,8 +14,8 @@ type ClaimButtonProps = {
   powerLevel: number;
 };
 export default function ClaimButton({ data, type, powerLevel }: ClaimButtonProps) {
-  const { data: upgradeData } = useFetchGenesisNFTUpgrade();
-  const upgrade = useGenesisNFTUpgrade({ powerLevel, currentLevel: data?.nftLevel, data: upgradeData });
+  const { data: genesisPL } = useFetchGenesisPL();
+  const upgrade = useGenesisNFTUpgrade({ powerLevel, currentLevel: data?.nftLevel, data: genesisPL });
   const upLevelConfig = useSBTLevelConfig(upgrade.upLevel);
   const nftConfig = useMemo(() => (type === GenesisRole.Gamer ? GAMER_BADGES : DEV_BADGES), [type]);
 
@@ -24,7 +24,7 @@ export default function ClaimButton({ data, type, powerLevel }: ClaimButtonProps
       <Button type="gradient" className="w-full py-4 font-medium" onClick={() => openLink(nftConfig[data.nftLevel].claim)}>
         Claim
       </Button>
-    ) : data.nftLevel === SBT_LEVEL.ORANGE ? (
+    ) : data.nftLevel === GenesisRarity.Legendary ? (
       <Button className="w-full py-4 text-gray-450" disabled>
         The highest level
       </Button>

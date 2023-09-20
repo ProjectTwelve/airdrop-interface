@@ -50,4 +50,7 @@ export const fetchGenesisNFT = (params?: { address?: string; role?: GenesisRole 
 // 验证用户有没有登录过编辑器
 export const verifyEditorLogin = () => request.post<any, Response<VerifyEditorLoginResult>>('/arcana/user/editor-login');
 
-export const fetchGenesisNFTUpgrade = () => request.get<any, Response<number[]>>('/assets/dashboard/sbt/rarity');
+export const fetchGenesisPL = () => request.get<any, Response<number[]>>('/assets/dashboard/sbt/pl');
+
+export const fetchGenesisUpgrade = (data: { address: string; role: GenesisRole }) =>
+  request.post<any, Response<number[]>>('/assets/dashboard/sbt/upgrade', data);

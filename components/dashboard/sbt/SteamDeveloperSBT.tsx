@@ -9,7 +9,7 @@ import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
 import ClaimButton from '@/components/dashboard/sbt/ClaimButton';
 import { useDevTokenStatus } from '@/hooks/dashboard/useTokenStatus';
-import { DEV_BADGES, GenesisRole, NFT_CLAIM } from '@/constants';
+import { DEV_BADGES, GenesisRole, GenesisSource, NFT_CLAIM } from '@/constants';
 import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
 
@@ -60,13 +60,13 @@ export default function SteamDeveloperSBT() {
             <div className="mt-3">
               <CredentialTask
                 onClick={() => setSelectedTab(0)}
-                status={nftSource.includes('arcana')}
+                status={nftSource.includes(GenesisSource.Arcana)}
                 text="Publish a creation in Arcana Editorium"
               />
               <p className="my-1 text-center text-sm">OR</p>
               <CredentialTask
                 onClick={() => setSelectedTab(2)}
-                status={nftSource.includes('steam')}
+                status={nftSource.includes(GenesisSource.Steam)}
                 text="Complete Steam game verify process"
               />
             </div>

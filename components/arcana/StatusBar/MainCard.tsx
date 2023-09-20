@@ -15,7 +15,7 @@ import ReferralVoteDialog from './ReferralVoteDialog';
 import MulticastVoteDialog from './MulticastVoteDialog';
 import { referralCodeAtom } from '@/store/invite/state';
 import { ArcanaUserInfo, ArcanaUserVotes } from '@/lib/types';
-import { SBT_LEVEL, GAMER_BADGES, ARCANA_CHAIN_ID } from '@/constants';
+import { GenesisRarity, GAMER_BADGES, ARCANA_CHAIN_ID } from '@/constants';
 import {
   arcanaInviteDialogAtom,
   arcanaMulticastVideoAtom,
@@ -26,7 +26,7 @@ import {
 type MainCardProps = {
   data?: ArcanaUserVotes;
   userInfo?: ArcanaUserInfo;
-  nftLevel?: SBT_LEVEL;
+  nftLevel?: GenesisRarity;
 };
 
 export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {

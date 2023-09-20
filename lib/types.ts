@@ -1,7 +1,7 @@
 import { Hash } from 'viem';
 import { PredictionAnswer } from '@/store/arcana/state';
 import { MEME_ICON } from '@/components/arcana/StatusBar/SwiperCard';
-import { NFT_CLAIM, SBT_LEVEL } from '@/constants';
+import { NFT_CLAIM, GenesisRarity } from '@/constants';
 import { PREDICTION_TYPE } from '@/components/arcana/PredictionItemDialog';
 
 export type Response<T> = {
@@ -45,7 +45,7 @@ export type AccountInfo = {
   nft_claim: NFT_CLAIM;
   nft_id?: string;
   appid: number;
-  nft_level: SBT_LEVEL;
+  nft_level: GenesisRarity;
   credential: number;
   updatedAt: string;
 };
@@ -55,12 +55,12 @@ export type DevInvitationInfo = {
   header_image: string;
   name: string;
   release_date?: { date: string };
-  nft_level: SBT_LEVEL;
+  nft_level: GenesisRarity;
 };
 export type GamerInvitationInfo = {
   avatar: string;
   createdAt: string;
-  nft_level: SBT_LEVEL;
+  nft_level: GenesisRarity;
   person_name: string;
   steam_id: string;
   wallet_address: string;
@@ -72,7 +72,7 @@ export type DevRankInfo = {
   developers: string[];
   genres: string[];
   appid: number;
-  nft_level: SBT_LEVEL;
+  nft_level: GenesisRarity;
   index: number;
   createdAt: string;
 };
@@ -84,7 +84,7 @@ export type GamerRankInfo = {
   ss_game_count: number;
   avatar_full: string;
   ss_game_playtime: number;
-  nft_level: SBT_LEVEL;
+  nft_level: GenesisRarity;
   createdAt: string;
   index: number;
 };
@@ -169,7 +169,7 @@ export type GamerInfoData = {
   email?: string;
   value?: number;
   nft_claim?: NFT_CLAIM;
-  nft_level?: SBT_LEVEL;
+  nft_level?: GenesisRarity;
   nft_id?: string;
   level?: number;
   tokens?: number;
@@ -219,7 +219,7 @@ export type GamerRank = {
   steam_id?: string;
   timeRank?: number;
   tokenRank?: number;
-  nft_level?: SBT_LEVEL;
+  nft_level?: GenesisRarity;
 };
 
 export type GamerInvitationParams = {
@@ -397,7 +397,7 @@ export type ArcanaInviteesVote = {
   createdAt: number;
   steamId: string;
   walletAddress: string;
-  nftLevel: SBT_LEVEL;
+  nftLevel: GenesisRarity;
   nftClaim: number;
   personName: string;
   avatar: string;
@@ -509,7 +509,7 @@ export type WorldCapInfo = {
   updatedAt: number;
   walletAddress: string;
   genesisNftHolder: number;
-  genesisNftLevel?: SBT_LEVEL;
+  genesisNftLevel?: GenesisRarity;
   answerSignature?: Hash;
   deadline: number;
   ownedNft?: any[];

@@ -1,6 +1,6 @@
 import { Address } from 'wagmi';
 import { SiweMessage } from 'siwe';
-import { GenesisRole, GenesisPayUser, NFT_CLAIM, Platform, SBT_LEVEL } from '@/constants';
+import { GenesisRole, GenesisPay, NFT_CLAIM, Platform, GenesisRarity } from '@/constants';
 
 export type LoginParams = {
   address: Address;
@@ -165,10 +165,10 @@ export type GenesisNFT = {
   id: number;
   nftClaim: NFT_CLAIM;
   nftId: string;
-  nftLevel: SBT_LEVEL;
+  nftLevel: GenesisRarity;
   nftSource: string[];
   nftType: GenesisRole;
-  payUser?: GenesisPayUser;
+  payUser?: GenesisPay;
   updatedAt: number;
   walletAddress: string;
 };

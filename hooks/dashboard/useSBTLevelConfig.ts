@@ -1,45 +1,45 @@
 import { useMemo } from 'react';
-import { SBT_LEVEL } from '@/constants';
+import { GenesisRarity } from '@/constants';
 
-export function useSBTLevelConfig(nftLevel?: SBT_LEVEL) {
+export function useSBTLevelConfig(nftLevel?: GenesisRarity) {
   return useMemo(() => {
     switch (nftLevel) {
-      case SBT_LEVEL.ORANGE:
+      case GenesisRarity.Legendary:
         return {
           text: 'text-orange',
           rarity: 'LEGENDARY',
           bg: 'bg-orange/20',
           hover: 'hover:bg-orange/30',
         };
-      case SBT_LEVEL.PURPLE:
+      case GenesisRarity.Epic:
         return {
           text: 'text-purple',
           rarity: 'EPIC',
           bg: 'bg-purple/20',
           hover: 'hover:bg-purple/30',
         };
-      case SBT_LEVEL.BLUE:
+      case GenesisRarity.Rekt:
         return {
           text: 'text-blue',
           rarity: 'RARE',
           bg: 'bg-blue/20',
           hover: 'hover:bg-blue/30',
         };
-      case SBT_LEVEL.GREEN:
+      case GenesisRarity.Uncommon:
         return {
           text: 'text-green',
           rarity: 'UNCOMMON',
           bg: 'bg-green/20',
           hover: 'hover:bg-green/30',
         };
-      case SBT_LEVEL.WHITE:
+      case GenesisRarity.Common:
         return {
           text: 'text-[#99A7C3]',
           rarity: 'COMMON',
           bg: 'bg-[#99A7C3]/20',
           hover: 'hover:bg-[#99A7C3]/30',
         };
-      case SBT_LEVEL.REKT:
+      case GenesisRarity.Rare:
         return {
           text: 'text-[#99A7C3]',
           rarity: 'REKT',

@@ -4,13 +4,13 @@ export enum NFT_CLAIM {
   CLAIMED,
 }
 
-export enum SBT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-  WHITE,
-  REKT,
+export enum GenesisRarity {
+  Legendary,
+  Epic,
+  Rare,
+  Uncommon,
+  Common,
+  Rekt,
 }
 
 export enum COLLAB_TIME_STATUS {
@@ -69,7 +69,12 @@ export enum GenesisRole {
   Developer = 'developer',
 }
 
-export enum GenesisPayUser {
+export enum GenesisPay {
   Golden = 'golden',
   Silvery = 'silvery',
+}
+
+export enum GenesisSource {
+  Steam = 'steam',
+  Arcana = 'arcana',
 }

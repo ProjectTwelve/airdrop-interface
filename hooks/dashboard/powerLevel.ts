@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchGenesisNFTUpgrade, fetchUserPowerLevel } from '@/lib/api-nest';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { fetchGenesisPL, fetchGenesisUpgrade, fetchUserPowerLevel } from '@/lib/api-nest';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { GenesisRole } from '@/constants';
 
 export function useFetchUserPowerLevel(address?: string) {
   const setUserPowerLevel = useSetRecoilState(userPowerLevelAtom);
@@ -23,8 +24,14 @@ export function useFetchUserPowerLevel(address?: string) {
   });
 }
 
-export function useFetchGenesisNFTUpgrade() {
-  return useQuery(['fetch_genesis_nft_upgrade'], () => fetchGenesisNFTUpgrade(), {
+export function useFetchGenesisPL() {
+  return useQuery(['fetch_genesis_pl'], () => fetchGenesisPL(), {
     select: (data) => (data.code === 200 ? data.data : []),
+  });
+}
+
+export function useMutationGenesisUpgrade() {
+  return useMutation({
+    mutationFn: (data: { address: string; role: GenesisRole }) => fetchGenesisUpgrade(data),
   });
 }

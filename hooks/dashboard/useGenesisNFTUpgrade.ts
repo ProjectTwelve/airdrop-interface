@@ -1,4 +1,4 @@
-import { SBT_LEVEL } from '@/constants';
+import { GenesisRarity } from '@/constants';
 
 export enum GenesisUpgradeStatus {
   None = 'none',
@@ -19,7 +19,7 @@ export function useGenesisNFTUpgrade({ powerLevel, currentLevel, data }: Genesis
       diff: 0,
       upLevel: 0,
     };
-  if (currentLevel === SBT_LEVEL.ORANGE)
+  if (currentLevel === GenesisRarity.Legendary)
     return {
       status: GenesisUpgradeStatus.None,
       diff: 0,

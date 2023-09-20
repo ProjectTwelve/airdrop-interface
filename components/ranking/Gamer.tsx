@@ -6,7 +6,7 @@ import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCoun
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 import { getCountMemo } from '@/utils';
-import { SBT_LEVEL } from '@/constants';
+import { GenesisRarity } from '@/constants';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -36,7 +36,7 @@ export default function GamerRanking() {
   );
   const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 1000, [gamerRankData?.tokenRank]);
 
-  const isLowLevelToken = (num?: number) => num === SBT_LEVEL.WHITE || num === SBT_LEVEL.REKT;
+  const isLowLevelToken = (num?: number) => num === GenesisRarity.Common || num === GenesisRarity.Uncommon;
 
   return (
     <div className="p-8 sm:p-4">
