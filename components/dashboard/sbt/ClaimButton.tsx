@@ -5,11 +5,11 @@ import Button from '@/components/button';
 import { GenesisNFT } from '@/lib/types-nest';
 import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
 import { useFetchGenesisNFTUpgrade } from '@/hooks/dashboard/powerLevel';
-import { DEV_BADGES, GAMER_BADGES, GenesisNFTType, NFT_CLAIM, SBT_LEVEL } from '@/constants';
+import { DEV_BADGES, GAMER_BADGES, GenesisRole, NFT_CLAIM, SBT_LEVEL } from '@/constants';
 import { GenesisUpgradeStatus, useGenesisNFTUpgrade } from '@/hooks/dashboard/useGenesisNFTUpgrade';
 
 type ClaimButtonProps = {
-  type: GenesisNFTType;
+  type: GenesisRole;
   data?: GenesisNFT;
   powerLevel: number;
 };
@@ -17,7 +17,7 @@ export default function ClaimButton({ data, type, powerLevel }: ClaimButtonProps
   const { data: upgradeData } = useFetchGenesisNFTUpgrade();
   const upgrade = useGenesisNFTUpgrade({ powerLevel, currentLevel: data?.nftLevel, data: upgradeData });
   const upLevelConfig = useSBTLevelConfig(upgrade.upLevel);
-  const nftConfig = useMemo(() => (type === GenesisNFTType.Gamer ? GAMER_BADGES : DEV_BADGES), [type]);
+  const nftConfig = useMemo(() => (type === GenesisRole.Gamer ? GAMER_BADGES : DEV_BADGES), [type]);
 
   return data?.credential ? (
     data.nftClaim === NFT_CLAIM.UNCLAIMED ? (

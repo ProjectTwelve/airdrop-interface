@@ -16,7 +16,7 @@ import {
 } from '@/lib/types-nest';
 import request, { Response } from '@/lib/request-nest';
 import { Address } from 'wagmi';
-import { GenesisNFTType } from '@/constants';
+import { GenesisRole } from '@/constants';
 
 export const fetchLogin = (data: LoginParams) => request.post<any, Response<UserInfo>>('/auth/login', data);
 
@@ -44,7 +44,7 @@ export const fetchInviteHistory = (code: string) =>
 export const fetchUserPowerLevel = (address?: string) =>
   request.get<any, Response<UserPowerLevel>>('/assets/dashboard/pl', { params: { address } });
 
-export const fetchGenesisNFT = (params?: { address?: string; type?: GenesisNFTType }) =>
+export const fetchGenesisNFT = (params?: { address?: string; role?: GenesisRole }) =>
   request.get<any, Response<GenesisNFT>>('/assets/dashboard/sbt', { params });
 
 // 验证用户有没有登录过编辑器
