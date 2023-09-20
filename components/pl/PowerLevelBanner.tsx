@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from '@/components/button';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useIsMounted } from '@/hooks/useIsMounted';
-import { useArcanaThemeAsset } from '@/hooks/theme';
+import { useThemeAsset } from '@/hooks/theme';
 import { isConnectPopoverOpen } from '@/store/web3/state';
 import { digitalFormat } from '@/utils/format';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
@@ -13,7 +13,7 @@ export default function PowerLevelBanner() {
   const router = useRouter();
   const isMounted = useIsMounted();
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const banner = useArcanaThemeAsset('banner.webm');
+  const banner = useThemeAsset('home_banner.webm');
   const { activatedPL } = useRecoilValue(userPowerLevelAtom);
 
   const onClick = () => {
@@ -25,11 +25,11 @@ export default function PowerLevelBanner() {
   };
 
   return (
-    <div className="relative cursor-pointer rounded-2xl duration-200 hover:-translate-y-1" onClick={onClick}>
+    <div className="relative cursor-pointer overflow-hidden rounded-2xl duration-200 hover:-translate-y-1" onClick={onClick}>
       <div className="absolute inset-0 left-0 top-0 -z-10 overflow-hidden">
         {banner && <video autoPlay loop muted className="w-full" src={banner} />}
       </div>
-      <div className="absolute left-0 top-0 -z-10 h-[138px] w-full rounded-t-2xl bg-card-mask" />
+      <div className="absolute left-0 top-0 -z-10 h-[138px] w-full bg-card-mask" />
       {isMounted && address && activatedPL ? (
         <div className="py-6 pt-11">
           <div className="flex-center gap-9">
