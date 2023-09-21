@@ -9,7 +9,7 @@ import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
 import ClaimButton from '@/components/dashboard/sbt/ClaimButton';
 import { useDevTokenStatus } from '@/hooks/dashboard/useTokenStatus';
-import { DEV_BADGES, GenesisRole, GenesisSource, NFT_CLAIM } from '@/constants';
+import { DEV_BADGES, GenesisRole, GenesisSource, GenesisClaim } from '@/constants';
 import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
 
@@ -17,12 +17,12 @@ export default function SteamDeveloperSBT() {
   const { address } = useAccount();
   useDeveloperInfo(address);
   const setSelectedTab = useSetRecoilState(dashboardSelectedTabAtom);
-  const { data: developerNFT } = useFetchGenesisNFT({ address, role: GenesisRole.Developer });
+  const { data: developerNFT, refetch } = useFetchGenesisNFT({ address, role: GenesisRole.Developer });
   const { developerPL } = useRecoilValue(userPowerLevelAtom);
   const nftSource = useMemo(() => developerNFT?.nftSource ?? [], [developerNFT?.nftSource]);
   const tokenStatus = useDevTokenStatus(developerNFT);
 
-  const isClaimed = useMemo(() => developerNFT?.nftClaim === NFT_CLAIM.CLAIMED, [developerNFT?.nftClaim]);
+  const isClaimed = useMemo(() => developerNFT?.nftClaim === GenesisClaim.Claimed, [developerNFT?.nftClaim]);
 
   return (
     <div className="relative h-full">
@@ -74,7 +74,12 @@ export default function SteamDeveloperSBT() {
         </div>
       </div>
       <div className="absolute bottom-0 w-full px-5">
-        <ClaimButton powerLevel={developerPL} type={GenesisRole.Developer} data={developerNFT} />
+        <ClaimButton
+          data={developerNFT}
+          powerLevel={developerPL}
+          role={GenesisRole.Developer}
+          onUpgradeSuccess={() => refetch().then()}
+        />
       </div>
     </div>
   );

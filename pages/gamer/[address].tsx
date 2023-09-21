@@ -8,7 +8,7 @@ import Empty from '../../components/empty';
 import Poster from '../../components/poster';
 import { shortenSteamId } from '../../utils';
 import Loading from '../../components/loading';
-import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
+import { GAMER_BADGES, GenesisClaim } from '../../constants';
 import SteamValue from '../../components/gamer/SteamValue';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
 import { fetchGamerGames, fetchGamerInfo } from '../../lib/api';
@@ -154,7 +154,7 @@ export default function GamerProfile() {
                   <p>Amount of tokens from this Steam account</p>
                   <div className="mt-5 flex items-center justify-between">
                     <p className="cursor-pointer font-ddin text-[48px] font-bold">
-                      {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
+                      {gamerInfo?.display || (gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---')}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
                   </div>

@@ -14,7 +14,7 @@ export default function PowerLevelBanner() {
   const isMounted = useIsMounted();
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const banner = useThemeAsset('home_banner.webm');
-  const { activatedPL } = useRecoilValue(userPowerLevelAtom);
+  const { activatedPL, gamerRank, developerRank, totalRank } = useRecoilValue(userPowerLevelAtom);
 
   const onClick = () => {
     if (!address) {
@@ -39,8 +39,10 @@ export default function PowerLevelBanner() {
             </div>
             <p className="h-10 w-px bg-gray" />
             <div>
-              <h2 className="text-2xl/7.5 font-semibold">RANK 58</h2>
-              <p className="mt-1 text-xl/7.5">Gamer 58 &nbsp;&nbsp; Developer 58</p>
+              <h2 className="text-2xl/7.5 font-semibold">RANK {totalRank ?? '--'}</h2>
+              <p className="mt-1 text-xl/7.5">
+                Gamer {gamerRank ?? '--'} &nbsp;&nbsp; Developer {developerRank ?? '--'}
+              </p>
             </div>
           </div>
           <div className="text-link mt-10 text-center text-xl/5.5 font-medium">Click to view details</div>

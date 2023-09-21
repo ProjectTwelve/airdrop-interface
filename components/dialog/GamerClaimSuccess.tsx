@@ -8,7 +8,7 @@ import Button from '../button';
 import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gamerClaimedPosterAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { NFT_CLAIM, STORAGE_KEY } from '../../constants';
+import { GenesisClaim, STORAGE_KEY } from '../../constants';
 import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
 import PosterVideo from '../poster/PosterVideo';
 
@@ -34,7 +34,7 @@ export default function GamerClaimSuccess() {
   const isGamerClaimed = useMemo(() => {
     if (!gamerInfo) return false;
     if (gamerInfo.friends_count === null || !gamerInfo.inventory_switch) return false;
-    return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === NFT_CLAIM.CLAIMED;
+    return address && address === gamerInfo.wallet_address && gamerInfo.nft_claim === GenesisClaim.Claimed;
   }, [address, gamerInfo]);
 
   useEffect(() => {

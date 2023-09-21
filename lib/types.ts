@@ -1,7 +1,7 @@
 import { Hash } from 'viem';
 import { PredictionAnswer } from '@/store/arcana/state';
 import { MEME_ICON } from '@/components/arcana/StatusBar/SwiperCard';
-import { NFT_CLAIM, GenesisRarity } from '@/constants';
+import { GenesisClaim, GenesisRarity } from '@/constants';
 import { PREDICTION_TYPE } from '@/components/arcana/PredictionItemDialog';
 
 export type Response<T> = {
@@ -42,7 +42,7 @@ export type AccountInfo = {
   total_reviews: number;
   header_image: string;
   release_date?: ReleaseDate;
-  nft_claim: NFT_CLAIM;
+  nft_claim: GenesisClaim;
   nft_id?: string;
   appid: number;
   nft_level: GenesisRarity;
@@ -168,7 +168,7 @@ export type GamerInfoData = {
   credential?: number;
   email?: string;
   value?: number;
-  nft_claim?: NFT_CLAIM;
+  nft_claim?: GenesisClaim;
   nft_level?: GenesisRarity;
   nft_id?: string;
   level?: number;

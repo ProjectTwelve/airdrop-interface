@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { DEV_BADGES, GenesisRarity, GAMER_BADGES, NFT_CLAIM } from '@/constants';
+import { DEV_BADGES, GenesisRarity, GAMER_BADGES, GenesisClaim } from '@/constants';
 import { AccountInfo, GamerInfoData } from '@/lib/types';
 
 export const useDevBadgeLoad = (game: AccountInfo) => {
@@ -46,7 +46,7 @@ export const useGamerBadgeLoad = (gamer?: GamerInfoData) => {
   );
 
   useEffect(() => {
-    if (!gamer?.credential || gamer?.nft_claim !== NFT_CLAIM.CLAIMED) return;
+    if (!gamer?.credential || gamer?.nft_claim !== GenesisClaim.Claimed) return;
     const item = GAMER_BADGES[gamer?.nft_level!];
     if (badgesRef.current.get(gamer?.nft_level!)) {
       setState({ src: item.asset, isLoading: false });
