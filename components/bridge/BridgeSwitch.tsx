@@ -315,6 +315,18 @@ export default function BridgeSwitch() {
     if (type === 'AMA') {
       return;
     }
+    if (stringId === 'GCBuzUFh4i') {
+      return {
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_sm_uncommon.gif',
+        name: 'P12 StarMaker [UNCOMMON]',
+      };
+    }
+    if (stringId === 'GCbVwUt9SD') {
+      return {
+        url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_sm_epic.gif',
+        name: 'P12 StarMaker [EPIC]',
+      };
+    }
     if (stringId === COMMUNITY_NFT_CAMPAIGN_ID.GCXBcUUM56) {
       return {
         url: 'https://cdn1.p12.games/airdrop/badge/cbadges/P12_dw_rare.gif',
