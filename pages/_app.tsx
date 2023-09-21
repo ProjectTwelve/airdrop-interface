@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
-            retry: (failureCount, error: any) => !(failureCount === 3 || error.code === 400),
+            retry: (failureCount, error: any) => !(failureCount === 3 || error?.code === 400),
           },
         },
       }),
