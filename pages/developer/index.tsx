@@ -9,7 +9,7 @@ import Tokens from '../../components/developer/Tokens';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import DeveloperEmailDialog from '../../components/dialog/DeveloperEmailDialog';
 import { claimGroupSelector, tabSelectAtom } from '../../store/developer/state';
-import { NFT_CLAIM } from '../../constants';
+import { GenesisClaim } from '../../constants';
 import { useAccount } from 'wagmi';
 import { useDeveloperInfo } from '@/hooks/developer';
 
@@ -18,7 +18,7 @@ export default function Developer() {
   useDeveloperInfo(address);
   const router = useRouter();
   const claimGroup = useRecoilValue(claimGroupSelector);
-  const allUnclaimed = useMemo(() => [...claimGroup[NFT_CLAIM.PENDING], ...claimGroup[NFT_CLAIM.UNCLAIMED]], [claimGroup]);
+  const allUnclaimed = useMemo(() => [...claimGroup[GenesisClaim.Pending], ...claimGroup[GenesisClaim.Unclaimed]], [claimGroup]);
   const [selectedTab, setSelectedTab] = useRecoilState(tabSelectAtom);
 
   return (

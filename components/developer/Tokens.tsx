@@ -8,14 +8,14 @@ import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector } from '../../store/developer/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
-import { NFT_CLAIM } from '../../constants';
+import { GenesisClaim } from '../../constants';
 import { invitationCountAtom } from '../../store/invite/state';
 
 function Tokens() {
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const [invitation] = useRecoilValue(invitationCountAtom);
-  const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
+  const claimGames = useMemo(() => claimGroup[GenesisClaim.Claimed].length || 0, [claimGroup]);
 
   return (
     <div className="relative px-3 pt-6 2xl:px-8 2xl:pt-12 ">

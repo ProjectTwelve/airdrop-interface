@@ -13,13 +13,13 @@ import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
 import PremiumPlusTooltip from '@/components/tooltip/PremiumPlusTooltip';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
-import { GAMER_BADGES, GenesisRole, GenesisPay, NFT_CLAIM, GenesisSource } from '@/constants';
+import { GAMER_BADGES, GenesisRole, GenesisPay, GenesisClaim, GenesisSource } from '@/constants';
 
 export default function SteamGamerSBT() {
   const { address } = useAccount();
   useGamerInfo(address);
   const setSelectedTab = useSetRecoilState(dashboardSelectedTabAtom);
-  const { data: gamerNFT } = useFetchGenesisNFT({ address, role: GenesisRole.Gamer });
+  const { data: gamerNFT, refetch } = useFetchGenesisNFT({ address, role: GenesisRole.Gamer });
   const { gamerPL } = useRecoilValue(userPowerLevelAtom);
   const tokenStatus = useGamerTokenStatus(gamerNFT);
   const nftSource = useMemo(() => gamerNFT?.nftSource ?? [], [gamerNFT?.nftSource]);
@@ -28,7 +28,7 @@ export default function SteamGamerSBT() {
     [gamerNFT?.createdAt],
   );
 
-  const isClaimed = useMemo(() => gamerNFT?.nftClaim === NFT_CLAIM.CLAIMED, [gamerNFT?.nftClaim]);
+  const isClaimed = useMemo(() => gamerNFT?.nftClaim === GenesisClaim.Claimed, [gamerNFT?.nftClaim]);
 
   return (
     <div className="relative h-full">
@@ -89,7 +89,7 @@ export default function SteamGamerSBT() {
         </div>
       </div>
       <div className="absolute bottom-0 w-full px-5">
-        <ClaimButton powerLevel={gamerPL} type={GenesisRole.Gamer} data={gamerNFT} />
+        <ClaimButton powerLevel={gamerPL} onUpgradeSuccess={() => refetch().then()} role={GenesisRole.Gamer} data={gamerNFT} />
       </div>
     </div>
   );

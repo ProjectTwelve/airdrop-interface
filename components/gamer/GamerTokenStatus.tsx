@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { GamerInfoData } from '../../lib/types';
 import { shortenAddress } from '../../utils';
-import { BADGE_CONTRACT_ADDRESS, NFT_CLAIM_TYPE } from '../../constants';
+import { BADGE_CONTRACT_ADDRESS, GenesisClaim_TYPE } from '../../constants';
 
 export default function GamerTokenStatus({ data }: { data?: GamerInfoData }) {
   return (
@@ -16,7 +16,7 @@ export default function GamerTokenStatus({ data }: { data?: GamerInfoData }) {
         { label: 'Role', value: data?.credential ? 'Gamer' : '--' },
         {
           label: 'Status',
-          value: data?.nft_claim ? NFT_CLAIM_TYPE[data.nft_claim] : 'NO NFT YET',
+          value: data?.nft_claim ? GenesisClaim_TYPE[data.nft_claim] : 'NO NFT YET',
         },
       ].map((item) => (
         <div

@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { AccountInfo } from '../../lib/types';
-import { NFT_CLAIM } from '../../constants';
+import { GenesisClaim } from '../../constants';
 
 export const tabSelectAtom = atom({
   key: 'tab_select',
@@ -21,10 +21,10 @@ export const claimGroupSelector = selector({
   key: 'claim_group',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    const filters: Record<NFT_CLAIM, AccountInfo[]> = {
-      [NFT_CLAIM.UNCLAIMED]: [],
-      [NFT_CLAIM.PENDING]: [],
-      [NFT_CLAIM.CLAIMED]: [],
+    const filters: Record<GenesisClaim, AccountInfo[]> = {
+      [GenesisClaim.Unclaimed]: [],
+      [GenesisClaim.Pending]: [],
+      [GenesisClaim.Claimed]: [],
     };
     developerGame.forEach((item) => {
       filters[item.nft_claim].push(item);
@@ -37,6 +37,6 @@ export const hasClaimedGameSelector = selector({
   key: 'has_claimed_game',
   get: ({ get }) => {
     const developerGame = get(developerGameAtom);
-    return developerGame.some((item) => item.nft_claim !== NFT_CLAIM.UNCLAIMED);
+    return developerGame.some((item) => item.nft_claim !== GenesisClaim.Unclaimed);
   },
 });

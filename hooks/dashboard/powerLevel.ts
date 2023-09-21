@@ -30,8 +30,9 @@ export function useFetchGenesisPL() {
   });
 }
 
-export function useMutationGenesisUpgrade() {
+export function useMutationGenesisUpgrade({ onSuccess }: { onSuccess?: () => void } = {}) {
   return useMutation({
     mutationFn: (data: { address: string; role: GenesisRole }) => fetchGenesisUpgrade(data),
+    onSuccess,
   });
 }

@@ -1,7 +1,7 @@
-export enum NFT_CLAIM {
-  UNCLAIMED = 0,
-  PENDING,
-  CLAIMED,
+export enum GenesisClaim {
+  Unclaimed = 0,
+  Pending,
+  Claimed,
 }
 
 export enum GenesisRarity {

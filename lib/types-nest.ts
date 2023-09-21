@@ -1,6 +1,6 @@
 import { Address } from 'wagmi';
 import { SiweMessage } from 'siwe';
-import { GenesisRole, GenesisPay, NFT_CLAIM, Platform, GenesisRarity } from '@/constants';
+import { GenesisRole, GenesisPay, GenesisClaim, Platform, GenesisRarity } from '@/constants';
 
 export type LoginParams = {
   address: Address;
@@ -149,6 +149,9 @@ export type PowerVoteResult = {
 };
 
 export type UserPowerLevel = {
+  gamerRank?: number;
+  developerRank?: number;
+  totalRank?: number;
   activatedPL: number; // Gamer + Developer = Current
   gamerPL: number; // Arcana Gamer + Steam Gamer  = Gamer
   developerPL: number; // Arcana Developer + Steam Developer = Developer
@@ -163,7 +166,7 @@ export type GenesisNFT = {
   createdAt: number;
   credential: number;
   id: number;
-  nftClaim: NFT_CLAIM;
+  nftClaim: GenesisClaim;
   nftId: string;
   nftLevel: GenesisRarity;
   nftSource: string[];
