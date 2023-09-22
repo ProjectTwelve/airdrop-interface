@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import Web3Status from '../web3/Web3Status';
 import { useQuery } from '@tanstack/react-query';
 import LayoutHeaderExtra from './LayoutHeaderExtra';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { invitationCountAtom } from '@/store/invite/state';
 import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
-import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '@/store/gamer/state';
+import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom } from '@/store/gamer/state';
 import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
 import { useFetchUserPowerLevel } from '@/hooks/dashboard/powerLevel';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
@@ -18,9 +18,8 @@ import { GradientBorderSvg } from '../svg/GradientBorderSvg';
 function LayoutHeader() {
   const router = useRouter();
   const { address } = useAccount();
-  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const setInvitationCount = useSetRecoilState(invitationCountAtom);
-  const [gamerEmailInfo, setGamerEmailInfo] = useRecoilState(gamerEmailInfoAtom);
+  const setGamerEmailInfo = useSetRecoilState(gamerEmailInfoAtom);
   const setGamerEmailDialogTypeAtom = useSetRecoilState(gamerEmailDialogTypeAtom);
   const fetchGlobalData = useFetchGlobalData();
   const isLogged = useIsLogged();
@@ -72,12 +71,6 @@ function LayoutHeader() {
       }
     },
   });
-
-  useEffect(() => {
-    if (router.pathname === '/') return;
-    const { is_email_verified, is_new_user } = gamerEmailInfo;
-    setGamerEmailShow(!is_new_user && !is_email_verified);
-  }, [gamerEmailInfo, router, setGamerEmailShow]);
 
   return (
     <header className="relative z-10 flex justify-between">

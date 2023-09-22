@@ -4,10 +4,10 @@ import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
-import { shortenAddress } from '../../utils';
-import { isBABTHolderAtom } from '../../store/web3/state';
-import { useBABTBalanceOf } from '../../hooks/useContract';
-import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom, gamerEmailShowAtom } from '../../store/gamer/state';
+import { shortenAddress } from '@/utils';
+import { isBABTHolderAtom } from '@/store/web3/state';
+import { useBABTBalanceOf } from '@/hooks/useContract';
+import { gamerEmailInfoAtom } from '@/store/gamer/state';
 import Popover from '../popover';
 import { useLogoutCallback } from '@/hooks/user';
 
@@ -16,8 +16,6 @@ function Web3StatusInner() {
   const { data: balance } = useBABTBalanceOf({ address });
   const gamerEmailInfo = useRecoilValue(gamerEmailInfoAtom);
   const setIsBABTHolder = useSetRecoilState(isBABTHolderAtom);
-  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
-  const setGamerEmailDialogType = useSetRecoilState(gamerEmailDialogTypeAtom);
   const isBABTHolder = useMemo(() => !!(balance && balance.toString() !== '0'), [balance]);
   const logout = useLogoutCallback();
 
@@ -37,19 +35,7 @@ function Web3StatusInner() {
         render={() => (
           <div className="flex items-start gap-3">
             <div className="backdrop-box flex flex-col gap-3 rounded-2xl p-3">
-              {gamerEmailInfo.is_email_verified ? (
-                <p>{gamerEmailInfo.email}</p>
-              ) : (
-                <p
-                  className="cursor-pointer text-[#FF2358]"
-                  onClick={() => {
-                    setGamerEmailShow(true);
-                    setGamerEmailDialogType('type2');
-                  }}
-                >
-                  {gamerEmailInfo.email}
-                </p>
-              )}
+              <p>{gamerEmailInfo.email}</p>
               <div
                 className="flex-center cursor-pointer rounded-lg p-2.5 hover:bg-white/[0.12] hover:backdrop-blur-lg"
                 onClick={logout}
