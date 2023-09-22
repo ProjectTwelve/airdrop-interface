@@ -11,12 +11,14 @@ import SteamGamesInfo from './SteamGamesInfo';
 import SteamProfileInfo from './SteamProfileInfo';
 import GamerGameItem from './GamerGameItem';
 import SteamValue from './SteamValue';
-import { getSteamProfileEdit, openLink, shortenSteamId } from '../../utils';
-import { useGamerGames } from '../../hooks/gamer';
-import { gamerGamesAtom, gamerInfoAtom } from '../../store/gamer/state';
-import { useSteamSignIn } from '../../hooks/useSteamSignIn';
-import { isConnectPopoverOpen } from '../../store/web3/state';
-import { useIsMounted } from '../../hooks/useIsMounted';
+import { getSteamProfileEdit, openLink, shortenSteamId } from '@/utils';
+import { useGamerGames } from '@/hooks/gamer';
+import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
+import { useSteamSignIn } from '@/hooks/useSteamSignIn';
+import { isConnectPopoverOpen } from '@/store/web3/state';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
+import { GenesisRole } from '@/constants';
 
 export default function SteamStatus() {
   const pageSize = 6;
@@ -30,6 +32,7 @@ export default function SteamStatus() {
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const gamesData = useRecoilValue(gamerGamesAtom);
+  const { refetch: refetchGamer } = useFetchGenesisNFT({ address, role: GenesisRole.Gamer });
   const { refetch, isFetching } = useGamerGames((query.address as string | undefined) ?? address);
   const useCurrentGames = useMemo(() => {
     if (!gamesData) return [];
@@ -42,8 +45,9 @@ export default function SteamStatus() {
     if (gamerInfo?.credential) return;
     if (gamesData) {
       queryClient.refetchQueries(['gamer_info', address]).then();
+      refetchGamer().then();
     }
-  }, [address, gamesData, gamerInfo?.credential, queryClient]);
+  }, [address, gamesData, gamerInfo?.credential, queryClient, refetchGamer]);
 
   return (
     <div>
@@ -64,12 +68,12 @@ export default function SteamStatus() {
             {gamesData ? (
               <>
                 <div className="flex items-start justify-start md:flex-col">
-                  <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
+                  <div className="flex-0 mr-5 w-[250px] md:mb-4 md:mr-0 md:w-full">
                     <SteamGamesInfo data={gamesData} />
                   </div>
                   <div className="flex-1 md:w-full ">
                     {gamesData.games.length ? (
-                      <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
+                      <div className="grid grid-cols-2 gap-x-5 gap-y-4 md:grid-cols-1">
                         {useCurrentGames.map((item) => (
                           <GamerGameItem key={item.appid} data={item} />
                         ))}
@@ -117,7 +121,7 @@ export default function SteamStatus() {
                           />
                         </div>
                       </div>
-                      <div className="ml-[40px] grid gap-6 md:mt-4 md:ml-0 md:w-full md:grid-cols-2 md:gap-2">
+                      <div className="ml-[40px] grid gap-6 md:ml-0 md:mt-4 md:w-full md:grid-cols-2 md:gap-2">
                         <Button
                           type="gradient"
                           className="w-[260px] md:w-full"

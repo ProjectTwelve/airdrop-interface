@@ -72,7 +72,7 @@ function LayoutHeader() {
   });
 
   return (
-    <header className="relative z-10 flex justify-between">
+    <header className="relative z-20 flex justify-between">
       <div className="flex items-center justify-start">
         <div className="h-[36px] w-[80px] cursor-pointer bg-p12-logo bg-cover" onClick={() => router.push('/')} />
         <div className="ml-8 md:hidden">
