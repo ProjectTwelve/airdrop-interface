@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Tooltip } from '../tooltip';
-import { getSteamGameImage } from '../../utils';
-import { GamerInfoData } from '../../lib/types';
+import { getSteamGameImage } from '@/utils';
+import { GamerInfoData } from '@/lib/types';
 
 type SteamValueProps = {
   data?: GamerInfoData;

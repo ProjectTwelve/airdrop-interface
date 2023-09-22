@@ -10,7 +10,6 @@ import Loading from '../loading';
 import SteamGamesInfo from './SteamGamesInfo';
 import SteamProfileInfo from './SteamProfileInfo';
 import GamerGameItem from './GamerGameItem';
-import SteamValue from './SteamValue';
 import { getSteamProfileEdit, openLink, shortenSteamId } from '@/utils';
 import { useGamerGames } from '@/hooks/gamer';
 import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
@@ -19,6 +18,7 @@ import { isConnectPopoverOpen } from '@/store/web3/state';
 import { useIsMounted } from '@/hooks/useIsMounted';
 import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import { GenesisRole } from '@/constants';
+import SteamPowerLevel from '@/components/gamer/SteamPowerLevel';
 
 export default function SteamStatus() {
   const pageSize = 6;
@@ -63,7 +63,8 @@ export default function SteamStatus() {
             </div>
             <SteamProfileInfo data={gamerInfo} />
           </div>
-          <div className="py-8">
+          <div className="pb-3">
+            <SteamPowerLevel />
             <h3 className="mb-3 text-xl font-semibold">My Games</h3>
             {gamesData ? (
               <>
@@ -99,7 +100,6 @@ export default function SteamStatus() {
                     )}
                   </div>
                 </div>
-                <SteamValue data={gamerInfo} />
               </>
             ) : (
               <div className="rounded-2xl bg-gray-800/80 p-6 md:p-3">
