@@ -53,7 +53,7 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
         setEditProfileDialogOpen(true);
       }}
       className={twMerge(
-        'relative flex h-[181px] w-[586px] cursor-pointer flex-col bg-p12-id-card-bg bg-cover px-9 pb-5 text-p12-id-card xs:w-full',
+        'relative flex h-[181px] w-[586px] cursor-pointer flex-col bg-p12-id-card-bg bg-cover px-9 pb-5 text-p12-id-card md:w-full',
         className,
       )}
     >
@@ -68,7 +68,7 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
             {/* <p className="flex-grow truncate text-base/6 font-bold">{shortenStr(p12Name ?? '')}</p> */}
             {/* </div> */}
             <div className="mt-2 line-clamp-3 max-h-15 overflow-hidden whitespace-pre-wrap text-center text-sm font-semibold text-p12-id-card">
-              “{bio ?? 'Hello World.'}”
+              “{bio ?? ''}”
             </div>
           </div>
           <div className="flex items-center gap-4 self-center fill-p12-id-card text-xs font-semibold text-p12-id-card">

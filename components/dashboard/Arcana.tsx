@@ -9,6 +9,7 @@ import BecomeCard from './editorium/BecomeCard';
 import CreateNowCard from './editorium/CreateNowCard';
 import MyCreation from './editorium/creation/MyCreation';
 import MyTasks from './editorium/creation/MyTasks';
+import classNames from 'classnames';
 
 export default function Arcana() {
   const isVoter = useIsVoter();
@@ -16,9 +17,9 @@ export default function Arcana() {
   const isMounted = useIsMounted();
   return (
     <div className="mb-32 mt-10 px-16 md:px-4">
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-1">
+      <div className={classNames('grid grid-cols-2 md:grid-cols-1', isVerify ? 'gap-10' : 'gap-6')}>
         <BecomeCard isVoter={isVoter} />
-        {isVerify ? <IDCard className="ml-4" /> : <CreateNowCard />}
+        {isVerify ? <IDCard /> : <CreateNowCard />}
       </div>
       {isMounted && <MyCreation />}
       {isMounted && <MyTasks />}

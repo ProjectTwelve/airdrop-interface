@@ -79,7 +79,7 @@ function LayoutHeader() {
           <LayoutHeaderExtra />
         </div>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 xs:flex-wrap xs:justify-end">
         {router.pathname === '/dashboard' ? (
           <div className="relative flex items-center gap-2 rounded-full border-2 border-yellow px-6 py-1.5 text-sm/5.5  font-semibold backdrop-blur">
             Activated PL

@@ -16,7 +16,7 @@ export default function Dashboard() {
   return (
     <div className="mt-7">
       <div className="backdrop-box relative rounded-2xl">
-        <div className="grid grid-cols-2 gap-8 px-6 pb-12 pt-7">
+        <div className="grid grid-cols-2 gap-8 px-6 pb-12 pt-7 md:grid-cols-1">
           <SteamGamerSBT />
           <SteamDeveloperSBT />
         </div>
