@@ -1,19 +1,18 @@
+import { useFetchUserPowerLevel } from '@/hooks/dashboard/powerLevel';
+import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
+import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom } from '@/store/gamer/state';
+import { invitationCountAtom } from '@/store/invite/state';
+import { digitalFormat } from '@/utils/format';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import ReactGA from 'react-ga4';
-import { useAccount } from 'wagmi';
-import { useRouter } from 'next/router';
-import Web3Status from '../web3/Web3Status';
-import { useQuery } from '@tanstack/react-query';
-import LayoutHeaderExtra from './LayoutHeaderExtra';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { invitationCountAtom } from '@/store/invite/state';
-import { fetchGamerEmailInfo, fetchInvitationCount } from '@/lib/api';
-import { gamerEmailDialogTypeAtom, gamerEmailInfoAtom } from '@/store/gamer/state';
-import { useFetchGlobalData, useIsLogged } from '@/hooks/user';
-import { useFetchUserPowerLevel } from '@/hooks/dashboard/powerLevel';
-import { userPowerLevelAtom } from '@/store/dashboard/state';
-import { digitalFormat } from '@/utils/format';
-import { GradientBorderSvg } from '../svg/GradientBorderSvg';
+import { useAccount } from 'wagmi';
+import Web3Status from '../web3/Web3Status';
+import LayoutHeaderExtra from './LayoutHeaderExtra';
 
 function LayoutHeader() {
   const router = useRouter();
@@ -82,8 +81,7 @@ function LayoutHeader() {
       </div>
       <div className="flex items-center gap-4">
         {router.pathname === '/dashboard' ? (
-          <div className="relative flex items-center gap-2 px-6 py-1.5 text-sm/5.5 font-semibold backdrop-blur">
-            <GradientBorderSvg type="headerPL" className="absolute inset-0 h-full w-full" />
+          <div className="relative flex items-center gap-2 rounded-full border-2 border-yellow px-6 py-1.5 text-sm/5.5  font-semibold backdrop-blur">
             Activated PL
             <div className="text-gradient-yellow ml-0.5 text-[2.125rem]/8.5 font-bold">
               {digitalFormat.integer(activatedPL)}

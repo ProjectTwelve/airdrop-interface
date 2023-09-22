@@ -8,57 +8,9 @@ export function GradientBorderSvg({
 }: {
   className?: string;
   size?: number;
-  type?: 'radioItem' | 'task' | 'headerPL';
+  type?: 'radioItem' | 'task';
 }) {
   const { gradientFrom, gradientTo } = useThemeColors();
-  if (type === 'headerPL')
-    return (
-      <svg
-        className={twMerge('group', className)}
-        width={size ?? 314}
-        height={size ?? 54}
-        viewBox="0 0 314 54"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <g filter="url(#filter0_b_11422_8586)">
-          <path
-            d="M0.75 27C0.75 12.5025 12.5025 0.75 27 0.75H287C301.497 0.75 313.25 12.5025 313.25 27C313.25 41.4975 301.497 53.25 287 53.25H27C12.5025 53.25 0.75 41.4975 0.75 27Z"
-            stroke="url(#paint0_linear_11422_8586)"
-            strokeWidth="1.5"
-          />
-        </g>
-        <defs>
-          <filter
-            id="filter0_b_11422_8586"
-            x="-50"
-            y="-50"
-            width="414"
-            height="154"
-            filterUnits="userSpaceOnUse"
-            colorInterpolationFilters="sRGB"
-          >
-            <feFlood floodOpacity="0" result="BackgroundImageFix" />
-            <feGaussianBlur in="BackgroundImageFix" stdDeviation="25" />
-            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_11422_8586" />
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_11422_8586" result="shape" />
-          </filter>
-          <linearGradient
-            id="paint0_linear_11422_8586"
-            x1="101.128"
-            y1="3.52114"
-            x2="101.128"
-            y2="53.6726"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#FFFFDA" />
-            <stop offset="1" stopColor="#CE9658" />
-          </linearGradient>
-        </defs>
-      </svg>
-    );
-
   if (type === 'radioItem') {
     return (
       <svg
