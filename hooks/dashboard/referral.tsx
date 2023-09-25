@@ -3,7 +3,7 @@ import { EventCategory, EventName } from '@/constants/event';
 import { fetchReferralCode } from '@/lib/api';
 import { fetchInvitationCode } from '@/lib/api-nest';
 import { arcanaInvitationInfoAtom, arcanaPowerVoteAtom } from '@/store/arcana/state';
-import { referralCodeAtom } from '@/store/invite/state';
+import { invitationCountSelector, referralCodeAtom } from '@/store/invite/state';
 import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash-es';
 import { useCallback, useMemo } from 'react';
@@ -73,10 +73,12 @@ export const useCopyReferralLink = () => {
 export const useCopyArcanaReferralLink = () => {
   const { address } = useAccount();
   const [, copyToClipboard] = useCopyToClipboard();
-  const { data } = useFetchArcanaInvitationInfo();
+  const inviteInfo = useRecoilValue(arcanaInvitationInfoAtom);
+
   const arcanaReferralLink = useMemo(
-    () => (address ? 'https://arcana.p12.games' + '/referral?code=' + data?.referralCode : 'Please connect your wallet first'),
-    [address, data?.referralCode],
+    () =>
+      address ? 'https://arcana.p12.games' + '/referral?code=' + inviteInfo?.referralCode : 'Please connect your wallet first',
+    [address, inviteInfo?.referralCode],
   );
   const tweetContent = useMemo(
     () => [
@@ -104,4 +106,10 @@ export const useCopyArcanaReferralLink = () => {
     arcanaReferralLink,
     onArcanaTwitterShare,
   };
+};
+export const useTotalInvitationCount = () => {
+  const { inviteCount: arcanaInviteCount } = useReferralReward();
+  const steamInviteCount = useRecoilValue(invitationCountSelector);
+  const totalInviteCount = useMemo(() => arcanaInviteCount + steamInviteCount, [arcanaInviteCount, steamInviteCount]);
+  return totalInviteCount;
 };

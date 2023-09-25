@@ -1,27 +1,27 @@
-import { useCopyArcanaReferralLink, useCopyReferralLink } from '@/hooks/dashboard/referral';
+import { EventCategory, EventName } from '@/constants/event';
+import { useCopyArcanaReferralLink, useCopyReferralLink, useTotalInvitationCount } from '@/hooks/dashboard/referral';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import ReactGA from 'react-ga4';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import { useIsMounted } from '../../hooks/useIsMounted';
-import { invitationCountSelector, inviteModalAtom } from '../../store/invite/state';
+import { inviteModalAtom } from '../../store/invite/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
 import Dialog from '../dialog';
 import { TwitterSvg } from '../svg/TwitterSvg';
 import Tag from '../tag';
 import { InviteRecordDialog } from './InviteRecordDialog';
-import ReactGA from 'react-ga4';
-import { EventCategory, EventName } from '@/constants/event';
 
 function InviteDialog() {
   const { address } = useAccount();
   const isMounted = useIsMounted();
   const [open, setOpen] = useRecoilState(inviteModalAtom);
-  const invitationCount = useRecoilValue(invitationCountSelector);
   const [isConnect, setIsConnect] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { referralLink, copyToClipboard, onTwitterShare } = useCopyReferralLink();
   const { arcanaReferralLink, copyToClipboardArcana, onArcanaTwitterShare } = useCopyArcanaReferralLink();
+  const totalInvitationCount = useTotalInvitationCount();
 
   useEffect(() => {
     if (open) {
@@ -162,7 +162,7 @@ function InviteDialog() {
               {isMounted && address && (
                 <div className="flex items-center">
                   <p className="text-[18px] font-medium">My Referrals</p>
-                  <p className="ml-3 text-xl font-medium">{invitationCount}</p>
+                  <p className="ml-3 text-xl font-medium">{totalInvitationCount}</p>
                   <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
                     <p className="ml-3 cursor-pointer text-sm text-blue">
                       More
