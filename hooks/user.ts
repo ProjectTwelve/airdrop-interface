@@ -11,10 +11,11 @@ import { accessTokenAtom, userInfoAtom } from '@/store/user/state';
 import { removeAccessToken, setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useFetchUserNotSubmittedList, useMutationUserSubmittedList } from './dashboard/creation';
 import { useMutationTasksStatus } from './dashboard/task';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 
 export const useMutationLogin = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);
@@ -105,23 +106,32 @@ export const useFetchGlobalData = () => {
 };
 
 export const useRemoveGlobalState = () => {
-  const setUserInfo = useSetRecoilState(userInfoAtom);
-  const setTasksStatus = useSetRecoilState(arcanaTasksStatusAtom);
-  const setPowerVote = useSetRecoilState(arcanaPowerVoteAtom);
-  const setArcanaSubmittedList = useSetRecoilState(arcanaSubmittedListAtom);
-  const setArcanaNotSubmittedListAtom = useSetRecoilState(arcanaNotSubmittedListAtom);
-  const setAccessToken = useSetRecoilState(accessTokenAtom);
+  const resetUserInfo = useResetRecoilState(userInfoAtom);
+  const resetTasksStatus = useResetRecoilState(arcanaTasksStatusAtom);
+  const resetPowerVote = useResetRecoilState(arcanaPowerVoteAtom);
+  const resetArcanaSubmittedList = useResetRecoilState(arcanaSubmittedListAtom);
+  const resetArcanaNotSubmittedListAtom = useResetRecoilState(arcanaNotSubmittedListAtom);
+  const resetAccessToken = useResetRecoilState(accessTokenAtom);
+  const resetUserPowerLevel = useResetRecoilState(userPowerLevelAtom);
 
   return useCallback(() => {
     removeAccessToken();
-    setAccessToken(undefined);
-    setUserInfo(undefined);
-    setTasksStatus(undefined);
-    setPowerVote(undefined);
-    console.log('remove');
-    setArcanaSubmittedList([]);
-    setArcanaNotSubmittedListAtom([]);
-  }, [setAccessToken, setUserInfo, setTasksStatus, setPowerVote, setArcanaSubmittedList, setArcanaNotSubmittedListAtom]);
+    resetUserInfo();
+    resetTasksStatus();
+    resetPowerVote();
+    resetArcanaSubmittedList();
+    resetArcanaNotSubmittedListAtom();
+    resetAccessToken();
+    resetUserPowerLevel();
+  }, [
+    resetAccessToken,
+    resetArcanaNotSubmittedListAtom,
+    resetArcanaSubmittedList,
+    resetPowerVote,
+    resetTasksStatus,
+    resetUserInfo,
+    resetUserPowerLevel,
+  ]);
 };
 
 export const useLogoutCallback = () => {
