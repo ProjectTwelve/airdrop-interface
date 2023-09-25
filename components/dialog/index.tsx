@@ -64,7 +64,7 @@ function Dialog({
             <FloatingOverlay lockScroll className="z-[100] grid place-items-center bg-gray-900/60 backdrop-blur-lg">
               <FloatingFocusManager context={context}>
                 <motion.div
-                  className={twMerge(classNames('backdrop-box rounded-2xl', ...fontVariants), className)}
+                  className={twMerge(classNames('backdrop-box rounded-2xl bg-[#23262c]/50', ...fontVariants), className)}
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.85 }}

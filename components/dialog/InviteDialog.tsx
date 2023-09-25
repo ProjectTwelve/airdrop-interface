@@ -93,7 +93,6 @@ function InviteDialog() {
     <Dialog
       open={open}
       onOpenChange={(op) => setOpen(op)}
-      className="bg-[#23262c]/50"
       onExitComplete={() => {
         setConnectOpen(isConnect);
         setIsConnect(false);
