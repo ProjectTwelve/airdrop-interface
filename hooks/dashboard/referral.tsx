@@ -26,7 +26,7 @@ export const useReferralReward = () => {
 export const useFetchArcanaInvitationInfo = () => {
   const setInviteInfo = useSetRecoilState(arcanaInvitationInfoAtom);
 
-  return useQuery(['fetch_invitation_code'], () => fetchInvitationCode(), {
+  return useQuery(['fetch_arcana_invitation_info'], () => fetchInvitationCode(), {
     select: (res) => (res.code === 200 ? res.data : null),
     onSuccess: (data) => {
       setInviteInfo(data);
@@ -108,8 +108,8 @@ export const useCopyArcanaReferralLink = () => {
   };
 };
 export const useTotalInvitationCount = () => {
-  const { inviteCount: arcanaInviteCount } = useReferralReward();
+  // const { inviteCount: arcanaInviteCount } = useReferralReward();
   const steamInviteCount = useRecoilValue(invitationCountSelector);
-  const totalInviteCount = useMemo(() => arcanaInviteCount + steamInviteCount, [arcanaInviteCount, steamInviteCount]);
+  const totalInviteCount = useMemo(() => steamInviteCount, [steamInviteCount]);
   return totalInviteCount;
 };

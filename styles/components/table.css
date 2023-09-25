@@ -1,26 +1,26 @@
 .react-table {
-    position: relative;
-    max-height: 400px;
-    overflow: hidden;
-    overflow-y: auto;
+  position: relative;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .react-table table {
-    width: 100%;
+  width: 100%;
 }
 
 .react-table-thead {
-    background: #4E5573;
-    position: sticky;
-    top: 0;
+  background: rgba(255, 255, 255, 0.12);
+  position: sticky;
+  top: 0;
 }
 
 .react-table-thead > tr {
 }
 
 .react-table-thead > tr > th {
-    text-align: left;
-    font-weight: 500;
+  text-align: left;
+  font-weight: 500;
 }
 
 .react-table-tbody > tr > td {
@@ -29,9 +29,8 @@
 .react-table-tbody > tr:hover > .react-table-cell {
 }
 
-
 .react-table-cell {
-    padding: 12px;
-    font-size: 12px;
-    border-bottom: 1px solid #6E7786;
+  padding: 12px;
+  font-size: 12px;
+  border-bottom: 1px solid #4e4e50;
 }

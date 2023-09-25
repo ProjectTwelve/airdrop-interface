@@ -164,7 +164,12 @@ function InviteDialog() {
                   <p className="text-[18px] font-medium">My Referrals</p>
                   <p className="ml-3 text-xl font-medium">{totalInvitationCount}</p>
                   <Dialog render={({ close }) => <InviteRecordDialog close={close} />}>
-                    <p className="ml-3 cursor-pointer text-sm text-blue">
+                    <p
+                      className="ml-3 cursor-pointer text-sm text-blue"
+                      onClick={() => {
+                        ReactGA.event({ category: EventCategory.Global, action: EventName.RefDetail });
+                      }}
+                    >
                       More
                       <img width={16} height={16} className="inline-block" src="/svg/more.svg" alt="more" />
                     </p>

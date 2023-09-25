@@ -7,6 +7,7 @@ export enum EventName {
   ToInvitation = 'to_invitation',
   CopyRefLink = 'copy_ref_link',
   ShareRefLink = 'share_ref_link',
+  RefDetail = 'ref_detail',
   // arcana tab
   BecomeVoter = 'become_voter',
   CreateNow = 'create_now',
