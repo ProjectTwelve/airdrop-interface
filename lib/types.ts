@@ -179,6 +179,9 @@ export type GamerInfoData = {
   dota2_value?: number;
   tf2_value?: number;
   inventory_switch: boolean;
+  ss_games_pl: number;
+  account_pl: number;
+  value_pl: number;
   invitedBy?: {
     avatar_full: string;
     name: string;

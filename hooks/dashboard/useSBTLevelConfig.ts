@@ -20,7 +20,7 @@ export function useSBTLevelConfig(nftLevel?: GenesisRarity) {
           bg: 'bg-purple/20',
           hover: 'hover:bg-purple/30',
         };
-      case GenesisRarity.Rekt:
+      case GenesisRarity.Rare:
         return {
           loading: 'fill-blue',
           text: 'text-blue',
@@ -44,7 +44,7 @@ export function useSBTLevelConfig(nftLevel?: GenesisRarity) {
           bg: 'bg-[#99A7C3]/20',
           hover: 'hover:bg-[#99A7C3]/30',
         };
-      case GenesisRarity.Rare:
+      case GenesisRarity.Rekt:
         return {
           loading: 'fill-[#99A7C3]',
           text: 'text-[#99A7C3]',

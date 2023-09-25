@@ -1,8 +1,13 @@
 import React from 'react';
 import { Tooltip } from '@/components/tooltip';
 import { digitalFormat } from '@/utils/format';
+import { GamerInfoData } from '@/lib/types';
 
-export default function SteamPowerLevel() {
+type SteamPowerLevelProps = {
+  data?: GamerInfoData;
+};
+
+export default function SteamPowerLevel({ data }: SteamPowerLevelProps) {
   return (
     <div className="grid grid-cols-3 gap-5 py-12 sm:my-4 sm:gap-2 md:grid-cols-1">
       <div>
@@ -13,7 +18,7 @@ export default function SteamPowerLevel() {
           </Tooltip>
         </div>
         <div className="bg-gradient-item  flex-center mt-3 gap-2 rounded-lg py-6 font-ddin">
-          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(0)}</span>
+          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(data?.account_pl)}</span>
           <img className="w-12" src="/img/pl/power_level.png" alt="pl" />
         </div>
       </div>
@@ -25,7 +30,7 @@ export default function SteamPowerLevel() {
           </Tooltip>
         </div>
         <div className="bg-gradient-item  flex-center mt-3 gap-2 rounded-lg py-6 font-ddin">
-          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(0)}</span>
+          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(data?.ss_games_pl)}</span>
           <img className="w-12" src="/img/pl/power_level.png" alt="pl" />
         </div>
       </div>
@@ -37,7 +42,7 @@ export default function SteamPowerLevel() {
           </Tooltip>
         </div>
         <div className="bg-gradient-item  flex-center mt-3 gap-2 rounded-lg py-6 font-ddin">
-          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(0)}</span>
+          <span className="text-gradient-yellow text-5xl/12 font-bold">{digitalFormat.integer(data?.value_pl)}</span>
           <img className="w-12" src="/img/pl/power_level.png" alt="pl" />
         </div>
       </div>

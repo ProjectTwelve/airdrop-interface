@@ -8,6 +8,7 @@ import {
   arcanaSubmittedListAtom,
   arcanaTasksStatusAtom,
 } from '@/store/arcana/state';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 import { accessTokenAtom, userInfoAtom } from '@/store/user/state';
 import { removeAccessToken, setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -15,9 +16,8 @@ import { useCallback, useMemo } from 'react';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useFetchUserNotSubmittedList, useMutationUserSubmittedList } from './dashboard/creation';
-import { useMutationTasksStatus } from './dashboard/task';
-import { userPowerLevelAtom } from '@/store/dashboard/state';
 import { useFetchArcanaInvitationInfo } from './dashboard/referral';
+import { useMutationTasksStatus } from './dashboard/task';
 
 export const useMutationLogin = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);

@@ -13,7 +13,7 @@ export default function PowerLevelBanner() {
   const router = useRouter();
   const isMounted = useIsMounted();
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const banner = useThemeAsset('home_banner.webm');
+  const banner = useThemeAsset('home_banner_1.webm');
   const { activatedPL, gamerRank, developerRank, totalRank } = useRecoilValue(userPowerLevelAtom);
 
   const onClick = () => {
@@ -25,7 +25,10 @@ export default function PowerLevelBanner() {
   };
 
   return (
-    <div className="relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur duration-200 hover:-translate-y-1" onClick={onClick}>
+    <div
+      className="relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur duration-200 hover:-translate-y-1"
+      onClick={onClick}
+    >
       <div className="absolute inset-0 left-0 top-0 -z-10 overflow-hidden">
         {banner && <video autoPlay loop muted className="w-full" src={banner} />}
       </div>
