@@ -181,3 +181,12 @@ export type VerifyEditorLoginResult = {
   mwDeveloperId: string;
   walletAddress: string;
 };
+
+export type InvitationCodeResult = {
+  referralBy?: string; // 被谁邀请的，邀请人的邀请码
+  referralCode: string;
+  walletAddress: string;
+  inviterAddress?: string;
+  inviterShowName?: string;
+  inviterTwitter?: string;
+};

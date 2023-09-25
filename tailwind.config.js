@@ -41,6 +41,9 @@ module.exports = {
         11: '2.75rem',
         12: '3rem',
       },
+      opacity: {
+        15: '0.15',
+      },
       colors: {
         gray: {
           200: '#CEDCFF',

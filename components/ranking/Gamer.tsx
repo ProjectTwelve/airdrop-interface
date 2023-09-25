@@ -67,7 +67,7 @@ export default function GamerRanking() {
         <div>
           <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
           <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
-            <div className="flex h-full w-full flex-wrap px-2 px-4 py-2">
+            <div className="flex h-full w-full flex-wrap px-4 py-2">
               <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
                 {gamerRankData?.avatar_full && (
                   <div className="mr-3 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">

@@ -3,6 +3,11 @@ export enum EventCategory {
 }
 
 export enum EventName {
+  // invitation
+  ToInvitation = 'to_invitation',
+  CopyRefLink = 'copy_ref_link',
+  ShareRefLink = 'share_ref_link',
+  RefDetail = 'ref_detail',
   // arcana tab
   BecomeVoter = 'become_voter',
   CreateNow = 'create_now',
@@ -16,4 +21,5 @@ export enum EventName {
   ProfileCancel = 'profile_cancel',
   ViewCreations = 'view_creations',
   GetPl = 'get_pl',
+  ReferralCopy = 'referral_copy',
 }
