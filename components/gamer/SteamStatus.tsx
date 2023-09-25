@@ -64,7 +64,7 @@ export default function SteamStatus() {
             <SteamProfileInfo data={gamerInfo} />
           </div>
           <div className="pb-3">
-            <SteamPowerLevel />
+            <SteamPowerLevel data={gamerInfo} />
             <h3 className="mb-3 text-xl font-semibold">My Games</h3>
             {gamesData ? (
               <>
