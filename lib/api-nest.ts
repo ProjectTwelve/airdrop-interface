@@ -4,6 +4,7 @@ import {
   CheckResult,
   GameInfo,
   GenesisNFT,
+  InvitationCodeResult,
   InvitationInfo,
   LoginParams,
   PowerLevelResult,
@@ -54,3 +55,5 @@ export const fetchGenesisPL = () => request.get<any, Response<number[]>>('/asset
 
 export const fetchGenesisUpgrade = (data: { address: string; role: GenesisRole }) =>
   request.post<any, Response<number[]>>('/assets/nft/upgrade', data);
+
+export const fetchInvitationCode = () => request.get<any, Response<InvitationCodeResult>>('/invitation/code');

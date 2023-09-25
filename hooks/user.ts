@@ -2,6 +2,7 @@ import { fetchLogin, fetchPowerVote, fetchUserInfo } from '@/lib/api-nest';
 import instance from '@/lib/request-nest';
 import { LoginParams } from '@/lib/types-nest';
 import {
+  arcanaInvitationInfoAtom,
   arcanaNotSubmittedListAtom,
   arcanaPowerVoteAtom,
   arcanaSubmittedListAtom,
@@ -16,6 +17,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import { useFetchUserNotSubmittedList, useMutationUserSubmittedList } from './dashboard/creation';
 import { useMutationTasksStatus } from './dashboard/task';
 import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { useFetchArcanaInvitationInfo } from './dashboard/referral';
 
 export const useMutationLogin = () => {
   const setUserInfo = useSetRecoilState(userInfoAtom);
@@ -92,6 +94,7 @@ export const useFetchGlobalData = () => {
   const { mutate: fetchPowerVoteI } = useMutationPowerVoteInfo();
   const { mutate: fetchUserSubmittedList } = useMutationUserSubmittedList();
   const { mutate: fetchUserNotSubmittedList } = useFetchUserNotSubmittedList();
+  const { refetch: refetchArcanaInviteInfo } = useFetchArcanaInvitationInfo();
 
   const accessToken = useRecoilValue(accessTokenAtom);
 
@@ -102,7 +105,16 @@ export const useFetchGlobalData = () => {
     fetchPowerVoteI();
     fetchUserSubmittedList();
     fetchUserNotSubmittedList();
-  }, [accessToken, fetchProfile, fetchTasksStatus, fetchPowerVoteI, fetchUserSubmittedList, fetchUserNotSubmittedList]);
+    refetchArcanaInviteInfo();
+  }, [
+    accessToken,
+    fetchProfile,
+    fetchTasksStatus,
+    fetchPowerVoteI,
+    fetchUserSubmittedList,
+    fetchUserNotSubmittedList,
+    refetchArcanaInviteInfo,
+  ]);
 };
 
 export const useRemoveGlobalState = () => {
@@ -113,6 +125,7 @@ export const useRemoveGlobalState = () => {
   const resetArcanaNotSubmittedListAtom = useResetRecoilState(arcanaNotSubmittedListAtom);
   const resetAccessToken = useResetRecoilState(accessTokenAtom);
   const resetUserPowerLevel = useResetRecoilState(userPowerLevelAtom);
+  const resetInviteInfo = useResetRecoilState(arcanaInvitationInfoAtom);
 
   return useCallback(() => {
     removeAccessToken();
@@ -123,10 +136,12 @@ export const useRemoveGlobalState = () => {
     resetArcanaNotSubmittedListAtom();
     resetAccessToken();
     resetUserPowerLevel();
+    resetInviteInfo();
   }, [
     resetAccessToken,
     resetArcanaNotSubmittedListAtom,
     resetArcanaSubmittedList,
+    resetInviteInfo,
     resetPowerVote,
     resetTasksStatus,
     resetUserInfo,
