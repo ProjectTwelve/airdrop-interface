@@ -61,7 +61,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
         cell: () => (
           <div className="flex h-full items-center">
             <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
+            <Image className="-z-10" layout="fixed" src="/img/pl/power_level.png" width={30} height={30} alt="PL" />
           </div>
         ),
       }),
@@ -153,7 +153,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
   return (
     <div>
       <Back onClick={close} className="absolute left-7 top-7" />
-      <h2 className="mb-[18px] w-[720px] text-center text-xl/5.5 md:w-full">Invite friend to mint P12 Genesis NFT</h2>
+      <h2 className="mb-[18px] text-center text-xl/5.5 md:w-full">Invite friend to mint P12 Genesis NFT</h2>
       <Tabs className="border-none" onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
         <TabList>
           <Tab style={{ padding: '14px 16px', fontSize: 18 }}>Developer</Tab>
