@@ -120,8 +120,7 @@ module.exports = {
         'card-mask': 'linear-gradient(to bottom, var(--mask-40), #00000000)',
         'arcana-card-mask':
           'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 60%), var(--p12-card-bg)',
-        'arcana-task-mask':
-          'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 30%), var(--p12-card-bg)',
+        'arcana-task-mask': 'linear-gradient(180deg,rgba(var(--arcana-mask),0.3) 0, rgba(var(--arcana-mask),0) 30%)',
         'arcana-refer-mask': 'linear-gradient(180deg, rgba(255, 231, 171, 0.40) 0%, rgba(255, 231, 171, 0) 30%)',
         'omg-count': 'var(--omg-count)',
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',

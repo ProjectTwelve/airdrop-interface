@@ -50,7 +50,11 @@ export default function MyTasks() {
                   )}
                   key={id}
                 >
-                  <h2 className={classNames('text-xl/6 font-semibold', { 'text-yellow': isInviteCard })}>
+                  <h2
+                    className={classNames('line-clamp-2 h-12 overflow-hidden text-xl/6 font-semibold', {
+                      'text-yellow': isInviteCard,
+                    })}
+                  >
                     {title}
                     <span
                       className={classNames('ml-4 align-middle text-xs/4 font-medium text-gray-400', {
@@ -60,14 +64,14 @@ export default function MyTasks() {
                       {subtitle}
                     </span>
                   </h2>
-                  <p className="mt-7.5 flex-grow text-xs/4.5 font-medium">{desc}</p>
+                  <p className="mt-1.5 flex-grow text-xs/4.5 font-medium">{desc}</p>
                   <div className="mt-8 flex items-center gap-2 font-ddin text-[26px]/6.5 font-semibold text-yellow">
                     {isInviteCard && <span className="whitespace-pre font-poppins text-xl/5 text-yellow">{'PL Reward :'}</span>}
                     {PL} PL
                     <img className="w-7.5" src="/img/pl/power_level.png" alt="pl-icon" />
                   </div>
                   {isInviteCard ? (
-                    <p className="mt-10 text-base/6.5">
+                    <p className="mb-3 mt-10 text-base/6.5">
                       Your Valid Referral : <span className="font-ddin text-[26px]/6.5"> {inviteCount}</span>
                     </p>
                   ) : (
