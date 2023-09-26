@@ -132,12 +132,11 @@
     position: relative;
     background: linear-gradient(
       180deg,
-      rgba(78, 86, 145, 0.5) 0%,
-      rgba(59, 65, 103, 0.5) 9.38%,
-      rgba(60, 65, 100, 0.5) 15.66%,
-      rgba(60, 65, 100, 0.5) 100%
+      rgba(93, 100, 108, 0.4) 0.52%,
+      rgba(57, 63, 70, 0.4) 14.16%,
+      rgba(35, 38, 44, 0.4) 96.73%
     );
-    border: 1px solid #616985;
+    border: 1px solid #6f7784;
     border-radius: 1rem;
     overflow: hidden;
     @apply backdrop-blur-lg sm:backdrop-blur-none;
@@ -157,7 +156,7 @@
   }
 
   .tooltip__container {
-    background: #23262CBF;
+    background: #23262cbf;
     border: 1px solid #6f778480;
     backdrop-filter: blur(50px);
   }

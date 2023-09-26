@@ -32,7 +32,7 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-gray-700/30 px-3 py-[10px] hover:bg-gray-700/60 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl border border-gray-550/50 bg-gray-700/30 px-3 py-[10px] hover:bg-gray-700/60 sm:px-2"
     >
       <div className="mr-2 w-[30px] flex-none text-center text-xs font-medium leading-[44px] 2xl:mr-4 2xl:w-[40px]">
         {getCountMemo(data.index)}
