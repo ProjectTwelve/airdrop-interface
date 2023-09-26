@@ -13,7 +13,7 @@ export function SocialsLabel({ label, icon, className, onClick }: CollabSocialsP
     <span
       onClick={onClick}
       className={classNames(
-        'flex max-h-6 cursor-pointer items-center gap-1 rounded-full bg-[#4383FF]/20 bg-opacity-20 px-3 py-1 leading-4',
+        'flex max-h-6 cursor-pointer items-center gap-1 rounded-full bg-gray-700 px-3 py-1 leading-4',
         className,
       )}
     >
