@@ -80,7 +80,7 @@ export default function SteamStatus() {
                         ))}
                       </div>
                     ) : (
-                      <div className="h-[248px] rounded-2xl bg-gray-800/80 p-6">
+                      <div className="h-[248px] rounded-2xl bg-gray-700/30 p-6">
                         <Empty />
                       </div>
                     )}
@@ -102,7 +102,7 @@ export default function SteamStatus() {
                 </div>
               </>
             ) : (
-              <div className="rounded-2xl bg-gray-800/80 p-6 md:p-3">
+              <div className="rounded-2xl bg-gray-700/30 p-6 md:p-3">
                 {isFetching ? (
                   <Loading size={58} className="my-[72px] opacity-50" />
                 ) : (

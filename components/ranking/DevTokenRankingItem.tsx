@@ -6,7 +6,7 @@ import { getCountMemo, openLink } from '../../utils';
 
 export function DevTokenRankingHeader() {
   return (
-    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
+    <div className="flex px-4 pb-2.5 pt-5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">Game</p>
       <p className="w-[50px]">Badge</p>
@@ -26,7 +26,7 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
   return (
     <div
       onClick={handleToSteamStore}
-      className="cursor-pointer overflow-hidden rounded-xl bg-gray-800/80 p-3.5 hover:bg-[#7980AF]/20 sm:px-2"
+      className="cursor-pointer overflow-hidden rounded-xl bg-gray-700/30 p-3.5 hover:bg-[#7980AF]/20 sm:px-2"
     >
       <div className="float-left mr-4 h-[60px] w-[35px] text-center text-xs font-medium leading-[60px]">
         {getCountMemo(data.index)}
@@ -48,7 +48,7 @@ export default function DevTokenRankingItem({ data }: DevDevTokenRankingItemProp
           </div>
           <div className="relative mt-1 flex h-[20px] flex-wrap overflow-hidden">
             {data.genres?.map((genre, index) => (
-              <span key={index} className="mr-1.5 mb-0.5 rounded bg-blue/20 px-2 py-[1px] text-xs text-blue">
+              <span key={index} className="mb-0.5 mr-1.5 rounded bg-blue/20 px-2 py-[1px] text-xs text-blue">
                 {genre}
               </span>
             ))}

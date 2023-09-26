@@ -9,7 +9,14 @@ import { developerGameAtom, tabSelectAtom } from '../../../store/developer/state
 import { LeftCircle } from '../../svg/LeftCircle';
 import { useClickScroll } from '../../../hooks/useClickScroll';
 import { useSelectedGame } from '../../../hooks/useSelectedGame';
-import { DEV_BADGES, GALXE_LIST, BADGE_CONTRACT_ADDRESS, GenesisClaim_TYPE, GenesisClaim, GALXE_P12_SPACE } from '../../../constants';
+import {
+  DEV_BADGES,
+  GALXE_LIST,
+  BADGE_CONTRACT_ADDRESS,
+  GenesisClaim_TYPE,
+  GenesisClaim,
+  GALXE_P12_SPACE,
+} from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 import { useDevBadgeLoad } from '../../../hooks/useBadgeLoad';
 import { openLink, shortenAddress } from '../../../utils';
@@ -65,7 +72,7 @@ export default function TokenTabs() {
               <div
                 key={game.appid}
                 className={classNames(
-                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-800/80 p-2.5',
+                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-700/30 p-2.5',
                   selectedGame.appid === game.appid ? 'opacity-100' : 'opacity-60',
                   'cursor-pointer last:mr-0 hover:opacity-100',
                 )}
@@ -98,9 +105,9 @@ export default function TokenTabs() {
           </div>
         </div>
       </div>
-      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
+      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-gray-700/30 md:flex-col">
         <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
-          <div className="absolute top-0 left-0 h-full w-full blur-3xl">
+          <div className="absolute left-0 top-0 h-full w-full blur-3xl">
             {selectedGame.nft_claim === GenesisClaim.Claimed && (
               <div
                 className="h-full w-full bg-cover"
@@ -110,14 +117,14 @@ export default function TokenTabs() {
           </div>
           <div className="relative z-10">
             <div className="w-full pb-[100%]"></div>
-            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
               {selectedGame.appid ? (
                 <div className="flex w-full flex-col items-center justify-center sm:w-auto">
                   {selectedGame.nft_claim === GenesisClaim.Claimed ? (
                     <>
                       <div className="relative aspect-square w-full max-w-[420px]">
                         {badge.isLoading && (
-                          <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 opacity-60">
+                          <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 opacity-60">
                             <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                           </div>
                         )}
@@ -182,7 +189,7 @@ export default function TokenTabs() {
               ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD')
               : '--'}
           </p>
-          <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
+          <div className="gradient__box mt-9 px-[30px] py-6 md:mt-4">
             <p>Amount of tokens from this game</p>
             <div className="mt-5 flex items-center justify-between">
               <p
@@ -211,7 +218,7 @@ export default function TokenTabs() {
                 key={item.label}
                 className={classNames(
                   'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
-                  'md:flex-row md:border-r-0 md:border-b md:py-2',
+                  'md:flex-row md:border-b md:border-r-0 md:py-2',
                   'last:border-none',
                 )}
               >

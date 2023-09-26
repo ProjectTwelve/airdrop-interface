@@ -129,12 +129,7 @@ function Verify() {
               />
             ))}
             {steamAppList.length < 3 && (
-              <Button
-                className="w-full"
-                type="bordered"
-                style={{ borderRadius: 16, height: 72 }}
-                onClick={() => onAddSteamApp(count)}
-              >
+              <Button className="h-18 w-full rounded-lg" type="bordered" onClick={() => onAddSteamApp(count)}>
                 <p className="text-[32px] font-medium">+</p>
               </Button>
             )}
@@ -149,25 +144,27 @@ function Verify() {
             <h3 className="text-xl font-medium">
               YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-gray-700/30 p-6 pb-16">
+            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-lg bg-gray-700/30 p-6 pb-16">
               {isMounted && address ? signature : 'Please connect your wallet first.'}
               <div className="absolute bottom-5 right-5">
                 {isMounted && address ? (
                   isSig ? (
-                    <Button
-                      type="gradient"
-                      size="small"
+                    <div
+                      className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5  text-sm/5 font-semibold text-blue hover:bg-blue/30"
                       onClick={() => {
                         copyToClipboard(signature);
                         toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                       }}
                     >
                       Copy
-                    </Button>
+                    </div>
                   ) : (
-                    <Button type="gradient" size="small" onClick={() => signMessage()}>
+                    <div
+                      className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5 text-sm/5 font-semibold text-blue hover:bg-blue/30"
+                      onClick={() => signMessage()}
+                    >
                       Generate
-                    </Button>
+                    </div>
                   )
                 ) : null}
               </div>

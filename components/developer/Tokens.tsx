@@ -25,7 +25,7 @@ function Tokens() {
           <DevP12 />
         </div>
         <div className="flex border-b border-gray-600 py-4">
-          <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
+          <div className="mr-4 rounded-lg bg-gray-700/30 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
                 {claimGames ? '?,???' : '-,---'}
@@ -36,7 +36,7 @@ function Tokens() {
               From <span className="text-green"> {claimGames} </span> verified {claimGames > 1 ? 'games' : 'game'}
             </p>
           </div>
-          <div className="rounded-lg bg-gray-800/80 p-3">
+          <div className="rounded-lg bg-gray-700/30 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                 {invitation ? '?,???' : '-,---'}

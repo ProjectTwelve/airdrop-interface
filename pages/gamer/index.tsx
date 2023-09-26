@@ -52,7 +52,7 @@ export default function Gamer() {
           <SteamStatus />
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
-            <div className="flex overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
+            <div className="flex overflow-hidden rounded-b-2xl bg-gray-700/30 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute left-0 top-0 h-full w-full blur-3xl">
                   {gamerInfo?.nft_claim === GenesisClaim.Claimed && (
@@ -140,7 +140,7 @@ export default function Gamer() {
               <GamerP12 />
             </div>
             <div className="flex border-b border-gray-600 py-4">
-              <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
+              <div className="mr-4 rounded-lg bg-gray-700/30 p-3">
                 <div className="flex items-center justify-between">
                   <p onClick={handleClaimedRoadmap} className="cursor-pointer font-ddin text-xl font-bold">
                     {gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---'}
@@ -149,7 +149,7 @@ export default function Gamer() {
                 </div>
                 <p className="mr-4 mt-2 text-xs text-gray">From your account</p>
               </div>
-              <div className="rounded-lg bg-gray-800/80 p-3">
+              <div className="rounded-lg bg-gray-700/30 p-3">
                 <div className="flex items-center justify-between">
                   <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                     {invitation ? '?,???' : '-,---'}
