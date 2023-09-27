@@ -12,7 +12,7 @@ export default function TokenStatus({ data }: { data?: TokenStatusData }) {
   const rarityConfig = useSBTLevelConfig(data?.rarity);
 
   return (
-    <div className="flex rounded-lg border border-gray-600 py-3">
+    <div className="flex rounded-lg border border-gray-650 py-3">
       {[
         { label: 'ID', value: data?.id || '--' },
         { label: 'Birthday', value: data?.birthday ?? '--' },
