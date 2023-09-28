@@ -45,7 +45,7 @@ export default function SteamDeveloperSBT() {
               {digitalFormat.integer(developerPL)}
             </div>
             {isClaimed ? (
-              <img className="w-7" src="/svg/check_success.svg" alt="check_success" />
+              <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />
             ) : (
               <Tooltip label="Claim P12 XII-PLORER Badge to activate Gamer Power Level.">
                 <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />

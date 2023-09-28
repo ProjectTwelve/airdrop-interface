@@ -27,7 +27,12 @@ export default function Dashboard() {
             onClick={() => setSelectedTab(0)}
             active={selectedTab === 0}
             title="P12 Arcana: Editorium"
-            score={digitalFormat.integer(arcanaPL)}
+            score={
+              <>
+                {digitalFormat.integer(arcanaPL)}
+                <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />
+              </>
+            }
           />
           <ActivityTab
             onClick={() => setSelectedTab(1)}
