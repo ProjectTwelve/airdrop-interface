@@ -14,7 +14,7 @@ export default function Dashboard() {
   const { arcanaPL, steamGamerPL, steamDeveloperPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
-    <div className="mt-7">
+    <div className="mt-4">
       <div className="backdrop-box relative rounded-2xl">
         <div className="grid grid-cols-2 gap-8 px-6 pb-12 pt-7 md:grid-cols-1">
           <SteamGamerSBT />
@@ -30,7 +30,7 @@ export default function Dashboard() {
             score={
               <>
                 {digitalFormat.integer(arcanaPL)}
-                <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />
+                {selectedTab === 0 && <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />}
               </>
             }
           />
@@ -38,13 +38,23 @@ export default function Dashboard() {
             onClick={() => setSelectedTab(1)}
             active={selectedTab === 1}
             title="Genesis Steam Gamer"
-            score={digitalFormat.integer(steamGamerPL)}
+            score={
+              <>
+                {digitalFormat.integer(steamGamerPL)}
+                {selectedTab === 1 && <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />}
+              </>
+            }
           />
           <ActivityTab
             onClick={() => setSelectedTab(2)}
             active={selectedTab === 2}
             title="Genesis Steam Developer"
-            score={digitalFormat.integer(steamDeveloperPL)}
+            score={
+              <>
+                {digitalFormat.integer(steamDeveloperPL)}
+                {selectedTab === 2 && <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />}
+              </>
+            }
           />
         </div>
       </div>

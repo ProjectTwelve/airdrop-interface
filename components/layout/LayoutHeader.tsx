@@ -72,20 +72,16 @@ function LayoutHeader() {
   });
 
   return (
-    <header className="relative z-20 flex justify-between px-8 md:px-4 2xl:px-0">
+    <header className="relative z-20 flex justify-between px-8 py-2.5 md:px-2 2xl:px-0">
       <div className="flex items-center justify-start">
-        <div className="h-[36px] w-[80px] cursor-pointer bg-p12-logo bg-cover" onClick={() => router.push('/')} />
-        <div className="ml-8 md:hidden">
-          <LayoutHeaderExtra />
-        </div>
+        <div className="h-[26px] w-[58px] cursor-pointer bg-p12-logo bg-cover" onClick={() => router.push('/')} />
+        <LayoutHeaderExtra className="ml-6 md:hidden" />
       </div>
       <div className="flex items-center gap-4 xs:flex-wrap xs:justify-end">
         {router.pathname === '/dashboard' ? (
-          <div className="relative flex items-center gap-2 rounded-full border-2 border-yellow px-6 py-1.5 text-sm/5.5  font-semibold backdrop-blur">
+          <div className="relative flex items-center gap-2 text-sm/5.5 font-semibold backdrop-blur">
             Activated PL
-            <div className="text-gradient-yellow ml-0.5 text-[2.125rem]/8.5 font-bold">
-              {digitalFormat.integer(activatedPL)}
-            </div>
+            <div className="text-gradient-yellow ml-0.5 text-[34px]/10 font-bold">{digitalFormat.integer(activatedPL)}</div>
             <img src="/img/pl/power_level.png" alt="PL" className="inline-block h-10 w-10" />
           </div>
         ) : null}

@@ -63,7 +63,7 @@ function Web3Status() {
   if (isConnected) {
     if (chain?.unsupported) {
       return (
-        <Button type="error" onClick={() => switchNetwork?.()}>
+        <Button type="error" className="h-10" onClick={() => switchNetwork?.()}>
           Wrong Network
         </Button>
       );
@@ -80,7 +80,7 @@ function Web3Status() {
     return (
       <div>
         <Popover open={isOpen} onOpenChange={(op) => setIsOpen(op)} render={({ close }) => <WalletPopover close={close} />}>
-          <Button type="gradient" className="w-[120px]">
+          <Button type="gradient" className="h-10 w-[120px]">
             Connect
           </Button>
         </Popover>

@@ -58,21 +58,21 @@ function Web3StatusInner() {
       >
         <div
           className={classNames(
-            'flex cursor-pointer items-center justify-center px-3 py-2',
+            'flex h-10 cursor-pointer items-center justify-center pl-3 pr-1.5 text-sm font-medium',
             isBABTHolder && 'overflow-hidden rounded-full bg-gradient-babt',
           )}
         >
           <p className={classNames(isBABTHolder && 'font-medium text-black')}>{shortenAddress(address)}</p>
-          <div className="ml-3 h-8 w-8 overflow-hidden rounded-full border border-white bg-p12-gradient sm:hidden">
+          <div className="ml-3 h-6.5 w-6.5 overflow-hidden rounded-full border border-white bg-p12-gradient sm:hidden">
             {isBABTHolder ? (
               <img
-                width={32}
-                height={32}
+                width={28}
+                height={28}
                 src="https://raw.githubusercontent.com/projecttwelve/icons/main/token/bab.jpg"
                 alt="bnb"
               />
             ) : (
-              <Jazzicon diameter={32} seed={jsNumberForAddress(address ?? '')} />
+              <Jazzicon diameter={28} seed={jsNumberForAddress(address ?? '')} />
             )}
           </div>
         </div>

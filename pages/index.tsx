@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center px-8 pt-4 md:px-4 2xl:px-0">
       {/*<div className="mt-4 grid w-full grid-cols-2 gap-4 md:grid-cols-1">*/}
-      <div className="mt-4 flex w-full gap-5 tablet:flex-col">
+      <div className="flex w-full gap-5 tablet:flex-col">
         <div
           className="relative cursor-pointer rounded-2xl duration-200 ease-linear hover:-translate-y-1 "
           onClick={() => {
