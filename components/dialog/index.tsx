@@ -7,6 +7,7 @@ import {
   FloatingPortal,
   FloatingOverlay,
   FloatingFocusManager,
+  useDismiss,
 } from '@floating-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -19,9 +20,12 @@ type DialogProps = {
   onOpenChange?: (open: boolean) => void;
   onExitComplete?: () => void;
   showCloseButton?: boolean;
+  isDismiss?: boolean;
   render: (props: { close: () => void }) => React.ReactNode;
   children?: JSX.Element;
   className?: string;
+  overlayClass?: string;
+  containerClass?: string;
 };
 
 function Dialog({
@@ -29,9 +33,12 @@ function Dialog({
   open: passedOpen = false,
   children,
   showCloseButton = true,
+  isDismiss,
   onOpenChange,
   onExitComplete,
   className,
+  overlayClass,
+  containerClass,
 }: React.PropsWithChildren<DialogProps>) {
   const [open, setOpen] = useState(false);
 
@@ -47,8 +54,9 @@ function Dialog({
     open,
     onOpenChange: onClose,
   });
+  const dismiss = useDismiss(context, { enabled: isDismiss, outsidePressEvent: 'mousedown' });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([useClick(context), useRole(context)]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([useClick(context), useRole(context), dismiss]);
 
   useEffect(() => {
     if (passedOpen === undefined) return;
@@ -61,7 +69,10 @@ function Dialog({
       <FloatingPortal>
         <AnimatePresence onExitComplete={onExitComplete}>
           {open && (
-            <FloatingOverlay lockScroll className="z-[100] grid place-items-center bg-gray-900/60 backdrop-blur-lg">
+            <FloatingOverlay
+              lockScroll
+              className={twMerge('z-[100] grid place-items-center bg-gray-900/60 backdrop-blur-lg', overlayClass)}
+            >
               <FloatingFocusManager context={context}>
                 <motion.div
                   className={twMerge(classNames('backdrop-box rounded-2xl bg-[#23262c]/50', ...fontVariants), className)}
@@ -71,7 +82,7 @@ function Dialog({
                   transition={{ type: 'spring', damping: 20, stiffness: 300 }}
                   {...getFloatingProps({ ref: setFloating })}
                 >
-                  <div className="relative p-7 md:p-2">
+                  <div className={twMerge('relative p-7 md:p-2', containerClass)}>
                     {showCloseButton && (
                       <div className="absolute right-7 top-7 flex h-4 w-4 cursor-pointer items-center justify-center md:right-3 md:top-3">
                         <Image src="/svg/close.svg" width={14} height={14} alt="close" onClick={() => onClose(false)} />

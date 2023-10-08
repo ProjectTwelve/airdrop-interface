@@ -1,12 +1,12 @@
-import React, { useMemo, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { GenesisRarity } from '@/constants';
+import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
+import { getCountMemo } from '@/utils';
 import classNames from 'classnames';
 import Pagination from 'rc-pagination';
-import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
+import { useMemo, useState } from 'react';
+import { useAccount } from 'wagmi';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
-import { getCountMemo } from '@/utils';
-import { GenesisRarity } from '@/constants';
 
 export default function GamerRanking() {
   const { data: verified } = useGamerVerifiedCount();
@@ -39,10 +39,10 @@ export default function GamerRanking() {
   const isLowLevelToken = (num?: number) => num === GenesisRarity.Common || num === GenesisRarity.Uncommon;
 
   return (
-    <div className="p-8 sm:p-4">
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-1 md:gap-2">
+    <div>
+      <div className="grid grid-cols-2 gap-5 md:grid-cols-1 md:gap-2">
         <div>
-          <h3 className="text-sm font-medium leading-5">Verified Gamers</h3>
+          <h3 className="text-base/6 font-semibold">P12 Gamers</h3>
           <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] leading-[90px] 2xl:flex 2xl:items-center">
             <div className="h-[40px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
               <p className="h-[14px] text-center text-xs">Total</p>
@@ -65,7 +65,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div>
-          <h3 className="text-sm font-medium leading-5">Your Ranking</h3>
+          <h3 className="text-base/6 font-semibold">P12 Developers</h3>
           <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
             <div className="flex h-full w-full flex-wrap px-4 py-2">
               <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
@@ -101,9 +101,9 @@ export default function GamerRanking() {
           </div>
         </div>
       </div>
-      <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1 lg:gap-4 xl:gap-4">
+      <div className="backdrop-box mt-5 grid grid-cols-2 gap-8 rounded-2xl px-6 pb-8 pt-5 sm:p-4 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
-          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Latest</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-base/6 font-semibold">Latest</h2>
           <GamerTimeRankingHeader />
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (
@@ -122,7 +122,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Leaderboard</h2>
+          <h2 className="border-b border-gray-600 pb-3 text-base/6 font-semibold">Leaderboard</h2>
           <GamerTokenRankingHeader />
           <div className="grid gap-4">
             {tokenRankData?.rankList.map((item, index) => (
