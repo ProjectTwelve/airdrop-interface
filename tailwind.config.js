@@ -40,6 +40,7 @@ module.exports = {
         10: '2.5rem',
         11: '2.75rem',
         12: '3rem',
+        13.5: '3.375rem',
       },
       opacity: {
         15: '0.15',
@@ -126,6 +127,7 @@ module.exports = {
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',
         'gradient-yellow': 'linear-gradient(to bottom, #FFFFDA 0%, #FFE7B6 50.34%, #CE9658 100%)',
+        'gradient-green': 'linear-gradient(90deg, #00F0FF 0.25%, #00FF94 92.45%)',
       },
       backgroundSize: {
         fill: '100% 100%',
