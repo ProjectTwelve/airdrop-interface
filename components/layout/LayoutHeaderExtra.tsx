@@ -45,7 +45,7 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
               className="relative flex items-center"
             >
               <div
-                className="flex-center cursor-pointer gap-1 rounded-full bg-blue/20 px-3 py-2.5 text-base/5 font-medium text-blue hover:bg-blue/30 lg:hidden xl:hidden"
+                className="flex-center mr-3 cursor-pointer gap-1 rounded-full bg-blue/20 px-3 py-2.5 text-base/5 font-medium text-blue hover:bg-blue/30 lg:hidden xl:hidden"
                 onClick={() => router.push('/bridge')}
               >
                 <BridgeSvg className="h-5 w-5" />
@@ -53,7 +53,7 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
               </div>
               {router.pathname !== '/gamer/[address]' && (
                 <div
-                  className="flex-center ml-3 h-10 cursor-pointer gap-1 rounded-full bg-blue/20 px-3 hover:bg-blue/30"
+                  className="flex-center h-10 cursor-pointer gap-1 rounded-full bg-blue/20 px-3 hover:bg-blue/30"
                   onClick={() => {
                     ReactGA.event({ action: 'Invite', category: 'Click', label: 'Header' });
                     setInviteOpen(true);
