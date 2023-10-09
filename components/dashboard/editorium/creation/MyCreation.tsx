@@ -21,15 +21,15 @@ export default function MyCreation() {
   }, [inventoryData, submitData]);
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-6 mt-13 flex items-end justify-between">
-        <h1 className="text-xl/6 font-semibold">My Creation</h1>
+    <div className="mt-7.5 flex flex-col">
+      <div className="mb-6 flex items-end justify-between">
+        <h1 className="text-base/6 font-semibold">My Creation</h1>
         <Button
           type="bordered"
-          className="flex gap-1.5 border-white px-8 py-4 text-base/5.5"
+          className="flex gap-1 border-white px-4 py-2.5 text-sm/5"
           onClick={() => setEditorDownloadDialogOpen(true)}
         >
-          <img className="h-6 w-6" src="/svg/download.svg" alt="" /> Download Editor & P12 App
+          <img className="h-5 w-5" src="/svg/download.svg" alt="" /> Download Editor & P12 App
         </Button>
       </div>
       <div className="mt-9.5 grid grid-cols-4 gap-8 md:grid-cols-2 md:gap-4 xs:grid-cols-1">

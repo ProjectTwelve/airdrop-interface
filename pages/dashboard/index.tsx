@@ -16,13 +16,13 @@ export default function Dashboard() {
   return (
     <div className="mt-4">
       <div className="backdrop-box relative rounded-2xl">
-        <div className="grid grid-cols-2 gap-8 px-6 pb-12 pt-7 md:grid-cols-1">
+        <div className="grid grid-cols-2 gap-10 px-6 py-7.5 md:grid-cols-1">
           <SteamGamerSBT />
           <SteamDeveloperSBT />
         </div>
       </div>
-      <div className="relative mt-10 h-[130px]">
-        <div className="flex-center absolute left-0 w-screen gap-15  bg-gray-700/30 py-5 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
+      <div className="relative mt-7.5">
+        <div className="flex-center absolute left-0 w-screen gap-15  bg-gray-700/30 pb-3 pt-4 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
           <ActivityTab
             onClick={() => setSelectedTab(0)}
             active={selectedTab === 0}

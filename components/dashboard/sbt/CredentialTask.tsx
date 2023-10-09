@@ -11,14 +11,14 @@ export default function CredentialTask({ status, onClick, text }: CredentialTask
     <div
       onClick={onClick}
       className={classNames(
-        'flex cursor-pointer gap-2 rounded-lg border bg-gray-700/30 px-3 py-3.5 text-sm font-medium',
+        'flex cursor-pointer gap-2 rounded-lg border bg-gray-700/30 px-3 py-3.5 text-xs font-semibold',
         status ? 'border-green text-green' : 'border-gray-550/50',
       )}
     >
       {status ? (
-        <img className="w-5" src="/svg/check.svg" alt="check" />
+        <img className="w-4" src="/svg/check.svg" alt="check" />
       ) : (
-        <img className="w-5" src="/svg/play.svg" alt="play" />
+        <img className="w-4" src="/svg/play.svg" alt="play" />
       )}
       {text}
     </div>
