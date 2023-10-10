@@ -24,7 +24,7 @@ export function CollabListDialog() {
           <h2 className="text-xl/5.5 font-semibold">collabs</h2>
           <div className="vertical-scroll -mx-4 flex flex-grow flex-col gap-4 overflow-auto px-4">
             {!collabList?.length ? (
-              <div>
+              <>
                 <CollabListItem loading={isLoading} />
                 <CollabListItem loading={isLoading} />
                 <CollabListItem loading={isLoading} />
@@ -33,7 +33,7 @@ export function CollabListDialog() {
                 <CollabListItem loading={isLoading} />
                 <CollabListItem loading={isLoading} />
                 <CollabListItem loading={isLoading} />
-              </div>
+              </>
             ) : (
               collabList.map((item) => <CollabListItem key={item?.collabCode} data={item} />)
             )}

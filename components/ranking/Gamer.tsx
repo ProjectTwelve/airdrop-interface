@@ -101,11 +101,11 @@ export default function GamerRanking() {
           </div>
         </div>
       </div>
-      <div className="backdrop-box mt-5 grid grid-cols-2 gap-8 rounded-2xl px-6 pb-8 pt-5 sm:p-4 md:grid-cols-1 lg:gap-4 xl:gap-4">
+      <div className="backdrop-box mt-5 grid grid-cols-2 gap-8 rounded-2xl bg-gray-700/30 px-6 pb-8 pt-5 sm:p-4 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
-          <h2 className="border-b border-gray-600 pb-3 text-base/6 font-semibold">Latest</h2>
+          <h2 className="border-b border-gray-650 pb-3 text-base/6 font-semibold">Latest</h2>
           <GamerTimeRankingHeader />
-          <div className="grid gap-4">
+          <div className="grid">
             {timeRankData?.rankList.map((item, index) => (
               <GamerTimeRankingItem data={item} key={item.steam_id || index} />
             ))}
@@ -122,9 +122,9 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-gray-600 pb-3 text-base/6 font-semibold">Leaderboard</h2>
+          <h2 className="border-b border-gray-650 pb-3 text-base/6 font-semibold">Leaderboard</h2>
           <GamerTokenRankingHeader />
-          <div className="grid gap-4">
+          <div className="grid">
             {tokenRankData?.rankList.map((item, index) => (
               <GamerTokenRankingItem data={item} key={item.steam_id || index} />
             ))}
