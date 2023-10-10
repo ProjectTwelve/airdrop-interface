@@ -100,12 +100,17 @@ module.exports = {
         backdrop: 'backdrop 2s linear forwards',
         omg: 'omg 1s linear infinite alternate',
         'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+        fadeIn: 'fadeIn 18s ease-in-out forwards',
       },
       keyframes: {
         backdrop: {
           '0%': { backdropFilter: 'none' },
           '50%': { backdropFilter: 'none' },
           '100%': { backdropFilter: 'blur(16px)', background: '#0C0C0C99' },
+        },
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 0.5 },
         },
       },
       backgroundImage: {
