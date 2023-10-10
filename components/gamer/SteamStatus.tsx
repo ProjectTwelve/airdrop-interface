@@ -54,22 +54,22 @@ export default function SteamStatus() {
       {gamerInfo ? (
         <div>
           <div className="flex items-center md:flex-col md:items-start">
-            <div className="mr-5 flex max-w-full md:mb-4">
-              <img className="mr-6 h-[78px] w-[78px] rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
+            <div className="mr-4 flex max-w-full md:mb-4">
+              <img className="mr-3 h-16 w-16 rounded-lg" src={gamerInfo.avatar_full} alt="avatar" />
               <div className="flex flex-col justify-around overflow-hidden">
-                <p className="truncate text-[26px] font-medium">{gamerInfo.person_name}</p>
-                <p>Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
+                <p className="truncate text-xl/8 font-semibold">{gamerInfo.person_name}</p>
+                <p className="text-sm/8">Steam ID: {shortenSteamId(gamerInfo.steam_id)}</p>
               </div>
             </div>
             <SteamProfileInfo data={gamerInfo} />
           </div>
-          <div className="pb-3">
+          <div>
             <SteamPowerLevel data={gamerInfo} />
-            <h3 className="mb-3 text-xl font-semibold">My Games</h3>
+            <h3 className="mb-3 text-base/6 font-semibold">My Games</h3>
             {gamesData ? (
               <>
                 <div className="flex items-start justify-start md:flex-col">
-                  <div className="flex-0 mr-5 w-[250px] md:mb-4 md:mr-0 md:w-full">
+                  <div className="flex-0 mr-5 w-[214px] md:mb-4 md:mr-0 md:w-full">
                     <SteamGamesInfo data={gamesData} />
                   </div>
                   <div className="flex-1 md:w-full ">
@@ -85,8 +85,8 @@ export default function SteamStatus() {
                       </div>
                     )}
                     {gamesData.games.length > 6 && (
-                      <div className="mt-4 flex items-center justify-between">
-                        <p className="text-xs">
+                      <div className="mt-3 flex items-center justify-between">
+                        <p className="text-xs/5 font-medium">
                           {currentPage * 6 - 5}-{currentPage * 6} of {gamesData.games.length}
                         </p>
                         <Pagination
@@ -111,7 +111,7 @@ export default function SteamStatus() {
                       We cannot view your profile. Please go to Privacy Settings and set all profile items to &quot;Public&quot;
                       including secondary options. You can turn off after the airdrop!
                     </div>
-                    <div className="mt-8 flex items-center justify-center md:mt-4 md:flex-col">
+                    <div className="mt-7.5 flex items-center justify-center md:mt-4 md:flex-col">
                       <div className="h-[346px] w-full max-w-[760px] overflow-x-scroll">
                         <div className="h-full w-[760px]">
                           <img
@@ -147,9 +147,9 @@ export default function SteamStatus() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-12 sm:py-4">
+        <div className="flex flex-col items-center justify-center sm:py-4">
           {isMounted && address ? (
-            <Button type="gradient" onClick={steamSignIn} className="w-[305px]">
+            <Button type="gradient" onClick={steamSignIn} className="w-[278px]">
               Sign in with Steam
             </Button>
           ) : (
@@ -157,7 +157,7 @@ export default function SteamStatus() {
               Please connect wallet
             </Button>
           )}
-          <p className="mt-5 text-sm text-gray">
+          <p className="mt-6.5 text-sm/6 text-gray">
             {isMounted && address && 'We cannot access your profile. Please log in to your Steam account.'}
           </p>
         </div>

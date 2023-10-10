@@ -16,10 +16,10 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
     >
       <div className="relative z-10">
         <div
-          className="relative float-left mr-4 flex h-[72px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover lg:mr-2"
+          className="relative float-left mr-4 flex h-[60px] w-full items-center justify-start bg-[#CEDCFF]/10 bg-cover lg:mr-2"
           style={{ maxWidth: 'min(45%, 168px)' }}
         >
-          <p className="absolute -z-10 w-full text-center text-xs leading-[72px] text-gray-500">Damedane</p>
+          <p className="absolute -z-10 w-full text-center text-xs leading-[60px] text-gray-500">Damedane</p>
           <img
             src={gameIcon}
             onError={(error) => ((error.target as any).style = 'display: none')}
@@ -28,14 +28,14 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
             alt="header_image"
           />
         </div>
-        <div className="float-right h-[72px] pr-2 sm:hidden 2xl:pr-6">
+        <div className="float-right h-[60px] pr-4 sm:hidden 2xl:pr-6">
           <div className="flex h-full items-center justify-center lg:hidden">
-            <p className="mr-3 text-sm xl:hidden">Playtime</p>
-            <p className="font-ddin text-2xl">{formatMinutes(data.playtime_forever)}</p>
+            <p className="mr-3 text-xs xl:hidden">Playtime</p>
+            <p className="font-ddin text-sm/4 font-semibold">{formatMinutes(data.playtime_forever)}</p>
           </div>
         </div>
-        <div className="truncate pt-3 lg:pt-1.5">
-          <p className="truncate font-medium lg:text-xs xl:text-sm">
+        <div className="truncate pt-2 lg:pt-1.5">
+          <p className="truncate text-xs font-semibold">
             {isSSGame && (
               <span className="mr-1.5 rounded bg-[#C859FF]/20 px-2 py-[1.5px] align-middle text-xs text-[#FC59FF] lg:px-1">
                 SS Game
