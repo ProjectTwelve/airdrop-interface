@@ -15,7 +15,7 @@ export default function Bridge() {
         <div className="absolute left-0 top-0 h-[138px] w-full rounded-t-2xl bg-card-mask" />
         <img width={104} src="/img/pl/power_level.png" alt="power_level" />
         <div>
-          <p className="text-xl/5.5">Arcana - Linea Editorium </p>
+          <p className="text-xl/5.5">P12 Arcana</p>
           <div className="text-gradient-yellow mt-3.5 text-[68px]/[68px] font-bold">{powerLevel?.power ?? 0}</div>
         </div>
       </div>
