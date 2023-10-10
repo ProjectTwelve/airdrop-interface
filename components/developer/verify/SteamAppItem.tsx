@@ -65,9 +65,9 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
           </div>
         </div>
       ) : (
-        <div className="flex h-full items-center justify-between px-5 md:px-2">
-          <div className="flex flex-1 items-center justify-start text-sm">
-            <p className="mr-4 md:mr-2">App ID:</p>
+        <div className="flex h-full items-center justify-between px-4 md:px-2">
+          <div className="flex flex-1 items-center justify-start text-sm/6">
+            <p className="mr-4 font-semibold md:mr-2">App ID:</p>
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}

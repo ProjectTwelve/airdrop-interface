@@ -35,16 +35,13 @@ export default function GameList() {
       <div
         ref={ref}
         className={classNames(
-          'horizontal-scroll flex w-full overflow-x-auto rounded-t-2xl pb-[10px]',
+          'horizontal-scroll flex w-full overflow-x-auto rounded-t-2xl',
           !enableTabScroll && '2xl:overflow-x-hidden',
         )}
       >
         <div className="whitespace-nowrap">
           {list.map((game) => (
-            <div
-              key={game.appid}
-              className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl p-2.5 last:mr-0')}
-            >
+            <div key={game.appid} className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl last:mr-0')}>
               <div className="flex">
                 <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-lg bg-gray-700/30">
                   {game.header_image ? (
