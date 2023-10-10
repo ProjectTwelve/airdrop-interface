@@ -78,7 +78,7 @@ function LayoutHeader() {
         <LayoutHeaderExtra className="ml-6 md:hidden" />
       </div>
       <div className="flex items-center gap-4 xs:flex-wrap xs:justify-end">
-        {router.pathname === '/dashboard' ? (
+        {['/dashboard', '/bridge'].includes(router.pathname) ? (
           <div className="relative flex items-center gap-2 text-sm/5.5 font-semibold backdrop-blur">
             Activated PL
             <div className="text-gradient-yellow ml-0.5 text-[34px]/10 font-bold">{digitalFormat.integer(activatedPL)}</div>
