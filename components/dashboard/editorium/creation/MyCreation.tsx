@@ -22,7 +22,7 @@ export default function MyCreation() {
 
   return (
     <div className="mt-7.5 flex flex-col">
-      <div className="mb-6 flex items-end justify-between">
+      <div className="mb-4 flex items-end justify-between">
         <h1 className="text-base/6 font-semibold">My Creation</h1>
         <Button
           type="bordered"
@@ -32,7 +32,7 @@ export default function MyCreation() {
           <img className="h-5 w-5" src="/svg/download.svg" alt="" /> Download Editor & P12 App
         </Button>
       </div>
-      <div className="mt-9.5 grid grid-cols-4 gap-8 md:grid-cols-2 md:gap-4 xs:grid-cols-1">
+      <div className="grid grid-cols-4 gap-8 md:grid-cols-2 md:gap-4 xs:grid-cols-1">
         {works?.length
           ? works.map((item) => <GalleryItem id={item.id} key={item.id} data={item} isRank50={(item?.rank ?? 999) <= 50} />)
           : null}
@@ -47,7 +47,7 @@ export default function MyCreation() {
       </div>
       <Button
         type="bordered"
-        className="mt-12 w-[438px] self-center border-white py-4 xs:w-full"
+        className="mt-7.5 w-[350px] self-center border-white py-2.5 text-sm font-medium xs:w-full"
         onClick={() => {
           ReactGA.event({ category: EventCategory.Global, action: EventName.ViewCreations });
           openLink('https://arcana.p12.games/#creation');

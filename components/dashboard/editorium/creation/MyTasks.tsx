@@ -35,11 +35,11 @@ export default function MyTasks() {
     return completedTasks;
   }, [allTasks, inviteCount, invitePL, isLogged, tasksStatus]);
   return (
-    <div className="mt-12 flex flex-col">
-      <h1 className="mb-6 text-xl/6 font-semibold">My Arcana Tasks</h1>
+    <div className="mt-7.5 flex flex-col">
+      <h1 className="mb-4 text-base/6 font-semibold">My Arcana Tasks</h1>
       {completedTasks?.length ? (
         <>
-          <div className="grid grid-cols-3 gap-5.5 md:grid-cols-2 xs:grid-cols-1">
+          <div className="grid grid-cols-3 gap-5 md:grid-cols-2 xs:grid-cols-1">
             {completedTasks.map(({ title, id, subtitle, desc, PL, inviteCount }) => {
               const isInviteCard = id === TaskCode.Invite;
               return (
@@ -90,13 +90,13 @@ export default function MyTasks() {
           </div>
           <Button
             type="bordered"
-            className="mt-12 flex w-[438px] justify-center gap-1.5 self-center border-white py-4 xs:w-full"
+            className="mt-7.5 flex w-[350px] justify-center gap-1.5 self-center border-white py-2.5 text-sm xs:w-full"
             onClick={() => {
               ReactGA.event({ category: EventCategory.Global, action: EventName.GetPl });
               openLink('https://arcana.p12.games/#task');
             }}
           >
-            Get More PL <img className="w-6" src="/img/pl/power_level.png" alt="pl-icon" />
+            Get More PL <img className="w-5" src="/img/pl/power_level.png" alt="pl-icon" />
           </Button>
         </>
       ) : (
