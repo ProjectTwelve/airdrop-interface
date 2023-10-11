@@ -11,7 +11,7 @@ export default function CredentialTask({ status, onClick, text }: CredentialTask
     <div
       onClick={onClick}
       className={classNames(
-        'flex cursor-pointer gap-2 rounded-lg border bg-gray-700/30 px-3 py-3.5 text-xs font-semibold',
+        'flex h-9 cursor-pointer items-center gap-2 rounded-lg border bg-gray-700/30 px-3 text-xs font-semibold',
         status ? 'border-green text-green' : 'border-gray-550/50',
       )}
     >

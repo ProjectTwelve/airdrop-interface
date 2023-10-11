@@ -3,7 +3,7 @@ import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCoun
 import { getCountMemo } from '@/utils';
 import classNames from 'classnames';
 import Pagination from 'rc-pagination';
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
@@ -44,23 +44,20 @@ export default function GamerRanking() {
         <div>
           <h3 className="text-base/6 font-semibold">P12 Gamers</h3>
           <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] leading-[90px] 2xl:flex 2xl:items-center">
-            <div className="h-[40px] w-full border-[#949FA9]/50 2xl:w-[130px] 2xl:border-r">
+            <div className="h-[40px] w-full 2xl:w-[130px]">
               <p className="h-[14px] text-center text-xs">Total</p>
               <p className="mt-1 text-center font-ddin text-xl leading-5">
                 {new Intl.NumberFormat().format(verified?.total ?? 0)}
               </p>
             </div>
+
             {levelCount.map((item, index) => (
-              <p
-                key={index}
-                className={classNames(
-                  'h-[40px] flex-1 border-[#949FA9]/50 text-center font-ddin text-lg leading-[40px]',
-                  '2xl:border-r 2xl:last:border-r-0',
-                  item.color,
-                )}
-              >
-                {new Intl.NumberFormat().format(item.num)}
-              </p>
+              <Fragment key={index}>
+                <div className="mx-2 my-auto hidden h-4 w-px bg-[#949FA9]/50 2xl:block" />
+                <p className={classNames('h-[40px] flex-1 text-center font-ddin text-lg leading-[40px]', item.color)}>
+                  {new Intl.NumberFormat().format(item.num)}
+                </p>
+              </Fragment>
             ))}
           </div>
         </div>
@@ -76,7 +73,7 @@ export default function GamerRanking() {
                 )}
                 <div className="truncate">{gamerRankData?.person_name || 'Please login first'}</div>
               </div>
-              <div className="mx-2 my-3.5 hidden w-[1px] bg-[#949FA9] 2xl:block" />
+              <div className="mx-2 my-auto hidden h-4 w-px bg-[#949FA9]/50 2xl:block" />
               <div
                 onClick={() => {
                   isInRanking && setTokenRankPage(Math.ceil(gamerRankData!.tokenRank! / 10));
@@ -92,7 +89,7 @@ export default function GamerRanking() {
                   {isLowLevelToken(gamerRankData?.nft_level) ? '+' : null}
                 </span>
               </div>
-              <div className="mx-2 my-3.5 hidden w-[1px] bg-[#949FA9] 2xl:block" />
+              <div className="mx-2 my-auto hidden h-4 w-px bg-[#949FA9]/50 2xl:block" />
               <div className="flex flex-1 items-center justify-center rounded-2xl text-xs">
                 By Claim Time
                 <span className="pl-3 font-ddin text-lg font-bold">{getCountMemo(gamerRankData?.timeRank) || '--'}</span>
@@ -101,7 +98,7 @@ export default function GamerRanking() {
           </div>
         </div>
       </div>
-      <div className="backdrop-box mt-5 grid grid-cols-2 gap-8 rounded-2xl bg-gray-700/30 px-6 pb-8 pt-5 sm:p-4 md:grid-cols-1 lg:gap-4 xl:gap-4">
+      <div className="backdrop-box mt-5 grid grid-cols-2 gap-8 rounded-[15px] bg-gray-700/30 px-6 pb-8 pt-5 sm:p-4 md:grid-cols-1 lg:gap-4 xl:gap-4">
         <div className="w-full">
           <h2 className="border-b border-gray-650 pb-3 text-base/6 font-semibold">Latest</h2>
           <GamerTimeRankingHeader />

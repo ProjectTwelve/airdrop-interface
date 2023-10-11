@@ -36,11 +36,11 @@ export default function SteamGamerSBT() {
         <div className="w-full max-w-[217px]">
           {isClaimed ? (
             <div
-              className="aspect-square bg-cover"
+              className="-mt-[15px] aspect-square bg-cover"
               style={{ backgroundImage: `url(${GAMER_BADGES[gamerNFT!.nftLevel].asset256})` }}
             />
           ) : (
-            <img className="w-full" src="/img/unclaimed.webp" alt="unclaimed" />
+            <img className="mb-4 w-full max-w-[186px]" src="/img/unclaimed.webp" alt="unclaimed" />
           )}
         </div>
         <div className="flex-1">
@@ -56,12 +56,7 @@ export default function SteamGamerSBT() {
           </div>
           <p className="mt-4 text-xs/3">Power Level</p>
           <div className="mt-2 flex gap-1.5">
-            <div
-              className={classNames(
-                'font-bold',
-                isClaimed ? 'text-gradient-yellow text-[44px]/10' : 'text-[34px]/10 text-gray-400',
-              )}
-            >
+            <div className={classNames('text-[34px]/8 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(gamerPL)}
             </div>
             {isClaimed ? (

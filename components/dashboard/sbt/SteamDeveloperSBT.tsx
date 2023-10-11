@@ -27,26 +27,21 @@ export default function SteamDeveloperSBT() {
   return (
     <div className="relative flex h-full flex-col gap-3.5">
       <div className="flex gap-6 xs:flex-wrap">
-        <div className="w-full max-w-[217px]">
+        <div className="max-w-[217px]">
           {isClaimed ? (
             <div
-              className="aspect-square bg-cover"
+              className="-mt-[15px] aspect-square bg-cover"
               style={{ backgroundImage: `url(${DEV_BADGES[developerNFT!.nftLevel].asset256})` }}
             />
           ) : (
-            <img className="w-full" src="/img/unclaimed.webp" alt="unclaimed" />
+            <img className="mb-4 aspect-square w-full max-w-[186px]" src="/img/unclaimed.webp" alt="unclaimed" />
           )}
         </div>
         <div className="flex-1">
           <div className="flex gap-3 text-lg/4.5">P12 Genesis Badge</div>
           <p className="mt-4 text-xs/3">Power Level</p>
           <div className="mt-2 flex gap-1.5">
-            <div
-              className={classNames(
-                'font-bold',
-                isClaimed ? 'text-gradient-yellow text-[44px]/10' : 'text-[34px]/10 text-gray-400',
-              )}
-            >
+            <div className={classNames('text-[34px]/8 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(developerPL)}
             </div>
             {isClaimed ? (
@@ -68,7 +63,7 @@ export default function SteamDeveloperSBT() {
                 status={nftSource.includes(GenesisSource.Arcana)}
                 text="Publish a creation in Arcana Editorium"
               />
-              <p className="my-0.5 text-center text-xs">OR</p>
+              <p className="text-center text-xs">OR</p>
               <CredentialTask
                 onClick={() => setSelectedTab(2)}
                 status={nftSource.includes(GenesisSource.Steam)}

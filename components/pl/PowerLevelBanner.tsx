@@ -28,7 +28,7 @@ export default function PowerLevelBanner({ className }: { className?: string }) 
   return (
     <div
       className={twMerge(
-        'relative cursor-pointer overflow-hidden rounded-2xl backdrop-blur duration-200 hover:-translate-y-1',
+        'relative cursor-pointer overflow-hidden rounded-[15px] backdrop-blur duration-200 hover:-translate-y-1',
         className,
       )}
       onClick={onClick}

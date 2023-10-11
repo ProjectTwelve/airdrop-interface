@@ -136,10 +136,8 @@
       rgba(57, 63, 70, 0.4) 14.16%,
       rgba(35, 38, 44, 0.4) 96.73%
     );
-    border: 1px solid #6f7784;
-    border-radius: 1rem;
     overflow: hidden;
-    @apply backdrop-blur-lg sm:backdrop-blur-none;
+    @apply rounded-lg border border-gray-550/50 backdrop-blur-lg sm:backdrop-blur-none;
   }
 
   .gradient__box::after {
