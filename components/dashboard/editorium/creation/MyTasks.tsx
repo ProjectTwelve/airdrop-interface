@@ -100,7 +100,7 @@ export default function MyTasks() {
           </Button>
         </>
       ) : (
-        <div className="flex-center rounded-lg border border-gray-550/50 py-17 text-gray-400">
+        <div className="flex-center rounded-lg border border-gray-550/50 py-17 text-gray-400 backdrop-blur-lg">
           You haven&#x27;t completed any arcana tasks yet.
         </div>
       )}
