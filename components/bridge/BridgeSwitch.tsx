@@ -368,8 +368,8 @@ export default function BridgeSwitch() {
     <div className="p-7.5">
       <div className="flex gap-9">
         <div className="flex-1">
-          <div className="border-b border-gray-600 pb-4 text-base font-semibold">
-            <img className="mr-2 inline w-[30px]" src="/img/bridge/inventory.svg" alt="inventory icon" />
+          <div className="border-b border-[#4e4e50] pb-4 text-base font-semibold">
+            <img className="mr-2 inline w-6" src="/img/bridge/inventory.svg" alt="inventory icon" />
             Inventory
           </div>
           <div className="mt-7.5">
@@ -557,8 +557,8 @@ export default function BridgeSwitch() {
           </div>
         </div>
         <div className="flex basis-[540px] flex-col">
-          <div className="border-b border-gray-600 pb-4 font-semibold">
-            <img className="mr-2 inline w-[30px]" src="/img/bridge/bridge.svg" alt="bridge icon" />
+          <div className="border-b border-[#4e4e50] pb-4 font-semibold">
+            <img className="mr-2 inline w-6" src="/img/bridge/bridge.svg" alt="bridge icon" />
             Bridge
           </div>
           {selectedBadge ? (
@@ -725,7 +725,7 @@ export default function BridgeSwitch() {
         </div>
       </div>
 
-      <div className="my-7.5 border-b border-gray-600"></div>
+      <div className="my-7.5 border-b border-[#4e4e50]"></div>
       <div className="text-base font-semibold">Bridge History</div>
       <Table loading={isLoading} className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={orderData} columns={gamerColumns} />
     </div>
