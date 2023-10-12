@@ -8,6 +8,7 @@ import { useIsMounted } from '../../hooks/useIsMounted';
 import { inviteModalAtom } from '../../store/invite/state';
 import { isConnectPopoverOpen } from '../../store/web3/state';
 import Button from '../button';
+import BlueButton from '../button/BlueButton';
 import Dialog from '../dialog';
 import { TwitterSvg } from '../svg/TwitterSvg';
 import Tag from '../tag';
@@ -35,21 +36,22 @@ function InviteDialog() {
       <>
         <h3 className="mt-9 text-base/6 font-semibold">Option 1: by joining P12 Arcana</h3>
         <div className="mt-3 flex gap-4">
-          <div className="relative flex flex-grow items-center justify-between rounded-lg bg-white/15 px-5 py-3 text-sm/6">
-            {arcanaReferralLink}
+          <div className="relative flex flex-grow items-center justify-between overflow-hidden rounded-lg bg-white/15 px-5 py-3 text-sm/6">
+            <p className="w-full truncate">{arcanaReferralLink}</p>
           </div>
-          <div
-            className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-5 text-base/5 text-blue hover:bg-blue/30"
+          <BlueButton
+            type="blue"
+            className="px-5 text-base/5"
             onClick={() => {
               if (!address) return;
               copyToClipboardArcana();
             }}
           >
             Copy
-          </div>
+          </BlueButton>
           <div
             onClick={onArcanaTwitterShare}
-            className="flex-center h-12 cursor-pointer rounded-lg bg-white/15 px-5 text-base/5 font-semibold hover:bg-white/30"
+            className="flex-center h-12 cursor-pointer truncate rounded-lg bg-white/15 px-5 text-base/5 font-semibold hover:bg-white/30"
           >
             Share <TwitterSvg color="#fff" />
           </div>
@@ -57,18 +59,19 @@ function InviteDialog() {
 
         <h3 className="mt-9 text-base/6 font-semibold">Option 2: by verifying Steam Account</h3>
         <div className="mt-3 flex gap-4">
-          <div className="relative flex flex-grow items-center justify-between rounded-lg bg-white/15 px-5 py-3 text-sm/6">
-            {referralLink}
+          <div className="relative flex flex-grow items-center justify-between overflow-hidden rounded-lg bg-white/15 px-5 py-3 text-sm/6">
+            <p className="w-full truncate">{referralLink}</p>
           </div>
-          <div
-            className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-5 text-base/5 text-blue hover:bg-blue/30"
+          <BlueButton
+            type="blue"
+            className="px-5 text-base/5"
             onClick={() => {
               if (!address) return;
               copyToClipboard();
             }}
           >
             Copy
-          </div>
+          </BlueButton>
           <div
             onClick={onTwitterShare}
             className="flex-center h-12 cursor-pointer rounded-lg bg-white/15 px-5 text-base/5 font-semibold hover:bg-white/30"
@@ -178,7 +181,7 @@ function InviteDialog() {
               )}
             </div>
             <div>
-              <Button type="bordered" onClick={() => setOpen(false)}>
+              <Button type="bordered" className="w-[7.5rem]" onClick={() => setOpen(false)}>
                 Confirm
               </Button>
               {isMounted && !address && (

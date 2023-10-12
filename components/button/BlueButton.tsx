@@ -37,7 +37,7 @@ const ButtonClass = {
   },
 };
 
-const Button = forwardRef(function ButtonInner(
+const BlueButton = forwardRef(function ButtonInner(
   { type, size, className, onClick, disabled, loading, style, children, iconClassName }: ButtonProps,
   ref: LegacyRef<HTMLButtonElement>,
 ) {
@@ -69,10 +69,10 @@ const Button = forwardRef(function ButtonInner(
     </button>
   );
 });
-Button.defaultProps = {
+BlueButton.defaultProps = {
   type: 'default',
   size: 'middle',
   loading: false,
   disabled: false,
 };
-export default Button;
+export default BlueButton;
