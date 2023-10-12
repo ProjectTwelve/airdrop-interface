@@ -45,7 +45,7 @@ export default function MyTasks() {
               return (
                 <div
                   className={classNames(
-                    'arcana__card flex flex-col p-4',
+                    'arcana__card flex flex-col border-gray-550/50 p-4',
                     isInviteCard ? 'bg-arcana-refer-mask' : 'bg-arcana-task-mask',
                   )}
                   key={id}
@@ -100,7 +100,7 @@ export default function MyTasks() {
           </Button>
         </>
       ) : (
-        <div className="flex-center rounded-lg border border-gray-600/50 py-17 text-gray-400">
+        <div className="flex-center rounded-lg border border-gray-550/50 py-17 text-gray-400">
           You haven&#x27;t completed any arcana tasks yet.
         </div>
       )}

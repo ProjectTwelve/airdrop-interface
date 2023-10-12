@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
-import { useMutation } from '@tanstack/react-query';
-import Button from '../../button';
-import Message from '../../message';
-import { SteamApp } from '../Verify';
-import { CloseCircle } from '../../svg/CloseCircle';
+import BlueButton from '@/components/button/BlueButton';
 import { fetchDeveloperGame } from '@/lib/api';
 import { roadmapModalAtom } from '@/store/roadmap/state';
+import { useMutation } from '@tanstack/react-query';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import Message from '../../message';
+import { CloseCircle } from '../../svg/CloseCircle';
+import { SteamApp } from '../Verify';
 
 type SteamGameItemProps = {
   app: SteamApp;
@@ -75,16 +75,15 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
               placeholder="Please enter"
             />
           </div>
-          <Button
+          <BlueButton
             loading={isLoading}
             disabled={!value}
-            type={value ? 'gradient' : 'default'}
-            size="small"
-            className="min-w-[56px] text-sm font-medium"
+            type={value ? 'blue' : 'default'}
+            className="flex-center min-w-[56px] text-sm font-medium"
             onClick={() => mutate({ appid: value })}
           >
             Add
-          </Button>
+          </BlueButton>
         </div>
       )}
     </div>

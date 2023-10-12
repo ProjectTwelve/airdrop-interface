@@ -39,7 +39,7 @@ export default function MyCreation() {
         {_.range(1, (works?.length ?? 0) < 4 ? 5 - (works?.length ?? 0) : 9 - (works?.length ?? 0)).map((v) => (
           <div
             key={v}
-            className="flex min-h-[15rem] items-center justify-center rounded-lg border border-gray-600/50 text-6xl text-gray-100 backdrop-blur-lg"
+            className="flex min-h-[15rem] items-center justify-center rounded-lg border border-gray-550/50 text-6xl text-gray-100 backdrop-blur-lg"
           >
             ?
           </div>

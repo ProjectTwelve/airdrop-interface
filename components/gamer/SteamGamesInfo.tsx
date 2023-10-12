@@ -40,7 +40,7 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
 
   return (
     <div>
-      <div className="relative flex w-full flex-col gap-8 rounded-xl border border-[#616985] bg-profile-info bg-cover p-4">
+      <div className="relative flex w-full flex-col gap-8 rounded-lg border border-[#616985] bg-profile-info bg-cover p-4">
         {list.map((item, index) => (
           <div key={index} className="flex flex-1 flex-row items-center justify-between last:mb-0">
             <div className="text-xs">{item.label}</div>

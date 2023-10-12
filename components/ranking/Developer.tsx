@@ -102,7 +102,7 @@ function DeveloperRanking() {
                             src={item.header_image}
                           />
                         ) : (
-                          <p className="text-center text-xs leading-[60px] text-gray-500">No Game</p>
+                          <p className="text-center text-sm/[72px] text-gray-400">No Game</p>
                         )}
                       </div>
                       <div className="truncate">
@@ -112,7 +112,7 @@ function DeveloperRanking() {
                             <div className="mt-1.5 text-xs">{item?.release_date}</div>
                           </>
                         ) : (
-                          <p className="text-sm font-medium leading-[60px]">NO GAME YET</p>
+                          <p className="text-base/[72px] font-semibold">NO GAME YET</p>
                         )}
                       </div>
                     </div>

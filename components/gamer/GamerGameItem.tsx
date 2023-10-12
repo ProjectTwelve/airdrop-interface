@@ -10,7 +10,7 @@ export default function GamerGameItem({ data }: { data: GamerGameInfo }) {
   return (
     <div
       className={classNames(
-        'relative overflow-hidden rounded-2xl bg-gray-700/30 bg-right bg-no-repeat',
+        'relative overflow-hidden rounded-lg bg-gray-700/30 bg-right bg-no-repeat',
         isSSGame && 'bg-ss-game',
       )}
     >

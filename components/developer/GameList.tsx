@@ -47,7 +47,7 @@ export default function GameList() {
                   {game.header_image ? (
                     <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                   ) : (
-                    <p className="text-center text-xs leading-[72px] text-gray-500">No Game</p>
+                    <p className="text-center text-sm/[72px] text-gray-400">No Game</p>
                   )}
                 </div>
                 <div className="flex-1">
@@ -57,7 +57,7 @@ export default function GameList() {
                       <p className="text-gradient-yellow mt-2 text-[34px]/10 font-bold">100</p>
                     </>
                   ) : (
-                    <p className="font-medium leading-[72px]">NO GAME YET</p>
+                    <p className="text-base/[72px] font-semibold">NO GAME YET</p>
                   )}
                 </div>
               </div>
