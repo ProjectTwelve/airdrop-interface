@@ -63,7 +63,7 @@ function Web3Status() {
   if (isConnected) {
     if (chain?.unsupported) {
       return (
-        <Button type="error" onClick={() => switchNetwork?.()}>
+        <Button size="small" type="error" className="h-10" onClick={() => switchNetwork?.()}>
           Wrong Network
         </Button>
       );
@@ -71,7 +71,7 @@ function Web3Status() {
     return (
       <div className="flex items-center">
         {router.pathname === '/gamer' && posterCapture && <PosterButton />}
-        <div className="flex rounded-full bg-[#44465F]/60 text-sm backdrop-blur">
+        <div className="flex rounded-full bg-[#44465F]/60 text-sm">
           <Web3StatusInner />
         </div>
       </div>
@@ -80,7 +80,7 @@ function Web3Status() {
     return (
       <div>
         <Popover open={isOpen} onOpenChange={(op) => setIsOpen(op)} render={({ close }) => <WalletPopover close={close} />}>
-          <Button type="gradient" className="w-[120px]">
+          <Button size="small" type="gradient" className="h-10 w-[120px]">
             Connect
           </Button>
         </Popover>

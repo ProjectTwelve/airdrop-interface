@@ -21,25 +21,25 @@ export default function MyCreation() {
   }, [inventoryData, submitData]);
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-6 mt-13 flex items-end justify-between">
-        <h1 className="text-xl/6 font-semibold">My Creation</h1>
+    <div className="mt-7.5 flex flex-col">
+      <div className="mb-4 flex items-end justify-between">
+        <h1 className="text-base/6 font-semibold">My Creation</h1>
         <Button
           type="bordered"
-          className="flex gap-1.5 border-white px-8 py-4 text-base/5.5"
+          className="flex gap-1 border-white px-4 py-2.5 text-sm/5"
           onClick={() => setEditorDownloadDialogOpen(true)}
         >
-          <img className="h-6 w-6" src="/svg/download.svg" alt="" /> Download Editor & P12 App
+          <img className="h-5 w-5" src="/svg/download.svg" alt="" /> Download Editor & P12 App
         </Button>
       </div>
-      <div className="mt-9.5 grid grid-cols-4 gap-8 md:grid-cols-2 md:gap-4 xs:grid-cols-1">
+      <div className="grid grid-cols-4 gap-8 md:grid-cols-2 md:gap-4 xs:grid-cols-1">
         {works?.length
           ? works.map((item) => <GalleryItem id={item.id} key={item.id} data={item} isRank50={(item?.rank ?? 999) <= 50} />)
           : null}
         {_.range(1, (works?.length ?? 0) < 4 ? 5 - (works?.length ?? 0) : 9 - (works?.length ?? 0)).map((v) => (
           <div
             key={v}
-            className="flex min-h-[15rem] items-center justify-center rounded-lg border border-gray-600/50 text-6xl text-gray-100 backdrop-blur-lg"
+            className="flex min-h-[15rem] items-center justify-center rounded-lg border border-gray-550/50 text-6xl text-gray-100 backdrop-blur-lg"
           >
             ?
           </div>
@@ -47,7 +47,7 @@ export default function MyCreation() {
       </div>
       <Button
         type="bordered"
-        className="mt-12 w-[438px] self-center border-white py-4 xs:w-full"
+        className="mt-7.5 w-[350px] self-center border-white py-2.5 text-sm font-medium xs:w-full"
         onClick={() => {
           ReactGA.event({ category: EventCategory.Global, action: EventName.ViewCreations });
           openLink('https://arcana.p12.games/#creation');

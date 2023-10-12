@@ -16,7 +16,7 @@ export default function Arcana() {
   const isVerify = useRecoilValue(arcanaIsVerifySelector);
   const isMounted = useIsMounted();
   return (
-    <div className="mb-32 mt-10 px-16 md:px-4">
+    <div className="mb-32 mt-7.5 px-16 md:px-4">
       <div className={classNames('grid grid-cols-2 md:grid-cols-1', isVerify ? 'gap-10' : 'gap-6')}>
         <BecomeCard isVoter={isVoter} />
         {isVerify ? <IDCard /> : <CreateNowCard />}

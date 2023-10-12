@@ -31,11 +31,15 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
 
   return data?.credential ? (
     data.nftClaim === GenesisClaim.Unclaimed ? (
-      <Button type="gradient" className="w-full py-4 font-medium" onClick={() => openLink(nftConfig[data.nftLevel].claim)}>
+      <Button
+        type="gradient"
+        className="w-full py-3 text-base/5 font-semibold"
+        onClick={() => openLink(nftConfig[data.nftLevel].claim)}
+      >
         Claim
       </Button>
     ) : data.nftLevel === GenesisRarity.Legendary ? (
-      <Button className="w-full py-4 text-gray-450" disabled>
+      <Button className="w-full py-3 text-base/5 font-semibold text-gray-450" disabled>
         The highest level
       </Button>
     ) : (
@@ -47,7 +51,7 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
               mutateAsync({ address, role }).then();
             }}
             className={classNames(
-              'flex-center cursor-pointer gap-3 rounded-full py-4.5 text-center text-xl/5 font-medium',
+              'flex-center cursor-pointer gap-3 rounded-full py-3 text-center text-base/5 font-semibold',
               upLevelConfig.bg,
               upLevelConfig.text,
               upLevelConfig.hover,
@@ -74,14 +78,14 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
           </div>
         )}
         {upgrade.status === GenesisUpgradeStatus.NotUpgrade && (
-          <Button className="w-full py-4.5 text-lg/5 font-medium" disabled>
-            Need <span className="text-2xl/5 text-yellow">{upgrade.diff} PL</span> to Upgrade
+          <Button className="w-full py-3 text-base/5 font-semibold" disabled>
+            Need <span className="text-xl/5 text-yellow">{upgrade.diff} PL</span> to Upgrade
           </Button>
         )}
       </>
     )
   ) : (
-    <Button className="w-full py-4 text-gray-450" disabled>
+    <Button className="w-full py-3 text-base/5 font-semibold text-gray-450" disabled>
       You are NOT eligible
     </Button>
   );

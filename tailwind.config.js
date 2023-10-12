@@ -22,6 +22,7 @@ module.exports = {
       spacing: {
         4.5: '1.125rem',
         5.5: '1.375rem',
+        6.5: '1.625rem',
         7.5: '1.875rem',
         13: '3.25rem',
         13.5: '3.375rem',
@@ -38,8 +39,10 @@ module.exports = {
         7.5: '1.875rem',
         8.5: '2.125rem',
         10: '2.5rem',
+        10.5: '2.625rem',
         11: '2.75rem',
         12: '3rem',
+        13.5: '3.375rem',
       },
       opacity: {
         15: '0.15',
@@ -97,12 +100,17 @@ module.exports = {
         backdrop: 'backdrop 2s linear forwards',
         omg: 'omg 1s linear infinite alternate',
         'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+        fadeIn: 'fadeIn 18s ease-in-out forwards',
       },
       keyframes: {
         backdrop: {
           '0%': { backdropFilter: 'none' },
           '50%': { backdropFilter: 'none' },
           '100%': { backdropFilter: 'blur(16px)', background: '#0C0C0C99' },
+        },
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 0.5 },
         },
       },
       backgroundImage: {
@@ -126,6 +134,7 @@ module.exports = {
         'gradient-babt': 'linear-gradient(to bottom, #F3E0A9 0%, #BC9759 100%)',
         'gradient-prediction': 'linear-gradient(to bottom, #55606880 0%, #23262C80 100%)',
         'gradient-yellow': 'linear-gradient(to bottom, #FFFFDA 0%, #FFE7B6 50.34%, #CE9658 100%)',
+        'gradient-green': 'linear-gradient(90deg, #00F0FF 0.25%, #00FF94 92.45%)',
       },
       backgroundSize: {
         fill: '100% 100%',

@@ -5,8 +5,8 @@ import { formatMinutes, openLink } from '../../utils';
 
 export function GamerTimeRankingHeader() {
   return (
-    <div className="flex px-4 pb-2.5 pt-5 text-xs font-medium sm:py-2">
-      <p className="w-[90px] sm:hidden">Timestamp</p>
+    <div className="flex border-b border-[#2E2E31] px-2 pb-3 pt-5 text-xs font-medium sm:py-2">
+      <p className="w-[90px] text-left sm:hidden">Timestamp</p>
       <p>User Info</p>
     </div>
   );
@@ -30,7 +30,7 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-xl border border-gray-550/50 bg-gray-700/30 px-3 py-[14px] hover:bg-gray-700/60 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[14px] hover:bg-white/5 sm:px-2"
     >
       <div className="mr-2 h-[44px] flex-none break-words pt-1 text-xs font-medium sm:hidden 2xl:mr-4">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>

@@ -12,7 +12,7 @@ export default function TokenStatus({ data }: { data?: TokenStatusData }) {
   const rarityConfig = useSBTLevelConfig(data?.rarity);
 
   return (
-    <div className="flex rounded-lg border border-gray-650 py-3">
+    <div className="flex rounded-lg border border-gray-650 py-4">
       {[
         { label: 'ID', value: data?.id || '--' },
         { label: 'Birthday', value: data?.birthday ?? '--' },
@@ -27,8 +27,8 @@ export default function TokenStatus({ data }: { data?: TokenStatusData }) {
             'last:border-none',
           )}
         >
-          <p className="text-sm text-gray md:mr-2 lg:text-xs xl:text-xs">{item.label}</p>
-          <p className="text-sm">{item.value}</p>
+          <p className="text-xs/5 text-gray md:mr-2">{item.label}</p>
+          <p className="text-sm/5 font-semibold">{item.value}</p>
         </div>
       ))}
       <div
@@ -38,8 +38,8 @@ export default function TokenStatus({ data }: { data?: TokenStatusData }) {
           'last:border-none',
         )}
       >
-        <p className="text-sm text-gray md:mr-2 lg:text-xs xl:text-xs">Rarity</p>
-        <p className={classNames('text-sm', rarityConfig.text)}>{rarityConfig.rarity}</p>
+        <p className="text-xs/5 text-gray md:mr-2">Rarity</p>
+        <p className={classNames('text-sm/5 font-semibold', rarityConfig.text)}>{rarityConfig.rarity}</p>
       </div>
     </div>
   );

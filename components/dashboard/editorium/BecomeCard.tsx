@@ -11,16 +11,16 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
   const { arcanaGamerPL, arcanaDeveloperPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
-    <div className="arcana__p12-card relative flex-grow p-6">
-      {!isVoter && <div className="mb-3.5 text-2xl/6.5 font-bold">Become a Voter</div>}
-      <div className="flex items-start justify-between gap-14">
-        <div className={classNames({ 'mt-5': !isVoter })}>
-          <p className={classNames('flex items-center font-semibold', isVoter ? 'gap-2 text-xl/5.5' : 'gap-1.5 text-sm/5.5')}>
-            <span className={classNames('text-gradient-yellow font-bold', isVoter ? 'text-5xl/12' : ' text-[2.125rem]/8.5')}>
+    <div className="arcana__p12-card relative flex-grow px-6 py-4.5">
+      {!isVoter && <div className="mb-2 text-xl/6 font-bold">Become a Voter</div>}
+      <div className={classNames('flex items-start justify-between gap-10', { 'h-full': isVoter })}>
+        <div className={classNames(isVoter ? 'flex h-full flex-col justify-center' : 'mt-1.5')}>
+          <p className={classNames('flex items-center font-semibold', isVoter ? 'gap-2 text-base/5' : 'gap-1.5 text-sm/5.5')}>
+            <span className={classNames('text-gradient-yellow font-bold', isVoter ? 'text-[34px]/10' : ' text-[2.125rem]/8.5')}>
               {digitalFormat.integer(arcanaGamerPL)}
             </span>
             <img
-              className={classNames(isVoter ? 'mr-1 h-12 w-12' : 'mr-0.5 h-7.5 w-7.5')}
+              className={classNames(isVoter ? 'mr-1 h-10 w-10' : 'mr-0.5 h-7.5 w-7.5')}
               src="/img/pl/power_level.png"
               alt="PL"
             />
@@ -29,14 +29,14 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
           <p
             className={classNames(
               'flex items-center font-semibold',
-              isVoter ? 'mt-5.5 gap-2 text-xl/5.5' : 'mt-2.5 gap-1.5 text-sm/5.5',
+              isVoter ? 'mt-4 gap-2 text-base/5' : 'mt-2.5 gap-1.5 text-sm/5.5',
             )}
           >
-            <span className={classNames('text-gradient-yellow font-bold', isVoter ? 'text-5xl/12' : ' text-[2.125rem]/8.5')}>
+            <span className={classNames('text-gradient-yellow font-bold', isVoter ? 'text-[34px]/10' : ' text-[2.125rem]/8.5')}>
               {digitalFormat.integer(arcanaDeveloperPL)}
             </span>
             <img
-              className={classNames(isVoter ? 'mr-1 h-12 w-12' : 'mr-0.5 h-7.5 w-7.5')}
+              className={classNames(isVoter ? 'mr-1 h-10 w-10' : 'mr-0.5 h-7.5 w-7.5')}
               src="/img/pl/power_level.png"
               alt="PL"
             />
@@ -53,8 +53,7 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
               });
               openLink('https://arcana.p12.games/#gallery');
             }}
-            size="large"
-            className="h-[3.375rem] w-[12.5rem] backdrop-blur-lg"
+            className="h-12 w-[168px] backdrop-blur-lg"
           >
             CLICK HERE!
           </Button>

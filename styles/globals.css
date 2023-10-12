@@ -136,10 +136,8 @@
       rgba(57, 63, 70, 0.4) 14.16%,
       rgba(35, 38, 44, 0.4) 96.73%
     );
-    border: 1px solid #6f7784;
-    border-radius: 1rem;
     overflow: hidden;
-    @apply backdrop-blur-lg sm:backdrop-blur-none;
+    @apply rounded-lg border border-gray-550/50 backdrop-blur-lg sm:backdrop-blur-none;
   }
 
   .gradient__box::after {
@@ -156,7 +154,7 @@
   }
 
   .tooltip__container {
-    background: #23262cbf;
+    background: #23262c80;
     border: 1px solid #6f778480;
     backdrop-filter: blur(50px);
   }
@@ -244,17 +242,6 @@
     background: linear-gradient(to bottom, #5d646c7f, #393f467f 15%, #23262c7f);
     backdrop-filter: blur(16px);
     border: 1px solid #6f77847f;
-  }
-
-  .bg-gradient-collab {
-    cursor: pointer;
-    background: linear-gradient(to bottom, #3d444b66, #23262c66);
-    backdrop-filter: blur(16px);
-    border: 1px solid #6f77847f;
-  }
-
-  .bg-gradient-collab:hover {
-    background: linear-gradient(to bottom, #3d444bad, #23262cad);
   }
 
   .bg-p12-poster-0 {

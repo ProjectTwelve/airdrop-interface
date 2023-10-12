@@ -14,15 +14,15 @@ export default function Dashboard() {
   const { arcanaPL, steamGamerPL, steamDeveloperPL } = useRecoilValue(userPowerLevelAtom);
 
   return (
-    <div className="mt-7">
+    <div className="mt-4">
       <div className="backdrop-box relative rounded-2xl">
-        <div className="grid grid-cols-2 gap-8 px-6 pb-12 pt-7 md:grid-cols-1">
+        <div className="grid grid-cols-2 gap-10 px-6 py-7.5 md:grid-cols-1">
           <SteamGamerSBT />
           <SteamDeveloperSBT />
         </div>
       </div>
-      <div className="relative mt-10 h-[130px]">
-        <div className="flex-center absolute left-0 w-screen gap-15  bg-gray-700/30 py-5 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
+      <div className="relative mt-7.5 h-[96px]">
+        <div className="flex-center absolute left-0 w-screen gap-15  bg-gray-700/30 pb-3 pt-4 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
           <ActivityTab
             onClick={() => setSelectedTab(0)}
             active={selectedTab === 0}
@@ -30,7 +30,7 @@ export default function Dashboard() {
             score={
               <>
                 {digitalFormat.integer(arcanaPL)}
-                <img className="h-12 w-12" src="/img/pl/power_level.png" alt="PL" />
+                {selectedTab === 0 && <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />}
               </>
             }
           />
@@ -38,13 +38,23 @@ export default function Dashboard() {
             onClick={() => setSelectedTab(1)}
             active={selectedTab === 1}
             title="Genesis Steam Gamer"
-            score={digitalFormat.integer(steamGamerPL)}
+            score={
+              <>
+                {digitalFormat.integer(steamGamerPL)}
+                {selectedTab === 1 && <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />}
+              </>
+            }
           />
           <ActivityTab
             onClick={() => setSelectedTab(2)}
             active={selectedTab === 2}
             title="Genesis Steam Developer"
-            score={digitalFormat.integer(steamDeveloperPL)}
+            score={
+              <>
+                {digitalFormat.integer(steamDeveloperPL)}
+                {selectedTab === 2 && <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />}
+              </>
+            }
           />
         </div>
       </div>

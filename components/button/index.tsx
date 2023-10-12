@@ -28,7 +28,7 @@ const Button = React.forwardRef(function ButtonInner(
     default: 'bg-white/[0.08]',
     error: 'bg-red-400',
     gradient: 'bg-p12-gradient',
-    bordered: 'border',
+    bordered: 'border border-white',
   };
   const sizes = {
     small: 'min-h-[30px]',

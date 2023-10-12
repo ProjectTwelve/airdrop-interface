@@ -49,7 +49,7 @@ function DeveloperRanking() {
   return (
     <div className="p-8 sm:p-3">
       <div className="flex md:flex-col">
-        <div className="mr-8 md:mr-0 md:mb-2">
+        <div className="mr-8 md:mb-2 md:mr-0">
           <h3 className="text-sm font-medium leading-5">Total Games</h3>
           <div className="gradient__box mt-3 h-[84px] w-[180px] text-center font-ddin text-2xl font-medium leading-[84px] sm:w-auto">
             {new Intl.NumberFormat().format(verified?.total ?? 0)}
@@ -80,7 +80,7 @@ function DeveloperRanking() {
               <div className="relative h-full w-full overflow-hidden">
                 <AnimatePresence initial={false} custom={swipeDirection}>
                   <motion.div
-                    className="absolute flex h-full w-full py-3 px-4 sm:flex-wrap sm:px-2"
+                    className="absolute flex h-full w-full px-4 py-3 sm:flex-wrap sm:px-2"
                     key={swipePage}
                     custom={swipeDirection}
                     variants={variants}
@@ -102,7 +102,7 @@ function DeveloperRanking() {
                             src={item.header_image}
                           />
                         ) : (
-                          <p className="text-center text-xs leading-[60px] text-gray-500">No Game</p>
+                          <p className="text-center text-sm/[72px] text-gray-400">No Game</p>
                         )}
                       </div>
                       <div className="truncate">
@@ -112,7 +112,7 @@ function DeveloperRanking() {
                             <div className="mt-1.5 text-xs">{item?.release_date}</div>
                           </>
                         ) : (
-                          <p className="text-sm font-medium leading-[60px]">NO GAME YET</p>
+                          <p className="text-base/[72px] font-semibold">NO GAME YET</p>
                         )}
                       </div>
                     </div>
@@ -145,7 +145,7 @@ function DeveloperRanking() {
       </div>
       <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-1">
         <div className="w-full">
-          <h2 className="border-b border-gray-600 pb-3 text-center text-xl font-medium">Latest</h2>
+          <h2 className="border-b border-gray-650 pb-3 text-center text-xl font-medium">Latest</h2>
           <DevTimeRankingHeader />
           <div className="grid gap-4">
             {timeRankData?.rankList.map((item, index) => (

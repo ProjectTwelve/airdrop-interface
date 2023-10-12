@@ -35,23 +35,23 @@ export default function MyTasks() {
     return completedTasks;
   }, [allTasks, inviteCount, invitePL, isLogged, tasksStatus]);
   return (
-    <div className="mt-12 flex flex-col">
-      <h1 className="mb-6 text-xl/6 font-semibold">My Arcana Tasks</h1>
+    <div className="mt-7.5 flex flex-col">
+      <h1 className="mb-4 text-base/6 font-semibold">My Arcana Tasks</h1>
       {completedTasks?.length ? (
         <>
-          <div className="grid grid-cols-3 gap-5.5 md:grid-cols-2 xs:grid-cols-1">
+          <div className="grid grid-cols-3 gap-5 md:grid-cols-2 xs:grid-cols-1">
             {completedTasks.map(({ title, id, subtitle, desc, PL, inviteCount }) => {
               const isInviteCard = id === TaskCode.Invite;
               return (
                 <div
                   className={classNames(
-                    'arcana__card flex flex-col p-4',
+                    'arcana__card flex flex-col border-gray-550/50 p-4',
                     isInviteCard ? 'bg-arcana-refer-mask' : 'bg-arcana-task-mask',
                   )}
                   key={id}
                 >
                   <h2
-                    className={classNames('line-clamp-2 h-12 overflow-hidden text-xl/6 font-semibold', {
+                    className={classNames('line-clamp-2 h-12 overflow-hidden text-lg/6 font-semibold', {
                       'text-yellow': isInviteCard,
                     })}
                   >
@@ -64,20 +64,20 @@ export default function MyTasks() {
                       {subtitle}
                     </span>
                   </h2>
-                  <p className="mt-1.5 flex-grow text-xs/4.5 font-medium">{desc}</p>
-                  <div className="mt-8 flex items-center gap-2 font-ddin text-[26px]/6.5 font-semibold text-yellow">
+                  <p className="mt-1.5 line-clamp-2 flex-grow text-xs/4.5 font-medium">{desc}</p>
+                  <div className="mt-5 flex items-center gap-2 font-ddin text-[20px]/6.5 font-semibold text-yellow">
                     {isInviteCard && <span className="whitespace-pre font-poppins text-xl/5 text-yellow">{'PL Reward :'}</span>}
                     {PL} PL
                     <img className="w-7.5" src="/img/pl/power_level.png" alt="pl-icon" />
                   </div>
                   {isInviteCard ? (
-                    <p className="mb-3 mt-10 text-base/6.5">
+                    <p className="mb-3 mt-7.5 text-base/6.5">
                       Your Valid Referral : <span className="font-ddin text-[26px]/6.5"> {inviteCount}</span>
                     </p>
                   ) : (
                     <div
                       className={classNames(
-                        'mt-7 flex justify-between rounded-lg px-5 py-3.5 font-semibold text-green',
+                        'mt-4 flex justify-between rounded-lg px-5 py-3.5 font-semibold text-green',
                         'cursor-default bg-green/20',
                       )}
                     >
@@ -90,17 +90,17 @@ export default function MyTasks() {
           </div>
           <Button
             type="bordered"
-            className="mt-12 flex w-[438px] justify-center gap-1.5 self-center border-white py-4 xs:w-full"
+            className="mt-7.5 flex w-[350px] justify-center gap-1.5 self-center border-white py-2.5 text-sm xs:w-full"
             onClick={() => {
               ReactGA.event({ category: EventCategory.Global, action: EventName.GetPl });
               openLink('https://arcana.p12.games/#task');
             }}
           >
-            Get More PL <img className="w-6" src="/img/pl/power_level.png" alt="pl-icon" />
+            Get More PL <img className="w-5" src="/img/pl/power_level.png" alt="pl-icon" />
           </Button>
         </>
       ) : (
-        <div className="flex-center rounded-lg border border-gray-600/50 py-17 text-gray-400">
+        <div className="flex-center rounded-lg border border-gray-550/50 py-17 text-gray-400">
           You haven&#x27;t completed any arcana tasks yet.
         </div>
       )}

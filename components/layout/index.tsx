@@ -33,7 +33,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
     <WagmiConfig config={config}>
       <RecoilRoot>
         <div className={classNames('min-h-screen', ...fontVariants)}>
-          <div className={classNames('mx-auto h-full pt-6 2xl:container', ...fontVariants)}>
+          <div className={classNames('mx-auto h-full 2xl:container', ...fontVariants)}>
             <LayoutHeader />
             <main>{children}</main>
             <LayoutFooter />

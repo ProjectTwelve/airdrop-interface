@@ -13,12 +13,14 @@
       "ddin",
       "Editorium",
       "gpark",
+      "Landingsite",
       "Leaderboard",
       "LINEA",
       "metaverse",
       "roadmap",
       "toastify",
-      "Voteme"
+      "Voteme",
+      "webm"
     ],
     "css.lint.unknownAtRules": "ignore",
     "editor.formatOnSave": true
