@@ -14,7 +14,9 @@ export default function PowerLevelBanner({ className }: { className?: string }) 
   const router = useRouter();
   const isMounted = useIsMounted();
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
-  const banner = useThemeAsset('home_banner_1.webm');
+  const bannerLeft = useThemeAsset('home_banner_left.webm');
+  const bannerRight = useThemeAsset('home_banner_right.webm');
+
   const { activatedPL, gamerRank, developerRank, totalRank } = useRecoilValue(userPowerLevelAtom);
 
   const onClick = () => {
@@ -33,10 +35,11 @@ export default function PowerLevelBanner({ className }: { className?: string }) 
       )}
       onClick={onClick}
     >
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        {banner && <video autoPlay loop muted className="w-full" src={banner} />}
+      <div className="absolute inset-0 -z-10 flex justify-between overflow-hidden">
+        {bannerLeft && <video autoPlay loop muted className="brio absolute left-0 h-[12.5rem]" src={bannerLeft} />}
+        {bannerRight && <video autoPlay loop muted className="absolute right-0 h-[12.5rem]" src={bannerRight} />}
       </div>
-      <div className="absolute left-0 top-0 -z-10 h-[138px] w-full bg-card-mask" />
+      <div className="absolute left-0 top-0 -z-10 h-20 w-full bg-card-mask" />
       {isMounted && address && activatedPL ? (
         <div className="py-6 pt-11">
           <div className="flex-center gap-7.5">

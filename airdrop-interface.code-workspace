@@ -19,7 +19,8 @@
       "metaverse",
       "roadmap",
       "toastify",
-      "Voteme"
+      "Voteme",
+      "webm"
     ],
     "css.lint.unknownAtRules": "ignore",
     "editor.formatOnSave": true
