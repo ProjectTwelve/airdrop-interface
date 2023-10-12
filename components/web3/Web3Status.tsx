@@ -71,7 +71,7 @@ function Web3Status() {
     return (
       <div className="flex items-center">
         {router.pathname === '/gamer' && posterCapture && <PosterButton />}
-        <div className="flex rounded-full bg-[#44465F]/60 text-sm backdrop-blur">
+        <div className="flex rounded-full bg-[#44465F]/60 text-sm">
           <Web3StatusInner />
         </div>
       </div>
