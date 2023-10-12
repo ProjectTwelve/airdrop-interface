@@ -52,7 +52,7 @@ const BlueButton = forwardRef(function ButtonInner(
           ? className
           : twMerge(
               classNames(
-                'rounded-lg transition',
+                'rounded-lg backdrop-blur-lg transition',
                 sizeClass[size ?? 'middle'],
                 typeClass[type ?? 'default'],
                 _disabled ? 'disabled:cursor-not-allowed' : 'cursor-pointer',

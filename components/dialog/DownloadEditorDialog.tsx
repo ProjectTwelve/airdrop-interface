@@ -111,7 +111,7 @@ export default function DownloadEditorDialog() {
               Ensure your security: Please download Editor & App exclusively from our official site to avoid any potential
               risks.
             </p>
-            <p className="my-4 h-px bg-gray" />
+            <p className="my-4 h-px bg-[#4e4e50]" />
             <p className="mb-7.5 text-center text-xs">
               If you encounter any issues during the process, please join our Discord for assistance.&nbsp;
               <a href={ARCANA_SOCIAL_LINKS.discord} target="_blank" className="text-blue hover:underline">

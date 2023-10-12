@@ -11,6 +11,7 @@ import { twMerge } from 'tailwind-merge';
 import { BridgeSvg } from '../svg/BridgeSvg';
 import { InviteSvg } from '../svg/InviteSvg';
 import { LandingSiteSvg } from '../svg/LandingSiteSvg';
+import BlueButton from '../button/BlueButton';
 
 function LayoutHeaderExtra({ className }: { className?: string }) {
   const router = useRouter();
@@ -27,13 +28,14 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
 
   return (
     <div className={twMerge('flex items-center gap-3', className)}>
-      <div
-        className="flex-center cursor-pointer gap-1 rounded-full bg-blue/20 px-3 py-2.5 text-base/5 font-medium text-blue hover:bg-blue/30 lg:hidden"
+      <BlueButton
+        type="blue"
+        className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
         onClick={() => openLink(landingSite)}
       >
         <LandingSiteSvg className="h-5 w-5 stroke-blue" />
         &nbsp;P12 Landingsite
-      </div>
+      </BlueButton>
       <AnimatePresence>
         {!hideRoute.includes(router.pathname) && (
           <motion.div className="relative">
@@ -44,16 +46,19 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
               className="relative flex items-center"
             >
-              <div
-                className="flex-center mr-3 cursor-pointer gap-1 rounded-full bg-blue/20 px-3 py-2.5 text-base/5 font-medium text-blue hover:bg-blue/30 lg:hidden xl:hidden"
+              <BlueButton
+                type="blue"
+                className="flex-center mr-3 gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden xl:hidden"
                 onClick={() => router.push('/bridge')}
               >
                 <BridgeSvg className="h-5 w-5" />
                 &nbsp;Bridge
-              </div>
+              </BlueButton>
+
               {router.pathname !== '/gamer/[address]' && (
-                <div
-                  className="flex-center h-10 cursor-pointer gap-1 rounded-full bg-blue/20 px-3 hover:bg-blue/30"
+                <BlueButton
+                  type="blue"
+                  className="flex-center h-10 gap-1 rounded-full text-base/5 font-medium lg:hidden xl:hidden"
                   onClick={() => {
                     ReactGA.event({ action: 'Invite', category: 'Click', label: 'Header' });
                     setInviteOpen(true);
@@ -66,7 +71,7 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
                       {invitationCount}
                     </p>
                   </div>
-                </div>
+                </BlueButton>
               )}
               <AnimatePresence>
                 {!tipsClick && (

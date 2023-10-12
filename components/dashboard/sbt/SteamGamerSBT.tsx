@@ -56,7 +56,7 @@ export default function SteamGamerSBT() {
           </div>
           <p className="mt-4 text-xs/3">Power Level</p>
           <div className="mt-2 flex gap-1.5">
-            <div className={classNames('text-[34px]/8 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
+            <div className={classNames('text-[34px]/10 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(gamerPL)}
             </div>
             {isClaimed ? (

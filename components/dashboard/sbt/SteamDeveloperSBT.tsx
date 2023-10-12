@@ -41,7 +41,7 @@ export default function SteamDeveloperSBT() {
           <div className="flex gap-3 text-lg/4.5">P12 Genesis Badge</div>
           <p className="mt-4 text-xs/3">Power Level</p>
           <div className="mt-2 flex gap-1.5">
-            <div className={classNames('text-[34px]/8 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
+            <div className={classNames('text-[34px]/10 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(developerPL)}
             </div>
             {isClaimed ? (

@@ -34,7 +34,7 @@ function Web3StatusInner() {
         className="z-40 border-none bg-transparent"
         render={() => (
           <div className="flex items-start gap-3">
-            <div className="backdrop-box flex flex-col gap-3 rounded-2xl p-3">
+            <div className="backdrop-box flex flex-col gap-3 rounded-lg p-3">
               <p>{gamerEmailInfo.email}</p>
               <div
                 className="flex-center cursor-pointer rounded-lg p-2.5 hover:bg-white/[0.12] hover:backdrop-blur-lg"

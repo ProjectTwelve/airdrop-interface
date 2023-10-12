@@ -30,7 +30,7 @@ export default function GamerTimeRankingItem({ data }: GamerTimeRankingItemProps
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[14px] hover:bg-gray-700/60 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[14px] hover:bg-white/5 sm:px-2"
     >
       <div className="mr-2 h-[44px] flex-none break-words pt-1 text-xs font-medium sm:hidden 2xl:mr-4">
         <p>{data.createdAt && dayjs(data.createdAt).format('MMM D, YYYY')}</p>
