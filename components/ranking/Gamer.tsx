@@ -2,9 +2,12 @@ import { GenesisRarity } from '@/constants';
 import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
 import { getCountMemo } from '@/utils';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import Pagination from 'rc-pagination';
 import { Fragment, useMemo, useState } from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useAccount } from 'wagmi';
+import DevelopRankTable from './DevelopRankTable';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 
@@ -37,6 +40,7 @@ export default function GamerRanking() {
   const isInRanking = useMemo(() => !!gamerRankData?.tokenRank && gamerRankData.tokenRank <= 1000, [gamerRankData?.tokenRank]);
 
   const isLowLevelToken = (num?: number) => num === GenesisRarity.Common || num === GenesisRarity.Uncommon;
+  const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <div>
@@ -119,23 +123,52 @@ export default function GamerRanking() {
           </div>
         </div>
         <div className="w-full">
-          <h2 className="border-b border-gray-650 pb-3 text-base/6 font-semibold">Leaderboard</h2>
-          <GamerTokenRankingHeader />
-          <div className="grid">
-            {tokenRankData?.rankList.map((item, index) => (
-              <GamerTokenRankingItem data={item} key={item.steam_id || index} />
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-center">
-            {tokenRankData && tokenRankData.rankLength > 10 && (
-              <Pagination
-                simple
-                current={tokenRankPage}
-                total={tokenRankData.rankLength}
-                onChange={(page) => setTokenRankPage(page)}
-              />
-            )}
-          </div>
+          <Tabs
+            className="home-tabs"
+            onSelect={(index) => {
+              setSelectedTab(index);
+            }}
+            selectedIndex={selectedTab}
+          >
+            <TabList className="flex items-end justify-between border-b border-gray-650 text-base/6 font-semibold">
+              <h2 className="flex-grow pb-3 text-base/6 font-semibold">Leaderboard</h2>
+              <Tab>
+                <div className="-mt-4">
+                  Gamer
+                  <div className="react-tabs__tab--underline">
+                    {selectedTab === 0 && <motion.div layoutId="dev_underline" />}
+                  </div>
+                </div>
+              </Tab>
+              <Tab>
+                Developer
+                <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="dev_underline" />}</div>
+              </Tab>
+            </TabList>
+            <TabPanel>
+              <>
+                <GamerTokenRankingHeader />
+                <div className="grid">
+                  {tokenRankData?.rankList.map((item, index) => (
+                    <GamerTokenRankingItem data={item} key={item.steam_id || index} />
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center justify-center">
+                  {tokenRankData && tokenRankData.rankLength > 10 && (
+                    <Pagination
+                      simple
+                      current={tokenRankPage}
+                      total={tokenRankData.rankLength}
+                      onChange={(page) => setTokenRankPage(page)}
+                    />
+                  )}
+                </div>
+              </>
+            </TabPanel>
+            <TabPanel>
+              <DevelopRankTable />
+            </TabPanel>
+          </Tabs>
         </div>
       </div>
     </div>

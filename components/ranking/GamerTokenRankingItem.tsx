@@ -7,7 +7,7 @@ import { formatMinutes, getCountMemo, openLink } from '../../utils';
 
 export function GamerTokenRankingHeader() {
   return (
-    <div className="flex border-b border-[#2E2E31] px-4 pb-2.5 pt-5 text-xs font-medium sm:py-2">
+    <div className="flex border-b border-[#2E2E31] px-4 pb-3 pt-5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">User Info</p>
       <p className="w-[70px] 2xl:w-[120px]">Badge</p>
@@ -32,7 +32,7 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[10px] hover:bg-gray-700/60 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[10px] hover:bg-white/5 sm:px-2"
     >
       <div className="mr-2 w-[30px] flex-none text-center text-xs font-medium leading-[44px] 2xl:mr-4 2xl:w-[40px]">
         {getCountMemo(data.index)}
