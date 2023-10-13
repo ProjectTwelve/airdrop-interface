@@ -12,7 +12,7 @@ export default function SteamAuth() {
     if (query.secret_token && typeof query.secret_token === 'string') {
       const code = getLocalStorage(STORAGE_KEY.INVITE_CODE);
       if (isMobile) {
-        router.push({ pathname: '/gamer', query: code ? { ...query, code } : query }).then();
+        router.push({ pathname: '/dashboard', query: code ? { ...query, code } : query }).then();
         return;
       }
       window.localStorage.removeItem(STORAGE_KEY.SECRET_TOKEN);
