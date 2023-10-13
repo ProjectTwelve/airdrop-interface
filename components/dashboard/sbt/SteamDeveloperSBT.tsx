@@ -27,7 +27,7 @@ export default function SteamDeveloperSBT() {
   return (
     <div className="relative flex h-full flex-col gap-3.5">
       <div className="flex gap-6 xs:flex-wrap">
-        <div className="max-w-[217px]">
+        <div className="w-full max-w-[217px]">
           {isClaimed ? (
             <div
               className="-mt-[15px] aspect-square bg-cover"

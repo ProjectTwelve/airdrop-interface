@@ -80,7 +80,6 @@ function LayoutHeader() {
       <div className="flex items-center gap-4 xs:flex-wrap xs:justify-end">
         {['/dashboard', '/bridge'].includes(router.pathname) ? (
           <div className="relative flex items-center gap-2 text-sm/5.5 font-semibold backdrop-blur">
-            Activated PL
             <div className="text-gradient-yellow ml-0.5 text-[34px]/10 font-bold">{digitalFormat.integer(activatedPL)}</div>
             <img src="/img/pl/power_level.png" alt="PL" className="inline-block h-10 w-10" />
           </div>
