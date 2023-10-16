@@ -3,6 +3,7 @@ import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 import GamerRanking from '@/components/ranking/Gamer';
 import { useThemeAsset } from '@/hooks/theme';
 import { collabListModalAtom } from '@/store/collab/state';
+import { openLink } from '@/utils';
 import { useSetRecoilState } from 'recoil';
 
 export default function Home() {
@@ -15,10 +16,17 @@ export default function Home() {
         <div
           className="relative cursor-pointer rounded-2xl duration-200 ease-linear hover:-translate-y-1 "
           onClick={() => {
-            setCollabModalOpen(true);
+            openLink('https://arcana.p12.games/');
           }}
         >
-          <div className="absolute right-0 top-0 rounded-es-lg rounded-se-lg bg-gradient-green px-2 py-1.5 text-base/4.5 font-bold text-black backdrop-blur-lg">
+          <div
+            className="absolute right-0 top-0 origin-top-right rounded-es-lg rounded-se-lg bg-gradient-green px-2.5 py-2 text-xl/5.5 font-bold text-black backdrop-blur-lg transition duration-500 hover:scale-110"
+            onClick={(e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
+              setCollabModalOpen(true);
+            }}
+          >
             View all collabs
           </div>
           {src ? (
