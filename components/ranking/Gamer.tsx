@@ -46,7 +46,7 @@ export default function GamerRanking() {
     <div>
       <div className="grid grid-cols-2 gap-5 md:grid-cols-1 md:gap-2">
         <div>
-          <h3 className="text-base/6 font-semibold">P12 Gamers</h3>
+          <h3 className="text-base/6 font-semibold">Verified Gamers</h3>
           <div className="gradient__box mt-3 grid grid-cols-3 py-[21px] leading-[90px] 2xl:flex 2xl:items-center">
             <div className="h-[40px] w-full 2xl:w-[130px]">
               <p className="h-[14px] text-center text-xs">Total</p>
@@ -66,7 +66,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div>
-          <h3 className="text-base/6 font-semibold">P12 Developers</h3>
+          <h3 className="text-base/6 font-semibold">Your Ranking</h3>
           <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
             <div className="flex h-full w-full flex-wrap px-4 py-2">
               <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
