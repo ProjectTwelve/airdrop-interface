@@ -11,13 +11,13 @@ export function CollabTimeLineItem({ startTime, endTime, type, label }: CollabTi
   return (
     <div
       className={classNames(
-        'flex h-[72px] basis-1/5 flex-col items-center justify-center p-7 text-base leading-[22px] md:bg-gray-800/80',
+        'flex h-[72px] basis-1/5 flex-col items-center justify-center p-7 text-base leading-[22px] md:bg-gray-700/30',
         { 'bg-collab-time-start md:bg-none': type === 'open' },
         { 'bg-collab-time-end -ml-4  md:ml-0 md:bg-none': type === 'close' },
         { 'bg-collab-timing -ml-4 md:ml-0 md:bg-none': type === 'normal' },
       )}
     >
-      <div className="text-[#1BD386] text-sm">
+      <div className="text-sm text-[#1BD386]">
         {startTime}
         {type !== 'close' && ` - ${endTime}`}
       </div>

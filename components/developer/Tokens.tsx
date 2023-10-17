@@ -8,14 +8,14 @@ import { InviteRecordDialog } from '../dialog/InviteRecordDialog';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { claimGroupSelector } from '../../store/developer/state';
 import { roadmapModalAtom } from '../../store/roadmap/state';
-import { NFT_CLAIM } from '../../constants';
+import { GenesisClaim } from '../../constants';
 import { invitationCountAtom } from '../../store/invite/state';
 
 function Tokens() {
   const claimGroup = useRecoilValue(claimGroupSelector);
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const [invitation] = useRecoilValue(invitationCountAtom);
-  const claimGames = useMemo(() => claimGroup[NFT_CLAIM.CLAIMED].length || 0, [claimGroup]);
+  const claimGames = useMemo(() => claimGroup[GenesisClaim.Claimed].length || 0, [claimGroup]);
 
   return (
     <div className="relative px-3 pt-6 2xl:px-8 2xl:pt-12 ">
@@ -25,7 +25,7 @@ function Tokens() {
           <DevP12 />
         </div>
         <div className="flex border-b border-gray-600 py-4">
-          <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
+          <div className="mr-4 rounded-lg bg-gray-700/30 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => claimGames && setOpen(true)}>
                 {claimGames ? '?,???' : '-,---'}
@@ -36,7 +36,7 @@ function Tokens() {
               From <span className="text-green"> {claimGames} </span> verified {claimGames > 1 ? 'games' : 'game'}
             </p>
           </div>
-          <div className="rounded-lg bg-gray-800/80 p-3">
+          <div className="rounded-lg bg-gray-700/30 p-3">
             <div className="flex items-center justify-between">
               <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                 {invitation ? '?,???' : '-,---'}

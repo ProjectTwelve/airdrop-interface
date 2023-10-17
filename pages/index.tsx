@@ -1,62 +1,54 @@
-import React from 'react';
-import ReactGA from 'react-ga4';
-import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { inviteModalAtom } from '../store/invite/state';
-import CollabHomeCard from '../components/collab/CollabHomeCard';
-import LeaderboardTabs from '../components/ranking/LeaderboardTabs';
-import { RankingHomeCard } from '../components/ranking/RankingHomeCard';
-import { openLink } from '../utils';
+import { CollabListDialog } from '@/components/dialog/CollabListDialog';
+import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
+import GamerRanking from '@/components/ranking/Gamer';
 import { useThemeAsset } from '@/hooks/theme';
+import { collabListModalAtom } from '@/store/collab/state';
+import { openLink } from '@/utils';
+import { useSetRecoilState } from 'recoil';
 
 export default function Home() {
-  const router = useRouter();
-  const setOpen = useSetRecoilState(inviteModalAtom);
-  const src = useThemeAsset('arcana-banner.webp');
+  const src = useThemeAsset('arcana_banner_2.webp');
+  const setCollabModalOpen = useSetRecoilState(collabListModalAtom);
   return (
-    <div className="flex flex-col items-center justify-center pt-6 md:pt-4">
-      <div
-        className="w-full cursor-pointer overflow-hidden rounded-2xl duration-200 ease-linear hover:-translate-y-1"
-        onClick={() => openLink('https://arcana.p12.games/referral?code=Mkq4zW')}
-      >
-        {src ? (
-          <img className="h-[260px] object-cover object-left md:h-[148px]" src={src} alt="p12Arcana" />
-        ) : (
-          <div className="h-[260px] w-full animate-pulse bg-white/10" />
-        )}
-      </div>
-      <div className="mt-6 grid w-full grid-cols-3 gap-7 md:grid-cols-1 md:gap-4">
+    <div className="flex flex-col justify-center px-8 pt-4 md:px-4 2xl:px-0">
+      {/*<div className="mt-4 grid w-full grid-cols-2 gap-4 md:grid-cols-1">*/}
+      <div className="flex w-full gap-5 tablet:flex-col">
         <div
-          className="home__card bg-white/10 py-7 hover:bg-[#FFFFFF26] xs:py-4"
+          className="relative cursor-pointer rounded-2xl duration-200 ease-linear hover:-translate-y-1 "
           onClick={() => {
-            ReactGA.event({ category: 'Invite', action: 'Click', label: 'Home' });
-            setOpen(true);
+            openLink('https://arcana.p12.games/');
           }}
         >
-          <img src="/svg/invite-3.svg" className="h-12 w-12 md:h-8 md:w-8" alt="invite" />
-          <p className="md:text-sm">My Referral Link</p>
+          <div
+            className="absolute right-0 top-0 origin-top-right rounded-es-lg rounded-se-lg bg-gradient-green px-2.5 py-2 text-xl/5.5 font-bold text-black backdrop-blur-lg transition duration-500 hover:scale-110"
+            onClick={(e) => {
+              e?.preventDefault();
+              e?.stopPropagation();
+              setCollabModalOpen(true);
+            }}
+          >
+            View all collabs
+          </div>
+          {src ? (
+            <img
+              className="-mt-[10px] h-[13.125rem] w-[28.5rem] rounded-xl object-cover object-center md:h-auto tablet:w-full"
+              src={src}
+              alt="p12Arcana"
+            />
+          ) : (
+            <div className="h-[300px] w-[684px] animate-pulse bg-white/10" />
+          )}
         </div>
-        <div
-          className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
-          onClick={() => router.push({ pathname: '/gamer', query: router.query })}
-        >
-          <img src="/svg/gamer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="developer" />
-          <p className="md:text-sm">I am a Steam Gamer</p>
-        </div>
-        <div
-          className="home__card bg-p12-gradient-30 py-7 hover:bg-p12-gradient-45 xs:py-4"
-          onClick={() => router.push({ pathname: '/developer', query: router.query })}
-        >
-          <img src="/svg/developer.svg" className="h-12 w-12 md:h-8 md:w-8" alt="gamer" />
-          <p className="md:text-sm">I am a Steam Game Dev</p>
-        </div>
+        <PowerLevelBanner className="flex-grow" />
+        {/* <CollabSwiper /> */}
       </div>
-      <div className="mt-[30px] grid w-full grid-cols-2 gap-8 md:grid-cols-1">
-        <RankingHomeCard routerId="gamer" title="Leaderboard" layoutId="ranking_gamer">
-          <LeaderboardTabs />
-        </RankingHomeCard>
-        <CollabHomeCard title="Campaigns" />
+      {/* <div className="mt-5 w-full">
+        <PowerLevelBanner />
+      </div> */}
+      <div className="mt-4">
+        <GamerRanking />
       </div>
+      <CollabListDialog />
     </div>
   );
 }

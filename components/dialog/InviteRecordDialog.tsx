@@ -1,17 +1,17 @@
-import React, { useMemo, useState } from 'react';
-import dayjs from 'dayjs';
-import Image from 'next/image';
-import { useAccount } from 'wagmi';
-import Table from '@/components/table';
-import { motion } from 'framer-motion';
 import Button from '@/components/button';
-import { useGamerInvitation } from '@/hooks/gamer';
-import { useDevInvitation } from '@/hooks/developer';
+import Table from '@/components/table';
 import { DEV_BADGES, GAMER_BADGES } from '@/constants';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useDevInvitation } from '@/hooks/developer';
+import { useGamerInvitation } from '@/hooks/gamer';
+import { DevInvitationInfo, GamerInvitationInfo } from '@/lib/types';
 import { shortenAddress, shortenSteamId } from '@/utils';
 import { createColumnHelper } from '@tanstack/react-table';
-import { DevInvitationInfo, GamerInvitationInfo } from '@/lib/types';
+import dayjs from 'dayjs';
+import { useMemo, useState } from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { useAccount } from 'wagmi';
+import Back from '../back';
+// import { useFetchArcanaInviteHistory } from '@/hooks/dashboard/referral';
 
 type InviteRecordDialogProps = {
   close?: () => void;
@@ -26,7 +26,7 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
   const [selectedTab, setSelectedTab] = useState(tab === 'developer' ? 0 : 1);
   const { data: devInvitation, isLoading: isDevLoading } = useDevInvitation(address);
   const { data: gamerInvitation, isLoading: isGamerLoading } = useGamerInvitation(address);
-
+  // const { data: arcanaInviteList } = useFetchArcanaInviteHistory();
   const devColumns = useMemo(
     () => [
       devColumnHelper.accessor('wallet_address', {
@@ -53,17 +53,17 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      devColumnHelper.display({
-        id: 'reward',
-        header: 'Reward',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // devColumnHelper.display({
+      //   id: 'reward',
+      //   header: 'Reward',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" layout="fixed" src="/img/pl/power_level.png" width={30} height={30} alt="PL" />
+      //     </div>
+      //   ),
+      // }),
       devColumnHelper.accessor('nft_level', {
         size: 60,
         header: 'badge',
@@ -73,20 +73,21 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      devColumnHelper.display({
-        id: 'get',
-        header: 'Will get',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // devColumnHelper.display({
+      //   id: 'get',
+      //   header: 'Will get',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
     ],
     [],
   );
+
   const gamerColumns = useMemo(
     () => [
       gamerColumnHelper.accessor('wallet_address', {
@@ -113,17 +114,17 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      gamerColumnHelper.display({
-        id: 'reward',
-        header: 'Reward',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // gamerColumnHelper.display({
+      //   id: 'reward',
+      //   header: 'Reward',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
       gamerColumnHelper.accessor('nft_level', {
         header: 'Badge',
         size: 100,
@@ -133,34 +134,29 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      gamerColumnHelper.display({
-        id: 'get',
-        header: 'Will get',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // gamerColumnHelper.display({
+      //   id: 'get',
+      //   header: 'Will get',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
     ],
     [],
   );
 
   return (
-    <div>
-      <h2 className="mb-[18px] text-center text-xl">My P12 Airdrop Referral List</h2>
-      <Tabs onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
+    <div className="w-[45rem] md:w-full">
+      <Back onClick={close} className="absolute left-7 top-7" />
+      <h2 className="mb-[18px] text-center text-xl/5.5 md:w-full">Invite friend to mint P12 Genesis NFT</h2>
+      <Tabs className="border-none" onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>
         <TabList>
-          <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-            Developer
-            <div className="react-tabs__tab--underline">{selectedTab === 0 && <motion.div layoutId="invite_underline" />}</div>
-          </Tab>
-          <Tab style={{ padding: '14px 16px', fontSize: 18 }}>
-            Gamer
-            <div className="react-tabs__tab--underline">{selectedTab === 1 && <motion.div layoutId="invite_underline" />}</div>
-          </Tab>
+          <Tab style={{ padding: '14px 16px', fontSize: 18 }}>Developer</Tab>
+          <Tab style={{ padding: '14px 16px', fontSize: 18 }}>Gamer</Tab>
         </TabList>
         <TabPanel>
           <div className="h-[400px]">

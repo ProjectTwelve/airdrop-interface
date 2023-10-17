@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
-import { AnimatePresence, motion, wrap } from 'framer-motion';
-import { CollabShortInfo } from '@/lib/types';
-import { isMobile } from 'react-device-detect';
-import { useFetchCollabList } from '@/hooks/collab';
-import { LeftCircle } from '@/components/svg/LeftCircle';
 import CollabListItem from '@/components/collab/CollabListItem';
+import { useFetchCollabList } from '@/hooks/collab';
+import { CollabShortInfo } from '@/lib/types';
+import { AnimatePresence, motion, wrap } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 const variants = {
   enter: (direction: number) => {
@@ -43,17 +42,21 @@ export default function CollabSwiper() {
     <div className="relative flex-1">
       <div
         onClick={() => paginate(-1)}
-        className="absolute -left-[15px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:left-0"
+        className="absolute -left-[27px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:left-0"
       >
-        <LeftCircle size={54} color="#00000000" />
+        <div className="flex-center h-13.5 w-13.5 cursor-pointer rounded-full border border-gray-550 bg-gray-700/40 backdrop-blur hover:border-white">
+          <img className="h-5 w-5" src="/svg/left.svg" alt="<" />
+        </div>
       </div>
       <div
         onClick={() => paginate(1)}
-        className="absolute -right-[15px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:right-0"
+        className="absolute -right-[27px] top-1/2 z-10 -translate-y-1/2 select-none rounded-full backdrop-blur-lg md:right-0"
       >
-        <LeftCircle size={54} className="rotate-180" color="#00000000" />
+        <div className="flex-center h-13.5 w-13.5 cursor-pointer rounded-full border border-gray-550 bg-gray-700/40 backdrop-blur hover:border-white">
+          <img className="h-5 w-5 rotate-180" src="/svg/left.svg" alt="<" />
+        </div>
       </div>
-      <div className="relative h-[308px] overflow-hidden">
+      <div className="relative h-[300px] overflow-hidden">
         <AnimatePresence initial={false} custom={swipeDirection}>
           <motion.div
             key={swipePage}
@@ -66,7 +69,7 @@ export default function CollabSwiper() {
               x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="absolute grid h-full w-full grid-cols-2 gap-5 md:grid-cols-1"
+            className="absolute grid h-full w-full grid-cols-2 gap-4 md:grid-cols-1"
           >
             {isLoading ? (
               <>

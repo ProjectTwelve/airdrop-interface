@@ -40,15 +40,15 @@ export default function SteamGamesInfo({ data }: SteamGamesInfoProps) {
 
   return (
     <div>
-      <div className="relative w-full rounded-xl border border-[#616985] bg-profile-info bg-cover p-5">
+      <div className="relative flex w-full flex-col gap-8 rounded-lg border border-[#616985] bg-profile-info bg-cover p-4">
         {list.map((item, index) => (
-          <div key={index} className="mb-8 flex flex-1 flex-row items-center justify-between last:mb-0">
-            <div className="text-sm">{item.label}</div>
-            <div className="text-center text-xl font-medium">{item.value}</div>
+          <div key={index} className="flex flex-1 flex-row items-center justify-between last:mb-0">
+            <div className="text-xs">{item.label}</div>
+            <div className="text-center text-base/5 font-semibold">{item.value}</div>
           </div>
         ))}
       </div>
-      <p className="mt-4 w-full text-center text-xs leading-6 text-gray md:hidden">I&apos;ve covered wars, you know</p>
+      <p className="mt-3 w-full text-center text-xs/5 text-gray md:hidden">I&apos;ve covered wars, you know</p>
     </div>
   );
 }

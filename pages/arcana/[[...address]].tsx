@@ -64,7 +64,7 @@ export default function Arcana() {
       </Head>
       <div className="pb-[110px] md:pb-0">
         <div className="absolute left-0 top-0 -z-10 flex h-[368px] w-full flex-col items-center justify-end overflow-hidden">
-          <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[430px] w-full md:block" />
+          <img src="/img/mask.webp" alt="mask" className="absolute left-0 top-0 hidden h-[430px] w-full md:block" />
           <div className="h-[368px] w-[1920px]">
             <video
               className="mx-auto h-[368px]"
@@ -155,21 +155,21 @@ export default function Arcana() {
           </div>
           <div className="mb-8">
             <div
-              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-700/30 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://discord.gg/p12')}
             >
               <img className="mr-2" src="/img/discord.png" width={20} height={20} alt="" />
               Discord
             </div>
             <div
-              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
+              className="mb-4 flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-700/30 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://twitter.com/_p12_')}
             >
               <img className="mr-2" src="/img/twitter.png" width={20} height={20} alt="" />
               Twitter
             </div>
             <div
-              className="flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-800/80 py-4 text-sm backdrop-blur hover:bg-gray-800"
+              className="flex w-[108px] cursor-pointer items-center justify-center rounded-lg bg-gray-700/30 py-4 text-sm backdrop-blur hover:bg-gray-800"
               onClick={() => openLink('https://mirror.xyz/p12.eth')}
             >
               <img className="mr-2" src="/img/mirror.png" width={20} height={20} alt="" />

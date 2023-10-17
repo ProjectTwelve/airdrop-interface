@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { polygon } from 'wagmi/chains';
 import { Platform } from '@/constants';
 import { useRouter } from 'next/router';
@@ -9,22 +9,22 @@ import WalletPopover from './WalletPopover';
 import Web3StatusInner from './Web3StatusInner';
 import { useMutationLogin } from '@/hooks/user';
 import { useIsMounted } from '@/hooks/useIsMounted';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { getAccessToken } from '@/utils/authorization';
 import { posterCaptureAtom } from '@/store/poster/state';
 import { isConnectPopoverOpen } from '@/store/web3/state';
 import PosterButton from '@/components/poster/PosterButton';
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import { useSignInWithEthereum } from '@/hooks/useSignInWithEthereum';
-import { AnimatePresence } from 'framer-motion';
-import DeveloperStatus from '@/components/web3/DeveloperStatus';
-import GamerStatus from '@/components/web3/GamerStatus';
+import { accessTokenAtom } from '@/store/user/state';
 
 function Web3Status() {
   const router = useRouter();
   const { chain } = useNetwork();
   const isMounted = useIsMounted();
   const { mutate } = useMutationLogin();
+  const { address } = useAccount();
+  const setAccessToken = useSetRecoilState(accessTokenAtom);
   const unwatchAccount = useRef<() => void>();
   const { signInWithEthereum } = useSignInWithEthereum({
     onSuccess: (args) => mutate({ ...args, platform: Platform.USER }),
@@ -49,6 +49,11 @@ function Web3Status() {
   const [isOpen, setIsOpen] = useRecoilState(isConnectPopoverOpen);
   const posterCapture = useRecoilValue(posterCaptureAtom);
 
+  useEffect(() => {
+    const accessToken = getAccessToken({ address });
+    setAccessToken(accessToken);
+  }, [address, setAccessToken]);
+
   if (!isMounted) return null;
 
   if (router.pathname === '/gamer/[address]') {
@@ -58,7 +63,7 @@ function Web3Status() {
   if (isConnected) {
     if (chain?.unsupported) {
       return (
-        <Button type="error" onClick={() => switchNetwork?.()}>
+        <Button size="small" type="error" className="h-10" onClick={() => switchNetwork?.()}>
           Wrong Network
         </Button>
       );
@@ -66,11 +71,7 @@ function Web3Status() {
     return (
       <div className="flex items-center">
         {router.pathname === '/gamer' && posterCapture && <PosterButton />}
-        <div className="flex rounded-full bg-[#44465F]/60 text-sm backdrop-blur">
-          <div className="py-2 md:hidden">
-            <AnimatePresence>{router.pathname === '/developer' && <DeveloperStatus />}</AnimatePresence>
-            <AnimatePresence>{router.pathname === '/gamer' && <GamerStatus />}</AnimatePresence>
-          </div>
+        <div className="flex rounded-full bg-[#44465F]/60 text-sm">
           <Web3StatusInner />
         </div>
       </div>
@@ -79,7 +80,7 @@ function Web3Status() {
     return (
       <div>
         <Popover open={isOpen} onOpenChange={(op) => setIsOpen(op)} render={({ close }) => <WalletPopover close={close} />}>
-          <Button type="gradient" className="w-[120px]">
+          <Button size="small" type="gradient" className="h-10 w-[120px]">
             Connect
           </Button>
         </Popover>

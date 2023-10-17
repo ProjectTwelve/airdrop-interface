@@ -8,7 +8,7 @@ import Empty from '../../components/empty';
 import Poster from '../../components/poster';
 import { shortenSteamId } from '../../utils';
 import Loading from '../../components/loading';
-import { GAMER_BADGES, NFT_CLAIM } from '../../constants';
+import { GAMER_BADGES, GenesisClaim } from '../../constants';
 import SteamValue from '../../components/gamer/SteamValue';
 import { useGamerBadgeLoad } from '../../hooks/useBadgeLoad';
 import { fetchGamerGames, fetchGamerInfo } from '../../lib/api';
@@ -65,25 +65,25 @@ export default function GamerProfile() {
           <div className="py-8">
             <h3 className="mb-3 text-xl font-semibold">Games</h3>
             {isGamerGamesLoading && (
-              <div className="rounded-2xl bg-gray-800/80 p-6 md:p-3">
+              <div className="rounded-2xl bg-gray-700/30 p-6 md:p-3">
                 <Loading size={58} className="my-[72px] opacity-50" />
               </div>
             )}
             {gamesData && (
               <>
                 <div className="flex items-start justify-start md:flex-col">
-                  <div className="flex-0 mr-5 w-[250px] md:mr-0 md:mb-4 md:w-full">
+                  <div className="flex-0 mr-5 w-[250px] md:mb-4 md:mr-0 md:w-full">
                     <SteamGamesInfo data={gamesData} />
                   </div>
                   <div className="flex-1 md:w-full ">
                     {gamesData.games.length ? (
-                      <div className="grid grid-cols-2 gap-y-4 gap-x-5 md:grid-cols-1">
+                      <div className="grid grid-cols-2 gap-x-5 gap-y-4 md:grid-cols-1">
                         {useCurrentGames.map((item) => (
                           <GamerGameItem key={item.appid} data={item} />
                         ))}
                       </div>
                     ) : (
-                      <div className="h-[248px] rounded-2xl bg-gray-800/80 p-6">
+                      <div className="h-[248px] rounded-2xl bg-gray-700/30 p-6">
                         <Empty />
                       </div>
                     )}
@@ -109,9 +109,9 @@ export default function GamerProfile() {
           </div>
           <div>
             <h3 className="my-3 text-xl font-semibold">Airdrop NFT</h3>
-            <div className="flex overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
+            <div className="flex overflow-hidden rounded-b-2xl bg-gray-700/30 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
-                <div className="absolute top-0 left-0 h-full w-full blur-3xl">
+                <div className="absolute left-0 top-0 h-full w-full blur-3xl">
                   {gamerInfo && (
                     <div
                       className="h-full w-full bg-cover"
@@ -121,10 +121,10 @@ export default function GamerProfile() {
                 </div>
                 <div className="relative z-10">
                   <div className="w-full pb-[100%]"></div>
-                  <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+                  <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
                     <div className="relative aspect-square w-full max-w-[420px]">
                       {badge.isLoading && (
-                        <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                        <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
                           <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                         </div>
                       )}
@@ -150,11 +150,11 @@ export default function GamerProfile() {
                 <p className="mt-2 text-sm text-gray">
                   Birthday:&nbsp;{gamerInfo?.birthday ? dayjs(gamerInfo.birthday).format('YYYY/MM/DD') : '--'}
                 </p>
-                <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
+                <div className="gradient__box mt-9 px-[30px] py-6 md:mt-4">
                   <p>Amount of tokens from this Steam account</p>
                   <div className="mt-5 flex items-center justify-between">
                     <p className="cursor-pointer font-ddin text-[48px] font-bold">
-                      {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
+                      {gamerInfo?.display || (gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---')}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
                   </div>

@@ -9,17 +9,24 @@ import { developerGameAtom, tabSelectAtom } from '../../../store/developer/state
 import { LeftCircle } from '../../svg/LeftCircle';
 import { useClickScroll } from '../../../hooks/useClickScroll';
 import { useSelectedGame } from '../../../hooks/useSelectedGame';
-import { DEV_BADGES, GALXE_LIST, BADGE_CONTRACT_ADDRESS, NFT_CLAIM_TYPE, NFT_CLAIM, GALXE_P12_SPACE } from '../../../constants';
+import {
+  DEV_BADGES,
+  GALXE_LIST,
+  BADGE_CONTRACT_ADDRESS,
+  GenesisClaim_TYPE,
+  GenesisClaim,
+  GALXE_P12_SPACE,
+} from '../../../constants';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
 import { useDevBadgeLoad } from '../../../hooks/useBadgeLoad';
 import { openLink, shortenAddress } from '../../../utils';
 
 import styles from './tokens.module.css';
 
-const claimComponents: Record<NFT_CLAIM, JSX.Element> = {
-  [NFT_CLAIM.UNCLAIMED]: <Tag size="small" type="red" value="Unclaimed" />,
-  [NFT_CLAIM.PENDING]: <p className="text-xs text-gray-500">Update in few minutes</p>,
-  [NFT_CLAIM.CLAIMED]: <Tag size="small" type="green" value="Obtained" />,
+const claimComponents: Record<GenesisClaim, JSX.Element> = {
+  [GenesisClaim.Unclaimed]: <Tag size="small" type="red" value="Unclaimed" />,
+  [GenesisClaim.Pending]: <p className="text-xs text-gray-500">Update in few minutes</p>,
+  [GenesisClaim.Claimed]: <Tag size="small" type="green" value="Obtained" />,
 };
 
 export default function TokenTabs() {
@@ -65,7 +72,7 @@ export default function TokenTabs() {
               <div
                 key={game.appid}
                 className={classNames(
-                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-800/80 p-2.5',
+                  'relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-700/30 p-2.5',
                   selectedGame.appid === game.appid ? 'opacity-100' : 'opacity-60',
                   'cursor-pointer last:mr-0 hover:opacity-100',
                 )}
@@ -76,7 +83,7 @@ export default function TokenTabs() {
                     {game.header_image ? (
                       <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                     ) : (
-                      <p className="text-center text-xs leading-[72px] text-gray-500">No Game</p>
+                      <p className="text-center text-sm/[72px] text-gray-400">No Game</p>
                     )}
                   </div>
                   <div className="flex-1">
@@ -86,7 +93,7 @@ export default function TokenTabs() {
                         {claimComponents[game.nft_claim]}
                       </>
                     ) : (
-                      <p className="font-medium leading-[72px]">NO GAME YET</p>
+                      <p className="text-base/[72px] font-semibold">NO GAME YET</p>
                     )}
                   </div>
                 </div>
@@ -98,10 +105,10 @@ export default function TokenTabs() {
           </div>
         </div>
       </div>
-      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
+      <div className="mt-[92px] flex w-full overflow-hidden rounded-b-2xl bg-gray-700/30 md:flex-col">
         <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
-          <div className="absolute top-0 left-0 h-full w-full blur-3xl">
-            {selectedGame.nft_claim === NFT_CLAIM.CLAIMED && (
+          <div className="absolute left-0 top-0 h-full w-full blur-3xl">
+            {selectedGame.nft_claim === GenesisClaim.Claimed && (
               <div
                 className="h-full w-full bg-cover"
                 style={{ backgroundImage: `url(${DEV_BADGES[selectedGame.nft_level].asset})` }}
@@ -110,14 +117,14 @@ export default function TokenTabs() {
           </div>
           <div className="relative z-10">
             <div className="w-full pb-[100%]"></div>
-            <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center">
+            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
               {selectedGame.appid ? (
                 <div className="flex w-full flex-col items-center justify-center sm:w-auto">
-                  {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? (
+                  {selectedGame.nft_claim === GenesisClaim.Claimed ? (
                     <>
                       <div className="relative aspect-square w-full max-w-[420px]">
                         {badge.isLoading && (
-                          <div className="absolute top-1/2 left-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                          <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 opacity-60">
                             <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                           </div>
                         )}
@@ -135,7 +142,7 @@ export default function TokenTabs() {
                   ) : (
                     <>
                       <h4 className="text-center text-xl font-medium text-green">
-                        {selectedGame.nft_claim === NFT_CLAIM.PENDING
+                        {selectedGame.nft_claim === GenesisClaim.Pending
                           ? 'Pending: update in a few minutes'
                           : 'Congrats! P12 Genesis NFT to be claimed'}
                       </h4>
@@ -182,14 +189,14 @@ export default function TokenTabs() {
               ? dayjs(selectedGame.updatedAt).format('YYYY/MM/DD')
               : '--'}
           </p>
-          <div className="gradient__box mt-9 py-6 px-[30px] md:mt-4">
+          <div className="gradient__box mt-9 px-[30px] py-6 md:mt-4">
             <p>Amount of tokens from this game</p>
             <div className="mt-5 flex items-center justify-between">
               <p
                 className="cursor-pointer font-ddin text-[48px] font-bold"
-                onClick={() => selectedGame.nft_claim === NFT_CLAIM.CLAIMED && setOpen(true)}
+                onClick={() => selectedGame.nft_claim === GenesisClaim.Claimed && setOpen(true)}
               >
-                {selectedGame.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
+                {selectedGame.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---'}
               </p>
               <Image src="/img/p12.png" width={48} height={48} alt="p12" />
             </div>
@@ -204,14 +211,14 @@ export default function TokenTabs() {
               { label: 'Role', value: selectedGame.appid ? 'Developer' : '--' },
               {
                 label: 'Status',
-                value: selectedGame.appid ? NFT_CLAIM_TYPE[selectedGame.nft_claim] : 'NO NFT YET',
+                value: selectedGame.appid ? GenesisClaim_TYPE[selectedGame.nft_claim] : 'NO NFT YET',
               },
             ].map((item) => (
               <div
                 key={item.label}
                 className={classNames(
                   'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
-                  'md:flex-row md:border-r-0 md:border-b md:py-2',
+                  'md:flex-row md:border-b md:border-r-0 md:py-2',
                   'last:border-none',
                 )}
               >

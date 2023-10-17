@@ -16,7 +16,7 @@ import { invitationCountAtom } from '@/store/invite/state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import PosterCanvas from '@/components/poster/PosterCanvas';
 import SteamStatus from '../../components/gamer/SteamStatus';
-import { GALXE_LIST, GAMER_BADGES, NFT_CLAIM } from '@/constants';
+import { GALXE_LIST, GAMER_BADGES, GenesisClaim } from '@/constants';
 import GamerTokenStatus from '@/components/gamer/GamerTokenStatus';
 import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
 import GamerClaimSuccess from '@/components/dialog/GamerClaimSuccess';
@@ -39,7 +39,7 @@ export default function Gamer() {
   };
 
   const handleClaimedRoadmap = () => {
-    if (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED) {
+    if (gamerInfo?.nft_claim === GenesisClaim.Claimed) {
       setOpen(true);
     }
   };
@@ -52,10 +52,10 @@ export default function Gamer() {
           <SteamStatus />
           <div>
             <h3 className="my-3 text-xl font-semibold">My Airdrop NFT</h3>
-            <div className="flex overflow-hidden rounded-b-2xl bg-gray-800/80 md:flex-col">
+            <div className="flex overflow-hidden rounded-b-2xl bg-gray-700/30 md:flex-col">
               <div className="relative max-w-[643px] basis-1/2 overflow-hidden bg-no-badge bg-cover bg-center md:max-w-full">
                 <div className="absolute left-0 top-0 h-full w-full blur-3xl">
-                  {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED && (
+                  {gamerInfo?.nft_claim === GenesisClaim.Claimed && (
                     <div
                       className="h-full w-full bg-cover"
                       style={{ backgroundImage: `url(${GAMER_BADGES[gamerInfo.nft_level!].asset})` }}
@@ -67,7 +67,7 @@ export default function Gamer() {
                   <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
                     {gamerInfo?.credential ? (
                       <div className="flex w-full flex-col items-center justify-center sm:w-auto">
-                        {gamerInfo.nft_claim === NFT_CLAIM.UNCLAIMED && (
+                        {gamerInfo.nft_claim === GenesisClaim.Unclaimed && (
                           <>
                             <h4 className="text-center text-xl font-medium text-green">
                               Congrats! P12 Genesis NFT to be claimed
@@ -77,7 +77,7 @@ export default function Gamer() {
                             </Button>
                           </>
                         )}
-                        {gamerInfo.nft_claim === NFT_CLAIM.PENDING && (
+                        {gamerInfo.nft_claim === GenesisClaim.Pending && (
                           <>
                             <h4 className="text-center text-xl font-medium text-green">Pending: update in a few minutes</h4>
                             <Button type="bordered" className="mt-9 w-[260px]" onClick={handleClaim}>
@@ -85,11 +85,11 @@ export default function Gamer() {
                             </Button>
                           </>
                         )}
-                        {gamerInfo.nft_claim === NFT_CLAIM.CLAIMED && (
+                        {gamerInfo.nft_claim === GenesisClaim.Claimed && (
                           <>
                             <div className="relative aspect-square w-full max-w-[420px]">
                               {badge.isLoading && (
-                                <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 -translate-x-1/2 opacity-60">
+                                <div className="absolute left-1/2 top-1/2 -z-10 h-[58px] w-[58px] -translate-x-1/2 opacity-60">
                                   <Image className="animate-spin" src="/svg/loading.svg" width={58} height={58} alt="loading" />
                                 </div>
                               )}
@@ -128,7 +128,7 @@ export default function Gamer() {
                   <p>Amount of tokens from this Steam account</p>
                   <div className="mt-5 flex items-center justify-between">
                     <p onClick={handleClaimedRoadmap} className="cursor-pointer font-ddin text-[48px] font-bold">
-                      {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
+                      {gamerInfo?.display || (gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---')}
                     </p>
                     <Image src="/img/p12.png" width={48} height={48} alt="p12" />
                   </div>
@@ -140,16 +140,16 @@ export default function Gamer() {
               <GamerP12 />
             </div>
             <div className="flex border-b border-gray-600 py-4">
-              <div className="mr-4 rounded-lg bg-gray-800/80 p-3">
+              <div className="mr-4 rounded-lg bg-gray-700/30 p-3">
                 <div className="flex items-center justify-between">
                   <p onClick={handleClaimedRoadmap} className="cursor-pointer font-ddin text-xl font-bold">
-                    {gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---'}
+                    {gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---'}
                   </p>
                   <Image src="/img/p12.png" width={30} height={30} alt="p12" />
                 </div>
                 <p className="mr-4 mt-2 text-xs text-gray">From your account</p>
               </div>
-              <div className="rounded-lg bg-gray-800/80 p-3">
+              <div className="rounded-lg bg-gray-700/30 p-3">
                 <div className="flex items-center justify-between">
                   <p className="cursor-pointer font-ddin text-xl font-bold" onClick={() => invitation && setOpen(true)}>
                     {invitation ? '?,???' : '-,---'}
@@ -170,7 +170,7 @@ export default function Gamer() {
                   onClick={handleClaimedRoadmap}
                   className="mr-6 cursor-pointer font-ddin text-[64px] font-bold leading-[64px]"
                 >
-                  {gamerInfo?.display || (gamerInfo?.nft_claim === NFT_CLAIM.CLAIMED ? '?,???' : '-,---')}
+                  {gamerInfo?.display || (gamerInfo?.nft_claim === GenesisClaim.Claimed ? '?,???' : '-,---')}
                 </p>
                 <Image src="/img/p12.png" width={60} height={60} alt="p12" />
               </div>

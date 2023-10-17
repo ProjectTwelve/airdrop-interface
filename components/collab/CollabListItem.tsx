@@ -63,28 +63,28 @@ export default function CollabListItem({ data, loading }: CollabItemProps) {
         }
       }}
       className={classNames(
-        'flex cursor-pointer flex-col items-center gap-2 rounded-2xl bg-gray-800/80 p-4 pb-3 backdrop-blur-lg hover:bg-[#7980AF]/20 sm:px-2',
+        'flex cursor-pointer flex-col items-center gap-2 rounded-lg bg-white/[0.12] p-3 hover:bg-white/20 sm:px-2',
         loading ? 'animate-pulse' : null,
       )}
     >
-      <div className="flex w-full items-center gap-3 border-b border-gray-600 pb-4">
-        <div className="h-[66px] w-[66px]">
-          {projectLogo ? <img className="h-full w-full rounded-2xl" src={projectLogo} alt="icon" /> : null}
+      <div className="flex w-full items-center gap-3 border-b border-white/15 pb-3">
+        <div className="h-[56px] w-[56px]">
+          {projectLogo ? <img className="h-full w-full rounded-lg" src={projectLogo} alt="icon" /> : null}
         </div>
-        <div className="flex w-14 flex-grow flex-col gap-[.375rem]">
-          <div className="flex items-center gap-2">
-            <h1 className="flex-shrink truncate text-base font-semibold leading-5">{projectName}</h1>
+        <div className="flex w-14 flex-grow flex-col gap-2">
+          <div className="flex items-center gap-1">
+            <h1 className="flex-shrink truncate text-sm/4 font-semibold">{projectName}</h1>
             {projectWebsite && (
-              <a href={projectWebsite} target="_blank" onClick={(e) => e.stopPropagation()} className="min-w-[20px]">
-                <img className="aspect-square min-w-[20px] hover:brightness-200" src="/svg/website.svg" alt="website icon" />
+              <a href={projectWebsite} target="_blank" onClick={(e) => e.stopPropagation()} className="h-4 w-4">
+                <img className="aspect-square min-w-[16px] hover:brightness-200" src="/svg/website.svg" alt="website icon" />
               </a>
             )}
           </div>
-          <p className="line-clamp-2 overflow-ellipsis text-xs leading-5">{projectInfoBrief || projectInfo}</p>
+          <p className="line-clamp-2 overflow-ellipsis text-xs">{projectInfoBrief || projectInfo}</p>
         </div>
       </div>
-      <div className="flex w-full items-center justify-between pt-1">
-        <div className="flex items-center text-xs leading-5 text-gray">
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center text-xs text-gray">
           {startTime} ~ {endTime}
         </div>
         {collabCode ? generateStatusLabel() : null}

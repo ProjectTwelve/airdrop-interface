@@ -38,6 +38,7 @@ export const invitationCountAtom = atom<[number, number]>({
   default: [0, 0],
 });
 
+// steam gamer & develop
 export const invitationCountSelector = selector({
   key: 'invitation_count_selector',
   get: ({ get }) => {

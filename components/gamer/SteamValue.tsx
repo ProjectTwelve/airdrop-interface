@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Tooltip } from '../tooltip';
-import { getSteamGameImage } from '../../utils';
-import { GamerInfoData } from '../../lib/types';
+import { getSteamGameImage } from '@/utils';
+import { GamerInfoData } from '@/lib/types';
 
 type SteamValueProps = {
   data?: GamerInfoData;
@@ -24,18 +24,18 @@ export default function SteamValue({ data }: SteamValueProps) {
     <div className="mt-8 flex sm:mt-4 md:flex-col">
       <div className="w-full max-w-[300px] md:max-w-full">
         <div className="flex items-center">
-          <h4 className="text-xl font-medium">My Account Value</h4>
+          <h4 className="text-xl font-medium">Steam Account Socre</h4>
           <Tooltip label="Represents your Steam store value of games owned.">
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
         </div>
-        <div className="mt-3 rounded-lg border border-orange bg-[#F36E22]/20 py-6 text-center font-ddin text-[48px] font-bold leading-[48px] text-orange">
-          {Math.floor(data.value || 0)}
+        <div className="bg-gradient-item  mt-3 rounded-lg py-6 text-center font-ddin">
+          <span className="text-gradient-yellow text-5xl/12 font-bold">{Math.floor(data.value || 0)}</span>
         </div>
       </div>
       <div className="ml-9 w-full md:ml-0 md:mt-4">
         <div className="flex items-center">
-          <h4 className="text-xl font-medium">My Inventory Value</h4>
+          <h4 className="text-xl font-medium">Inventory Value</h4>
           <Tooltip label="Represents your inventory value of CSGO, DOTA2 and TF2.">
             <img src="/svg/question.svg" className="ml-2 cursor-pointer" width={18} height={18} alt="question" />
           </Tooltip>
@@ -48,7 +48,7 @@ export default function SteamValue({ data }: SteamValueProps) {
                   <img width={112} height={72} src={item.img} className="rounded-lg object-cover lg:hidden" alt="game" />
                   <div className="ml-2 2xl:ml-4">
                     <p className="font-medium">{item.name}</p>
-                    <div className="mt-1.5 font-ddin text-[42px] font-bold leading-[42px] text-green lg:text-2xl xl:text-2xl">
+                    <div className="text-gradient-yellow mt-1.5 font-ddin text-[42px]/[42px] font-bold lg:text-2xl xl:text-2xl">
                       {Math.floor(item.value)}
                     </div>
                   </div>
@@ -57,7 +57,7 @@ export default function SteamValue({ data }: SteamValueProps) {
             )}
           </div>
         ) : (
-          <div className="mt-3 h-[98px] w-full rounded-2xl bg-gray-800/80 text-center text-xs leading-[98px] text-gray-500">
+          <div className="mt-3 h-[98px] w-full rounded-2xl bg-gray-700/30 text-center text-xs leading-[98px] text-gray-500">
             No data
           </div>
         )}

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 
 type ActivityTabProps = {
   title: string;
-  score: string;
+  score: number | string | ReactNode;
   active?: boolean;
   onClick?: () => void;
 };
@@ -12,15 +13,15 @@ export default function ActivityTab({ title, score, active, onClick }: ActivityT
       <div
         className={classNames(
           'text-center font-semibold group-hover:text-white',
-          active ? 'text-[26px]/6.5 text-white' : 'text-xl/6.5 text-gray-400',
+          active ? 'text-base/5 text-white' : 'text-sm/5 text-gray-400',
         )}
       >
         {title}
       </div>
       <div
         className={classNames(
-          'group-hover:text-gradient-yellow mt-4 text-center font-bold text-gray-400',
-          active ? 'text-gradient-yellow text-5xl/12' : 'text-[34px]/12 text-gray-400',
+          'group-hover:text-gradient-yellow flex-center mt-2 gap-2 text-center text-[34px]/10 font-bold text-gray-400',
+          active ? 'text-gradient-yellow' : 'text-gray-400',
         )}
       >
         {score}

@@ -3,17 +3,11 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { STORAGE_KEY } from '../constants';
+import { STORAGE_KEY } from '@/constants';
 import Message from '../components/message';
-import { getLocalStorage } from '../utils/storage';
-import { BinSteamParams, Response } from '../lib/types';
-import {
-  gamerEmailShowAtom,
-  gamerGamesAtom,
-  gamerInfoAtom,
-  gamerInfoCodeAtom,
-  gamerPermissionSettingAtom,
-} from '../store/gamer/state';
+import { getLocalStorage } from '@/utils/storage';
+import { BinSteamParams, Response } from '@/lib/types';
+import { gamerGamesAtom, gamerInfoAtom, gamerInfoCodeAtom, gamerPermissionSettingAtom } from '@/store/gamer/state';
 import {
   fetchBindSteam,
   fetchGamerGames,
@@ -21,11 +15,10 @@ import {
   fetchGamerInvitation,
   fetchGamerReload,
   fetchGamerVerifyEmailCode,
-} from '../lib/api';
+} from '@/lib/api';
 
 export const useGamerInfo = (addr?: string) => {
   const setGamerInfo = useSetRecoilState(gamerInfoAtom);
-  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
   const setGamerInfoCode = useSetRecoilState(gamerInfoCodeAtom);
   const [gamerGames, setGamerGames] = useRecoilState(gamerGamesAtom);
   const { refetch } = useGamerGames(addr);
@@ -36,9 +29,6 @@ export const useGamerInfo = (addr?: string) => {
     onSuccess: (data) => {
       setGamerInfoCode(data.code);
       if (data.code === 0 && data.data) {
-        if (!data.data.email && gamerGames) {
-          setGamerEmailShow(true);
-        }
         if (data.data.steam_id && gamerGames?.wallet_address !== addr) {
           setGamerGames(undefined);
           refetch().then();
@@ -71,7 +61,6 @@ export const useGamerGames = (wallet_address?: string) => {
   const { code } = router.query;
   const gamerInfo = useRecoilValue(gamerInfoAtom);
   const setGamerGames = useSetRecoilState(gamerGamesAtom);
-  const setGamerEmailShow = useSetRecoilState(gamerEmailShowAtom);
 
   return useQuery(
     ['gamer_games', { wallet_address }],
@@ -85,9 +74,6 @@ export const useGamerGames = (wallet_address?: string) => {
     {
       enabled: false,
       onSuccess: (data) => {
-        if (data.data && !gamerInfo?.email) {
-          setGamerEmailShow(true);
-        }
         setGamerGames(data.code === 0 ? { ...data.data, wallet_address } : undefined);
       },
     },

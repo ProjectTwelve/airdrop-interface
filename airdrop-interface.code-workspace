@@ -1,0 +1,28 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "prettier.configPath": ".prettierrc.js",
+    "cSpell.words": [
+      "Aspecta",
+      "Bitget",
+      "bitkeep",
+      "ddin",
+      "Editorium",
+      "gpark",
+      "Landingsite",
+      "Leaderboard",
+      "LINEA",
+      "metaverse",
+      "roadmap",
+      "toastify",
+      "Voteme",
+      "webm"
+    ],
+    "css.lint.unknownAtRules": "ignore",
+    "editor.formatOnSave": true
+  }
+}

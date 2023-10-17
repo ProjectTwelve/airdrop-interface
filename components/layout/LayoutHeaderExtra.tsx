@@ -1,20 +1,23 @@
+import { STORAGE_KEY } from '@/constants';
+import { invitationCountSelector, inviteModalAtom } from '@/store/invite/state';
+import { openLink } from '@/utils';
+import { getLocalStorage, setLocalStorage } from '@/utils/storage';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { openLink } from '@/utils';
-import { useRouter } from 'next/router';
-import Button from '@/components/button';
-import { STORAGE_KEY } from '@/constants';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { getLocalStorage, setLocalStorage } from '@/utils/storage';
-import { invitationCountSelector, inviteModalAtom } from '@/store/invite/state';
+import { twMerge } from 'tailwind-merge';
+import { BridgeSvg } from '../svg/BridgeSvg';
+import { InviteSvg } from '../svg/InviteSvg';
+import { LandingSiteSvg } from '../svg/LandingSiteSvg';
+import BlueButton from '../button/BlueButton';
 
-function LayoutHeaderExtra() {
+function LayoutHeaderExtra({ className }: { className?: string }) {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
-  const readmeLink = 'https://github.com/ProjectTwelve/airdrop-interface#readme';
   const landingSite = 'https://p12.network';
   const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022', '/bridge'];
 
@@ -24,13 +27,15 @@ function LayoutHeaderExtra() {
   }, []);
 
   return (
-    <div className="flex">
-      <Button type="bordered" className="mr-3 lg:hidden" onClick={() => openLink(landingSite)}>
-        <div className="flex items-center justify-center text-sm">
-          <img src="/svg/landing.svg" width={24} height={24} alt="landing_site" />
-          &nbsp;P12 Landingsite
-        </div>
-      </Button>
+    <div className={twMerge('flex items-center gap-3', className)}>
+      <BlueButton
+        type="blue"
+        className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
+        onClick={() => openLink(landingSite)}
+      >
+        <LandingSiteSvg className="h-5 w-5 stroke-blue" />
+        &nbsp;P12 Landingsite
+      </BlueButton>
       <AnimatePresence>
         {!hideRoute.includes(router.pathname) && (
           <motion.div className="relative">
@@ -39,30 +44,34 @@ function LayoutHeaderExtra() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-              className="relative flex"
+              className="relative flex items-center"
             >
-              <Button type="bordered" className="mr-3 lg:hidden xl:hidden" onClick={() => openLink(readmeLink)}>
-                <div className="flex items-center justify-center text-sm">
-                  <img src="/svg/white_paper.svg" width={24} height={24} alt="white_paper" />
-                  &nbsp;Readme
-                </div>
-              </Button>
+              <BlueButton
+                type="blue"
+                className="flex-center mr-3 gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden xl:hidden"
+                onClick={() => router.push('/bridge')}
+              >
+                <BridgeSvg className="h-5 w-5" />
+                &nbsp;Bridge
+              </BlueButton>
+
               {router.pathname !== '/gamer/[address]' && (
-                <Button
-                  type="bordered"
+                <BlueButton
+                  type="blue"
+                  className="flex-center h-10 gap-1 rounded-full text-base/5 font-medium lg:hidden xl:hidden"
                   onClick={() => {
                     ReactGA.event({ action: 'Invite', category: 'Click', label: 'Header' });
                     setInviteOpen(true);
                   }}
                 >
-                  <div className="flex items-center justify-center text-sm">
-                    <img src="/svg/invite.svg" width={24} height={24} alt="invite" />
+                  <div className="flex items-center justify-center text-base/5 font-medium text-blue">
+                    <InviteSvg className="h-5 w-5 stroke-blue" />
                     &nbsp;My referral link
-                    <p className="ml-3 border-l-2 border-gray-600 pl-3 font-ddin text-xl font-bold text-green lg:hidden">
+                    <p className="ml-3 border-l-2 border-blue/50 pl-3 font-ddin text-xl/6.5 font-bold text-green lg:hidden">
                       {invitationCount}
                     </p>
                   </div>
-                </Button>
+                </BlueButton>
               )}
               <AnimatePresence>
                 {!tipsClick && (

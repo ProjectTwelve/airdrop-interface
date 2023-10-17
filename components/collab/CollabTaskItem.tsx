@@ -58,7 +58,7 @@ export default function CollabTaskItem({
     );
   };
   return (
-    <div className={classNames('flex flex-col justify-between gap-5 rounded-2xl bg-gray-800/80 p-7', className)}>
+    <div className={classNames('flex flex-col justify-between gap-5 rounded-lg bg-gray-700/30 p-7', className)}>
       <div className="flex flex-col gap-6">
         <div className="flex items-center gap-3">
           {icon && <div>{icon}</div>}

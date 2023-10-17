@@ -3,9 +3,8 @@ import Head from 'next/head';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Layout from '../components/layout';
-import { STORAGE_KEY } from '../constants';
-import { setLocalStorage } from '../utils/storage';
-import { Analytics } from '@vercel/analytics/react';
+import { STORAGE_KEY } from '@/constants';
+import { setLocalStorage } from '@/utils/storage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 
@@ -23,7 +22,18 @@ type AppPropsWithLayout = AppProps & {
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
-  const queryClient = useMemo(() => new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false } } }), []);
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: (failureCount, error: any) => !(failureCount === 3 || error?.code === 400),
+          },
+        },
+      }),
+    [],
+  );
   const isCollab = useMemo(
     () => router.pathname.indexOf('/collab') !== -1 || router.pathname.indexOf('/arcana') !== -1,
     [router],
@@ -57,7 +67,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           <Component {...pageProps} />
         </Layout>
       </QueryClientProvider>
-      <Analytics />
     </>
   );
 }

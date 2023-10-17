@@ -5,12 +5,12 @@ import { useAccount } from 'wagmi';
 import classNames from 'classnames';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import html2canvas from './html2canvas.min';
-import { posterCaptureAtom, posterStylesAtom } from '../../store/poster/state';
-import { formatMinutes, getSteamGameImage, shortenSteamId } from '../../utils';
-import { GAMER_NFT_LEVEL, NFT_CLAIM } from '../../constants';
-import { referralCodeAtom } from '../../store/invite/state';
+import { posterCaptureAtom, posterStylesAtom } from '@/store/poster/state';
+import { formatMinutes, getSteamGameImage, shortenSteamId } from '@/utils';
+import { GenesisRarity, GenesisClaim } from '@/constants';
+import { referralCodeAtom } from '@/store/invite/state';
 import PosterGameItem from './PosterGameItem';
-import { GamerGamesData, GamerInfoData } from '../../lib/types';
+import { GamerGamesData, GamerInfoData } from '@/lib/types';
 
 export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: GamerInfoData; gamerGames?: GamerGamesData }) {
   const { address } = useAccount();
@@ -51,7 +51,7 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
   useEffect(() => {
     const capture: HTMLElement | null = document.querySelector('#poster-capture');
     if (!capture || !gamerGames) return;
-    if (gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return;
+    if (gamerInfo?.nft_claim !== GenesisClaim.Claimed || gamerInfo?.nft_level === GenesisRarity.Rekt) return;
     html2canvas(capture, {
       useCORS: true,
       allowTaint: true,
@@ -63,7 +63,7 @@ export default function PosterCanvas({ gamerInfo, gamerGames }: { gamerInfo?: Ga
     });
   }, [gamerGames, gamerInfo?.nft_claim, gamerInfo?.nft_level, setPosterCapture]);
 
-  if (gamerInfo?.nft_claim !== NFT_CLAIM.CLAIMED || gamerInfo?.nft_level === GAMER_NFT_LEVEL.REKT) return null;
+  if (gamerInfo?.nft_claim !== GenesisClaim.Claimed || gamerInfo?.nft_level === GenesisRarity.Rekt) return null;
 
   return (
     <div

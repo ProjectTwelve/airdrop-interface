@@ -7,7 +7,7 @@ import { formatMinutes, getCountMemo, openLink } from '../../utils';
 
 export function GamerTokenRankingHeader() {
   return (
-    <div className="flex px-4 pt-5 pb-2.5 text-xs font-medium sm:py-2">
+    <div className="flex border-b border-[#2E2E31] px-4 pb-3 pt-5 text-xs font-medium sm:py-2">
       <p className="w-[55px]">Rank</p>
       <p className="flex-1">User Info</p>
       <p className="w-[70px] 2xl:w-[120px]">Badge</p>
@@ -32,7 +32,7 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
   return (
     <div
       onClick={handleToSteamProfile}
-      className="flex cursor-pointer items-center justify-start overflow-hidden rounded-2xl bg-gray-800/80 px-3 py-[10px] hover:bg-[#7980AF]/20 sm:px-2"
+      className="flex cursor-pointer items-center justify-start overflow-hidden border-b border-[#2E2E31] px-3 py-[10px] hover:bg-white/5 sm:px-2"
     >
       <div className="mr-2 w-[30px] flex-none text-center text-xs font-medium leading-[44px] 2xl:mr-4 2xl:w-[40px]">
         {getCountMemo(data.index)}
@@ -41,13 +41,13 @@ export default function GamerTokenRankingItem({ data }: GamerTokenRankingItemPro
         <div className="float-left mr-2 h-[44px] w-[44px] flex-none overflow-hidden rounded bg-[#CEDCFF]/10">
           {data.avatar_full && <img loading="lazy" src={data.avatar_full} alt="avatar" />}
         </div>
-        <div className="float-right ml-2 flex-none rounded bg-blue-550/20 py-1 px-2 lg:hidden xs:hidden">
+        <div className="float-right ml-2 flex-none rounded bg-blue-550/20 px-2 py-1 lg:hidden xs:hidden">
           <p className="border-b border-blue-550/30 pb-[3px] text-center text-xs leading-[14px] text-blue">SS Games</p>
           <p className="text-p12-lin mt-1 text-center text-xs leading-[14px] text-blue">
             {data.ss_game_playtime !== undefined ? data.ss_game_count + '/' + formatMinutes(data.ss_game_playtime) : '--'}
           </p>
         </div>
-        <div className="float-right ml-2 rounded bg-blue-550/20 py-1 px-2">
+        <div className="float-right ml-2 rounded bg-blue-550/20 px-2 py-1">
           <p className="border-b border-blue-550/30 pb-[3px] text-center text-xs leading-[14px] text-blue">Steam year</p>
           <p className="mt-1 text-center text-xs leading-[14px] text-blue">
             {data.time_created ? dayjs.unix(data.time_created).format('YYYY') : '--'}

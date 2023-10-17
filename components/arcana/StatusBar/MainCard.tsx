@@ -13,20 +13,20 @@ import TaskVoteDialog from './TaskVoteDialog';
 import GenesisVoteDialog from './GenesisVoteDialog';
 import ReferralVoteDialog from './ReferralVoteDialog';
 import MulticastVoteDialog from './MulticastVoteDialog';
-import { referralCodeAtom } from '../../../store/invite/state';
-import { ArcanaUserInfo, ArcanaUserVotes } from '../../../lib/types';
-import { GAMER_NFT_LEVEL, GAMER_BADGES, ARCANA_CHAIN_ID } from '../../../constants';
+import { referralCodeAtom } from '@/store/invite/state';
+import { ArcanaUserInfo, ArcanaUserVotes } from '@/lib/types';
+import { GenesisRarity, GAMER_BADGES, ARCANA_CHAIN_ID } from '@/constants';
 import {
   arcanaInviteDialogAtom,
   arcanaMulticastVideoAtom,
   arcanaPredictionAnswerAtom,
   arcanaPredictionCountAtom,
-} from '../../../store/arcana/state';
+} from '@/store/arcana/state';
 
 type MainCardProps = {
   data?: ArcanaUserVotes;
   userInfo?: ArcanaUserInfo;
-  nftLevel?: GAMER_NFT_LEVEL;
+  nftLevel?: GenesisRarity;
 };
 
 export default function MainCard({ data, nftLevel, userInfo }: MainCardProps) {

@@ -384,16 +384,16 @@ export default function BridgeSwitch() {
   };
 
   return (
-    <div className="p-9">
+    <div className="p-7.5">
       <div className="flex gap-9">
         <div className="flex-1">
-          <div className="border-b border-gray-600 pb-6 font-semibold">
-            <img className="mr-2 inline w-[30px]" src="/img/bridge/inventory.svg" alt="inventory icon" />
+          <div className="border-b border-[#4e4e50] pb-4 text-base font-semibold">
+            <img className="mr-2 inline w-6" src="/img/bridge/inventory.svg" alt="inventory icon" />
             Inventory
           </div>
-          <div className="mt-8">
-            <p className="text-sm font-semibold leading-[30px]">Community Badges</p>
-            <div className="mt-3 flex flex-wrap gap-3">
+          <div className="mt-7.5">
+            <p className="text-base font-semibold">Community Badges</p>
+            <div className="mt-4 flex flex-wrap gap-3">
               {nftOwned.map((chainItem) => {
                 return chainItem.map((item) => {
                   return (
@@ -489,9 +489,9 @@ export default function BridgeSwitch() {
                 );
               })}
             </div>
-            <p className="mt-8 text-sm font-semibold">AMA OATs</p>
+            <p className="mt-7.5 text-base font-semibold">AMA OATs</p>
             {AMABadge.length > 0 ? (
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="mt-4 flex flex-wrap gap-2">
                 {AMABadge.map((chainItem) => {
                   return chainItem.map((item) => {
                     return (
@@ -561,7 +561,7 @@ export default function BridgeSwitch() {
                 })}
               </div>
             ) : (
-              <div className="nft-backdrop-box mt-3 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+              <div className="nft-backdrop-box mt-4 flex h-[118px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
                 <div className="text-xs text-gray-400">To collect more badges & level your game up at</div>
                 <div
                   className="cursor-pointer text-sm font-semibold text-blue"
@@ -575,13 +575,13 @@ export default function BridgeSwitch() {
             )}
           </div>
         </div>
-        <div className="basis-[540px]">
-          <div className="border-b border-gray-600 pb-6 font-semibold">
-            <img className="mr-2 inline w-[30px]" src="/img/bridge/bridge.svg" alt="bridge icon" />
+        <div className="flex basis-[540px] flex-col">
+          <div className="border-b border-[#4e4e50] pb-4 font-semibold">
+            <img className="mr-2 inline w-6" src="/img/bridge/bridge.svg" alt="bridge icon" />
             Bridge
           </div>
           {selectedBadge ? (
-            <div className="mt-8">
+            <div className="mt-9">
               <div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -711,35 +711,35 @@ export default function BridgeSwitch() {
               </div>
             </div>
           ) : (
-            <div className="mt-8">
+            <div className="mt-4 flex flex-grow flex-col">
               <div className="flex items-center gap-2 text-sm font-semibold ">
                 TO: <img className="w-[30px]" src="/img/bridge/p12_chain.svg" alt="chain icon" /> P12 Chain
               </div>
-              <div className="nft-backdrop-box mt-3 flex h-[306px] flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed backdrop-blur-0">
+              <div className="nft-backdrop-box mt-3 flex flex-grow flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 border-dashed fill-gray-400 backdrop-blur-0">
                 <svg
                   className="mx-auto mb-2"
                   width="48"
                   height="37"
                   viewBox="0 0 48 37"
-                  fill="none"
+                  fill="current"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M39.153 2.31251C38.0162 0.853264 36.2698 0 34.4199 0H13.5802C11.7304 0 9.98394 0.853266 8.84707 2.31251L0.515845 13.0061C0.174662 13.4441 0.051278 13.9489 0.100098 14.4274V34C0.100098 35.6568 1.44324 37 3.1001 37H44.9C46.5569 37 47.9 35.6568 47.9 34V14.4275C47.9489 13.949 47.8255 13.4441 47.4843 13.0061L39.153 2.31251ZM13.5802 2H34.4199C35.6531 2 36.8174 2.56884 37.5753 3.54167L45.9066 14.2353H34.8379C33.181 14.2353 31.8379 15.5784 31.8379 17.2353V19.8824H16.1622V17.2353C16.1622 15.5784 14.8191 14.2353 13.1622 14.2353H2.09355L10.4248 3.54167C11.1827 2.56884 12.347 2 13.5802 2ZM45.9 16.2353H34.8379C34.2856 16.2353 33.8379 16.683 33.8379 17.2353V19.8824C33.8379 20.9869 32.9425 21.8824 31.8379 21.8824H16.1622C15.0577 21.8824 14.1622 20.9869 14.1622 19.8824V17.2353C14.1622 16.683 13.7145 16.2353 13.1622 16.2353H2.1001V34C2.1001 34.5523 2.54781 35 3.1001 35H44.9C45.4523 35 45.9 34.5523 45.9 34V16.2353Z"
-                    fill={'#74788B'}
+                    fill="current"
                   />
                 </svg>
-                <p className="text-p12-bg w-[200px] text-center text-sm leading-5">Choose badge you want to bridge on left</p>
+                <p className="w-[200px] text-center text-sm leading-5 text-gray-400">Choose badge you want to bridge on left</p>
               </div>
             </div>
           )}
         </div>
       </div>
 
-      <div className="mt-[96px] border-b border-gray-600"></div>
-      <div className="mt-6 text-lg font-semibold">Bridge History</div>
+      <div className="my-7.5 border-b border-[#4e4e50]"></div>
+      <div className="text-base font-semibold">Bridge History</div>
       <Table loading={isLoading} className="mt-6 max-w-[95vw] overflow-x-auto" dataSource={orderData} columns={gamerColumns} />
     </div>
   );

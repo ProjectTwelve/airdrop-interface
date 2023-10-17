@@ -1,23 +1,16 @@
-export enum NFT_CLAIM {
-  UNCLAIMED = 0,
-  PENDING,
-  CLAIMED,
+export enum GenesisClaim {
+  Unclaimed = 0,
+  Pending,
+  Claimed,
 }
 
-export enum DEV_NFT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-}
-
-export enum GAMER_NFT_LEVEL {
-  ORANGE = 0,
-  PURPLE,
-  BLUE,
-  GREEN,
-  WHITE,
-  REKT,
+export enum GenesisRarity {
+  Legendary,
+  Epic,
+  Rare,
+  Uncommon,
+  Common,
+  Rekt,
 }
 
 export enum COLLAB_TIME_STATUS {
@@ -70,4 +63,19 @@ export enum AMA_NFT_CAMPAIGN_ID {
   GCdFZUtN2T = 'GCdFZUtN2T',
   GCmP7UtXdx = 'GCmP7UtXdx',
   GCsJQUt6Xc = 'GCsJQUt6Xc',
+}
+
+export enum GenesisRole {
+  Gamer = 'gamer',
+  Developer = 'developer',
+}
+
+export enum GenesisPay {
+  Golden = 'golden',
+  Silvery = 'silvery',
+}
+
+export enum GenesisSource {
+  Steam = 'steam',
+  Arcana = 'arcana',
 }

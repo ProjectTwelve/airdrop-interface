@@ -1,5 +1,5 @@
-import React, { LegacyRef } from 'react';
 import classNames from 'classnames';
+import React, { LegacyRef } from 'react';
 
 type ButtonProps = {
   className?: string;
@@ -9,6 +9,7 @@ type ButtonProps = {
   disabled?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  htmlType?: 'button' | 'submit' | 'reset';
 };
 
 function Loading() {
@@ -20,14 +21,14 @@ function Loading() {
 }
 
 const Button = React.forwardRef(function ButtonInner(
-  { className, loading, type, size, onClick, disabled, children, style }: React.PropsWithChildren<ButtonProps>,
+  { className, loading, type, size, onClick, disabled, children, style, htmlType }: React.PropsWithChildren<ButtonProps>,
   ref: LegacyRef<HTMLButtonElement>,
 ) {
   const bg = {
-    default: 'bg-[#494E69]/40',
+    default: 'bg-white/[0.08]',
     error: 'bg-red-400',
     gradient: 'bg-p12-gradient',
-    bordered: 'border',
+    bordered: 'border border-white',
   };
   const sizes = {
     small: 'min-h-[30px]',
@@ -37,6 +38,7 @@ const Button = React.forwardRef(function ButtonInner(
 
   return (
     <button
+      type={htmlType}
       ref={ref}
       onClick={loading ? undefined : onClick}
       className={classNames(

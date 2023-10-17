@@ -5,18 +5,18 @@ import { useSetRecoilState } from 'recoil';
 import { useCopyToClipboard } from 'react-use';
 import { useAccount, useSignMessage } from 'wagmi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import Button from '../button';
-import Message from '../message';
-import { STORAGE_KEY } from '../../constants';
-import { getVerifySignData } from '../../utils';
+import Button from '@/components/button';
+import Message from '@/components/message';
+import { STORAGE_KEY } from '@/constants';
+import { getVerifySignData } from '@/utils';
 import SteamAppItem from './verify/SteamAppItem';
-import { fetchDeveloperVerify } from '../../lib/api';
-import { getLocalStorage } from '../../utils/storage';
-import { getErrorToast } from '../../utils/developer';
+import { fetchDeveloperVerify } from '@/lib/api';
+import { getLocalStorage } from '@/utils/storage';
+import { getErrorToast } from '@/utils/developer';
 import { AddGameTips, OwnershipTips } from './verify/Tips';
-import { tabSelectAtom, verifiedSteamAppAtom } from '../../store/developer/state';
-import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '../../lib/types';
-import { useIsMounted } from '../../hooks/useIsMounted';
+import { tabSelectAtom, verifiedSteamAppAtom } from '@/store/developer/state';
+import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '@/lib/types';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 export type SteamApp = Partial<DevGameInfo> & { index: number };
 
@@ -104,19 +104,21 @@ function Verify() {
   }, [address, mutation, router.query, setVerifiedSteamApp, submittedSteamApps]);
 
   return (
-    <div className="px-8 pt-12 md:px-4 md:pt-6">
-      <div className="grid grid-cols-2 gap-[60px] border-b border-gray-600 pb-12 md:grid-cols-1">
+    <div className="px-7.5 pt-12 md:px-4 md:pt-6">
+      <div className="grid grid-cols-2 gap-7.5 md:grid-cols-1">
         <div className="w-full">
-          <h2 className="text-[30px] font-medium">Step One: Add Steam games</h2>
-          <p className="">you can add 3 games at once</p>
-          <div className="mt-7">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h2 className="text-[30px]/10.5 font-semibold">Step1: Add Steam games</h2>
+            <p className="text-base">(you can add 3 games)</p>
+          </div>
+          <div className="mt-6">
             <AddGameTips />
           </div>
-          <div className="mt-7 grid gap-4">
-            <h3 className="text-xl font-medium">
+          <div className="mt-9 grid gap-4">
+            <h3 className="text-base/6 font-semibold">
               YOUR GAMES&nbsp;
-              <span className="text-base font-normal">
-                (Game data was snapshoted on <span className="text-xl font-medium">1 May 2022</span>)
+              <span className="font-normal">
+                (Game data was snapshoted on <span className="font-semibold">1 May 2022</span>)
               </span>
             </h3>
             {steamAppList.map((app, index) => (
@@ -129,45 +131,42 @@ function Verify() {
               />
             ))}
             {steamAppList.length < 3 && (
-              <Button
-                className="w-full"
-                type="bordered"
-                style={{ borderRadius: 16, height: 72 }}
-                onClick={() => onAddSteamApp(count)}
-              >
-                <p className="text-[32px] font-medium">+</p>
+              <Button className="h-18 w-full rounded-lg border-none" type="bordered" onClick={() => onAddSteamApp(count)}>
+                <p className="text-[30px]/8">+</p>
               </Button>
             )}
           </div>
         </div>
         <div className="w-full">
-          <h2 className="text-[30px] font-medium">Step Two: Verify ownership</h2>
+          <h2 className="text-[30px]/10.5 font-semibold">Step2: Verify ownership</h2>
           <div className="mt-7">
             <OwnershipTips />
           </div>
           <div className="mt-7">
-            <h3 className="text-xl font-medium">
-              YOUR SIGNATURE <span className="text-base font-normal">(you can check later too)</span>
+            <h3 className="text-base/6 font-semibold">
+              YOUR SIGNATURE <span className="font-normal">(you can check later too)</span>
             </h3>
-            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-2xl bg-gray-800/80 p-6 pb-16">
+            <div className="relative mt-3 max-w-[620px] whitespace-pre-line break-words rounded-lg bg-gray-700/30 p-4 pb-16">
               {isMounted && address ? signature : 'Please connect your wallet first.'}
-              <div className="absolute right-5 bottom-5">
+              <div className="absolute bottom-4 right-4">
                 {isMounted && address ? (
                   isSig ? (
-                    <Button
-                      type="gradient"
-                      size="small"
+                    <div
+                      className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5 text-sm/5 font-semibold text-blue hover:bg-blue/30"
                       onClick={() => {
                         copyToClipboard(signature);
                         toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                       }}
                     >
                       Copy
-                    </Button>
+                    </div>
                   ) : (
-                    <Button type="gradient" size="small" onClick={() => signMessage()}>
+                    <div
+                      className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5 text-sm/5 font-semibold text-blue hover:bg-blue/30"
+                      onClick={() => signMessage()}
+                    >
                       Generate
-                    </Button>
+                    </div>
                   )
                 ) : null}
               </div>
@@ -175,13 +174,13 @@ function Verify() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between py-8 md:flex-col">
+      <div className="flex items-center justify-between pb-7.5 pt-9 md:flex-col">
         <div className="text-[18px] md:mb-4">
           Selected <span className="text-green">{submittedSteamApps.length}</span>{' '}
           {submittedSteamApps.length > 1 ? 'games' : 'game'} to verify
         </div>
         <Button
-          className="w-[280px]"
+          className="w-[278px] py-4 text-base/6 font-semibold"
           disabled={!canVerify}
           type={canVerify ? 'gradient' : 'default'}
           size="large"

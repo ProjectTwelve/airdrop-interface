@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { motion } from 'framer-motion';
 import { claimGroupSelector, developerGameAtom } from '@/store/developer/state';
 import { roadmapModalAtom } from '@/store/roadmap/state';
-import { NFT_CLAIM } from '@/constants';
+import { GenesisClaim } from '@/constants';
 
 function DeveloperStatus() {
   const games = useRecoilValue(developerGameAtom);
@@ -13,7 +13,7 @@ function DeveloperStatus() {
   const setOpen = useSetRecoilState(roadmapModalAtom);
 
   const tagType = useMemo(
-    () => (claimGroup[NFT_CLAIM.CLAIMED].length === games.length ? 'green' : 'red'),
+    () => (claimGroup[GenesisClaim.Claimed].length === games.length ? 'green' : 'red'),
     [claimGroup, games.length],
   );
 
@@ -26,7 +26,7 @@ function DeveloperStatus() {
     >
       <div className="flex items-center justify-center border-r border-gray-600 px-3 text-xl">
         {games.length ? (
-          <Tag type={tagType} size="large" value={`${claimGroup[NFT_CLAIM.CLAIMED].length}/${games.length} Airdrop NFT`} />
+          <Tag type={tagType} size="large" value={`${claimGroup[GenesisClaim.Claimed].length}/${games.length} Airdrop NFT`} />
         ) : (
           <Tag type="red" size="large" value="No NFT yet" />
         )}

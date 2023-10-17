@@ -2,52 +2,58 @@
 }
 
 .react-tabs__tab-list {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid #4E556D;
-    gap: 16px;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    @apply md:gap-0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #4e556d;
+  gap: 16px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  text-align: center;
+  @apply md:gap-0;
 }
 
 .react-tabs__tab {
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-    padding: 16px;
-    color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  padding: 16px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .react-tabs__tab--selected {
-    color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .react-tabs__tab--disabled {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .react-tabs__tab--underline {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
 }
 
 .react-tabs__tab--underline > div {
-    margin: 0 auto;
-    height: 3px;
-    width: 60px;
-    background-image: linear-gradient(to right, var(--from), var(--to));
+  margin: 0 auto;
+  height: 3px;
+  width: 60px;
+  background-image: linear-gradient(to right, var(--from), var(--to));
 }
 
 .react-tabs__tab-panel {
-    display: none;
+  display: none;
 }
 
 .react-tabs__tab-panel--selected {
-    display: block;
+  display: block;
+}
+
+.home-tabs .react-tabs__tab {
+  padding: 0;
+  @apply px-2.5 pb-3;
 }

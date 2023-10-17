@@ -35,22 +35,19 @@ export default function GameList() {
       <div
         ref={ref}
         className={classNames(
-          'horizontal-scroll flex w-full overflow-x-auto rounded-t-2xl pb-[10px]',
+          'horizontal-scroll flex w-full overflow-x-auto rounded-t-2xl',
           !enableTabScroll && '2xl:overflow-x-hidden',
         )}
       >
         <div className="whitespace-nowrap">
           {list.map((game) => (
-            <div
-              key={game.appid}
-              className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl bg-gray-800 p-2.5 last:mr-0')}
-            >
+            <div key={game.appid} className={classNames('relative mr-[13px] inline-block w-[315px] rounded-t-2xl last:mr-0')}>
               <div className="flex">
-                <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-2xl bg-[#CEDCFF]/10">
+                <div className="mr-3 h-[72px] w-[112px] overflow-hidden rounded-lg bg-gray-700/30">
                   {game.header_image ? (
                     <img loading="lazy" className="h-[72px] w-[112px] object-cover" src={game.header_image} alt="" />
                   ) : (
-                    <p className="text-center text-xs leading-[72px] text-gray-500">No Game</p>
+                    <p className="text-center text-sm/[72px] text-gray-400">No Game</p>
                   )}
                 </div>
                 <div className="flex-1">
@@ -60,7 +57,7 @@ export default function GameList() {
                       <p className="text-gradient-yellow mt-2 text-[34px]/10 font-bold">100</p>
                     </>
                   ) : (
-                    <p className="font-medium leading-[72px]">NO GAME YET</p>
+                    <p className="text-base/[72px] font-semibold">NO GAME YET</p>
                   )}
                 </div>
               </div>

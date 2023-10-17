@@ -2,12 +2,12 @@ import React from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
 import Button from '../../button';
-import { shortenAddress } from '../../../utils';
-import { BADGE_CONTRACT_ADDRESS, GAMER_BADGES, GAMER_NFT_LEVEL } from '../../../constants';
+import { shortenAddress } from '@/utils';
+import { BADGE_CONTRACT_ADDRESS, GAMER_BADGES, GenesisRarity } from '@/constants';
 
 type GenesisVoteDialogProps = {
   close: () => void;
-  nftLevel?: GAMER_NFT_LEVEL;
+  nftLevel?: GenesisRarity;
   votes?: number;
   createdAt?: number;
   nftId?: number;
@@ -34,7 +34,7 @@ export default function GenesisVoteDialog({ nftLevel, close, votes, createdAt, n
             key={item.label}
             className={classNames(
               'flex flex-1 flex-col items-center justify-center border-r border-gray-600',
-              'md:flex-row md:border-r-0 md:border-b md:py-2',
+              'md:flex-row md:border-b md:border-r-0 md:py-2',
               'last:border-none',
             )}
           >

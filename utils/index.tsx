@@ -1,8 +1,8 @@
-import React from 'react';
-import { getAddress } from 'viem';
-import { toast } from 'react-toastify';
 import { getNetwork } from '@wagmi/core';
+
 import { isMobile } from 'react-device-detect';
+import { toast } from 'react-toastify';
+import { getAddress } from 'viem';
 import Message from '../components/message';
 
 export function isAddress(value: any): string | false {
@@ -17,7 +17,8 @@ export function shortenSteamId(steamId?: string): string {
   return steamId ? steamId.substring(0, 2) + '...' + steamId.substring(steamId.length - 2) : '';
 }
 
-export function shortenAddress(address: string, chars = 4): string {
+export function shortenAddress(address?: string, chars = 4): string {
+  if (!address) return '';
   const parsed = isAddress(address);
   if (!parsed) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
@@ -27,6 +28,30 @@ export function shortenAddress(address: string, chars = 4): string {
 
 export function shortenHash(hash?: string): string {
   return hash ? hash.substring(0, 6) + '...' + hash.substring(hash.length - 4) : '';
+}
+
+export function shortenArcanaStr(
+  str?: string,
+  option?: {
+    startTruncateLength?: number; // 开始省略的长度
+    pre?: number;
+    post?: number;
+  },
+): string {
+  const { pre = 3, post = 5, startTruncateLength = 20 } = option ?? {};
+  const len = str?.length;
+  if (!len) return '';
+  if (len < startTruncateLength) return str;
+  return `${str.substring(0, pre)}...${str.substring(len - post)}`;
+}
+
+export function shortenArcanaShowName(showName?: string, startTruncateLength = 20): string {
+  if (!showName) return '';
+  const parsed = isAddress(showName);
+  // TODO: shorten Rule
+  if (parsed) return shortenAddress(showName);
+  else if (showName.includes('.p12.dev')) return shortenArcanaStr(showName, { post: 3, startTruncateLength });
+  else return shortenArcanaStr(showName, { startTruncateLength });
 }
 
 export const isBrowser = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
