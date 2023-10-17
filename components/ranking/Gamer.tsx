@@ -1,17 +1,23 @@
 import { GenesisRarity } from '@/constants';
 import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
+import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
+import { isConnectPopoverOpen } from '@/store/web3/state';
 import { getCountMemo } from '@/utils';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import Pagination from 'rc-pagination';
 import { Fragment, useMemo, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import DevelopRankTable from './DevelopRankTable';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
 
 export default function GamerRanking() {
+  const router = useRouter();
+  const setDashboardSelectedTab = useSetRecoilState(dashboardSelectedTabAtom);
   const { data: verified } = useGamerVerifiedCount();
   const [timeRankPage, setTimeRankPage] = useState(1);
   const [tokenRankPage, setTokenRankPage] = useState(1);
@@ -23,6 +29,8 @@ export default function GamerRanking() {
     () => (verified ? (verified.verifiedCount[4] || 0) + (verified.verifiedCount[5] || 0) : 0),
     [verified],
   );
+  const { activatedPL } = useRecoilValue(userPowerLevelAtom);
+  const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
 
   const levelCount = useMemo(
     () => [
@@ -66,7 +74,7 @@ export default function GamerRanking() {
           </div>
         </div>
         <div>
-          <h3 className="text-base/6 font-semibold">Your Ranking</h3>
+          <h3 className="text-base/6 font-semibold">Steam Ranking</h3>
           <div className="gradient__box mt-3 h-[124px] 2xl:h-[84px]">
             <div className="flex h-full w-full flex-wrap px-4 py-2">
               <div className="flex h-[68px] basis-full items-center justify-center truncate 2xl:flex-1">
@@ -75,7 +83,30 @@ export default function GamerRanking() {
                     <img src={gamerRankData.avatar_full} alt="avatar" />
                   </div>
                 )}
-                <div className="truncate">{gamerRankData?.person_name || 'Please login first'}</div>
+                <div className="truncate">
+                  {gamerRankData?.person_name ? (
+                    gamerRankData?.person_name
+                  ) : activatedPL ? (
+                    <p
+                      className="cursor-pointer text-sm/4 font-semibold text-blue"
+                      onClick={() => {
+                        setDashboardSelectedTab(1);
+                        router.push('/dashboard');
+                      }}
+                    >
+                      Go to verify Steam
+                    </p>
+                  ) : (
+                    <p
+                      className="cursor-pointer text-sm/4 font-semibold text-blue"
+                      onClick={() => {
+                        setConnectOpen(true);
+                      }}
+                    >
+                      Please login
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="mx-2 my-auto hidden h-4 w-px bg-[#949FA9]/50 2xl:block" />
               <div
