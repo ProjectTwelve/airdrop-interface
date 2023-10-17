@@ -7,7 +7,6 @@ import { DevInvitationInfo, GamerInvitationInfo } from '@/lib/types';
 import { shortenAddress, shortenSteamId } from '@/utils';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useAccount } from 'wagmi';
@@ -54,17 +53,17 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      devColumnHelper.display({
-        id: 'reward',
-        header: 'Reward',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" layout="fixed" src="/img/pl/power_level.png" width={30} height={30} alt="PL" />
-          </div>
-        ),
-      }),
+      // devColumnHelper.display({
+      //   id: 'reward',
+      //   header: 'Reward',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" layout="fixed" src="/img/pl/power_level.png" width={30} height={30} alt="PL" />
+      //     </div>
+      //   ),
+      // }),
       devColumnHelper.accessor('nft_level', {
         size: 60,
         header: 'badge',
@@ -74,17 +73,17 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      devColumnHelper.display({
-        id: 'get',
-        header: 'Will get',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // devColumnHelper.display({
+      //   id: 'get',
+      //   header: 'Will get',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
     ],
     [],
   );
@@ -115,17 +114,17 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      gamerColumnHelper.display({
-        id: 'reward',
-        header: 'Reward',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // gamerColumnHelper.display({
+      //   id: 'reward',
+      //   header: 'Reward',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" layout="fixed" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
       gamerColumnHelper.accessor('nft_level', {
         header: 'Badge',
         size: 100,
@@ -135,23 +134,23 @@ export function InviteRecordDialog({ close, tab }: InviteRecordDialogProps) {
           </div>
         ),
       }),
-      gamerColumnHelper.display({
-        id: 'get',
-        header: 'Will get',
-        size: 120,
-        cell: () => (
-          <div className="flex h-full items-center">
-            <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
-            <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
-          </div>
-        ),
-      }),
+      // gamerColumnHelper.display({
+      //   id: 'get',
+      //   header: 'Will get',
+      //   size: 120,
+      //   cell: () => (
+      //     <div className="flex h-full items-center">
+      //       <p className="mr-2 cursor-pointer font-ddin text-2xl font-bold">?,???</p>
+      //       <Image className="-z-10" src="/img/p12.png" width={30} height={30} alt="p12" />
+      //     </div>
+      //   ),
+      // }),
     ],
     [],
   );
 
   return (
-    <div>
+    <div className="w-[45rem] md:w-full">
       <Back onClick={close} className="absolute left-7 top-7" />
       <h2 className="mb-[18px] text-center text-xl/5.5 md:w-full">Invite friend to mint P12 Genesis NFT</h2>
       <Tabs className="border-none" onSelect={(index) => setSelectedTab(index)} selectedIndex={selectedTab}>

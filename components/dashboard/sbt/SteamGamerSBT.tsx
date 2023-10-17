@@ -76,7 +76,7 @@ export default function SteamGamerSBT() {
               <CredentialTask
                 onClick={() => setSelectedTab(0)}
                 status={nftSource.includes(GenesisSource.Arcana)}
-                text="Become a voter in Arcana Editorium"
+                text="Become a voter in P12 Arcana"
               />
               <p className="text-center text-xs">OR</p>
               <CredentialTask

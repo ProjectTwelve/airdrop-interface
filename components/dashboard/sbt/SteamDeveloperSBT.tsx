@@ -38,7 +38,7 @@ export default function SteamDeveloperSBT() {
           )}
         </div>
         <div className="flex-1">
-          <div className="flex gap-3 text-lg/4.5">P12 Genesis Badge</div>
+          <div className="flex gap-3 text-lg/4.5">P12 GENESIS Badge</div>
           <p className="mt-4 text-xs/3">Power Level</p>
           <div className="mt-2 flex gap-1.5">
             <div className={classNames('text-[34px]/10 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
@@ -47,7 +47,7 @@ export default function SteamDeveloperSBT() {
             {isClaimed ? (
               <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />
             ) : (
-              <Tooltip label="Claim P12 XII-PLORER Badge to activate Gamer Power Level.">
+              <Tooltip label="Claim P12 GENESIS Badge to activate Developer Power Level.">
                 <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />
               </Tooltip>
             )}
@@ -61,7 +61,7 @@ export default function SteamDeveloperSBT() {
               <CredentialTask
                 onClick={() => setSelectedTab(0)}
                 status={nftSource.includes(GenesisSource.Arcana)}
-                text="Publish a creation in Arcana Editorium"
+                text="Publish a creation in P12 Arcana"
               />
               <p className="text-center text-xs">OR</p>
               <CredentialTask
