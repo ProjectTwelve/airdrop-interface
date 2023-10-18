@@ -4,6 +4,7 @@ import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
 import { Tooltip } from '@/components/tooltip';
 import PremiumPlusTooltip from '@/components/tooltip/PremiumPlusTooltip';
 import { GAMER_BADGES, GenesisClaim, GenesisPay, GenesisRole, GenesisSource } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
 import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import { useGamerTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import { useGamerInfo } from '@/hooks/gamer';
@@ -12,6 +13,7 @@ import { digitalFormat } from '@/utils/format';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 
@@ -74,13 +76,19 @@ export default function SteamGamerSBT() {
           ) : (
             <div className="mt-3">
               <CredentialTask
-                onClick={() => setSelectedTab(0)}
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'gamer_become_voter' });
+                  setSelectedTab(0);
+                }}
                 status={nftSource.includes(GenesisSource.Arcana)}
                 text="Become a voter in P12 Arcana"
               />
               <p className="text-center text-xs">OR</p>
               <CredentialTask
-                onClick={() => setSelectedTab(1)}
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'gamer_verify_steam' });
+                  setSelectedTab(1);
+                }}
                 status={nftSource.includes(GenesisSource.Steam)}
                 text="Complete Steam verify process in airdrop"
               />

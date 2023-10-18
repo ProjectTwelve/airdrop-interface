@@ -18,7 +18,7 @@ export default function Home() {
         <div
           className="relative cursor-pointer rounded-2xl duration-200 ease-linear hover:-translate-y-1 "
           onClick={() => {
-            ReactGA.event({ category: EventCategory.Global, action: EventName.CollabBanner });
+            ReactGA.event({ category: EventCategory.Assets, action: EventName.CollabBanner });
             openLink('https://arcana.p12.games/');
           }}
         >

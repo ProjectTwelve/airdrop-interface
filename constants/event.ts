@@ -18,6 +18,13 @@ export enum EventName {
   // collab
   CollabBanner = 'collab_banner',
   CollabCard = 'collab_card',
+  // to sbt
+  SbtEntrance = 'sbt_entrance',
+  // sbt detail
+  GetNftTask = 'get_nft_task',
+  ClaimSbt = 'claim_sbt',
+  UpgradeSbt = 'upgrade_sbt',
+  SectionTab = 'section_tab',
   // arcana tab
   BecomeVoter = 'become_voter',
   CreateNow = 'create_now',
