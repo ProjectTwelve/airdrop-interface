@@ -4,6 +4,13 @@ export enum EventCategory {
 }
 
 export enum EventName {
+  // wallet
+  ConnectWallet = 'connect_wallet',
+  ConnectResult = 'connect_result',
+  DisconnectWallet = 'disconnect_wallet',
+  ToLandingsite = 'to_landingsite',
+  ToBridge = 'to_bridge',
+
   // invitation
   ToInvitation = 'to_invitation',
   CopyRefLink = 'copy_ref_link',

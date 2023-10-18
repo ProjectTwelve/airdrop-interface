@@ -20,6 +20,7 @@
       "roadmap",
       "toastify",
       "Voteme",
+      "walletconnet",
       "webm"
     ],
     "css.lint.unknownAtRules": "ignore",
