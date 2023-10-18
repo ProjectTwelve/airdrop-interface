@@ -118,7 +118,7 @@ export default function GamerRanking() {
                   isInRanking && 'cursor-pointer hover:bg-[#7980AF]/30',
                 )}
               >
-                By Token Rarity
+                By Steam PL
                 <span className="pl-3 font-ddin text-lg font-bold">
                   {getCountMemo(gamerRankData?.tokenRank) || '--'}
                   {isLowLevelToken(gamerRankData?.nft_level) ? '+' : null}

@@ -28,7 +28,7 @@ export default function Qatar2022() {
     <>
       <div className="md:px-2">
         <div className="absolute left-0 top-0 -z-10 flex h-[420px] w-full flex-col items-center justify-center overflow-hidden">
-          <img src="/img/mask.webp" alt="mask" className="absolute top-0 left-0 hidden h-[420px] w-full md:block" />
+          <img src="/img/mask.webp" alt="mask" className="absolute left-0 top-0 hidden h-[420px] w-full md:block" />
           <div className="h-[420px] w-[1920px]">
             <img width={1440} className="mx-auto" src="https://cdn1.p12.games/airdrop/collab/qatar_banner3.webp" alt="banner" />
           </div>
@@ -47,11 +47,11 @@ export default function Qatar2022() {
               More <img className="mb-[1px] inline" width={12} height={12} src="/svg/more.svg" alt="more" />
             </p>
           </div>
-          <div className="flex items-center justify-between pt-10 pb-14 md:flex-col md:items-start md:py-6">
+          <div className="flex items-center justify-between pb-14 pt-10 md:flex-col md:items-start md:py-6">
             <div className="font-semibold leading-9 text-green md:text-sm">
               Reward: &nbsp;&nbsp;P12 x BNB Chain Football Fiesta OAT
             </div>
-            <div className="text-sm leading-5 text-[#A5A6AB] md:text-xs">Time：2022.11.15 - 2022.12.20</div>
+            <div className="text-sm leading-5 text-[#A5A6AB] md:text-xs">Time: 2022.11.15 - 2022.12.20</div>
           </div>
         </div>
         <div className="mt-8">
@@ -67,7 +67,7 @@ export default function Qatar2022() {
             />
             {isMounted && (
               <HolderItem
-                link="https://airdrop.p12.games/gamer"
+                link="https://assets.p12.games/dashboard#gamer"
                 asset={
                   data?.genesisNftLevel ? (
                     <img src={GAMER_BADGES[data?.genesisNftLevel].imgBig} alt="glory_pass" />
