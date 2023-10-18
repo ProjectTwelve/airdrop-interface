@@ -92,7 +92,7 @@ export default function MyTasks() {
             type="bordered"
             className="mt-7.5 flex w-[350px] justify-center gap-1.5 self-center border-white py-2.5 text-sm xs:w-full"
             onClick={() => {
-              ReactGA.event({ category: EventCategory.Global, action: EventName.GetPl });
+              ReactGA.event({ category: EventCategory.Assets, action: EventName.GetPl });
               openLink('https://arcana.p12.games/#task');
             }}
           >

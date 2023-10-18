@@ -1,14 +1,16 @@
-import React, { useMemo } from 'react';
-import classNames from 'classnames';
-import { openLink } from '@/utils';
 import Button from '@/components/button';
-import { GenesisNFT } from '@/lib/types-nest';
-import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
-import { useFetchGenesisPL, useMutationGenesisUpgrade } from '@/hooks/dashboard/powerLevel';
 import { DEV_BADGES, GAMER_BADGES, GenesisClaim, GenesisRarity, GenesisRole } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
+import { useFetchGenesisPL, useMutationGenesisUpgrade } from '@/hooks/dashboard/powerLevel';
 import { GenesisUpgradeStatus, useGenesisNFTUpgrade } from '@/hooks/dashboard/useGenesisNFTUpgrade';
-import { useAccount } from 'wagmi';
+import { useSBTLevelConfig } from '@/hooks/dashboard/useSBTLevelConfig';
+import { GenesisNFT } from '@/lib/types-nest';
+import { openLink } from '@/utils';
+import classNames from 'classnames';
+import { useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { toast } from 'react-toastify';
+import { useAccount } from 'wagmi';
 
 type ClaimButtonProps = {
   role: GenesisRole;
@@ -34,7 +36,14 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
       <Button
         type="gradient"
         className="w-full py-3 text-base/5 font-semibold"
-        onClick={() => openLink(nftConfig[data.nftLevel].claim)}
+        onClick={() => {
+          ReactGA.event({
+            category: EventCategory.Assets,
+            action: EventName.ClaimSbt,
+            label: role === GenesisRole.Gamer ? 'gamer' : 'dev',
+          });
+          openLink(nftConfig[data.nftLevel].claim);
+        }}
       >
         Claim
       </Button>
@@ -52,6 +61,11 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
           <div
             onClick={() => {
               if (!address || isLoading) return;
+              ReactGA.event({
+                category: EventCategory.Assets,
+                action: EventName.UpgradeSbt,
+                label: `${role === GenesisRole.Gamer ? 'gamer' : 'dev'}_${data?.nftLevel}_${powerLevel}`, // role + currentNFTLevel + currentPL
+              });
               mutateAsync({ address, role }).then();
             }}
             className={classNames(

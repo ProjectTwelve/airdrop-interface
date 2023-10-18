@@ -1,8 +1,9 @@
-import React from 'react';
-import Dialog from '../../dialog';
-import MessageCodeDialog from '../../dialog/MessageCodeDialog';
+import { EventCategory, EventName } from '@/constants/event';
+import ReactGA from 'react-ga4';
 import { useSetRecoilState } from 'recoil';
 import { roadmapModalAtom } from '../../../store/roadmap/state';
+import Dialog from '../../dialog';
+import MessageCodeDialog from '../../dialog/MessageCodeDialog';
 
 export function AddGameTips() {
   const setOpen = useSetRecoilState(roadmapModalAtom);
@@ -18,7 +19,13 @@ export function AddGameTips() {
       </div>
       <div className="mt-2">
         2. &nbsp;Why is my amount of tokens displayed with a question mark - &apos;?&apos; -
-        <span className="cursor-pointer text-blue" onClick={() => setOpen(true)}>
+        <span
+          className="cursor-pointer text-blue"
+          onClick={() => {
+            ReactGA.event({ category: EventCategory.Assets, action: EventName.GuideClick, label: 'tokens' });
+            setOpen(true);
+          }}
+        >
           &nbsp;click here&nbsp;
         </span>
         to know more.
@@ -42,7 +49,12 @@ export function OwnershipTips() {
       <div className=" mt-2">
         2. &nbsp;How to add the signature?
         <Dialog render={({ close }) => <MessageCodeDialog close={close} />}>
-          <span className="cursor-pointer text-blue"> click here </span>
+          <span
+            className="cursor-pointer text-blue"
+            onClick={() => ReactGA.event({ category: EventCategory.Assets, action: EventName.GuideClick, label: 'add_code' })}
+          >
+            &nbsp;click here&nbsp;
+          </span>
         </Dialog>
         to see a step-by-step guide.
       </div>

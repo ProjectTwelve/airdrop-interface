@@ -157,7 +157,7 @@ export default function EditProfileDialog() {
                   className="flex flex-wrap items-center gap-1 rounded-lg bg-white/[0.12] px-3 py-2.5 backdrop-blur-lg"
                   onClick={() => {
                     if (!profileData?.twitter) {
-                      ReactGA.event({ category: EventCategory.Global, action: EventName.ConnectTwitter });
+                      ReactGA.event({ category: EventCategory.Assets, action: EventName.ConnectTwitter });
                       openLink('https://arcana.p12.games/');
                       return;
                     }
@@ -177,7 +177,7 @@ export default function EditProfileDialog() {
                 className="flex cursor-pointer items-center gap-1 rounded-lg bg-white/[0.12] px-3 py-2.5 backdrop-blur-lg"
                 onClick={() => {
                   if (!tgHandle) {
-                    ReactGA.event({ category: EventCategory.Global, action: EventName.ConnectTelegram });
+                    ReactGA.event({ category: EventCategory.Assets, action: EventName.ConnectTelegram });
                     openLink('https://arcana.p12.games/');
                     return;
                   }
@@ -205,7 +205,7 @@ export default function EditProfileDialog() {
               <Button
                 htmlType="button"
                 onClick={() => {
-                  ReactGA.event({ category: EventCategory.Global, action: EventName.ProfileCancel });
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.ProfileCancel });
                   close();
                 }}
                 className="w-[7.375rem]"

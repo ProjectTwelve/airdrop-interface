@@ -17,6 +17,8 @@ import { AddGameTips, OwnershipTips } from './verify/Tips';
 import { tabSelectAtom, verifiedSteamAppAtom } from '@/store/developer/state';
 import { DeveloperVerifyData, DeveloperVerifyParams, DevGameInfo, Response } from '@/lib/types';
 import { useIsMounted } from '@/hooks/useIsMounted';
+import { EventCategory, EventName } from '@/constants/event';
+import ReactGA from 'react-ga4';
 
 export type SteamApp = Partial<DevGameInfo> & { index: number };
 
@@ -46,17 +48,32 @@ function Verify() {
       return fetchDeveloperVerify(data);
     },
     {
-      onSuccess: (data) => {
+      onSuccess: (data, { steam_appids }) => {
         queryClient.refetchQueries(['developer_info', address]).then();
         if (data.code === 1) {
+          ReactGA.event({
+            category: EventCategory.Assets,
+            action: EventName.VerifyAppid,
+            label: 'failed_' + (steam_appids?.join(',') ?? ''),
+          });
           toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
           return;
         }
         if (data.code !== 0) {
           const { failedGames } = data.data;
+          ReactGA.event({
+            category: EventCategory.Assets,
+            action: EventName.VerifyAppid,
+            label: 'failed_' + (steam_appids?.join(',') ?? ''),
+          });
           toast.error(<Message message={getErrorToast(failedGames)} title="Ah shit, here we go again" />);
           return;
         }
+        ReactGA.event({
+          category: EventCategory.Assets,
+          action: EventName.VerifyAppid,
+          label: 'success_' + (steam_appids?.join(',') ?? ''),
+        });
         toast.success(<Message message="Verified successfully" title="Mission Complete" />);
         setSelectedTab(1);
       },
@@ -154,6 +171,7 @@ function Verify() {
                     <div
                       className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5 text-sm/5 font-semibold text-blue hover:bg-blue/30"
                       onClick={() => {
+                        ReactGA.event({ category: EventCategory.Assets, action: EventName.CopyCode });
                         copyToClipboard(signature);
                         toast.success(<Message message="Copied to clipboard" title="Mission Complete" />);
                       }}
@@ -163,7 +181,10 @@ function Verify() {
                   ) : (
                     <div
                       className="flex-center cursor-pointer gap-0.5 rounded-lg bg-blue/20 px-4 py-3.5 text-sm/5 font-semibold text-blue hover:bg-blue/30"
-                      onClick={() => signMessage()}
+                      onClick={() => {
+                        ReactGA.event({ category: EventCategory.Assets, action: EventName.GenerateCode });
+                        signMessage();
+                      }}
                     >
                       Generate
                     </div>

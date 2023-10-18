@@ -1,4 +1,5 @@
 import { STORAGE_KEY } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
 import { invitationCountSelector, inviteModalAtom } from '@/store/invite/state';
 import { openLink } from '@/utils';
 import { getLocalStorage, setLocalStorage } from '@/utils/storage';
@@ -8,10 +9,10 @@ import React, { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
+import BlueButton from '../button/BlueButton';
 import { BridgeSvg } from '../svg/BridgeSvg';
 import { InviteSvg } from '../svg/InviteSvg';
 import { LandingSiteSvg } from '../svg/LandingSiteSvg';
-import BlueButton from '../button/BlueButton';
 
 function LayoutHeaderExtra({ className }: { className?: string }) {
   const router = useRouter();
@@ -31,7 +32,10 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
       <BlueButton
         type="blue"
         className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
-        onClick={() => openLink(landingSite)}
+        onClick={() => {
+          ReactGA.event({ category: EventCategory.Global, action: EventName.ToLandingsite });
+          openLink(landingSite);
+        }}
       >
         <LandingSiteSvg className="h-5 w-5 stroke-blue" />
         &nbsp;P12 Landingsite
@@ -49,7 +53,10 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
               <BlueButton
                 type="blue"
                 className="flex-center mr-3 gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden xl:hidden"
-                onClick={() => router.push('/bridge')}
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Global, action: EventName.ToBridge });
+                  router.push('/bridge');
+                }}
               >
                 <BridgeSvg className="h-5 w-5" />
                 &nbsp;Bridge
@@ -60,7 +67,6 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
                   type="blue"
                   className="flex-center h-10 gap-1 rounded-full text-base/5 font-medium lg:hidden xl:hidden"
                   onClick={() => {
-                    ReactGA.event({ action: 'Invite', category: 'Click', label: 'Header' });
                     setInviteOpen(true);
                   }}
                 >

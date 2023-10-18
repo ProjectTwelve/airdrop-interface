@@ -1,17 +1,19 @@
-import React, { useMemo } from 'react';
-import { useAccount } from 'wagmi';
-import classNames from 'classnames';
-import { Tooltip } from '@/components/tooltip';
-import { digitalFormat } from '@/utils/format';
-import { useDeveloperInfo } from '@/hooks/developer';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
-import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
 import ClaimButton from '@/components/dashboard/sbt/ClaimButton';
-import { useDevTokenStatus } from '@/hooks/dashboard/useTokenStatus';
-import { DEV_BADGES, GenesisRole, GenesisSource, GenesisClaim } from '@/constants';
 import CredentialTask from '@/components/dashboard/sbt/CredentialTask';
+import TokenStatus from '@/components/dashboard/sbt/TokenStatus';
+import { Tooltip } from '@/components/tooltip';
+import { DEV_BADGES, GenesisClaim, GenesisRole, GenesisSource } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
+import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
+import { useDevTokenStatus } from '@/hooks/dashboard/useTokenStatus';
+import { useDeveloperInfo } from '@/hooks/developer';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
+import { digitalFormat } from '@/utils/format';
+import classNames from 'classnames';
+import { useMemo } from 'react';
+import ReactGA from 'react-ga4';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useAccount } from 'wagmi';
 
 export default function SteamDeveloperSBT() {
   const { address } = useAccount();
@@ -59,13 +61,19 @@ export default function SteamDeveloperSBT() {
           ) : (
             <div className="mt-3">
               <CredentialTask
-                onClick={() => setSelectedTab(0)}
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'dev_publish' });
+                  setSelectedTab(0);
+                }}
                 status={nftSource.includes(GenesisSource.Arcana)}
                 text="Publish a creation in P12 Arcana"
               />
               <p className="text-center text-xs">OR</p>
               <CredentialTask
-                onClick={() => setSelectedTab(2)}
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'dev_verify_steam' });
+                  setSelectedTab(2);
+                }}
                 status={nftSource.includes(GenesisSource.Steam)}
                 text="Complete Steam game verify process"
               />

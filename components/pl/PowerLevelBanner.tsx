@@ -1,13 +1,15 @@
-import { useAccount } from 'wagmi';
-import { useRouter } from 'next/router';
 import Button from '@/components/button';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useIsMounted } from '@/hooks/useIsMounted';
+import { EventCategory, EventName } from '@/constants/event';
 import { useThemeAsset } from '@/hooks/theme';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import { userPowerLevelAtom } from '@/store/dashboard/state';
 import { isConnectPopoverOpen } from '@/store/web3/state';
 import { digitalFormat } from '@/utils/format';
-import { userPowerLevelAtom } from '@/store/dashboard/state';
+import { useRouter } from 'next/router';
+import ReactGA from 'react-ga4';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { twMerge } from 'tailwind-merge';
+import { useAccount } from 'wagmi';
 
 export default function PowerLevelBanner({ className }: { className?: string }) {
   const { address } = useAccount();
@@ -21,9 +23,11 @@ export default function PowerLevelBanner({ className }: { className?: string }) 
 
   const onClick = () => {
     if (!address) {
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.SbtEntrance, label: 'none' });
       setConnectOpen(true);
       return;
     }
+    ReactGA.event({ category: EventCategory.Assets, action: EventName.SbtEntrance, label: 'claimed' });
     router.push('/dashboard').then();
   };
 

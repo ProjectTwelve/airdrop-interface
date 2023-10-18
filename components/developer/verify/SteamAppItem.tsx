@@ -9,6 +9,8 @@ import { useSetRecoilState } from 'recoil';
 import Message from '../../message';
 import { CloseCircle } from '../../svg/CloseCircle';
 import { SteamApp } from '../Verify';
+import { EventCategory, EventName } from '@/constants/event';
+import ReactGA from 'react-ga4';
 
 type SteamGameItemProps = {
   app: SteamApp;
@@ -21,11 +23,13 @@ function SteamAppItem({ app, onConfirm, onRemove, index }: SteamGameItemProps) {
   const [value, setValue] = useState('');
   const setOpen = useSetRecoilState(roadmapModalAtom);
   const { isLoading, mutate } = useMutation<any, any, { appid: string }>((data) => fetchDeveloperGame(data), {
-    onSuccess: (data) => {
+    onSuccess: (data, { appid }) => {
       if (data.code !== 0) {
+        ReactGA.event({ category: EventCategory.Assets, action: EventName.AddAppid, label: 'failed_' + appid });
         toast.error(<Message message={data.msg} title="Ah shit, here we go again" />);
         return;
       }
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.AddAppid, label: 'success_' + appid });
       onConfirm(data.data.game_info);
     },
   });

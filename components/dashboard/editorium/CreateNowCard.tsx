@@ -17,7 +17,7 @@ export default function CreateNowCard() {
           onClick={() => {
             ReactGA.event({
               action: EventName.CreateNow,
-              category: EventCategory.Global,
+              category: EventCategory.Assets,
             });
             setEditorDownloadDialogOpen(true);
           }}

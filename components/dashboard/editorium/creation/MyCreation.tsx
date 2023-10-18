@@ -49,7 +49,7 @@ export default function MyCreation() {
         type="bordered"
         className="mt-7.5 w-[350px] self-center border-white py-2.5 text-sm font-medium xs:w-full"
         onClick={() => {
-          ReactGA.event({ category: EventCategory.Global, action: EventName.ViewCreations });
+          ReactGA.event({ category: EventCategory.Assets, action: EventName.ViewCreations });
           openLink('https://arcana.p12.games/#creation');
         }}
       >
