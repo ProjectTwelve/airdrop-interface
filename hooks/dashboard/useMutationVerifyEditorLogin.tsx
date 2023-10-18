@@ -17,7 +17,7 @@ export const useMutationVerifyEditorLogin = ({ position }: { position?: string }
       toast.success(<Message title="Verify Editor login succeeded." />);
       setVerifyEditorLogin(true);
       setIsOpen(false);
-      ReactGA.event({ category: EventCategory.Global, action: EventName.EditorLoginVerify, label: 'success' });
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.EditorLoginVerify, label: 'success' });
     },
     onError: () => {
       if (position !== 'start') {
@@ -25,7 +25,7 @@ export const useMutationVerifyEditorLogin = ({ position }: { position?: string }
       }
       setIsOpen(true);
       setVerifyEditorLogin(false);
-      ReactGA.event({ category: EventCategory.Global, action: EventName.EditorLoginVerify, label: 'failed' });
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.EditorLoginVerify, label: 'failed' });
     },
   });
 };

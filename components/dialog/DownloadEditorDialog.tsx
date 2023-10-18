@@ -21,7 +21,7 @@ export default function DownloadEditorDialog() {
 
   useEffect(() => {
     if (isOpen) {
-      ReactGA.event({ category: EventCategory.Global, action: EventName.DownloadPopup });
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.DownloadPopup });
     }
   }, [isOpen]);
 
@@ -40,7 +40,7 @@ export default function DownloadEditorDialog() {
                 <p className="mt-3 text-xs/4">Download the editor: Your tool for building worlds.</p>
                 <a
                   onClick={() =>
-                    ReactGA.event({ category: EventCategory.Global, action: EventName.DownloadLink, label: 'editor' })
+                    ReactGA.event({ category: EventCategory.Assets, action: EventName.DownloadLink, label: 'editor' })
                   }
                   href="https://cdn1.p12.games/arcana/editor_download/Editor_1.0.3.exe"
                   className="text-xs/4 text-blue hover:underline"
@@ -64,7 +64,7 @@ export default function DownloadEditorDialog() {
                   <a
                     onClick={() =>
                       ReactGA.event({
-                        category: EventCategory.Global,
+                        category: EventCategory.Assets,
                         action: EventName.DownloadLink,
                         label: 'app_google_play',
                       })
@@ -78,7 +78,7 @@ export default function DownloadEditorDialog() {
                   <a
                     onClick={() =>
                       ReactGA.event({
-                        category: EventCategory.Global,
+                        category: EventCategory.Assets,
                         action: EventName.DownloadLink,
                         label: 'app_android_apk',
                       })

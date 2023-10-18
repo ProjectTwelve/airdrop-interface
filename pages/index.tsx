@@ -1,9 +1,11 @@
 import { CollabListDialog } from '@/components/dialog/CollabListDialog';
 import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 import GamerRanking from '@/components/ranking/Gamer';
+import { EventCategory, EventName } from '@/constants/event';
 import { useThemeAsset } from '@/hooks/theme';
 import { collabListModalAtom } from '@/store/collab/state';
 import { openLink } from '@/utils';
+import ReactGA from 'react-ga4';
 import { useSetRecoilState } from 'recoil';
 
 export default function Home() {
@@ -16,6 +18,7 @@ export default function Home() {
         <div
           className="relative cursor-pointer rounded-2xl duration-200 ease-linear hover:-translate-y-1 "
           onClick={() => {
+            ReactGA.event({ category: EventCategory.Assets, action: EventName.CollabBanner });
             openLink('https://arcana.p12.games/');
           }}
         >

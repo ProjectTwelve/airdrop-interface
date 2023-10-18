@@ -1,24 +1,26 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useAccount } from 'wagmi';
+import SteamPowerLevel from '@/components/gamer/SteamPowerLevel';
+import { GenesisRole } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
+import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
+import { useGamerGames } from '@/hooks/gamer';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import { useSteamSignIn } from '@/hooks/useSteamSignIn';
+import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
+import { isConnectPopoverOpen } from '@/store/web3/state';
+import { getSteamProfileEdit, openLink, shortenSteamId } from '@/utils';
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import Pagination from 'rc-pagination';
+import { useEffect, useMemo, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useQueryClient } from '@tanstack/react-query';
-import Empty from '../empty';
+import { useAccount } from 'wagmi';
 import Button from '../button';
+import Empty from '../empty';
 import Loading from '../loading';
+import GamerGameItem from './GamerGameItem';
 import SteamGamesInfo from './SteamGamesInfo';
 import SteamProfileInfo from './SteamProfileInfo';
-import GamerGameItem from './GamerGameItem';
-import { getSteamProfileEdit, openLink, shortenSteamId } from '@/utils';
-import { useGamerGames } from '@/hooks/gamer';
-import { gamerGamesAtom, gamerInfoAtom } from '@/store/gamer/state';
-import { useSteamSignIn } from '@/hooks/useSteamSignIn';
-import { isConnectPopoverOpen } from '@/store/web3/state';
-import { useIsMounted } from '@/hooks/useIsMounted';
-import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
-import { GenesisRole } from '@/constants';
-import SteamPowerLevel from '@/components/gamer/SteamPowerLevel';
 
 export default function SteamStatus() {
   const pageSize = 6;
@@ -125,14 +127,24 @@ export default function SteamStatus() {
                         <Button
                           type="gradient"
                           className="w-[260px] md:w-full"
-                          onClick={() => openLink(getSteamProfileEdit(gamerInfo.steam_id))}
+                          onClick={() => {
+                            ReactGA.event({ category: EventCategory.Assets, action: EventName.OpenSteam });
+                            openLink(getSteamProfileEdit(gamerInfo.steam_id));
+                          }}
                         >
                           <div className="flex items-center justify-center">
                             Open Steam
-                            <img className="ml-2 w-6 rotate-180 sm:hidden" src="/svg/left.svg" alt="reload" />
+                            <img className="ml-2 w-6 rotate-180 sm:hidden" src="/svg/left.svg" alt="open" />
                           </div>
                         </Button>
-                        <Button type="bordered" className="w-[260px] md:w-full" onClick={refetch}>
+                        <Button
+                          type="bordered"
+                          className="w-[260px] md:w-full"
+                          onClick={() => {
+                            ReactGA.event({ category: EventCategory.Assets, action: EventName.ReloadStatus });
+                            refetch();
+                          }}
+                        >
                           <div className="flex items-center justify-center">
                             Reload Stats
                             <img className="ml-2 sm:hidden" src="/svg/reload.svg" alt="reload" />

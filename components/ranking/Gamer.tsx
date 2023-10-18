@@ -1,6 +1,6 @@
 import { GenesisRarity } from '@/constants';
 import { useGamerRank, useGamerTimeRank, useGamerTokenRank, useGamerVerifiedCount } from '@/hooks/ranking';
-import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
+import { dashboardSelectedTabAtom } from '@/store/dashboard/state';
 import { isConnectPopoverOpen } from '@/store/web3/state';
 import { getCountMemo } from '@/utils';
 import classNames from 'classnames';
@@ -9,11 +9,12 @@ import { useRouter } from 'next/router';
 import Pagination from 'rc-pagination';
 import { Fragment, useMemo, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useAccount } from 'wagmi';
 import DevelopRankTable from './DevelopRankTable';
 import GamerTimeRankingItem, { GamerTimeRankingHeader } from './GamerTimeRankingItem';
 import GamerTokenRankingItem, { GamerTokenRankingHeader } from './GamerTokenRankingItem';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 export default function GamerRanking() {
   const router = useRouter();
@@ -29,7 +30,6 @@ export default function GamerRanking() {
     () => (verified ? (verified.verifiedCount[4] || 0) + (verified.verifiedCount[5] || 0) : 0),
     [verified],
   );
-  const { activatedPL } = useRecoilValue(userPowerLevelAtom);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
 
   const levelCount = useMemo(
@@ -50,6 +50,8 @@ export default function GamerRanking() {
   const isLowLevelToken = (num?: number) => num === GenesisRarity.Common || num === GenesisRarity.Uncommon;
   const [selectedTab, setSelectedTab] = useState(0);
 
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
   return (
     <div>
       <div className="grid grid-cols-2 gap-5 md:grid-cols-1 md:gap-2">
@@ -86,7 +88,7 @@ export default function GamerRanking() {
                 <div className="truncate">
                   {gamerRankData?.person_name ? (
                     gamerRankData?.person_name
-                  ) : activatedPL ? (
+                  ) : address ? (
                     <p
                       className="cursor-pointer text-sm/4 font-semibold text-blue"
                       onClick={() => {

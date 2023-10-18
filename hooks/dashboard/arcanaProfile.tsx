@@ -137,7 +137,7 @@ export const useProfileSubmit = (selectedRadioKey?: string) => {
   const onSubmit = useCallback(
     async (values: ProfileFormData) => {
       try {
-        ReactGA.event({ category: EventCategory.Global, action: EventName.ProfileSave });
+        ReactGA.event({ category: EventCategory.Assets, action: EventName.ProfileSave });
         const { showName, twitter, discord } = profileData ?? {};
         const { twitterHandle, discordHandle, displayName, bio } = values;
         const newProfile: ProfileParams = { bio, showName, twitter, discord };

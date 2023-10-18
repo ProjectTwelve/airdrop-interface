@@ -49,7 +49,7 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
             onClick={() => {
               ReactGA.event({
                 action: EventName.BecomeVoter,
-                category: EventCategory.Global,
+                category: EventCategory.Assets,
               });
               openLink('https://arcana.p12.games/#gallery');
             }}

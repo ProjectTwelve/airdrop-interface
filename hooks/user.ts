@@ -1,3 +1,4 @@
+import { EventCategory, EventName } from '@/constants/event';
 import { fetchLogin, fetchPowerVote, fetchUserInfo } from '@/lib/api-nest';
 import instance from '@/lib/request-nest';
 import { LoginParams } from '@/lib/types-nest';
@@ -13,6 +14,7 @@ import { accessTokenAtom, userInfoAtom } from '@/store/user/state';
 import { removeAccessToken, setAccessToken } from '@/utils/authorization';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { useAccount, useDisconnect } from 'wagmi';
 import { useFetchUserNotSubmittedList, useMutationUserSubmittedList } from './dashboard/creation';
@@ -154,6 +156,7 @@ export const useLogoutCallback = () => {
   const { disconnect } = useDisconnect();
 
   return useCallback(() => {
+    ReactGA.event({ category: EventCategory.Global, action: EventName.DisconnectWallet });
     removeGlobalState();
     disconnect?.();
   }, [disconnect, removeGlobalState]);

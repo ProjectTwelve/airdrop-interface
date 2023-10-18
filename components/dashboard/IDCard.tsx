@@ -49,7 +49,7 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
     <motion.div
       {...clickableMotionProps()}
       onClick={() => {
-        ReactGA.event({ category: EventCategory.Global, action: EventName.ArcanaProfile });
+        ReactGA.event({ category: EventCategory.Assets, action: EventName.ArcanaProfile });
         setEditProfileDialogOpen(true);
       }}
       className={twMerge(
@@ -77,7 +77,6 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
                 if (!twitter) return;
                 e?.preventDefault();
                 e?.stopPropagation();
-                // ReactGA.event({ category: EventCategory.Editorium, action: EventName.ProfileLink, label: 'twitter' });
                 openLink('https://twitter.com/' + twitter);
               }}
               className="flex items-center gap-1 text-p12-id-card"
@@ -92,7 +91,6 @@ export default function IDCard({ loading, className }: { loading?: boolean; clas
                 if (!tgHandle) return;
                 e?.preventDefault();
                 e?.stopPropagation();
-                // ReactGA.event({ category: EventCategory.Editorium, action: EventName.ProfileLink, label: 'telegram' });
                 openLink('https://t.me/' + tgHandle);
               }}
             >

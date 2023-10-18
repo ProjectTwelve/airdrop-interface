@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { EventCategory, EventName } from '@/constants/event';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import ReactGA from 'react-ga4';
 import { useEvent } from 'react-use';
 import { useAccount } from 'wagmi';
-import { useRouter } from 'next/router';
-import { isMobile } from 'react-device-detect';
-import { useBindSteamAccount } from './gamer';
-import { getLocalStorage } from '../utils/storage';
 import { STORAGE_KEY } from '../constants';
+import { getLocalStorage } from '../utils/storage';
+import { useBindSteamAccount } from './gamer';
 
 export const useSteamSignIn = (): [signInCallback: () => void] => {
   const { address } = useAccount();
@@ -26,6 +28,7 @@ export const useSteamSignIn = (): [signInCallback: () => void] => {
   useEvent('storage', (event: StorageEvent) => {
     if (!event.newValue) return;
     if (event.key === STORAGE_KEY.SECRET_TOKEN) {
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.SignInSteam, label: 'success' });
       const secretToken = event.newValue;
       setSteamSecretToken(secretToken);
       Cookies.set(STORAGE_KEY.SECRET_TOKEN, secretToken);

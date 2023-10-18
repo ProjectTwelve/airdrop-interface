@@ -1,11 +1,12 @@
-import { useCallback } from 'react';
-import ReactGA from 'react-ga4';
+import { COLLAB_TIME_STATUS } from '@/constants';
+import { EventCategory, EventName } from '@/constants/event';
+import { useCollabTimes } from '@/hooks/collab';
+import { CollabShortInfo } from '@/lib/types';
 import { openLink } from '@/utils';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import { CollabShortInfo } from '@/lib/types';
-import { useCollabTimes } from '@/hooks/collab';
-import { COLLAB_TIME_STATUS } from '@/constants';
+import { useCallback } from 'react';
+import ReactGA from 'react-ga4';
 
 type CollabItemProps = {
   data?: CollabShortInfo;
@@ -55,7 +56,7 @@ export default function CollabListItem({ data, loading }: CollabItemProps) {
   return (
     <div
       onClick={() => {
-        ReactGA.event({ action: 'Collab-List', category: 'Click', label: collabCode });
+        ReactGA.event({ category: EventCategory.Assets, action: EventName.CollabCard, label: collabCode });
         if (collabCode && openLinkCollabCode.includes(collabCode)) {
           openLink(projectWebsite ?? '');
         } else {

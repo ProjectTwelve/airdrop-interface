@@ -1,5 +1,7 @@
+import { EventCategory, EventName } from '@/constants/event';
 import { dashboardSelectedTabAtom } from '@/store/dashboard/state';
 import { useCallback, useEffect, useMemo } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilState } from 'recoil';
 
 export enum HOME_TAB_TYPE {
@@ -17,6 +19,7 @@ export function usePageTabSelected() {
     (index: number) => {
       const hash = tabHash[index];
       if (!hash) return;
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.SectionTab, label: hash });
       setIndex(index);
     },
     [setIndex],
