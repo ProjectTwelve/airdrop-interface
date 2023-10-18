@@ -123,7 +123,7 @@ function DeveloperRanking() {
                       }}
                       className="flex flex-1 cursor-pointer items-center justify-center rounded-2xl text-xs hover:bg-[#7980AF]/30"
                     >
-                      By Token Rarity
+                      By Steam PL
                       <span className="pl-3 font-ddin text-xl font-bold">{getCountMemo(item?.tokenRank) || '--'}</span>
                     </div>
                     <div className="m-2 w-[1px] bg-[#949FA9] sm:hidden" />
