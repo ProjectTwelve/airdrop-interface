@@ -10,12 +10,14 @@ export enum EventName {
   DisconnectWallet = 'disconnect_wallet',
   ToLandingsite = 'to_landingsite',
   ToBridge = 'to_bridge',
-
   // invitation
   ToInvitation = 'to_invitation',
   CopyRefLink = 'copy_ref_link',
   ShareRefLink = 'share_ref_link',
   RefDetail = 'ref_detail',
+  // collab
+  CollabBanner = 'collab_banner',
+  CollabCard = 'collab_card',
   // arcana tab
   BecomeVoter = 'become_voter',
   CreateNow = 'create_now',
