@@ -1,5 +1,6 @@
 export enum EventCategory {
-  Global = 'assets',
+  Global = 'global',
+  Assets = 'assets',
 }
 
 export enum EventName {

@@ -26,7 +26,7 @@ function InviteDialog() {
 
   useEffect(() => {
     if (open) {
-      ReactGA.event({ category: EventCategory.Global, action: EventName.ToInvitation });
+      ReactGA.event({ category: EventCategory.Assets, action: EventName.ToInvitation });
     }
   }, [open]);
 
@@ -170,7 +170,7 @@ function InviteDialog() {
                     <p
                       className="ml-3 cursor-pointer text-sm text-blue"
                       onClick={() => {
-                        ReactGA.event({ category: EventCategory.Global, action: EventName.RefDetail });
+                        ReactGA.event({ category: EventCategory.Assets, action: EventName.RefDetail });
                       }}
                     >
                       More
