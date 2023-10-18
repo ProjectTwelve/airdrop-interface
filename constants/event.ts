@@ -39,4 +39,16 @@ export enum EventName {
   ViewCreations = 'view_creations',
   GetPl = 'get_pl',
   ReferralCopy = 'referral_copy',
+  // steam gamer
+  SignInSteam = 'sign_in_steam',
+  ErrorReload = 'error_reload',
+  OpenSteam = 'open_steam',
+  ReloadStatus = 'reload_status',
+  MyPoster = 'my_poster',
+  // steam developer
+  AddAppid = 'add_appid',
+  GenerateCode = 'generate_code',
+  CopyCode = 'copy_code',
+  VerifyAppid = 'verify_appid',
+  GuideClick = 'guide_click',
 }

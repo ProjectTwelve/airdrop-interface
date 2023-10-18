@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
-import { useAccount } from 'wagmi';
+import { EventCategory, EventName } from '@/constants/event';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { motion, AnimatePresence } from 'framer-motion';
-import { getLocalStorage } from '../../utils/storage';
+import { useAccount } from 'wagmi';
+import { STORAGE_KEY } from '../../constants';
 import { gamerClaimedPosterAtom } from '../../store/gamer/state';
 import { posterBtnShowAtom, posterCaptureAtom } from '../../store/poster/state';
-import { STORAGE_KEY } from '../../constants';
+import { getLocalStorage } from '../../utils/storage';
 
 export default function PosterButton() {
   const { address } = useAccount();
@@ -16,6 +18,7 @@ export default function PosterButton() {
   const posterCapture = useRecoilValue(posterCaptureAtom);
 
   const onClick = () => {
+    ReactGA.event({ category: EventCategory.Assets, action: EventName.MyPoster });
     setGamerClaimedPoster(true);
     setShow(false);
   };
@@ -43,7 +46,7 @@ export default function PosterButton() {
             initial={{ opacity: 1, scale: 1 }}
             animate={{ opacity: 0, scale: 0 }}
             transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-            className="absolute top-1/2 left-1/2 -z-[1] h-1/2 w-1/2"
+            className="absolute left-1/2 top-1/2 -z-[1] h-1/2 w-1/2"
             layoutId="sharing_poster"
           >
             <img className="h-full w-full" src={posterCapture} alt="poster" />
