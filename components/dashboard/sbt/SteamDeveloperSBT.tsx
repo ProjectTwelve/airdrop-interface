@@ -8,6 +8,7 @@ import { useFetchGenesisNFT } from '@/hooks/dashboard/genesis';
 import { useDevTokenStatus } from '@/hooks/dashboard/useTokenStatus';
 import { useDeveloperInfo } from '@/hooks/developer';
 import { dashboardSelectedTabAtom, userPowerLevelAtom } from '@/store/dashboard/state';
+import { openLink } from '@/utils';
 import { digitalFormat } from '@/utils/format';
 import classNames from 'classnames';
 import { useMemo } from 'react';
@@ -32,8 +33,9 @@ export default function SteamDeveloperSBT() {
         <div className="w-full max-w-[217px]">
           {isClaimed ? (
             <div
-              className="-mt-[15px] aspect-square bg-cover"
+              className="-mt-[15px] aspect-square cursor-pointer bg-cover"
               style={{ backgroundImage: `url(${DEV_BADGES[developerNFT!.nftLevel].asset256})` }}
+              onClick={() => openLink(`https://galxe.com/nft/${tokenStatus?.id}/0xb034d6bA0b6593Fa5107C6a55042b67746d44605`)}
             />
           ) : (
             <img className="mb-4 aspect-square w-full max-w-[186px]" src="/img/unclaimed.webp" alt="unclaimed" />
