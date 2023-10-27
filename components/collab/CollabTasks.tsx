@@ -86,7 +86,7 @@ export default function CollabTasks({ data }: CollabTasksProps) {
     const taskProps = {
       key: 'airdrop',
       title: 'Genesis Airdrop',
-      icon: <div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo bg-cover"></div>,
+      icon: <div className="aspect-[2.19/1] h-7 max-w-[70px] bg-p12-logo-white bg-cover"></div>,
       content: 'Go to P12 Genesis Soul-Bound NFT Airdrop to claim P12 Airdrop NFT.',
       gaKey: 'airdrop',
       className: 'flex-grow w-full',
