@@ -74,7 +74,7 @@ function LayoutHeader() {
   return (
     <header className="relative z-20 flex justify-between px-8 py-2.5 md:px-2 2xl:px-0">
       <div className="flex items-center justify-start">
-        <div className="h-[26px] w-[58px] cursor-pointer bg-p12-logo bg-cover" onClick={() => router.push('/')} />
+        <div className="h-[26px] w-[58px] cursor-pointer bg-p12-logo-white bg-cover" onClick={() => router.push('/')} />
         <LayoutHeaderExtra className="ml-6 md:hidden" />
       </div>
       <div className="flex items-center gap-4 xs:flex-wrap xs:justify-end">

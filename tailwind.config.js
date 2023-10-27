@@ -117,6 +117,7 @@ module.exports = {
         'profile-info': 'var(--profile-info)',
         'collab-info': 'var(--collab-info)',
         'p12-logo': 'var(--logo)',
+        'p12-logo-white': 'url("/svg/logo.svg")',
         'p12-gradient': 'linear-gradient(to right, var(--from), var(--to))',
         'p12-gradient-30': 'linear-gradient(to right, var(--from-30), var(--to-30))',
         'p12-gradient-45': 'linear-gradient(to right, var(--from-45), var(--to-45))',
