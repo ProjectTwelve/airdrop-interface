@@ -81,7 +81,7 @@ export default function SteamDeveloperSBT() {
                   setSelectedTab(2);
                 }}
                 status={nftSource.includes(GenesisSource.Steam)}
-                text=" Get verified if you have published games on Steam."
+                text="Get verified if you have published games on Steam"
               />
             </div>
           )}
