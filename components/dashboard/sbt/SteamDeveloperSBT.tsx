@@ -73,11 +73,15 @@ export default function SteamDeveloperSBT() {
               <p className="text-center text-xs">OR</p>
               <CredentialTask
                 onClick={() => {
-                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'dev_verify_steam' });
+                  ReactGA.event({
+                    category: EventCategory.Assets,
+                    action: EventName.GetNftTask,
+                    label: 'dev_verify_steam',
+                  });
                   setSelectedTab(2);
                 }}
                 status={nftSource.includes(GenesisSource.Steam)}
-                text="Complete Steam game verify process"
+                text=" Get verified if you have published games on Steam."
               />
             </div>
           )}
