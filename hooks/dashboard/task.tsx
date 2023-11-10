@@ -61,7 +61,7 @@ export const useTaskItems = () => {
         id: TaskCode.DoVote,
         title: 'Vote Vote Vote',
         subtitle: 'Daily Task',
-        PL: '12',
+        PL: 3,
         PLExpand: 'per day',
         desc: "Your POWER LEVEL is your vote count, and it resets daily. Don't forget to vote everyday!",
       },
