@@ -22,11 +22,11 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="relative mt-7.5 h-[96px]">
-        <div className="flex-center absolute left-0 w-screen gap-15  bg-gray-700/30 pb-3 pt-4 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
+        <div className="flex-center absolute left-0 w-screen gap-20 bg-gray-700/30 pb-3 pt-4 backdrop-blur-lg 2xl:left-[calc((1366px-100vw)/2)]">
           <ActivityTab
             onClick={() => onSelect(0)}
             active={index === 0}
-            title="P12 Arcana: Editorium"
+            title="P12 Arcana"
             score={
               <>
                 {digitalFormat.integer(arcanaPL)}
@@ -37,7 +37,7 @@ export default function Dashboard() {
           <ActivityTab
             onClick={() => onSelect(1)}
             active={index === 1}
-            title="Genesis Steam Gamer"
+            title="Steam Gamer"
             score={
               <>
                 {digitalFormat.integer(steamGamerPL)}
@@ -48,7 +48,7 @@ export default function Dashboard() {
           <ActivityTab
             onClick={() => onSelect(2)}
             active={index === 2}
-            title="Genesis Steam Developer"
+            title="Steam Developer"
             score={
               <>
                 {digitalFormat.integer(steamDeveloperPL)}

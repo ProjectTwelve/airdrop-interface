@@ -68,7 +68,7 @@ export default function SteamDeveloperSBT() {
                   setSelectedTab(0);
                 }}
                 status={nftSource.includes(GenesisSource.Arcana)}
-                text="Publish a creation in P12 Arcana"
+                text="I am a P12 Creator"
               />
               <p className="text-center text-xs">OR</p>
               <CredentialTask
@@ -81,7 +81,7 @@ export default function SteamDeveloperSBT() {
                   setSelectedTab(2);
                 }}
                 status={nftSource.includes(GenesisSource.Steam)}
-                text="Get verified if you have published games on Steam"
+                text="I am a Steam Developer"
               />
             </div>
           )}

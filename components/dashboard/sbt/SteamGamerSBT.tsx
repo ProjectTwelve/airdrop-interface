@@ -49,7 +49,7 @@ export default function SteamGamerSBT() {
         </div>
         <div className="flex-1">
           <div className="flex gap-3 text-lg/4.5">
-            P12 XII-PLORER Badge
+            P12 Gamer SBT
             {gamerNFT?.payUser === GenesisPay.Golden && (
               <PremiumPlusTooltip data={birthday} placement="bottom">
                 <div className="w-18 cursor-pointer rounded bg-[url(/svg/pl/premium_plus.svg)] bg-cover py-0.5 text-center text-xs/4.5 font-semibold text-orange-700 shadow-md shadow-orange-500/50">
@@ -66,7 +66,7 @@ export default function SteamGamerSBT() {
             {isClaimed ? (
               <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />
             ) : (
-              <Tooltip label="Claim P12 XII-PLORER Badge to activate Gamer Power Level.">
+              <Tooltip label="Claim P12 Gamer SBT to activate Gamer Power Level.">
                 <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />
               </Tooltip>
             )}
@@ -79,20 +79,20 @@ export default function SteamGamerSBT() {
             <div className="mt-3">
               <CredentialTask
                 onClick={() => {
-                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'gamer_become_voter' });
-                  setSelectedTab(0);
-                }}
-                status={nftSource.includes(GenesisSource.Arcana)}
-                text="Become a voter in P12 Arcana"
-              />
-              <p className="text-center text-xs">OR</p>
-              <CredentialTask
-                onClick={() => {
                   ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'gamer_verify_steam' });
                   setSelectedTab(1);
                 }}
                 status={nftSource.includes(GenesisSource.Steam)}
-                text="Complete Steam verify process in airdrop"
+                text="I am a Steam Gamer"
+              />
+              <p className="text-center text-xs">OR</p>
+              <CredentialTask
+                onClick={() => {
+                  ReactGA.event({ category: EventCategory.Assets, action: EventName.GetNftTask, label: 'gamer_become_voter' });
+                  setSelectedTab(0);
+                }}
+                status={nftSource.includes(GenesisSource.Arcana)}
+                text="I am a P12 Arcana voter"
               />
             </div>
           )}
