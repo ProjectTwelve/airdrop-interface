@@ -58,7 +58,7 @@ export default function SteamGamerSBT() {
               </PremiumPlusTooltip>
             )}
           </div>
-          <p className="mt-4 text-xs/3">Power Level</p>
+          <p className="mt-4 text-xs/3">Gamer Power Level</p>
           <div className="mt-2 flex gap-1.5">
             <div className={classNames('text-[34px]/10 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(gamerPL)}

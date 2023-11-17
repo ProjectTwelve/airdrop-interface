@@ -67,8 +67,7 @@ export default function RoadmapDialog() {
                 <div className="py-5 text-xs">
                   <p className="flex justify-start leading-5">
                     <img src="/svg/check.svg" className="mr-1.5 h-4 w-4" alt="check" />
-                    P12 Airdrop for Steam gamers launch. Gamers can verify Steam accounts to get Gamer Genesis NFT, in a fair
-                    way.
+                    P12 Airdrop for Steam gamers launch. Gamers can verify Steam accounts to get P12 Gamer SBT, in a fair way.
                   </p>
                 </div>
               </div>

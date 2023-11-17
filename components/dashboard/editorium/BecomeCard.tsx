@@ -24,7 +24,7 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
               src="/img/pl/power_level.png"
               alt="PL"
             />
-            for Gamer Genesis NFT
+            for P12 Gamer SBT
           </p>
           <p
             className={classNames(
@@ -40,7 +40,7 @@ export default function BecomeCard({ isVoter }: { isVoter?: boolean }) {
               src="/img/pl/power_level.png"
               alt="PL"
             />
-            for Developer Genesis NFT
+            for P12 Developer SBT
           </p>
         </div>
         {!isVoter && (

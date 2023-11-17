@@ -42,8 +42,8 @@ export default function SteamDeveloperSBT() {
           )}
         </div>
         <div className="flex-1">
-          <div className="flex gap-3 text-lg/4.5">P12 GENESIS Badge</div>
-          <p className="mt-4 text-xs/3">Power Level</p>
+          <div className="flex gap-3 text-lg/4.5">P12 Developer SBT</div>
+          <p className="mt-4 text-xs/3">Developer Power Level</p>
           <div className="mt-2 flex gap-1.5">
             <div className={classNames('text-[34px]/10 font-bold', isClaimed ? 'text-gradient-yellow' : 'text-gray-400')}>
               {digitalFormat.integer(developerPL)}
@@ -51,7 +51,7 @@ export default function SteamDeveloperSBT() {
             {isClaimed ? (
               <img className="h-10 w-10" src="/img/pl/power_level.png" alt="PL" />
             ) : (
-              <Tooltip label="Claim P12 GENESIS Badge to activate Developer Power Level.">
+              <Tooltip label="Claim P12 Developer SBT to activate Developer Power Level.">
                 <img className="w-7" src="/svg/warning_badge.svg" alt="warning" />
               </Tooltip>
             )}
