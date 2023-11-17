@@ -11,8 +11,8 @@ export default function CredentialTask({ status, onClick, text }: CredentialTask
     <div
       onClick={onClick}
       className={classNames(
-        'flex h-9 cursor-pointer items-center gap-2 rounded-lg border bg-gray-700/30 px-3 text-xs font-semibold',
-        status ? 'border-green text-green' : 'border-gray-550/50',
+        'flex h-9 cursor-pointer items-center gap-2 rounded-lg border bg-gray-700/30 px-3 text-xs font-semibold transition',
+        status ? 'border-green text-green' : 'border-gray-550/50 hover:border-gray-550',
       )}
     >
       {status ? (
@@ -21,6 +21,11 @@ export default function CredentialTask({ status, onClick, text }: CredentialTask
         <img className="w-4" src="/svg/play.svg" alt="play" />
       )}
       {text}
+      {!status && (
+        <p className="ml-auto flex items-center text-blue">
+          GO <img width={14} height={14} src="/svg/more.svg" alt="more" />
+        </p>
+      )}
     </div>
   );
 }

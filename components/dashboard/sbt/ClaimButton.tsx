@@ -104,7 +104,7 @@ export default function ClaimButton({ data, role, powerLevel, onUpgradeSuccess }
     )
   ) : (
     <Button className="w-full py-3 text-base/5 font-semibold text-gray-450" disabled>
-      You are NOT eligible
+      Complete One Task Above
     </Button>
   );
 }
