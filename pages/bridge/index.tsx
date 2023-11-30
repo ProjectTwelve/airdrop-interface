@@ -1,10 +1,14 @@
 import { motion } from 'framer-motion';
 import ReactGA from 'react-ga4';
 import BridgeSwitch from '../../components/bridge/BridgeSwitch';
+import Back from '@/components/back';
+import { useRouter } from 'next/router';
 
 export default function Bridge() {
+  const router = useRouter();
   return (
-    <div className="mt-6">
+    <div>
+      <Back className="my-3.5" onClick={() => router.push('inventory')} />
       <div className="h-9 rounded-lg bg-[#4383FF4D] px-4 text-sm/9 font-medium backdrop-blur-lg">
         Bridge community badge to P12 Chain and obtain the corresponding Power Level.{' '}
         <span

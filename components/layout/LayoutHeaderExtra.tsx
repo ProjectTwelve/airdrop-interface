@@ -13,12 +13,15 @@ import BlueButton from '../button/BlueButton';
 import { BridgeSvg } from '../svg/BridgeSvg';
 import { InviteSvg } from '../svg/InviteSvg';
 import { LandingSiteSvg } from '../svg/LandingSiteSvg';
+import { collabListModalAtom } from '@/store/collab/state';
+import { CollabsSvg } from '../svg/CollabsSvg';
 
 function LayoutHeaderExtra({ className }: { className?: string }) {
   const router = useRouter();
   const [tipsClick, setTipsClick] = useState(true);
   const setInviteOpen = useSetRecoilState(inviteModalAtom);
   const invitationCount = useRecoilValue(invitationCountSelector);
+  const setCollabModalOpen = useSetRecoilState(collabListModalAtom);
   const landingSite = 'https://p12.network';
   const hideRoute = ['/', '/arcana/[[...address]]', '/collab/qatar2022', '/bridge'];
 
@@ -39,6 +42,16 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
       >
         <LandingSiteSvg className="h-5 w-5 stroke-blue" />
         &nbsp;P12 Landingsite
+      </BlueButton>
+      <BlueButton
+        type="blue"
+        className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
+        onClick={() => {
+          setCollabModalOpen(true);
+        }}
+      >
+        <CollabsSvg className="h-5 w-5 stroke-blue" />
+        &nbsp;collabs
       </BlueButton>
       <AnimatePresence>
         {!hideRoute.includes(router.pathname) && (
