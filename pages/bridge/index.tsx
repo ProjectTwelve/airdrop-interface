@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import ReactGA from 'react-ga4';
-import BridgeSwitch from '../../components/bridge/BridgeSwitch';
+import BridgeSwitch from '../../components/inventory/bridge/BridgeSwitch';
 import Back from '@/components/back';
 import { useRouter } from 'next/router';
 

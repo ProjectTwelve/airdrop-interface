@@ -43,16 +43,18 @@ function LayoutHeaderExtra({ className }: { className?: string }) {
         <LandingSiteSvg className="h-5 w-5 stroke-blue" />
         &nbsp;P12 Landingsite
       </BlueButton>
-      <BlueButton
-        type="blue"
-        className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
-        onClick={() => {
-          setCollabModalOpen(true);
-        }}
-      >
-        <CollabsSvg className="h-5 w-5 stroke-blue" />
-        &nbsp;collabs
-      </BlueButton>
+      {router.pathname === '/' && (
+        <BlueButton
+          type="blue"
+          className="flex-center gap-1 rounded-full px-3 py-2.5 text-base/5 font-medium lg:hidden"
+          onClick={() => {
+            setCollabModalOpen(true);
+          }}
+        >
+          <CollabsSvg className="h-5 w-5 stroke-blue" />
+          &nbsp;collabs
+        </BlueButton>
+      )}
       <AnimatePresence>
         {!hideRoute.includes(router.pathname) && (
           <motion.div className="relative">

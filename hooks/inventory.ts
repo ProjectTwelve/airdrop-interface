@@ -12,7 +12,6 @@ export const useFetchNFTData = () => {
   const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
 
   useEffect(() => {
-    if (!address) return;
     const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
     const allCommunityBadge = Object.entries(P12_COMMUNITY_BADGE);
     if (galxeBadges?.length > 0) {

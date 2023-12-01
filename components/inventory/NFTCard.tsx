@@ -1,7 +1,7 @@
 import React from 'react';
 import { GalxeBadge } from '@/constants';
 import Image from 'next/image';
-import ChainIcon from '@/components/bridge/ChainIcon';
+import ChainIcon from '@/components/inventory/ChainIcon';
 import classNames from 'classnames';
 
 type NFTCardProps = {
