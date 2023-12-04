@@ -5,20 +5,19 @@ import { useAccount, useNetwork, useSwitchNetwork, useWaitForTransaction } from 
 import { isConnectPopoverOpen } from '../../../store/web3/state';
 import { useSetRecoilState } from 'recoil';
 import { polygon, bsc } from 'wagmi/chains';
-import classNames from 'classnames';
-import { Tooltip } from '../../tooltip';
 import Table from '../../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
-import { BridgeTxs, HistoryResult, useBadgeHistory, useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
-import { BadgeInfo, COMMUNITY_NFT_CAMPAIGN_ID, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
-import { groupBy } from 'lodash-es';
+import { BridgeTxs, HistoryResult, useBadgeHistory, useBridgeContract, useNFTContract } from '@/hooks/bridge';
+import { COMMUNITY_NFT_CAMPAIGN_ID, GalxeBadge } from '@/constants';
 import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC } from '@/constants/addresses';
 import Message from '../../message';
 import { toast } from 'react-toastify';
 import { shortenHash } from '@/utils';
-import ChainIcon from '../ChainIcon';
 import ReactGA from 'react-ga4';
+import { useFetchNFTData } from '@/hooks/inventory';
+import NFTCardTooltip from '../NFTCardTooltip';
+import BadgeCardTooltip from '../BadgeCardTooltip';
 
 const historyColumnHelper = createColumnHelper<BridgeTxs>();
 
@@ -33,13 +32,10 @@ export default function BridgeSwitch() {
   const { chain } = useNetwork();
   const { address } = useAccount();
 
-  const { data, refetch } = useBadgeNFT(address);
   const { data: historyData, isLoading } = useBadgeHistory<HistoryResult>(address);
   const [orderData, setOrderData] = useState<BridgeTxs[]>([]);
 
-  const [nftOwned, setNFTOwned] = useState<GalxeBadge[][]>([]);
-  const [restBadge, setRestBadge] = useState<BadgeInfo[]>([]);
-  const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
+  const { nftOwned, restBadge, AMABadge, refetch } = useFetchNFTData();
   const [approveHash, setApproveHash] = useState<undefined | `0x${string}`>(undefined);
   const [confirmHash, setConfirmHash] = useState<undefined | `0x${string}`>(undefined);
 
@@ -103,72 +99,6 @@ export default function BridgeSwitch() {
         console.log(error);
       });
   }, [selectedBadge, chain?.id, address]);
-
-  useEffect(() => {
-    const galxeBadges: GalxeBadge[] = ((data as any)?.user as NFTQueryResult)?.galxeBadges;
-    const allCommunityBadge = Object.entries(P12_COMMUNITY_BADGE);
-    if (galxeBadges?.length > 0) {
-      const communityBadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'Community');
-      const communityBadgeCampaign = communityBadge.map((item) => item.galxeCampaign?.stringId);
-      const AMABadge = galxeBadges.filter((item) => item.galxeCampaign?.campaignType === 'AMA');
-      const groupCommunityBadge = groupBy(communityBadge, (o) => o.chainId);
-      const groupAMABadge = groupBy(AMABadge, (o) => o.chainId);
-      const communityBadgeEntries = Object.entries(groupCommunityBadge);
-      const AMABadgeEntries = Object.entries(groupAMABadge);
-
-      const chainCommunityBadge: GalxeBadge[][] = [];
-      const chainAMABadge: GalxeBadge[][] = [];
-      for (const [, value] of communityBadgeEntries) {
-        chainCommunityBadge.push(value);
-      }
-      for (const [, value] of AMABadgeEntries) {
-        chainAMABadge.push(value);
-      }
-      for (let i = 0; i < chainCommunityBadge.length; i++) {
-        const chainItem = chainCommunityBadge[i];
-        const groupCommunityBadgeById = groupBy(chainItem, (o) => o.galxeCampaign?.stringId);
-        const communityBadgeByIdEntries = Object.entries(groupCommunityBadgeById);
-        const byIdItem: GalxeBadge[] = [];
-        for (const [, value] of communityBadgeByIdEntries) {
-          const newItem = value[0];
-          newItem.count = value.length;
-          const ids = value.map((item) => item.tokenId);
-          newItem.tokenIds = ids;
-          byIdItem.push(newItem);
-        }
-        chainCommunityBadge[i] = byIdItem;
-      }
-      for (let i = 0; i < chainAMABadge.length; i++) {
-        const chainItem = chainAMABadge[i];
-        const groupAMABadgeById = groupBy(chainItem, (o) => o.galxeCampaign?.stringId);
-        const AMABadgeByIdEntries = Object.entries(groupAMABadgeById);
-        const byIdItem: GalxeBadge[] = [];
-        for (const [, value] of AMABadgeByIdEntries) {
-          const newItem = value[0];
-          newItem.count = value.length;
-          const ids = value.map((item) => item.tokenId);
-          newItem.tokenIds = ids;
-          byIdItem.push(newItem);
-        }
-        chainAMABadge[i] = byIdItem;
-      }
-      chainCommunityBadge.sort((arr1, arr2) => {
-        const chainId1 = arr1[0]?.chainId || 0;
-        const chainId2 = arr2[0]?.chainId || 0;
-        return chainId2 - chainId1;
-      });
-
-      setNFTOwned(chainCommunityBadge);
-      setAMABadge(chainAMABadge);
-      const restBadge = allCommunityBadge
-        .filter(([, value]) => !communityBadgeCampaign.includes(value.campaign))
-        .map(([, value]) => value);
-      setRestBadge(restBadge);
-    } else {
-      const restBadge = allCommunityBadge.map(([, value]) => value);
-      setRestBadge(restBadge);
-    }
-  }, [data]);
 
   const addSelectedBadge = (badge: GalxeBadge) => {
     setSelectedBadge(badge);
@@ -295,18 +225,6 @@ export default function BridgeSwitch() {
     [],
   );
 
-  const renderChainName = (chainId: number) => {
-    if (chainId === polygon.id) {
-      return polygon.name;
-    } else if (chainId === bsc.id) {
-      return bsc.name;
-    } else if (chainId === 20736) {
-      return 'P12 Chain';
-    } else {
-      return 'Unknown';
-    }
-  };
-
   const targetByRarity = (badge: GalxeBadge) => {
     const rarity = badge.galxeCampaign?.rarity;
     const type = badge.galxeCampaign?.campaignType;
@@ -356,18 +274,6 @@ export default function BridgeSwitch() {
     }
   };
 
-  const transferRarity = (rarity?: string) => {
-    if (rarity === 'White') {
-      return 'Common';
-    } else if (rarity === 'Green') {
-      return 'Uncommon';
-    } else if (rarity === 'Blue') {
-      return 'Rare';
-    } else if (rarity === 'Purple') {
-      return 'Epic';
-    }
-  };
-
   const calculatePLByRarity = (rarity?: string) => {
     switch (rarity) {
       case 'White':
@@ -397,96 +303,26 @@ export default function BridgeSwitch() {
               {nftOwned.map((chainItem) => {
                 return chainItem.map((item) => {
                   return (
-                    <Tooltip
+                    <NFTCardTooltip
+                      info={item}
                       key={item.galxeCampaign?.stringId}
-                      placement="bottom"
-                      label={
-                        <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
-                          <div className="relative h-[180px] w-[180px]">
-                            <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
-                          </div>
-                          <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
-                          <div className="mt-4 flex w-full items-center justify-between text-xs">
-                            <span className="text-inherit">Chain:</span>
-                            <span className="flex items-center gap-1">
-                              <ChainIcon chainId={item.chainId} className="w-4" />
-                              <span className="text-inherit">{renderChainName(item.chainId)}</span>
-                            </span>
-                          </div>
-                          <div className="mt-1 flex w-full items-center justify-between text-xs">
-                            <span className="text-inherit">Rarity:</span>
-                            <span className="text-inherit">
-                              {transferRarity(item.galxeCampaign?.rarity) ?? item.galxeCampaign?.rarity}
-                            </span>
-                          </div>
-                          <div className="mt-1 flex w-full items-center justify-between text-xs">
-                            <span className="text-inherit">Amount:</span>
-                            <span className="text-inherit">{item.count || 0}</span>
-                          </div>
-                        </div>
-                      }
-                    >
-                      <div
-                        onClick={() => {
-                          if (approveLoading) {
-                            return;
-                          }
-                          if (item.chainId !== 20736) {
-                            ReactGA.event({ action: 'select_badge', label: item.galxeCampaign?.stringId, category: 'bridge' });
-                            addSelectedBadge(item);
-                            setBridgeCount(item.count ?? 1);
-                          }
-                        }}
-                        className={classNames(
-                          'nft-backdrop-box relative flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
-                          {
-                            'border-[#A5A6AB]':
-                              selectedBadge &&
-                              selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId &&
-                              selectedBadge.chainId === item.chainId,
-                          },
-                        )}
-                      >
-                        <div className="relative h-[80px] w-[80px]">
-                          <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
-                        </div>
-                        <ChainIcon chainId={item.chainId} className="absolute left-[6px] top-[6px] w-[20px]" />
-                        <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
-                      </div>
-                    </Tooltip>
+                      selectedBadge={selectedBadge}
+                      onClick={() => {
+                        if (approveLoading) {
+                          return;
+                        }
+                        if (item.chainId !== 20736) {
+                          ReactGA.event({ action: 'select_badge', label: item.galxeCampaign?.stringId, category: 'bridge' });
+                          addSelectedBadge(item);
+                          setBridgeCount(item.count ?? 1);
+                        }
+                      }}
+                    />
                   );
                 });
               })}
               {restBadge.map((item) => {
-                return (
-                  <Tooltip
-                    key={item.campaign}
-                    placement="bottom"
-                    label={
-                      <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
-                        <div className="relative h-[180px] w-[180px]">
-                          <Image src={item.polygonImage} alt="badge" objectFit="contain" layout="fill" />
-                        </div>
-                        <div className="mt-6 w-full text-center text-sm font-medium">{item.polygonName}</div>
-                        <div className="mt-6 flex w-full items-center justify-between text-xs">
-                          <span className="text-inherit">Rarity:</span>
-                          <span className="text-inherit">{item.rarity}</span>
-                        </div>
-                      </div>
-                    }
-                  >
-                    <div
-                      className={classNames(
-                        'nft-backdrop-box relative flex h-[108px] w-[108px] items-center justify-center overflow-hidden rounded opacity-25',
-                      )}
-                    >
-                      <div className="relative h-[80px] w-[80px]">
-                        <Image src={item.polygonImage} alt="badge" objectFit="contain" layout="fill" />
-                      </div>
-                      <div className="absolute bottom-[6px] right-[6px] text-xs text-white/25">0</div>
-                    </div>
-                  </Tooltip>
-                );
+                return <BadgeCardTooltip key={item.campaign} info={item} />;
               })}
             </div>
             <p className="mt-7.5 text-base font-semibold">AMA OATs</p>
@@ -495,67 +331,25 @@ export default function BridgeSwitch() {
                 {AMABadge.map((chainItem) => {
                   return chainItem.map((item) => {
                     return (
-                      <Tooltip
+                      <NFTCardTooltip
+                        info={item}
                         key={item.galxeCampaign?.stringId}
-                        placement="bottom"
-                        label={
-                          <div className="flex w-[194px] flex-col items-center justify-start p-[14px]">
-                            <div className="relative h-[180px] w-[180px]">
-                              <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
-                            </div>
-                            <div className="mt-6 w-full text-center text-sm font-medium">{item.galxeCampaign?.name}</div>
-                            <div className="mt-4 flex w-full items-center justify-between text-xs">
-                              <span className="text-inherit">Chain:</span>
-                              <span className="flex items-center gap-1">
-                                <ChainIcon chainId={item.chainId} className="w-4" />
-                                <span className="text-inherit">{renderChainName(item.chainId)}</span>
-                              </span>
-                            </div>
-                            <div className="mt-1 flex w-full items-center justify-between text-xs">
-                              <span className="text-inherit">Rarity:</span>
-                              <span className="text-inherit">
-                                {transferRarity(item.galxeCampaign?.rarity) ?? item.galxeCampaign?.rarity}
-                              </span>
-                            </div>
-                            <div className="mt-1 flex w-full items-center justify-between text-xs">
-                              <span className="text-inherit">Amount:</span>
-                              <span className="text-inherit">{item.count || 0}</span>
-                            </div>
-                          </div>
-                        }
-                      >
-                        <div
-                          onClick={() => {
-                            if (approveLoading) {
-                              return;
-                            }
-                            if (item.chainId !== 20736) {
-                              ReactGA.event({
-                                action: 'select_badge',
-                                label: item.galxeCampaign?.stringId,
-                                category: 'bridge',
-                              });
-                              addSelectedBadge(item);
-                              setBridgeCount(item.count ?? 1);
-                            }
-                          }}
-                          className={classNames(
-                            'nft-backdrop-box flex h-[108px] w-[108px] cursor-pointer items-center justify-center overflow-hidden rounded',
-                            {
-                              'border-[#A5A6AB]':
-                                selectedBadge &&
-                                selectedBadge.galxeCampaign?.stringId === item.galxeCampaign?.stringId &&
-                                selectedBadge.chainId === item.chainId,
-                            },
-                          )}
-                        >
-                          <div className="relative h-[86px] w-[86px]">
-                            <Image src={item.image} alt="badge" objectFit="contain" layout="fill" />
-                          </div>
-                          <ChainIcon chainId={item.chainId} className="absolute left-[6px] top-[6px] w-[20px]" />
-                          <div className="absolute bottom-[6px] right-[6px] text-xs text-green">{item.count}</div>
-                        </div>
-                      </Tooltip>
+                        selectedBadge={selectedBadge}
+                        onClick={() => {
+                          if (approveLoading) {
+                            return;
+                          }
+                          if (item.chainId !== 20736) {
+                            ReactGA.event({
+                              action: 'select_badge',
+                              label: item.galxeCampaign?.stringId,
+                              category: 'bridge',
+                            });
+                            addSelectedBadge(item);
+                            setBridgeCount(item.count ?? 1);
+                          }
+                        }}
+                      />
                     );
                   });
                 })}
