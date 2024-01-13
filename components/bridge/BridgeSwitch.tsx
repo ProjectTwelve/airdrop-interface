@@ -206,7 +206,7 @@ export default function BridgeSwitch() {
     try {
       const slicedTokenIds: bigint[] = selectedBadge.tokenIds.slice(0, bridgeCount).map((item) => BigInt(item));
       const transactionHash = await bridgeContract.write.sendBatchNFT(
-        [selectedBadge?.contractAddress, BigInt(20736), slicedTokenIds, address, address],
+        [selectedBadge?.contractAddress, BigInt(20736), slicedTokenIds, address],
         { account: bridgeContract.account ?? address, chain: selectedBadge.chainId === polygon.id ? polygon : bsc },
       );
       setConfirmHash(transactionHash);

@@ -1,14 +1,56 @@
 export const bridgeABI = [
   {
+    anonymous: false,
     inputs: [
       {
+        indexed: false,
         internalType: 'address',
-        name: 'owner_',
+        name: 'previousAdmin',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'newAdmin',
         type: 'address',
       },
     ],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
+    name: 'AdminChanged',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'beacon',
+        type: 'address',
+      },
+    ],
+    name: 'BeaconUpgraded',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'implementation',
+        type: 'address',
+      },
+    ],
+    name: 'Upgraded',
+    type: 'event',
+  },
+  {
+    stateMutability: 'payable',
+    type: 'fallback',
+  },
+  {
+    stateMutability: 'payable',
+    type: 'receive',
   },
   {
     inputs: [],
@@ -17,12 +59,7 @@ export const bridgeABI = [
   },
   {
     inputs: [],
-    name: 'NewOwnerIsZeroAddress',
-    type: 'error',
-  },
-  {
-    inputs: [],
-    name: 'NoHandoverRequest',
+    name: 'InvalidNFTAddr',
     type: 'error',
   },
   {
@@ -31,9 +68,41 @@ export const bridgeABI = [
     type: 'error',
   },
   {
-    inputs: [],
-    name: 'Unauthorized',
-    type: 'error',
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'cid',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'usdRefund',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'plRefund',
+        type: 'uint256',
+      },
+    ],
+    name: 'BurnAndRefund',
+    type: 'event',
   },
   {
     anonymous: false,
@@ -58,13 +127,13 @@ export const bridgeABI = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: 'address',
-        name: 'pendingOwner',
-        type: 'address',
+        indexed: false,
+        internalType: 'uint8',
+        name: 'version',
+        type: 'uint8',
       },
     ],
-    name: 'OwnershipHandoverCanceled',
+    name: 'Initialized',
     type: 'event',
   },
   {
@@ -73,11 +142,17 @@ export const bridgeABI = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'pendingOwner',
+        name: 'previousOwner',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'newOwner',
         type: 'address',
       },
     ],
-    name: 'OwnershipHandoverRequested',
+    name: 'OwnershipTransferStarted',
     type: 'event',
   },
   {
@@ -86,7 +161,7 @@ export const bridgeABI = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'oldOwner',
+        name: 'previousOwner',
         type: 'address',
       },
       {
@@ -97,6 +172,25 @@ export const bridgeABI = [
       },
     ],
     name: 'OwnershipTransferred',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256[]',
+        name: 'cids',
+        type: 'uint256[]',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256[]',
+        name: 'amounts',
+        type: 'uint256[]',
+      },
+    ],
+    name: 'PlRefundSet',
     type: 'event',
   },
   {
@@ -181,6 +275,51 @@ export const bridgeABI = [
     type: 'event',
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256[]',
+        name: 'cids',
+        type: 'uint256[]',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256[]',
+        name: 'amounts',
+        type: 'uint256[]',
+      },
+    ],
+    name: 'UsdRefundSet',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'bool',
+        name: 'valid',
+        type: 'bool',
+      },
+    ],
+    name: 'ValidNftAddrSet',
+    type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'acceptOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'uint256',
@@ -200,23 +339,16 @@ export const bridgeABI = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'cancelOwnershipHandover',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'address',
-        name: 'pendingOwner',
+        name: 'owner_',
         type: 'address',
       },
     ],
-    name: 'completeOwnershipHandover',
+    name: 'initialize',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -259,7 +391,7 @@ export const bridgeABI = [
     outputs: [
       {
         internalType: 'address',
-        name: 'result',
+        name: '',
         type: 'address',
       },
     ],
@@ -267,19 +399,26 @@ export const bridgeABI = [
     type: 'function',
   },
   {
-    inputs: [
+    inputs: [],
+    name: 'pendingOwner',
+    outputs: [
       {
         internalType: 'address',
-        name: 'pendingOwner',
+        name: '',
         type: 'address',
       },
     ],
-    name: 'ownershipHandoverExpiresAt',
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'proxiableUUID',
     outputs: [
       {
-        internalType: 'uint256',
-        name: 'result',
-        type: 'uint256',
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
       },
     ],
     stateMutability: 'view',
@@ -312,14 +451,7 @@ export const bridgeABI = [
     inputs: [],
     name: 'renounceOwnership',
     outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'requestOwnershipHandover',
-    outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -338,11 +470,6 @@ export const bridgeABI = [
         internalType: 'uint256[]',
         name: 'tokenIds',
         type: 'uint256[]',
-      },
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
       },
       {
         internalType: 'address',
@@ -371,11 +498,6 @@ export const bridgeABI = [
         internalType: 'uint256',
         name: 'tokenId',
         type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
       },
       {
         internalType: 'address',
@@ -417,7 +539,7 @@ export const bridgeABI = [
     ],
     name: 'transferOwnership',
     outputs: [],
-    stateMutability: 'payable',
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -455,5 +577,89 @@ export const bridgeABI = [
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'nftAddr',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: 'valid',
+        type: 'bool',
+      },
+    ],
+    name: 'updateValidNftAddr',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'newImplementation',
+        type: 'address',
+      },
+    ],
+    name: 'upgradeTo',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'newImplementation',
+        type: 'address',
+      },
+      {
+        internalType: 'bytes',
+        name: 'data',
+        type: 'bytes',
+      },
+    ],
+    name: 'upgradeToAndCall',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    name: 'whitelistNFT',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_logic',
+        type: 'address',
+      },
+      {
+        internalType: 'bytes',
+        name: '_data',
+        type: 'bytes',
+      },
+    ],
+    stateMutability: 'payable',
+    type: 'constructor',
   },
 ] as const;
