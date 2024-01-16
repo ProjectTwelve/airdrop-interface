@@ -10,10 +10,22 @@ import { Tooltip } from '../tooltip';
 import Table from '../table';
 import { createColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
-import { BridgeTxs, HistoryResult, useBadgeHistory, useBadgeNFT, useBridgeContract, useNFTContract } from '@/hooks/bridge';
+import {
+  BridgeTxs,
+  HistoryResult,
+  useBadgeHistory,
+  useBadgeNFT,
+  useBridgeContract,
+  useNFTContract,
+} from '@/hooks/bridge';
 import { BadgeInfo, COMMUNITY_NFT_CAMPAIGN_ID, GalxeBadge, NFTQueryResult, P12_COMMUNITY_BADGE } from '@/constants';
 import { groupBy } from 'lodash-es';
-import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC } from '@/constants/addresses';
+import {
+  BADGE_BRIDGE_ADDRESS,
+  BADGE_BRIDGE_ADDRESS_BSC,
+  BADGE_BRIDGE_ADDRESS_BSC_OLD,
+  BADGE_BRIDGE_ADDRESS_OLD,
+} from '@/constants/addresses';
 import Message from '../message';
 import { toast } from 'react-toastify';
 import { shortenHash } from '@/utils';
@@ -25,6 +37,7 @@ const historyColumnHelper = createColumnHelper<BridgeTxs>();
 export default function BridgeSwitch() {
   const [selectedBadge, setSelectedBadge] = useState<GalxeBadge | null>(null);
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
+  const [isApprovedForAllOld, setIsApprovedForAllOld] = useState<boolean>(false);
   const setConnectOpen = useSetRecoilState(isConnectPopoverOpen);
   const { switchNetwork } = useSwitchNetwork({ chainId: polygon.id });
   const [bridgeCount, setBridgeCount] = useState<number>(1);
@@ -42,6 +55,7 @@ export default function BridgeSwitch() {
   const [AMABadge, setAMABadge] = useState<GalxeBadge[][]>([]);
   const [approveHash, setApproveHash] = useState<undefined | `0x${string}`>(undefined);
   const [confirmHash, setConfirmHash] = useState<undefined | `0x${string}`>(undefined);
+  const [revokeHash, setRevokeHash] = useState<undefined | `0x${string}`>(undefined);
 
   const { isLoading: approveLoading } = useWaitForTransaction({
     chainId: selectedBadge?.chainId,
@@ -54,6 +68,24 @@ export default function BridgeSwitch() {
         .isApprovedForAll([address, bridgeAddress])
         .then((isApproved) => {
           setIsApprovedForAll(isApproved as boolean);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  });
+
+  const { isLoading: revokeLoading } = useWaitForTransaction({
+    chainId: selectedBadge?.chainId,
+    hash: revokeHash,
+    onSuccess() {
+      setRevokeHash(undefined);
+      if (!NFTContract || !address || !selectedBadge) return;
+      const bridgeAddressOld = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS_OLD : BADGE_BRIDGE_ADDRESS_BSC_OLD;
+      NFTContract.read
+        .isApprovedForAll([address, bridgeAddressOld])
+        .then((isApproved) => {
+          setIsApprovedForAllOld(isApproved as boolean);
         })
         .catch((error) => {
           console.log(error);
@@ -98,6 +130,16 @@ export default function BridgeSwitch() {
       .isApprovedForAll([address, bridgeAddress])
       .then((isApproved) => {
         setIsApprovedForAll(isApproved as boolean);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    const bridgeAddressOld = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS_OLD : BADGE_BRIDGE_ADDRESS_BSC_OLD;
+    NFTContract.read
+      .isApprovedForAll([address, bridgeAddressOld])
+      .then((isApproved) => {
+        setIsApprovedForAllOld(isApproved as boolean);
       })
       .catch((error) => {
         console.log(error);
@@ -184,6 +226,20 @@ export default function BridgeSwitch() {
         chain: selectedBadge.chainId === polygon.id ? polygon : bsc,
       });
       setApproveHash(transactionHash);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const revokeApproval = async () => {
+    if (!selectedBadge || !NFTContract || !address || chain?.id !== selectedBadge?.chainId) return;
+    try {
+      const bridgeAddressOld = selectedBadge.chainId === polygon.id ? BADGE_BRIDGE_ADDRESS_OLD : BADGE_BRIDGE_ADDRESS_BSC_OLD;
+      const transactionHash = await NFTContract.write.setApprovalForAll([bridgeAddressOld, false], {
+        account: NFTContract.account ?? address,
+        chain: selectedBadge.chainId === polygon.id ? polygon : bsc,
+      });
+      setRevokeHash(transactionHash);
     } catch (error) {
       console.log(error);
     }
@@ -682,6 +738,10 @@ export default function BridgeSwitch() {
                       }}
                     >
                       Wrong Network
+                    </Button>
+                  ) : isApprovedForAllOld ? (
+                    <Button type="gradient" onClick={revokeApproval} className="w-full" loading={revokeLoading}>
+                      Revoke deprecated approval
                     </Button>
                   ) : isApprovedForAll ? (
                     <div className="flex gap-5">

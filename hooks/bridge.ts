@@ -3,7 +3,7 @@ import { Address } from 'wagmi';
 import { GraphQLClient } from 'graphql-request';
 import { useContract } from './useContract';
 import { badgeABI, bridgeABI } from '@/abis';
-import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC } from '@/constants/addresses';
+import { BADGE_BRIDGE_ADDRESS, BADGE_BRIDGE_ADDRESS_BSC, BADGE_BRIDGE_ADDRESS_BSC_OLD, BADGE_BRIDGE_ADDRESS_OLD } from '@/constants/addresses';
 import { polygon } from 'wagmi/chains';
 import { GalxeBadge } from '@/constants';
 import { fetchPowerLevel } from '@/lib/api-nest';
@@ -111,7 +111,6 @@ export function useNFTContract({ token, chainId }: { token?: Address; chainId?: 
 }
 
 export function useBridgeContract({ chainId }: { chainId?: number }) {
-  // todo bsc chain address
   const address = chainId === polygon.id ? BADGE_BRIDGE_ADDRESS : BADGE_BRIDGE_ADDRESS_BSC;
   return useContract(address, bridgeABI, chainId);
 }
